@@ -2,6 +2,7 @@
 # remain on this computer; sibling desktop clients are outside this Git root.
 /*
 !/.gitignore
+!/AGENTS.md
 !/README.md
 !/LICENSE
 !/THIRD_PARTY_NOTICES.md

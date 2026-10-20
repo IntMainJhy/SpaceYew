@@ -1,0 +1,38 @@
+import type {Metadata,Viewport} from 'next';
+import {cookies} from 'next/headers';
+import {LocaleProvider} from '@/components/LocaleProvider';
+import {SitePromotion} from '@/components/PromotionBar';
+import {getConfig} from '@/lib/db.mjs';
+import {appSurface} from '@/lib/app-access.mjs';
+import {defaultPromotionBar} from '@/lib/promotions.mjs';
+import {normalizeLocale,htmlLocale} from '@/lib/i18n.mjs';
+import './globals.css';
+import './organic.css';
+import './admin-organic.css';
+import './community.css';
+import './appearance.css';
+import './community-feed.css';
+import './compact.css';
+import './member-avatars.css';
+import './community-social.css';
+import './quiet-ui.css';
+import './motion.css';
+import './x-social.css';
+import './home.css';
+import './catalog.css';
+import './detail.css';
+import './resume-auth.css';
+import './spaces.css';
+import './product-home.css';
+import './product-previews.css';
+import './product-motion.css';
+import './site-unified.css';
+import './management-tools.css';
+export const viewport:Viewport={width:'device-width',initialScale:1,viewportFit:'cover'};
+export const metadata:Metadata={applicationName:'SpaceYew',title:'SpaceYew',description:'Projects, experience, and shared resources.'};
+const designContract='<!-- SpaceYew: one shared X-style interface with white surfaces, ink controls, and the existing flowing background. Baskerville/Songti editorial type unifies headings, body copy and controls; code retains monospace. Public, workspace and management pages share this appearance; author-owned boards keep their independent styles. -->';
+export default async function RootLayout({children}:{children:React.ReactNode}){
+  const locale=normalizeLocale((await cookies()).get('site-locale')?.value);
+  const promotion=appSurface()==='admin'?null:getConfig('site').promotionBar||defaultPromotionBar;
+  return <html lang={htmlLocale(locale)} data-ui="x-social"><body><template id="public-design-contract" dangerouslySetInnerHTML={{__html:designContract}}/><LocaleProvider initialLocale={locale}>{promotion&&<SitePromotion config={promotion}/>} {children}</LocaleProvider></body></html>
+}

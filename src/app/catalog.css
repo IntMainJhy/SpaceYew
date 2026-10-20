@@ -1,0 +1,81 @@
+/* Content indexes use the same compact reading scale as the homepage.
+   Scope composition here; theme tokens continue to own color and contour. */
+html[data-ui] .catalog-page {min-width:0;}
+html[data-ui] .catalog-page .organic-page-heading {padding-block:24px 20px;}
+html[data-ui] .catalog-page .organic-page-heading h1 {font-size:30px;line-height:1.4;letter-spacing:-.02em;}
+html[data-ui] .catalog-page .organic-page-heading h1 em {display:inline;font-size:22px;line-height:1.5;margin-left:8px;}
+html[data-ui] .catalog-page .organic-page-heading p {max-width:68ch;font-size:14px;line-height:1.75;margin-top:8px;}
+html[data-ui] .catalog-page .organic-filters {display:flex;align-items:center;gap:12px;padding:0;margin:0;max-width:none;}
+html[data-ui] .catalog-page .organic-search-field {flex:1;min-width:180px;margin:0;}
+html[data-ui] .catalog-page .organic-search-field>.icon {top:50%;left:16px;width:16px;height:16px;transform:translateY(-50%);}
+html[data-ui] .catalog-page .organic-search-field .organic-input {width:100%;padding-left:42px;}
+html[data-ui] .catalog-page .organic-filter-row {flex:1.6;display:flex;gap:8px;min-width:0;}
+html[data-ui] .catalog-page .organic-filter-row select {min-width:0;width:0;flex:1;padding-inline:14px 28px;}
+html[data-ui] .catalog-page .organic-filters :is(input,select,button) {height:44px;min-height:44px;font-size:14px;padding-block:8px;}
+html[data-ui] .catalog-page .organic-filter-row button {padding-inline:18px;gap:8px;white-space:nowrap;flex-shrink:0;}
+html[data-ui] .catalog-page .organic-results-info {display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px;margin:8px 0 12px;padding:0;font-size:12px;}
+html[data-ui] .catalog-page .organic-results-info p {margin:0;font-size:12px;}
+html[data-ui] .catalog-page .organic-results-info a {min-height:44px;font-size:12px;}
+html[data-ui] .catalog-page :is(.organic-project-grid,.organic-resource-grid) {grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 24px;}
+html[data-ui] .organic-site .catalog-page :is(.organic-project-piece,.organic-resource-piece) {border:0;box-shadow:none;}
+html[data-ui] .catalog-page .organic-project-piece {padding:0;background:transparent;}
+html[data-ui] .catalog-page .organic-project-cover {aspect-ratio:2.2;min-height:0;background:var(--organic-paper);}
+html[data-ui] .catalog-page .organic-project-cover img {object-fit:contain;}
+html[data-ui] .catalog-page .organic-type-cover {padding:20px;gap:10px;}
+html[data-ui] .catalog-page .organic-type-cover strong {font-size:24px;line-height:1.35;}
+html[data-ui] .catalog-page .organic-project-copy {padding:12px 0 0;gap:12px;}
+html[data-ui] .catalog-page :is(.organic-project-copy,.organic-resource-piece) h2 {font-size:20px;line-height:1.5;overflow-wrap:anywhere;}
+html[data-ui] .catalog-page .organic-project-copy p {margin-top:6px;}
+html[data-ui] .catalog-page :is(.organic-project-link,.organic-article-row>a):hover h2 {color:var(--organic-green);}
+html[data-ui=editorial] .catalog-page :is(.organic-project-link,.organic-article-row>a):hover h2 {font-style:italic;}
+html[data-ui] .catalog-page :is(.organic-project-copy,.organic-resource-piece,.organic-article-row) p {font-size:14px;line-height:1.75;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+html[data-ui] .catalog-page .organic-project-piece>.organic-tags {padding:0;margin-top:10px;}
+html[data-ui] .catalog-page .organic-tags {gap:6px;margin-top:10px;}
+html[data-ui] .catalog-page .organic-tags li {font-size:11px;padding:3px 9px;}
+html[data-ui] .catalog-page .organic-resource-piece {padding:20px;}
+html[data-ui] .catalog-page .organic-resource-piece>a {display:block;}
+html[data-ui] .catalog-page .organic-resource-top {font-size:11px;gap:12px;}
+html[data-ui] .catalog-page .organic-resource-symbol {width:32px;height:32px;}
+html[data-ui] .catalog-page .organic-resource-symbol svg {width:18px;height:18px;}
+html[data-ui] .catalog-page .organic-resource-piece h2 {margin-top:12px;}
+html[data-ui] .catalog-page .organic-resource-piece p {margin:6px 0 12px;}
+html[data-ui] .catalog-page .organic-resource-bottom {padding-top:4px;border:0;font-size:11px;gap:8px;}
+html[data-ui] .catalog-page .organic-resource-bottom>span {min-width:0;overflow-wrap:anywhere;}
+html[data-ui=x-social] .catalog-page .organic-resource-symbol {background:var(--organic-line);color:var(--organic-text);}
+html[data-ui] .catalog-page .organic-article-list {max-width:900px;}
+html[data-ui] .catalog-page .organic-article-row {padding-block:18px;border:0;}
+html[data-ui] .catalog-page .organic-article-row:first-child {padding-top:0;}
+html[data-ui] .catalog-page .organic-article-meta {font-size:12px;margin-bottom:6px;}
+html[data-ui] .catalog-page .organic-article-row>a {display:flex;align-items:center;gap:24px;min-height:44px;}
+html[data-ui] .catalog-page .catalog-article-copy {flex:1;min-width:0;}
+html[data-ui] .catalog-page .organic-article-row h2 {font-size:22px;line-height:1.5;margin-bottom:6px;overflow-wrap:anywhere;}
+html[data-ui] .catalog-page .catalog-article-cover {width:120px;height:90px;flex-shrink:0;object-fit:contain;border-radius:12px;background:var(--organic-paper);}
+html[data-ui] .catalog-page .organic-pagination {margin-top:24px;gap:16px;font-size:13px;}
+html[data-ui] .catalog-page .organic-pagination a {min-height:44px;padding:10px 18px;white-space:nowrap;}
+@media(max-width:1099px){
+ html[data-ui] .catalog-page :is(.organic-project-grid,.organic-resource-grid) {grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;}
+ html[data-ui] .catalog-page .organic-filters {flex-wrap:wrap;}
+ html[data-ui] .catalog-page .organic-search-field {flex-basis:100%;}
+ html[data-ui] .catalog-page .organic-filter-row {flex-basis:100%;}
+}
+@media(max-width:767px){
+ html[data-ui] .catalog-page .organic-page-heading {padding-block:20px 16px;}
+ html[data-ui] .catalog-page .organic-page-heading h1 {font-size:24px;}
+ html[data-ui] .catalog-page .organic-page-heading h1 em {display:block;font-size:18px;margin:4px 0 0;}
+ html[data-ui] .catalog-page .organic-page-heading p {font-size:13px;margin-top:8px;}
+ html[data-ui] .catalog-page .organic-filters {gap:8px;}
+ html[data-ui] .catalog-page .organic-filters :is(input,select) {font-size:16px;}
+ html[data-ui] .catalog-page .organic-filter-row {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;}
+ html[data-ui] .catalog-page .organic-filter-row select {width:100%;}
+ html[data-ui] :is(.catalog-projects,.catalog-articles) .organic-filter-row button {grid-column:1/-1;}
+ html[data-ui] .catalog-page .organic-results-info {margin-block:4px 8px;}
+ html[data-ui] .catalog-page :is(.organic-project-grid,.organic-resource-grid) {grid-template-columns:minmax(0,1fr);gap:24px;}
+ html[data-ui] .catalog-page .organic-type-cover {padding:16px;}
+ html[data-ui] .catalog-page .organic-type-cover strong {font-size:22px;}
+ html[data-ui] .catalog-page :is(.organic-project-copy,.organic-resource-piece) h2 {font-size:19px;}
+ html[data-ui] .catalog-page .organic-resource-piece {padding:16px;}
+ html[data-ui] .catalog-page .organic-article-row {padding-block:16px;}
+ html[data-ui] .catalog-page .organic-article-row h2 {font-size:19px;}
+ html[data-ui] .catalog-page .organic-article-row>a {align-items:flex-start;gap:12px;}
+ html[data-ui] .catalog-page .catalog-article-cover {width:88px;height:76px;}
+}

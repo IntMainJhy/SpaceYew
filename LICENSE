@@ -1,0 +1,81 @@
+SpaceYew 网站源码阅读与学习许可 1.0
+SpaceYew Website Source Reading and Study License 1.0
+
+Copyright (c) 2026 IntMainJhy. All rights reserved.
+
+本项目为「源码可见」项目，不属于符合 Open Source Initiative 定义的开源软件。
+本许可不授予自由使用、修改、部署、商用或再分发本项目的权利。
+
+1. 适用范围
+
+本许可仅适用于本仓库内由 IntMainJhy 享有著作权、且未单独注明其他许可的
+网站源码、文档与原创资源。macOS 和 Windows 客户端源码、安装包及其专有
+资源不在本仓库发布，也不在本许可授权范围内。
+
+2. 允许的阅读与学习
+
+你可以为个人、非商业的阅读和学习查看本项目，并保存一份未修改的副本，
+但该副本只能用于阅读学习，不得用于运行服务、实际使用、部署或交付。
+副本须保留本许可、著作权声明及第三方声明。
+
+在 GitHub 上查看及通过平台功能 Fork 本仓库的权利，以适用的 GitHub
+服务条款为准。本许可不撤销这些平台权利，也不排除适用法律规定的、
+不能通过许可排除的权利或例外。
+
+3. 其他行为须取得事先书面授权
+
+未经著作权人事先明确书面许可，不得对本项目的全部或实质部分实施：
+
+- 直接使用、运行、部署或提供服务，包括个人自用、内网及非商业部署；
+- 修改后使用、修改后部署，或作为其他产品、服务、模板的组成部分；
+- 任何商业利用，包括销售、收费服务、商业交付、商业项目集成；
+- 再分发、出售、转授权或在其他平台公开原版、修改版或衍生作品；
+- 去除或替换署名、著作权声明、许可声明后对外使用。
+
+前述限制不改变第 2 条明确允许的阅读副本、GitHub 平台权利及法定例外。
+不得将本仓库中的安装、开发、测试或部署说明视为额外的使用授权；这些
+说明面向著作权人、维护者及已另行取得书面授权的人。
+
+4. 申请授权
+
+请通过 https://github.com/IntMainJhy 的公开联系渠道联系著作权人，说明
+用途、使用主体、修改范围、部署范围及是否涉及商业使用。授权须由
+著作权人另行明确书面作出；公开源码、未回复或口头讨论均不构成授权。
+
+5. 第三方材料及标识
+
+第三方代码、依赖及其衍生部分继续适用各自的原始许可，详见
+THIRD_PARTY_NOTICES.md 及 docs/licenses/。本许可不缩减第三方许可已经
+授予的权利，也不将第三方材料重新许可为本许可。品牌、商标、个人资料
+及他人内容不因本许可而获得额外的使用授权。
+
+6. 无担保
+
+在适用法律允许的最大范围内，本项目按「现状」提供，不作任何明示或
+默示担保，包括适销性、特定用途适用性或不侵权的担保。著作权人不对
+因本项目产生的损失承担责任，但适用法律不允许排除的责任除外。
+违反许可时，本许可授予的权限终止；依法不可排除的权利不受影响。
+
+English summary (the Chinese text above controls if there is a discrepancy)
+
+This is a source-available website, not OSI-defined open source software.
+For IntMainJhy's original material, you may view the source and retain an
+unmodified copy solely for personal, non-commercial reading and study,
+with all copyright, license and third-party notices intact.
+
+All other uses require prior express written permission from the copyright
+holder, including running or deploying the software (even for personal or
+non-commercial use), modification, incorporation into another product or
+service, commercial use, redistribution and sublicensing. Development and
+deployment instructions do not grant permission to perform these activities.
+
+Viewing and forking through GitHub remain subject to GitHub's applicable
+Terms of Service. Mandatory statutory rights and exceptions are unaffected.
+Third-party material retains its original licenses; those rights are not
+restricted by this license. macOS and Windows clients are excluded and no
+rights to their source, binaries or proprietary assets are granted here.
+
+Contact the author through https://github.com/IntMainJhy for separate written
+authorization. Silence and publication of the source are not permission.
+To the fullest extent permitted by law, the material is provided AS IS,
+without warranties or liability, except where liability cannot be excluded.

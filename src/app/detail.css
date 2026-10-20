@@ -1,0 +1,69 @@
+/* Detail reading scale follows the homepage and content indexes.
+   Only this surface changes; each theme still owns typography and palette. */
+html[data-ui] .detail-page {min-width:0;}
+html[data-ui] .detail-page .organic-breadcrumb {padding-top:12px;gap:12px;font-size:12px;min-height:56px;}
+html[data-ui] .detail-page .organic-breadcrumb a {gap:8px;min-height:44px;}
+html[data-ui] .detail-page .organic-breadcrumb .icon {width:16px;height:16px;}
+html[data-ui] .detail-page .organic-detail-heading {padding-block:12px 24px;max-width:960px;}
+html[data-ui] .detail-page .organic-detail-heading h1 {font-size:30px;line-height:1.4;letter-spacing:-.02em;overflow-wrap:anywhere;}
+html[data-ui] .detail-page .organic-detail-heading>p {font-size:14px;line-height:1.75;margin-top:10px;max-width:70ch;overflow-wrap:anywhere;}
+html[data-ui] .detail-page .organic-detail-heading .organic-tags {gap:6px;margin-top:12px;}
+html[data-ui] .detail-page .organic-detail-heading .organic-tags li {padding:3px 9px;font-size:11px;}
+html[data-ui] .detail-page .organic-detail-layout {grid-template-columns:minmax(0,1fr) 260px;grid-template-areas:"article aside";gap:32px;}
+html[data-ui] .detail-page .organic-detail-article {grid-area:article;min-width:0;}
+html[data-ui] .detail-page .organic-detail-cover {width:auto;max-width:100%;height:auto;max-height:260px;object-fit:contain;margin-block:0 24px;}
+html[data-ui] .organic-site .detail-page .organic-detail-aside {grid-area:aside;position:sticky;top:24px;padding:20px;border:0;box-shadow:none;min-width:0;}
+html[data-ui] .detail-page .organic-detail-aside h2 {font-size:19px;line-height:1.5;margin-bottom:12px;overflow-wrap:anywhere;}
+html[data-ui] .detail-page .organic-meta {display:grid;grid-template-columns:minmax(0,1fr);gap:12px;font-size:12px;}
+.detail-page .detail-meta-entry {display:grid;grid-template-columns:84px minmax(0,1fr);gap:8px;align-items:baseline;}
+html[data-ui] .detail-page .organic-meta :is(dt,dd) {font-size:12px;line-height:1.6;overflow-wrap:anywhere;}
+html[data-ui] .detail-page .organic-aside-actions {margin:0 0 16px;gap:8px;}
+html[data-ui] .detail-page .organic-aside-actions .organic-button {min-height:44px;font-size:13px;padding:10px 14px;white-space:normal;text-align:center;line-height:1.5;}
+html[data-ui] .detail-page .organic-aside-actions .icon {flex-shrink:0;}
+html[data-ui] .detail-page .organic-aside-actions .organic-fineprint {font-size:12px;line-height:1.7;margin:0;}
+html[data-ui] .detail-page .organic-contribution-section {padding:0;margin:0 0 24px;border:0;}
+html[data-ui] .detail-page .organic-contribution-section h2 {font-size:22px;line-height:1.5;overflow-wrap:anywhere;}
+html[data-ui] .detail-page .organic-contributions {grid-template-columns:120px minmax(0,1fr);gap:12px 16px;margin-top:12px;font-size:14px;line-height:1.75;}
+html[data-ui] .detail-page .organic-contributions :is(dt,dd) {overflow-wrap:anywhere;}
+html[data-ui] .detail-page .organic-prose {max-width:70ch;font-size:15px;line-height:1.85;overflow-wrap:anywhere;}
+html[data-ui] .detail-page .organic-prose :where(h1,h2,h3,h4) {margin:28px 0 12px;line-height:1.5;scroll-margin-top:24px;}
+html[data-ui] .detail-page .organic-prose> :first-child {margin-top:0;}
+html[data-ui] .detail-page .organic-prose :is(h1,h2) {font-size:24px;}
+html[data-ui] .detail-page .organic-prose h3 {font-size:20px;}
+html[data-ui] .detail-page .organic-prose h4 {font-size:17px;}
+html[data-ui] .detail-page .organic-prose p {margin-bottom:14px;}
+html[data-ui] .detail-page .organic-prose :is(ul,ol) {margin-block:14px;padding-left:22px;}
+html[data-ui] .detail-page .organic-prose li {margin-bottom:6px;}
+html[data-ui] .detail-page .organic-prose :is(img,pre,blockquote) {margin-block:18px;max-width:100%;}
+html[data-ui] .detail-page .organic-prose pre {padding:16px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.75;overflow-x:auto;overscroll-behavior-x:contain;tab-size:2;white-space:pre;overflow-wrap:normal;}
+html[data-ui] .detail-page .organic-prose pre:focus-visible {outline:2px solid var(--organic-green);outline-offset:3px;}
+html[data-ui] .detail-page .organic-prose pre code {font-family:inherit;white-space:pre;overflow-wrap:normal;word-break:normal;}
+html[data-ui] .detail-page .organic-prose blockquote {padding:16px 20px;}
+html[data-ui] .detail-page .organic-prose blockquote p:last-child {margin-bottom:0;}
+html[data-ui] .detail-page .organic-prose table {display:block;max-width:100%;overflow-x:auto;}
+html[data-ui=x-social] .detail-page :is(.organic-detail-aside,.organic-prose pre,.organic-prose blockquote,.organic-prose :not(pre)>code) {background:var(--organic-line);color:var(--organic-text);}
+html[data-ui=x-social] .detail-page .organic-prose blockquote p {color:var(--organic-text);}
+@media(max-width:767px){
+ html[data-ui] .detail-page .organic-breadcrumb {padding-top:4px;min-height:48px;}
+ html[data-ui] .detail-page .organic-detail-heading {padding-block:8px 20px;}
+ html[data-ui] .detail-page .organic-detail-heading h1 {font-size:24px;line-height:1.45;}
+ html[data-ui] .detail-page .organic-detail-heading>p {margin-top:8px;font-size:14px;}
+ html[data-ui] .detail-page .organic-detail-heading .organic-tags {margin-top:10px;}
+ html[data-ui] .detail-page .organic-detail-layout {grid-template-columns:minmax(0,1fr);grid-template-areas:"aside" "article";gap:24px;}
+ html[data-ui] .organic-site .detail-page .organic-detail-aside {position:static;top:auto;padding:16px;}
+ html[data-ui] .detail-page .organic-detail-aside h2 {font-size:17px;margin-bottom:10px;}
+ html[data-ui] .detail-page .organic-meta {grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 16px;}
+ .detail-page .detail-meta-entry {display:block;}
+ html[data-ui] .detail-page .organic-meta dd {margin-top:3px;font-size:13px;}
+ .detail-page .detail-meta-entry.is-filename {grid-column:1/-1;}
+ html[data-ui] .detail-page .organic-aside-actions {margin-bottom:14px;}
+ html[data-ui] .detail-page .organic-detail-cover {max-height:190px;margin-bottom:20px;}
+ html[data-ui] .detail-page .organic-contribution-section {margin-bottom:20px;}
+ html[data-ui] .detail-page .organic-contribution-section h2 {font-size:20px;}
+ html[data-ui] .detail-page .organic-contributions {grid-template-columns:96px minmax(0,1fr);gap:10px 12px;font-size:14px;}
+ html[data-ui] .detail-page .organic-prose :is(h1,h2) {font-size:21px;}
+ html[data-ui] .detail-page .organic-prose h3 {font-size:18px;}
+ html[data-ui] .detail-page .organic-prose :where(h1,h2,h3,h4) {margin-top:24px;}
+ html[data-ui] .detail-page .organic-prose> :first-child {margin-top:0;}
+ html[data-ui] .detail-page .organic-prose blockquote {padding:14px 16px;}
+}

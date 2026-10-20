@@ -1,0 +1,8394 @@
+{
+  "/ 1000 字": [
+    "/ 1000 characters",
+    "/ 1000文字"
+  ],
+  "/秒": [
+    "/s",
+    "/秒"
+  ],
+  "20–10,000 字。支持段落、## 标题和三反引号代码块，图片请通过封面上传，不支持 HTML 或附件。": [
+    "20–10,000 characters. Supports paragraphs, ## headings and fenced code. Upload images as a cover; HTML and attachments are not supported.",
+    "20〜10,000文字。段落、## 見出し、コードブロックに対応。画像はカバーとしてアップロードしてください。HTMLや添付ファイルは使えません。"
+  ],
+  "20–300 字，说明用途、适用人群与限制。": [
+    "20–300 characters. Describe the purpose, audience and limitations.",
+    "20〜300文字で用途、対象者、制約を説明してください。"
+  ],
+  "2–80 字，准确说明分享的内容。": [
+    "2–80 characters. Describe what you are sharing.",
+    "2〜80文字で共有する内容を表してください。"
+  ],
+  "3–32 位字母、数字、下划线或短横线，以字母开头。": [
+    "3–32 letters, numbers, underscores or hyphens; start with a letter.",
+    "英字で始まる3〜32文字の英数字、アンダースコア、ハイフン。"
+  ],
+  "Asia/Shanghai · 更新于": [
+    "Asia/Shanghai · Updated",
+    "Asia/Shanghai · 更新"
+  ],
+  "GitHub / 个人代码主页": [
+    "GitHub / Personal code",
+    "GitHub / 個人のコード"
+  ],
+  "GitHub / 代码主页": [
+    "GitHub / Code profile",
+    "GitHub / コード"
+  ],
+  "· 共": [
+    "· Total",
+    "· 合計"
+  ],
+  "· 到期": [
+    "· Expires",
+    "· 有効期限"
+  ],
+  "· 已接收": [
+    "· Received",
+    "· 受信済み"
+  ],
+  "· 当前磁盘可用": [
+    "· Available disk space",
+    "· ディスク空き容量"
+  ],
+  "· 既往核查：": [
+    "· Previous review:",
+    "· 前回の確認："
+  ],
+  "· 有新草稿": [
+    "· New draft available",
+    "· 新しい下書きあり"
+  ],
+  "· 版本": [
+    "· Version",
+    "· バージョン"
+  ],
+  "“本地测试资格”只供功能联调，不代表真实身份已核验。账号资料先由站长核查；公网开放仍被服务端禁用。": [
+    "Local testing eligibility is for development only and does not verify identity. The owner reviews account details; public community access remains disabled on the server.",
+    "ローカルテスト資格は機能確認用で、本人確認を意味しません。アカウント情報は管理者が確認し、公開コミュニティはサーバー側で無効のままです。"
+  ],
+  "。填写内容仍保留在此页，可重试保存。": [
+    ". Your text is still here. Try saving again.",
+    "。入力内容はこのページに残っています。保存を再試行してください。"
+  ],
+  "。已引用的文件需要先解除引用才能删除。": [
+    ". Remove existing references before deleting a file.",
+    "。参照中のファイルは参照を解除してから削除してください。"
+  ],
+  "。文件流量为所选计量层的发送字节，服务器网卡总流量和外部网盘流量未接入。": [
+    ". File traffic counts bytes sent at the selected measurement layer; network-wide and external storage traffic are not connected.",
+    "。ファイル転送量は選択した計測層の送信バイト数です。サーバー全体や外部ストレージの通信量は未連携です。"
+  ],
+  "。普通举报和权利通知无需注册。": [
+    ". General reports and rights notices do not require registration.",
+    "。通常の通報と権利通知には登録が不要です。"
+  ],
+  "。本地联调期间，这些资料仅供你验证流程，请勿提交真实敏感证据。": [
+    ". During local testing, use sample information only; do not submit real sensitive evidence.",
+    "。ローカルテスト中はサンプル情報のみを使用し、実際の機微な証拠は送信しないでください。"
+  ],
+  "。草稿已保存，可稍后再提交审核。": [
+    ". Your draft is saved. You can submit it for review later.",
+    "。下書きは保存済みです。後で審査に提出できます。"
+  ],
+  "。记录保留，新修订会作为独立版本重新审核。": [
+    ". Records are retained. Revisions are reviewed as separate versions.",
+    "。記録は保持され、改訂は別バージョンとして再審査されます。"
+  ],
+  "。请核对来源方的使用条款。": [
+    ". Check the source site's terms of use.",
+    "。リンク先の利用規約を確認してください。"
+  ],
+  "一张图片，让分享更直观。支持 JPG、PNG、WebP，最大5MB。": [
+    "Add an image to your post. JPG, PNG or WebP, up to 5 MB.",
+    "投稿に画像を追加できます。JPG、PNG、WebP、最大5 MB。"
+  ],
+  "一起分享的收藏": [
+    "Collections to share",
+    "共有したいコレクション"
+  ],
+  "一起照看这片分享的空间": [
+    "Help look after this community",
+    "コミュニティを一緒に守る"
+  ],
+  "一边探索，一边生长。": [
+    "Exploring, learning, growing.",
+    "探究しながら、成長する。"
+  ],
+  "上一页": [
+    "Previous",
+    "前へ"
+  ],
+  "上传": [
+    "Upload",
+    "アップロード"
+  ],
+  "上传失败": [
+    "Upload failed",
+    "アップロードに失敗しました"
+  ],
+  "上传封面": [
+    "Upload cover",
+    "カバーを追加"
+  ],
+  "上传已暂停，已完成部分会保留。": [
+    "Upload paused. Completed chunks are kept.",
+    "アップロードを一時停止しました。完了した部分は保持されます。"
+  ],
+  "上传新文件": [
+    "Upload a new file",
+    "新しいファイルを追加"
+  ],
+  "上传正文图片": [
+    "Upload inline image",
+    "本文画像を追加"
+  ],
+  "上次处理：": [
+    "Last action:",
+    "前回の処理："
+  ],
+  "下一次跟进时间（可选）": [
+    "Next follow-up (optional)",
+    "次の対応日時（任意）"
+  ],
+  "下一页": [
+    "Next",
+    "次へ"
+  ],
+  "下一页文件": [
+    "More files",
+    "次のファイル"
+  ],
+  "下架": [
+    "Take offline",
+    "非公開にする"
+  ],
+  "下架后将停止公开，再次公开需要审核。继续吗？": [
+    "Taking this offline will stop public access. Publishing again requires review. Continue?",
+    "非公開にすると公開アクセスが停止します。再公開には審査が必要です。続行しますか？"
+  ],
+  "下载": [
+    "Download",
+    "ダウンロード"
+  ],
+  "下载按钮点击": [
+    "Download clicks",
+    "ダウンロードのクリック数"
+  ],
+  "下载简历 PDF": [
+    "Download résumé PDF",
+    "履歴書PDFをダウンロード"
+  ],
+  "下载资源": [
+    "Get resource",
+    "リソースを取得"
+  ],
+  "不侵权声明（私密）": [
+    "Non-infringement statement (private)",
+    "非侵害声明（非公開）"
+  ],
+  "不含私密数据、破解资源或代理订阅。": [
+    "No private data, cracked software or proxy subscriptions.",
+    "個人の非公開データ、クラックソフト、プロキシの購読情報を含めないでください。"
+  ],
+  "不要填写身份证件、密码或无关个人信息。": [
+    "Do not enter identity documents, passwords or unrelated personal data.",
+    "身分証明書、パスワード、無関係な個人情報は入力しないでください。"
+  ],
+  "不适用或未提供": [
+    "Not applicable or not provided",
+    "該当なし、または未提出"
+  ],
+  "与": [
+    "and",
+    "と"
+  ],
+  "与我相关的处理进展": [
+    "Cases related to me",
+    "自分に関係する対応状況"
+  ],
+  "两次新密码输入不一致": [
+    "The new passwords do not match.",
+    "新しいパスワードが一致しません。"
+  ],
+  "两次输入的新密码不一致": [
+    "The new passwords do not match.",
+    "新しいパスワードが一致しません。"
+  ],
+  "个人主页": [
+    "Profile",
+    "プロフィール"
+  ],
+  "个人主页内容": [
+    "Profile content",
+    "プロフィールの内容"
+  ],
+  "个人介绍": [
+    "About me",
+    "自己紹介"
+  ],
+  "个人介绍、成长经历与技能，也都收在这份持续更新的记录里。": [
+    "My background, milestones and skills, in a record that keeps growing.",
+    "自己紹介、歩み、スキルを、更新し続ける記録にまとめています。"
+  ],
+  "个人头像": [
+    "Profile photo",
+    "プロフィール画像"
+  ],
+  "个人网站": [
+    "Personal website",
+    "個人サイト"
+  ],
+  "个人账号": [
+    "Account",
+    "アカウント"
+  ],
+  "个人资料": [
+    "Personal details",
+    "個人情報"
+  ],
+  "个人资料与经历": [
+    "Profile and experience",
+    "プロフィールと経歴"
+  ],
+  "个人资料与经历已更新": [
+    "Profile and experience updated.",
+    "プロフィールと経歴を更新しました。"
+  ],
+  "个作品": [
+    "projects",
+    "件の作品"
+  ],
+  "个文件": [
+    "files",
+    "件のファイル"
+  ],
+  "主动下架": [
+    "Take my post offline",
+    "自分の投稿を非公開にする"
+  ],
+  "主导航": [
+    "Main navigation",
+    "メインナビゲーション"
+  ],
+  "主站作品、手记和资源继续在": [
+    "Manage portfolio projects, notes and resources in",
+    "作品、ノート、リソースの管理は"
+  ],
+  "主要访问来源": [
+    "Top traffic sources",
+    "主な流入元"
+  ],
+  "举报": [
+    "Report",
+    "通報"
+  ],
+  "举报、投诉与申诉": [
+    "Reports, complaints and appeals",
+    "通報・苦情・異議申立て"
+  ],
+  "举报、权利投诉和申诉分别处理。普通举报无需登录；请描述事实，材料不会公开展示。": [
+    "Reports, rights notices and appeals are handled separately. General reports do not require login. Describe the facts; your evidence is not public.",
+    "通報、権利通知、異議申立ては別々に扱います。通常の通報はログイン不要です。事実を説明してください。証拠は公開されません。"
+  ],
+  "举报与投诉": [
+    "Reports and complaints",
+    "通報と苦情"
+  ],
+  "举报与权利通知": [
+    "Reports and rights notices",
+    "通報と権利通知"
+  ],
+  "举报或反馈问题": [
+    "Report a problem",
+    "問題を報告"
+  ],
+  "举报投诉": [
+    "Report or complaint",
+    "通報・苦情"
+  ],
+  "举报此内容": [
+    "Report this post",
+    "この投稿を通報"
+  ],
+  "也想分享给你。": [
+    "Worth sharing with you.",
+    "あなたにも共有したいもの。"
+  ],
+  "了解网站访问，以及大家感兴趣的内容。": [
+    "See how people visit and what interests them.",
+    "アクセス状況や関心を持たれた内容を確認できます。"
+  ],
+  "事实说明": [
+    "Description of facts",
+    "事実の説明"
+  ],
+  "事实说明 *": [
+    "Description of facts *",
+    "事実の説明 *"
+  ],
+  "二级标题": [
+    "Heading 2",
+    "見出し2"
+  ],
+  "仅介绍官方链接": [
+    "Official link introduction only",
+    "公式リンクの紹介のみ"
+  ],
+  "今日": [
+    "Today",
+    "今日"
+  ],
+  "仍在公开展示": [
+    "is still public",
+    "は公開中です"
+  ],
+  "从一份有明确来源的工具或开发经验开始。": [
+    "Start with a tool or experience with a clear source.",
+    "出典の明確なツールや開発経験から始めましょう。"
+  ],
+  "从作品之外，": [
+    "Beyond the work,",
+    "作品の向こうに、"
+  ],
+  "从已有文件选择": [
+    "Choose an existing file",
+    "既存ファイルから選択"
+  ],
+  "从想法到实践": [
+    "From idea to practice",
+    "アイデアから実践へ"
+  ],
+  "从第一份分享开始": [
+    "Start with your first post",
+    "最初の投稿から始める"
+  ],
+  "从项目继续了解": [
+    "Explore more projects",
+    "ほかのプロジェクトを見る"
+  ],
+  "代码块": [
+    "Code block",
+    "コードブロック"
+  ],
+  "份分享": [
+    "posts",
+    "件の投稿"
+  ],
+  "份分享 ·": [
+    "posts ·",
+    "件の投稿 ·"
+  ],
+  "份分享 · 最近更新": [
+    "posts · Recently updated",
+    "件の投稿 · 更新順"
+  ],
+  "份收藏暂不可用，恢复公开后会重新出现。": [
+    "bookmarks are temporarily unavailable and will return when public again.",
+    "件のブックマークは一時的に利用できません。再公開後に表示されます。"
+  ],
+  "份资源": [
+    "resources",
+    "件のリソース"
+  ],
+  "优先处理": [
+    "Priority",
+    "優先対応"
+  ],
+  "优先处理 ·": [
+    "Priority ·",
+    "優先対応 ·"
+  ],
+  "位关注者": [
+    "followers",
+    "人のフォロワー"
+  ],
+  "作品": [
+    "Work",
+    "作品"
+  ],
+  "作品、手记和资源可从": [
+    "Publish projects, notes and resources from",
+    "作品、ノート、リソースの公開は"
+  ],
+  "作者已撤回": [
+    "Withdrawn by author",
+    "投稿者が取り下げました"
+  ],
+  "作者申诉请先": [
+    "To appeal as the author, please",
+    "投稿者として異議を申し立てるには"
+  ],
+  "你好，我是": [
+    "Hi, I'm",
+    "こんにちは、"
+  ],
+  "你已经看完了所有消息。": [
+    "You're all caught up.",
+    "未読の通知はありません。"
+  ],
+  "例如：本地流程体验": [
+    "For example: local workflow testing",
+    "例：ローカルの操作確認"
+  ],
+  "依据": [
+    "Basis",
+    "根拠"
+  ],
+  "保存中…": [
+    "Saving…",
+    "保存中…"
+  ],
+  "保存分类与标签": [
+    "Save categories and tags",
+    "カテゴリとタグを保存"
+  ],
+  "保存后立即对外生效，未填写的联系方式不会展示。": [
+    "Changes take effect immediately. Empty contact fields stay hidden.",
+    "保存後すぐに反映されます。未入力の連絡先は表示されません。"
+  ],
+  "保存头像": [
+    "Save photo",
+    "画像を保存"
+  ],
+  "保存并提交审核": [
+    "Save and submit",
+    "保存して審査に提出"
+  ],
+  "保存并重新送审": [
+    "Save and resubmit",
+    "保存して再審査へ"
+  ],
+  "保存方式": [
+    "Save method",
+    "保存方法"
+  ],
+  "保存更新": [
+    "Save changes",
+    "変更を保存"
+  ],
+  "保存草稿": [
+    "Save draft",
+    "下書きを保存"
+  ],
+  "保存设置": [
+    "Save settings",
+    "設定を保存"
+  ],
+  "保存设置后更新；没有内容时隐藏。当前默认内容是站内推荐，付费推广请选择“广告”标识。": [
+    "Updated after saving. Hidden when empty. Defaults are internal recommendations; label paid promotions as ads.",
+    "設定保存後に更新され、空の場合は非表示です。初期内容はサイト内のおすすめです。有料の宣伝には広告の表示を付けてください。"
+  ],
+  "保存账号操作": [
+    "Save account action",
+    "アカウント操作を保存"
+  ],
+  "修改头像与资料": [
+    "Edit photo and profile",
+    "画像・プロフィールを編集"
+  ],
+  "修改密码": [
+    "Change password",
+    "パスワードを変更"
+  ],
+  "修改密码并退出旧会话": [
+    "Change password and end old sessions",
+    "パスワードを変更し旧セッションを終了"
+  ],
+  "修改密码并重新登录": [
+    "Change password and sign in again",
+    "変更して再ログイン"
+  ],
+  "修改管理员密码": [
+    "Change admin password",
+    "管理者パスワードを変更"
+  ],
+  "值得分享的小收藏": [
+    "Small finds worth sharing",
+    "共有したい小さな発見"
+  ],
+  "值得认识的人": [
+    "People to know",
+    "おすすめのメンバー"
+  ],
+  "做过的事情，和每一段实践里的思考。": [
+    "Work I've done, and the thinking behind it.",
+    "取り組んできたことと、その過程での考え。"
+  ],
+  "做过的作品": [
+    "Selected work",
+    "これまでの作品"
+  ],
+  "做过的开发、投入的实践，以及过程中的思考与收获。": [
+    "Development, practice, and what I learned along the way.",
+    "開発、実践、そしてその中で得た学び。"
+  ],
+  "先处理紧急风险，保护私密材料，并向当事人说明依据。": [
+    "Address urgent risks first, protect private evidence and explain your decision.",
+    "緊急のリスクを優先し、非公開資料を保護し、判断の根拠を説明してください。"
+  ],
+  "先看看社区": [
+    "Browse the community",
+    "コミュニティを見る"
+  ],
+  "先确认昵称与本地测试资格，再开放投稿；角色与站长权限分开。": [
+    "Confirm the nickname and local testing eligibility first. Community roles do not grant site-owner privileges.",
+    "ニックネームとローカルテスト資格を確認してから投稿を許可してください。コミュニティの役割とサイト所有者の権限は別です。"
+  ],
+  "先确认来源和许可，再核查正文与全部链接。已经公开的分享，每次修改也要审核。": [
+    "Check the source and license, then the content and every link. Changes to public posts also require review.",
+    "出典とライセンスを確認してから、本文とすべてのリンクを確認します。公開済み投稿の変更にも審査が必要です。"
+  ],
+  "免费可访问不等于可自由转载。仅介绍官方页面也请说明。": [
+    "Free access does not mean free redistribution. Explain even when linking to official pages.",
+    "無料で閲覧できても自由に転載できるとは限りません。公式ページの紹介でも説明してください。"
+  ],
+  "全部": [
+    "All",
+    "すべて"
+  ],
+  "全部作品": [
+    "All work",
+    "すべての作品"
+  ],
+  "全部分享": [
+    "All posts",
+    "すべての投稿"
+  ],
+  "全部分类": [
+    "All categories",
+    "すべてのカテゴリ"
+  ],
+  "全部动态": [
+    "For you",
+    "すべての投稿"
+  ],
+  "全部工单": [
+    "All cases",
+    "すべての案件"
+  ],
+  "全部提交记录": [
+    "All submissions",
+    "すべての提出履歴"
+  ],
+  "全部文章": [
+    "All articles",
+    "すべての記事"
+  ],
+  "全部标为已读": [
+    "Mark all as read",
+    "すべて既読にする"
+  ],
+  "全部标签": [
+    "All tags",
+    "すべてのタグ"
+  ],
+  "全部状态": [
+    "All statuses",
+    "すべての状態"
+  ],
+  "全部类型": [
+    "All types",
+    "すべての種類"
+  ],
+  "全部记录": [
+    "All records",
+    "すべての記録"
+  ],
+  "公开举报和投诉进入后会显示在这里；紧急风险会标明优先处理。": [
+    "Incoming public reports appear here. Urgent risks are marked as priority.",
+    "受信した通報と苦情を表示します。緊急リスクには優先対応の表示が付きます。"
+  ],
+  "公开内容": [
+    "Public content",
+    "公開内容"
+  ],
+  "公开展示网站照常开放。社区完成身份核验、规则生效与相关开放条件后再见。": [
+    "The public website is open. The community will open after identity checks, rules and launch requirements are complete.",
+    "公開サイトは利用できます。コミュニティは本人確認、規則の発効、公開条件の整備後に開放します。"
+  ],
+  "公开版本": [
+    "Public version",
+    "公開バージョン"
+  ],
+  "公开的分享与转发会出现在这份主页里。": [
+    "Public posts and reposts appear on this profile.",
+    "公開した投稿とリポストがここに表示されます。"
+  ],
+  "公开邮箱": [
+    "Public email",
+    "公開メールアドレス"
+  ],
+  "共": [
+    "Total",
+    "合計"
+  ],
+  "关于": [
+    "About",
+    "紹介"
+  ],
+  "关于与联系": [
+    "About and contact",
+    "紹介・連絡先"
+  ],
+  "关于我与我的经历": [
+    "About me and my journey",
+    "自己紹介とこれまでの歩み"
+  ],
+  "关于我，": [
+    "About me,",
+    "私について、"
+  ],
+  "关于这个项目": [
+    "About this project",
+    "このプロジェクトについて"
+  ],
+  "关注": [
+    "Follow",
+    "フォロー"
+  ],
+  "关注动态": [
+    "Following feed",
+    "フォロー中の投稿"
+  ],
+  "关注者": [
+    "Followers",
+    "フォロワー"
+  ],
+  "关注这位成员": [
+    "Follow this member",
+    "このメンバーをフォロー"
+  ],
+  "关闭": [
+    "Close",
+    "閉じる"
+  ],
+  "关闭我的菜单": [
+    "Close account menu",
+    "アカウントメニューを閉じる"
+  ],
+  "关闭推广条": [
+    "Close promotion bar",
+    "お知らせバーを閉じる"
+  ],
+  "其他": [
+    "Other",
+    "その他"
+  ],
+  "其他社交链接": [
+    "Other social links",
+    "その他のSNSリンク"
+  ],
+  "内容加载中": [
+    "Loading content",
+    "読み込み中"
+  ],
+  "内容可能正在核查或已经下架。": [
+    "This content may be under review or offline.",
+    "この内容は確認中、または非公開になっている可能性があります。"
+  ],
+  "内容地址、原决定回执或账号问题": [
+    "Content URL, original case receipt or account issue",
+    "コンテンツURL、元の受付番号、アカウントの問題"
+  ],
+  "内容地址（可选）": [
+    "Content URL (optional)",
+    "コンテンツURL（任意）"
+  ],
+  "内容地址：/": [
+    "Content URL: /",
+    "コンテンツURL：/"
+  ],
+  "内容处理": [
+    "Content action",
+    "コンテンツの処理"
+  ],
+  "内容存在投诉或风险限制，须先处理关联工单；不能通过审核绕过冻结。": [
+    "This content has an active complaint or risk hold. Resolve related cases first; review cannot bypass a freeze.",
+    "苦情またはリスクによる制限があります。関連案件を先に処理してください。審査で凍結を回避することはできません。"
+  ],
+  "内容安全与合法权益": [
+    "Content safety and rights",
+    "コンテンツの安全と権利"
+  ],
+  "内容已下架": [
+    "Content taken offline.",
+    "内容を非公開にしました。"
+  ],
+  "内容已下架，重新公开需要审核。": [
+    "Content is offline. Publishing again requires review.",
+    "内容は非公開です。再公開には審査が必要です。"
+  ],
+  "内容已发布": [
+    "Content published.",
+    "内容を公開しました。"
+  ],
+  "内容已发布，前台已更新。": [
+    "Published. The public site is updated.",
+    "公開しました。サイトにも反映されました。"
+  ],
+  "内容正在慢慢整理。也可以先从我的经历开始了解。": [
+    "I'm still putting this together. You can start with my background.",
+    "内容を準備中です。まずは私の経歴をご覧ください。"
+  ],
+  "内容管理": [
+    "Content management",
+    "コンテンツ管理"
+  ],
+  "内容管理后台": [
+    "Content dashboard",
+    "コンテンツ管理画面"
+  ],
+  "内容编辑": [
+    "Content editor",
+    "コンテンツ編集"
+  ],
+  "内容预览 · 尚未发布": [
+    "Preview · Not published",
+    "プレビュー · 未公開"
+  ],
+  "再多认识我一点。": [
+    "A little more about me.",
+    "もう少し、私について。"
+  ],
+  "写一份分享": [
+    "Write a post",
+    "投稿する"
+  ],
+  "写一份新的分享": [
+    "Write a new post",
+    "新しい投稿"
+  ],
+  "写下新的想法，整理值得分享的内容。": [
+    "Write down new ideas and organize what is worth sharing.",
+    "新しいアイデアを書き留め、共有したい内容を整理しましょう。"
+  ],
+  "写下的想法": [
+    "Notes and ideas",
+    "書き留めた考え"
+  ],
+  "写下评论": [
+    "Write a comment",
+    "コメントを書く"
+  ],
+  "写清作者、来源和许可。": [
+    "Include the author, source and license.",
+    "著者、出典、ライセンスを明記してください。"
+  ],
+  "决定已保存，作者会收到理由和申诉入口。": [
+    "Decision saved. The author will receive the reason and appeal link.",
+    "判断を保存しました。投稿者に理由と異議申立ての入口が届きます。"
+  ],
+  "分享": [
+    "Share",
+    "共有"
+  ],
+  "分享一个新发现": [
+    "Share a new find",
+    "新しい発見を共有"
+  ],
+  "分享与收藏": [
+    "Shares and collections",
+    "共有とコレクション"
+  ],
+  "分享与更多操作": [
+    "Share and more",
+    "共有・その他"
+  ],
+  "分享与转发": [
+    "Posts and reposts",
+    "投稿とリポスト"
+  ],
+  "分享之前，核对一下": [
+    "Before you share",
+    "共有する前に"
+  ],
+  "分享互动": [
+    "Post actions",
+    "投稿への操作"
+  ],
+  "分享你的看法，或补充使用经验…": [
+    "Share your thoughts or a useful tip…",
+    "感想や役立つ情報を書いてください…"
+  ],
+  "分享依据": [
+    "Sharing basis",
+    "共有の根拠"
+  ],
+  "分享内容": [
+    "Post content",
+    "投稿内容"
+  ],
+  "分享方式": [
+    "Share options",
+    "共有方法"
+  ],
+  "分享，也留一份出处。": [
+    "Share, and keep the source.",
+    "共有とともに、出典も残す。"
+  ],
+  "分类": [
+    "Category",
+    "カテゴリ"
+  ],
+  "分类 *": [
+    "Category *",
+    "カテゴリ *"
+  ],
+  "分类与标签": [
+    "Categories and tags",
+    "カテゴリとタグ"
+  ],
+  "分类与标签已更新": [
+    "Categories and tags updated.",
+    "カテゴリとタグを更新しました。"
+  ],
+  "分类标签": [
+    "Categories & tags",
+    "カテゴリ・タグ"
+  ],
+  "分配社区角色": [
+    "Assign community role",
+    "コミュニティの役割を設定"
+  ],
+  "分页": [
+    "Pagination",
+    "ページ切り替え"
+  ],
+  "切换到展示页": [
+    "View public site",
+    "公開サイトへ"
+  ],
+  "列表": [
+    "List",
+    "リスト"
+  ],
+  "列表分页": [
+    "List pages",
+    "一覧のページ切り替え"
+  ],
+  "创建一次性邀请": [
+    "Create one-time invitation",
+    "一度限りの招待を作成"
+  ],
+  "创建于": [
+    "Created",
+    "作成日時"
+  ],
+  "创建新修订": [
+    "Create revision",
+    "改訂版を作成"
+  ],
+  "创建本地体验账号": [
+    "Create local test account",
+    "ローカルテスト用アカウントを作成"
+  ],
+  "初步证据": [
+    "Initial evidence",
+    "予備的な証拠"
+  ],
+  "删除": [
+    "Delete",
+    "削除"
+  ],
+  "别名": [
+    "Alias",
+    "別名"
+  ],
+  "刷新状态": [
+    "Refresh status",
+    "状態を更新"
+  ],
+  "前往个人资料更换头像": [
+    "Change photo in profile settings",
+    "プロフィール設定で画像を変更"
+  ],
+  "前往登录": [
+    "Sign in",
+    "ログイン"
+  ],
+  "前往社区审核": [
+    "Open community review",
+    "コミュニティ審査へ"
+  ],
+  "前往邀请注册": [
+    "Use an invitation",
+    "招待から登録"
+  ],
+  "加入社区": [
+    "Joined the community",
+    "コミュニティに参加"
+  ],
+  "加粗": [
+    "Bold",
+    "太字"
+  ],
+  "动态范围": [
+    "Feed scope",
+    "投稿の範囲"
+  ],
+  "历史 / 未知": [
+    "Historical / Unknown",
+    "過去 / 不明"
+  ],
+  "历史资源": [
+    "Archived resource",
+    "過去のリソース"
+  ],
+  "原作者 / 机构": [
+    "Original author / Organization",
+    "原著者 / 組織"
+  ],
+  "原作者或机构": [
+    "Original author or organization",
+    "原著者または組織"
+  ],
+  "原分享暂不可用或存在风险限制，不能批准新评论。": [
+    "The original post is unavailable or restricted. New comments cannot be approved.",
+    "元の投稿が利用不可または制限中のため、新しいコメントを承認できません。"
+  ],
+  "原分享：": [
+    "Original post:",
+    "元の投稿："
+  ],
+  "原创、合规开源资源与官方链接，都可以从这里开始。": [
+    "Original work, licensed open-source resources and official links are welcome.",
+    "オリジナルの作品、適切なライセンスのオープンソース資料、公式リンクを共有できます。"
+  ],
+  "原访问与流量看板": [
+    "Existing traffic dashboard",
+    "既存のアクセス・通信量ダッシュボード"
+  ],
+  "去认识我": [
+    "Get to know me",
+    "私について知る"
+  ],
+  "反馈类型": [
+    "Feedback type",
+    "フィードバックの種類"
+  ],
+  "发布": [
+    "Publish",
+    "公開"
+  ],
+  "发布。体验成员投稿时，请创建邀请并使用独立测试账号。": [
+    ". To try member submissions, create an invitation and use a separate test account.",
+    "から行えます。メンバー投稿を試すには、招待を作成して別のテスト用アカウントを使用してください。"
+  ],
+  "发布内容": [
+    "Publish content",
+    "コンテンツを公開"
+  ],
+  "发布更新": [
+    "Publish update",
+    "更新を公開"
+  ],
+  "发布状态": [
+    "Publication status",
+    "公開状態"
+  ],
+  "发布设置": [
+    "Publication settings",
+    "公開設定"
+  ],
+  "发现一份来自旧版本的本地草稿。请先核对当前内容。": [
+    "A local draft from an older version was found. Check the current content first.",
+    "以前のバージョンのローカル下書きが見つかりました。現在の内容を先に確認してください。"
+  ],
+  "发现与社区信息": [
+    "Discovery and community information",
+    "おすすめとコミュニティ情報"
+  ],
+  "发现成员": [
+    "Explore members",
+    "メンバーを探す"
+  ],
+  "发现更多成员": [
+    "Discover more people",
+    "ほかのメンバーを見る"
+  ],
+  "发现社区成员": [
+    "Discover community members",
+    "コミュニティのメンバーを探す"
+  ],
+  "取消": [
+    "Cancel",
+    "キャンセル"
+  ],
+  "取消任务": [
+    "Cancel task",
+    "タスクをキャンセル"
+  ],
+  "取消关注": [
+    "Unfollow",
+    "フォロー解除"
+  ],
+  "取消收藏": [
+    "Remove bookmark",
+    "ブックマークを解除"
+  ],
+  "取消此上传任务并清理已传的部分？": [
+    "Cancel this upload and remove the uploaded chunks?",
+    "このアップロードを中止し、アップロード済みの部分を削除しますか？"
+  ],
+  "取消点赞": [
+    "Unlike",
+    "いいねを取り消す"
+  ],
+  "取消转发": [
+    "Undo repost",
+    "リポストを取り消す"
+  ],
+  "取消选择": [
+    "Cancel selection",
+    "選択を解除"
+  ],
+  "另存草稿不会改变当前公开版本，发布更新后才会对外生效。": [
+    "Saving a draft does not change the public version. Changes go live only after publishing.",
+    "下書きの保存では公開版は変わりません。更新の公開後に反映されます。"
+  ],
+  "另有": [
+    "Another",
+    "ほかに"
+  ],
+  "只审这一次提交的固定版本，核查来源、许可与每一个链接。": [
+    "Review only this fixed submission, checking its source, license and every link.",
+    "この固定された提出バージョンのみを対象に、出典、ライセンス、すべてのリンクを確認してください。"
+  ],
+  "可以": [
+    "You can",
+    "利用可能"
+  ],
+  "可以从社区里的分享开始认识彼此。": [
+    "Start getting to know people through their posts.",
+    "投稿をきっかけに、メンバーと知り合いましょう。"
+  ],
+  "可分享文字、封面与来源链接。": [
+    "Share text, a cover image and source links.",
+    "本文、カバー画像、出典リンクを共有できます。"
+  ],
+  "可向相关当事人反馈的事实、依据与结果": [
+    "Facts, basis and results that may be shared with the relevant parties",
+    "関係者に伝えられる事実、根拠、結果"
+  ],
+  "可手动复制的分享链接": [
+    "Share link for manual copying",
+    "手動コピー用の共有リンク"
+  ],
+  "可横向滚动的数据表": [
+    "Horizontally scrollable data table",
+    "横スクロール可能なデータ表"
+  ],
+  "可横向滚动的文件列表": [
+    "Horizontally scrollable file list",
+    "横スクロール可能なファイル一覧"
+  ],
+  "可横向滚动的治理记录": [
+    "Horizontally scrollable moderation records",
+    "横スクロール可能な管理記録"
+  ],
+  "可横向滚动的规则表格": [
+    "Horizontally scrollable rules table",
+    "横スクロール可能な規則表"
+  ],
+  "可选": [
+    "Optional",
+    "任意"
+  ],
+  "名称": [
+    "Name",
+    "名称"
+  ],
+  "后台分页": [
+    "Dashboard pagination",
+    "管理画面のページ切り替え"
+  ],
+  "后台导航": [
+    "Dashboard navigation",
+    "管理画面ナビゲーション"
+  ],
+  "后台页面不存在": [
+    "Dashboard page not found",
+    "管理画面のページが見つかりません"
+  ],
+  "启用推广条": [
+    "Enable promotion bar",
+    "お知らせバーを有効化"
+  ],
+  "和": [
+    "and",
+    "と"
+  ],
+  "和一路走来的经历。": [
+    "and the journey along the way.",
+    "これまで歩んできた道。"
+  ],
+  "回到展示页": [
+    "View public site",
+    "公開ページへ"
+  ],
+  "回到社区": [
+    "Back to community",
+    "コミュニティに戻る"
+  ],
+  "回复": [
+    "Reply",
+    "返信"
+  ],
+  "回复上下文：": [
+    "Reply context:",
+    "返信の文脈："
+  ],
+  "回执": [
+    "Receipt",
+    "受付番号"
+  ],
+  "回执编号": [
+    "Receipt number",
+    "受付番号"
+  ],
+  "回执：": [
+    "Receipt:",
+    "受付番号："
+  ],
+  "回收内容类型": [
+    "Deleted content type",
+    "削除済みコンテンツの種類"
+  ],
+  "回收站": [
+    "Trash",
+    "ゴミ箱"
+  ],
+  "回收站没有匹配内容。": [
+    "No matching items in the trash.",
+    "ゴミ箱に一致する項目はありません。"
+  ],
+  "图片上传中…": [
+    "Uploading image…",
+    "画像をアップロード中…"
+  ],
+  "图片不能超过5MB。": [
+    "The image must be 5 MB or smaller.",
+    "画像は5 MB以下にしてください。"
+  ],
+  "图片说明 *": [
+    "Image description *",
+    "画像の説明 *"
+  ],
+  "在分享下方点击收藏，之后可以在任何登录设备上找到。": [
+    "Bookmark a post to find it later on any device you sign in to.",
+    "投稿をブックマークすると、ログインしたどの端末でも後から確認できます。"
+  ],
+  "在审核中核对来源，让合适的内容与大家见面。": [
+    "Check sources during review and help suitable posts reach the community.",
+    "審査で出典を確認し、適切な投稿をコミュニティに届けましょう。"
+  ],
+  "在求职展示页展示": [
+    "Show on career page",
+    "採用向けページに表示"
+  ],
+  "在站长后台修改密码": [
+    "Change password in owner settings",
+    "管理者設定でパスワードを変更"
+  ],
+  "在这里，慢慢认识一个人，也看看他做过的事情。": [
+    "Get to know the person and the work behind this site.",
+    "このサイトの作者と、その取り組みをご覧ください。"
+  ],
+  "在首页推荐资源中展示": [
+    "Feature in homepage resources",
+    "トップページのおすすめ資料に表示"
+  ],
+  "垃圾广告": [
+    "Spam",
+    "スパム"
+  ],
+  "基本信息": [
+    "Basic information",
+    "基本情報"
+  ],
+  "基础与分享信息": [
+    "Site and sharing information",
+    "サイト・共有の基本情報"
+  ],
+  "填写原始发布位置、许可依据或对比说明。目前不接收网页证据附件。": [
+    "Provide the original publication, license or comparison. Evidence attachments are not currently accepted.",
+    "元の公開場所、ライセンス、比較説明を記載してください。証拠ファイルの添付は現在受け付けていません。"
+  ],
+  "填写完整的 http:// 或 https:// 地址。": [
+    "Enter a full http:// or https:// URL.",
+    "http:// または https:// から始まる完全なURLを入力してください。"
+  ],
+  "声明已提交，请等候负责人跟进。": [
+    "Statement submitted. Please wait for the responsible person's response.",
+    "声明を提出しました。担当者の対応をお待ちください。"
+  ],
+  "处理举报与申诉": [
+    "Handle reports and appeals",
+    "通報と異議申立てを処理"
+  ],
+  "处理决定": [
+    "Decision",
+    "判断"
+  ],
+  "处理操作": [
+    "Action",
+    "処理操作"
+  ],
+  "处理新投稿，照看公开内容，及时回应举报与申诉。": [
+    "Review new submissions, look after public posts and respond to reports and appeals.",
+    "新しい投稿を審査し、公開内容を管理して、通報や異議申立てに対応します。"
+  ],
+  "处理记录已保存，相关成员可查看进展。": [
+    "Action saved. Relevant members can view progress.",
+    "処理を保存しました。関係するメンバーが進捗を確認できます。"
+  ],
+  "处置与反馈": [
+    "Action and response",
+    "対応と回答"
+  ],
+  "复制回执与凭证": [
+    "Copy receipt and credential",
+    "受付番号と照会キーをコピー"
+  ],
+  "复制失败，请手动保存上方内容": [
+    "Copy failed. Save the information above manually.",
+    "コピーに失敗しました。上の情報を手動で保存してください。"
+  ],
+  "复制失败，请手动复制下方链接": [
+    "Copy failed. Copy the link below manually.",
+    "コピーに失敗しました。下のリンクを手動でコピーしてください。"
+  ],
+  "复制链接": [
+    "Copy link",
+    "リンクをコピー"
+  ],
+  "外部网站": [
+    "External website",
+    "外部サイト"
+  ],
+  "外部资源": [
+    "External resource",
+    "外部リソース"
+  ],
+  "外部资源地址": [
+    "External resource URL",
+    "外部リソースのURL"
+  ],
+  "多个技能用逗号分隔。": [
+    "Separate multiple skills with commas.",
+    "複数のスキルはカンマで区切ってください。"
+  ],
+  "多个标签使用逗号分隔。": [
+    "Separate multiple tags with commas.",
+    "複数のタグはカンマで区切ってください。"
+  ],
+  "大小": [
+    "Size",
+    "サイズ"
+  ],
+  "头像": [
+    "Avatar",
+    "アバター"
+  ],
+  "头像已更新，账号区和所有投稿会同步使用新头像。": [
+    "Photo updated. Your account and all your posts now use it.",
+    "画像を更新しました。アカウント欄とすべての投稿に反映されます。"
+  ],
+  "好用的资源，": [
+    "Useful resources,",
+    "役立つ資料を、"
+  ],
+  "姓名": [
+    "Full name",
+    "氏名"
+  ],
+  "完成内容、预览检查，再决定何时公开。": [
+    "Finish your content and preview it before deciding when to publish.",
+    "内容を整えてプレビューを確認し、公開する時期を決めましょう。"
+  ],
+  "完整 HTTPS 公共页面；不接收短链、网盘、密码及来源不明下载地址。": [
+    "Use a full public HTTPS page. Short links, cloud-drive links, passwords and unverified downloads are not accepted.",
+    "公開された完全なHTTPSページを指定してください。短縮URL、クラウドストレージ、パスワード、不明な配布先は受け付けません。"
+  ],
+  "完整个人介绍": [
+    "Full biography",
+    "詳しい自己紹介"
+  ],
+  "完整经历": [
+    "Full experience",
+    "経歴の詳細"
+  ],
+  "实用的网站、开发资料与自己的资源，会收在这里。": [
+    "Useful sites, development materials and my own resources, collected here.",
+    "便利なサイト、開発資料、自作リソースをまとめています。"
+  ],
+  "实用网站、开发资料与个人资源，认真整理，持续更新。": [
+    "Useful websites, development materials and personal resources, carefully collected and updated.",
+    "便利なサイト、開発資料、自作リソースを整理し、更新しています。"
+  ],
+  "审核": [
+    "Review",
+    "審査"
+  ],
+  "审核、冻结、恢复、账号操作与私密材料访问均保留操作者和时间。": [
+    "Reviews, freezes, restores, account actions and private-evidence access retain actor and time records.",
+    "審査、凍結、復旧、アカウント操作、非公開資料へのアクセスには、操作者と日時が記録されます。"
+  ],
+  "审核、回应与照看": [
+    "Review, respond and maintain",
+    "審査・回答・管理"
+  ],
+  "审核决定": [
+    "Review decision",
+    "審査の判断"
+  ],
+  "审核列表范围": [
+    "Review list scope",
+    "審査一覧の範囲"
+  ],
+  "审核反馈：": [
+    "Review feedback:",
+    "審査からの回答："
+  ],
+  "审核员": [
+    "Reviewer",
+    "審査担当者"
+  ],
+  "审核或账号申诉": [
+    "Review or account appeal",
+    "審査・アカウントの異議申立て"
+  ],
+  "审核结果、互动与处理进展，都在这里。": [
+    "Reviews, interactions and case updates, all in one place.",
+    "審査結果、交流、対応の進捗をここで確認できます。"
+  ],
+  "密码": [
+    "Password",
+    "パスワード"
+  ],
+  "密码已修改，请重新登录。": [
+    "Password changed. Sign in again.",
+    "パスワードを変更しました。再度ログインしてください。"
+  ],
+  "对处理提出申诉": [
+    "Appeal this action",
+    "この処理に異議を申し立てる"
+  ],
+  "对外展示": [
+    "Public display",
+    "公開表示"
+  ],
+  "对此决定申诉": [
+    "Appeal this decision",
+    "この判断に異議を申し立てる"
+  ],
+  "对照当前已审版本": [
+    "Compare with approved version",
+    "承認済みバージョンと比較"
+  ],
+  "对账号措施提出申诉": [
+    "Appeal account action",
+    "アカウントへの措置に異議を申し立てる"
+  ],
+  "导航": [
+    "Navigation",
+    "ナビゲーション"
+  ],
+  "封禁": [
+    "Ban",
+    "利用停止"
+  ],
+  "封面和正文一起审核，审核通过前仅本人和审核人员可见。": [
+    "The cover and content are reviewed together. Until approved, only you and reviewers can see them.",
+    "カバーは本文と一緒に審査されます。承認までは本人と審査担当者のみ閲覧できます。"
+  ],
+  "封面图片": [
+    "Cover image",
+    "カバー画像"
+  ],
+  "封面暂不可用": [
+    "Cover image unavailable",
+    "カバー画像を表示できません"
+  ],
+  "将前往": [
+    "You will visit",
+    "移動先："
+  ],
+  "将打开外部网站，获取方式以对方页面为准。": [
+    "Opens an external website. Follow the source site's access instructions.",
+    "外部サイトを開きます。入手方法はリンク先の案内に従ってください。"
+  ],
+  "将旧本地草稿载入当前编辑区？需要你核对后再保存。": [
+    "Load the older local draft into this editor? Check it before saving.",
+    "以前のローカル下書きを編集画面に読み込みますか？保存前に内容を確認してください。"
+  ],
+  "将此内容移入回收站？公开页面和下载入口将停止提供。": [
+    "Move this content to the trash? Its public page and downloads will become unavailable.",
+    "この内容をゴミ箱に移動しますか？公開ページとダウンロードが利用できなくなります。"
+  ],
+  "尚未保存": [
+    "Not saved yet",
+    "未保存"
+  ],
+  "尚未保存草稿": [
+    "Draft not saved yet",
+    "下書きは未保存です"
+  ],
+  "尚未填写标题": [
+    "Untitled",
+    "タイトル未入力"
+  ],
+  "尚未结案": [
+    "Not closed",
+    "未解決"
+  ],
+  "尚未记录": [
+    "Not recorded",
+    "未記録"
+  ],
+  "尽量给出可准确定位的本站内容地址；申诉请说明原决定。": [
+    "Provide a precise URL on this site where possible. Appeals should refer to the original decision.",
+    "できるだけ該当するサイト内URLを記載してください。異議申立てでは元の判断を示してください。"
+  ],
+  "展开这篇手记": [
+    "Read this note",
+    "このノートを読む"
+  ],
+  "展示排序": [
+    "Display order",
+    "表示順"
+  ],
+  "展示标识": [
+    "Display label",
+    "表示ラベル"
+  ],
+  "工作人员正在核查。": [
+    "Staff are reviewing this case.",
+    "担当者が確認しています。"
+  ],
+  "工具、资料与个人资源": [
+    "Tools, materials and personal resources",
+    "ツール・資料・個人リソース"
+  ],
+  "工单筛选": [
+    "Case filters",
+    "案件フィルター"
+  ],
+  "已下架": [
+    "Offline",
+    "非公開"
+  ],
+  "已使用": [
+    "Used",
+    "使用済み"
+  ],
+  "已保存操作记录。": [
+    "Action record saved.",
+    "操作記録を保存しました。"
+  ],
+  "已停止公开": [
+    "is no longer public",
+    "は公開を停止しました"
+  ],
+  "已公开": [
+    "Public",
+    "公開済み"
+  ],
+  "已公开评论": [
+    "Public comments",
+    "公開コメント"
+  ],
+  "已关注": [
+    "Following",
+    "フォロー中"
+  ],
+  "已切换；浏览器未允许保存偏好，刷新后会恢复默认外观。": [
+    "Appearance changed. Your browser blocked saving this preference; reloads will use the default.",
+    "外観を変更しましたが、ブラウザーが設定の保存を許可しませんでした。再読み込み後は初期設定に戻ります。"
+  ],
+  "已创建修订草稿。": [
+    "Revision draft created.",
+    "改訂の下書きを作成しました。"
+  ],
+  "已发布": [
+    "Published",
+    "公開済み"
+  ],
+  "已复制": [
+    "Copied",
+    "コピーしました"
+  ],
+  "已存文件": [
+    "Stored files",
+    "保存済みファイル"
+  ],
+  "已恢复为草稿": [
+    "Restored as draft.",
+    "下書きとして復元しました。"
+  ],
+  "已打开系统分享": [
+    "System share opened.",
+    "共有メニューを開きました。"
+  ],
+  "已拒绝此评论，并向作者发送具体理由。": [
+    "Comment rejected. The author was sent the reason.",
+    "コメントを却下し、投稿者に具体的な理由を通知しました。"
+  ],
+  "已提交审核。通过前不会公开这一版内容。": [
+    "Submitted for review. This version stays private until approved.",
+    "審査に提出しました。このバージョンは承認されるまで非公開です。"
+  ],
+  "已提交审核，审核通过后公开显示。": [
+    "Submitted for review. It will appear after approval.",
+    "審査に提出しました。承認後に公開されます。"
+  ],
+  "已撤回，可继续修改。": [
+    "Withdrawn. You can continue editing.",
+    "取り下げました。編集を続けられます。"
+  ],
+  "已撤销": [
+    "Revoked",
+    "取り消し済み"
+  ],
+  "已收到你的反馈": [
+    "Feedback received",
+    "フィードバックを受け付けました"
+  ],
+  "已收到反馈，等待工作人员处理。": [
+    "Feedback received. Waiting for staff.",
+    "受け付けました。担当者の対応をお待ちください。"
+  ],
+  "已收到，等待工作人员核查。": [
+    "Received. Waiting for review.",
+    "受け付けました。確認をお待ちください。"
+  ],
+  "已收藏": [
+    "Bookmarked",
+    "保存済み"
+  ],
+  "已有回执？查看处理进展": [
+    "Have a receipt? Check progress",
+    "受付番号から進捗を確認"
+  ],
+  "已有账号，前往登录": [
+    "Already have an account? Sign in",
+    "アカウントをお持ちの方はログイン"
+  ],
+  "已检查此昵称，仅授予本机联调资格，并未完成真实实名核验。": [
+    "I checked this nickname and grant local testing eligibility only; real-name identity verification is not complete.",
+    "このニックネームを確認し、ローカルテスト資格のみを付与します。実際の本人確認は完了していません。"
+  ],
+  "已注销账号不可恢复或重新授权。": [
+    "Closed accounts cannot be restored or reauthorized.",
+    "退会済みアカウントは復旧や権限の再付与ができません。"
+  ],
+  "已移入回收站": [
+    "Moved to trash.",
+    "ゴミ箱に移動しました。"
+  ],
+  "已移除头像，恢复默认图片头像。": [
+    "Photo removed. The default image is restored.",
+    "画像を削除し、デフォルト画像に戻しました。"
+  ],
+  "已获授权": [
+    "Authorized",
+    "許諾取得済み"
+  ],
+  "已被封禁": [
+    "Banned",
+    "利用停止中"
+  ],
+  "已记录操作上下文": [
+    "Action context recorded",
+    "操作の文脈を記録しました"
+  ],
+  "已读": [
+    "Read",
+    "既読"
+  ],
+  "已过期": [
+    "Expired",
+    "期限切れ"
+  ],
+  "已锁定，正在等待人工审核。需要修改时请先撤回。": [
+    "is locked and awaiting human review. Withdraw it before editing.",
+    "はロックされ、担当者の審査待ちです。編集するには先に取り下げてください。"
+  ],
+  "已阅读": [
+    "I have read",
+    "確認しました："
+  ],
+  "已领取此审核任务。": [
+    "Review task claimed.",
+    "審査タスクを引き受けました。"
+  ],
+  "帖子": [
+    "Post",
+    "投稿"
+  ],
+  "广告": [
+    "Ad",
+    "広告"
+  ],
+  "广告与站内推荐": [
+    "Ads and recommendations",
+    "広告とおすすめ"
+  ],
+  "应用日期": [
+    "Apply dates",
+    "期間を適用"
+  ],
+  "应用链接": [
+    "Apply link",
+    "リンクを適用"
+  ],
+  "开发、实践与复盘": [
+    "Development, practice and reflection",
+    "開発・実践・振り返り"
+  ],
+  "开发心得、技术笔记，还有成长途中想留下的片段。": [
+    "Development ideas, technical notes and moments worth keeping.",
+    "開発の考え、技術ノート、残しておきたい成長の記録。"
+  ],
+  "开发经验、实用工具，或一份值得收藏的灵感。": [
+    "Development experience, useful tools or an idea worth saving.",
+    "開発経験、便利なツール、残しておきたいアイデア。"
+  ],
+  "开始审核": [
+    "Start review",
+    "審査を開始"
+  ],
+  "开始整理": [
+    "Start writing",
+    "作成を始める"
+  ],
+  "开始日期": [
+    "Start date",
+    "開始日"
+  ],
+  "开始时间": [
+    "Start time",
+    "開始日時"
+  ],
+  "开源或开放许可": [
+    "Open-source or open license",
+    "オープンソース・オープンライセンス"
+  ],
+  "引用": [
+    "Quote",
+    "引用"
+  ],
+  "当前位置": [
+    "Current location",
+    "現在の位置"
+  ],
+  "当前密码": [
+    "Current password",
+    "現在のパスワード"
+  ],
+  "当前已审版本": [
+    "Current approved version",
+    "現在の承認済みバージョン"
+  ],
+  "当前状态": [
+    "Current status",
+    "現在の状態"
+  ],
+  "待使用": [
+    "Unused",
+    "未使用"
+  ],
+  "待保存的新头像": [
+    "New photo preview",
+    "保存前の画像プレビュー"
+  ],
+  "待填写": [
+    "Not provided",
+    "未入力"
+  ],
+  "待处理": [
+    "Needs work",
+    "対応が必要"
+  ],
+  "待安排": [
+    "Unscheduled",
+    "未定"
+  ],
+  "待审分享": [
+    "Submission under review",
+    "審査中の投稿"
+  ],
+  "待审投稿": [
+    "Pending submission",
+    "審査待ちの投稿"
+  ],
+  "待审核": [
+    "Pending review",
+    "審査待ち"
+  ],
+  "待审评论": [
+    "Pending comments",
+    "審査待ちコメント"
+  ],
+  "待审队列已整理完": [
+    "Review queue is clear",
+    "審査待ちはありません"
+  ],
+  "很高兴，在这里遇见你。": [
+    "Glad to meet you here.",
+    "ここでお会いできてうれしいです。"
+  ],
+  "恢复为草稿": [
+    "Restore as draft",
+    "下書きに戻す"
+  ],
+  "恢复后先进入草稿，再由你决定何时发布。": [
+    "Restored items become drafts. You decide when to publish them.",
+    "復元した内容は下書きになります。公開する時期は後で決められます。"
+  ],
+  "恢复本地新投稿": [
+    "Restore local post draft",
+    "投稿のローカル下書きを復元"
+  ],
+  "成员主页内容": [
+    "Member profile content",
+    "メンバーのプロフィール内容"
+  ],
+  "成员提交内容后，会在这里出现。可前往账号与邀请创建本地测试邀请。": [
+    "Member submissions appear here. Create a local test invitation under Accounts and invitations.",
+    "メンバーが提出するとここに表示されます。「アカウントと招待」からローカルテスト用の招待を作成できます。"
+  ],
+  "成员资格与权限": [
+    "Member eligibility and permissions",
+    "メンバーの資格と権限"
+  ],
+  "成果与收获": [
+    "Results and learning",
+    "成果と学び"
+  ],
+  "成长的足迹": [
+    "Milestones",
+    "成長の記録"
+  ],
+  "我已成年，了解此邀请仅用于本地体验。": [
+    "I am an adult and understand this invitation is for local testing only.",
+    "成人であり、この招待がローカルテスト専用であることを理解しています。"
+  ],
+  "我已核对法律程序、全部案件限制与指定已审版本；不存在其他有效冻结。": [
+    "I checked the legal process, all case restrictions and the approved version. No other active freeze remains.",
+    "法的手続き、すべての案件制限、指定の承認済みバージョンを確認し、ほかに有効な凍結がないことを確認しました。"
+  ],
+  "我已检查来源、许可、正文、封面和全部链接，确认批准的是上方固定版本。": [
+    "I checked the source, license, text, cover and all links. I am approving the fixed version shown above.",
+    "出典、ライセンス、本文、カバー、全リンクを確認し、上の固定バージョンを承認することを確認しました。"
+  ],
+  "我已检查正文、链接、回复上下文及社区规则。": [
+    "I checked the text, links, reply context and community rules.",
+    "本文、リンク、返信の文脈、コミュニティ規則を確認しました。"
+  ],
+  "我已阅读": [
+    "I have read",
+    "確認しました："
+  ],
+  "我的": [
+    "Me",
+    "自分"
+  ],
+  "我的主页": [
+    "My profile",
+    "プロフィール"
+  ],
+  "我的工作台": [
+    "My workspace",
+    "ワークスペース"
+  ],
+  "我的投稿": [
+    "My posts",
+    "自分の投稿"
+  ],
+  "我的收藏": [
+    "Bookmarks",
+    "ブックマーク"
+  ],
+  "我的社区菜单": [
+    "My community menu",
+    "自分のコミュニティメニュー"
+  ],
+  "我的角色": [
+    "My role",
+    "自分の役割"
+  ],
+  "我的账号与更多功能": [
+    "My account and more",
+    "アカウント・その他"
+  ],
+  "我确认提交的声明与证据真实，并了解必要材料会依法转送。": [
+    "I confirm this statement and evidence are accurate and understand that necessary materials may be forwarded under applicable procedures.",
+    "声明と証拠が正確であり、必要な資料が適用手続きに従って転送されることを理解しています。"
+  ],
+  "我确认身份、权利主张和证据真实，并了解必要通知和材料会依法向相关当事人转送。": [
+    "I confirm that my identity, rights claim and evidence are accurate and understand that necessary materials may be forwarded to relevant parties.",
+    "身元、権利の主張、証拠が正確であり、必要な資料が関係者に転送されることを理解しています。"
+  ],
+  "所有消息已标为已读。": [
+    "All notifications marked as read.",
+    "すべての通知を既読にしました。"
+  ],
+  "所选文件与此任务不一致，请选择原文件": [
+    "This file does not match the upload task. Select the original file.",
+    "選択したファイルはこのタスクと一致しません。元のファイルを選択してください。"
+  ],
+  "手机导航": [
+    "Mobile navigation",
+    "モバイルナビゲーション"
+  ],
+  "手记": [
+    "Notes",
+    "ノート"
+  ],
+  "打开审核队列": [
+    "Open review queue",
+    "審査一覧を開く"
+  ],
+  "打开投稿": [
+    "Open submission",
+    "投稿を開く"
+  ],
+  "打开查看固定提交版本与审核记录。": [
+    "View the fixed submission and review history.",
+    "固定された提出内容と審査記録を確認できます。"
+  ],
+  "执行操作并保存记录": [
+    "Apply action and save record",
+    "操作を実行して記録"
+  ],
+  "找到一起生长的人。": [
+    "Find people to grow with.",
+    "一緒に成長する仲間を見つける。"
+  ],
+  "找到兴趣相近的人，看看他们最近的分享。": [
+    "Find people with shared interests and explore their posts.",
+    "関心の近いメンバーを見つけ、最近の投稿を見てみましょう。"
+  ],
+  "找找资源名称、用途或关键词": [
+    "Search names, uses or keywords",
+    "名称、用途、キーワードで検索"
+  ],
+  "技术笔记与成长记录": [
+    "Technical notes and learning",
+    "技術ノートと学習記録"
+  ],
+  "技能与方向": [
+    "Skills and interests",
+    "スキルと関心"
+  ],
+  "把想法落在实处。": [
+    "Turning ideas into practice.",
+    "考えを実践に。"
+  ],
+  "把想法，慢慢做成作品。": [
+    "Turning ideas into work, one step at a time.",
+    "アイデアを、一歩ずつ形に。"
+  ],
+  "把日子过成过程，把过程留下来。": [
+    "Live the process. Keep the record.",
+    "日々の過程を、記録に残す。"
+  ],
+  "把有用的发现收在这里": [
+    "Keep your useful finds here",
+    "役立つ発見を保存"
+  ],
+  "把有用的发现，留给下一位同行的人。": [
+    "Keep a useful find for the next person.",
+    "次の誰かのために、役立つ発見を残す。"
+  ],
+  "把用途、来源和使用限制写清楚，让下一位使用者少走一点弯路。": [
+    "Describe the purpose, source and limitations to help the next person.",
+    "用途、出典、制約を明記し、次に使う人に役立てましょう。"
+  ],
+  "把这份资源，带走吧。": [
+    "Take this resource with you.",
+    "このリソースを持ち帰る。"
+  ],
+  "投稿": [
+    "Post",
+    "投稿"
+  ],
+  "投稿与修改均先审后发。": [
+    "Posts and edits are reviewed before publication.",
+    "投稿も編集も公開前に審査されます。"
+  ],
+  "投稿列表": [
+    "Submission list",
+    "投稿一覧"
+  ],
+  "投稿审核": [
+    "Submission review",
+    "投稿審査"
+  ],
+  "投稿审核队列": [
+    "Submission review queue",
+    "投稿の審査待ち一覧"
+  ],
+  "投稿封面": [
+    "Post cover",
+    "投稿カバー"
+  ],
+  "投稿状态": [
+    "Submission status",
+    "投稿の状態"
+  ],
+  "投诉工单队列": [
+    "Complaint queue",
+    "苦情の対応待ち一覧"
+  ],
+  "拒绝投稿": [
+    "Reject submission",
+    "投稿を却下"
+  ],
+  "拒绝评论": [
+    "Reject comment",
+    "コメントを却下"
+  ],
+  "指定版本已通过并公开。": [
+    "Selected version approved and published.",
+    "指定したバージョンを承認し、公開しました。"
+  ],
+  "按分类发现": [
+    "Browse categories",
+    "カテゴリから探す"
+  ],
+  "按时间显示浏览次数和去重访客数": [
+    "Page views and unique visitors over time",
+    "時系列の閲覧数とユニーク訪問者数"
+  ],
+  "按适用权利通知程序及时处理并记录转送与送达，不能统一设为十五天自动恢复。当前为本地测试，请勿提交真实敏感材料。": [
+    "Follow applicable rights-notice procedures and record forwarding and delivery; do not apply a blanket 15-day automatic restore. This is local testing; do not submit real sensitive evidence.",
+    "適用される権利通知の手続きに従い、転送と送達を記録してください。一律15日後の自動復旧にはしないでください。ローカルテストのため実際の機微な資料は送信しないでください。"
+  ],
+  "换一个关键词，或清空筛选再看看。": [
+    "Try another keyword or clear the filters.",
+    "キーワードを変えるか、絞り込みを解除してください。"
+  ],
+  "换一个昵称试试。": [
+    "Try another nickname.",
+    "別のニックネームをお試しください。"
+  ],
+  "换个关键词，或者清空筛选，再找找看。": [
+    "Try a different keyword or clear the filters.",
+    "別のキーワードを試すか、絞り込みを解除してください。"
+  ],
+  "排序": [
+    "Order",
+    "並び順"
+  ],
+  "探索网站": [
+    "Explore the site",
+    "サイトを探索"
+  ],
+  "接受邀请，加入分享": [
+    "Accept an invitation and join",
+    "招待から参加する"
+  ],
+  "推广文案": [
+    "Promotion text",
+    "お知らせの文面"
+  ],
+  "描述画面，并在来源说明中注明图片权利": [
+    "Describe the image and include its rights information in the source notes.",
+    "画像の内容を説明し、出典欄に画像の権利情報を記載してください。"
+  ],
+  "提交不侵权声明": [
+    "Submit a non-infringement statement",
+    "非侵害声明を提出"
+  ],
+  "提交与审核记录": [
+    "Submission and review history",
+    "提出・審査履歴"
+  ],
+  "提交中…": [
+    "Submitting…",
+    "提出中…"
+  ],
+  "提交前请阅读": [
+    "Before submitting, read",
+    "提出前にご確認ください："
+  ],
+  "提交声明": [
+    "Submit statement",
+    "声明を提出"
+  ],
+  "提交审核": [
+    "Submit for review",
+    "審査に提出"
+  ],
+  "提交审核后，会在这里与大家见面。": [
+    "It will appear here after approval.",
+    "審査で承認されると、ここに表示されます。"
+  ],
+  "提交并获取回执": [
+    "Submit and get receipt",
+    "送信して受付番号を取得"
+  ],
+  "提交必要身份说明，非必要不发送完整证件；材料仅向获授权人员提供。": [
+    "Provide necessary identity information only. Avoid full identity documents unless required; only authorized staff can access the material.",
+    "必要な身元情報のみを提出してください。必要がなければ身分証明書全体は送らないでください。資料は権限のある担当者のみ閲覧できます。"
+  ],
+  "提交投稿后，可在这里收到审核结果和处理提醒。": [
+    "Review results and case updates will appear here after you submit a post.",
+    "投稿を提出すると、審査結果や対応の進捗がここに届きます。"
+  ],
+  "提交版本": [
+    "Submitted version",
+    "提出バージョン"
+  ],
+  "提出申诉": [
+    "Appeal",
+    "異議申立て"
+  ],
+  "插入图片": [
+    "Insert image",
+    "画像を挿入"
+  ],
+  "搜索": [
+    "Search",
+    "検索"
+  ],
+  "搜索内容": [
+    "Search content",
+    "コンテンツを検索"
+  ],
+  "搜索内容标题": [
+    "Search content titles",
+    "コンテンツのタイトルを検索"
+  ],
+  "搜索分享、工具或关键词": [
+    "Search posts, tools or keywords",
+    "投稿、ツール、キーワードを検索"
+  ],
+  "搜索成员": [
+    "Search members",
+    "メンバーを検索"
+  ],
+  "搜索成员昵称": [
+    "Search member nicknames",
+    "ニックネームを検索"
+  ],
+  "搜索我的投稿": [
+    "Search my posts",
+    "自分の投稿を検索"
+  ],
+  "搜索文章标题或摘要": [
+    "Search article titles or summaries",
+    "記事のタイトル・要約を検索"
+  ],
+  "搜索标题": [
+    "Search titles",
+    "タイトルを検索"
+  ],
+  "搜索标题或摘要": [
+    "Search titles or summaries",
+    "タイトル・要約を検索"
+  ],
+  "搜索社区分享": [
+    "Search community posts",
+    "コミュニティ投稿を検索"
+  ],
+  "搜索社区资源": [
+    "Search community resources",
+    "共有リソースを検索"
+  ],
+  "摘要": [
+    "Summary",
+    "要約"
+  ],
+  "撤回": [
+    "Withdraw",
+    "取り下げ"
+  ],
+  "撤回并继续编辑": [
+    "Withdraw and edit",
+    "取り下げて編集"
+  ],
+  "撤销": [
+    "Undo",
+    "元に戻す"
+  ],
+  "撤销邀请": [
+    "Revoke invitation",
+    "招待を取り消す"
+  ],
+  "操作": [
+    "Actions",
+    "操作"
+  ],
+  "操作与对象": [
+    "Action and target",
+    "操作と対象"
+  ],
+  "操作者": [
+    "Actor",
+    "操作者"
+  ],
+  "支持 /community 等站内路径，或完整 HTTPS 网址。留空仅展示文字。": [
+    "Use a site path such as /community, or a full HTTPS URL. Leave blank for text only.",
+    "/community などのサイト内パスか、完全なHTTPS URLを入力してください。空欄なら文字のみ表示します。"
+  ],
+  "支持 JPG、PNG、WebP，最大 2 MB。保存时居中裁切为方图，展示时统一为圆形。": [
+    "JPG, PNG or WebP, up to 2 MB. Saved images are center-cropped and displayed as a circle.",
+    "JPG、PNG、WebP、最大2 MB。保存時に中央で切り抜き、丸い画像として表示します。"
+  ],
+  "支持中断后重新选择原文件继续，单文件上限": [
+    "Reselect the original file to resume an interrupted upload. Maximum file size:",
+    "中断後は元のファイルを選び直すと再開できます。最大ファイルサイズ："
+  ],
+  "支持中断续传。使用前，请先看看资源说明。": [
+    "Resumable downloads supported. Read the resource notes before use.",
+    "再開可能なダウンロードに対応しています。使用前にリソースの説明をご確認ください。"
+  ],
+  "收藏": [
+    "Bookmark",
+    "ブックマーク"
+  ],
+  "教育与实践经历": [
+    "Education and experience",
+    "学歴と実践経験"
+  ],
+  "数字越小越靠前。": [
+    "Lower numbers appear first.",
+    "数値が小さい順に表示します。"
+  ],
+  "数据概览": [
+    "Overview",
+    "概要"
+  ],
+  "整个范围内去重 · 估算": [
+    "Deduplicated across the range · Estimate",
+    "期間全体で重複除外 · 推定値"
+  ],
+  "整理有用的工具、开发经验和资源来源，保存为草稿，准备好后提交审核。": [
+    "Collect a useful tool, experience or source. Save a draft and submit it when ready.",
+    "便利なツール、開発経験、出典をまとめて下書きに保存し、準備ができたら審査に提出しましょう。"
+  ],
+  "整理第一份分享": [
+    "Write your first post",
+    "最初の投稿を作成"
+  ],
+  "整理自己的分享": [
+    "Manage your posts",
+    "自分の投稿を管理"
+  ],
+  "整理这份分享": [
+    "Edit your post",
+    "投稿を編集"
+  ],
+  "文件上传进度": [
+    "File upload progress",
+    "ファイルのアップロード状況"
+  ],
+  "文件与图片素材": [
+    "Files and images",
+    "ファイルと画像素材"
+  ],
+  "文件名称": [
+    "File name",
+    "ファイル名"
+  ],
+  "文件响应流量": [
+    "File response traffic",
+    "ファイルの送信量"
+  ],
+  "文件大小": [
+    "File size",
+    "ファイルサイズ"
+  ],
+  "文件已上传，可在内容编辑时从文件库选择。": [
+    "File uploaded. Choose it from the library while editing content.",
+    "アップロードしました。コンテンツ編集時にファイル一覧から選択できます。"
+  ],
+  "文件已删除": [
+    "File deleted.",
+    "ファイルを削除しました。"
+  ],
+  "文件素材": [
+    "File library",
+    "ファイル素材"
+  ],
+  "文章与手记": [
+    "Articles and notes",
+    "記事とノート"
+  ],
+  "文章管理": [
+    "Articles",
+    "記事管理"
+  ],
+  "斜体": [
+    "Italic",
+    "斜体"
+  ],
+  "新头像尚未保存，点击“保存头像”后公开更新。": [
+    "This photo is not saved yet. Save it to update your public photo.",
+    "新しい画像はまだ保存されていません。「画像を保存」で公開プロフィールに反映されます。"
+  ],
+  "新密码": [
+    "New password",
+    "新しいパスワード"
+  ],
+  "新密码至少12位，请使用独立的密码。": [
+    "Use a unique password with at least 12 characters.",
+    "ほかで使っていない12文字以上のパスワードを使用してください。"
+  ],
+  "新建": [
+    "New",
+    "新規"
+  ],
+  "新投稿已暂停，已发布的分享仍可浏览。": [
+    "New submissions are paused. Published posts remain available.",
+    "新しい投稿の受付を停止しています。公開済みの投稿は閲覧できます。"
+  ],
+  "新生成的邀请码": [
+    "New invitation code",
+    "作成した招待コード"
+  ],
+  "新的分享": [
+    "New post",
+    "新しい投稿"
+  ],
+  "新的技术笔记与阶段总结，会在这里慢慢写下。": [
+    "New technical notes and reflections will gradually appear here.",
+    "技術ノートや振り返りを、少しずつここに残していきます。"
+  ],
+  "新的评论或修订提交后，会出现在待审队列。": [
+    "New comments and revisions appear in the review queue.",
+    "新しいコメントや改訂が提出されると、審査待ちに表示されます。"
+  ],
+  "新草稿": [
+    "New draft",
+    "新しい下書き"
+  ],
+  "无": [
+    "None",
+    "なし"
+  ],
+  "无法载入后台": [
+    "Could not load dashboard",
+    "管理画面を読み込めません"
+  ],
+  "时间": [
+    "Time",
+    "日時"
+  ],
+  "显示在公开页面导航上方。从左向右全宽连续滚动，鼠标悬停不停播，访客可关闭；本次浏览关闭后不再出现。最多 5 条，按列表顺序展示。": [
+    "Shown above the public navigation. Scrolls across the full width without pausing on hover; visitors may close it for this session. Up to 5 items, in list order.",
+    "公開ページのナビゲーション上に表示します。横幅いっぱいに流れ、ホバーでは停止しません。訪問者はこの閲覧中のみ閉じられます。最大5件、一覧順に表示します。"
+  ],
+  "普通举报": [
+    "General report",
+    "通常の通報"
+  ],
+  "普通举报可匿名并凭回执查询。提供联系方式用于必要核查与反馈，不会公开。": [
+    "General reports may be anonymous and tracked with the receipt. Contact details are private and used only for necessary checks and replies.",
+    "通常の通報は匿名で行え、受付番号から照会できます。連絡先は必要な確認・返信にのみ使用し、公開しません。"
+  ],
+  "普通举报或资源反馈": [
+    "General report or resource feedback",
+    "通常の通報・リソースへの意見"
+  ],
+  "普通成员": [
+    "Member",
+    "一般メンバー"
+  ],
+  "暂停": [
+    "Pause",
+    "一時停止"
+  ],
+  "暂停公开": [
+    "Pause publication",
+    "公開を一時停止"
+  ],
+  "暂停后仍可查看历史、处理举报与申诉。无人处理或出现紧急情况时可先暂停收稿。": [
+    "History, reports and appeals remain available when paused. Pause submissions if nobody can review or an urgent issue occurs.",
+    "停止中も履歴、通報、異議申立ては扱えます。対応者が不在の場合や緊急時は受付を一時停止できます。"
+  ],
+  "暂停本地新投稿": [
+    "Pause local submissions",
+    "ローカル投稿を一時停止"
+  ],
+  "暂无匹配内容，可以新建内容或调整筛选。": [
+    "No matching content. Create something new or adjust the filters.",
+    "一致する内容はありません。新規作成するか、絞り込みを変更してください。"
+  ],
+  "暂无匹配投稿": [
+    "No matching posts",
+    "一致する投稿はありません"
+  ],
+  "暂时无法载入统计。": [
+    "Statistics are temporarily unavailable.",
+    "統計を一時的に読み込めません。"
+  ],
+  "暂时没有找到这份内容": [
+    "Content not found",
+    "内容が見つかりません"
+  ],
+  "暂时没有找到这份分享": [
+    "No matching posts found",
+    "該当する投稿が見つかりません"
+  ],
+  "暂时没有找到这位成员": [
+    "Member not found",
+    "メンバーが見つかりません"
+  ],
+  "暂时没有新消息": [
+    "No notifications yet",
+    "通知はまだありません"
+  ],
+  "暂时没有这类工单": [
+    "No cases of this type",
+    "この種類の案件はありません"
+  ],
+  "更换封面": [
+    "Replace cover",
+    "カバーを変更"
+  ],
+  "更改后需要重新登录": [
+    "You will need to sign in again",
+    "変更後に再ログインが必要です"
+  ],
+  "更新个人资料、发布作品与资源，了解网站访问。": [
+    "Update your profile, publish work and resources, and see site traffic.",
+    "プロフィールの更新、作品や資料の公開、アクセス状況の確認ができます。"
+  ],
+  "更新于": [
+    "Updated",
+    "更新"
+  ],
+  "更新日期": [
+    "Updated date",
+    "更新日"
+  ],
+  "更新资料": [
+    "Update profile",
+    "プロフィールを更新"
+  ],
+  "最近保存于": [
+    "Last saved",
+    "最終保存"
+  ],
+  "最近写下的手记": [
+    "Recent notes",
+    "最近のノート"
+  ],
+  "最近反馈：": [
+    "Latest feedback:",
+    "最近の回答："
+  ],
+  "最近邀请记录（": [
+    "Recent invitations (",
+    "最近の招待（"
+  ],
+  "有尚未保存到服务器的修改，仍要离开吗？": [
+    "You have changes that are not saved to the server. Leave this page?",
+    "サーバーに未保存の変更があります。このページを離れますか？"
+  ],
+  "有序列表": [
+    "Numbered list",
+    "番号付きリスト"
+  ],
+  "有效联系渠道 *": [
+    "Valid contact channel *",
+    "有効な連絡先 *"
+  ],
+  "有效页面浏览": [
+    "Valid page views",
+    "有効な閲覧数"
+  ],
+  "有未保存修改": [
+    "Unsaved changes",
+    "未保存の変更あり"
+  ],
+  "有未保存的修改": [
+    "You have unsaved changes",
+    "未保存の変更があります"
+  ],
+  "有未保存的投稿，仍要离开吗？": [
+    "You have an unsaved post. Leave this page?",
+    "未保存の投稿があります。このページを離れますか？"
+  ],
+  "有邀请码？创建账号": [
+    "Have an invitation? Create an account",
+    "招待をお持ちの方はアカウント作成"
+  ],
+  "服务器草稿": [
+    "Server draft",
+    "サーバーの下書き"
+  ],
+  "服务器草稿已保存，公开版本保持原样。": [
+    "Draft saved to the server. The public version is unchanged.",
+    "サーバーに下書きを保存しました。公開版は変更されていません。"
+  ],
+  "未分类": [
+    "Uncategorized",
+    "未分類"
+  ],
+  "未命名分享": [
+    "Untitled post",
+    "無題の投稿"
+  ],
+  "未完成任务": [
+    "Unfinished tasks",
+    "未完了のタスク"
+  ],
+  "未引用": [
+    "Unreferenced",
+    "未参照"
+  ],
+  "未接入": [
+    "Not connected",
+    "未連携"
+  ],
+  "未提交的编辑会保留本浏览器的恢复副本；保存草稿后才会写入服务器。": [
+    "Unsubmitted edits have a recovery copy in this browser. Save a draft to store them on the server.",
+    "未提出の編集はこのブラウザーに復元用コピーが保存されます。サーバーに残すには下書きを保存してください。"
+  ],
+  "未提供；可通过查询凭证反馈": [
+    "Not provided; reply through the query credential",
+    "未提出。照会キーを通じて回答可能"
+  ],
+  "未确认": [
+    "Unconfirmed",
+    "未確認"
+  ],
+  "未结工单": [
+    "Open cases",
+    "未解決の案件"
+  ],
+  "未读": [
+    "Unread",
+    "未読"
+  ],
+  "未选择简历时，求职页隐藏下载按钮。首页精选与求职项目在项目编辑中勾选。": [
+    "The résumé download stays hidden until a file is selected. Set featured and career projects in the project editor.",
+    "履歴書を選択しない場合、ダウンロードボタンは非表示です。おすすめ・採用向け作品はプロジェクト編集で指定します。"
+  ],
+  "本人原创": [
+    "Original work",
+    "本人のオリジナル"
+  ],
+  "本人贡献": [
+    "My contribution",
+    "自分の担当範囲"
+  ],
+  "本地体验 · 真实身份核验与对外开放尚未启用": [
+    "Local testing · Identity verification and public community access are not enabled",
+    "ローカルテスト · 本人確認と公開コミュニティは未有効"
+  ],
+  "本地联调模式。公网注册和投稿保持关闭，现有个人网站及站长内容管理照常使用。": [
+    "Local development mode. Public registration and submissions remain closed; the personal site and owner dashboard work normally.",
+    "ローカル開発モードです。一般登録と投稿は閉じたままです。個人サイトと管理画面は通常どおり利用できます。"
+  ],
+  "本浏览器无法保存临时恢复副本，请及时保存服务器草稿。": [
+    "This browser cannot store a recovery copy. Save your draft to the server promptly.",
+    "このブラウザーでは復元用コピーを保存できません。早めにサーバーへ下書きを保存してください。"
+  ],
+  "本站站长": [
+    "Site owner",
+    "サイト管理者"
+  ],
+  "权利人身份说明": [
+    "Rights holder identity",
+    "権利者の身元説明"
+  ],
+  "权利依据": [
+    "Rights basis",
+    "権利の根拠"
+  ],
+  "权利依据 *": [
+    "Rights basis *",
+    "権利の根拠 *"
+  ],
+  "权利依据与初步证据 *": [
+    "Rights basis and initial evidence *",
+    "権利の根拠と予備的な証拠 *"
+  ],
+  "权利投诉指引": [
+    "Rights complaint guide",
+    "権利に関する申立て案内"
+  ],
+  "权利通知": [
+    "Rights notice",
+    "権利通知"
+  ],
+  "权利通知与申诉指引": [
+    "Rights notices and appeals",
+    "権利通知と異議申立ての案内"
+  ],
+  "条": [
+    "items",
+    "件"
+  ],
+  "条 ·": [
+    "items ·",
+    "件 ·"
+  ],
+  "条未读消息": [
+    "unread notifications",
+    "件の未読通知"
+  ],
+  "来源": [
+    "Source",
+    "出典"
+  ],
+  "来源与使用说明": [
+    "Source and usage",
+    "出典と使用条件"
+  ],
+  "来源与许可": [
+    "Source and license",
+    "出典とライセンス"
+  ],
+  "来源与许可说明": [
+    "Source and license details",
+    "出典・ライセンスの詳細"
+  ],
+  "来源信息与使用说明": [
+    "Source and instructions",
+    "出典情報と使い方"
+  ],
+  "来源可核查，许可覆盖分享行为。": [
+    "The source is verifiable and the license permits sharing.",
+    "出典を確認でき、ライセンスが共有を許可していること。"
+  ],
+  "来源页": [
+    "Source page",
+    "出典ページ"
+  ],
+  "来源：": [
+    "Source:",
+    "出典："
+  ],
+  "查看": [
+    "View",
+    "表示"
+  ],
+  "查看个人主页": [
+    "View profile",
+    "プロフィールを見る"
+  ],
+  "查看作者": [
+    "View author",
+    "投稿者を見る"
+  ],
+  "查看全部分享": [
+    "View all posts",
+    "すべての投稿を見る"
+  ],
+  "查看全部投稿": [
+    "View all my posts",
+    "自分の投稿をすべて見る"
+  ],
+  "查看公开版本": [
+    "View public version",
+    "公開版を見る"
+  ],
+  "查看公开页面": [
+    "View public page",
+    "公開ページを見る"
+  ],
+  "查看关于页": [
+    "View about page",
+    "紹介ページを見る"
+  ],
+  "查看当前公开版本": [
+    "View current public version",
+    "現在の公開版を見る"
+  ],
+  "查看求职展示": [
+    "View career page",
+    "採用向けページを見る"
+  ],
+  "查看涉事版本快照": [
+    "View affected version snapshot",
+    "対象バージョンの記録を見る"
+  ],
+  "查看源码": [
+    "View source",
+    "ソースを見る"
+  ],
+  "查看演示": [
+    "View demo",
+    "デモを見る"
+  ],
+  "查看相关内容": [
+    "View details",
+    "関連内容を見る"
+  ],
+  "查看社区": [
+    "View community",
+    "コミュニティを見る"
+  ],
+  "查看网站": [
+    "View site",
+    "サイトを見る"
+  ],
+  "查看项目": [
+    "View project",
+    "プロジェクトを見る"
+  ],
+  "查询凭证仅本次显示，请保存。它能查看此工单的可反馈结果，不要公开转发。": [
+    "Save this query credential; it is shown only once. It provides private access to this case's available updates. Do not share it publicly.",
+    "この照会キーは一度しか表示されません。案件の進捗を非公開で確認できます。保存し、公開しないでください。"
+  ],
+  "查询凭证：": [
+    "Query credential:",
+    "照会キー："
+  ],
+  "查询进展": [
+    "Check progress",
+    "進捗を確認"
+  ],
+  "标签": [
+    "Tags",
+    "タグ"
+  ],
+  "标签（最多 5 项）": [
+    "Tags (up to 5)",
+    "タグ（最大5件）"
+  ],
+  "标题": [
+    "Title",
+    "タイトル"
+  ],
+  "核查或处置依据": [
+    "Basis for review or action",
+    "確認・対応の根拠"
+  ],
+  "核查记录与处理理由": [
+    "Review notes and decision reason",
+    "確認記録と判断理由"
+  ],
+  "核查记录或具体处理理由": [
+    "Review notes or specific decision reason",
+    "確認記録または具体的な処理理由"
+  ],
+  "核查评论、回复上下文与链接。通过后才会在原分享下公开。": [
+    "Check comments, reply context and links. They appear below the original post only after approval.",
+    "コメント、返信の文脈、リンクを確認してください。承認後に元の投稿の下に表示されます。"
+  ],
+  "欢迎回来": [
+    "Welcome back",
+    "おかえりなさい"
+  ],
+  "正在上传…": [
+    "Uploading…",
+    "アップロード中…"
+  ],
+  "正在保存…": [
+    "Saving…",
+    "保存中…"
+  ],
+  "正在保存互动…": [
+    "Saving interaction…",
+    "操作を保存中…"
+  ],
+  "正在修改…": [
+    "Updating…",
+    "変更中…"
+  ],
+  "正在关注": [
+    "Following",
+    "フォロー中"
+  ],
+  "正在处理…": [
+    "Processing…",
+    "処理中…"
+  ],
+  "正在提交…": [
+    "Submitting…",
+    "送信中…"
+  ],
+  "正在整理这一页…": [
+    "Loading this page…",
+    "ページを読み込み中…"
+  ],
+  "正在登录…": [
+    "Signing in…",
+    "ログイン中…"
+  ],
+  "正在载入管理后台…": [
+    "Loading dashboard…",
+    "管理画面を読み込み中…"
+  ],
+  "正常": [
+    "Active",
+    "通常"
+  ],
+  "正式来源页": [
+    "Official source page",
+    "正式な出典ページ"
+  ],
+  "正文": [
+    "Body",
+    "本文"
+  ],
+  "正文与详细内容": [
+    "Body and details",
+    "本文・詳細"
+  ],
+  "正文图片请控制在20 MB以内": [
+    "Inline images must be 20 MB or smaller.",
+    "本文の画像は20 MB以下にしてください。"
+  ],
+  "正文格式": [
+    "Body format",
+    "本文形式"
+  ],
+  "正文链接地址": [
+    "Body link URL",
+    "本文リンクのURL"
+  ],
+  "此条记录已处理。作者编辑后会重新进入待审队列；被移除的评论不能自行恢复。": [
+    "This version is already handled. Edited comments return to review; removed comments cannot be restored by the author.",
+    "この記録は処理済みです。編集後は再審査になります。削除されたコメントを投稿者が復元することはできません。"
+  ],
+  "此版本已处理：": [
+    "This version is already handled:",
+    "このバージョンは処理済みです："
+  ],
+  "此范围暂无访客数据。管理员访问、已识别机器人和选择不被追踪的访问不会计入。网站公开访问后会逐步积累数据。": [
+    "No visitor data in this range. Admin visits, identified bots and opted-out visits are excluded. Data accumulates after public use.",
+    "この期間の訪問データはありません。管理者、識別済みボット、追跡拒否の訪問は含まれません。公開後にデータが蓄積されます。"
+  ],
+  "此范围还没有访问数据。": [
+    "No traffic data in this range yet.",
+    "この期間のアクセスデータはまだありません。"
+  ],
+  "此账号没有社区管理权限": [
+    "This account has no moderation access",
+    "このアカウントにはコミュニティ管理権限がありません"
+  ],
+  "每行一个名称。删除仍被使用的分类或标签时，会提示先处理内容引用。": [
+    "One name per line. Categories or tags in use must have their references removed before deletion.",
+    "1行に1つの名称を入力してください。使用中のカテゴリやタグは参照を解除してから削除してください。"
+  ],
+  "永久删除这个未被引用的文件？此操作不可从回收站恢复。": [
+    "Permanently delete this unreferenced file? It cannot be restored from the trash.",
+    "未参照のファイルを完全に削除しますか？ゴミ箱からは復元できません。"
+  ],
+  "求职展示": [
+    "Career",
+    "採用向け"
+  ],
+  "求职页简历": [
+    "Career résumé",
+    "採用向けの履歴書"
+  ],
+  "没有找到这一页": [
+    "Page not found",
+    "ページが見つかりません"
+  ],
+  "没有未读消息": [
+    "No unread notifications",
+    "未読の通知はありません"
+  ],
+  "治理概览": [
+    "Moderation overview",
+    "コミュニティ管理の概要"
+  ],
+  "治理记录": [
+    "Audit records",
+    "管理操作の記録"
+  ],
+  "治理记录会从第一次操作开始": [
+    "Audit records begin with your first action",
+    "最初の操作から記録されます"
+  ],
+  "注册后由站长确认昵称与本地测试资格，再开始投稿。": [
+    "After registration, the owner confirms your nickname and local testing eligibility before you can post.",
+    "登録後、管理者がニックネームとローカルテスト資格を確認すると投稿できます。"
+  ],
+  "注销后账号无法登录，投稿将停止公开，必要案件记录保留。确认继续吗？": [
+    "Closing your account stops login and public access to your posts. Necessary case records remain. Continue?",
+    "退会するとログインできなくなり、投稿の公開が停止します。必要な案件記録は保持されます。続行しますか？"
+  ],
+  "浏览器": [
+    "Browsers",
+    "ブラウザー"
+  ],
+  "浏览次数": [
+    "Page views",
+    "閲覧数"
+  ],
+  "浏览次数 PV": [
+    "Page views · PV",
+    "閲覧数 PV"
+  ],
+  "消息列表": [
+    "Notification list",
+    "通知一覧"
+  ],
+  "消息筛选": [
+    "Notification filters",
+    "通知の絞り込み"
+  ],
+  "消息通知": [
+    "Notifications",
+    "通知"
+  ],
+  "涉嫌侵权": [
+    "Potential infringement",
+    "権利侵害の疑い"
+  ],
+  "添加推广内容": [
+    "Add promotion",
+    "お知らせを追加"
+  ],
+  "添加社交链接": [
+    "Add social link",
+    "SNSリンクを追加"
+  ],
+  "添加经历": [
+    "Add experience",
+    "経歴を追加"
+  ],
+  "清空筛选": [
+    "Clear filters",
+    "絞り込みを解除"
+  ],
+  "清除成员头像": [
+    "Remove member photo",
+    "メンバーの画像を削除"
+  ],
+  "源码链接": [
+    "Source URL",
+    "ソースコードのURL"
+  ],
+  "演示链接": [
+    "Demo URL",
+    "デモのURL"
+  ],
+  "点击时的类型": [
+    "Type at click time",
+    "クリック時の種類"
+  ],
+  "点击次数": [
+    "Clicks",
+    "クリック数"
+  ],
+  "点击次数，非完成下载数": [
+    "Click count, not completed downloads",
+    "完了したダウンロード数ではなくクリック数"
+  ],
+  "点赞": [
+    "Like",
+    "いいね"
+  ],
+  "热门内容": [
+    "Popular content",
+    "人気の内容"
+  ],
+  "版本": [
+    "Version",
+    "バージョン"
+  ],
+  "版权或其他权利通知": [
+    "Copyright or other rights notice",
+    "著作権などの権利通知"
+  ],
+  "版权投诉与申诉指引": [
+    "Copyright complaints and appeals",
+    "著作権の申立てと異議申立ての案内"
+  ],
+  "状态": [
+    "Status",
+    "状態"
+  ],
+  "生成邀请码": [
+    "Generate invitation",
+    "招待コードを作成"
+  ],
+  "生成邀请码后，在邀请注册页创建体验账号；再回到这里确认资格。": [
+    "Use the code to create a test account, then return here to confirm eligibility.",
+    "招待コードでテスト用アカウントを作成してから、この画面で資格を確認してください。"
+  ],
+  "用于列表、首页及分享预览。": [
+    "Used in lists, homepage and share previews.",
+    "一覧、トップページ、共有プレビューで使用します。"
+  ],
+  "用户协议": [
+    "Terms of use",
+    "利用規約"
+  ],
+  "由 Nginx 日志计量": [
+    "Measured from Nginx logs",
+    "Nginxログから計測"
+  ],
+  "由应用文件响应流计量": [
+    "Measured from application file responses",
+    "アプリのファイル応答から計測"
+  ],
+  "申诉复核": [
+    "Appeal review",
+    "異議申立ての再確認"
+  ],
+  "申请注销本地测试账号": [
+    "Close local test account",
+    "ローカルテスト用アカウントを退会"
+  ],
+  "界面语言": [
+    "Language",
+    "表示言語"
+  ],
+  "界面风格": [
+    "Appearance",
+    "表示テーマ"
+  ],
+  "留一点时间，给想法和生活。": [
+    "Leave a little time for ideas and life.",
+    "考えることと暮らすことに、少しの時間を。"
+  ],
+  "留住值得再读的内容。此列表仅你自己可见。": [
+    "Keep what is worth reading again. Only you can see this list.",
+    "読み返したい内容を保存。この一覧は自分だけに表示されます。"
+  ],
+  "留空时根据标题生成，创建后保持稳定。": [
+    "Generated from the title if blank; kept stable after creation.",
+    "空欄ならタイトルから作成し、作成後は固定します。"
+  ],
+  "登录 / 工作台": [
+    "Sign in / Workspace",
+    "ログイン / ワークスペース"
+  ],
+  "登录 / 注册": [
+    "Sign in / Join",
+    "ログイン / 登録"
+  ],
+  "登录后分享": [
+    "Sign in to share",
+    "ログインして共有"
+  ],
+  "登录后分享、收藏与关注": [
+    "Sign in to post, bookmark and follow",
+    "ログインして投稿・保存・フォロー"
+  ],
+  "登录后参与交流": [
+    "Sign in to join the conversation",
+    "ログインしてコメント"
+  ],
+  "登录后管理自己的投稿，随时回到公开展示页面。": [
+    "Manage your submissions and return to the public site anytime.",
+    "自分の投稿を管理し、いつでも公開ページに戻れます。"
+  ],
+  "登录并继续": [
+    "Sign in and continue",
+    "ログインして続ける"
+  ],
+  "登录或注册社区账号": [
+    "Sign in or create a community account",
+    "コミュニティにログイン・登録"
+  ],
+  "登录社区": [
+    "Sign in to community",
+    "コミュニティにログイン"
+  ],
+  "登录管理后台": [
+    "Sign in to dashboard",
+    "管理画面にログイン"
+  ],
+  "登录账号": [
+    "Sign in",
+    "アカウントにログイン"
+  ],
+  "的个人资料": [
+    "'s profile",
+    "のプロフィール"
+  ],
+  "的当前头像": [
+    "'s current photo",
+    "の現在の画像"
+  ],
+  "的账号选项": [
+    "'s account options",
+    "のアカウント設定"
+  ],
+  "目标地址": [
+    "Target URL",
+    "対象URL"
+  ],
+  "相关处理与申诉": [
+    "Related actions and appeals",
+    "関連する処理と異議申立て"
+  ],
+  "看看全部内容": [
+    "Browse everything",
+    "すべての内容を見る"
+  ],
+  "看看我的作品": [
+    "Explore my work",
+    "作品を見る"
+  ],
+  "真实处理动作完成后，记录将保存到数据库，不使用示例记录。": [
+    "Actions are stored in the database when performed. No sample audit records are used.",
+    "実際の操作後にデータベースへ記録します。架空の操作記録は使用しません。"
+  ],
+  "真实身份、权利人及代理关系 *": [
+    "Real identity, rights holder and agency relationship *",
+    "実際の身元、権利者、代理関係 *"
+  ],
+  "确认新密码": [
+    "Confirm new password",
+    "新しいパスワードの確認"
+  ],
+  "确认本地测试资格": [
+    "Confirm local testing eligibility",
+    "ローカルテスト資格を確認"
+  ],
+  "确认注销账号": [
+    "Confirm account closure",
+    "退会を確定"
+  ],
+  "社区": [
+    "Community",
+    "コミュニティ"
+  ],
+  "社区分享": [
+    "Community posts",
+    "コミュニティの投稿"
+  ],
+  "社区分类": [
+    "Community categories",
+    "コミュニティのカテゴリ"
+  ],
+  "社区分页": [
+    "Community pagination",
+    "コミュニティのページ切り替え"
+  ],
+  "社区动态": [
+    "Home feed",
+    "ホーム"
+  ],
+  "社区审核": [
+    "Moderation",
+    "コミュニティ審査"
+  ],
+  "社区审核员": [
+    "Community reviewer",
+    "コミュニティ審査担当"
+  ],
+  "社区导航": [
+    "Community navigation",
+    "コミュニティナビゲーション"
+  ],
+  "社区成员": [
+    "Community member",
+    "コミュニティメンバー"
+  ],
+  "社区成员分享 · 来源与权利仍归相应作者。": [
+    "Shared by a member · Sources and rights belong to their respective authors.",
+    "メンバーによる共有 · 出典と権利は各著者に帰属します。"
+  ],
+  "社区昵称": [
+    "Community nickname",
+    "ニックネーム"
+  ],
+  "社区暂未对外开放": [
+    "Community is not publicly open",
+    "コミュニティは一般公開前です"
+  ],
+  "社区正在准备中": [
+    "The community is getting ready",
+    "コミュニティを準備中です"
+  ],
+  "社区治理": [
+    "Community",
+    "コミュニティ管理"
+  ],
+  "社区治理 /": [
+    "Community management /",
+    "コミュニティ管理 /"
+  ],
+  "社区第一版服务范围": [
+    "Community V1 service scope",
+    "コミュニティ初版のサービス範囲"
+  ],
+  "社区管理导航": [
+    "Moderation navigation",
+    "コミュニティ管理ナビゲーション"
+  ],
+  "社区规则": [
+    "Community rules",
+    "コミュニティ規則"
+  ],
+  "社区规则与事实核查": [
+    "Community rules and fact checking",
+    "コミュニティ規則と事実確認"
+  ],
+  "社区资源": [
+    "Community resources",
+    "コミュニティのリソース"
+  ],
+  "社区运行状态": [
+    "Community status",
+    "コミュニティの運用状態"
+  ],
+  "私密声明与证据": [
+    "Private statement and evidence",
+    "非公開の声明と証拠"
+  ],
+  "私密审核说明": [
+    "Private reviewer notes",
+    "非公開の審査メモ"
+  ],
+  "私密查询凭证": [
+    "Private query credential",
+    "非公開の照会キー"
+  ],
+  "私密联系渠道": [
+    "Private contact channel",
+    "非公開の連絡先"
+  ],
+  "私密转送、到达凭证及适用期限记录": [
+    "Private forwarding, delivery evidence and applicable deadlines",
+    "非公開の転送記録、到達証拠、適用期限"
+  ],
+  "移除": [
+    "Remove",
+    "削除"
+  ],
+  "移除公开评论": [
+    "Remove public comment",
+    "公開コメントを削除"
+  ],
+  "移除头像": [
+    "Remove photo",
+    "プロフィール画像を削除"
+  ],
+  "移除封面": [
+    "Remove cover",
+    "カバーを削除"
+  ],
+  "移除此条": [
+    "Remove item",
+    "この項目を削除"
+  ],
+  "移除此经历": [
+    "Remove experience",
+    "この経歴を削除"
+  ],
+  "站内上传文件": [
+    "File uploaded to this site",
+    "サイト内アップロード"
+  ],
+  "站内推荐": [
+    "Recommended",
+    "サイトのおすすめ"
+  ],
+  "站内文件": [
+    "Hosted file",
+    "サイト内ファイル"
+  ],
+  "站长": [
+    "Owner",
+    "管理者"
+  ],
+  "站长内容继续在后台维护": [
+    "Manage owner content in the dashboard",
+    "管理者のコンテンツは管理画面で編集"
+  ],
+  "站长头像与主站个人资料共用。": [
+    "The owner's photo is shared with the main site profile.",
+    "管理者の画像はメインサイトのプロフィールと共通です。"
+  ],
+  "站长提供的邀请码": [
+    "Invitation code from the owner",
+    "管理者からの招待コード"
+  ],
+  "站长沿用原管理员账号；成员使用邀请注册的账号。": [
+    "Owners use the existing admin account; members use an invited account.",
+    "管理者は既存の管理用アカウント、メンバーは招待で登録したアカウントを使います。"
+  ],
+  "第": [
+    "No.",
+    "第"
+  ],
+  "等你分享第一个好发现": [
+    "Share the first useful find",
+    "最初の発見を共有しよう"
+  ],
+  "等待审核": [
+    "Awaiting review",
+    "審査待ち"
+  ],
+  "等待文件": [
+    "Waiting for file",
+    "ファイル待ち"
+  ],
+  "筛选": [
+    "Filter",
+    "絞り込み"
+  ],
+  "筛选社区分享": [
+    "Filter community posts",
+    "コミュニティ投稿を絞り込む"
+  ],
+  "简历 PDF": [
+    "Résumé PDF",
+    "履歴書PDF"
+  ],
+  "管理": [
+    "management",
+    "管理"
+  ],
+  "管理分享与个人账号": [
+    "Manage posts and your account",
+    "投稿とアカウントを管理"
+  ],
+  "管理后台": [
+    "Dashboard",
+    "管理画面"
+  ],
+  "管理后台 /": [
+    "Dashboard /",
+    "管理画面 /"
+  ],
+  "管理员账号": [
+    "Admin username",
+    "管理者アカウント"
+  ],
+  "管理草稿、送审进展与公开内容。": [
+    "Manage drafts, review progress and public posts.",
+    "下書き、審査状況、公開中の投稿を管理します。"
+  ],
+  "管理附件和上传任务，查看文件大小及引用情况。": [
+    "Manage attachments and uploads; check file sizes and references.",
+    "添付ファイルやアップロードを管理し、容量と参照状況を確認します。"
+  ],
+  "篇手记": [
+    "notes",
+    "件のノート"
+  ],
+  "精选项目与本人贡献": [
+    "Selected projects and my contribution",
+    "選んだプロジェクトと担当範囲"
+  ],
+  "精选项目整理中，已发布作品可在项目页查看。": [
+    "Selected projects are being prepared. Published work is on the Work page.",
+    "おすすめ作品を準備中です。公開済みの作品は作品ページでご覧ください。"
+  ],
+  "系统分享": [
+    "Share with an app",
+    "アプリで共有"
+  ],
+  "系统分享暂不可用，请复制链接": [
+    "System sharing is unavailable. Copy the link instead.",
+    "共有メニューを利用できません。リンクをコピーしてください。"
+  ],
+  "紧急风险先停止传播，私密材料按授权核查。恢复前逐项检查全部案件与适用程序。": [
+    "Stop urgent risks from spreading and review private evidence only with authorization. Check all cases and applicable procedures before restoring content.",
+    "緊急の拡散を止め、非公開資料は権限に従って確認してください。復旧前にすべての案件と適用手続きを確認します。"
+  ],
+  "约": [
+    "About",
+    "約"
+  ],
+  "纸页、陶器与枝叶构成的自然静物": [
+    "A still life of paper, pottery and branches",
+    "紙、陶器、枝葉の静物写真"
+  ],
+  "经历时间线": [
+    "Experience timeline",
+    "経歴のタイムライン"
+  ],
+  "经历标题": [
+    "Experience title",
+    "経歴のタイトル"
+  ],
+  "经历类型": [
+    "Experience type",
+    "経歴の種類"
+  ],
+  "经历说明": [
+    "Experience description",
+    "経歴の説明"
+  ],
+  "结束日期": [
+    "End date",
+    "終了日"
+  ],
+  "结束时间（空为至今）": [
+    "End date (blank for present)",
+    "終了日（空欄なら現在）"
+  ],
+  "结案不会自动解除冻结；解除一个工单的限制也不会绕过其他案件。恢复内容须另行核查。": [
+    "Closing a case does not release its freeze. Releasing one case does not override other cases. Restoring content requires a separate check.",
+    "案件の完了だけでは凍結は解除されません。一つの制限を解除しても他の案件は優先されます。内容の復旧には別途確認が必要です。"
+  ],
+  "给审核员的补充说明（不公开）": [
+    "Notes for reviewers (private)",
+    "審査担当への補足（非公開）"
+  ],
+  "继续未完成的上传": [
+    "Resume unfinished upload",
+    "未完了のアップロードを再開"
+  ],
+  "继续浏览。": [
+    "Keep exploring.",
+    "引き続きご覧ください。"
+  ],
+  "继续看看": [
+    "Explore more",
+    "続きを見る"
+  ],
+  "维护网站名称、分享信息与求职简历。": [
+    "Manage the site name, sharing information and résumé.",
+    "サイト名、共有情報、採用向け履歴書を管理します。"
+  ],
+  "维护；社区审核与邀请使用独立入口。": [
+    ". Community review and invitations have a separate workspace.",
+    "で行えます。コミュニティの審査と招待は別の画面で管理します。"
+  ],
+  "编辑": [
+    "Edit",
+    "編集"
+  ],
+  "编辑与处理记录": [
+    "Edit and history",
+    "編集・処理履歴"
+  ],
+  "编辑内容、保存草稿，并选择何时公开。": [
+    "Edit content, save drafts and choose when to publish.",
+    "内容を編集して下書きに保存し、公開する時期を選べます。"
+  ],
+  "编辑器加载中": [
+    "Loading editor",
+    "エディターを読み込み中"
+  ],
+  "编辑投稿": [
+    "Edit post",
+    "投稿を編集"
+  ],
+  "编辑自己的评论": [
+    "Editing your comment",
+    "自分のコメントを編集中"
+  ],
+  "编辑评论": [
+    "Edit comment",
+    "コメントを編集"
+  ],
+  "编辑资料": [
+    "Edit profile",
+    "プロフィールを編集"
+  ],
+  "网址": [
+    "Website URL",
+    "URL"
+  ],
+  "网盘 / 外部视频等资源": [
+    "Cloud storage, external video and other resources",
+    "クラウドストレージ、外部動画など"
+  ],
+  "网站内容管理": [
+    "Site content management",
+    "サイトのコンテンツ管理"
+  ],
+  "网站名称": [
+    "Site name",
+    "サイト名"
+  ],
+  "网站简介": [
+    "Site description",
+    "サイトの紹介"
+  ],
+  "网站设置": [
+    "Site settings",
+    "サイト設定"
+  ],
+  "网站设置已保存": [
+    "Site settings saved.",
+    "サイト設定を保存しました。"
+  ],
+  "联系渠道（可选）": [
+    "Contact channel (optional)",
+    "連絡先（任意）"
+  ],
+  "自己的评论需由其他审核员处理。": [
+    "Your comments must be handled by another reviewer.",
+    "自分のコメントは別の担当者が審査する必要があります。"
+  ],
+  "至今": [
+    "Present",
+    "現在"
+  ],
+  "至少 10 字。请勿为了举证而再次散布完整隐私或侵权资源。": [
+    "At least 10 characters. Do not reproduce full private or infringing material as evidence.",
+    "10文字以上。証拠として完全な個人情報や侵害資料を再掲しないでください。"
+  ],
+  "至少 12 位，请使用独立且足够强的密码。": [
+    "At least 12 characters. Use a strong, unique password.",
+    "12文字以上の、ほかで使っていない十分に強いパスワードを使用してください。"
+  ],
+  "至少 5 字。具体说明核查事项或违规依据，作者可以据此补充或申诉。": [
+    "At least 5 characters. Describe the checks or rule violation so the author can revise or appeal.",
+    "5文字以上で確認事項や規則違反を具体的に説明し、投稿者が修正・異議申立てできるようにしてください。"
+  ],
+  "至少 5 字，不在这里泄露举报人的身份或无关证据。通知不会自动发送到外部邮箱。": [
+    "At least 5 characters. Do not reveal the reporter or unrelated evidence. No external email is sent automatically.",
+    "5文字以上。通報者の身元や無関係な証拠は開示しないでください。外部メールは自動送信されません。"
+  ],
+  "至少 5 字，说明事实、必要范围与期限。账号限制不会自动清理已公开内容。": [
+    "At least 5 characters. Explain the facts, necessary scope and duration. Account restrictions do not automatically remove public content.",
+    "5文字以上で事実、必要な範囲、期間を説明してください。アカウント制限では公開内容は自動削除されません。"
+  ],
+  "草案": [
+    "Draft policy",
+    "草案"
+  ],
+  "草稿": [
+    "Draft",
+    "下書き"
+  ],
+  "草稿已保存到服务器。": [
+    "Draft saved to the server.",
+    "サーバーに下書きを保存しました。"
+  ],
+  "草稿或回收站": [
+    "Draft or trash",
+    "下書き・ゴミ箱"
+  ],
+  "获赞": [
+    "Likes received",
+    "いいね"
+  ],
+  "菜单": [
+    "Menu",
+    "メニュー"
+  ],
+  "规则依据": [
+    "Rule basis",
+    "規則上の根拠"
+  ],
+  "角色": [
+    "Role",
+    "役割"
+  ],
+  "解除选择": [
+    "Clear selection",
+    "選択を解除"
+  ],
+  "认识我更多": [
+    "More about me",
+    "自己紹介を見る"
+  ],
+  "让好想法，": [
+    "Let good ideas",
+    "よいアイデアが、"
+  ],
+  "让思考慢慢扎根。": [
+    "Let ideas take root.",
+    "考えを、少しずつ根付かせる。"
+  ],
+  "让每一份分享，都有据可循。": [
+    "Give every post a verifiable source.",
+    "すべての投稿に、確かめられる出典を。"
+  ],
+  "让每一份分享，都有清晰的出处。": [
+    "Give every post a clear source.",
+    "すべての投稿に、明確な出典を。"
+  ],
+  "记录作品，分享收藏，也认真对待每一份来源与署名。": [
+    "Record your work, share your finds and respect every source and credit.",
+    "作品を記録し、発見を共有し、出典と著者を大切にしましょう。"
+  ],
+  "记录实际送达事实，不以站内已发通知替代法定送达。": [
+    "Record actual delivery; an in-app notification is not a substitute for legally required delivery.",
+    "実際の送達を記録してください。サイト内通知は法定の送達の代わりにはなりません。"
+  ],
+  "许可与限制": [
+    "License and restrictions",
+    "ライセンスと制約"
+  ],
+  "许可名称、出处或授权说明": [
+    "License name, source or authorization details",
+    "ライセンス名、出典、許諾の説明"
+  ],
+  "设备分布": [
+    "Devices",
+    "端末の分布"
+  ],
+  "设置密码": [
+    "Set password",
+    "パスワードを設定"
+  ],
+  "设置账号": [
+    "Choose username",
+    "アカウント名を設定"
+  ],
+  "访客": [
+    "Visitor",
+    "訪問者"
+  ],
+  "访客数 UV": [
+    "Unique visitors · UV",
+    "訪問者数 UV"
+  ],
+  "访客访问的目标链接": [
+    "Destination URL for visitors",
+    "訪問者が開くリンク"
+  ],
+  "访问外部资源": [
+    "Open external resource",
+    "外部リソースを開く"
+  ],
+  "访问方式": [
+    "Access method",
+    "アクセス方法"
+  ],
+  "访问来源": [
+    "Visit source",
+    "出典を開く"
+  ],
+  "访问趋势": [
+    "Traffic trend",
+    "アクセスの推移"
+  ],
+  "证据或补充说明（可选）": [
+    "Evidence or additional information (optional)",
+    "証拠・補足説明（任意）"
+  ],
+  "评论": [
+    "Comments",
+    "コメント"
+  ],
+  "评论与回复审核通过后显示。": [
+    "Comments and replies appear after review.",
+    "コメントと返信は審査後に表示されます。"
+  ],
+  "评论审核": [
+    "Comment review",
+    "コメント審査"
+  ],
+  "评论审核分页": [
+    "Comment review pagination",
+    "コメント審査のページ切り替え"
+  ],
+  "评论审核范围": [
+    "Comment review scope",
+    "コメント審査の範囲"
+  ],
+  "评论审核队列": [
+    "Comment review queue",
+    "コメントの審査待ち一覧"
+  ],
+  "评论已从公开页面移除，处理记录已保留。": [
+    "Comment removed from the public page. The action record is retained.",
+    "公開ページからコメントを削除しました。処理記録は保持されます。"
+  ],
+  "评论已撤回。": [
+    "Comment withdrawn.",
+    "コメントを取り下げました。"
+  ],
+  "评论已通过并公开，相关成员已收到通知。": [
+    "Comment approved and published. Relevant members were notified.",
+    "コメントを承認・公開し、関係するメンバーに通知しました。"
+  ],
+  "诈骗或恶意链接": [
+    "Scam or malicious link",
+    "詐欺・悪意のあるリンク"
+  ],
+  "详情": [
+    "Details",
+    "詳細"
+  ],
+  "说明适用环境和限制，不夸大效果。": [
+    "Describe supported environments and limitations without exaggeration.",
+    "対応環境と制約を明記し、効果を誇張しないでください。"
+  ],
+  "请使用有权使用且符合社区规则的图片，保存后会公开显示在你的投稿旁。": [
+    "Use an image you may legally use that follows community rules. Saved photos are public next to your posts.",
+    "利用する権利があり、規則に沿った画像を使用してください。保存後は投稿の横に公開表示されます。"
+  ],
+  "请先登录社区审核": [
+    "Sign in to moderation first",
+    "コミュニティ管理にログインしてください"
+  ],
+  "请在私密材料中提供真实身份、联系渠道及不侵权的初步证据。负责人将依法核查、转送，不会自动恢复内容。": [
+    "Provide your real identity, contact channel and initial evidence privately. Staff will check and forward it under the applicable procedure; content is not restored automatically.",
+    "身元、連絡先、非侵害を示す予備的な証拠を非公開資料に記載してください。担当者が適用手続きに従って確認・転送します。自動で復旧はされません。"
+  ],
+  "请登录后继续。未保存内容会保留在本浏览器。": [
+    "Sign in to continue. Unsaved content stays in this browser.",
+    "ログインして続けてください。未保存の内容はこのブラウザーに残ります。"
+  ],
+  "请选择 JPG、PNG 或 WebP 图片。": [
+    "Choose a JPG, PNG or WebP image.",
+    "JPG、PNG、WebPの画像を選択してください。"
+  ],
+  "请选择不超过 2 MB 的 JPG、PNG 或 WebP 图片。": [
+    "Choose a JPG, PNG or WebP image of up to 2 MB.",
+    "2 MB以下のJPG、PNG、WebP画像を選択してください。"
+  ],
+  "请选择分类": [
+    "Choose a category",
+    "カテゴリを選択"
+  ],
+  "请选择有效的 PDF 文件": [
+    "Choose a valid PDF file.",
+    "有効なPDFファイルを選択してください。"
+  ],
+  "请选择有效的 PNG、JPEG、GIF 或 WebP 图片": [
+    "Choose a valid PNG, JPEG, GIF or WebP image.",
+    "有効なPNG、JPEG、GIF、WebP画像を選択してください。"
+  ],
+  "请选择有效的图片文件": [
+    "Choose a valid image file.",
+    "有効な画像ファイルを選択してください。"
+  ],
+  "请选择有权限的社区管理页面。": [
+    "Choose a moderation page you can access.",
+    "アクセス権のある管理ページを選択してください。"
+  ],
+  "调整账号状态": [
+    "Change account status",
+    "アカウント状態を変更"
+  ],
+  "账号": [
+    "Username",
+    "アカウント名"
+  ],
+  "账号与安全": [
+    "Account and security",
+    "アカウントとセキュリティ"
+  ],
+  "账号与邀请": [
+    "Accounts and invitations",
+    "アカウントと招待"
+  ],
+  "账号受到限制时，仍可申诉。注销后退出所有会话，停止公开你的投稿；必要的案件与安全记录按适用规则处理。": [
+    "Restricted accounts can still appeal. Closing an account ends all sessions and stops public access to your posts; necessary case and security records are handled under applicable rules.",
+    "制限中でも異議申立てができます。退会後は全セッションを終了し、投稿の公開を停止します。必要な案件・安全記録は適用規則に従って扱います。"
+  ],
+  "账号已注册，尚待站长审核昵称并确认本地测试资格。请稍后再开始投稿。": [
+    "Registered. The owner still needs to check your nickname and local testing eligibility before you can post.",
+    "登録済みです。投稿前に管理者によるニックネームとローカルテスト資格の確認が必要です。"
+  ],
+  "账号当前": [
+    "Your account is currently",
+    "現在のアカウント状態："
+  ],
+  "账号暂未取得投稿资格或已受限，请查看通知或联系站长；仍可查看历史并申诉。": [
+    "Your account is not eligible to post or is restricted. Check notifications or contact the owner. History and appeals remain available.",
+    "投稿資格が未確認、または制限中です。通知を確認するか管理者に連絡してください。履歴の確認と異議申立ては利用できます。"
+  ],
+  "账号正常且已确认本地测试资格后可上传头像。": [
+    "You can upload a photo when your account is active and locally qualified.",
+    "アカウントが通常状態でローカル資格が確認済みの場合、画像をアップロードできます。"
+  ],
+  "账号状态": [
+    "Account status",
+    "アカウントの状態"
+  ],
+  "账号菜单": [
+    "Account menu",
+    "アカウントメニュー"
+  ],
+  "账号选项": [
+    "Account options",
+    "アカウントの操作"
+  ],
+  "资料与经历": [
+    "Profile & experience",
+    "プロフィール・経歴"
+  ],
+  "资源": [
+    "Resources",
+    "リソース"
+  ],
+  "资源下载点击": [
+    "Resource download clicks",
+    "リソースのダウンロードクリック"
+  ],
+  "资源与附件": [
+    "Resource and attachments",
+    "リソースと添付ファイル"
+  ],
+  "资源中心": [
+    "Resource library",
+    "リソース一覧"
+  ],
+  "资源分类": [
+    "Resource categories",
+    "リソースのカテゴリ"
+  ],
+  "资源收藏": [
+    "Resource collection",
+    "リソースのコレクション"
+  ],
+  "资源暂不可获取。": [
+    "This resource is unavailable.",
+    "このリソースは現在利用できません。"
+  ],
+  "资源管理": [
+    "Resources",
+    "リソース管理"
+  ],
+  "资源类型": [
+    "Resource type",
+    "リソースの種類"
+  ],
+  "资源说明": [
+    "Resource instructions",
+    "リソースの説明"
+  ],
+  "资源附件": [
+    "Resource attachment",
+    "リソースの添付ファイル"
+  ],
+  "走过的路，留下的印记。": [
+    "The road traveled, the traces left.",
+    "歩んだ道と、残したしるし。"
+  ],
+  "跑马灯": [
+    "Marquee",
+    "スクロール表示"
+  ],
+  "跟进时间": [
+    "Follow-up date",
+    "対応予定日時"
+  ],
+  "跳到主要内容": [
+    "Skip to main content",
+    "本文へ移動"
+  ],
+  "跳转链接（选填）": [
+    "Destination link (optional)",
+    "移動先リンク（任意）"
+  ],
+  "转发了这份分享": [
+    "reposted this",
+    "がリポストしました"
+  ],
+  "转发到个人主页": [
+    "Repost to profile",
+    "プロフィールにリポスト"
+  ],
+  "转送与送达记录": [
+    "Forwarding and delivery records",
+    "転送と送達の記録"
+  ],
+  "载入本地草稿": [
+    "Load local draft",
+    "ローカル下書きを読み込む"
+  ],
+  "近30天": [
+    "Last 30 days",
+    "過去30日"
+  ],
+  "近7天": [
+    "Last 7 days",
+    "過去7日"
+  ],
+  "返回内容后台": [
+    "Back to content dashboard",
+    "コンテンツ管理画面に戻る"
+  ],
+  "返回内容管理": [
+    "Back to content management",
+    "コンテンツ管理に戻る"
+  ],
+  "返回列表": [
+    "Back to list",
+    "一覧に戻る"
+  ],
+  "返回成员列表": [
+    "Back to members",
+    "メンバー一覧に戻る"
+  ],
+  "返回我的主页": [
+    "Back to my profile",
+    "自分のプロフィールに戻る"
+  ],
+  "返回我的工作台": [
+    "Back to workspace",
+    "ワークスペースに戻る"
+  ],
+  "返回我的投稿": [
+    "Back to my posts",
+    "自分の投稿に戻る"
+  ],
+  "返回新上传": [
+    "Back to new upload",
+    "新規アップロードに戻る"
+  ],
+  "返回概览": [
+    "Back to overview",
+    "概要に戻る"
+  ],
+  "返回社区": [
+    "Back to community",
+    "コミュニティに戻る"
+  ],
+  "返回编辑": [
+    "Back to editing",
+    "編集に戻る"
+  ],
+  "返回网站": [
+    "Back to site",
+    "サイトに戻る"
+  ],
+  "还没有下载点击。": [
+    "No download clicks yet.",
+    "ダウンロードのクリックはまだありません。"
+  ],
+  "还没有公开评论，可以留下第一份有用的补充。": [
+    "No public comments yet. Add a helpful first comment.",
+    "公開コメントはまだありません。役立つ最初のコメントをどうぞ。"
+  ],
+  "还没有关注其他成员": [
+    "Not following anyone yet",
+    "まだ誰もフォローしていません"
+  ],
+  "还没有关注者": [
+    "No followers yet",
+    "フォロワーはまだいません"
+  ],
+  "还没有文件，可在上方上传。": [
+    "No files yet. Upload one above.",
+    "ファイルはまだありません。上からアップロードできます。"
+  ],
+  "还没有热门内容。": [
+    "No popular content yet.",
+    "人気コンテンツはまだありません。"
+  ],
+  "还没有社区成员": [
+    "No community members yet",
+    "メンバーはまだいません"
+  ],
+  "这一页，等下一次更新": [
+    "Waiting for the next update",
+    "次の更新をお待ちください"
+  ],
+  "这份内容暂时不可用": [
+    "This content is unavailable",
+    "この内容は利用できません"
+  ],
+  "这份经历还在整理中。可以先从项目与作品看看我的实践。": [
+    "This experience is still being prepared. Explore my projects in the meantime.",
+    "この経歴は整理中です。まずはプロジェクトと作品をご覧ください。"
+  ],
+  "这是本地产品流程使用的草案，尚未正式生效。运营信息和相关方案补齐、完成审阅前不会据此开放公网社区。": [
+    "These are drafts for local product testing and are not effective. Public community access stays closed until operating details and plans are complete and reviewed.",
+    "これはローカルの動作確認用の草案で、正式には発効していません。運営情報や計画の整備・確認が終わるまで、一般公開しません。"
+  ],
+  "这次实践，我做了什么": [
+    "What I did in this project",
+    "この取り組みで担当したこと"
+  ],
+  "这篇手记": [
+    "This note",
+    "このノート"
+  ],
+  "这组评论已处理完": [
+    "This comment queue is clear",
+    "このコメント一覧は処理済みです"
+  ],
+  "这里还在慢慢生长": [
+    "More to come",
+    "これから少しずつ"
+  ],
+  "进入审核": [
+    "Open review",
+    "審査へ"
+  ],
+  "进入社区审核": [
+    "Open moderation",
+    "コミュニティ管理へ"
+  ],
+  "违法有害信息": [
+    "Illegal or harmful content",
+    "違法・有害な情報"
+  ],
+  "退出": [
+    "Sign out",
+    "ログアウト"
+  ],
+  "退出登录": [
+    "Sign out",
+    "ログアウト"
+  ],
+  "退回补充": [
+    "Return for changes",
+    "修正を依頼"
+  ],
+  "选择原文件续传": [
+    "Select original file to resume",
+    "元のファイルを選んで再開"
+  ],
+  "选择头像图片": [
+    "Choose profile photo",
+    "プロフィール画像を選択"
+  ],
+  "选择已有文件": [
+    "Choose existing file",
+    "既存ファイルを選択"
+  ],
+  "选择并上传文件": [
+    "Choose and upload file",
+    "ファイルを選んでアップロード"
+  ],
+  "选择投稿封面": [
+    "Choose post cover",
+    "投稿カバーを選択"
+  ],
+  "选择文件": [
+    "Choose file",
+    "ファイルを選択"
+  ],
+  "选择界面风格": [
+    "Choose appearance",
+    "テーマを選択"
+  ],
+  "通过并公开": [
+    "Approve and publish",
+    "承認して公開"
+  ],
+  "通过并公开评论": [
+    "Approve and publish comment",
+    "コメントを承認して公開"
+  ],
+  "通过时说明已核查事项；退回或拒绝至少写 5 字，并告诉作者可如何补充。": [
+    "For approval, explain what was checked. For returns or rejections, use at least 5 characters and explain how to improve.",
+    "承認時は確認事項を説明してください。差し戻し・却下時は5文字以上で修正方法も示してください。"
+  ],
+  "邀请备注": [
+    "Invitation note",
+    "招待のメモ"
+  ],
+  "邀请码仅本次显示，请私下提供给体验者。": [
+    "This code is shown once. Share it privately with the tester.",
+    "コードは一度しか表示されません。テスト参加者に非公開で伝えてください。"
+  ],
+  "邀请码单次使用，七天内有效。身份核验及开放条件完成前不向公众开放投稿。": [
+    "Invitation codes work once and expire after seven days. Public posting stays closed until verification and launch requirements are met.",
+    "招待コードは一度限りで、有効期限は7日です。本人確認や公開条件が整うまでは一般投稿を開放しません。"
+  ],
+  "重做": [
+    "Redo",
+    "やり直し"
+  ],
+  "重新加载": [
+    "Reload",
+    "再読み込み"
+  ],
+  "重新登录": [
+    "Sign in again",
+    "再ログイン"
+  ],
+  "重试": [
+    "Retry",
+    "再試行"
+  ],
+  "重试并续传": [
+    "Retry and resume",
+    "再試行して再開"
+  ],
+  "链接": [
+    "Link",
+    "リンク"
+  ],
+  "链接失效": [
+    "Broken link",
+    "リンク切れ"
+  ],
+  "链接已复制": [
+    "Link copied",
+    "リンクをコピーしました"
+  ],
+  "链接须以http://或https://开头": [
+    "Links must start with http:// or https://.",
+    "リンクは http:// または https:// で始めてください。"
+  ],
+  "问题类别": [
+    "Issue category",
+    "問題の種類"
+  ],
+  "阅读完整社区规则": [
+    "Read full community rules",
+    "コミュニティ規則の全文を読む"
+  ],
+  "阅读社区规则": [
+    "Read community rules",
+    "コミュニティ規則を読む"
+  ],
+  "附件": [
+    "Attachment",
+    "添付ファイル"
+  ],
+  "附件尚未完成上传。可以保存草稿，重新打开后选择原文件继续。": [
+    "The attachment is not fully uploaded. Save a draft, reopen it and select the original file to resume.",
+    "添付ファイルのアップロードが未完了です。下書きを保存し、再度開いて元のファイルを選ぶと再開できます。"
+  ],
+  "限制投稿": [
+    "Posting restricted",
+    "投稿制限中"
+  ],
+  "随手记下，": [
+    "Notes along the way,",
+    "ふと書き留めたことを、"
+  ],
+  "隐私政策": [
+    "Privacy policy",
+    "プライバシーポリシー"
+  ],
+  "隐私政策草案": [
+    "Draft privacy policy",
+    "プライバシーポリシー草案"
+  ],
+  "隐私泄露": [
+    "Privacy exposure",
+    "プライバシーの漏えい"
+  ],
+  "需要帮助或注销？": [
+    "Need help or want to close your account?",
+    "サポート・退会について"
+  ],
+  "页脚导航": [
+    "Footer navigation",
+    "フッターナビゲーション"
+  ],
+  "页面": [
+    "Page",
+    "ページ"
+  ],
+  "页面不可用": [
+    "Page unavailable",
+    "ページを利用できません"
+  ],
+  "页面或内容": [
+    "Page or content",
+    "ページ・コンテンツ"
+  ],
+  "顶部广告与推荐跑马灯": [
+    "Top promotion and recommendation marquee",
+    "上部の広告・おすすめスクロールバー"
+  ],
+  "项目与作品": [
+    "Projects and work",
+    "プロジェクトと作品"
+  ],
+  "项目与作品，": [
+    "Projects and work,",
+    "プロジェクトと作品を、"
+  ],
+  "项目与实践": [
+    "Projects and practice",
+    "プロジェクトと実践"
+  ],
+  "项目与本人贡献": [
+    "Project and my contribution",
+    "プロジェクトと自分の担当"
+  ],
+  "项目管理": [
+    "Projects",
+    "プロジェクト管理"
+  ],
+  "预览": [
+    "Preview",
+    "プレビュー"
+  ],
+  "预览当前填写内容": [
+    "Preview current content",
+    "入力中の内容をプレビュー"
+  ],
+  "领取任务": [
+    "Claim task",
+    "タスクを引き受ける"
+  ],
+  "首页": [
+    "Home",
+    "ホーム"
+  ],
+  "首页、关于页和求职页共用这份资料。": [
+    "Shared by the homepage, about page and career page.",
+    "トップ、自己紹介、採用向けページで共通使用します。"
+  ],
+  "首页精选项目": [
+    "Featured homepage projects",
+    "トップページのおすすめ作品"
+  ],
+  "验证当前密码": [
+    "Verify current password",
+    "現在のパスワードを確認"
+  ],
+  "默认分享封面": [
+    "Default share image",
+    "共有用の初期画像"
+  ],
+  "默认分享摘要": [
+    "Default share description",
+    "共有用の初期説明"
+  ],
+  "，仍可查看消息并": [
+    ". You can still view notifications and",
+    "。通知の確認と"
+  ],
+  "，欢迎回来。": [
+    ", welcome back.",
+    "さん、おかえりなさい。"
+  ],
+  "，理解当前服务范围、内容授权、处理措施及个人信息用途。": [
+    ", and understand the service scope, content permissions, moderation and personal-data use.",
+    "サービス範囲、コンテンツの利用許可、処理措置、個人情報の利用目的を理解しています。"
+  ],
+  "，确认有合法分享依据且不含个人敏感信息；同意将审核通过的正文、来源与昵称在本地社区展示。": [
+    ", confirm that I have a lawful sharing basis and include no sensitive personal information, and agree to display approved text, sources and nickname in the local community.",
+    "合法的な共有の根拠があり、機微な個人情報を含まないことを確認し、承認後の本文・出典・ニックネームをローカルコミュニティに表示することに同意します。"
+  ],
+  "；这份草稿与待审修改不会提前替换它。": [
+    ". Drafts and pending edits do not replace it early.",
+    "。下書きや審査待ちの変更が先に置き換わることはありません。"
+  ],
+  "项目": [
+    "Projects",
+    "プロジェクト"
+  ],
+  "文章": [
+    "Articles",
+    "記事"
+  ],
+  "关于与经历": [
+    "About & experience",
+    "プロフィールと経歴"
+  ],
+  "项目列表": [
+    "Projects",
+    "プロジェクト一覧"
+  ],
+  "文章列表": [
+    "Articles",
+    "記事一覧"
+  ],
+  "实践经历": [
+    "Practical experience",
+    "実務経験"
+  ],
+  "官方链接介绍": [
+    "Official source link",
+    "公式リンクの紹介"
+  ],
+  "记录进展并通知": [
+    "Record an update and notify",
+    "進捗を記録して通知"
+  ],
+  "请求补充材料": [
+    "Request more information",
+    "追加資料を依頼"
+  ],
+  "立即暂停关联内容": [
+    "Pause related content now",
+    "関連コンテンツを直ちに非公開"
+  ],
+  "下架并保留限制": [
+    "Take down and retain restrictions",
+    "制限を維持して公開停止"
+  ],
+  "解除本工单的冻结": [
+    "Release this case’s hold",
+    "この案件の公開制限を解除"
+  ],
+  "复核后恢复已审版本": [
+    "Restore the reviewed version",
+    "確認済みの版を復元"
+  ],
+  "记录法定通知或转送": [
+    "Record legal notice or referral",
+    "法定通知・移送を記録"
+  ],
+  "给出结论并结案": [
+    "Record a decision and close",
+    "結論を記録して完了"
+  ],
+  "提交评论": [
+    "Submit comment",
+    "コメントを送信"
+  ],
+  "编辑评论送审": [
+    "Resubmit edited comment",
+    "編集したコメントを審査に提出"
+  ],
+  "作者撤回评论": [
+    "Comment withdrawn by author",
+    "投稿者がコメントを撤回"
+  ],
+  "评论审核通过": [
+    "Comment approved",
+    "コメント承認済み"
+  ],
+  "查看评论队列": [
+    "View comment queue",
+    "コメント審査一覧を表示"
+  ],
+  "账号注册": [
+    "Account registration",
+    "アカウント登録"
+  ],
+  "审核通过": [
+    "Approved",
+    "承認済み"
+  ],
+  "领取审核": [
+    "Claim review",
+    "審査を担当"
+  ],
+  "撤回投稿": [
+    "Withdraw submission",
+    "投稿を撤回"
+  ],
+  "作者下架": [
+    "Taken down by author",
+    "投稿者による公開停止"
+  ],
+  "收到工单": [
+    "Case received",
+    "案件を受け付けました"
+  ],
+  "解除本案限制": [
+    "Release case restrictions",
+    "案件の制限を解除"
+  ],
+  "下架内容": [
+    "Take down content",
+    "コンテンツの公開停止"
+  ],
+  "恢复已审版本": [
+    "Restore reviewed version",
+    "確認済みの版を復元"
+  ],
+  "回复进展": [
+    "Progress update",
+    "進捗を返信"
+  ],
+  "要求补充": [
+    "Request information",
+    "追加情報を依頼"
+  ],
+  "工单结案": [
+    "Case closed",
+    "案件完了"
+  ],
+  "记录法定转送": [
+    "Record legal referral",
+    "法定移送を記録"
+  ],
+  "确认测试资格": [
+    "Confirm test eligibility",
+    "テスト資格を確認"
+  ],
+  "调整社区角色": [
+    "Change community role",
+    "コミュニティの権限を変更"
+  ],
+  "账号注销": [
+    "Account closed",
+    "アカウント削除"
+  ],
+  "账号密码已修改": [
+    "Password changed",
+    "パスワード変更済み"
+  ],
+  "创建邀请": [
+    "Create invitation",
+    "招待を作成"
+  ],
+  "调整收稿状态": [
+    "Change submission availability",
+    "投稿受付を変更"
+  ],
+  "访问私密工单": [
+    "Access private case",
+    "非公開案件にアクセス"
+  ],
+  "查看审核队列": [
+    "View review queue",
+    "審査一覧を表示"
+  ],
+  "发现": [
+    "Explore",
+    "見つける"
+  ],
+  "通知": [
+    "Notifications",
+    "通知"
+  ],
+  "审核中": [
+    "In review",
+    "審査中"
+  ],
+  "退回修改": [
+    "Changes requested",
+    "修正依頼"
+  ],
+  "未通过": [
+    "Not approved",
+    "不承認"
+  ],
+  "已通过": [
+    "Approved",
+    "承認済み"
+  ],
+  "已撤回": [
+    "Withdrawn",
+    "撤回済み"
+  ],
+  "已移除": [
+    "Removed",
+    "削除済み"
+  ],
+  "未公开": [
+    "Private",
+    "非公開"
+  ],
+  "待分流": [
+    "Awaiting triage",
+    "振り分け待ち"
+  ],
+  "处理中": [
+    "In progress",
+    "対応中"
+  ],
+  "待补充": [
+    "Awaiting information",
+    "追加情報待ち"
+  ],
+  "已结案": [
+    "Closed",
+    "完了"
+  ],
+  "已封禁": [
+    "Banned",
+    "利用停止"
+  ],
+  "已注销": [
+    "Closed",
+    "削除済み"
+  ],
+  "成员": [
+    "Member",
+    "メンバー"
+  ],
+  "本地测试资格": [
+    "Local test eligibility",
+    "ローカルテスト資格"
+  ],
+  "权利投诉": [
+    "Rights complaint",
+    "権利侵害の申立て"
+  ],
+  "申诉": [
+    "Appeal",
+    "異議申立て"
+  ],
+  "资格确认": [
+    "Eligibility check",
+    "資格確認"
+  ],
+  "语言偏好已保存。": [
+    "Language preference saved.",
+    "言語設定を保存しました。"
+  ],
+  "语言已切换，但浏览器未允许保存偏好。": [
+    "Language changed. Your browser could not save the preference.",
+    "言語を変更しましたが、ブラウザーに設定を保存できませんでした。"
+  ],
+  "正文编辑器": [
+    "Body editor",
+    "本文エディター"
+  ],
+  "自然有机": [
+    "Organic",
+    "ナチュラル"
+  ],
+  "单色极简": [
+    "Monochrome",
+    "モノクロ"
+  ],
+  "编辑杂志": [
+    "Editorial",
+    "エディトリアル"
+  ],
+  "X 社交": [
+    "X Social",
+    "X ソーシャル"
+  ],
+  "上传中": [
+    "Uploading",
+    "アップロード中"
+  ],
+  "网络波动，正在重试": [
+    "Connection interrupted. Retrying…",
+    "接続が不安定です。再試行中…"
+  ],
+  "正在校验完整文件": [
+    "Verifying file",
+    "ファイルを検証中"
+  ],
+  "已暂停 / 等待原文件": [
+    "Paused · Select the original file",
+    "一時停止中 · 元のファイルを選択"
+  ],
+  "上传完成，可使用": [
+    "Uploaded and ready",
+    "アップロード完了"
+  ],
+  "开发资源": [
+    "Development",
+    "開発リソース"
+  ],
+  "素材合集": [
+    "Assets",
+    "素材集"
+  ],
+  "实用网站": [
+    "Useful websites",
+    "便利なサイト"
+  ],
+  "技术笔记": [
+    "Technical notes",
+    "技術ノート"
+  ],
+  "前端": [
+    "Frontend",
+    "フロントエンド"
+  ],
+  "设计": [
+    "Design",
+    "デザイン"
+  ],
+  "工具": [
+    "Tools",
+    "ツール"
+  ],
+  "学习": [
+    "Learning",
+    "学習"
+  ],
+  "导航：{0}": [
+    "{0} navigation",
+    "{0}のナビゲーション"
+  ],
+  "界面风格：{0}": [
+    "Appearance: {0}",
+    "テーマ：{0}"
+  ],
+  "已切换为{0}": [
+    "Switched to {0}",
+    "{0}に変更しました"
+  ],
+  "查看{0}的个人资料": [
+    "View {0}’s profile",
+    "{0}のプロフィールを表示"
+  ],
+  "{0}的账号选项": [
+    "Account options for {0}",
+    "{0}のアカウントオプション"
+  ],
+  "{0} 条未读消息": [
+    "{0} unread notifications",
+    "未読通知 {0} 件"
+  ],
+  "{0} 加入社区": [
+    "Joined {0}",
+    "{0}に参加"
+  ],
+  "评论 {0} 条": [
+    "{0} comments",
+    "コメント {0} 件"
+  ],
+  "管理{0}": [
+    "Manage {0}",
+    "{0}を管理"
+  ],
+  "单文件不能超过 {0}": [
+    "A file must be no larger than {0}",
+    "ファイルは {0} 以下にしてください"
+  ],
+  "上传{0}": [
+    "Upload {0}",
+    "{0}をアップロード"
+  ],
+  "这一页，暂时不在这里。": [
+    "This page is not available.",
+    "このページは見つかりません。"
+  ],
+  "内容可能尚未发布、已经下架，或地址有误。回到首页，继续逛逛吧。": [
+    "The content may be unpublished, removed, or at a different address. Return home to keep exploring.",
+    "未公開、公開停止、またはアドレスが間違っている可能性があります。ホームに戻ってご覧ください。"
+  ],
+  "法律草案目前仅提供中文原文。": [
+    "Legal drafts are currently available in their original Chinese only.",
+    "法的文書の草案は現在、中国語の原文のみです。"
+  ],
+  "收到新的点赞": [
+    "Someone liked your post",
+    "投稿にいいねが付きました"
+  ],
+  "你的分享被转发": [
+    "Your post was reposted",
+    "投稿がリポストされました"
+  ],
+  "有成员关注了你": [
+    "You have a new follower",
+    "新しいフォロワーがいます"
+  ],
+  "有人回复了你的评论": [
+    "Someone replied to your comment",
+    "コメントに返信がありました"
+  ],
+  "你的分享收到新评论": [
+    "New comment on your post",
+    "投稿に新しいコメントがあります"
+  ],
+  "评论未通过审核": [
+    "Comment not approved",
+    "コメントは承認されませんでした"
+  ],
+  "投稿审核通过": [
+    "Submission approved",
+    "投稿が承認されました"
+  ],
+  "投稿需要补充": [
+    "Changes requested on your submission",
+    "投稿に修正依頼があります"
+  ],
+  "投稿未通过审核": [
+    "Submission not approved",
+    "投稿は承認されませんでした"
+  ],
+  "{0}赞了你的分享。": [
+    "{0} liked your post.",
+    "{0}があなたの投稿にいいねしました。"
+  ],
+  "{0}转发了你的分享。": [
+    "{0} reposted your post.",
+    "{0}があなたの投稿をリポストしました。"
+  ],
+  "{0}关注了你。": [
+    "{0} followed you.",
+    "{0}があなたをフォローしました。"
+  ],
+  "{0}。如有异议可从工作台申诉。": [
+    "{0}. You may appeal from your workspace.",
+    "{0}。異議がある場合はワークスペースから申し立てできます。"
+  ],
+  "{0}；依据：{1}。如有异议，可从投稿页申请复核。": [
+    "{0}. Basis: {1}. You may request a review from your submission page.",
+    "{0}。根拠：{1}。投稿ページから再審査を申請できます。"
+  ],
+  "{0}。如有异议可提交申诉。": [
+    "{0}. You may submit an appeal.",
+    "{0}。異議申立てが可能です。"
+  ],
+  "投稿相关工单有进展": [
+    "Update on a case involving your post",
+    "投稿に関する案件の進捗"
+  ],
+  "举报或申诉处理进展": [
+    "Report or appeal update",
+    "通報・異議申立ての進捗"
+  ],
+  "统计路径无效": [
+    "Invalid analytics path",
+    "アクセス解析のパスが無効です"
+  ],
+  "事件无效": [
+    "Invalid event",
+    "イベントが無効です"
+  ],
+  "事件标识无效": [
+    "Invalid event ID",
+    "イベントIDが無効です"
+  ],
+  "访问过于频繁": [
+    "Too many requests. Please try again later.",
+    "アクセスが集中しています。しばらくしてから再試行してください。"
+  ],
+  "下载资源无效": [
+    "Invalid download resource",
+    "ダウンロード対象が無効です"
+  ],
+  "日期格式无效": [
+    "Invalid date format",
+    "日付の形式が無効です"
+  ],
+  "日期无效": [
+    "Invalid date",
+    "日付が無効です"
+  ],
+  "日期范围应在1–366天内": [
+    "Choose a date range of 1–366 days.",
+    "1〜366日間の期間を指定してください。"
+  ],
+  "请求格式无效": [
+    "Invalid request format",
+    "リクエストの形式が無効です"
+  ],
+  "内容不存在": [
+    "Content not found",
+    "コンテンツが見つかりません"
+  ],
+  "文件不存在": [
+    "File not found",
+    "ファイルが見つかりません"
+  ],
+  "上传任务标识无效": [
+    "Invalid upload ID",
+    "アップロードIDが無効です"
+  ],
+  "上传任务不存在": [
+    "Upload not found",
+    "アップロードが見つかりません"
+  ],
+  "请先登录管理后台": [
+    "Sign in to the admin console first.",
+    "先に管理画面へログインしてください。"
+  ],
+  "请求来源无效": [
+    "The request origin is not allowed.",
+    "許可されていない送信元です。"
+  ],
+  "账号或密码错误": [
+    "Incorrect username or password",
+    "ユーザー名またはパスワードが違います"
+  ],
+  "尝试次数过多，请15分钟后重试": [
+    "Too many attempts. Try again in 15 minutes.",
+    "試行回数が多すぎます。15分後に再試行してください。"
+  ],
+  "社区账号当前仅供本机联调": [
+    "Community accounts are currently limited to local testing.",
+    "コミュニティのアカウントは現在ローカル環境のみで利用できます。"
+  ],
+  "新密码需要12–256位": [
+    "Use 12–256 characters for the new password.",
+    "新しいパスワードは12〜256文字にしてください。"
+  ],
+  "当前密码错误": [
+    "The current password is incorrect.",
+    "現在のパスワードが違います。"
+  ],
+  "社区头像目前仅供本地体验": [
+    "Community avatars are available locally only.",
+    "コミュニティのアバターはローカル環境のみで利用できます。"
+  ],
+  "请先登录": [
+    "Please sign in first.",
+    "先にログインしてください。"
+  ],
+  "站长头像请在个人资料中更换": [
+    "Change the owner’s avatar in profile settings.",
+    "管理者のアバターはプロフィール設定で変更してください。"
+  ],
+  "账号暂不能更换头像，请先确认本地测试资格或联系站长": [
+    "Confirm local test eligibility or contact the owner before changing your avatar.",
+    "アバターを変更するには、ローカルテスト資格を確認するか管理者にお問い合わせください。"
+  ],
+  "头像操作无效": [
+    "Invalid avatar action",
+    "アバターの操作が無効です"
+  ],
+  "更换头像过于频繁，请稍后再试": [
+    "You are changing avatars too quickly. Try again later.",
+    "アバターの変更が多すぎます。しばらくしてから再試行してください。"
+  ],
+  "头像仅支持 JPG、PNG、WebP 图片": [
+    "Avatars must be JPG, PNG, or WebP images.",
+    "アバターはJPG、PNG、WebP形式にしてください。"
+  ],
+  "请选择非空图片": [
+    "Choose a non-empty image.",
+    "空でない画像を選択してください。"
+  ],
+  "文件内容不是支持的头像图片": [
+    "The file is not a supported avatar image.",
+    "このファイルは対応するアバター画像ではありません。"
+  ],
+  "请选择有效的静态 JPG、PNG、WebP 图片": [
+    "Choose a valid static JPG, PNG, or WebP image.",
+    "有効な静止画のJPG、PNG、WebPを選択してください。"
+  ],
+  "图片至少需要 32 × 32 像素": [
+    "The image must be at least 32 × 32 pixels.",
+    "画像は32 × 32ピクセル以上にしてください。"
+  ],
+  "无法读取图片，请选择有效的 JPG、PNG 或 WebP 静态图片": [
+    "Cannot read this image. Choose a valid static JPG, PNG, or WebP.",
+    "画像を読み込めません。有効なJPG、PNG、WebPの静止画を選択してください。"
+  ],
+  "可用磁盘不足，请联系站长": [
+    "Not enough disk space. Contact the site owner.",
+    "ディスクの空き容量が不足しています。管理者にお問い合わせください。"
+  ],
+  "请选择非空文件": [
+    "Choose a non-empty file.",
+    "空でないファイルを選択してください。"
+  ],
+  "网络中断，请重试": [
+    "Connection interrupted. Please try again.",
+    "接続が切断されました。再試行してください。"
+  ],
+  "上传分片超时，请重试": [
+    "The upload chunk timed out. Please try again.",
+    "分割アップロードがタイムアウトしました。再試行してください。"
+  ],
+  "已暂停": [
+    "Paused",
+    "一時停止中"
+  ],
+  "当前账号没有投稿资格；请联系站长确认本地测试邀请": [
+    "This account cannot submit yet. Ask the owner to confirm your local test invitation.",
+    "このアカウントには投稿資格がありません。管理者にローカルテスト招待をご確認ください。"
+  ],
+  "没有此项管理权限": [
+    "You do not have permission for this action.",
+    "この操作を行う権限がありません。"
+  ],
+  "投稿不存在或无权访问": [
+    "Submission not found or access denied",
+    "投稿が見つからないか、アクセス権がありません"
+  ],
+  "此页面已发生变化，请刷新后重试；当前填写的内容仍保留": [
+    "This page has changed. Refresh and try again. Your current input is retained.",
+    "ページが更新されています。再読み込みして再試行してください。入力内容は保持されます。"
+  ],
+  "该内容仍有投诉或风险限制，请先处理全部关联工单": [
+    "Resolve all related cases before removing this content’s restrictions.",
+    "関連するすべての案件に対応してから、コンテンツの制限を解除してください。"
+  ],
+  "请阅读并确认当前版本的协议、规则和隐私告知": [
+    "Read and accept the current terms, community rules, and privacy notice.",
+    "最新の利用規約、コミュニティルール、プライバシー告知をご確認ください。"
+  ],
+  "社区已暂停新投稿，已有内容和投诉仍可处理": [
+    "New submissions are paused. Existing content and cases remain available.",
+    "新規投稿は停止中です。既存のコンテンツと案件には引き続き対応できます。"
+  ],
+  "请填写完整的 HTTPS 来源网址": [
+    "Enter the full HTTPS source URL.",
+    "完全なHTTPSの出典URLを入力してください。"
+  ],
+  "只接收可核查的 HTTPS 公共来源页，不接收内网、短链、网盘或带凭据地址": [
+    "Use a verifiable public HTTPS source. Private networks, short links, file shares, and URLs with credentials are not accepted.",
+    "確認可能な公開HTTPSページを指定してください。内部ネットワーク、短縮URL、共有ストレージ、認証情報付きURLは利用できません。"
+  ],
+  "请分享正式来源页面，不要提交文件直链、密码或订阅凭据": [
+    "Share an official source page without direct file links, passwords, or subscription credentials.",
+    "正式な出典ページを共有してください。ファイルの直リンク、パスワード、購読情報は投稿できません。"
+  ],
+  "投稿内容格式无效": [
+    "Invalid submission format",
+    "投稿の形式が無効です"
+  ],
+  "社区不支持附件、任意图片地址或 HTML 投稿": [
+    "Attachments, arbitrary image URLs, and HTML submissions are not supported.",
+    "添付ファイル、任意の画像URL、HTML投稿には対応していません。"
+  ],
+  "正文只接收文字，不支持 HTML、图片或内嵌页面": [
+    "The body must be plain text without HTML, images, or embedded pages.",
+    "本文にはテキストのみを入力してください。HTML、画像、埋め込みページは利用できません。"
+  ],
+  "只能使用本人上传的投稿封面": [
+    "Use a cover image you uploaded yourself.",
+    "自分でアップロードしたカバー画像を使用してください。"
+  ],
+  "请填写至少3字的封面说明": [
+    "Enter a cover description of at least 3 characters.",
+    "カバー画像の説明を3文字以上で入力してください。"
+  ],
+  "请选择已有分类": [
+    "Choose an existing category.",
+    "既存のカテゴリーを選択してください。"
+  ],
+  "最多选择 5 个已有标签": [
+    "Select up to 5 existing tags.",
+    "既存のタグを5個まで選択してください。"
+  ],
+  "全部外部链接合计最多 5 个": [
+    "Use no more than 5 external links in total.",
+    "外部リンクは合計5件までにしてください。"
+  ],
+  "请使用完整 HTTPS 链接，不支持其他链接写法": [
+    "Use complete HTTPS links.",
+    "完全なHTTPSリンクを使用してください。"
+  ],
+  "标题至少 2 字，摘要与正文至少各 20 字": [
+    "Use at least 2 characters for the title and 20 each for the summary and body.",
+    "タイトルは2文字以上、要約と本文は各20文字以上にしてください。"
+  ],
+  "请补齐分类、作者或机构、来源、目标链接和许可依据": [
+    "Complete the category, author or organization, source, destination link, and license basis.",
+    "カテゴリー、著者・組織、出典、リンク先、利用許諾の根拠を入力してください。"
+  ],
+  "请选择权利依据": [
+    "Choose a rights basis.",
+    "権利の根拠を選択してください。"
+  ],
+  "账号正常且已确认本地测试资格后可使用此项互动": [
+    "An active account with confirmed local test eligibility is required.",
+    "有効なアカウントと確認済みのローカルテスト資格が必要です。"
+  ],
+  "请登录后查看关注动态": [
+    "Sign in to view your following feed.",
+    "フォロー中の投稿を見るにはログインしてください。"
+  ],
+  "成员主页暂不可用": [
+    "This member profile is unavailable.",
+    "このメンバーのプロフィールは利用できません。"
+  ],
+  "内容暂不可用": [
+    "This content is unavailable.",
+    "このコンテンツは利用できません。"
+  ],
+  "互动操作格式无效": [
+    "Invalid interaction request",
+    "リアクションのリクエストが無効です"
+  ],
+  "操作太频繁，请稍后再试": [
+    "Too many actions. Please try again later.",
+    "操作が多すぎます。しばらくしてから再試行してください。"
+  ],
+  "本地版每个账号最多收藏 1000 份内容": [
+    "Each local account can bookmark up to 1,000 posts.",
+    "ローカル版では1アカウントにつき1,000件までブックマークできます。"
+  ],
+  "不能关注自己，且需要明确关注状态": [
+    "You cannot follow yourself. Specify a follow state.",
+    "自分をフォローすることはできません。フォロー状態を指定してください。"
+  ],
+  "关注操作太频繁，请稍后再试": [
+    "Too many follow actions. Try again later.",
+    "フォロー操作が多すぎます。しばらくしてから再試行してください。"
+  ],
+  "本地版最多关注 1000 位成员": [
+    "You can follow up to 1,000 members locally.",
+    "ローカル版では1,000人までフォローできます。"
+  ],
+  "评论请填写 2–1000 字": [
+    "Comments must be 2–1,000 characters.",
+    "コメントは2〜1,000文字で入力してください。"
+  ],
+  "评论内容为空": [
+    "The comment is empty.",
+    "コメントが入力されていません。"
+  ],
+  "评论仅接收文字与完整 HTTPS 公共来源链接": [
+    "Comments accept text and complete public HTTPS links only.",
+    "コメントにはテキストと公開HTTPSリンクのみを使用できます。"
+  ],
+  "评论外部链接最多 5 个": [
+    "Use up to 5 external links per comment.",
+    "コメントの外部リンクは5件までです。"
+  ],
+  "评论不存在或无权操作": [
+    "Comment not found or access denied",
+    "コメントが見つからないか、操作権限がありません"
+  ],
+  "此评论已处理": [
+    "This comment has already been processed.",
+    "このコメントは対応済みです。"
+  ],
+  "此评论不能重新编辑": [
+    "This comment cannot be edited again.",
+    "このコメントは再編集できません。"
+  ],
+  "同时待审评论最多 5 条": [
+    "You can have up to 5 comments awaiting review.",
+    "審査待ちのコメントは同時に5件までです。"
+  ],
+  "每天最多提交 20 次评论或修订": [
+    "You can submit up to 20 comments or revisions per day.",
+    "コメント・修正版の送信は1日20回までです。"
+  ],
+  "仅可回复同一分享中已公开的一级评论": [
+    "Reply to a published top-level comment on this post.",
+    "この投稿で公開された親コメントに返信してください。"
+  ],
+  "评论不存在": [
+    "Comment not found",
+    "コメントが見つかりません"
+  ],
+  "请填写至少 5 字的处理理由": [
+    "Enter a reason of at least 5 characters.",
+    "対応理由を5文字以上で入力してください。"
+  ],
+  "评论已发生变化": [
+    "This comment has changed. Refresh and try again.",
+    "コメントが更新されています。再読み込みしてください。"
+  ],
+  "不能审核自己的评论": [
+    "You cannot review your own comment.",
+    "自分のコメントは審査できません。"
+  ],
+  "请确认核查正文、链接及回复上下文": [
+    "Confirm you checked the body, links, and reply context.",
+    "本文、リンク、返信の文脈を確認してください。"
+  ],
+  "作者账号不可用": [
+    "The author’s account is unavailable.",
+    "投稿者のアカウントは利用できません。"
+  ],
+  "审核动作无效": [
+    "Invalid review action",
+    "審査の操作が無効です"
+  ],
+  "评论状态已发生变化": [
+    "The comment status has changed.",
+    "コメントの状態が変更されています。"
+  ],
+  "本地测试账号仅向成年人开放": [
+    "Local test accounts are available to adults only.",
+    "ローカルテストアカウントは成人のみ利用できます。"
+  ],
+  "注册操作过于频繁，请稍后重试": [
+    "Too many registration attempts. Try again later.",
+    "登録の試行が多すぎます。しばらくしてから再試行してください。"
+  ],
+  "账号需为 3–32 位字母、数字、下划线或短横线，并以字母开头": [
+    "Use 3–32 letters, digits, underscores, or hyphens, starting with a letter.",
+    "ユーザー名は英字で始まる3〜32文字の英数字・アンダースコア・ハイフンにしてください。"
+  ],
+  "昵称需为 2–40 字，不支持 HTML": [
+    "Use 2–40 characters for your display name, without HTML.",
+    "表示名はHTMLを含めず2〜40文字にしてください。"
+  ],
+  "密码需为 12–256 位": [
+    "Use a password of 12–256 characters.",
+    "パスワードは12〜256文字にしてください。"
+  ],
+  "此账号不可使用": [
+    "This username is unavailable.",
+    "このユーザー名は利用できません。"
+  ],
+  "邀请码无效、已使用或已过期": [
+    "The invitation is invalid, used, or expired.",
+    "招待コードが無効、使用済み、または期限切れです。"
+  ],
+  "请先撤回待审版本，再继续编辑": [
+    "Withdraw the pending version before editing.",
+    "編集する前に審査待ちの版を撤回してください。"
+  ],
+  "站长原创内容请继续使用原内容管理；社区投稿使用成员身份": [
+    "Use content management for the owner’s posts and a member account for community submissions.",
+    "管理者のコンテンツは既存の管理画面で、コミュニティ投稿はメンバーアカウントで扱ってください。"
+  ],
+  "本地测试每个账号最多保留 500 条投稿": [
+    "Each local test account can keep up to 500 submissions.",
+    "ローカルテストでは1アカウントにつき500件まで投稿を保存できます。"
+  ],
+  "账号未取得本地测试投稿资格": [
+    "This account does not have local test submission eligibility.",
+    "このアカウントにはローカルテスト投稿資格がありません。"
+  ],
+  "请先保存草稿，且不能重复提交待审版本": [
+    "Save a draft first. A pending version cannot be submitted twice.",
+    "先に下書きを保存してください。審査待ちの版は再送信できません。"
+  ],
+  "同时待审最多 3 项，每天最多提交 5 个版本": [
+    "Up to 3 submissions may await review, with 5 version submissions per day.",
+    "審査待ちは同時に3件まで、送信は1日5版までです。"
+  ],
+  "投稿已提交": [
+    "Submission received",
+    "投稿を受け付けました"
+  ],
+  "提交版本已锁定，人工审核通过后才会公开。": [
+    "Your submitted version is locked and will be published only after manual approval.",
+    "提出した版は固定され、手動審査で承認された後に公開されます。"
+  ],
+  "没有可撤回的待审版本": [
+    "There is no pending version to withdraw.",
+    "撤回できる審査待ちの版がありません。"
+  ],
+  "审核状态已变化": [
+    "The review status has changed.",
+    "審査状態が変更されています。"
+  ],
+  "请先撤回待审版本": [
+    "Withdraw the pending version first.",
+    "先に審査待ちの版を撤回してください。"
+  ],
+  "尚无可修订的历史版本": [
+    "There is no previous version to revise.",
+    "修正できる過去の版がありません。"
+  ],
+  "已有草稿，请继续编辑": [
+    "A draft already exists. Continue editing it.",
+    "下書きがあります。引き続き編集してください。"
+  ],
+  "投稿操作无效": [
+    "Invalid submission action",
+    "投稿の操作が無効です"
+  ],
+  "投稿不存在": [
+    "Submission not found",
+    "投稿が見つかりません"
+  ],
+  "待审版本已变化或已撤回": [
+    "The pending version has changed or was withdrawn.",
+    "審査待ちの版は変更または撤回されています。"
+  ],
+  "不能审核自己的投稿": [
+    "You cannot review your own submission.",
+    "自分の投稿は審査できません。"
+  ],
+  "请选择适用规则": [
+    "Select the applicable rule.",
+    "適用するルールを選択してください。"
+  ],
+  "该任务已由其他审核员领取": [
+    "Another reviewer has claimed this task.",
+    "他の審査担当者がこの案件を担当しています。"
+  ],
+  "请由领取任务的审核员处理": [
+    "Only the assigned reviewer can process this task.",
+    "担当の審査者が対応してください。"
+  ],
+  "请填写核查记录，并确认已检查来源、许可和全部链接": [
+    "Record your review and confirm the source, license, and all links were checked.",
+    "確認記録を入力し、出典・許諾・全リンクの確認を行ってください。"
+  ],
+  "作者账号不具备发布资格": [
+    "The author’s account is not eligible for publication.",
+    "投稿者のアカウントには公開資格がありません。"
+  ],
+  "请填写至少 5 字的具体修改或拒绝理由": [
+    "Explain the requested changes or rejection in at least 5 characters.",
+    "修正依頼・不承認の具体的な理由を5文字以上で入力してください。"
+  ],
+  "工单类型无效": [
+    "Invalid case type",
+    "案件の種類が無効です"
+  ],
+  "请至少填写 10 字事实说明": [
+    "Describe the facts in at least 10 characters.",
+    "事実の説明を10文字以上で入力してください。"
+  ],
+  "请选择问题类别": [
+    "Select an issue category.",
+    "問題のカテゴリーを選択してください。"
+  ],
+  "提交较频繁，请稍后重试；也可按投诉指引联系受理人": [
+    "Too many submissions. Try again later or contact the recipient listed in the complaints guide.",
+    "送信が多すぎます。時間をおいて再試行するか、申立てガイドの窓口にお問い合わせください。"
+  ],
+  "目标评论暂不可用": [
+    "The target comment is unavailable.",
+    "対象のコメントは利用できません。"
+  ],
+  "评论与分享不匹配": [
+    "The comment does not belong to this post.",
+    "コメントと投稿が一致しません。"
+  ],
+  "请填写可定位的内容地址或账号问题": [
+    "Provide a content URL or describe the account issue.",
+    "特定できるコンテンツURLまたはアカウントの問題を入力してください。"
+  ],
+  "请先登录后提交申诉": [
+    "Sign in before submitting an appeal.",
+    "異議申立てにはログインが必要です。"
+  ],
+  "仅可对自己的内容或账号提出申诉": [
+    "You may appeal only for your own content or account.",
+    "自分のコンテンツまたはアカウントについてのみ異議申立てできます。"
+  ],
+  "权利通知需要真实身份、联系渠道、初步证据及真实性确认": [
+    "A rights notice requires your identity, contact details, initial evidence, and a truthfulness declaration.",
+    "権利通知には本人情報、連絡先、初期証拠、真実性の確認が必要です。"
+  ],
+  "工单已建立。保存查询凭证，工作人员核查后会反馈。": [
+    "Case created. Save your private lookup token to check for updates.",
+    "案件を作成しました。非公開の照会キーを保管してください。確認後に回答します。"
+  ],
+  "工单不存在": [
+    "Case not found",
+    "案件が見つかりません"
+  ],
+  "权利通知和申诉交由负责人处理": [
+    "Rights notices and appeals require the owner’s review.",
+    "権利通知と異議申立ては責任者が対応してください。"
+  ],
+  "请填写至少 5 字的事实、规则依据及处理说明": [
+    "Enter facts, rule basis, and a decision in at least 5 characters.",
+    "事実、適用ルール、対応の説明を5文字以上で入力してください。"
+  ],
+  "此工单未关联投稿，无法暂停": [
+    "This case has no linked submission to pause.",
+    "関連する投稿がないため公開を停止できません。"
+  ],
+  "仅负责人可解除案件限制": [
+    "Only the owner can release case restrictions.",
+    "案件の制限は責任者のみ解除できます。"
+  ],
+  "此工单未关联投稿": [
+    "This case has no linked submission.",
+    "この案件には関連する投稿がありません。"
+  ],
+  "仅负责人可恢复关联内容": [
+    "Only the owner can restore related content.",
+    "関連コンテンツの復元は責任者のみ行えます。"
+  ],
+  "请确认已核对适用法律程序及全部关联案件": [
+    "Confirm the applicable legal process and all related cases were checked.",
+    "適用手続きとすべての関連案件を確認してください。"
+  ],
+  "请先处理待审修订；没有已审公开版本时须重新投稿": [
+    "Process pending revisions first. Resubmit if no approved public version exists.",
+    "先に審査待ちの修正版に対応してください。承認済みの公開版がない場合は再投稿が必要です。"
+  ],
+  "作者账号不具备恢复资格": [
+    "The author’s account is not eligible for restoration.",
+    "投稿者のアカウントには復元資格がありません。"
+  ],
+  "工单操作无效": [
+    "Invalid case action",
+    "案件の操作が無効です"
+  ],
+  "请填写有效的跟进日期": [
+    "Enter a valid follow-up date.",
+    "有効なフォローアップ日を入力してください。"
+  ],
+  "规则页面不存在": [
+    "Rules page not found",
+    "ルールのページが見つかりません"
+  ],
+  "社区当前仅供本机联调。身份核验、规则生效及开放条件完成前不对外提供服务": [
+    "The community is currently local only. It will not open publicly until identity checks, effective rules, and launch requirements are completed.",
+    "現在はローカルテスト専用です。本人確認、ルールの施行、公開条件が整うまで外部には提供しません。"
+  ],
+  "查询过于频繁": [
+    "Too many lookups. Try again later.",
+    "照会が多すぎます。しばらくしてから再試行してください。"
+  ],
+  "回执或查询凭证无效": [
+    "Invalid receipt or lookup token",
+    "受付番号または照会キーが無効です"
+  ],
+  "权利工单不存在": [
+    "Rights case not found",
+    "権利案件が見つかりません"
+  ],
+  "请提供真实身份、联系渠道及不侵权的初步证据，并确认真实性": [
+    "Provide your identity, contact details, initial evidence of non-infringement, and confirm truthfulness.",
+    "本人情報、連絡先、非侵害を示す初期証拠を提出し、真実性を確認してください。"
+  ],
+  "站长密码请在原后台网站设置中修改": [
+    "Change the owner’s password in admin site settings.",
+    "管理者のパスワードは管理画面のサイト設定で変更してください。"
+  ],
+  "请填写当前密码": [
+    "Enter your current password.",
+    "現在のパスワードを入力してください。"
+  ],
+  "新密码需要 12–256 位": [
+    "Use 12–256 characters for the new password.",
+    "新しいパスワードは12〜256文字にしてください。"
+  ],
+  "请明确确认注销本地测试账号": [
+    "Confirm that you want to close this local test account.",
+    "ローカルテストアカウントの削除を確認してください。"
+  ],
+  "评论范围无效": [
+    "Invalid comment scope",
+    "コメントの範囲が無効です"
+  ],
+  "请填写邀请备注": [
+    "Enter an invitation note.",
+    "招待メモを入力してください。"
+  ],
+  "请记录至少 5 字的资格核查或账号处置依据": [
+    "Record an eligibility check or account action basis of at least 5 characters.",
+    "資格確認またはアカウント対応の根拠を5文字以上で記録してください。"
+  ],
+  "账号不可用": [
+    "Account unavailable",
+    "アカウントを利用できません"
+  ],
+  "请确认昵称审核且仅授予本地测试资格；这不是真实实名核验": [
+    "Confirm the display name was reviewed and only local test eligibility is granted. This is not identity verification.",
+    "表示名を確認し、ローカルテスト資格のみを付与することを確認してください。これは実際の本人確認ではありません。"
+  ],
+  "角色无效": [
+    "Invalid role",
+    "権限が無効です"
+  ],
+  "账号状态无效": [
+    "Invalid account status",
+    "アカウントの状態が無効です"
+  ],
+  "设置格式无效": [
+    "Invalid settings format",
+    "設定の形式が無効です"
+  ],
+  "社区接口不存在": [
+    "Community endpoint not found",
+    "コミュニティのエンドポイントが見つかりません"
+  ],
+  "文本字段格式无效": [
+    "Invalid text field format",
+    "テキスト項目の形式が無効です"
+  ],
+  "链接仅支持 HTTP 或 HTTPS": [
+    "Links must use HTTP or HTTPS.",
+    "リンクはHTTPまたはHTTPSを使用してください。"
+  ],
+  "请填写有效的完整网址": [
+    "Enter a valid complete URL.",
+    "有効な完全URLを入力してください。"
+  ],
+  "附件标识无效": [
+    "Invalid attachment ID",
+    "添付ファイルIDが無効です"
+  ],
+  "推广条设置格式无效": [
+    "Invalid promotion bar settings",
+    "お知らせバーの設定形式が無効です"
+  ],
+  "推广条最多设置 5 条内容": [
+    "The promotion bar supports up to 5 items.",
+    "お知らせバーは5件まで設定できます。"
+  ],
+  "推广内容格式无效": [
+    "Invalid promotion format",
+    "お知らせの形式が無効です"
+  ],
+  "请填写推广文案": [
+    "Enter promotion text.",
+    "お知らせの文言を入力してください。"
+  ],
+  "请选择广告或站内推荐": [
+    "Choose advertisement or site recommendation.",
+    "広告またはサイト内のおすすめを選択してください。"
+  ],
+  "推广链接仅支持站内路径或完整 HTTPS 网址": [
+    "Promotion links must be site paths or full HTTPS URLs.",
+    "お知らせのリンクにはサイト内パスまたは完全なHTTPS URLを使用してください。"
+  ],
+  "正文格式无效": [
+    "Invalid body format",
+    "本文の形式が無効です"
+  ],
+  "正文过长，请拆分后发布": [
+    "The body is too long. Split it before publishing.",
+    "本文が長すぎます。分割してから公開してください。"
+  ],
+  "内容类型无效": [
+    "Invalid content type",
+    "コンテンツの種類が無効です"
+  ],
+  "内容格式无效": [
+    "Invalid content format",
+    "コンテンツの形式が無効です"
+  ],
+  "请填写标题": [
+    "Enter a title.",
+    "タイトルを入力してください。"
+  ],
+  "封面需要上传可用的图片": [
+    "Upload a valid cover image.",
+    "有効なカバー画像をアップロードしてください。"
+  ],
+  "请填写正文或资源说明": [
+    "Enter the body or resource description.",
+    "本文またはリソースの説明を入力してください。"
+  ],
+  "新附件仍在上传中，请完成后再发布": [
+    "Wait for the new attachment to finish uploading before publishing.",
+    "新しい添付ファイルのアップロードが完了してから公開してください。"
+  ],
+  "请先完成资源文件上传": [
+    "Finish uploading the resource first.",
+    "先にリソースファイルのアップロードを完了してください。"
+  ],
+  "请填写外部资源地址": [
+    "Enter an external resource URL.",
+    "外部リソースのURLを入力してください。"
+  ],
+  "状态无效": [
+    "Invalid status",
+    "状態が無効です"
+  ],
+  "内容已被其他页面修改，请重新载入后再编辑": [
+    "This content was changed elsewhere. Reload before editing.",
+    "他のページで変更されています。再読み込みしてから編集してください。"
+  ],
+  "操作无效": [
+    "Invalid action",
+    "操作が無効です"
+  ],
+  "请先从回收站恢复": [
+    "Restore from the trash first.",
+    "先にゴミ箱から復元してください。"
+  ],
+  "此内容地址已被使用，请换一个地址": [
+    "This address is already in use. Choose another.",
+    "このアドレスは使用中です。別のアドレスを指定してください。"
+  ],
+  "设置类型无效": [
+    "Invalid settings type",
+    "設定の種類が無効です"
+  ],
+  "经历结束时间不能早于开始时间": [
+    "The experience end date cannot precede its start date.",
+    "経歴の終了日は開始日以降にしてください。"
+  ],
+  "请填写姓名": [
+    "Enter your name.",
+    "氏名を入力してください。"
+  ],
+  "邮箱格式无效": [
+    "Invalid email format",
+    "メールアドレスの形式が無効です"
+  ],
+  "请填写网站名称": [
+    "Enter a site name.",
+    "サイト名を入力してください。"
+  ],
+  "简历必须为可用的 PDF 文件": [
+    "The résumé must be a valid PDF file.",
+    "履歴書には有効なPDFファイルを使用してください。"
+  ],
+  "头像和分享封面需要使用有效图片": [
+    "Use valid images for the avatar and sharing cover.",
+    "アバターと共有カバーには有効な画像を使用してください。"
+  ],
+  "社区封面目前仅供本地体验": [
+    "Community covers are available locally only.",
+    "コミュニティのカバーはローカル環境のみで利用できます。"
+  ],
+  "确认本地测试资格后才能上传投稿封面": [
+    "Confirm local test eligibility before uploading a cover.",
+    "カバーのアップロードにはローカルテスト資格の確認が必要です。"
+  ],
+  "社区已暂停新投稿": [
+    "New community submissions are paused.",
+    "新規のコミュニティ投稿は停止中です。"
+  ],
+  "今天上传的图片较多，请稍后再试": [
+    "You have uploaded many images today. Try again later.",
+    "本日の画像アップロードが多いため、しばらくしてから再試行してください。"
+  ],
+  "本地版每个账号最多保存200张封面，请联系站长清理未使用图片": [
+    "Local accounts can store up to 200 covers. Contact the owner to remove unused images.",
+    "ローカル版ではカバーを200枚まで保存できます。未使用画像の削除は管理者にお問い合わせください。"
+  ],
+  "封面仅支持 JPG、PNG、WebP": [
+    "Covers must be JPG, PNG, or WebP.",
+    "カバーはJPG、PNG、WebP形式にしてください。"
+  ],
+  "请选择图片": [
+    "Choose an image.",
+    "画像を選択してください。"
+  ],
+  "封面至少需要160×90像素": [
+    "The cover must be at least 160 × 90 pixels.",
+    "カバーは160 × 90ピクセル以上にしてください。"
+  ],
+  "初始管理员密码至少需要12位": [
+    "The initial admin password must contain at least 12 characters.",
+    "初期管理者パスワードは12文字以上にしてください。"
+  ],
+  "引用的文件不存在或尚未上传完成": [
+    "The referenced file is missing or has not finished uploading.",
+    "参照ファイルが存在しないか、アップロードが完了していません。"
+  ],
+  "文件不存在或已下架": [
+    "The file is missing or no longer available.",
+    "ファイルが存在しないか公開停止されています。"
+  ],
+  "此文件不可内嵌显示": [
+    "This file cannot be displayed inline.",
+    "このファイルはインライン表示できません。"
+  ],
+  "下载请求过于频繁，请稍后重试": [
+    "Too many download requests. Try again later.",
+    "ダウンロード要求が多すぎます。しばらくしてから再試行してください。"
+  ],
+  "当前下载繁忙，请稍后重试": [
+    "Downloads are busy. Please try again later.",
+    "ダウンロードが混雑しています。しばらくしてから再試行してください。"
+  ],
+  "文件意外结束": [
+    "The file ended unexpectedly.",
+    "ファイルが予期せず終了しました。"
+  ],
+  "文件指纹无效": [
+    "Invalid file fingerprint",
+    "ファイルの識別情報が無効です"
+  ],
+  "文件名不能为空": [
+    "The file name cannot be empty.",
+    "ファイル名を入力してください。"
+  ],
+  "未完成上传过多，请先取消或完成现有任务": [
+    "Too many unfinished uploads. Complete or cancel existing tasks first.",
+    "未完了のアップロードが多すぎます。先に既存のタスクを完了またはキャンセルしてください。"
+  ],
+  "可用磁盘不足，请清理空间后再上传": [
+    "Not enough disk space. Free up space before uploading.",
+    "ディスク容量が不足しています。空き容量を確保してからアップロードしてください。"
+  ],
+  "请求内容过大": [
+    "The request is too large.",
+    "リクエストが大きすぎます。"
+  ],
+  "此任务不能继续上传": [
+    "This upload cannot be resumed.",
+    "このアップロードは再開できません。"
+  ],
+  "分片序号无效": [
+    "Invalid chunk index",
+    "分割ファイルの番号が無効です"
+  ],
+  "缺少有效的分片校验值": [
+    "A valid chunk checksum is required.",
+    "有効な分割ファイルのチェックサムが必要です。"
+  ],
+  "分片长度不正确": [
+    "Incorrect chunk length",
+    "分割ファイルの長さが正しくありません"
+  ],
+  "分片校验失败，请重试": [
+    "Chunk verification failed. Please retry.",
+    "分割ファイルの検証に失敗しました。再試行してください。"
+  ],
+  "原文件与已上传内容不一致": [
+    "The original file does not match the uploaded data.",
+    "元のファイルとアップロード済みデータが一致しません。"
+  ],
+  "写入失败": [
+    "Could not write the file.",
+    "ファイルを書き込めませんでした。"
+  ],
+  "上传任务不可完成": [
+    "This upload cannot be completed.",
+    "このアップロードを完了できません。"
+  ],
+  "文件尚未上传完整": [
+    "The file has not finished uploading.",
+    "ファイルのアップロードが完了していません。"
+  ],
+  "已完成文件请在文件管理中处理": [
+    "Manage completed files in the file library.",
+    "アップロード済みファイルはファイル管理で操作してください。"
+  ],
+  "文件仍被内容或设置引用，请先解除引用": [
+    "This file is used by content or settings. Remove its references first.",
+    "コンテンツや設定で使用中です。先に参照を解除してください。"
+  ],
+  "文件仍被引用": [
+    "This file is still in use.",
+    "このファイルは使用中です。"
+  ],
+  "已收到申诉": [
+    "Appeal received",
+    "異議申立てを受け付けました"
+  ],
+  "已收到举报或投诉": [
+    "Report or complaint received",
+    "通報・申立てを受け付けました"
+  ],
+  "账号头像已清除": [
+    "Account avatar removed",
+    "アカウントのアバターを削除しました"
+  ],
+  "账号资格或权限已更新": [
+    "Account eligibility or permissions updated",
+    "アカウントの資格・権限を更新しました"
+  ],
+  "{0}。如有异议可在工作台申诉。": [
+    "{0}. You may appeal from your workspace.",
+    "{0}。異議がある場合はワークスペースから申し立てできます。"
+  ],
+  "{0}。草稿已保存，可稍后再提交审核。": [
+    "{0}. Your draft is saved. You can submit it for review later.",
+    "{0}。下書きは保存済みです。後で審査に提出できます。"
+  ],
+  "{0}。填写内容仍保留在此页，可重试保存。": [
+    "{0}. Your input is retained on this page. Try saving again.",
+    "{0}。入力内容はこのページに保持されています。保存を再試行してください。"
+  ],
+  "登录": [
+    "Sign in",
+    "ログイン"
+  ],
+  "邀请注册": [
+    "Join by invitation",
+    "招待から登録"
+  ],
+  "协议与规则": [
+    "Terms and rules",
+    "規約とルール"
+  ],
+  "新建{0}": [
+    "New {0}",
+    "{0}を新規作成"
+  ],
+  "编辑{0}": [
+    "Edit {0}",
+    "{0}を編集"
+  ],
+  "直接访问 / 来源未知": [
+    "Direct / Unknown source",
+    "直接アクセス・参照元不明"
+  ],
+  "直接访问": [
+    "Direct",
+    "直接アクセス"
+  ],
+  "平板": [
+    "Tablet",
+    "タブレット"
+  ],
+  "手机": [
+    "Mobile",
+    "スマートフォン"
+  ],
+  "电脑": [
+    "Desktop",
+    "パソコン"
+  ],
+  "接口不存在": [
+    "Endpoint not found",
+    "エンドポイントが見つかりません"
+  ],
+  "操作失败，请重试；如持续失败，请检查服务器日志": [
+    "Action failed. Try again; if it persists, check the server logs.",
+    "操作に失敗しました。再試行しても解決しない場合はサーバーログをご確認ください。"
+  ],
+  "操作失败，请重试": [
+    "Action failed. Please try again.",
+    "操作に失敗しました。再試行してください。"
+  ],
+  "服务器响应异常": [
+    "Unexpected server response",
+    "サーバーの応答が不正です"
+  ],
+  "分片上传失败": [
+    "Chunk upload failed",
+    "分割アップロードに失敗しました"
+  ],
+  "已注销成员": [
+    "Closed account",
+    "削除されたアカウント"
+  ],
+  "原评论已移除": [
+    "Original comment removed",
+    "元のコメントは削除されました"
+  ],
+  "评论已移除": [
+    "Comment removed",
+    "コメントは削除されました"
+  ],
+  "账号已创建，请登录。站长确认昵称及本地测试资格后可投稿。": [
+    "Account created. Sign in; you can submit after the owner confirms your display name and local test eligibility.",
+    "アカウントを作成しました。ログインしてください。管理者が表示名とローカルテスト資格を確認すると投稿できます。"
+  ],
+  "已收到。请保存回执和查询凭证；它们不会出现在公开链接中。": [
+    "Received. Save your receipt and private lookup token; neither is included in public links.",
+    "受け付けました。受付番号と非公開の照会キーを保管してください。公開リンクには含まれません。"
+  ],
+  "原分享暂不可用": [
+    "Original post unavailable",
+    "元の投稿は利用できません"
+  ],
+  "文本长度不能超过 {0} 字": [
+    "Text must be no longer than {0} characters.",
+    "テキストは {0} 文字以内にしてください。"
+  ],
+  "{0} 必须是最多 {1} 项的列表": [
+    "{0} must be a list of up to {1} items.",
+    "{0} は {1} 項目以内のリストにしてください。"
+  ],
+  "分类“{0}”仍被 {1} 条内容使用，请先修改这些内容的分类": [
+    "Category “{0}” is still used by {1} items. Update their category first.",
+    "カテゴリー「{0}」は {1} 件で使用中です。先に各コンテンツのカテゴリーを変更してください。"
+  ],
+  "标签“{0}”仍被内容使用，请先处理引用": [
+    "Tag “{0}” is still in use. Remove its references first.",
+    "タグ「{0}」は使用中です。先に参照を解除してください。"
+  ],
+  "请选择非空且不超过 {0} GB 的文件": [
+    "Choose a non-empty file no larger than {0} GB.",
+    "空でない {0} GB 以下のファイルを選択してください。"
+  ],
+  "1 份分享": [
+    "1 post",
+    "投稿1件"
+  ],
+  "{0} 份分享": [
+    "{0} posts",
+    "投稿{0}件"
+  ],
+  "内容编辑语言": [
+    "Content language",
+    "コンテンツの編集言語"
+  ],
+  "原文": [
+    "Original",
+    "原文"
+  ],
+  "仅切换内容编辑语言。翻译字段留空时显示原文；封面、附件、链接和分类共用。保存会保留所有语言版本。": [
+    "Switch the content language only. Empty translation fields use the original. Images, files, links and categories are shared. Saving keeps every language version.",
+    "コンテンツの編集言語を切り替えます。翻訳欄が空の場合は原文を表示します。画像・添付ファイル・リンク・分類は共通です。保存するとすべての言語版が保持されます。"
+  ],
+  "正在编辑翻译；留空字段会使用原文。原文标题：{0}": [
+    "Editing a translation. Empty fields use the original. Original title: {0}",
+    "翻訳を編集中です。空欄には原文を使用します。原文のタイトル：{0}"
+  ],
+  "请先在原文中添加经历，再填写对应翻译。": [
+    "Add an experience in Original first, then write its translations.",
+    "先に原文で経歴を追加してから、翻訳を入力してください。"
+  ],
+  "原文：{0}": [
+    "Original: {0}",
+    "原文：{0}"
+  ],
+  "翻译内容格式无效": [
+    "Invalid translation format.",
+    "翻訳の形式が正しくありません。"
+  ],
+  "翻译语言仅支持英文、中文和日语": [
+    "Translations support English, Chinese and Japanese only.",
+    "翻訳は英語・中国語・日本語に対応しています。"
+  ],
+  "技能翻译最多 30 项": [
+    "Add up to 30 translated skills.",
+    "スキルの翻訳は30件までです。"
+  ],
+  "经历翻译格式无效": [
+    "Invalid experience translation format.",
+    "経歴の翻訳形式が正しくありません。"
+  ],
+  "请填写原文标题": [
+    "Enter the original title first.",
+    "先に原文のタイトルを入力してください。"
+  ],
+  "请填写原文姓名": [
+    "Enter the original name first.",
+    "先に原文の氏名を入力してください。"
+  ],
+  "精选作品": [
+    "Selected work",
+    "ピックアップ作品"
+  ],
+  "标为已读": [
+    "Mark as read",
+    "既読にする"
+  ],
+  "消息已标为已读。": [
+    "Notification marked as read.",
+    "通知を既読にしました。"
+  ],
+  "消息筛选无效": [
+    "Choose a valid notification filter.",
+    "有効な通知フィルターを選択してください。"
+  ],
+  "消息编号无效": [
+    "Invalid notification ID.",
+    "通知 ID が無効です。"
+  ],
+  "消息不存在": [
+    "Notification not found.",
+    "通知が見つかりません。"
+  ],
+  "邮箱": [
+    "Email",
+    "メールアドレス"
+  ],
+  "登录邮箱": [
+    "Sign-in email",
+    "ログイン用メール"
+  ],
+  "邮箱或原账号": [
+    "Email or existing username",
+    "メールまたは既存のユーザー名"
+  ],
+  "邮箱或原管理员账号": [
+    "Email or existing admin username",
+    "メールまたは既存の管理者名"
+  ],
+  "发送验证码": [
+    "Send code",
+    "確認コードを送信"
+  ],
+  "正在发送…": [
+    "Sending…",
+    "送信中…"
+  ],
+  "{0}秒后重发": [
+    "Resend in {0}s",
+    "{0}秒後に再送"
+  ],
+  "邮箱验证码": [
+    "Email verification code",
+    "メール確認コード"
+  ],
+  "邮件服务尚未配置，请联系站长": [
+    "Email delivery is not configured. Contact the site owner.",
+    "メール送信が未設定です。管理者にお問い合わせください。"
+  ],
+  "本地邮件捕获模式：验证码保存在服务器私有邮件目录。": [
+    "Local mail capture: codes are saved in the server’s private mail directory.",
+    "ローカルメール保存モード：コードはサーバーの非公開メールフォルダーに保存されます。"
+  ],
+  "尚未绑定邮箱，原账号仍可登录。": [
+    "No email linked yet. Your existing username still works.",
+    "メールは未登録です。既存のユーザー名でログインできます。"
+  ],
+  "邮箱仅用于登录、验证和账号恢复，不会显示在社区个人主页。": [
+    "Your email is used for sign-in, verification and account recovery. It is not shown on your community profile.",
+    "メールはログイン、認証、アカウント復旧に使用し、コミュニティのプロフィールには表示しません。"
+  ],
+  "更换邮箱": [
+    "Change email",
+    "メールを変更"
+  ],
+  "绑定邮箱": [
+    "Link email",
+    "メールを登録"
+  ],
+  "新邮箱": [
+    "New email",
+    "新しいメールアドレス"
+  ],
+  "验证并保存邮箱": [
+    "Verify and save email",
+    "認証して保存"
+  ],
+  "邮箱已验证并保存，其他会话已退出。": [
+    "Email verified and saved. Other sessions have been signed out.",
+    "メールを認証して保存しました。他のセッションはログアウトされました。"
+  ],
+  "忘记密码？": [
+    "Forgot password?",
+    "パスワードをお忘れですか？"
+  ],
+  "使用已经验证的登录邮箱找回密码。": [
+    "Use your verified sign-in email to reset your password.",
+    "認証済みのログイン用メールでパスワードを再設定します。"
+  ],
+  "重置密码": [
+    "Reset password",
+    "パスワードを再設定"
+  ],
+  "密码已重置，请使用新密码登录。": [
+    "Password reset. Sign in with your new password.",
+    "パスワードを再設定しました。新しいパスワードでログインしてください。"
+  ],
+  "如果该邮箱符合条件，验证码将在几分钟内送达。有效期10分钟。": [
+    "If this email is eligible, a code will arrive shortly. It expires in 10 minutes.",
+    "対象のメールアドレスには確認コードが届きます。有効期限は10分です。"
+  ],
+  "此邮箱不可用于当前账号": [
+    "This email cannot be linked to this account.",
+    "このメールは現在のアカウントに登録できません。"
+  ],
+  "此邮箱不可用于注册": [
+    "This email cannot be used to register.",
+    "このメールは登録に使用できません。"
+  ],
+  "社区已暂停注册": [
+    "Community registration is paused.",
+    "コミュニティへの登録は一時停止中です。"
+  ],
+  "请填写有效邮箱": [
+    "Enter a valid email address.",
+    "有効なメールアドレスを入力してください。"
+  ],
+  "请稍后再发送验证码": [
+    "Please wait before requesting another code.",
+    "しばらく待ってからコードを再送してください。"
+  ],
+  "邮件发送失败，请稍后重试": [
+    "Email delivery failed. Please try again later.",
+    "メールを送信できませんでした。時間をおいて再試行してください。"
+  ],
+  "邮件发送繁忙，请稍后重试": [
+    "Email delivery is busy. Please try again shortly.",
+    "メール送信が混雑しています。しばらくしてから再試行してください。"
+  ],
+  "邮件请求过于频繁，请稍后重试": [
+    "Too many email requests. Please try again later.",
+    "メールの要求が多すぎます。時間をおいて再試行してください。"
+  ],
+  "验证操作过于频繁": [
+    "Too many verification attempts. Please try again later.",
+    "認証の試行が多すぎます。時間をおいて再試行してください。"
+  ],
+  "验证用途无效": [
+    "Invalid verification purpose.",
+    "認証の用途が無効です。"
+  ],
+  "验证码已使用或已过期": [
+    "This code has been used or has expired.",
+    "コードは使用済みか有効期限切れです。"
+  ],
+  "验证码已失效，请重新发送": [
+    "This code is no longer valid. Request a new one.",
+    "コードが無効です。新しいコードを要求してください。"
+  ],
+  "验证码无效或已过期，请重新发送": [
+    "Invalid or expired code. Request a new one.",
+    "コードが無効か期限切れです。新しいコードを要求してください。"
+  ],
+  "验证码错误，请检查邮件": [
+    "Incorrect code. Check your email.",
+    "コードが違います。メールを確認してください。"
+  ],
+  "请使用JSON请求": [
+    "Use a JSON request.",
+    "JSON形式で送信してください。"
+  ],
+  "打印 / 另存PDF": [
+    "Print / Save PDF",
+    "印刷 / PDF保存"
+  ],
+  "下载附件简历": [
+    "Download attached résumé",
+    "添付の履歴書をダウンロード"
+  ],
+  "个人简历": [
+    "Résumé",
+    "履歴書"
+  ],
+  "技能": [
+    "Skills",
+    "スキル"
+  ],
+  "根据已公开的个人资料、经历与精选项目自动生成。": [
+    "Generated from your published profile, experience and selected projects.",
+    "公開中のプロフィール、経歴、厳選プロジェクトから自動生成します。"
+  ],
+  "求职简历由个人介绍、技能、公开经历和求职精选项目自动生成，可打印或另存PDF。此处可附加独立PDF。": [
+    "Your résumé is generated from your profile, skills, public experience and career projects. Print or save it as PDF, or attach a separate PDF here.",
+    "履歴書は自己紹介、スキル、公開経歴、就職用プロジェクトから自動生成します。印刷・PDF保存のほか、別のPDFも添付できます。"
+  ],
+  "使用已验证邮箱登录；已有账号仍可使用原账号登录并绑定邮箱。": [
+    "Sign in with your verified email. Existing accounts can still use their username and link an email.",
+    "認証済みメールでログインしてください。既存のアカウントはユーザー名でログインし、メールを登録できます。"
+  ],
+  "请求过于频繁，请稍后重试": [
+    "Too many requests. Please try again shortly.",
+    "リクエストが多すぎます。しばらくしてから再試行してください。"
+  ],
+  "附加简历 PDF": [
+    "Additional résumé PDF",
+    "追加の履歴書PDF"
+  ],
+  "附加简历（可选）": [
+    "Additional résumé (optional)",
+    "追加の履歴書（任意）"
+  ],
+  "一份持续更新的简历": [
+    "A résumé that grows with you",
+    "更新を重ねる履歴書"
+  ],
+  "不能审核自己的内容": [
+    "You cannot review your own content.",
+    "自分のコンテンツは審査できません。"
+  ],
+  "不能更改内容类型": [
+    "The content type cannot be changed.",
+    "コンテンツの種類は変更できません。"
+  ],
+  "个人介绍与经历": [
+    "Profile & experience",
+    "プロフィールと経歴"
+  ],
+  "个人展板与内容审核": [
+    "Showcase & content review",
+    "ショーケース・コンテンツ審査"
+  ],
+  "个人展板审核": [
+    "Showcase review",
+    "ショーケース審査"
+  ],
+  "个人展板导航": [
+    "Showcase navigation",
+    "ショーケースのナビゲーション"
+  ],
+  "个人展板的内容结构": [
+    "The building blocks of your showcase",
+    "ショーケースを構成するコンテンツ"
+  ],
+  "个人照片": [
+    "Profile photo",
+    "プロフィール写真"
+  ],
+  "个人称呼 / 别名": [
+    "Alias / headline",
+    "別名・肩書き"
+  ],
+  "个人空间": [
+    "Personal space",
+    "個人スペース"
+  ],
+  "个人空间单文件上限100MB": [
+    "Each file in a personal space can be up to 100 MB.",
+    "個人スペースのファイルは1件100MBまでです。"
+  ],
+  "个人空间图片暂不支持动图": [
+    "Animated images are not supported in personal spaces yet.",
+    "個人スペースではアニメーション画像はまだ利用できません。"
+  ],
+  "个人空间存储不足或未完成上传过多": [
+    "Storage is full or too many uploads are in progress.",
+    "空き容量が不足しているか、未完了のアップロードが多すぎます。"
+  ],
+  "个人空间导航": [
+    "Personal space navigation",
+    "個人スペースのナビゲーション"
+  ],
+  "个人资料格式无效": [
+    "Invalid profile format.",
+    "プロフィールの形式が正しくありません。"
+  ],
+  "中文": [
+    "Chinese",
+    "中国語"
+  ],
+  "为此尺寸使用自由排布": [
+    "Use a custom canvas for this size",
+    "この画面サイズで自由配置を使う"
+  ],
+  "了解更多": [
+    "Learn more",
+    "詳しく見る"
+  ],
+  "仅站长可解除限制": [
+    "Only the owner can release this restriction.",
+    "この制限を解除できるのは管理者のみです。"
+  ],
+  "仅站长核查后可恢复": [
+    "Only the owner can restore content after review.",
+    "審査後の復元は管理者のみ可能です。"
+  ],
+  "今天提交次数过多，请稍后再试": [
+    "Daily submission limit reached. Please try again later.",
+    "本日の送信上限に達しました。後でもう一度お試しください。"
+  ],
+  "仍有关联工单限制，请先解除全部冻结": [
+    "Resolve all related holds before restoring content.",
+    "復元する前に関連するすべての制限を解除してください。"
+  ],
+  "从一份作品、一段经历，认识创作背后的人。": [
+    "Discover the people behind the work, one project and one story at a time.",
+    "作品や経歴から、つくり手の人柄を知る。"
+  ],
+  "从想法，到成果": [
+    "From idea to outcome",
+    "アイデアから成果へ"
+  ],
+  "从第一份作品开始。": [
+    "Start with your first project.",
+    "最初の作品から始めましょう。"
+  ],
+  "任务不存在": [
+    "Upload task not found.",
+    "アップロードが見つかりません。"
+  ],
+  "作品、手记与资源共用一份内容库，发布后在展板和简历中同步展示。": [
+    "One library for your projects, notes and resources. Published content stays in sync across your showcase and résumé.",
+    "作品・ノート・リソースを一元管理。公開後はショーケースと履歴書に反映されます。"
+  ],
+  "作品、经历、资源和简历共用一份内容库。更新一次，个人展板持续生长。": [
+    "One library connects your work, experience, resources and résumé. Update once and let your showcase grow.",
+    "作品・経歴・リソース・履歴書をひとつに。更新するたび、ショーケースも育ちます。"
+  ],
+  "作品集": [
+    "Portfolio",
+    "ポートフォリオ"
+  ],
+  "你的故事，有自己的排布。": [
+    "Your story. Your arrangement.",
+    "あなたのストーリーを、あなたらしく。"
+  ],
+  "使用服务器版本": [
+    "Keep server version",
+    "サーバーの版を使う"
+  ],
+  "使用许可": [
+    "Usage license",
+    "利用ライセンス"
+  ],
+  "保存": [
+    "Save",
+    "保存"
+  ],
+  "保存后会保留历史草稿。": [
+    "Saved drafts will appear here.",
+    "保存した下書きの履歴がここに表示されます。"
+  ],
+  "保存失败": [
+    "Save failed",
+    "保存できませんでした"
+  ],
+  "保存资料": [
+    "Save profile",
+    "プロフィールを保存"
+  ],
+  "保留原管理入口，已发布内容会自动显示在站长展板。": [
+    "Your existing management tools remain available. Published content also appears on your showcase.",
+    "既存の管理画面は引き続き利用でき、公開済みの内容はショーケースにも反映されます。"
+  ],
+  "全部文字与链接": [
+    "All text & links",
+    "すべてのテキストとリンク"
+  ],
+  "公开联系邮箱": [
+    "Public contact email",
+    "公開する連絡先メール"
+  ],
+  "公开联系邮箱格式无效": [
+    "Enter a valid public contact email.",
+    "公開用の連絡先メールを正しく入力してください。"
+  ],
+  "内容": [
+    "Content",
+    "コンテンツ"
+  ],
+  "内容已在其他页面更新，请先刷新再继续": [
+    "This was updated elsewhere. Refresh before continuing; your local draft is retained.",
+    "別の画面で更新されました。再読み込みしてください。ローカルの下書きは保持されます。"
+  ],
+  "内容库": [
+    "Library",
+    "ライブラリ"
+  ],
+  "内容库已达500条上限": [
+    "Your library has reached the limit of 500 items.",
+    "ライブラリの上限500件に達しました。"
+  ],
+  "内容是你的，表达也由你决定。": [
+    "Your content. Your way of telling it.",
+    "コンテンツも、表現も、あなたのもの。"
+  ],
+  "内容正在整理中。": [
+    "More to come.",
+    "ただいま準備中です。"
+  ],
+  "内容类型": [
+    "Content type",
+    "コンテンツの種類"
+  ],
+  "内边距": [
+    "Padding",
+    "余白"
+  ],
+  "分享展板": [
+    "Share showcase",
+    "ショーケースを共有"
+  ],
+  "分享展板后，访问记录会在这里出现。": [
+    "Visits will appear here after you share your showcase.",
+    "ショーケースを共有すると、アクセス記録が表示されます。"
+  ],
+  "分享有出处的资源、交流实践，关注与你同路的人。": [
+    "Share resources with a source, exchange what you learn, and find people on a similar path.",
+    "出典のあるリソースや実践を共有し、同じ道を歩む人とつながる。"
+  ],
+  "分组": [
+    "Group",
+    "グループ化"
+  ],
+  "创建我的展板": [
+    "Create my showcase",
+    "自分のショーケースを作る"
+  ],
+  "创建自己的个人空间": [
+    "Create your personal space",
+    "自分のスペースを作る"
+  ],
+  "加入简历": [
+    "Include in résumé",
+    "履歴書に含める"
+  ],
+  "加载中…": [
+    "Loading…",
+    "読み込み中…"
+  ],
+  "历史版本不存在": [
+    "History version not found.",
+    "履歴のバージョンが見つかりません。"
+  ],
+  "原有站长内容": [
+    "Existing owner content",
+    "既存の管理者コンテンツ"
+  ],
+  "发布前会核查个人介绍、文字、图片与外部链接。保存草稿不会改变已公开版本。": [
+    "Profile text, images and links are reviewed before publication. Saving a draft keeps your published version intact.",
+    "プロフィール・文章・画像・外部リンクは公開前に審査されます。下書きの保存は公開済みの版に影響しません。"
+  ],
+  "发现个人展板": [
+    "Discover showcases",
+    "ショーケースを探す"
+  ],
+  "发现展板": [
+    "Showcases",
+    "ショーケース"
+  ],
+  "发现此浏览器中尚未保存的展板。": [
+    "An unsaved showcase draft was found in this browser.",
+    "このブラウザーに未保存のショーケースが見つかりました。"
+  ],
+  "取消分组": [
+    "Ungroup",
+    "グループ解除"
+  ],
+  "只能选择自己上传的文件": [
+    "Choose a file that belongs to your own space.",
+    "自分のスペースのファイルを選択してください。"
+  ],
+  "向上移动": [
+    "Move up",
+    "上へ移動"
+  ],
+  "向下移动": [
+    "Move down",
+    "下へ移動"
+  ],
+  "四套主题，三种语言。草稿可以慢慢打磨，公开页面始终展示已发布版本。": [
+    "Four themes. Three languages. Refine your drafts at your own pace while visitors see the published version.",
+    "4つのテーマと3つの言語。下書きをじっくり整える間も、訪問者には公開済みの版が表示されます。"
+  ],
+  "固定版本预览": [
+    "Submitted version preview",
+    "提出された版のプレビュー"
+  ],
+  "图片": [
+    "Image",
+    "画像"
+  ],
+  "图片替代文字": [
+    "Image alt text",
+    "画像の代替テキスト"
+  ],
+  "图片格式无效": [
+    "Invalid image format.",
+    "画像の形式が正しくありません。"
+  ],
+  "图片请控制在25MB以内": [
+    "Keep images under 25 MB.",
+    "画像は25MB以内にしてください。"
+  ],
+  "圆角": [
+    "Corner radius",
+    "角の丸み"
+  ],
+  "在发现展板中展示": [
+    "List in showcase discovery",
+    "ショーケース一覧に掲載する"
+  ],
+  "在展板展示": [
+    "Show on showcase",
+    "ショーケースに表示"
+  ],
+  "在社区相遇": [
+    "Meet in the community",
+    "コミュニティで出会う"
+  ],
+  "复制": [
+    "Duplicate",
+    "複製"
+  ],
+  "复制展板链接": [
+    "Copy showcase link",
+    "ショーケースのリンクをコピー"
+  ],
+  "外部链接": [
+    "External link",
+    "外部リンク"
+  ],
+  "姓名或公开昵称": [
+    "Name / public display name",
+    "名前・公開ニックネーム"
+  ],
+  "字体": [
+    "Font",
+    "フォント"
+  ],
+  "字号": [
+    "Font size",
+    "文字サイズ"
+  ],
+  "存在投诉冻结，不能批准。": [
+    "This content is on hold due to a complaint and cannot be approved.",
+    "申し立てによる制限中のため、承認できません。"
+  ],
+  "审核反馈": [
+    "Review feedback",
+    "審査結果"
+  ],
+  "宽度": [
+    "Width",
+    "幅"
+  ],
+  "居中": [
+    "Center",
+    "中央"
+  ],
+  "居右": [
+    "Right",
+    "右"
+  ],
+  "居左": [
+    "Left",
+    "左"
+  ],
+  "展板": [
+    "Showcase",
+    "ショーケース"
+  ],
+  "展板不存在": [
+    "Showcase not found.",
+    "ショーケースが見つかりません。"
+  ],
+  "展板不存在或暂未公开": [
+    "This showcase is unavailable or not published.",
+    "このショーケースは利用できないか、まだ公開されていません。"
+  ],
+  "展板主题": [
+    "Showcase theme",
+    "ショーケースのテーマ"
+  ],
+  "展板主题独立于界面主题，访客打开分享链接时看到你选择的样式。": [
+    "Your showcase theme is independent of the interface theme. Visitors see the style you choose.",
+    "ショーケースのテーマは画面のテーマとは独立しています。訪問者にはあなたが選んだスタイルが表示されます。"
+  ],
+  "展板内容审核通过": [
+    "Showcase content approved",
+    "ショーケースの内容が承認されました"
+  ],
+  "展板内容已提交审核": [
+    "Showcase content submitted",
+    "ショーケースの内容を審査に提出しました"
+  ],
+  "展板内容未通过审核": [
+    "Showcase content needs changes",
+    "ショーケースの内容に修正が必要です"
+  ],
+  "展板已设为私密": [
+    "Showcase is now private",
+    "ショーケースを非公開にしました"
+  ],
+  "展板最多60个模块": [
+    "A showcase supports up to 60 modules.",
+    "ショーケースは60モジュールまでです。"
+  ],
+  "展板编辑器": [
+    "Showcase studio",
+    "ショーケース編集"
+  ],
+  "展板设置": [
+    "Showcase settings",
+    "ショーケースの設定"
+  ],
+  "展板访问数据": [
+    "Showcase analytics",
+    "ショーケースのアクセス解析"
+  ],
+  "展示内容，留空表示全部": [
+    "Content to display; leave empty for all",
+    "表示するコンテンツ（未選択ですべて）"
+  ],
+  "已保存": [
+    "Saved",
+    "保存済み"
+  ],
+  "已恢复历史草稿": [
+    "Historical draft restored",
+    "履歴の下書きを復元しました"
+  ],
+  "已恢复此浏览器中的草稿。": [
+    "Your browser draft has been restored.",
+    "ブラウザーの下書きを復元しました。"
+  ],
+  "已提交审核": [
+    "Submitted for review",
+    "審査に提出済み"
+  ],
+  "已有待审版本，请先撤回": [
+    "Withdraw the pending version before submitting again.",
+    "再提出の前に審査待ちの版を取り下げてください。"
+  ],
+  "已核查全部内容、图片、外链和许可，批准的是这个固定版本。": [
+    "I have checked all content, images, external links and licenses. My decision applies to this fixed version.",
+    "すべての内容・画像・外部リンク・ライセンスを確認し、この固定された版を承認します。"
+  ],
+  "当前暂停接收新投稿": [
+    "New submissions are currently paused.",
+    "現在、新規投稿の受付を停止しています。"
+  ],
+  "待审版本不存在或已处理": [
+    "This version was withdrawn or has already been reviewed.",
+    "この版は取り下げ済みか、すでに審査されています。"
+  ],
+  "恢复": [
+    "Restore",
+    "復元"
+  ],
+  "恢复草稿": [
+    "Restore draft",
+    "下書きを復元"
+  ],
+  "成为被看见的你。": [
+    "Make yourself known.",
+    "あなたを知る、きっかけに。"
+  ],
+  "成长经历": [
+    "Experience",
+    "経歴"
+  ],
+  "我的内容库": [
+    "My library",
+    "自分のライブラリ"
+  ],
+  "打开展板编辑器": [
+    "Open showcase studio",
+    "ショーケース編集を開く"
+  ],
+  "技能，用逗号分隔": [
+    "Skills, separated by commas",
+    "スキル（カンマ区切り）"
+  ],
+  "把收获分享出去": [
+    "Share what you discover",
+    "発見を共有する"
+  ],
+  "把经历、作品、手记和资源汇集成自己的展板。在社区分享，也让未来的合作从这里开始。": [
+    "Your experience, work and resources, in one shareable space. Build a showcase and find your community.",
+    "経歴・作品・ノート・リソースを、自分だけのショーケースに。コミュニティでの共有から、次のつながりが生まれます。"
+  ],
+  "拖动": [
+    "Move",
+    "移動"
+  ],
+  "拖动模块": [
+    "Drag module",
+    "モジュールをドラッグ"
+  ],
+  "按住Shift点选多个模块，组成一组。顺序也决定画布层级。": [
+    "Shift-click to select multiple modules and group them. Layer order also controls stacking on the canvas.",
+    "Shiftキーを押しながら選択してグループ化できます。順序はキャンバス上の重なり順にも反映されます。"
+  ],
+  "按自己的方式展示": [
+    "Make it your own",
+    "自分らしく見せる"
+  ],
+  "提交即确认拥有发布权利、来源与许可符合社区规则。审核通过后公开。": [
+    "By submitting, you confirm you have publishing rights and that sources and licenses meet the community rules. Content is public after approval.",
+    "提出により、公開の権利を持ち、出典とライセンスが規則に適合することを確認します。承認後に公開されます。"
+  ],
+  "提交展板审核": [
+    "Submit showcase",
+    "ショーケースを審査に提出"
+  ],
+  "提交版本已固定，审核通过后公开。": [
+    "Your submitted version is locked for review. It becomes public after approval.",
+    "提出された版を固定しました。審査に通過すると公開されます。"
+  ],
+  "撤回审核": [
+    "Withdraw submission",
+    "審査依頼を取り下げ"
+  ],
+  "文字": [
+    "Text",
+    "テキスト"
+  ],
+  "文字与背景对比度不足，请调整配色": [
+    "Text contrast is too low. Adjust the text or background color.",
+    "文字と背景のコントラストが不足しています。配色を調整してください。"
+  ],
+  "文字内容": [
+    "Text content",
+    "テキストの内容"
+  ],
+  "文字对齐": [
+    "Text alignment",
+    "文字の配置"
+  ],
+  "新的经历，会在这里慢慢积累。": [
+    "Your next chapter will find its place here.",
+    "これからの歩みを、ここに。"
+  ],
+  "新经历": [
+    "New experience",
+    "新しい経歴"
+  ],
+  "无衬线字体": [
+    "Sans serif",
+    "サンセリフ体"
+  ],
+  "日语": [
+    "Japanese",
+    "日本語"
+  ],
+  "显示此模块": [
+    "Show this module",
+    "このモジュールを表示"
+  ],
+  "暂时没有公开展板。": [
+    "No public showcases yet.",
+    "公開されたショーケースはまだありません。"
+  ],
+  "最近30天。仅统计此账号的公开展板，自己的访问不计入。": [
+    "Last 30 days. Only this account’s public showcase is counted; your own visits are excluded.",
+    "過去30日間。このアカウントの公開ショーケースのみを集計し、自分のアクセスは除外します。"
+  ],
+  "有关联投诉限制，须先处理工单": [
+    "Resolve the related complaint before publishing.",
+    "公開前に関連する申し立てを処理してください。"
+  ],
+  "未保存": [
+    "Unsaved",
+    "未保存"
+  ],
+  "来源 / 源码地址": [
+    "Source / repository URL",
+    "出典・ソースコードURL"
+  ],
+  "来源与使用许可": [
+    "Source & usage license",
+    "出典と利用ライセンス"
+  ],
+  "来自同一份内容库": [
+    "Connected to your library",
+    "同じライブラリから"
+  ],
+  "查看个人展板": [
+    "View showcase",
+    "ショーケースを見る"
+  ],
+  "查看公开内容": [
+    "View published content",
+    "公開済みの内容を見る"
+  ],
+  "查看展板": [
+    "View showcase",
+    "ショーケースを見る"
+  ],
+  "查看简历": [
+    "View résumé",
+    "履歴書を見る"
+  ],
+  "查看详情": [
+    "View details",
+    "詳細を見る"
+  ],
+  "查看附件": [
+    "View attachment",
+    "添付ファイルを見る"
+  ],
+  "标签，用逗号分隔": [
+    "Tags, separated by commas",
+    "タグ（カンマ区切り）"
+  ],
+  "核查固定版本的全部个人资料、文字、图片、文件、外部链接和资源许可。": [
+    "Check all profile details, text, images, files, external links and resource licenses in the submitted version.",
+    "提出された版のプロフィール・文章・画像・ファイル・外部リンク・ライセンスをすべて確認してください。"
+  ],
+  "根据已发布资料和精选作品生成": [
+    "Generated from published profile and selected projects",
+    "公開済みプロフィールと選択した作品から生成"
+  ],
+  "桌面": [
+    "Desktop",
+    "デスクトップ"
+  ],
+  "检查附件": [
+    "Check attachment",
+    "添付ファイルを確認"
+  ],
+  "模块与图层": [
+    "Modules & layers",
+    "モジュールとレイヤー"
+  ],
+  "模块分组无效": [
+    "Invalid module group.",
+    "モジュールのグループが正しくありません。"
+  ],
+  "模块引用了不属于此空间的内容": [
+    "A module references content outside this space.",
+    "モジュールが別のスペースのコンテンツを参照しています。"
+  ],
+  "模块标识重复": [
+    "Duplicate module IDs.",
+    "モジュールのIDが重複しています。"
+  ],
+  "模块格式无效": [
+    "Invalid module format.",
+    "モジュールの形式が正しくありません。"
+  ],
+  "模块模式": [
+    "Modules",
+    "モジュール"
+  ],
+  "模块设置": [
+    "Module settings",
+    "モジュールの設定"
+  ],
+  "横坐标": [
+    "X position",
+    "X座標"
+  ],
+  "欢迎来到我的个人展板。": [
+    "Welcome to my showcase.",
+    "私のショーケースへようこそ。"
+  ],
+  "此版本已处理": [
+    "This version has already been reviewed.",
+    "この版はすでに審査済みです。"
+  ],
+  "此版本已处理，请刷新": [
+    "This version has already been reviewed. Refresh to continue.",
+    "この版は審査済みです。再読み込みしてください。"
+  ],
+  "此账号暂不能编辑内容": [
+    "This account cannot edit content right now.",
+    "このアカウントは現在コンテンツを編集できません。"
+  ],
+  "每日浏览量": [
+    "Daily views",
+    "日別の閲覧数"
+  ],
+  "没有审核权限": [
+    "You do not have review permissions.",
+    "審査する権限がありません。"
+  ],
+  "没有已审版本": [
+    "No approved version is available.",
+    "承認済みの版がありません。"
+  ],
+  "浏览社区": [
+    "Explore community",
+    "コミュニティを見る"
+  ],
+  "浏览量": [
+    "Page views",
+    "閲覧数"
+  ],
+  "添加内容": [
+    "Add content",
+    "コンテンツを追加"
+  ],
+  "添加内容，保存草稿，准备好后再提交审核。": [
+    "Add content, save a draft, and submit it when you’re ready.",
+    "コンテンツを追加し、下書きを保存して、準備ができたら審査に提出しましょう。"
+  ],
+  "添加模块": [
+    "Add module",
+    "モジュールを追加"
+  ],
+  "热门页面": [
+    "Top pages",
+    "人気のページ"
+  ],
+  "版本不存在": [
+    "Version not found.",
+    "バージョンが見つかりません。"
+  ],
+  "版本历史": [
+    "Version history",
+    "バージョン履歴"
+  ],
+  "现有站长资料已接入个人展板，继续在原内容后台维护即可同步更新。": [
+    "Your existing owner profile is connected to your showcase. Keep editing it in the original dashboard to update both.",
+    "既存の管理者プロフィールはショーケースに接続されています。従来の管理画面で編集すると両方に反映されます。"
+  ],
+  "用一个链接介绍自己": [
+    "One link to introduce yourself",
+    "ひとつのリンクで、あなたを伝える"
+  ],
+  "用模块快速搭建，或在自由画布中拖动、缩放和分组。电脑与手机各有合适的排布。": [
+    "Build quickly with modules, or move, resize and group on a free canvas. Give desktop and mobile their own arrangement.",
+    "モジュールで素早く作成。自由なキャンバスでは移動・サイズ変更・グループ化ができ、パソコンとスマートフォンで配置を調整できます。"
+  ],
+  "登录后整理作品、经历与资源，搭建可分享的个人展板。": [
+    "Sign in to organize your work, experience and resources in a shareable showcase.",
+    "ログインして作品・経歴・リソースを整理し、共有できるショーケースを作りましょう。"
+  ],
+  "目前没有待审展板或内容。": [
+    "No showcases or content to review yet.",
+    "審査対象のショーケースやコンテンツはありません。"
+  ],
+  "看看个人展板": [
+    "Explore a showcase",
+    "ショーケースを見る"
+  ],
+  "社区主页": [
+    "Community profile",
+    "コミュニティプロフィール"
+  ],
+  "窄屏默认按模块顺序排列。启用自由排布后，可为此尺寸单独调整位置。": [
+    "Small screens use module order by default. Enable a custom canvas to arrange this size separately.",
+    "小さい画面ではモジュール順に表示します。自由配置を有効にすると、この画面サイズ専用の配置を編集できます。"
+  ],
+  "等宽字体": [
+    "Monospace",
+    "等幅フォント"
+  ],
+  "管理作品、手记与资源": [
+    "Manage projects, notes & resources",
+    "作品・ノート・リソースを管理"
+  ],
+  "管理我的内容": [
+    "Manage my content",
+    "自分のコンテンツを管理"
+  ],
+  "纵坐标": [
+    "Y position",
+    "Y座標"
+  ],
+  "经历、技能与精选作品，汇成一份完整简历。": [
+    "Your experience, skills and selected projects, together in one résumé.",
+    "経歴・スキル・選んだ作品を、ひとつの履歴書に。"
+  ],
+  "经历与个人介绍": [
+    "Experience & profile",
+    "経歴とプロフィール"
+  ],
+  "经历描述": [
+    "Description",
+    "経歴の説明"
+  ],
+  "结束日期，留空表示至今": [
+    "End month; leave empty if ongoing",
+    "終了月（継続中は空欄）"
+  ],
+  "编辑个人介绍与经历": [
+    "Edit profile & experience",
+    "プロフィールと経歴を編集"
+  ],
+  "编辑内容": [
+    "Edit content",
+    "コンテンツを編集"
+  ],
+  "编辑内容语言": [
+    "Content language",
+    "コンテンツの言語"
+  ],
+  "编辑站长资料": [
+    "Edit owner profile",
+    "管理者プロフィールを編集"
+  ],
+  "翻译格式无效": [
+    "Invalid translation format.",
+    "翻訳の形式が正しくありません。"
+  ],
+  "翻译语言无效": [
+    "Unsupported translation language.",
+    "翻訳言語が正しくありません。"
+  ],
+  "联系我": [
+    "Get in touch",
+    "連絡する"
+  ],
+  "背景": [
+    "Background",
+    "背景"
+  ],
+  "自定义背景和文字颜色需要一起设置": [
+    "Set both the background and text color.",
+    "背景色と文字色の両方を設定してください。"
+  ],
+  "自定义配色": [
+    "Custom colors",
+    "カスタム配色"
+  ],
+  "自由画布": [
+    "Free canvas",
+    "自由キャンバス"
+  ],
+  "英文": [
+    "English",
+    "英語"
+  ],
+  "草稿已保存。": [
+    "Draft saved.",
+    "下書きを保存しました。"
+  ],
+  "草稿预览": [
+    "Draft preview",
+    "下書きのプレビュー"
+  ],
+  "衬线字体": [
+    "Serif",
+    "セリフ体"
+  ],
+  "让做过的事，": [
+    "The things you do.",
+    "積み重ねたことが、"
+  ],
+  "让做过的事，成为被看见的你。": [
+    "Make yourself known through the things you do.",
+    "積み重ねたことが、あなたを伝える。"
+  ],
+  "社区、个人展板与持续更新的简历。": [
+    "Community, personal showcases and a résumé that grows with you.",
+    "コミュニティ、個人ショーケース、更新を重ねる履歴書。"
+  ],
+  "社区与个人展板": [
+    "Community & personal showcases",
+    "コミュニティと個人ショーケース"
+  ],
+  "记录每一步成长": [
+    "Every step of your journey",
+    "成長の一歩を記録"
+  ],
+  "设为私密": [
+    "Make private",
+    "非公開にする"
+  ],
+  "访客数": [
+    "Visitors",
+    "訪問者数"
+  ],
+  "访客标识无效": [
+    "Invalid visitor ID.",
+    "訪問者IDが正しくありません。"
+  ],
+  "访问外部链接": [
+    "Open external link",
+    "外部リンクを開く"
+  ],
+  "访问数据": [
+    "Traffic",
+    "アクセスデータ"
+  ],
+  "访问路径无效": [
+    "Invalid visit path.",
+    "アクセス先のパスが正しくありません。"
+  ],
+  "请先完成本地测试资格核查": [
+    "Complete the local account check before submitting.",
+    "提出前にローカルアカウントの確認を完了してください。"
+  ],
+  "请先撤回待审版本再编辑": [
+    "Withdraw the pending version before editing.",
+    "編集前に審査待ちの版を取り下げてください。"
+  ],
+  "请填写姓名或公开昵称": [
+    "Enter a name or public display name.",
+    "名前または公開ニックネームを入力してください。"
+  ],
+  "请填写至少5字核查记录": [
+    "Enter a review note of at least 5 characters.",
+    "5文字以上の審査記録を入力してください。"
+  ],
+  "请确认内容与资源许可符合社区规则": [
+    "Confirm that the content and resource licenses follow the community rules.",
+    "内容とライセンスがコミュニティの規則に適合することを確認してください。"
+  ],
+  "请确认已核查全部内容、图片与许可": [
+    "Confirm that you checked all content, images and licenses.",
+    "すべての内容・画像・ライセンスを確認してください。"
+  ],
+  "请补充资源许可和获取方式": [
+    "Add the resource license and download or access method.",
+    "リソースのライセンスと入手方法を入力してください。"
+  ],
+  "请选择同一层级的两个或更多模块": [
+    "Select at least two modules at the same level.",
+    "同じ階層のモジュールを2つ以上選択してください。"
+  ],
+  "请选择有效颜色": [
+    "Choose a valid color.",
+    "有効な色を選択してください。"
+  ],
+  "调整模块大小": [
+    "Resize module",
+    "モジュールのサイズを変更"
+  ],
+  "资料已保存，提交展板审核后公开。": [
+    "Profile saved. Submit your showcase for review to make it public.",
+    "プロフィールを保存しました。公開するにはショーケースを審査に提出してください。"
+  ],
+  "资料条目过多": [
+    "Too many profile entries.",
+    "プロフィールの項目が多すぎます。"
+  ],
+  "资源与手记": [
+    "Resources & notes",
+    "リソースとノート"
+  ],
+  "跟随主题": [
+    "Theme default",
+    "テーマに合わせる"
+  ],
+  "返回内容库": [
+    "Back to library",
+    "ライブラリに戻る"
+  ],
+  "还没有添加技能。": [
+    "No skills added yet.",
+    "スキルはまだ追加されていません。"
+  ],
+  "这里只填写愿意公开的资料，登录邮箱不会自动展示。": [
+    "Only add information you want to share publicly. Your sign-in email is never shown automatically.",
+    "公開したい情報だけを入力してください。ログイン用メールは自動的に表示されません。"
+  ],
+  "进入社区": [
+    "Join the conversation",
+    "コミュニティへ"
+  ],
+  "选择一张图片": [
+    "Choose an image",
+    "画像を選択"
+  ],
+  "选择模块": [
+    "Choose a module",
+    "モジュールを選択"
+  ],
+  "重置": [
+    "Reset",
+    "リセット"
+  ],
+  "链接地址": [
+    "Link URL",
+    "リンク先URL"
+  ],
+  "链接按钮": [
+    "Link button",
+    "リンクボタン"
+  ],
+  "链接无效": [
+    "Invalid link.",
+    "リンクが正しくありません。"
+  ],
+  "链接标识只能包含文字、字母、数字、短横线或下划线": [
+    "Use letters, numbers, Chinese characters, hyphens or underscores in the URL slug.",
+    "URLの識別子には英数字・漢字・ハイフン・アンダースコアを使ってください。"
+  ],
+  "链接标识，可留空": [
+    "URL slug (optional)",
+    "URLの識別子（任意）"
+  ],
+  "随手记下": [
+    "Notes",
+    "ノート"
+  ],
+  "高度": [
+    "Height",
+    "高さ"
+  ],
+  "上传操作过于频繁": [
+    "Too many uploads. Please try again later.",
+    "アップロードが多すぎます。後でもう一度お試しください。"
+  ],
+  "文件标识无效": [
+    "Invalid file ID.",
+    "ファイルIDが正しくありません。"
+  ],
+  "编辑我的展板": [
+    "Edit my showcase",
+    "自分のショーケースを編集"
+  ],
+  "此页面仅自己可见，分享链接展示已发布版本。": [
+    "Only you can see this preview. Shared links show the published version.",
+    "このプレビューは自分だけに表示されます。共有リンクには公開済みの版が表示されます。"
+  ],
+  "已发布内容的链接标识不能更改": [
+    "Published URL slugs cannot be changed.",
+    "公開済みのURL識別子は変更できません。"
+  ],
+  "展板地址": [
+    "Showcase URL",
+    "ショーケースのURL"
+  ],
+  "更新地址": [
+    "Update URL",
+    "URLを更新"
+  ],
+  "首次发布前可修改地址，发布后保持稳定。请先保存其他资料。": [
+    "You can change the URL before your first release. Save other profile edits first.",
+    "初回公開前にURLを変更できます。先にほかのプロフィール情報を保存してください。"
+  ],
+  "展板地址需为3–32位小写字母、数字和短横线，以字母开头": [
+    "Use 3–32 lowercase letters, numbers or hyphens, starting with a letter.",
+    "英小文字で始まる3〜32文字の英小文字・数字・ハイフンを使ってください。"
+  ],
+  "此展板地址不可使用": [
+    "This showcase URL cannot be used.",
+    "このショーケースURLは利用できません。"
+  ],
+  "公开或待审展板的地址不能更改": [
+    "Published or pending showcase URLs cannot be changed.",
+    "公開済みまたは審査待ちのショーケースのURLは変更できません。"
+  ],
+  "此展板地址已被使用": [
+    "This showcase URL is already in use.",
+    "このショーケースURLはすでに使われています。"
+  ],
+  "展板地址更改次数已达上限": [
+    "The showcase URL change limit has been reached.",
+    "ショーケースURLの変更回数が上限に達しました。"
+  ],
+  "工具接入": [
+    "Connect",
+    "ツール連携"
+  ],
+  "给你的写作工具授权，快速保存草稿和提交审核。独立凭据不会开放后台权限。": [
+    "Authorize your writing tools to save drafts and request review. Scoped credentials never grant administration access.",
+    "執筆ツールに権限を与え、下書きの保存や審査依頼を行えます。独立した認証情報に管理権限は含まれません。"
+  ],
+  "查看API、Skill与MCP文档": [
+    "Read API, Skill & MCP documentation",
+    "API・Skill・MCPの説明を見る"
+  ],
+  "凭据只显示一次": [
+    "This credential is shown only once",
+    "認証情報は一度だけ表示されます"
+  ],
+  "请保存到客户端的私密环境配置中，不要贴进帖子、截图或公共仓库。": [
+    "Save it in your client's private environment. Do not include it in posts, screenshots or public repositories.",
+    "クライアントの非公開環境に保存し、投稿・スクリーンショット・公開リポジトリに含めないでください。"
+  ],
+  "复制凭据": [
+    "Copy credential",
+    "認証情報をコピー"
+  ],
+  "我已保存": [
+    "I've saved it",
+    "保存しました"
+  ],
+  "用途名称": [
+    "Purpose / name",
+    "用途・名前"
+  ],
+  "有效天数": [
+    "Days until expiry",
+    "有効日数"
+  ],
+  "权限范围": [
+    "Permissions",
+    "権限の範囲"
+  ],
+  "读取和编辑自己的内容库": [
+    "Read and edit my library",
+    "自分のライブラリの読み取り・編集"
+  ],
+  "读取和编辑自己的社区投稿": [
+    "Read and edit my community drafts",
+    "自分のコミュニティ投稿の読み取り・編集"
+  ],
+  "允许明确确认后的提交审核": [
+    "Allow submissions after explicit confirmation",
+    "明示的な確認後の審査提出を許可"
+  ],
+  "创建独立凭据": [
+    "Create scoped credential",
+    "独立した認証情報を作成"
+  ],
+  "已授权的工具": [
+    "Authorized tools",
+    "許可したツール"
+  ],
+  "到期时间": [
+    "Expires",
+    "有効期限"
+  ],
+  "有效": [
+    "Active",
+    "有効"
+  ],
+  "撤销授权": [
+    "Revoke access",
+    "権限を取り消す"
+  ],
+  "还没有授权任何工具。": [
+    "No tools have been authorized.",
+    "許可したツールはまだありません。"
+  ],
+  "网页、API与工具共用内容归属、版本和人工审核流程。": [
+    "The web interface, API and tools share ownership checks, versioning and human review.",
+    "画面・API・ツールで、コンテンツの所有者確認・バージョン管理・人による審査を共通化しています。"
+  ],
+  "管理工具授权": [
+    "Manage tool access",
+    "ツールの権限を管理"
+  ],
+  "1. 保存草稿": [
+    "1. Save a draft",
+    "1. 下書きを保存"
+  ],
+  "在客户端私密环境中设置SPACEYEW_URL和SPACEYEW_TOKEN，再调用同一套投稿API。": [
+    "Set SPACEYEW_URL and SPACEYEW_TOKEN in your client's private environment, then call the shared submission API.",
+    "クライアントの非公開環境にSPACEYEW_URLとSPACEYEW_TOKENを設定し、共通の投稿APIを呼び出します。"
+  ],
+  "2. 投稿Skill": [
+    "2. Posting Skill",
+    "2. 投稿用Skill"
+  ],
+  "项目附带spaceyew-post Skill，包含字段说明、幂等重试和先存草稿再送审的步骤。": [
+    "The project includes an spaceyew-post Skill with field guidance, safe retries and a draft-first submission workflow.",
+    "プロジェクトには、項目の説明・安全な再試行・下書きから審査提出までを扱うspaceyew-post Skillが含まれています。"
+  ],
+  "3. 本地MCP桥接": [
+    "3. Local MCP bridge",
+    "3. ローカルMCPブリッジ"
+  ],
+  "将桥接程序作为stdio进程启动。支持MCP 2025-11-25，凭据从客户端环境传入，不提供公网HTTP MCP端点。": [
+    "Run the bridge as a stdio process. It supports MCP 2025-11-25 with credentials from the client environment. A public HTTP MCP endpoint is not provided.",
+    "ブリッジをstdioプロセスとして起動します。MCP 2025-11-25に対応し、認証情報はクライアント環境から渡します。公開HTTP MCPエンドポイントは提供しません。"
+  ],
+  "工具默认只保存草稿。提交还需要独立权限、用户明确确认，并进入正常审核。": [
+    "Tools save drafts by default. Submission requires a separate permission and explicit user confirmation, then follows normal review.",
+    "ツールは既定で下書きのみ保存します。提出には別の権限と利用者の明示的な確認が必要で、通常の審査に進みます。"
+  ],
+  "凭据最长90天，可随时撤销。写入请求需稳定的幂等标识；相同凭据和标识在24小时内返回同一结果。": [
+    "Credentials expire within 90 days and can be revoked anytime. Writes require a stable operation key; identical retries return the same result for 24 hours.",
+    "認証情報の有効期間は最長90日で、いつでも取り消せます。書き込みには固定の操作IDが必要で、同一の再試行は24時間同じ結果を返します。"
+  ],
+  "工具接入目前仅供本地使用": [
+    "Tool integration is currently local only.",
+    "ツール連携は現在ローカル環境専用です。"
+  ],
+  "请提供有效的独立工具凭据": [
+    "Provide a valid scoped tool credential.",
+    "有効な独立したツール認証情報を指定してください。"
+  ],
+  "工具凭据已失效或撤销": [
+    "The tool credential has expired or been revoked.",
+    "ツールの認証情報は期限切れか取り消されています。"
+  ],
+  "此账号暂不可使用工具": [
+    "This account cannot use tools right now.",
+    "このアカウントは現在ツールを利用できません。"
+  ],
+  "工具请求过于频繁": [
+    "Too many tool requests. Try again later.",
+    "ツールのリクエストが多すぎます。後でもう一度お試しください。"
+  ],
+  "凭据没有此项权限": [
+    "This credential does not grant that permission.",
+    "この認証情報にはその権限がありません。"
+  ],
+  "提交需独立权限及明确确认": [
+    "Submission requires its own permission and explicit confirmation.",
+    "提出には専用の権限と明示的な確認が必要です。"
+  ],
+  "需要有效的内容标识": [
+    "A valid content ID is required.",
+    "有効なコンテンツIDが必要です。"
+  ],
+  "写入操作需要8至100位幂等标识": [
+    "Writes require a stable operation key of 8–100 characters.",
+    "書き込みには8〜100文字の固定操作IDが必要です。"
+  ],
+  "相同幂等标识不能用于不同内容": [
+    "The same operation key cannot be reused for different input.",
+    "同じ操作IDを異なる内容に使うことはできません。"
+  ],
+  "请先读取并确认当前社区规则": [
+    "Read and confirm the current community rules first.",
+    "現在のコミュニティ規則を読み、確認してください。"
+  ],
+  "工具操作不存在": [
+    "Tool operation not found.",
+    "ツールの操作が見つかりません。"
+  ],
+  "凭据不存在": [
+    "Credential not found.",
+    "認証情報が見つかりません。"
+  ],
+  "凭据操作过于频繁": [
+    "Too many credential operations. Try again later.",
+    "認証情報の操作が多すぎます。後でもう一度お試しください。"
+  ],
+  "请选择凭据用途和权限": [
+    "Enter a purpose and select permissions.",
+    "用途を入力し、権限を選択してください。"
+  ],
+  "最多保留10个有效凭据": [
+    "You can have up to 10 active credentials.",
+    "有効な認証情報は10件までです。"
+  ],
+  "有效期需要1至90天": [
+    "Expiry must be between 1 and 90 days.",
+    "有効期間は1〜90日で指定してください。"
+  ],
+  "我的展板": [
+    "My showcase",
+    "自分のショーケース"
+  ],
+  "通过审核并公开后即可分享": [
+    "Share after your showcase is approved and published.",
+    "審査に通過して公開した後に共有できます。"
+  ],
+  "预览缩放": [
+    "Preview zoom",
+    "プレビューの拡大率"
+  ],
+  "适应宽度": [
+    "Fit width",
+    "幅に合わせる"
+  ],
+  "私密": [
+    "Private",
+    "非公開"
+  ],
+  "个人空间最多保留1000个文件": [
+    "A personal space can store up to 1,000 files.",
+    "個人スペースに保存できるファイルは1,000件までです。"
+  ],
+  "单条内容请控制在240KB以内": [
+    "Keep each content entry under 240 KB.",
+    "コンテンツは1件240KB以内にしてください。"
+  ],
+  "个人内容库已达到20MB文本上限": [
+    "Your library has reached the 20 MB text limit.",
+    "ライブラリのテキスト上限20MBに達しました。"
+  ],
+  "个人资料文本过多，请精简至200KB以内": [
+    "Keep profile text under 200 KB.",
+    "プロフィールのテキストは200KB以内にしてください。"
+  ],
+  "展板文字过多，请精简至200KB以内": [
+    "Keep showcase text under 200 KB.",
+    "ショーケースのテキストは200KB以内にしてください。"
+  ],
+  "内容不存在或暂未公开": [
+    "This content is unavailable or not published.",
+    "このコンテンツは利用できないか、未公開です。"
+  ],
+  "多选模块": [
+    "Select multiple",
+    "複数選択"
+  ],
+  "开启多选或按住Shift选择模块后分组。顺序也决定画布层级。": [
+    "Turn on multi-select or hold Shift to group modules. Order also sets canvas layers.",
+    "複数選択をオンにするか、Shiftを押してグループ化します。順序はレイヤーの重なりにも反映されます。"
+  ],
+  "分享个人展板": [
+    "Share your showcase",
+    "ショーケースを共有"
+  ],
+  "个人展板二维码": [
+    "Showcase QR code",
+    "ショーケースのQRコード"
+  ],
+  "扫码打开公开展板": [
+    "Scan to open the public showcase",
+    "スキャンして公開ページを開く"
+  ],
+  "展板链接": [
+    "Showcase link",
+    "ショーケースのリンク"
+  ],
+  "下载二维码": [
+    "Download QR code",
+    "QRコードを保存"
+  ],
+  "请手动复制下方链接": [
+    "Copy the link below manually.",
+    "下のリンクを手動でコピーしてください。"
+  ],
+  "系统分享不可用，请复制链接": [
+    "System sharing is unavailable. Copy the link instead.",
+    "システム共有が利用できません。リンクをコピーしてください。"
+  ],
+  "模块列数": [
+    "Module columns",
+    "モジュールの列数"
+  ],
+  "单栏": [
+    "One column",
+    "1列"
+  ],
+  "双栏": [
+    "Two columns",
+    "2列"
+  ],
+  "内容排列": [
+    "Content layout",
+    "コンテンツの配置"
+  ],
+  "网格": [
+    "Grid",
+    "グリッド"
+  ],
+  "展板封面": [
+    "Showcase cover",
+    "ショーケースのカバー"
+  ],
+  "栏目导航": [
+    "Showcase navigation",
+    "ショーケースのナビゲーション"
+  ],
+  "允许搜索引擎收录展板": [
+    "Allow search indexing",
+    "検索エンジンへの掲載を許可"
+  ],
+  "关闭收录不会让展板私密，公开链接仍可访问与转发。": [
+    "Turning off indexing does not make your showcase private. The public link can still be read and shared.",
+    "検索への掲載をオフにしても非公開にはなりません。公開リンクへのアクセスや共有は引き続き可能です。"
+  ],
+  "导出我的内容": [
+    "Export my content",
+    "自分のコンテンツを書き出す"
+  ],
+  "导出过于频繁，请稍后再试": [
+    "Too many exports. Try again shortly.",
+    "書き出しが多すぎます。しばらくしてからお試しください。"
+  ],
+  "让作品被看见。": [
+    "Show what you make.",
+    "あなたの作品を、届けよう。"
+  ],
+  "作品、经历与资源，一个展板。": [
+    "Your work, experience and resources. One showcase.",
+    "作品、経歴、リソースをひとつに。"
+  ],
+  "公开展板": [
+    "Public showcases",
+    "公開ショーケース"
+  ],
+  "在首页和发现页展示": [
+    "Show on Home and Discover",
+    "ホームと一覧に表示する"
+  ],
+  "登录后编辑展板。": [
+    "Sign in to edit your showcase.",
+    "ログインしてショーケースを編集。"
+  ],
+  "浏览公开展板": [
+    "Browse showcases",
+    "公開ショーケースを見る"
+  ],
+  "让你的创造，": [
+    "Give your work",
+    "あなたの創造に、"
+  ],
+  "有自己的空间。": [
+    "a place of its own.",
+    "自分らしい場所を。"
+  ],
+  "在社区分享发现，把作品、经历与资源，整理成你的个人展板。": [
+    "Share discoveries with the community. Bring your work, experience and resources together in your own showcase.",
+    "コミュニティで発見を共有し、作品・経歴・リソースを自分のショーケースにまとめよう。"
+  ],
+  "打开网页版": [
+    "Open web app",
+    "Web版を開く"
+  ],
+  "下载桌面端": [
+    "Get desktop app",
+    "デスクトップ版"
+  ],
+  "支持 macOS 与 Windows，选择适合你的版本。": [
+    "For macOS and Windows. Choose your version.",
+    "macOSとWindows。お使いの環境に合うバージョンを。"
+  ],
+  "macOS 与 Windows 桌面版即将推出。": [
+    "Desktop apps for macOS and Windows are coming soon.",
+    "macOS・Windows向けアプリは近日公開予定。"
+  ],
+  "产品界面预览": [
+    "Product preview",
+    "製品プレビュー"
+  ],
+  "切换产品预览": [
+    "Switch product preview",
+    "製品プレビューの切り替え"
+  ],
+  "好想法，从分享开始。": [
+    "Good ideas start with a conversation.",
+    "いいアイデアは、共有から。"
+  ],
+  "发现资源，交流想法，收藏值得留下的内容。": [
+    "Discover resources, exchange ideas and save what matters.",
+    "リソースを見つけ、アイデアを交わし、大切な情報を保存。"
+  ],
+  "公开个人展板封面": [
+    "Public showcase cover",
+    "公開ショーケースのカバー"
+  ],
+  "展板内容": [
+    "Showcase content",
+    "ショーケースの内容"
+  ],
+  "你的内容，你来定义。": [
+    "Your content, your way.",
+    "あなたの内容を、あなたらしく。"
+  ],
+  "自由组合经历、作品与资源，搭建自己的个人展板。": [
+    "Build a personal showcase from your experience, work and resources.",
+    "経歴・作品・リソースを自由に組み合わせて、自分のショーケースを。"
+  ],
+  "平台核心功能": [
+    "What you can do",
+    "主な機能"
+  ],
+  "社区，让分享发生。": [
+    "A community for sharing.",
+    "共有が生まれるコミュニティ。"
+  ],
+  "发现资源、交流想法，把有用的内容留下来。": [
+    "Find resources, exchange ideas and keep what is useful.",
+    "リソースを探し、アイデアを交わし、役立つ情報を残そう。"
+  ],
+  "展板，由你来定义。": [
+    "A showcase that is yours.",
+    "自分らしく作るショーケース。"
+  ],
+  "模块编辑或自由画布，让作品和经历各就其位。": [
+    "Use modules or a free canvas to arrange your work and experience.",
+    "モジュールや自由なキャンバスで、作品と経歴を思い通りに配置。"
+  ],
+  "简历，随着你成长。": [
+    "A résumé that grows with you.",
+    "成長とともに育つ履歴書。"
+  ],
+  "用已公开的经历、技能和作品，整理一份可分享的简历。": [
+    "Turn your published experience, skills and work into a shareable résumé.",
+    "公開済みの経歴・スキル・作品から、共有できる履歴書を作成。"
+  ],
+  "在你的电脑上，继续创造。": [
+    "Make room on your desktop.",
+    "デスクトップでも、創造を続けよう。"
+  ],
+  "选择你的系统。网页版现在就可以使用。": [
+    "Choose your platform. The web app is ready now.",
+    "お使いのOSを選択。Web版は今すぐ利用できます。"
+  ],
+  "使用网页版": [
+    "Use web app",
+    "Web版を使う"
+  ],
+  "桌面应用": [
+    "Desktop app",
+    "デスクトップアプリ"
+  ],
+  "桌面版筹备中": [
+    "Desktop app coming soon",
+    "デスクトップ版は準備中"
+  ],
+  "即将推出": [
+    "Coming soon",
+    "近日公開"
+  ],
+  "{0} 桌面版即将推出": [
+    "{0} desktop app is coming soon",
+    "{0}デスクトップ版は近日公開予定"
+  ],
+  "下载 {0}": [
+    "Download for {0}",
+    "{0}版をダウンロード"
+  ],
+  "{0} 下载": [
+    "Download for {0}",
+    "{0}版を入手"
+  ],
+  "进入网站": [
+    "Open web app",
+    "Web版を開く"
+  ],
+  "登录 SpaceYew": [
+    "Log in to SpaceYew",
+    "SpaceYew にログイン"
+  ],
+  "邮箱或账号": [
+    "Email or username",
+    "メールアドレスまたはユーザー名"
+  ],
+  "看看大家如何展示自己的作品与经历。": [
+    "See how people share their work and experience.",
+    "作品や経歴を、みんながどう紹介しているか見てみよう。"
+  ],
+  "发现更多展板": [
+    "Explore more showcases",
+    "もっとショーケースを見る"
+  ],
+  "桌面应用下载": [
+    "Desktop app downloads",
+    "デスクトップアプリのダウンロード"
+  ],
+  "填写正式安装包的 HTTPS 地址。留空时，官网显示“即将推出”；保存后立即更新。": [
+    "Add the HTTPS URL of a released installer. Leave it blank to show Coming soon. Saving updates the website immediately.",
+    "公開済みインストーラーのHTTPS URLを入力。空欄の場合は「近日公開」と表示され、保存すると公式サイトに反映されます。"
+  ],
+  "{0} 下载地址": [
+    "{0} download URL",
+    "{0}のダウンロードURL"
+  ],
+  "{0} 版本说明（选填）": [
+    "{0} version details (optional)",
+    "{0}のバージョン情報（任意）"
+  ],
+  "可填写版本号、适用架构或系统要求，以实际安装包为准。": [
+    "Use the actual version, supported architecture or system requirements.",
+    "実際のインストーラーに合わせて、バージョン・対応アーキテクチャ・システム要件を入力。"
+  ],
+  "桌面下载设置格式无效": [
+    "Invalid desktop download settings",
+    "デスクトップ版のダウンロード設定が無効です"
+  ],
+  "安装包地址仅支持完整 HTTPS 网址": [
+    "Installer URLs must be complete HTTPS URLs",
+    "インストーラーには完全なHTTPS URLを指定してください"
+  ],
+  "安装包地址不能包含账号或密码": [
+    "Installer URLs cannot contain account credentials",
+    "インストーラーのURLにアカウントやパスワードは含められません"
+  ],
+  "个人展板": [
+    "Showcase",
+    "ショーケース"
+  ],
+  "经历": [
+    "Experience",
+    "経歴"
+  ],
+  "简历": [
+    "Résumé",
+    "履歴書"
+  ],
+  "欢迎来到 SpaceYew。一个分享发现、展示作品、记录成长的地方，让每一份积累，都成为你的表达。": [
+    "Welcome to SpaceYew. A place to share discoveries, showcase your work and capture your growth. Bring everything you create and learn into a space that feels like you.",
+    "SpaceYewへようこそ。発見を分かち合い、作品を紹介し、成長を記録する場所。積み重ねてきた一つひとつを、あなたらしい表現に。"
+  ],
+  "探索社区": [
+    "Explore the community",
+    "コミュニティを見てみる"
+  ],
+  "了解 SpaceYew": [
+    "Discover SpaceYew",
+    "SpaceYewについて"
+  ],
+  "分享发现，": [
+    "Share what you find.",
+    "発見を分かち合い、"
+  ],
+  "也发现同路人。": [
+    "Find your people.",
+    "仲間に出会う。"
+  ],
+  "一个好用的工具，一次创作的心得，一个值得展开的想法。把它们带到社区，在交流中遇见新的视角，也让有价值的内容被更多人发现。": [
+    "A useful tool, a lesson from making something, an idea worth exploring. Share it with the community, discover fresh perspectives through conversation and help good things reach more people.",
+    "便利なツール、創作から得た気づき、もっと深めたいアイデア。コミュニティで共有すれば、対話から新しい視点が生まれ、価値ある発見がより多くの人に届きます。"
+  ],
+  "去社区看看": [
+    "Visit the community",
+    "コミュニティへ"
+  ],
+  "一路积累，都有归处。": [
+    "A home for everything you build.",
+    "積み重ねてきたことに、居場所を。"
+  ],
+  "从一个作品到一段经历，用自己的方式，把你做过的事介绍给世界。": [
+    "From a project to a chapter in your journey, share what you have done with the world, in your own way.",
+    "一つの作品から、これまでの経験まで。あなたが取り組んできたことを、自分らしいかたちで世界に伝えましょう。"
+  ],
+  "用模块快速搭建，或在自由画布中编排。把作品、手记与资源放在一起，做一个有你风格的个人展板。": [
+    "Start with ready-made blocks or arrange things freely on a canvas. Bring your work, notes and resources together in a showcase that reflects your style.",
+    "ブロックで手軽に組み立てても、自由なキャンバスに配置しても。作品、ノート、リソースをまとめて、あなたらしいショーケースを作れます。"
+  ],
+  "设计我的展板": [
+    "Design my showcase",
+    "自分のショーケースをデザインする"
+  ],
+  "经历，值得被记录。": [
+    "Your journey is worth sharing.",
+    "歩んできた道のりを、記録に。"
+  ],
+  "把学习、工作与创作中的重要片段整理下来。让别人看到作品，也了解作品背后的你。": [
+    "Collect the moments that matter from learning, working and creating. Let people discover your work and get to know the person behind it.",
+    "学び、仕事、創作の大切な場面をまとめましょう。作品だけでなく、その背景にあるあなた自身も伝えられます。"
+  ],
+  "看看大家的经历": [
+    "Explore people's journeys",
+    "みんなの歩みを見る"
+  ],
+  "将已公开的经历、技能和作品整理为简历，用一个链接分享，让每一次介绍都有据可循。": [
+    "Turn your public experience, skills and work into a résumé you can share with one link. Give every introduction a story to back it up.",
+    "公開している経歴、スキル、作品を履歴書にまとめ、リンク一つで共有。自己紹介に、これまでの実績を添えられます。"
+  ],
+  "探索个人简历": [
+    "Explore résumés",
+    "履歴書を見てみる"
+  ],
+  "每个展板，都是一种表达。": [
+    "Every showcase tells a story.",
+    "ショーケースの数だけ、表現がある。"
+  ],
+  "下一份值得被看见的，": [
+    "The next thing worth discovering",
+    "次に誰かの目に留まるのは、"
+  ],
+  "是你的创造。": [
+    "is what you create.",
+    "あなたの創造。"
+  ],
+  "从发现一个好想法，或整理你的第一个作品开始。": [
+    "Start with an idea that inspires you, or bring your first piece of work into focus.",
+    "心ひかれるアイデアを見つけることから。あるいは、最初の作品をまとめることから。"
+  ],
+  "开始我的展板": [
+    "Start my showcase",
+    "自分のショーケースを始める"
+  ],
+  "先逛逛社区": [
+    "Browse the community",
+    "まずはコミュニティを見てみる"
+  ],
+  "探索 SpaceYew 的功能": [
+    "Explore SpaceYew’s features",
+    "SpaceYewでできること"
+  ],
+  "在社区，": [
+    "Find fresh inspiration",
+    "コミュニティで、"
+  ],
+  "遇见新的灵感。": [
+    "in the community.",
+    "新しいひらめきに出会う。"
+  ],
+  "分享一个好用的工具、一次创作的心得，或一个值得展开的想法。与同样热爱创造的人交流，让有价值的发现继续流动。": [
+    "Share a useful tool, a lesson from your creative process, or an idea worth exploring. Connect with people who love making things, and give great discoveries room to grow.",
+    "便利なツール、創作の中で得た気づき、もっと深めたいアイデア。つくることを楽しむ仲間と語り合い、大切な発見を次の誰かへつなげましょう。"
+  ],
+  "发现与交流": [
+    "Discover and connect",
+    "見つける、語り合う"
+  ],
+  "浏览分享、参与评论，在不同的视角里找到新的方向。": [
+    "Explore what others share, join the conversation, and find a new direction through a different perspective.",
+    "みんなの投稿を読み、コメントで交流。さまざまな視点に触れることで、新しい方向が見えてきます。"
+  ],
+  "把灵感留住": [
+    "Keep inspiration close",
+    "ひらめきを手元に"
+  ],
+  "收藏实用内容，关注感兴趣的作者，让下一次探索有迹可循。": [
+    "Save useful finds and follow creators who interest you, so your next discovery starts where you left off.",
+    "役立つ投稿を保存し、気になる作者をフォロー。次の探索へつながる手がかりを残せます。"
+  ],
+  "个人展板，": [
+    "Your showcase,",
+    "あなたのショーケースを、"
+  ],
+  "由你来定义。": [
+    "on your terms.",
+    "あなたらしく。"
+  ],
+  "把作品、手记、资源与成长经历，整理成一个属于你的空间。用模块快速搭建，或在自由画布上安排每个细节。": [
+    "Bring your work, notes, resources and experience together in a space of your own. Build quickly with modules, or arrange every detail on a free canvas.",
+    "作品、手記、リソース、これまでの歩みを、自分だけの空間に。モジュールで手軽に組み立てたり、自由キャンバスで細部まで配置したりできます。"
+  ],
+  "模块与自由画布": [
+    "Modules and a free canvas",
+    "モジュールと自由キャンバス"
+  ],
+  "选择适合内容的布局，让作品的呈现方式也表达你的风格。": [
+    "Choose a layout that fits your content, and let the way you present your work reflect your style.",
+    "内容に合ったレイアウトを選び、作品の見せ方にも自分らしさを込められます。"
+  ],
+  "一个链接，完整介绍你": [
+    "Your whole story, in one link",
+    "リンク一つで、あなたを伝える"
+  ],
+  "将公开的作品和经历汇聚在一起，分享给朋友、同行或未来的合作伙伴。": [
+    "Bring your public work and experience together, ready to share with friends, peers or future collaborators.",
+    "公開した作品と経歴を一か所にまとめて、友人や仲間、これから一緒に活動する人へ共有できます。"
+  ],
+  "一份简历，": [
+    "A résumé that tells",
+    "一つの履歴書に、"
+  ],
+  "串起你的成长。": [
+    "the story of your growth.",
+    "これまでの歩みを。"
+  ],
+  "经历不必反复整理，作品也不必散落各处。让已公开的资料、技能与精选项目，汇成一份清晰的个人简历。": [
+    "Keep your experience and work together without starting over each time. Turn your public profile, skills and selected projects into a clear, considered résumé.",
+    "経歴を何度もまとめ直したり、作品をあちこちから探したりする手間を減らせます。公開済みのプロフィール、スキル、選りすぐりのプロジェクトを、わかりやすい履歴書にまとめましょう。"
+  ],
+  "用作品说明实力": [
+    "Let your work speak",
+    "作品で、できることを伝える"
+  ],
+  "把经历与实际项目放在一起，清楚呈现你的角色、贡献和收获。": [
+    "Show your experience alongside real projects, with a clear picture of your role, contributions and what you learned.",
+    "経歴に実際のプロジェクトを添えて、担当した役割、貢献、そこから得た学びを具体的に伝えられます。"
+  ],
+  "随时分享，也能打印": [
+    "Ready to share or print",
+    "共有も、印刷も"
+  ],
+  "通过独立链接分享简历，或使用浏览器打印、另存为 PDF，让介绍适合不同场合。": [
+    "Share your résumé with its own link, or use your browser to print it or save it as a PDF. Be ready for every introduction.",
+    "専用リンクで履歴書を共有したり、ブラウザーから印刷・PDF保存したり。自己紹介の場面に合わせた形で届けられます。"
+  ],
+  "查看简历示例": [
+    "View a sample résumé",
+    "履歴書のサンプルを見る"
+  ],
+  "社区界面预览": [
+    "Community preview",
+    "コミュニティ画面のプレビュー"
+  ],
+  "个人展板界面预览": [
+    "Showcase preview",
+    "ショーケース画面のプレビュー"
+  ],
+  "简历界面预览": [
+    "Résumé preview",
+    "履歴書画面のプレビュー"
+  ],
+  "公开内容预览": [
+    "Public content preview",
+    "公開コンテンツのプレビュー"
+  ],
+  "查看完整简历": [
+    "View full résumé",
+    "履歴書の全体を見る"
+  ],
+  "分享发现，展示作品，记录成长。": [
+    "Share discoveries, showcase your work, and document your growth.",
+    "発見を共有し、作品を展示し、成長を記録する。"
+  ],
+  "分享发现与创作心得，和同样热爱创造的人交流。": [
+    "Share discoveries and creative insights with people who love making things.",
+    "発見や創作のヒントを共有し、ものづくりを楽しむ人と交流する。"
+  ],
+  "用模块或自由画布，展示你的作品、经历与资源。": [
+    "Showcase your work, experience, and resources with modules or a freeform canvas.",
+    "モジュールや自由なキャンバスで、作品・経験・リソースを紹介する。"
+  ],
+  "汇集技能、经历与作品，生成可分享、可打印的简历。": [
+    "Bring your skills, experience, and work together in a résumé you can share and print.",
+    "スキル・経験・作品をまとめて、共有・印刷できる履歴書に。"
+  ],
+  "安装 SpaceYew Skill": [
+    "Install SpaceYew Skill",
+    "SpaceYew Skill をインストール"
+  ],
+  "复制安装代码": [
+    "Copy install command",
+    "インストールコマンドをコピー"
+  ],
+  "Skill 安装代码": [
+    "Skill install command",
+    "Skill インストールコマンド"
+  ],
+  "复制失败，请手动选择代码。": [
+    "Could not copy. Select the code to copy it manually.",
+    "コピーできませんでした。コードを選択して手動でコピーしてください。"
+  ],
+  "此列表仅你自己可见。": [
+    "Only you can see this list.",
+    "このリストは自分にのみ表示されます。"
+  ],
+  "播放打字动效": [
+    "Play typing animation",
+    "タイプアニメーションを再生"
+  ],
+  "暂停打字动效": [
+    "Pause typing animation",
+    "タイプアニメーションを一時停止"
+  ],
+  "播放": [
+    "Play",
+    "再生"
+  ],
+  "复制代码": [
+    "Copy code",
+    "コピー"
+  ],
+  "更多": [
+    "More",
+    "その他"
+  ],
+  "更多功能": [
+    "More options",
+    "その他の機能"
+  ],
+  "搜索分享": [
+    "Search posts",
+    "投稿を検索"
+  ],
+  "管理中心": [
+    "Management center",
+    "管理センター"
+  ],
+  "站点内容、社区与访问数据": [
+    "Content, community and traffic",
+    "コンテンツ、コミュニティとアクセス状況"
+  ],
+  "新建内容": [
+    "Create content",
+    "コンテンツを作成"
+  ],
+  "内容总数": [
+    "Content items",
+    "コンテンツ総数"
+  ],
+  "文件存储": [
+    "File storage",
+    "ファイル容量"
+  ],
+  "待办": [
+    "To review",
+    "対応待ち"
+  ],
+  "待审展板": [
+    "Showcases to review",
+    "審査待ちのショーケース"
+  ],
+  "待处理反馈": [
+    "Open reports",
+    "未対応の報告"
+  ],
+  "最近编辑": [
+    "Recently edited",
+    "最近の編集"
+  ],
+  "未命名内容": [
+    "Untitled content",
+    "無題のコンテンツ"
+  ],
+  "还没有内容，从新建内容开始。": [
+    "No content yet. Create your first item.",
+    "コンテンツはまだありません。新規作成から始めましょう。"
+  ],
+  "成员管理": [
+    "Manage members",
+    "メンバー管理"
+  ],
+  "服务状态": [
+    "Service status",
+    "サービス状況"
+  ],
+  "演示环境": [
+    "Demo environment",
+    "デモ環境"
+  ],
+  "标准环境": [
+    "Standard environment",
+    "通常環境"
+  ],
+  "社区访问": [
+    "Community access",
+    "コミュニティ公開範囲"
+  ],
+  "仅本机开放": [
+    "Local access only",
+    "ローカルのみ"
+  ],
+  "仅本机 · 暂停投稿": [
+    "Local only · Submissions paused",
+    "ローカルのみ・投稿受付停止中"
+  ],
+  "验证码邮件": [
+    "Verification email",
+    "認証メール"
+  ],
+  "本地收件箱": [
+    "Local inbox",
+    "ローカル受信箱"
+  ],
+  "SMTP 已配置": [
+    "SMTP configured",
+    "SMTP設定済み"
+  ],
+  "已配置": [
+    "Configured",
+    "設定済み"
+  ],
+  "未配置": [
+    "Not configured",
+    "未設定"
+  ],
+  "发现本地未保存草稿。恢复后请核对，再保存到服务器。": [
+    "An unsaved local draft is available. Review it before saving to the server.",
+    "未保存のローカル下書きがあります。復元後に確認してからサーバーに保存してください。"
+  ],
+  "忽略此副本": [
+    "Dismiss this copy",
+    "このコピーを使わない"
+  ],
+  "此分类还没有内容。": [
+    "No content in this category yet.",
+    "このカテゴリにはまだコンテンツがありません。"
+  ],
+  "我的文件": [
+    "My files",
+    "マイファイル"
+  ],
+  "上传文件": [
+    "Upload file",
+    "ファイルをアップロード"
+  ],
+  "已用空间": [
+    "Storage used",
+    "使用済み容量"
+  ],
+  "上传预留": [
+    "Reserved for uploads",
+    "アップロード予約容量"
+  ],
+  "搜索文件": [
+    "Search files",
+    "ファイルを検索"
+  ],
+  "文件类型": [
+    "File type",
+    "ファイルの種類"
+  ],
+  "全部文件": [
+    "All files",
+    "すべてのファイル"
+  ],
+  "其他文件": [
+    "Other files",
+    "その他のファイル"
+  ],
+  "引用状态": [
+    "References",
+    "参照状態"
+  ],
+  "已引用": [
+    "In use",
+    "使用中"
+  ],
+  "查看引用": [
+    "View references",
+    "参照を表示"
+  ],
+  "文件分页": [
+    "File pages",
+    "ファイルのページ"
+  ],
+  "仍有引用，不能删除": [
+    "This file is still referenced.",
+    "参照されているため削除できません"
+  ],
+  "文件已上传。": [
+    "File uploaded.",
+    "ファイルをアップロードしました。"
+  ],
+  "文件已删除，空间已释放。": [
+    "File deleted and storage released.",
+    "ファイルを削除し、容量を解放しました。"
+  ],
+  "永久删除此文件并释放空间？此操作无法撤销。": [
+    "Permanently delete this file and free its storage? This cannot be undone.",
+    "このファイルを完全に削除して容量を解放しますか？元に戻せません。"
+  ],
+  "上传已暂停，重新选择原文件可以续传。": [
+    "Upload paused. Select the original file to resume.",
+    "アップロードを一時停止しました。元のファイルを選ぶと再開できます。"
+  ],
+  "重新选择原文件可以续传。": [
+    "Select the original file to resume.",
+    "元のファイルを選ぶと再開できます。"
+  ],
+  "未完成上传": [
+    "Unfinished uploads",
+    "未完了のアップロード"
+  ],
+  "没有匹配的文件。": [
+    "No matching files.",
+    "一致するファイルはありません。"
+  ],
+  "还没有文件，上传后即可在内容和展板中使用。": [
+    "Upload files to use them in your content and showcase.",
+    "ファイルをアップロードすると、コンテンツやボードで使用できます。"
+  ],
+  "内容草稿": [
+    "Content draft",
+    "コンテンツの下書き"
+  ],
+  "展板草稿": [
+    "Showcase draft",
+    "ボードの下書き"
+  ],
+  "历史版本": [
+    "Version history",
+    "履歴バージョン"
+  ],
+  "审核版本": [
+    "Review snapshot",
+    "審査バージョン"
+  ],
+  "站点设置": [
+    "Site settings",
+    "サイト設定"
+  ],
+  "社区内容": [
+    "Community content",
+    "コミュニティのコンテンツ"
+  ],
+  "其他引用": [
+    "Other references",
+    "その他の参照"
+  ],
+  "文件": [
+    "File",
+    "ファイル"
+  ],
+  "文件筛选无效": [
+    "Invalid file filter.",
+    "ファイルの絞り込み条件が無効です。"
+  ],
+  "管理日志": [
+    "Management log",
+    "管理ログ"
+  ],
+  "操作范围": [
+    "Scope",
+    "操作範囲"
+  ],
+  "全部操作": [
+    "All actions",
+    "すべての操作"
+  ],
+  "站点管理": [
+    "Site management",
+    "サイト管理"
+  ],
+  "操作人": [
+    "Actor",
+    "操作者"
+  ],
+  "全部账号": [
+    "All accounts",
+    "すべてのアカウント"
+  ],
+  "操作类型": [
+    "Action type",
+    "操作の種類"
+  ],
+  "搜索对象": [
+    "Search target",
+    "対象を検索"
+  ],
+  "对象": [
+    "Target",
+    "対象"
+  ],
+  "操作详情": [
+    "Details",
+    "操作の詳細"
+  ],
+  "查看记录": [
+    "View record",
+    "記録を表示"
+  ],
+  "没有匹配的管理记录。": [
+    "No matching log entries.",
+    "一致する管理記録はありません。"
+  ],
+  "管理日志列表": [
+    "Management log entries",
+    "管理ログ一覧"
+  ],
+  "日志分页": [
+    "Log pages",
+    "ログのページ"
+  ],
+  "历史账号": [
+    "Historical account",
+    "過去のアカウント"
+  ],
+  "保存内容草稿": [
+    "Save content draft",
+    "コンテンツの下書きを保存"
+  ],
+  "恢复内容草稿": [
+    "Restore content draft",
+    "コンテンツの下書きを復元"
+  ],
+  "移入回收站": [
+    "Move to trash",
+    "ごみ箱に移動"
+  ],
+  "更新网站设置": [
+    "Update site settings",
+    "サイト設定を更新"
+  ],
+  "上传站点文件": [
+    "Upload site file",
+    "サイトのファイルをアップロード"
+  ],
+  "删除站点文件": [
+    "Delete site file",
+    "サイトのファイルを削除"
+  ],
+  "创建上传任务": [
+    "Create upload task",
+    "アップロードタスクを作成"
+  ],
+  "取消上传任务": [
+    "Cancel upload task",
+    "アップロードタスクをキャンセル"
+  ],
+  "上传空间文件": [
+    "Upload workspace file",
+    "スペースのファイルをアップロード"
+  ],
+  "删除空间文件": [
+    "Delete workspace file",
+    "スペースのファイルを削除"
+  ],
+  "关联投诉内容": [
+    "Link case to content",
+    "申告とコンテンツを関連付け"
+  ],
+  "投诉处置下架": [
+    "Take content offline for a case",
+    "申告によりコンテンツを非公開"
+  ],
+  "投诉复核恢复": [
+    "Restore reviewed content after a case",
+    "申告の再確認後にコンテンツを復元"
+  ],
+  "关联内容": [
+    "Linked content",
+    "関連コンテンツ"
+  ],
+  "关联站点内容": [
+    "Link site content",
+    "サイトのコンテンツを関連付け"
+  ],
+  "为旧工单选择准确内容，关联后即可在这里下架和恢复。": [
+    "Select the exact content for this older case to manage its visibility here.",
+    "既存の申告に正確なコンテンツを関連付けると、ここで公開状態を管理できます。"
+  ],
+  "选择内容": [
+    "Select content",
+    "コンテンツを選択"
+  ],
+  "关联依据": [
+    "Reason for linking",
+    "関連付けの根拠"
+  ],
+  "确认关联": [
+    "Confirm link",
+    "関連付けを確定"
+  ],
+  "内容版本": [
+    "Content revision",
+    "コンテンツのバージョン"
+  ],
+  "仍有投诉限制": [
+    "Case restrictions remain",
+    "申告による制限が残っています"
+  ],
+  "仅站长可关联站点内容": [
+    "Only the site owner can link site content.",
+    "サイト所有者のみコンテンツを関連付けられます。"
+  ],
+  "仅站长核查后可恢复已公开版本": [
+    "Only the owner can restore a previously public version after review.",
+    "所有者が確認した後にのみ公開済みバージョンを復元できます。"
+  ],
+  "公开版本与涉事快照不同，请在内容管理中核对": [
+    "The public version differs from the case snapshot. Check content management.",
+    "公開バージョンが申告時の記録と異なります。コンテンツ管理で確認してください。"
+  ],
+  "关联内容不存在": [
+    "Linked content no longer exists.",
+    "関連コンテンツが存在しません。"
+  ],
+  "关联内容已更新，请刷新工单后重试": [
+    "The linked content changed. Refresh the case and try again.",
+    "関連コンテンツが更新されました。申告を更新して再試行してください。"
+  ],
+  "内容尚无公开版本，不能关联投诉处置": [
+    "This content has no public version to link to a case.",
+    "公開済みバージョンがないため申告に関連付けられません。"
+  ],
+  "内容已变化，请刷新后重新关联": [
+    "Content changed. Refresh before linking it.",
+    "コンテンツが変更されました。更新してから関連付けてください。"
+  ],
+  "工单已关联其他内容": [
+    "This case is already linked to other content.",
+    "この申告は別のコンテンツに関連付けられています。"
+  ],
+  "工单已关联内容": [
+    "This case already has linked content.",
+    "この申告には関連コンテンツがあります。"
+  ],
+  "开始日期不能晚于结束日期": [
+    "The start date must not follow the end date.",
+    "開始日は終了日以前にしてください。"
+  ],
+  "日志日期无效": [
+    "Invalid log date.",
+    "ログの日付が無効です。"
+  ],
+  "日志范围无效": [
+    "Invalid log scope.",
+    "ログの範囲が無効です。"
+  ],
+  "目标内容暂不可用": [
+    "The target content is unavailable.",
+    "対象のコンテンツは現在利用できません。"
+  ],
+  "目标展板或内容暂不可用": [
+    "The target showcase or content is unavailable.",
+    "対象のボードまたはコンテンツは現在利用できません。"
+  ],
+  "请先恢复回收站内容；尚无可恢复的公开版本": [
+    "Restore the trashed content first. No public version can be restored yet.",
+    "先にごみ箱から復元してください。現在、復元できる公開バージョンはありません。"
+  ],
+  "请选择需要关联的内容": [
+    "Select the content to link.",
+    "関連付けるコンテンツを選択してください。"
+  ],
+  "内容仍有投诉限制，请先处理全部关联工单": [
+    "Case restrictions remain. Resolve all linked restrictions first.",
+    "申告による制限が残っています。関連するすべての制限を先に処理してください。"
+  ],
+  "文件仍被草稿、公开内容、审核或历史版本引用，请先处理引用": [
+    "This file is referenced by drafts, public content, review snapshots or history. Resolve these references first.",
+    "下書き、公開コンテンツ、審査または履歴で参照されています。先に参照を解除してください。"
+  ],
+  "处理中…": [
+    "Processing…",
+    "処理中…"
+  ],
+  "投诉记录": [
+    "Case record",
+    "申告の記録"
+  ],
+  "2–80 字。": [
+    "2–80 characters.",
+    "2〜80文字。"
+  ],
+  "20–10,000 字。支持段落、## 标题和代码块；图片仅限封面，不支持 HTML 或附件。": [
+    "20–10,000 characters. Supports paragraphs, ## headings and code blocks. Images are cover-only; HTML and attachments are not supported.",
+    "20〜10,000文字。段落、## 見出し、コードブロックに対応。画像はカバーのみ。HTML・添付ファイルは使えません。"
+  ],
+  "20–300 字，说明用途与限制。": [
+    "20–300 characters describing the purpose and limitations.",
+    "20〜300文字で用途と制約を説明。"
+  ],
+  "仅限完整 HTTPS 公共链接，不接受短链、网盘或不明下载地址。": [
+    "Use a full public HTTPS link; no shortened URLs, cloud drives or unverified downloads.",
+    "完全な公開HTTPSリンクのみ。短縮URL、クラウドドライブ、不明なダウンロード先は不可。"
+  ],
+  "免费不代表可转载；介绍官方页面也需说明许可。": [
+    "Free access does not permit redistribution. State the license even for official-page introductions.",
+    "無料公開でも転載できるとは限りません。公式ページの紹介でも利用許諾を記載。"
+  ],
+  "审核补充（不公开）": [
+    "Review notes (private)",
+    "審査への補足（非公開）"
+  ],
+  "预览分享": [
+    "Preview post",
+    "投稿をプレビュー"
+  ],
+  "编辑分享": [
+    "Edit post",
+    "投稿を編集"
+  ],
+  "站长资料与展板同步，在内容后台编辑。": [
+    "Owner details sync to the showcase. Edit them in the content admin.",
+    "管理者のプロフィールは展示に同期されます。コンテンツ管理で編集。"
+  ],
+  "仅填写愿意公开的资料，登录邮箱不会展示。": [
+    "Share only public details. Your sign-in email stays private.",
+    "公開したい情報のみ記入。ログイン用メールは表示されません。"
+  ],
+  "发布后地址不可修改；修改前请先保存资料。": [
+    "The address is fixed after publishing. Save profile changes before updating it.",
+    "公開後はURLを変更できません。変更前にプロフィールを保存。"
+  ],
+  "暂无内容": [
+    "No content yet",
+    "コンテンツはまだありません"
+  ],
+  "添加作品、文章或资源，审核后公开。": [
+    "Add projects, articles or resources. They go public after review.",
+    "作品・記事・資料を追加。審査後に公開されます。"
+  ],
+  "已发布内容同步到站长展板。": [
+    "Published content syncs to the owner showcase.",
+    "公開済みコンテンツは管理者の展示に同期。"
+  ],
+  "近30天的公开展板访问，不含本人。": [
+    "Public showcase visits over the last 30 days, excluding your own.",
+    "過去30日間の公開展示へのアクセス。本人の閲覧は除外。"
+  ],
+  "暂无访问记录。": [
+    "No visits recorded yet.",
+    "アクセス記録はまだありません。"
+  ],
+  "预览仅自己可见，分享链接展示已发布版本。": [
+    "Only you can see this preview. Shared links show the published version.",
+    "プレビューは本人のみ閲覧可能。共有リンクは公開済みの版を表示。"
+  ],
+  "按住 Shift 多选后可分组，顺序决定图层。": [
+    "Hold Shift to select and group modules. Order sets the layer stack.",
+    "Shiftで複数選択してグループ化。並び順がレイヤー順になります。"
+  ],
+  "关闭收录后，公开链接仍可访问。": [
+    "Public links remain accessible when discovery is off.",
+    "掲載をオフにしても公開リンクは閲覧可能です。"
+  ],
+  "展板主题对访客生效，独立于界面主题。": [
+    "The showcase theme is visible to visitors and separate from your interface theme.",
+    "展示テーマは訪問者に適用され、画面テーマとは独立しています。"
+  ],
+  "窄屏默认按模块顺序排列，可开启自由排布。": [
+    "Narrow screens follow module order by default. Free layout is optional.",
+    "狭い画面はモジュール順に配置。自由配置も有効にできます。"
+  ],
+  "审核通过后公开，保存草稿不影响已发布版本。": [
+    "Publishes after approval. Saving a draft leaves the published version unchanged.",
+    "承認後に公開。下書きの保存は公開済みの版に影響しません。"
+  ],
+  "查看审核记录": [
+    "View review history",
+    "審査履歴を見る"
+  ],
+  "保存草稿，准备好后提交审核。": [
+    "Save a draft, then submit when ready.",
+    "下書きを保存し、準備ができたら審査へ。"
+  ],
+  "处理进展": [
+    "Case progress",
+    "対応状況"
+  ],
+  "公开页面共用此资料。": [
+    "Public pages share these details.",
+    "公開ページで共通のプロフィールです。"
+  ],
+  "保存后公开生效；空白联系方式不展示。": [
+    "Changes go public when saved. Blank contact fields stay hidden.",
+    "保存後に公開へ反映。空欄の連絡先は表示されません。"
+  ],
+  "顶部推广条": [
+    "Promotion bar",
+    "上部プロモーションバー"
+  ],
+  "最多5条，按顺序展示在导航上方；访客可关闭。": [
+    "Up to 5 items, in order above navigation. Visitors can dismiss the bar.",
+    "最大5件をナビ上部に順番に表示。訪問者は閉じられます。"
+  ],
+  "站内路径或 HTTPS 网址，留空不跳转。": [
+    "Local path or HTTPS URL. Leave blank for text only.",
+    "サイト内パスまたはHTTPS URL。空欄ならリンクなし。"
+  ],
+  "无内容时隐藏；付费推广须标记为“广告”。": [
+    "Hidden when empty. Label paid promotions as ads.",
+    "空欄なら非表示。有料掲載には「広告」表示が必要です。"
+  ],
+  "简历由公开资料自动生成，也可附加独立 PDF。": [
+    "Your resume uses public profile data. You can also attach a separate PDF.",
+    "公開プロフィールから履歴書を生成。別のPDFも添付できます。"
+  ],
+  "每行一个；删除前须清除内容引用。": [
+    "One per line. Remove content references before deleting.",
+    "1行に1件。削除前にコンテンツでの参照を解除。"
+  ],
+  "暂无文件。": [
+    "No files yet.",
+    "ファイルはまだありません。"
+  ],
+  "填写正式安装包的 HTTPS 地址，留空显示“即将推出”。": [
+    "Use the official installer HTTPS URL. Blank shows “Coming soon”.",
+    "正式インストーラーのHTTPS URL。空欄では「近日公開」と表示。"
+  ],
+  "版本号、架构或系统要求。": [
+    "Version, architecture or system requirements.",
+    "バージョン、アーキテクチャ、システム要件。"
+  ],
+  "核查本次固定版本的来源、许可与全部链接。": [
+    "Check sources, licenses and every link in this fixed submission.",
+    "今回の固定版の出典、許諾、全リンクを確認。"
+  ],
+  "确认昵称与本地测试资格后方可投稿；社区角色不含站长权限。": [
+    "Posting requires nickname and local-test approval. Community roles do not grant owner access.",
+    "ニックネームとローカルテスト資格の確認後に投稿可能。コミュニティの役割に管理者権限は含まれません。"
+  ],
+  "社区管理": [
+    "Community management",
+    "コミュニティ管理"
+  ],
+  "修改已公开内容仍需审核。": [
+    "Edits to published content still require review.",
+    "公開済みコンテンツの変更も審査が必要です。"
+  ],
+  "紧急风险先下架，恢复前核查全部案件。": [
+    "Take urgent risks offline. Check every case before restoring.",
+    "緊急時は先に非公開へ。復元前に全案件を確認。"
+  ],
+  "暂停投稿不影响历史记录、举报与申诉处理。": [
+    "Pausing submissions keeps history and case handling available.",
+    "投稿停止中も履歴の閲覧、通報・異議申立てへの対応は可能です。"
+  ],
+  "核查上下文与链接，通过后公开。": [
+    "Check context and links. Publishes after approval.",
+    "文脈とリンクを確認し、承認後に公開。"
+  ],
+  "核查固定版本的资料、内容、文件、链接与许可。": [
+    "Check profile details, content, files, links and licenses in the fixed version.",
+    "固定版のプロフィール、内容、ファイル、リンク、許諾を確認。"
+  ],
+  "举报与申诉": [
+    "Reports and appeals",
+    "通報・異議申立て"
+  ],
+  "普通举报无需登录，提交材料不公开。": [
+    "Standard reports need no sign-in. Submitted materials stay private.",
+    "通常の通報はログイン不要。提出資料は非公開です。"
+  ],
+  "填写本站内容地址；申诉请注明原决定。": [
+    "Enter the content URL on this site. For appeals, identify the original decision.",
+    "本站のコンテンツURLを記入。異議申立ては元の決定を明記。"
+  ],
+  "JPG、PNG、WebP，最大2 MB，居中裁切。": [
+    "JPG, PNG or WebP, up to 2 MB. Cropped from the center.",
+    "JPG・PNG・WebP、最大2 MB。中央でトリミング。"
+  ],
+  "请确保图片使用权并遵守社区规则，保存后公开显示。": [
+    "Use an image you have rights to, following community rules. It becomes public when saved.",
+    "使用権のある画像をルールに従って使用。保存後に公開されます。"
+  ],
+  "邮箱仅用于登录、验证与恢复，不公开。": [
+    "Email is private and used for sign-in, verification and recovery.",
+    "メールはログイン、認証、復旧にのみ使用し、非公開です。"
+  ],
+  "仅授权所选内容，不开放后台权限。": [
+    "Access is limited to selected content, with no admin permissions.",
+    "選択したコンテンツのみを許可。管理権限は付与しません。"
+  ],
+  "接入文档": [
+    "Integration docs",
+    "連携ドキュメント"
+  ],
+  "体验登录，账号和密码可任意填写。": [
+    "Preview sign-in. Enter any account and password.",
+    "体験ログイン。アカウントとパスワードは自由に入力できます。"
+  ],
+  "体验账号暂不支持修改密码、绑定邮箱或注销。": [
+    "Password changes, email linking and account closure are unavailable in preview.",
+    "体験アカウントではパスワード変更、メール連携、退会はできません。"
+  ],
+  "体验模式暂不支持工具授权。": [
+    "Tool authorization is unavailable in preview.",
+    "体験モードではツール認可は利用できません。"
+  ],
+  "体验账号暂不支持此操作": [
+    "This action is unavailable for preview accounts.",
+    "体験アカウントではこの操作は利用できません。"
+  ],
+  "注册暂未开放": [
+    "Registration is not available yet.",
+    "新規登録はまだ利用できません。"
+  ]
+}

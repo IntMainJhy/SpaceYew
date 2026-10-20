@@ -1,0 +1,21 @@
+[Unit]
+Description=Personal website and content management
+After=network.target
+
+[Service]
+Type=simple
+User=personal-site
+Group=personal-site
+WorkingDirectory=/opt/personal-site/app
+Environment=NODE_ENV=production
+EnvironmentFile=/etc/personal-site.env
+ExecStart=/usr/bin/node /opt/personal-site/app/node_modules/next/dist/bin/next start --hostname 127.0.0.1 --port 3008
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=30
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

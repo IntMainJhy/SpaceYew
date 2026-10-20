@@ -1,0 +1,20 @@
+/* Shared language selector for public navigation and management pages. */
+.site-tools {display:flex;align-items:center;flex-shrink:0;}
+.site-tools .language-control select {min-height:44px;font:500 13px/1.5 'Helvetica Neue','PingFang SC','Microsoft YaHei',sans-serif;}
+.site-tools .language-control select:focus-visible {outline:2px solid var(--organic-ink);outline-offset:3px;}
+@media print {.site-tools {display:none;}}
+
+/* Public navigation is a quiet row of links and a native language selector. */
+html[data-ui] .organic-header .organic-header-tools {gap:16px;}
+html[data-ui] .organic-header .organic-desktop-nav {gap:8px;}
+html[data-ui] .organic-header .organic-desktop-nav>a {padding:8px 6px;font-size:13px;}
+html[data-ui] .organic-header .organic-desktop-nav>a:is(.organic-career-nav,.organic-login-nav) {min-height:44px;padding:8px 6px;margin:0;border:0;background:transparent;box-shadow:none;font-size:13px;}
+html[data-ui] .organic-header .organic-login-nav {font-weight:600;}
+html[data-ui] .organic-site .organic-header .site-tools .language-control select {min-height:44px;max-width:108px;border:0;background:transparent;box-shadow:none;font:inherit;font-size:13px;color:inherit;padding:8px 6px;}
+html[data-ui] .organic-header :is(.organic-desktop-nav>a,.site-tools select):hover {background:transparent;color:var(--organic-green);}
+html[data-ui] .organic-header :is(.organic-desktop-nav>a,.site-tools select):focus-visible {outline:2px solid var(--organic-green);outline-offset:3px;}
+html[data-ui] .organic-header .organic-desktop-nav>a:active {opacity:.7;}
+@media(max-width:767px){
+ html[data-ui] .organic-header .organic-header-tools {gap:6px;}
+ html[data-ui] .organic-site .site-tools .language-control select {font-size:16px;}
+}

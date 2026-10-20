@@ -1,0 +1,753 @@
+/* Shared neutral component base: Monochrome and Editorial. Natural remains independent. */
+html:is([data-ui="monochrome"],[data-ui="editorial"]) {
+ --neutral-ink: #111111;
+ --neutral-strong: #333333;
+ --neutral-text: #666666;
+ --neutral-quiet: #999999;
+ --neutral-border: #cccccc;
+ --neutral-line: #e5e5e5;
+ --neutral-surface: #f5f5f5;
+ --neutral-ground: #fafafa;
+ --neutral-white: #ffffff;
+ --neutral-scrim: #33333366;
+}
+/* Monochrome theme. Scoped grayscale presentation of the shared public, CMS,
+   analytics and community components; original behavior and responsive grids remain shared.
+   The theme-specific composition below replaces the organic material, type and contours. */
+html:is([data-ui="monochrome"],[data-ui="editorial"]) {
+    --bg: var(--neutral-ground);
+    --paper: var(--neutral-white);
+    --ink: var(--neutral-strong);
+    --muted: var(--neutral-text);
+    --line: var(--neutral-surface);
+    --blue: var(--neutral-strong);
+    --blue-soft: var(--neutral-surface);
+    --green: var(--neutral-strong);
+    --red: var(--neutral-strong);
+    --shadow: none}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) input, html:is([data-ui="monochrome"],[data-ui="editorial"]) textarea, html:is([data-ui="monochrome"],[data-ui="editorial"]) select {
+    border: 1px solid var(--neutral-line)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) input::placeholder, html:is([data-ui="monochrome"],[data-ui="editorial"]) textarea::placeholder {
+    color: var(--neutral-text)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) input:focus, html:is([data-ui="monochrome"],[data-ui="editorial"]) textarea:focus, html:is([data-ui="monochrome"],[data-ui="editorial"]) select:focus {
+    outline: 2px solid var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) :focus-visible {
+    outline: 3px solid var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) ::selection {
+    background: var(--neutral-line);
+    color: var(--neutral-ink)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) ::-webkit-scrollbar-thumb {
+    background: var(--neutral-border)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) ::-webkit-scrollbar-track {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .proto-bar {
+    background: var(--neutral-strong);
+    color: var(--neutral-text)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .proto-dot {
+    background: var(--neutral-border)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .proto-bar .muted {
+    color: var(--neutral-text)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .proto-bar a.active, html:is([data-ui="monochrome"],[data-ui="editorial"]) .proto-bar button:hover {
+    background: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .btn {
+    border: 1px solid var(--neutral-line)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .btn:hover {
+    background: var(--neutral-ground);
+    border-color: var(--neutral-border)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .btn.primary:hover {
+    background: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .btn.danger {
+    border-color: var(--neutral-line)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .work-preview {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .mock-toolbar {
+    color: var(--neutral-text)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .mock-toolbar i {
+    background: var(--neutral-border)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .mock-rail {
+    background: var(--neutral-ground)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .mock-line {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .project-art {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .project-art.alt {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .project-art.third {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .tag {
+    background: var(--neutral-surface);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .tag.blue {
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .tag.green {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .tag.amber {
+    background: var(--neutral-surface);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .tag.red {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .resource-card:hover {
+    border-color: var(--neutral-border)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .resource-bottom {
+    border-top: 1px solid var(--neutral-line)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .prose pre {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .notice {
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .notice.warn {
+    background: var(--neutral-ground);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .notice.success {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .profile-card .avatar-large {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .empty {
+    border: 1px dashed var(--neutral-line)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .admin-nav a {
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .admin-nav a:hover {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .legend-dot.light {
+    background: var(--neutral-border)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .chart text {
+    fill: var(--neutral-text)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .bar-track {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .bar-fill {
+    background: var(--neutral-text)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) th {
+    background: var(--neutral-ground);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) td {
+    border-bottom: 1px solid var(--neutral-line)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .editor-toolbar {
+    border: 1px solid var(--neutral-line);
+    background: var(--neutral-ground)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .upload-zone {
+    border: 1px dashed var(--neutral-border);
+    background: var(--neutral-ground)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .upload-progress {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .preview-strip {
+    background: var(--neutral-surface);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) #toast {
+    background: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) dialog {
+    box-shadow: none
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) dialog::backdrop {
+    background: var(--neutral-scrim)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .app-feedback {
+    background: var(--neutral-surface);
+    color: var(--neutral-ink)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .app-feedback.error {
+    background: var(--neutral-surface);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .editor-surface {
+    border: 1px solid var(--neutral-line)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .tiptap pre, html:is([data-ui="monochrome"],[data-ui="editorial"]) .prose pre {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .editor-toolbar button.active {
+    background: var(--neutral-surface);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .prose a {
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .prose blockquote {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .skeleton {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .chart-column i {
+    background: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .chart-column i.light {
+    background: var(--neutral-border)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .image-placeholder {
+    background: var(--neutral-surface);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .field small a {
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .toolbar-divider {
+    background: var(--neutral-line)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .unsaved-mark {
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .table-actions a {
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .table-actions button:disabled {
+    color: var(--neutral-text)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .type-badge {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .progress-track {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]):has(.organic-site) {
+    background: var(--neutral-ground);
+    scrollbar-color: var(--neutral-border) var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-site {
+    --organic-paper: var(--neutral-ground);
+    --organic-ink: var(--neutral-strong);
+    --organic-text: var(--neutral-strong);
+    --organic-muted: var(--neutral-text);
+    --organic-line: var(--neutral-line);
+    --organic-sage: var(--neutral-border);
+    --organic-green: var(--neutral-strong);
+    --organic-tan: var(--neutral-border)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-site ::selection {
+    background: var(--neutral-surface);
+    color: var(--neutral-ink)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-site ::-webkit-scrollbar-thumb {
+    background: var(--neutral-border)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-site ::-webkit-scrollbar-track {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-button.is-primary {
+    color: var(--neutral-ground)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-button.is-primary:hover {
+    background: var(--neutral-strong);
+    border-color: var(--neutral-strong);
+    color: var(--neutral-ground)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-button.is-secondary {
+    border-color: var(--neutral-border)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-button.is-secondary:hover {
+    background: var(--neutral-surface);
+    border-color: var(--neutral-border)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-text-link:hover {
+    color: var(--neutral-ink)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-card:hover {
+    border-color: var(--neutral-border)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-tags li {
+    color: var(--neutral-strong);
+    border: 1px solid var(--neutral-line)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-desktop-nav>a.is-active {
+    text-decoration-color: var(--neutral-border)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-photo-underlay {
+    background: var(--neutral-line)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-project-cover {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-type-cover {
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-type-cover span {
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .tone-1 .organic-type-cover {
+    background: var(--neutral-surface);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .tone-1 .organic-type-cover span {
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .tone-2 .organic-type-cover {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-resource-symbol {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-about-band {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-about-band h2 {
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-about-band p {
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-input {
+    background: var(--neutral-white);
+    color: var(--neutral-ink)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-input::placeholder {
+    color: var(--neutral-text)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-input:hover {
+    border-color: var(--neutral-border)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-input:focus {
+    border-color: var(--neutral-border);
+    outline: 2px solid var(--neutral-strong);
+    background: var(--neutral-white)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-empty-leaf {
+    background: var(--neutral-border)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-prose pre {
+    background: var(--neutral-surface);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-prose :not(pre)>code {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-prose blockquote {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-prose blockquote p {
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-initials {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-career-header {
+    border-bottom: 1px solid var(--neutral-border)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-footer {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-footer-bottom {
+    border-top: 1px solid var(--neutral-line)
+}
+@media (max-width:767px) {
+    html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-mobile-menu[open] summary {
+        background: var(--neutral-surface)
+    }
+    html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-mobile-menu nav {
+        background: var(--neutral-ground);
+        box-shadow: none
+    }
+    html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-mobile-menu nav a[aria-current] {
+        background: var(--neutral-surface)
+    }
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin {
+    --paper: var(--neutral-ground);
+    --blue-soft: var(--neutral-surface);
+    --green: var(--neutral-strong);
+    --red: var(--neutral-strong);
+    --shadow: none}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .admin-side {
+    background: var(--neutral-surface);
+    border: 1px solid var(--neutral-line)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .admin-nav a {
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .admin-nav a.active {
+    color: var(--neutral-strong);
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .admin-nav a:hover {
+    background: var(--neutral-surface);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .btn {
+    background: var(--neutral-ground);
+    border: 1px solid var(--neutral-border)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .btn:hover {
+    background: var(--neutral-surface);
+    border-color: var(--neutral-border)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .btn.primary, html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .btn.dark {
+    color: var(--neutral-ground)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .btn.primary:hover, html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .btn.dark:hover {
+    background: var(--neutral-strong);
+    border-color: var(--neutral-strong);
+    color: var(--neutral-ground)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .btn.danger {
+    color: var(--neutral-strong);
+    border-color: var(--neutral-border)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin input:not([type=checkbox]):not([type=file]), html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin select, html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin textarea {
+    background: var(--neutral-white);
+    color: var(--neutral-ink)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin :where(input,textarea)::placeholder {
+    color: var(--neutral-text)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin :where(input,textarea,select):hover {
+    border-color: var(--neutral-border)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin :where(input,textarea,select):focus {
+    outline: 2px solid var(--neutral-strong);
+    border-color: var(--neutral-border)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin input[type=checkbox] {
+    accent-color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .unsaved-mark {
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .panel {
+    background: var(--neutral-ground)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .stat {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .stat p {
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .stat small {
+    color: var(--neutral-text)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .legend-dot {
+    background: var(--neutral-text)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .legend-dot.light {
+    background: var(--neutral-text)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .chart-column i {
+    background: var(--neutral-text)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .chart-column i.light {
+    background: var(--neutral-text)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .bar-track {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .bar-fill {
+    background: var(--neutral-text)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .table-wrap {
+    scrollbar-color: var(--neutral-border) var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin th {
+    background: var(--neutral-surface);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .table-actions .red, html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .danger-text {
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .table-actions button:disabled {
+    color: var(--neutral-text)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .tag {
+    background: var(--neutral-surface);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .tag.green {
+    background: var(--neutral-surface);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .tag.amber {
+    background: var(--neutral-surface);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .editor-toolbar {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .editor-toolbar button:hover {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .editor-toolbar button.active {
+    background: var(--neutral-surface);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .editor-toolbar .btn {
+    background: var(--neutral-ground);
+    border-color: var(--neutral-border)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .toolbar-divider {
+    background: var(--neutral-border)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .editor-surface {
+    background: var(--neutral-white)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin :where(.tiptap,.prose) :where(pre,blockquote) {
+    background: var(--neutral-surface);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin :where(.tiptap,.prose) blockquote {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin input[type=file]::file-selector-button {
+    background: var(--neutral-ground);
+    border: 1px solid var(--neutral-border)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin input[type=file]::file-selector-button:hover {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .progress-track {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .progress-track span {
+    background: var(--neutral-text)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .notice, html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .app-feedback {
+    background: var(--neutral-surface);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .notice.warn {
+    background: var(--neutral-surface);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .notice.success {
+    background: var(--neutral-surface);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .app-feedback.error {
+    background: var(--neutral-surface);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .skeleton {
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .empty {
+    border-color: var(--neutral-border)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin dialog {
+    background: var(--neutral-ground);
+    box-shadow: none
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin dialog::backdrop {
+    background: var(--neutral-scrim)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .login-card {
+    background: var(--neutral-ground)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-surface textarea {
+    background: var(--neutral-white);
+    color: var(--neutral-ink)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-surface .field input:not([type=checkbox]), html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-surface .field select, html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-receipt input {
+    background: var(--neutral-white);
+    color: var(--neutral-ink)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-surface :where(input,textarea)::placeholder {
+    color: var(--neutral-text)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-mode-note {
+    color: var(--neutral-strong);
+    background: var(--neutral-surface)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-feedback {
+    background: var(--neutral-surface);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-feedback.is-error {
+    background: var(--neutral-surface);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-badge {
+    background: var(--neutral-surface);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-badge:is(.status-public,.status-approved,.status-active,.status-resolved) {
+    background: var(--neutral-surface);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-badge:is(.status-pending,.status-reviewing,.status-needs_info) {
+    background: var(--neutral-surface);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-badge:is(.status-banned,.status-paused,.status-rejected) {
+    background: var(--neutral-surface);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-search select {
+    background: var(--neutral-white)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-queue>button.is-selected {
+    background: var(--neutral-surface);
+    color: var(--neutral-strong)
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-queue>button:hover {
+    background: var(--neutral-surface)
+}
+
+/* A complete second visual language: flat planes, weight and an aligned grid. */
+html:is([data-ui="monochrome"],[data-ui="editorial"]) {
+ --bg: var(--neutral-ground); --paper: var(--neutral-white); --ink: var(--neutral-ink); --muted: var(--neutral-text);
+ --line: var(--neutral-line); --blue: var(--neutral-ink); --blue-soft: var(--neutral-surface);
+ --green: var(--neutral-strong); --red: var(--neutral-strong); --radius: 2px; --shadow: none;
+ background: var(--neutral-ground); color: var(--neutral-ink); color-scheme: light;
+ scrollbar-color: var(--neutral-border) var(--neutral-surface);
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-site {
+ --organic-paper: var(--neutral-ground); --organic-ink: var(--neutral-ink); --organic-text: var(--neutral-text);
+ --organic-muted: var(--neutral-text); --organic-line: var(--neutral-line); --organic-sage: var(--neutral-strong);
+ --organic-green: var(--neutral-strong); --organic-tan: var(--neutral-border);
+ --organic-serif: 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+ font-family: var(--organic-serif); font-weight: 300;
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin {
+ --paper: var(--neutral-white); --blue-soft: var(--neutral-surface); --green: var(--neutral-strong); --red: var(--neutral-strong); --radius: 2px; --shadow: none;
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-site::before {display: none;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-site :where(*,*::before,*::after) {
+ border-radius: 2px!important; box-shadow: none!important;
+ animation: none!important;
+ transition: color .6s ease-in-out, background-color .6s ease-in-out, border-color .6s ease-in-out, opacity .6s ease-in-out;
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-site :where(a,button,summary,.organic-hero-photo,.organic-photo-underlay):is(:hover,:active),
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-site .organic-text-link svg {transform: none!important;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-site :is(h1,h2,h3,h4) {font-family: var(--organic-serif); font-weight: 700; letter-spacing: -.035em; line-height: 1.45;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-site :where(img,video,canvas) {filter: grayscale(1);}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-site :where(a,button,summary):focus-visible {outline: 2px solid var(--neutral-ink); outline-offset: 4px;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-site :where(a,button):active {opacity: .7;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-brand,
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .brand {font-family: var(--organic-serif); font-weight: 700; letter-spacing: -.035em;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-header {border-bottom: 1px solid var(--neutral-line);}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-container {max-width: 1248px; padding-inline: 32px;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-header-inner {min-height: 104px;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-desktop-nav>a.is-active {text-decoration-color: var(--neutral-ink); text-decoration-thickness: 1px;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-hero {grid-template-columns: 1.15fr .85fr; gap: 80px; padding-block: 96px;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-hero-copy h1 {font-size: clamp(48px,5.2vw,72px); line-height: 1.25;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-hero-copy h1 em {font-size: .46em; font-weight: 300; color: var(--neutral-text); margin-top: 28px; letter-spacing: 0;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-hero-description {max-width: 42ch; margin-block: 32px;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-hero-figure {padding: 0;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-hero-photo {aspect-ratio: 1; min-height: 0;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-photo-underlay {display: none;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-hero-figure figcaption {text-align: left; font-family: var(--organic-serif); color: var(--neutral-text); font-size: 12px; letter-spacing: .04em; margin-top: 16px;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-paths {gap: 32px; padding-block: 20px;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-paths a>span {font-weight: 700; font-size: 20px;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-card {border: 1px solid var(--neutral-line); padding: 24px;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-tags li {background: transparent; border-color: var(--neutral-line); color: var(--neutral-text); padding-inline: 9px;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-type-cover strong {font-weight: 700;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-section {padding-top: 96px;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-about-band {background: var(--neutral-surface); padding: 56px;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-site .organic-button.is-primary,
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .btn:is(.primary,.dark) {background: var(--neutral-ink); border-color: var(--neutral-ink); color: var(--neutral-ground);}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-site .organic-button.is-primary:hover,
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .btn:is(.primary,.dark):hover {background: var(--neutral-strong); border-color: var(--neutral-strong); color: var(--neutral-ground);}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-site .organic-button.is-secondary,
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .btn:not(.primary):not(.dark) {background: var(--neutral-surface); border-color: var(--neutral-line); color: var(--neutral-ink);}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-site .organic-button.is-secondary:hover,
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .btn:not(.primary):not(.dark):hover {background: var(--neutral-line); border-color: var(--neutral-border); color: var(--neutral-ink);}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-site :is(input:not([type=checkbox]):not([type=file]),select,textarea) {
+ background: transparent; border: 0; border-bottom: 1px solid var(--neutral-border); color: var(--neutral-ink); padding-block: 12px; box-shadow: none; caret-color: var(--neutral-ink);
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-site :is(input:not([type=checkbox]):not([type=file]),select,textarea):focus {
+ outline: 2px solid var(--neutral-strong); outline-offset: 3px; border-bottom-color: var(--neutral-ink); background: transparent;
+}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-site :is(input,textarea)::placeholder {color: var(--neutral-text); opacity: 1;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-site input[type=checkbox] {accent-color: var(--neutral-ink);}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-empty-leaf {width: 36px; height: 1px; transform: none; background: var(--neutral-quiet);}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-footer {background: var(--neutral-surface); border-top: 1px solid var(--neutral-line);}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-footer-signature {font-weight: 700;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .admin-side {margin: 0; top: 0; height: 100dvh; padding: 36px 20px; border: 0; border-right: 1px solid var(--neutral-line); background: var(--neutral-surface);}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .admin-nav a {font-weight: 300;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .admin-nav a.active {color: var(--neutral-ink); background: var(--neutral-line); font-weight: 700;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .admin-main {padding-top: 40px;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .panel {background: transparent; border-color: var(--neutral-line);}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .stats-grid {gap: 0; border-top: 1px solid var(--neutral-line); border-bottom: 1px solid var(--neutral-line);}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .stat {background: transparent; border: 0; padding: 28px 24px;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .admin-main .stats-grid .stat strong,
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-governance-summary strong {font-family: var(--organic-serif); font-weight: 700;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin :is(.chart-column i,.legend-dot,.bar-fill,.progress-track span) {background: var(--neutral-strong);}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin :is(.chart-column i.light,.legend-dot.light) {background: var(--neutral-quiet);}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin :is(th,.editor-toolbar) {background: var(--neutral-surface);}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .editor-surface {background: var(--neutral-white);}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-mode-note {background: transparent; border-bottom: 1px solid var(--neutral-line); padding: 12px 0; color: var(--neutral-text);}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-feedback {background: var(--neutral-surface); border: 1px solid var(--neutral-line); color: var(--neutral-strong);}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-feedback.is-error {background: var(--neutral-line); border-color: var(--neutral-border); color: var(--neutral-ink);}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-badge {border: 1px solid var(--neutral-border); background: var(--neutral-ground); color: var(--neutral-strong);}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-badge:is(.status-public,.status-approved,.status-active,.status-resolved) {background: var(--neutral-line); color: var(--neutral-ink);}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-badge:is(.status-pending,.status-reviewing,.status-needs_info) {background: var(--neutral-surface); border-style: dashed; color: var(--neutral-strong);}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-badge:is(.status-banned,.status-paused,.status-rejected) {background: var(--neutral-strong); border-color: var(--neutral-strong); color: var(--neutral-ground);}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-queue>button.is-selected {background: var(--neutral-line); color: var(--neutral-ink);}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-queue>button strong {font-weight: 700;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-tabs a.is-current {color: var(--neutral-ink); border-bottom-color: var(--neutral-ink); font-weight: 500;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-surface .page-head>div {flex: 1; min-width: 0;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-surface .page-head>select {flex: 0 0 220px; width: 220px;}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin input[type=file]::file-selector-button {border-radius: 2px; background: var(--neutral-surface); border-color: var(--neutral-border); color: var(--neutral-ink);}
+html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin input[type=file]::file-selector-button:hover {background: var(--neutral-line);}
+@media(max-width:1100px) {
+ html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-hero {gap: 48px;}
+ html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-hero-copy h1 {font-size: 52px;}
+}
+@media(max-width:900px) {
+ html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .admin-side {height: auto; padding: 24px 28px 8px; border-right: 0; border-bottom: 1px solid var(--neutral-line);}
+}
+@media(max-width:767px) {
+ html:is([data-ui="monochrome"],[data-ui="editorial"]) .community-surface .page-head>select {flex: none; width: 100%;}
+ html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-container {padding-inline: 24px;}
+ html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-header-inner {min-height: 88px;}
+ html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-hero {grid-template-columns: 1fr; padding-block: 48px 56px; gap: 40px;}
+ html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-hero-copy h1 {font-size: 48px;}
+ html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-hero-copy h1 em {font-size: 25px; margin-top: 20px;}
+ html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-hero-figure {width: 100%; max-width: 480px;}
+ html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-paths {gap: 0;}
+ html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-section {padding-top: 64px;}
+ html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-about-band {padding: 32px 24px;}
+ html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .admin-main {padding-top: 24px;}
+ html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .stat {padding: 24px 16px;}
+}
+@media(max-width:359px) {
+ html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-container {padding-inline: 20px;}
+ html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-hero-copy h1 {font-size: 42px;}
+ html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-admin .admin-side {padding-inline: 16px;}
+}
+@media(prefers-reduced-motion:reduce) {
+ html:is([data-ui="monochrome"],[data-ui="editorial"]) .organic-site :where(*,*::before,*::after) {transition: none!important; animation: none!important;}
+}

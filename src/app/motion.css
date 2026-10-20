@@ -1,0 +1,45 @@
+/* Continuity across the existing three themes; no full-page travel or delayed content. */
+html {scrollbar-gutter:stable;scroll-behavior:auto;}
+@supports not (scrollbar-gutter:stable) {html {overflow-y:scroll;}}
+html[data-ui] {--motion-color:200ms;--motion-feedback:140ms;--motion-panel:180ms;--motion-ease:cubic-bezier(.2,.7,.2,1);}
+html[data-ui=natural-organic] {--motion-color:500ms;--motion-panel:240ms;}
+html[data-ui=editorial] {--motion-color:300ms;--motion-panel:200ms;}
+.page-content {min-width:0;opacity:1;}
+html[data-ui] .organic-site :is(a,button,summary,input,select,textarea) {
+ transition:color var(--motion-color) ease-in-out,background-color var(--motion-color) ease-in-out,border-color var(--motion-color) ease-in-out,opacity var(--motion-feedback) ease-out,transform var(--motion-feedback) var(--motion-ease);
+}
+html[data-ui=natural-organic] .organic-site :is(.organic-button,.btn) {
+ transition:color var(--motion-color) ease-in-out,background-color var(--motion-color) ease-in-out,border-color var(--motion-color) ease-in-out,border-radius 700ms ease-in-out,opacity var(--motion-feedback) ease-out,transform var(--motion-feedback) var(--motion-ease);
+}
+/* Headlines and text do not change metrics when a link is hovered. */
+html[data-ui=editorial] .organic-site :is(.organic-project-link,.organic-article-row>a,.feed-post-content):hover :is(h2,h3) {font-style:normal;}
+html[data-ui] .organic-site .organic-hero-figure {animation:none;}
+html[data-ui] .organic-site .organic-text-link svg {transition:transform 220ms var(--motion-ease);}
+html[data-ui=natural-organic] .organic-site :is(.organic-button,.btn):active {transform:translateY(1px);}
+html[data-ui=editorial] .organic-site :is(.organic-button,.btn,.organic-text-link,.organic-desktop-nav>a)::after {transition:transform 260ms var(--motion-ease);}
+html[data-ui] .organic-site .feed-post-actions .icon {transition:color var(--motion-feedback) ease-out,fill var(--motion-feedback) ease-out,fill-opacity var(--motion-feedback) ease-out;}
+html[data-ui] .organic-site :is(.theme-menu,.feed-account-popover,.feed-share-popover,.organic-mobile-menu nav) {animation:panel-disclose var(--motion-panel) var(--motion-ease)!important;}
+@keyframes panel-disclose {from {opacity:.65;clip-path:inset(0 0 8% 0);}to {opacity:1;clip-path:inset(0);}}
+html[data-ui] .organic-site dialog[open] {animation:dialog-disclose 180ms var(--motion-ease)!important;}
+@keyframes dialog-disclose {from {opacity:.75;}to {opacity:1;}}
+html[data-ui] .organic-site dialog::backdrop {transition:background-color 180ms ease-out;}
+/* Editor hydration reserves its toolbar and canvas rather than a 120px block. */
+html[data-ui] .organic-site .editor-loading {height:360px;min-height:360px;}
+html[data-ui] .organic-site .community-loading {min-height:280px;}
+html[data-ui] .organic-site .progress-track span {transition:transform 180ms linear;}
+html[data-ui] .organic-site .chart-bars i {transition:height 220ms var(--motion-ease);}
+@media(max-width:767px){html[data-ui] .organic-site .editor-loading {height:420px;min-height:420px;}}
+@media(prefers-reduced-motion:reduce){
+ html[data-ui] .organic-site :is(a,button,summary,input,select,textarea),html[data-ui] .organic-site .organic-text-link svg {transition:none!important;}
+ html[data-ui] .organic-site :is(.theme-menu,.feed-account-popover,.feed-share-popover,.organic-mobile-menu nav,dialog[open],.promotion-track) {animation:none!important;}
+ html[data-ui] .organic-site :is(.organic-button,.btn):active {transform:none!important;}
+}
+/* Route content is replaced as a unit; browser scroll anchoring must not move the rail. */
+.organic-main:has(.community-navigation-shell) {overflow-anchor:none;}
+
+/* The active destination travels inside the rail; reading content stays visible. */
+.feed-nav-links {position:relative;}
+.feed-active-indicator {position:absolute;top:0;left:0;pointer-events:none;background:#f5f5f5;border-radius:999px;opacity:0;z-index:0;}
+.feed-nav-links[data-motion-ready] > a[data-nav-key] {position:relative;z-index:1;}
+html[data-ui=x-social] .feed-navigation .feed-nav-links[data-motion-ready] > a[data-nav-key][aria-current=page] {background:transparent;}
+@media(max-width:767px){.feed-active-indicator {display:none;}}

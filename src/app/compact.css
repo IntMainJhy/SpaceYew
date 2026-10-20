@@ -1,0 +1,180 @@
+/* Shared compact public chrome. Theme palettes, contours and body reading remain intact. */
+html[data-ui] .organic-header-inner {min-height:68px; gap:20px;}
+html[data-ui] .organic-container {max-width:1248px; padding-inline:32px;}
+html[data-ui] .organic-brand {font-size:23px; flex-shrink:0;}
+html[data-ui] .organic-brand span {font-size:10px; margin-top:4px; letter-spacing:.02em;}
+.organic-header-tools {display:flex; align-items:center; gap:12px; min-width:0;}
+html[data-ui] .organic-desktop-nav {gap:10px; font-size:13px;}
+html[data-ui] .organic-desktop-nav>a {font-size:13px; letter-spacing:0; padding:6px 2px;}
+html[data-ui] .organic-desktop-nav>a:is(.organic-career-nav,.organic-login-nav) {min-height:44px; padding:8px 16px; margin-left:0; font-size:12px; gap:8px;}
+html[data-ui] .organic-header {border-bottom:1px solid var(--organic-line);}
+html[data-ui] .organic-main {padding-bottom:56px;}
+html[data-ui] .organic-main h2 {font-size:28px;}
+html[data-ui] .organic-hero {grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr); gap:48px; padding-block:36px 40px;}
+html[data-ui] .organic-hero-copy {grid-column:auto; min-width:0;}
+html[data-ui] .organic-hero-copy h1 {font-size:clamp(36px,4vw,52px); line-height:1.2;}
+html[data-ui] .organic-hero-copy h1 em {font-size:.48em; margin-top:14px; line-height:1.5;}
+html[data-ui] .organic-hero-description {font-size:14px; max-width:46ch; margin-block:18px 20px; line-height:1.8;}
+html[data-ui] .organic-hero .organic-button {min-height:44px; padding:8px 20px; font-size:13px; gap:10px;}
+html[data-ui] .organic-hero-copy .organic-tags {margin-top:16px; gap:8px;}
+html[data-ui] .organic-hero-figure {grid-column:auto; max-width:300px; width:100%; justify-self:end; padding:0;}
+html[data-ui] .organic-hero-photo {aspect-ratio:6/5; min-height:0;}
+html[data-ui] .organic-hero-figure figcaption {font-size:12px; margin-top:12px; line-height:1.6;}
+html[data-ui] .organic-paths {gap:24px; padding-block:12px;}
+html[data-ui] .organic-paths a {min-height:64px; padding-block:6px;}
+html[data-ui] .organic-paths a>span {font-size:20px;}
+html[data-ui] .organic-paths small {margin-top:2px; font-size:11px;}
+html[data-ui] .organic-section {padding-top:56px;}
+html[data-ui] .organic-section-heading {margin-bottom:24px; gap:20px;}
+html[data-ui] .organic-section-heading p {margin-top:8px;}
+html[data-ui] .organic-project-grid,html[data-ui] .organic-resource-grid {gap:24px;}
+html[data-ui] .organic-card {padding:24px;}
+html[data-ui=editorial] .organic-project-piece {padding:0;}
+html[data-ui] .organic-project-cover {aspect-ratio:1.7;}
+html[data-ui] .organic-project-copy {padding-top:16px;}
+html[data-ui] .organic-project-copy h3 {font-size:23px;}
+html[data-ui] .organic-reading-split {gap:40px;}
+html[data-ui] .organic-article-row {padding-block:20px;}
+html[data-ui] .organic-article-row h3 {font-size:23px;}
+html[data-ui] .organic-resource-piece h3 {font-size:21px; margin-top:16px;}
+html[data-ui] .organic-resource-piece p {margin-block:10px 18px;}
+html[data-ui] .organic-about-band {margin-top:48px; padding:32px; gap:32px;}
+html[data-ui=editorial] .organic-about-band {padding-inline:0;}
+html[data-ui] .organic-about-band h2 {font-size:28px;}
+html[data-ui] .organic-about-band p {margin-top:12px;}
+html[data-ui] .organic-page-heading {padding-block:36px 32px;}
+html[data-ui] .organic-page-heading h1 {font-size:40px;}
+html[data-ui] .organic-page-heading p {margin-top:16px;}
+html[data-ui] .organic-footer {padding-block:48px 24px;}
+html[data-ui] .organic-footer-top {padding-bottom:28px;}
+html[data-ui] .organic-footer-signature {font-size:30px;}
+.admin-login-toolbar {display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:20px;}
+.admin-login-toolbar .brand {margin:0;}
+.organic-admin .admin-topline .theme-control {font-size:12px;}
+.promotion-editor {padding-block:20px; border-top:1px solid var(--organic-line); margin-top:20px;}
+.promotion-editor .section-title h4 {font-size:16px; margin:0;}
+
+/* A shallow, seamless text marquee above the navigation. */
+.promotion-bar {background:#111111; color:#f9f8f6; border-bottom:1px solid #111111; font:500 12px/1.5 -apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;}
+.promotion-inner {position:relative; display:flex; align-items:center; width:100%; min-height:44px;}
+.promotion-viewport {min-width:0; flex:1; overflow:hidden;}
+.promotion-track {display:flex; width:max-content;}
+/* Explicitly requested motion is shared even by themes that disable decoration. */
+html[data-ui] .promotion-track {animation:promotion-marquee var(--promotion-duration,30s) linear infinite!important; animation-play-state:var(--promotion-state,paused)!important;}
+.promotion-group,.promotion-cycle {display:flex; flex:0 0 auto; align-items:center;}
+.promotion-cycle {gap:40px; padding-inline-end:40px;}
+.promotion-item {display:flex; flex:0 0 auto; align-items:center; gap:14px; white-space:nowrap;}
+.promotion-label {font-size:11px; white-space:nowrap; flex-shrink:0;}
+.promotion-item a,.promotion-title {display:flex; align-items:center; min-height:44px; color:inherit; white-space:nowrap;}
+.promotion-item a:hover {text-decoration:underline; color:inherit;}
+.promotion-controls {position:absolute; inset-inline-end:0; top:0; bottom:0; z-index:2; display:flex; align-items:center; background:#111111;}
+@keyframes promotion-marquee {from {transform:translateX(-50%);} to {transform:translateX(0);}}
+/* Keyboard/reduced-motion readers get one static, horizontally scrollable list. */
+.promotion-bar[data-static] .promotion-viewport {overflow-x:auto;}
+html[data-ui] .promotion-bar[data-static] .promotion-track {animation:none!important;}
+.promotion-bar[data-static] .promotion-clone {display:none;}
+.promotion-controls button {display:grid; place-items:center; width:44px; min-height:44px; background:transparent; color:inherit; border:0; cursor:pointer; border-radius:14px 18px 16px 20px;}
+.promotion-controls button:hover {background:#303030; color:inherit;}
+.promotion-controls button:active {opacity:.75;}
+.promotion-controls svg {width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:1.4;}
+html[data-ui] .promotion-bar :is(a,button):focus-visible {outline:2px solid #f9f8f6; outline-offset:-3px;}
+html:is([data-ui=monochrome],[data-ui=editorial]) .promotion-controls button {border-radius:0;}
+@media(max-width:1099px) {
+ html[data-ui] .organic-desktop-nav {display:none;}
+ html[data-ui] .organic-mobile-menu {display:block;}
+ .organic-mobile-menu summary {display:flex; align-items:center; gap:10px; min-height:44px; padding:8px 12px; list-style:none; cursor:pointer; font-size:12px;}
+ .organic-mobile-menu summary::-webkit-details-marker {display:none;}
+ .organic-mobile-menu summary>span {display:flex; flex-direction:column; gap:6px;}
+ .organic-mobile-menu summary i {display:block; width:16px; height:1px; background:currentColor;}
+ .organic-mobile-menu nav {position:absolute; z-index:80; right:0; top:52px; width:205px; padding:12px; background:var(--organic-paper); border:1px solid var(--organic-line); border-radius:25px 31px 23px 29px;}
+ .organic-mobile-menu nav a {display:flex; align-items:center; min-height:44px; padding:6px 14px; font-size:14px;}
+ html[data-ui] .organic-hero {gap:32px;}
+}
+@media(max-width:767px) {
+ html[data-ui] .organic-container {padding-inline:20px;}
+ html[data-ui] .organic-header-inner {min-height:64px; gap:12px;}
+ html[data-ui] .organic-brand {font-size:20px;}
+ html[data-ui] .organic-brand span {font-size:9px;}
+ .organic-header-tools {gap:4px;}
+ .theme-trigger {padding-inline:10px; gap:6px;}
+ .theme-trigger>svg:first-child {display:none;}
+ html[data-ui] .organic-hero {grid-template-columns:minmax(0,1fr); padding-block:24px; gap:20px;}
+ html[data-ui] .organic-hero-copy h1 {font-size:36px; line-height:1.22;}
+ html[data-ui] .organic-hero-copy h1 em {font-size:21px; margin-top:10px;}
+ html[data-ui] .organic-hero-description {margin-block:14px 16px; font-size:14px;}
+ html[data-ui] .organic-hero .organic-actions {gap:10px;}
+ html[data-ui] .organic-hero .organic-button {padding-inline:18px;}
+ html[data-ui] .organic-hero-figure {max-width:none; margin:0; width:100%;}
+ html[data-ui] .organic-hero-photo {aspect-ratio:3/1; max-height:144px;}
+ html[data-ui] .organic-hero-figure figcaption {font-size:11px; margin-top:8px;}
+ .organic-photo-underlay {inset:6px 12px 12px 0;}
+ html[data-ui] .organic-paths {grid-template-columns:minmax(0,1fr); gap:0; padding-block:0;}
+ html[data-ui] .organic-paths a {min-height:60px; padding-block:10px;}
+ html[data-ui] .organic-paths a>span {font-size:18px;}
+ html[data-ui] .organic-paths small {font-size:11px;}
+ html[data-ui] .organic-section {padding-top:40px;}
+ html[data-ui] .organic-main h2 {font-size:25px;}
+ html[data-ui] .organic-section-heading {margin-bottom:20px; gap:12px;}
+ html[data-ui] .organic-project-grid,html[data-ui] .organic-resource-grid {gap:20px;}
+ html[data-ui] .organic-card {padding:20px;}
+ html[data-ui=editorial] .organic-project-piece {padding:0;}
+ html[data-ui] .organic-about-band {margin-top:32px; padding:24px; gap:20px;}
+ html[data-ui=editorial] .organic-about-band {padding-inline:0;}
+ html[data-ui] .organic-about-band h2 {font-size:25px;}
+ html[data-ui] .organic-page-heading {padding-block:28px 24px;}
+ html[data-ui] .organic-page-heading h1 {font-size:32px;}
+ html[data-ui] .organic-footer {padding-block:32px 20px;}
+ html[data-ui] .organic-main {padding-bottom:40px;}
+ .promotion-inner {gap:8px; min-height:56px;}
+ .promotion-item {gap:10px; font-size:11px;}
+ .promotion-label {font-size:10px;}
+ .promotion-cycle {gap:28px; padding-inline-end:28px;}
+ .admin-login-toolbar {align-items:flex-start; flex-wrap:wrap;}
+ .organic-admin .admin-topline {align-items:flex-start; gap:12px;}
+ .organic-admin .admin-topline>.actions {flex-wrap:wrap; justify-content:flex-end; gap:8px;}
+}
+@media(max-width:359px) {
+ html[data-ui] .organic-container {padding-inline:16px;}
+ html[data-ui] .organic-brand {font-size:16px; letter-spacing:0;}
+ .theme-trigger {padding-inline:8px; font-size:11px;}
+ .organic-mobile-menu summary {gap:8px; padding-inline:8px; white-space:nowrap; flex-shrink:0;}
+ html[data-ui] .organic-hero-copy h1 {font-size:32px;}
+}
+@media print {.promotion-bar {display:none;}}
+.promotion-bar[data-static] .promotion-viewport {padding-inline-end:48px;scroll-padding-inline-end:48px;}
+
+/* Pure white navigation and black announcement strip. */
+html[data-ui] {--chrome-surface:#fff;--chrome-ink:#171717;--chrome-muted:#646464;--chrome-accent:#171717;--chrome-banner:#000;--chrome-banner-ink:#ededed;}
+html[data-ui] .organic-header {background:var(--chrome-surface)!important;border-bottom:0;backdrop-filter:none;}
+html[data-ui] .organic-site .organic-header :is(.organic-brand,.organic-desktop-nav>a,.organic-mobile-menu>summary,.theme-trigger,.language-control select) {color:var(--chrome-ink);}
+html[data-ui] .organic-site .organic-header :is(.organic-brand span,.theme-name-mobile) {color:var(--chrome-muted);}
+html[data-ui] .organic-site .organic-header .organic-desktop-nav>a:is(:hover,.is-active) {color:var(--chrome-accent);border-color:var(--chrome-accent);text-decoration-color:var(--chrome-accent);}
+html[data-ui] .organic-site .organic-header .organic-desktop-nav>a.is-active::after {background:var(--chrome-accent);}
+html[data-ui] .organic-site .organic-header :is(a,button,summary,select):focus-visible {outline-color:var(--chrome-ink);}
+html[data-ui] .promotion-bar {background:var(--chrome-banner,#000);color:var(--chrome-banner-ink,#f5f5f5);border-bottom:0;font-family:var(--site-font);font-size:13px;font-weight:400;line-height:1.8;letter-spacing:.035em;}
+html[data-ui] .promotion-controls {background:var(--chrome-banner,#000);}
+html[data-ui] .promotion-inner,html[data-ui] .promotion-item a,html[data-ui] .promotion-title {min-height:48px;}
+html[data-ui] .promotion-cycle {gap:80px;padding-inline-end:80px;}
+html[data-ui] .promotion-item {gap:18px;}
+html[data-ui] .promotion-label {font-size:12px;color:#b5b5b5;letter-spacing:.06em;}
+html[data-ui] .promotion-controls button {width:48px;min-height:48px;}
+html[data-ui] .promotion-controls button:hover {background:#1c1c1c;}
+
+/* Consistent navigation targets and a quieter ending to public pages. */
+html[data-ui] .organic-desktop-nav {gap:18px;}
+html[data-ui] .organic-desktop-nav>a {min-height:44px;padding:8px 4px;font-size:14px;display:inline-flex;align-items:center;}
+html[data-ui] .organic-footer-compact {background:#fff;border-top:0;padding-block:28px;}
+html[data-ui] .organic-footer-compact .organic-footer-signature {font-size:18px;color:#171717;}
+html[data-ui] .organic-footer-compact nav {gap:24px;font-size:12px;line-height:1.8;color:#656565;}
+html[data-ui] .organic-footer-compact nav a {min-height:44px;display:inline-flex;align-items:center;}
+@media(max-width:760px){html[data-ui] .organic-footer-compact{padding-block:24px;}html[data-ui] .organic-footer-compact nav{column-gap:20px;row-gap:0;}}
+html:is([data-ui=x-social],[data-ui=monochrome],[data-ui=editorial]) .organic-footer-compact {border-radius:0;}
+
+/* The promotion lives above route content and keeps one geometry and scroll phase. */
+.promotion-bar {overflow:hidden;}
+.promotion-label {display:inline-flex;align-items:center;gap:8px;}
+.promotion-label>.icon {width:15px;height:15px;flex:none;stroke-width:1.6;}
+.promotion-item::after {content:'';width:3px;height:3px;margin-inline-start:20px;border-radius:50%;background:#777;flex:none;}
+.promotion-bar[data-closing] {pointer-events:none;}
+.promotion-bar[data-closing] .promotion-track {animation-play-state:paused!important;}
+@media(prefers-reduced-motion:reduce){html[data-ui] .promotion-track {animation:none!important;}}

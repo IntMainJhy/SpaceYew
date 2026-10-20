@@ -1,0 +1,6 @@
+/* User-requested removal of repeated decorative lines, across all three themes. */
+html[data-ui] .organic-site :is(.organic-header,.organic-paths,.organic-article-row,.organic-resource-bottom,.organic-contribution-section,.organic-timeline-entry,.organic-career-header,.organic-career-project,.organic-footer-bottom,.feed-post,.community-resource-row,.community-history-row,.community-editor-aside,.community-preview,.community-version-compare,.community-close-account,.community-case-lookup,.community-admin-section,.community-governance-summary,.community-review-top,.community-review-decision,.community-member-row) {border-color:transparent;}
+html[data-ui] .organic-site .organic-card,html[data-ui] .organic-admin :is(.panel,.stat,.admin-side) {border-color:transparent;}
+html[data-ui] .organic-site .feed-search :is(input,select) {border:0;background:var(--feed-surface);}
+html[data-ui] .organic-admin :is(.list-row,.experience-editor,.selected-file,.community-queue>button),html[data-ui] .organic-admin td {border-color:transparent;}
+/* Editable fields, focus indicators, menus, table headings and content-authored rules stay visible. */

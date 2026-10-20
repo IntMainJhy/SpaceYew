@@ -1,0 +1,22 @@
+[Unit]
+Description=SpaceYew %i website
+After=network.target
+
+[Service]
+Type=simple
+User=spaceyew
+Group=spaceyew
+WorkingDirectory=/opt/spaceyew/app
+Environment=NODE_ENV=production
+EnvironmentFile=/etc/spaceyew/common.env
+EnvironmentFile=/etc/spaceyew/%i.env
+ExecStart=/usr/bin/node /opt/spaceyew/app/node_modules/next/dist/bin/next start --hostname 127.0.0.1 --port ${PORT}
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=30
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

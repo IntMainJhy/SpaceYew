@@ -1,0 +1,71 @@
+/* Operate extension: inherit white/ink controls, quiet rows and existing responsive navigation. */
+.management-filters{display:flex;align-items:end;flex-wrap:wrap;gap:12px;margin:24px 0}
+.management-filters label{display:grid;gap:6px;min-width:0;font-size:13px;color:var(--x-muted,#536471)}
+.management-filters :is(input,select){max-width:100%;min-width:130px;padding:10px 12px;background:#fff;color:var(--x-ink,#0f1419);border:1px solid var(--x-border,#cfd9de);border-radius:10px;font:inherit}
+.management-filters input[type=search]{width:220px}
+.management-filters>button{align-self:end}
+.management-pagination{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:16px;margin-top:24px;font-variant-numeric:tabular-nums}
+.management-empty{padding:32px 0;color:var(--x-muted,#536471)}
+.file-storage{max-width:640px;margin:12px 0 28px;font-variant-numeric:tabular-nums}
+.file-storage p{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin:0 0 8px}
+.file-storage p span{margin-left:auto;color:var(--x-muted,#536471);font-size:13px}
+.file-storage progress{display:block;width:100%;height:5px;accent-color:var(--x-ink,#0f1419)}
+.file-storage small{display:block;margin-top:8px;color:var(--x-muted,#536471)}
+.personal-files .space-panel-heading{margin-bottom:20px}
+.organic-site .personal-files .space-panel-heading h1{margin:0}
+.personal-files .file-upload-control{margin:0;min-height:44px;justify-content:center}
+.personal-files .file-storage{max-width:none;margin:0 0 28px}
+.personal-files .file-storage progress{appearance:none;height:3px;border:0;border-radius:3px;background:var(--sp-line,#e5e5e5);overflow:hidden}
+.personal-files .file-storage progress::-webkit-progress-bar{background:var(--sp-line,#e5e5e5)}
+.personal-files .file-storage progress::-webkit-progress-value{background:var(--sp-ink,#242424)}
+.personal-files .file-storage progress::-moz-progress-bar{background:var(--sp-ink,#242424)}
+.personal-files .management-filters{display:grid;grid-template-columns:minmax(180px,1fr) minmax(140px,180px) minmax(140px,180px) auto;margin:0 0 20px}
+.personal-files .management-filters label{margin:0}
+.personal-files .management-filters input[type=search]{width:100%}
+.personal-files .management-empty{display:grid;place-items:center;min-height:180px;margin:0;padding:32px 0;text-align:center}
+.file-upload-control{position:relative;overflow:hidden;cursor:pointer}
+.file-upload-control input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+.file-upload-control:focus-within{outline:2px solid var(--x-ink,#0f1419);outline-offset:4px}
+.personal-file-row{display:flex;align-items:center;gap:20px;padding:22px 0;border-bottom:1px solid var(--x-line,#eff3f4)}
+.personal-file-preview{flex:0 0 64px;width:64px;height:64px;display:grid;place-items:center;background:var(--x-hover,#f7f9f9);border-radius:12px;overflow:hidden;font-size:11px;font-weight:600;color:var(--x-muted,#536471)}
+.personal-file-preview img{width:100%;height:100%;object-fit:cover}
+.personal-file-copy{flex:1;min-width:0}
+.space-panel.personal-files .personal-file-copy h2{font-size:16px;font-weight:600;line-height:1.45;margin:0 0 4px;overflow-wrap:anywhere}
+.personal-file-copy p,.file-pending-row p{margin:4px 0;color:var(--x-muted,#536471);font-size:13px;font-variant-numeric:tabular-nums}
+.personal-file-copy summary,.file-unused{font-size:13px;color:var(--x-muted,#536471)}
+.personal-file-copy ul{padding-left:20px;font-size:13px}
+.file-transfer,.file-pending-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
+.file-pending{margin-top:36px}
+.file-pending h2{font-size:20px}
+.space-file-library{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.space-file-library select{min-width:0;max-width:100%}
+.management-log table{min-width:760px;width:100%;font-size:13px}
+.management-log :is(td,th){vertical-align:top}
+.management-log td:first-child{white-space:nowrap;font-variant-numeric:tabular-nums}
+.management-log pre{max-width:380px;max-height:240px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}
+.log-target{display:block;max-width:190px;overflow-wrap:anywhere;font-size:12px}
+.case-linked-content,.case-content-link{margin:20px 0 28px;padding:20px 0}
+.case-linked-content h3{margin-top:0}
+.case-linked-content strong,.case-content-link select{overflow-wrap:anywhere;max-width:100%}
+.case-site-snapshot img{max-width:100%;max-height:360px;object-fit:contain}
+.case-content-link textarea{width:100%;margin:8px 0 12px}
+@media(max-width:860px){
+ .personal-files .management-filters{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .personal-files .management-filters :is(input,select){min-width:0}
+ .personal-files .management-filters>button{justify-self:start;min-height:44px}
+}
+@media(max-width:767px){
+ .management-filters{align-items:stretch;gap:12px}
+ .management-filters label{flex:1 1 140px}
+ .management-filters :is(input,select){width:100%;min-width:0}
+ .management-filters input[type=search]{width:100%}
+ .space-panel.personal-files .personal-file-row{display:grid;grid-template-columns:48px minmax(0,1fr);align-items:start;gap:12px}
+ .personal-file-preview{flex-basis:48px;width:48px;height:48px}
+ .personal-file-row>.space-actions{grid-column:2;margin-left:0;justify-content:flex-start}
+ .feed-nav-links>[data-nav-key="files"]{display:none!important}
+ .file-storage p span{margin-left:0;width:100%}
+ .space-workspace-main>.space-tabs{flex-wrap:wrap}
+}
+@media(prefers-reduced-motion:reduce){.file-upload-control{transition:none}}
+
+.case-site-snapshot .community-review-meta dd{min-width:0;overflow-wrap:anywhere}

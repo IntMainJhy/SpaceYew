@@ -1,0 +1,2 @@
+import {serverI18n} from '@/lib/server-i18n';
+export default async function NotFound(){const {t}=await serverI18n();return <div className="organic-site"><main className="organic-container organic-404"><div className="organic-empty"><span className="organic-empty-leaf" aria-hidden="true"/><h1>{t('这一页，暂时不在这里。')}</h1><p>{t('内容可能尚未发布、已经下架，或地址有误。回到首页，继续逛逛吧。')}</p><a href="/" className="organic-button px-6 py-3 rounded-full font-medium transition-colors duration-300 is-primary">{t('返回首页')}</a></div></main></div>}

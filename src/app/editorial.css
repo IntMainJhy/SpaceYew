@@ -1,0 +1,148 @@
+/* User-pinned Editorial: warm paper, soft monochrome, serif publication scale.
+   Shared neutral components keep existing CMS/community/upload behavior.
+   No accent color, texture, decorative geometry, shadow or rounded contour. */
+html[data-ui="editorial"] {
+ --neutral-ground: #f9f8f6; --neutral-white: #f9f8f6; --neutral-ink: #1c1c1c;
+ --neutral-strong: rgb(28 28 28 / .8); --neutral-text: rgb(28 28 28 / .65);
+ --neutral-quiet: rgb(28 28 28 / .4); --neutral-line: rgb(28 28 28 / .1);
+ --neutral-border: rgb(28 28 28 / .2); --neutral-surface: rgb(28 28 28 / .025);
+ --neutral-scrim: rgb(28 28 28 / .4);
+ --editorial-serif: 'Baskerville', 'Baskerville Old Face', 'Songti SC', STSong, Georgia, serif;
+ --editorial-sans: 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+ background: #f9f8f6; color: #1c1c1c;
+}
+html[data-ui="editorial"] .organic-site {
+ --organic-serif: var(--editorial-serif); font-family: var(--editorial-sans); font-weight: 400; line-height: 1.85;
+}
+html[data-ui="editorial"] .organic-site :where(*,*::before,*::after) {
+ border-radius: 0!important; box-shadow: none!important;
+ transition: color .5s ease-in-out, background-color .5s ease-in-out, border-color .5s ease-in-out, opacity .5s ease-in-out;
+}
+html[data-ui="editorial"] .organic-site :is(h1,h2,h3,h4) {font-family: var(--editorial-serif); font-weight: 400; letter-spacing: -.04em; line-height: 1.45;}
+html[data-ui="editorial"] .organic-site :is(p,small) {font-family: var(--editorial-sans); line-height: 1.85;}
+html[data-ui="editorial"] .organic-site a {text-decoration-color: currentColor; text-decoration-thickness: 1px; text-underline-offset: 6px;}
+html[data-ui="editorial"] .organic-site :where(a,button):active {opacity: 1;}
+html[data-ui="editorial"] .organic-site :where(a,button,summary):focus-visible {outline: 1px solid #1c1c1c; outline-offset: 5px;}
+html[data-ui="editorial"] .organic-container {max-width: 1280px; padding-inline: 48px;}
+html[data-ui="editorial"] .organic-header {position: sticky; top: 0; z-index: 50; background: rgb(249 248 246 / .94); backdrop-filter: blur(4px); border-bottom: 1px solid var(--neutral-line);}
+html[data-ui="editorial"] .organic-header-inner {min-height: 100px;}
+html[data-ui="editorial"] .organic-brand {font-family: var(--editorial-serif); font-weight: 400; letter-spacing: .12em; font-size: 24px; text-transform: uppercase;}
+html[data-ui="editorial"] .organic-brand span {font-family: var(--editorial-sans); font-size: 11px; letter-spacing: .08em;}
+html[data-ui="editorial"] .organic-desktop-nav {gap: 20px;}
+html[data-ui="editorial"] .organic-desktop-nav>a {font-size: 12px; letter-spacing: .13em; text-transform: uppercase;}
+html[data-ui="editorial"] .organic-site :is(.organic-button,.btn) {font-family: var(--editorial-sans); font-weight: 400; letter-spacing: .05em; padding: 12px 24px;}
+html[data-ui="editorial"] .organic-site :is(.organic-button.is-secondary,.btn:not(.primary):not(.dark)) {background: transparent;}
+html[data-ui="editorial"] .organic-site :is(.organic-button.is-primary,.btn.primary,.btn.dark):hover {background: #f9f8f6; color: #1c1c1c; border-color: #1c1c1c;}
+html[data-ui="editorial"] .organic-site :is(.organic-button,.btn,.organic-text-link,.organic-desktop-nav>a) {position: relative;}
+html[data-ui="editorial"] .organic-site :is(.organic-button,.btn,.organic-text-link,.organic-desktop-nav>a)::after {content: ''; position: absolute; bottom: 8px; left: 16px; right: 16px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .5s ease-in-out; pointer-events: none;}
+html[data-ui="editorial"] .organic-site :is(.organic-button,.btn,.organic-text-link,.organic-desktop-nav>a):hover::after {transform: scaleX(1); transform-origin: left;}
+html[data-ui="editorial"] .organic-site :is(.organic-button,.btn,.organic-text-link,.organic-desktop-nav>a):hover {text-decoration: none;}
+html[data-ui="editorial"] .organic-hero {display: grid; grid-template-columns: repeat(12,minmax(0,1fr)); gap: 32px; padding-block: 96px 160px; align-items: center;}
+html[data-ui="editorial"] .organic-hero-copy {grid-column: 1/8; min-width: 0;}
+html[data-ui="editorial"] .organic-hero-copy h1 {font-size: 96px; line-height: 1.12; letter-spacing: -.04em; font-weight: 400;}
+html[data-ui="editorial"] .organic-hero-copy h1 em {font-family: var(--editorial-serif); font-size: 32px; font-weight: 400; font-style: italic; margin-top: 30px; letter-spacing: -.02em; color: rgb(28 28 28 / .65); line-height: 1.6;}
+html[data-ui="editorial"] .organic-hero-description {font-size: 14px; max-width: 40ch; margin-block: 32px; line-height: 1.9;}
+html[data-ui="editorial"] .organic-hero-figure {grid-column: 8/13; align-self: center; width: 100%;}
+html[data-ui="editorial"] .organic-hero-image {overflow: hidden; position: relative;}
+html[data-ui="editorial"] .organic-hero-photo {aspect-ratio: 4/5; object-fit: cover; transform: none; transition: transform 1s ease-in-out;}
+html[data-ui="editorial"] .organic-hero-figure:hover .organic-hero-photo {transform: scale(1.05)!important;}
+html[data-ui="editorial"] .organic-hero-figure figcaption {font-size: 12px; color: var(--neutral-text); font-family: var(--editorial-serif); font-style: italic; letter-spacing: .02em;}
+html[data-ui="editorial"] .organic-tags li {font-size: 11px; letter-spacing: .08em; font-weight: 400;}
+html[data-ui="editorial"] .organic-paths {gap: 48px; padding-block: 30px;}
+html[data-ui="editorial"] .organic-paths a>span {font-family: var(--editorial-serif); font-weight: 400; font-size: 26px;}
+html[data-ui="editorial"] .organic-section {padding-top: 160px;}
+html[data-ui="editorial"] .organic-section-heading {margin-bottom: 48px;}
+html[data-ui="editorial"] .organic-project-grid {gap: 48px;}
+html[data-ui="editorial"] .organic-card {padding: 24px; background: transparent; border-color: var(--neutral-line);}
+html[data-ui="editorial"] .organic-card:hover {border-color: rgb(28 28 28 / .4);}
+html[data-ui="editorial"] .organic-project-piece {padding: 0; border: 0;}
+html[data-ui="editorial"] .organic-project-cover {aspect-ratio: 1.35;}
+html[data-ui="editorial"] .organic-project-cover img {transition: transform 1s ease-in-out;}
+html[data-ui="editorial"] .organic-project-link:hover img {transform: scale(1.05);}
+html[data-ui="editorial"] .organic-type-cover strong {font-family: var(--editorial-serif); font-weight: 400;}
+html[data-ui="editorial"] .organic-site :is(.organic-project-link:hover,.organic-article-row>a:hover) h3 {font-style: italic;}
+html[data-ui="editorial"] .organic-reading-split {gap: 96px;}
+html[data-ui="editorial"] .organic-about-band {padding: 80px 0; margin-top: 160px; border-block: 1px solid var(--neutral-line); background: transparent;}
+html[data-ui="editorial"] .organic-about-band h2 {font-size: 40px;}
+html[data-ui="editorial"] .organic-page-heading {padding-block: 96px 80px;}
+html[data-ui="editorial"] .organic-page-heading h1 {font-size: 60px;}
+html[data-ui="editorial"] .organic-page-heading h1 em {font-style: italic; font-weight: 400;}
+html[data-ui="editorial"] .organic-detail-heading {padding-bottom: 64px;}
+html[data-ui="editorial"] .organic-detail-layout {gap: 96px;}
+html[data-ui="editorial"] .organic-about-layout {gap: 96px;}
+html[data-ui="editorial"] .organic-timeline-date {letter-spacing: .08em; font-size: 12px; text-transform: uppercase;}
+html[data-ui="editorial"] .organic-footer {padding-block: 96px 32px; background: transparent;}
+html[data-ui="editorial"] .organic-site p.organic-footer-signature {font-family: var(--editorial-serif); font-weight: 400;}
+html[data-ui="editorial"] .organic-admin .brand {font-family: var(--editorial-serif); font-weight: 400; letter-spacing: .04em;}
+html[data-ui="editorial"] .organic-admin .admin-side {background: transparent; padding-top: 40px;}
+html[data-ui="editorial"] .organic-admin .admin-main {padding-top: 40px;}
+html[data-ui="editorial"] .organic-admin .admin-nav a {font-size: 13px; letter-spacing: .03em; font-weight: 400;}
+html[data-ui="editorial"] .organic-admin .admin-nav a.active {font-weight: 400; border-bottom: 1px solid var(--neutral-border); background: var(--neutral-surface);}
+html[data-ui="editorial"] .organic-admin :is(.page-head,.community-heading) h1 {font-size: 40px; font-weight: 400;}
+html[data-ui="editorial"] .organic-admin .panel {padding: 32px 0; border: 0; border-top: 1px solid var(--neutral-line);}
+html[data-ui="editorial"] .organic-admin :is(.stat strong,.community-governance-summary strong) {font-family: var(--editorial-serif)!important; font-weight: 400!important;}
+html[data-ui="editorial"] .organic-admin .admin-main .stats-grid .stat strong {font-weight: 400; font-family: var(--editorial-serif);}
+html[data-ui="editorial"] .organic-admin :is(th,.editor-toolbar) {background: var(--neutral-surface); font-weight: 400;}
+html[data-ui="editorial"] .organic-admin .editor-surface {background: transparent;}
+html[data-ui="editorial"] .organic-admin input[type=file]::file-selector-button {border-radius: 0; background: transparent; color: #1c1c1c; border-color: var(--neutral-border); box-shadow: none;}
+html[data-ui="editorial"] .organic-admin .content-table :is(th,td) {border-width: 1px;}
+html[data-ui="editorial"] .community-welcome {padding-block: 48px 64px;}
+html[data-ui="editorial"] .community-welcome h1 {font-size: 48px; font-weight: 400;}
+html[data-ui="editorial"] .community-resource-row {padding-block: 40px;}
+html[data-ui="editorial"] .community-resource-row h2 {font-size: 30px;}
+html[data-ui="editorial"] .community-review-detail {padding-top: 0;}
+html[data-ui="editorial"] .community-queue>button {border-radius: 0; border-bottom: 1px solid var(--neutral-line);}
+html[data-ui="editorial"] .community-queue>button strong {font-family: var(--editorial-serif); font-weight: 400; font-size: 20px;}
+html[data-ui="editorial"] .community-badge {font-size: 11px; letter-spacing: .06em; font-weight: 400;}
+html[data-ui="editorial"] .community-tabs a {font-weight: 400; letter-spacing: .05em;}
+html[data-ui="editorial"] .organic-site :is(input:not([type=checkbox]):not([type=file]),textarea,select):focus {outline: none; box-shadow: none; border-bottom-color: #1c1c1c;}
+html[data-ui="editorial"] .organic-site :is(input:not([type=checkbox]):not([type=file]),textarea,select):focus-visible {outline: none;}
+html[data-ui="editorial"] .organic-site :is(input,textarea)::placeholder {color: var(--neutral-text);}
+/* The blank placeholder is a CSS state hook; actual labels/IDs remain intact.
+   Date/number/select controls keep their native label and value formatting. */
+html[data-ui="editorial"] .field:has(> :is(input:not([type=checkbox]):not([type=file]):not([type=date]):not([type=datetime-local]):not([type=number]),textarea)[placeholder]) {position: relative; --label-top: 18px; --label-size: 16px;}
+html[data-ui="editorial"] .field:has(> :is(input:not([type=checkbox]):not([type=file]):not([type=date]):not([type=datetime-local]):not([type=number]),textarea)[placeholder])>label {position: absolute; top: var(--label-top); left: 0; margin: 0; z-index: 1; color: var(--neutral-text); font-family: var(--editorial-sans); font-size: var(--label-size); font-weight: 400; line-height: 1.5; transition: top .5s ease-in-out, font-size .5s ease-in-out, color .5s ease-in-out; cursor: text;}
+html[data-ui="editorial"] .field:has(> :is(input:not([type=checkbox]):not([type=file]):not([type=date]):not([type=datetime-local]):not([type=number]),textarea)[placeholder]):is(:focus-within,:has(> :is(input,textarea):not(:placeholder-shown))) {--label-top: 0px; --label-size: 12px;}
+html[data-ui="editorial"] .organic-site .field>:is(input:not([type=checkbox]):not([type=file]):not([type=date]):not([type=datetime-local]):not([type=number]),textarea)[placeholder] {min-height: 70px; padding: 28px 0 10px!important; font-family: var(--editorial-serif); font-size: 20px; line-height: 1.6;}
+html[data-ui="editorial"] .organic-site .field>textarea[placeholder] {min-height: 150px;}
+@media(max-width:1100px) {
+ html[data-ui="editorial"] .organic-hero-copy h1 {font-size: 72px;}
+ html[data-ui="editorial"] .organic-desktop-nav {gap: 12px;}
+ html[data-ui="editorial"] .organic-desktop-nav>a {font-size: 11px; letter-spacing: .04em;}
+ html[data-ui="editorial"] .organic-brand {font-size: 22px; letter-spacing: .04em;}
+ html[data-ui="editorial"] .organic-reading-split {gap: 48px;}
+ html[data-ui="editorial"] .organic-detail-layout,html[data-ui="editorial"] .organic-about-layout {gap: 48px;}
+}
+@media(max-width:900px) {
+ html[data-ui="editorial"] .organic-admin .admin-side {height: auto; padding: 24px 28px 8px;}
+}
+@media(max-width:767px) {
+ html[data-ui="editorial"] .organic-container {padding-inline: 24px;}
+ html[data-ui="editorial"] .organic-header-inner {min-height: 88px;}
+ html[data-ui="editorial"] .organic-hero {grid-template-columns: 1fr; padding-block: 72px 96px; gap: 48px;}
+ html[data-ui="editorial"] .organic-hero-copy,html[data-ui="editorial"] .organic-hero-figure {grid-column: auto;}
+ html[data-ui="editorial"] .organic-hero-copy h1 {font-size: 60px;}
+ html[data-ui="editorial"] .organic-hero-copy h1 em {font-size: 26px; margin-top: 24px;}
+ html[data-ui="editorial"] .organic-hero-photo {aspect-ratio: 4/3;}
+ html[data-ui="editorial"] .organic-paths {gap: 0;}
+ html[data-ui="editorial"] .organic-section {padding-top: 96px;}
+ html[data-ui="editorial"] .organic-about-band {margin-top: 96px; padding-block: 48px;}
+ html[data-ui="editorial"] .organic-about-band h2 {font-size: 34px;}
+ html[data-ui="editorial"] .organic-page-heading {padding-block: 64px 48px;}
+ html[data-ui="editorial"] .organic-page-heading h1 {font-size: 40px;}
+ html[data-ui="editorial"] .organic-footer {padding-top: 64px;}
+ html[data-ui="editorial"] .organic-admin .page-head h1 {font-size: 32px;}
+ html[data-ui="editorial"] .community-welcome h1 {font-size: 36px;}
+ html[data-ui="editorial"] .organic-admin .panel {padding-block: 24px;}
+}
+@media(max-width:359px) {
+ html[data-ui="editorial"] .organic-container {padding-inline: 20px;}
+ html[data-ui="editorial"] .organic-hero-copy h1 {font-size: 52px;}
+ html[data-ui="editorial"] .community-welcome h1 {font-size: 30px;}
+ html[data-ui="editorial"] .organic-admin .page-head h1 {font-size: 30px;}
+}
+@media(prefers-reduced-motion:reduce) {
+ html[data-ui="editorial"] .organic-site :where(*,*::before,*::after) {animation: none!important; transition: none!important; scroll-behavior: auto!important;}
+ html[data-ui="editorial"] .organic-site :where(a,button,summary,img):is(:hover,:active) {transform: none!important;}
+ html[data-ui="editorial"] .organic-hero-figure:hover .organic-hero-photo {transform: none!important;}
+}

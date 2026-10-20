@@ -1,0 +1,40 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {mkdtemp,rm} from 'node:fs/promises';import {tmpdir} from 'node:os';import path from 'node:path';
+const temp=await mkdtemp(path.join(tmpdir(),'site-page-seed-'));
+process.env.APP_DATA_DIR=temp;process.env.PUBLIC_URL='http://127.0.0.1:3008';process.env.INITIAL_ADMIN_PASSWORD='page-seed-only-owner-password';
+const D=await import('../src/lib/db.mjs'),A=await import('../src/lib/auth.mjs'),C=await import('../src/lib/community.mjs');
+const {pageResources}=await import('../src/lib/page-resources.mjs'),{resourceKey}=await import('../src/lib/resource-key.mjs');
+const req=(token='',base=process.env.PUBLIC_URL)=>new Request(base,{headers:{cookie:token?'site_admin='+token:'',host:new URL(base).host,origin:base}});
+const {verifiedSignup}=await import('./email-fixture.mjs');
+const owner=A.login(req(),{username:'admin',password:process.env.INITIAL_ADMIN_PASSWORD});
+const call=(p,input={},token=owner,method='POST')=>C.communityApi(new Request(req(token),{method}),p.split('/'),p==='community/register'?verifiedSignup(input):input,new URL(process.env.PUBLIC_URL+'/api/'+p));
+const config=call('community/config',{},'','GET'),ack={accepted:true,policyVersion:config.policyVersion,policyHash:config.policyHash};
+const invite=call('admin/community/invites',{label:'首屏预载隔离测试'});call('community/register',{...ack,adult:true,username:'seed_member',nickname:'预载测试成员',password:'page-seed-only-member-password',invite:invite.token},'');
+const token=A.login(req(),{username:'seed_member',password:'page-seed-only-member-password'}),member=A.currentUser(req(token));
+call('admin/community/accounts',{id:member.id,action:'qualify',checked:true,reason:'仅用于本地首屏权限验收'},owner);
+const doc={title:'首屏数据权限验证分享',summary:'此合成分享用于验证首屏预载仍执行原权限与审核规则，不泄露待审材料。',body:'公开正文用于本地验证，所有私密审核说明仍然仅向授权角色展示。',category:'开发资源',tags:[],sourceName:'测试来源',sourceUrl:'https://example.com/source',url:'https://example.com/docs',basis:'official',license:'仅提供来源链接。',note:'PRIVATE_NOTE_FOR_REVIEWER'};
+let published=call('community/submissions',{data:doc},token);published=call('community/submissions/'+published.id,{...ack,action:'submit',version:published.version},token);published=call('admin/community/reviews/'+published.id,{action:'approve',version:published.version,revision:published.pending_revision,checked:true,reason:'已核查合成来源、正文及许可',rule:'来源与许可'},owner);
+const draft=call('community/submissions',{data:{...doc,title:'PRIVATE_DRAFT_IN_PAGE_SEED'}},token);
+test('SSR preloads public data together, keeps auth accurate and never includes private drafts/review notes',async()=>{
+ const seed=await pageResources(req(),['community'],{});assert.equal(seed.resources['/api/auth/me'].data.user,null);assert.equal(seed.resources['/api/community/posts'].data.items[0].id,published.id);assert.ok(!JSON.stringify(seed).includes(doc.note));assert.ok(!JSON.stringify(seed).includes('PRIVATE_DRAFT'));
+ const detail=await pageResources(req(),['community',draft.id],{});assert.equal(detail.resources['/api/community/posts/'+draft.id].status,404);assert.ok(!JSON.stringify(detail).includes('PRIVATE_DRAFT'));
+ const workspace=await pageResources(req(token),['workspace'],{});assert.equal(workspace.resources['/api/auth/me'].data.user.id,member.id);assert.ok(JSON.stringify(workspace).includes('PRIVATE_DRAFT_IN_PAGE_SEED'));
+ const inbox=await pageResources(req(token),['workspace','notifications'],{});assert.ok(inbox.resources[resourceKey('/api/community/notifications?status=all&page=1')].data.items.length);
+ const guestInbox=await pageResources(req(),['workspace','notifications'],{});assert.ok(!guestInbox.resources[resourceKey('/api/community/notifications?status=all&page=1')]);
+ const guestWorkspace=await pageResources(req(),['workspace'],{});assert.ok(!guestWorkspace.resources['/api/community/workspace']);
+});
+test('SSR uses the same owner/reviewer permissions and local-community gate as HTTP GET',async()=>{
+ const guest=await pageResources(req(),['admin'],{});assert.equal(guest.resources['/api/admin/bootstrap'].status,401);assert.ok(!guest.resources['/api/admin/statistics']);
+ const denied=await pageResources(req(token),['admin'],{});assert.equal(denied.resources['/api/admin/bootstrap'].status,401);
+ const admin=await pageResources(req(owner),['admin'],{});assert.equal(admin.resources['/api/admin/bootstrap'].status,200);assert.equal(admin.resources['/api/admin/statistics'].status,200);
+ call('admin/community/accounts',{id:member.id,action:'role',role:'reviewer',reason:'首屏审核角色边界测试'});
+ const reviewer=await pageResources(req(token),['admin','community','accounts'],{});assert.ok(!reviewer.resources['/api/admin/community/accounts']);assert.ok(!reviewer.resources['/api/admin/community/invites']);
+ const publicHost=await pageResources(req(token,'https://public.example'),['community'],{});assert.equal(publicHost.resources['/api/community/config'].data.mode,'closed');assert.ok(!publicHost.resources['/api/community/posts']);
+ assert.notEqual(admin.scope,guest.scope);
+});
+test('preload keys match query ordering and empty controls without merging distinct duplicate parameters',()=>{
+ assert.equal(resourceKey('/api/community/comments/id?focus=&page=1'),resourceKey('/api/community/comments/id?page=1'));
+ assert.equal(resourceKey('/api/community/posts?page=1&category=开发资源'),resourceKey('/api/community/posts?category=开发资源&page=1'));
+ assert.notEqual(resourceKey('/api/community/posts?q=&q=private'),resourceKey('/api/community/posts?q=private'));
+});
+test.after(async()=>{D.db().close();delete globalThis.__personalSiteDb;await rm(temp,{recursive:true,force:true});});

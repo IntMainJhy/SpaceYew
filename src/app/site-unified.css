@@ -1,0 +1,425 @@
+/* Shared site chrome follows the welcome page. Author-owned .space-root is independent. */
+html[data-ui]:has(.organic-site) {background:#fff;scrollbar-color:#bdbdbd #f5f5f5;}
+html[data-ui] .organic-site {
+  --organic-paper:#fff;--organic-ink:#171717;--organic-text:#454545;
+  --organic-muted:#656565;--organic-line:#e5e5e5;--organic-sage:#d9d9d9;
+  --organic-green:#171717;--organic-brown:#171717;--organic-tan:#f5f5f5;
+  --bg:#fff;--paper:#fff;--ink:#171717;--muted:#656565;--line:#e5e5e5;
+  --blue:#171717;--blue-soft:#f5f5f5;--shadow:0 8px 24px #1717170d;
+  background:#fff;color:#171717;color-scheme:light;
+}
+html[data-ui] .organic-site .organic-admin {
+  --bg:#fff;--paper:#fff;--ink:#171717;--muted:#656565;--line:#e5e5e5;
+  --blue:#171717;--blue-soft:#f5f5f5;
+}
+.public-content-site>.home-flow-background {height:780px;opacity:.34;}
+html[data-ui] .organic-site :is(.platform-page:not(.product-home),.space-public,.space-workspace-layout,.space-panel) {
+  --sp-accent:#171717;--sp-soft:#f5f5f5;--sp-ink:#171717;--sp-muted:#656565;
+  --sp-paper:#fff;--sp-line:#e5e5e5;
+}
+html:is([data-ui=natural-organic],[data-ui=x-social]) .organic-site {
+  --radius:16px;--organic-radius:16px;
+}
+html:is([data-ui=natural-organic],[data-ui=x-social]) .organic-site :is(.platform-page:not(.product-home),.space-public,.space-workspace-layout,.space-panel) {
+  --sp-control-radius:999px;--sp-field-radius:10px;--sp-panel-radius:16px;
+}
+html[data-ui] .organic-site :is(.community-navigation-shell,.feed-layout,.feed-workspace-layout) {
+  --feed-ink:#171717;--feed-text:#454545;--feed-muted:#656565;
+  --feed-line:#e5e5e5;--feed-accent:#171717;--feed-surface:#f5f5f5;
+}
+html:is([data-ui=natural-organic],[data-ui=x-social]) .organic-site :is(.community-navigation-shell,.feed-layout,.feed-workspace-layout) {--feed-radius:16px;}
+
+/* Primary actions, secondary surfaces and browser affordances share one palette. */
+html[data-ui] .organic-site :is(.space-btn.primary,.organic-button.is-primary,.btn.primary,.community-follow-button:not(.is-following)):not(.space-root *) {
+  background:#171717;border-color:transparent;color:#fff;
+}
+html[data-ui] .organic-site :is(.space-btn.primary,.organic-button.is-primary,.btn.primary,.community-follow-button:not(.is-following)):not(.space-root *):hover {background:#333;color:#fff;filter:none;}
+html[data-ui] .organic-site .community-follow-button.is-following {background:#fff;border-color:#d9d9d9;color:#171717;}
+html[data-ui] .organic-site :is(.organic-button.is-secondary,.btn:not(.primary):not(.danger)):not(.space-root *) {background:#fff;border-color:#d9d9d9;color:#171717;}
+html[data-ui] .organic-site :is(.organic-button.is-secondary,.btn:not(.primary):not(.danger)):not(.space-root *):hover {background:#f5f5f5;}
+html[data-ui] .organic-site :is(a,button,input,textarea,select,summary):not(.space-root *):focus-visible {outline:2px solid #171717;outline-offset:3px;}
+html[data-ui] .organic-site :is(input,textarea,select):not(.space-root *) {caret-color:#171717;}
+html[data-ui] .organic-site :is(input,textarea,select):not(.space-root *):focus {outline-color:#171717;border-color:#929292;}
+html[data-ui] .organic-site :is(input[type=checkbox],input[type=radio]):not(.space-root *) {accent-color:#171717;}
+html[data-ui] .organic-site :not(.space-root *)::selection {background:#dedede;color:#171717;}
+html[data-ui] .organic-site ::-webkit-scrollbar-thumb {background:#bdbdbd;border-radius:8px;}
+html[data-ui] .organic-site ::-webkit-scrollbar-track {background:#f5f5f5;}
+html[data-ui] .organic-site :is(input,textarea):not(.space-root *)::placeholder {color:#6b6b6b;}
+
+/* Page containers reveal the same quiet ambient background as the file workspace. */
+html[data-ui] .organic-site :is(.feed-main,.feed-workspace-main,.space-studio,.space-panel,.community-profile-page .community-profile-header) {background:transparent;}
+html[data-ui] .organic-site :is(.space-resume,.resume-document) {background:#fff;box-shadow:none;border-radius:var(--sp-panel-radius,var(--organic-radius,0px));}
+html[data-ui] .organic-site :is(.space-studio-toolbar,.space-experience-edit,.feed-discover>section,.community-profile-header,.organic-detail-aside) {background:#f5f5f5;}
+html:is([data-ui=natural-organic],[data-ui=x-social]) .organic-site :is(.feed-discover>section,.community-profile-header,.organic-detail-aside,.space-experience-edit,.panel,.stat) {border-radius:16px;box-shadow:none;}
+html[data-ui] .organic-site .platform-showcase {background:#f5f5f5;}
+html[data-ui] .organic-site .platform-showcase:hover {background:#ededed;}
+html[data-ui] .organic-site :is(.space-panel,.space-studio) :is(input:not([type=checkbox]):not([type=file]):not([type=color]),textarea,select):not(.space-root *) {
+  background:#fff;border-color:#d9d9d9;min-height:44px;
+}
+html[data-ui] .organic-site :is(.space-public-header,.space-workspace-header) .space-btn {min-height:44px;}
+
+/* Keep selection cues, including semantic like/repost colors; replace only interface blue. */
+html[data-ui] .organic-site .feed-main>.feed-tabs a[aria-current=page]::after,
+html[data-ui] .organic-site .community-profile-page .feed-tabs button[aria-pressed=true]::after {background:#171717;}
+html[data-ui] .organic-site .feed-workspace-main>.feed-tabs button[aria-pressed=true] {border-bottom-color:#171717;}
+html[data-ui] .organic-site :is(.feed-search input,.feed-search select,.feed-discovery-search input,.feed-discovery-search button) {background:#f5f5f5;}
+html[data-ui] .organic-site :is(.feed-compose-actions>span,.feed-discover a,.workspace-notification-open,.feed-post-actions>.is-selected:not([data-reaction=like]):not([data-reaction=repost])) {color:#171717;}
+html[data-ui] .organic-site .feed-post-actions :is(button,a,summary):hover {color:#171717;}
+html[data-ui] .organic-site .workspace-notification.is-unread {background:#f5f5f5;}
+html[data-ui] .organic-site .workspace-notification.is-unread :is(.workspace-notification-icon,.workspace-row-meta>span) {color:#171717;}
+html[data-ui] .organic-site .feed-post:hover {background:rgb(23 23 23 / .025);}
+html[data-ui] .organic-site :is(.admin-side,.panel,.stat,.community-auth .community-auth-form) {background:transparent;}
+html[data-ui] .organic-site :is(.organic-mobile-menu nav,.theme-menu) {background:#fff;}
+html[data-ui] .organic-site .admin-nav a.active {background:#f5f5f5;color:#171717;}
+html[data-ui] .organic-site :is(.bar-fill,.chart-bars i,.legend-dot,.progress-track span) {background:#171717;}
+html[data-ui] .organic-site :is(.chart-bars i.light,.legend-dot.light) {background:#bdbdbd;}
+html[data-ui] .organic-site :is(.bar-track,.progress-track) {background:#f5f5f5;}
+
+html[data-ui] .organic-site .community-follow-button.is-following:hover {background:#f5f5f5;color:#171717;}
+html[data-ui] .organic-site :is(.organic-text-link,.workspace-row-actions a,.feed-navigation nav a[aria-current=page],.feed-mobile-account>summary[aria-current=page],.feed-mobile-account[open]>summary) {color:#171717;}
+html[data-ui] .organic-site :is(.feed-navigation nav a[aria-current=page],.workspace-tabs button[aria-pressed=true])::after {background:#171717;}
+html[data-ui] .organic-site .theme-control {--theme-paper:#fff;--theme-ink:#171717;--theme-muted:#656565;--theme-line:#d9d9d9;--theme-hover:#f5f5f5;--theme-focus:#171717;}
+
+/* The admin's permission-aware sign-in uses the same quiet form scale. */
+html[data-ui] .organic-site.organic-admin .login-wrap {display:grid;grid-template-columns:minmax(0,400px);justify-content:center;max-width:none;gap:0;padding:64px 24px;}
+html[data-ui] .organic-site.organic-admin .login-card {max-width:400px;padding:0;background:transparent;border:0;border-radius:0;box-shadow:none;}
+html[data-ui] .organic-site.organic-admin .login-card h1 {font-size:36px;line-height:1.3;letter-spacing:-.035em;margin:36px 0 30px;}
+html[data-ui] .organic-site.organic-admin .login-card .field {margin-bottom:22px;}
+html[data-ui] .organic-site.organic-admin .login-card label {font-size:13px;margin-bottom:8px;}
+html[data-ui] .organic-site.organic-admin .login-card :is(input,.btn.primary) {min-height:52px;font-size:16px;}
+html[data-ui] .organic-site.organic-admin .login-card input {background:#fff;border:1px solid #d9d9d9;padding:13px 15px;}
+html:is([data-ui=natural-organic],[data-ui=x-social]) .organic-site.organic-admin .login-card input {border-radius:12px;}
+html[data-ui] .organic-site.organic-admin .login-card .password-recovery {margin-top:28px;font-size:13px;}
+
+@media(max-width:767px) {
+  .public-content-site>.home-flow-background {height:680px;opacity:.28;}
+  html[data-ui] .organic-site :is(.feed-search,.feed-discovery-search,.space-panel,.space-studio,.organic-filters,.workspace-profile-form,.community-auth-form) :is(input:not([type=checkbox]):not([type=radio]):not([type=color]):not([type=file]),textarea,select):not(.space-root *) {font-size:16px;}
+  html[data-ui] .organic-site .space-inspector input[type=number] {font-size:14px;}
+  html[data-ui] .organic-site.organic-admin .login-wrap {padding:40px 24px;}
+  html[data-ui] .organic-site.organic-admin .login-card h1 {font-size:30px;}
+}
+@media print {.public-content-site>.home-flow-background {display:none;}}
+
+/* Community reading: smaller rails, one compose entry and a wider, quieter timeline. */
+html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-results:not(.is-filtered),
+html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-category {display:none;}
+html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-main>.feed-tabs {border:0;padding:0 16px 12px;gap:28px;}
+html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-main>.feed-tabs a {flex:0 0 auto;min-height:44px;padding:8px 0;border-radius:0;background:transparent;font-size:14px;}
+html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-main>.feed-tabs a[aria-current=page] {color:#171717;font-weight:650;}
+html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-main>.feed-tabs a[aria-current=page]::after {height:2px;width:24px;left:0;}
+html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-post {padding:24px 16px;background:transparent;}
+html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-author {margin-bottom:10px;}
+html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-post h2 {font-size:20px!important;line-height:1.5;margin:0 0 8px;font-weight:650;}
+html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-post-content p {font-size:16px;line-height:1.75;max-width:70ch;-webkit-line-clamp:3;}
+html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-post .community-post-cover {max-height:320px;margin-top:16px;object-fit:contain;}
+html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-post-actions {justify-content:flex-start;gap:28px;}
+html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-post-actions>button[data-reaction=bookmark]>span,
+html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-share-menu>summary>span,
+html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-report-link {display:none;}
+html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-share-popover .feed-mobile-report {display:flex;align-items:center;min-height:44px;padding:8px 12px;font-size:13px;}
+html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout)>.feed-discover>section {padding:0;margin:24px 0 0;background:transparent;border:0;border-radius:0;box-shadow:none;}
+html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-discover h2 {font-size:13px!important;line-height:1.5;font-weight:500;color:#656565;margin:0 0 10px;}
+html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-discover nav a {min-height:44px;padding:10px 0;font-size:13px;}
+
+@media(min-width:1100px) {
+  html[data-ui] .organic-container:has(.community-navigation-shell:not(.space-workspace-layout)) {max-width:1248px;padding-inline:24px;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) {grid-template-columns:160px minmax(0,1fr) 208px;gap:32px;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout)>.feed-navigation {top:16px;padding-top:0;height:calc(100dvh - 128px);min-height:480px;display:flex;flex-direction:column;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-navigation .feed-nav-links {gap:4px;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-navigation nav a {font-size:15px;gap:10px;padding:8px 12px;min-height:44px;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-navigation .icon {width:20px;height:20px;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-navigation .feed-write {width:100%;min-height:44px;font-size:14px;margin-top:20px;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-identity {margin-top:auto;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-timeline-search {display:none;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout)>.feed-discover {display:block;position:sticky;top:16px;padding:0;grid-column:auto;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-discovery-search {display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:4px;margin:0;padding:0;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-discovery-search input {min-width:0;width:100%;height:44px;font-size:13px;padding:10px 14px;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-discovery-search button {min-width:44px;min-height:44px;padding:10px;border:0;background:#f5f5f5;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-discovery-search button span {display:none;}
+}
+
+/* Member discovery stays available; the account dock remains in the viewport. */
+html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout)>.feed-discover>.feed-suggestions {padding:14px;margin-top:20px;background:#f5f5f5;border-radius:16px;}
+html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-suggestions h2 {font-size:15px!important;font-weight:650;color:#171717;}
+html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-suggestion {gap:8px;margin-block:16px;}
+html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-suggestion>a {flex:1;min-width:0;}
+html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-suggestion .community-follow-button {min-height:36px;padding:6px 10px;font-size:12px;}
+html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-suggestions>.organic-text-link {font-size:12px;min-height:44px;display:flex;align-items:center;}
+
+/* A post is a single reading column; provenance is quiet and available below it. */
+html[data-ui] .organic-site .community-post-detail {--post-radius:16px;--post-field-radius:10px;max-width:768px;min-width:0;padding:0 16px 48px;background:transparent;}
+html:is([data-ui=monochrome],[data-ui=editorial]) .organic-site .community-post-detail {--post-radius:0px;--post-field-radius:0px;}
+html[data-ui] .organic-site .community-post-back {display:inline-flex;align-items:center;min-height:44px;margin-bottom:16px;color:#656565;font-size:13px;}
+html[data-ui] .organic-site .community-post-detail .community-post-heading {padding:0;margin:0 0 24px;max-width:none;}
+html[data-ui] .organic-site .community-post-author {margin:0 0 16px;gap:16px;}
+html[data-ui] .organic-site .community-post-author-link {min-height:44px;}
+html[data-ui] .organic-site .community-post-author-link .feed-avatar {width:32px;height:32px;flex-basis:32px;}
+html[data-ui] .organic-site .community-post-author-link strong {font-size:14px;font-weight:600;}
+html[data-ui] .organic-site .community-post-time {margin:0;font-size:12px;line-height:1.5;color:#656565;text-align:right;}
+html[data-ui] .organic-site .community-post-heading h1 {max-width:none;font-size:30px;line-height:1.45;font-weight:650;letter-spacing:-.025em;margin:0;text-wrap:pretty;}
+html[data-ui] .organic-site .community-post-reading {width:100%;min-width:0;padding:0;}
+html[data-ui] .organic-site .community-post-reading>.community-post-cover {width:100%;height:auto;max-height:240px;object-fit:contain;margin:0 0 28px;border-radius:var(--post-radius);background:#f5f5f5;}
+html[data-ui] .organic-site .community-post-reading .community-prose {font-size:17px;line-height:1.85;max-width:74ch;margin:0 0 28px;overflow-wrap:anywhere;}
+html[data-ui] .organic-site .community-post-reading .community-prose :is(h2,h3) {margin:32px 0 12px;line-height:1.5;}
+html[data-ui] .organic-site .community-post-reading .community-prose h2 {font-size:22px;}
+html[data-ui] .organic-site .community-post-reading .community-prose h3 {font-size:19px;}
+html[data-ui] .organic-site .community-post-reading .community-prose p {font-size:inherit;line-height:inherit;margin:0 0 18px;}
+html[data-ui] .organic-site .community-post-reading .community-prose>:first-child {margin-top:0;}
+html[data-ui] .organic-site .community-post-reading .community-prose pre {max-width:100%;overflow-x:auto;padding:18px;background:#f5f5f5;color:#171717;border-radius:var(--post-field-radius);font-size:14px;line-height:1.75;white-space:pre;overflow-wrap:normal;tab-size:2;}
+html[data-ui] .organic-site .community-post-detail .community-post-source {position:static;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px 16px;width:100%;padding:0;margin:28px 0 12px;background:transparent;border:0;border-radius:0;box-shadow:none;}
+html[data-ui] .organic-site .community-source-link {display:flex;align-items:center;gap:10px;min-height:44px;min-width:0;max-width:100%;font-size:13px;}
+html[data-ui] .organic-site .community-source-link>span {display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;min-width:0;overflow-wrap:anywhere;}
+html[data-ui] .organic-site .community-source-link strong {font-weight:600;}
+html[data-ui] .organic-site .community-source-link small {font-size:12px;color:#656565;}
+html[data-ui] .organic-site .community-source-disclosure>summary {min-height:44px;font-size:13px;color:#656565;}
+html[data-ui] .organic-site .community-source-disclosure[open] {flex-basis:100%;}
+html[data-ui] .organic-site .community-source-disclosure .organic-meta {display:grid;grid-template-columns:100px minmax(0,1fr);gap:12px 16px;margin:16px 0;font-size:13px;line-height:1.75;overflow-wrap:anywhere;}
+html[data-ui] .organic-site .community-post-detail .feed-post-actions {justify-content:flex-start;gap:28px;}
+html[data-ui] .organic-site .community-post-detail .feed-post-actions>button[data-reaction=bookmark]>span,
+html[data-ui] .organic-site .community-post-detail .feed-share-menu>summary>span,
+html[data-ui] .organic-site .community-post-detail .feed-report-link {display:none;}
+html[data-ui] .organic-site .community-post-detail .feed-share-popover .feed-mobile-report {display:flex;align-items:center;min-height:44px;padding:8px 12px;font-size:13px;}
+html[data-ui] .organic-site .community-post-detail .community-comments {width:100%;padding:0;margin:36px 0 0;scroll-margin-top:80px;}
+html[data-ui] .organic-site .community-post-detail .community-comments .community-heading {margin-bottom:20px;}
+html[data-ui] .organic-site .community-post-detail .community-comments h2 {font-size:20px;line-height:1.5;}
+html[data-ui] .organic-site .community-post-detail .community-comment-input textarea {min-height:96px;font-size:16px;border-color:#d9d9d9;border-radius:var(--post-field-radius);background:#fff;}
+
+@media(min-width:768px) {
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout)>.feed-navigation>.feed-identity {position:fixed;bottom:16px;z-index:45;width:160px;min-height:64px;padding:8px 0;margin:0;background:#fff;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-nav-links {max-height:calc(100dvh - 280px);overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;flex-shrink:0;}
+  html[data-ui]:not([data-ui=x-social]) .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-nav-links {max-height:calc(100dvh - 328px);}
+}
+@media(min-width:768px) and (max-width:1099px) {
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout)>.feed-navigation>.feed-identity {width:64px;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-account-menu {display:none;}
+}
+@media(max-width:767px) {
+  html[data-ui] .organic-site .community-post-detail {max-width:none;padding:0 0 40px;}
+  html[data-ui] .organic-site .community-post-back {margin-bottom:12px;}
+  html[data-ui] .organic-site .community-post-detail .community-post-heading {margin-bottom:20px;}
+  html[data-ui] .organic-site .community-post-heading h1 {font-size:25px;line-height:1.5;}
+  html[data-ui] .organic-site .community-post-author {gap:12px;}
+  html[data-ui] .organic-site .community-post-time {font-size:11px;}
+  html[data-ui] .organic-site .community-post-reading>.community-post-cover {max-height:180px;margin-bottom:24px;}
+  html[data-ui] .organic-site .community-post-reading .community-prose {font-size:16px;line-height:1.85;}
+  html[data-ui] .organic-site .community-post-reading .community-prose h2 {font-size:20px;}
+  html[data-ui] .organic-site .community-post-reading .community-prose h3 {font-size:18px;}
+  html[data-ui] .organic-site .community-post-detail .feed-post-actions {display:grid;grid-template-columns:repeat(5,minmax(44px,1fr));gap:0;}
+  html[data-ui] .organic-site .community-post-detail .community-comments {scroll-margin-top:112px;}
+  html[data-ui] .organic-site .community-post-detail .community-comment-submit {margin-left:0;}
+  html[data-ui] .organic-site .community-source-disclosure .organic-meta {grid-template-columns:1fr;gap:4px;}
+  html[data-ui] .organic-site .community-source-disclosure .organic-meta dd {margin-bottom:10px;}
+}
+@media(min-width:768px) and (max-width:1099px) {
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) {grid-template-columns:64px minmax(0,1fr);gap:24px;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout)>.feed-discover {display:none;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-timeline-search {display:grid;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-navigation nav a {width:48px;min-height:44px;justify-content:center;padding:10px;position:relative;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-nav-links>a>span:not(.feed-unread),
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-account-copy {display:none;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-write {width:48px;font-size:0;padding:10px;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-write>.icon {display:block;}
+}
+@media(max-width:767px) {
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout)>.feed-discover {display:none;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-main>.feed-tabs {padding:0 0 8px;gap:24px;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-main .feed-search {padding:0 0 8px;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-post {padding:20px 0;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-post h2 {font-size:18px!important;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-post-content p {font-size:15px;line-height:1.7;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-post-actions {display:grid;gap:0;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-post .community-post-cover {margin-top:12px;max-height:260px;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-main .feed-search {display:grid;grid-template-columns:minmax(0,1fr) 104px 44px;gap:6px;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-main .feed-search>input {grid-column:auto;min-width:0;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-main .feed-search select {width:100%;min-width:0;padding-inline:8px;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-main .feed-search .organic-button {min-width:44px;min-height:44px;padding:10px;}
+  html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-main .feed-search button>span {display:none;}
+  html[data-ui]:not([data-ui=x-social]) .organic-site .community-navigation-shell:not(.space-workspace-layout)>.feed-navigation {position:relative;top:0;display:flex;align-items:flex-start;gap:8px;}
+  html[data-ui]:not([data-ui=x-social]) .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-nav-links {min-width:0;flex:1;scrollbar-width:none;}
+  html[data-ui]:not([data-ui=x-social]) .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-mobile-compose {position:fixed;z-index:55;right:20px;bottom:20px;display:inline-flex;gap:8px;min-height:48px;padding:10px 18px;}
+}
+
+/* All functional routes use the community timeline's navigation rhythm. */
+@media(min-width:1100px){
+ html[data-ui] .organic-site .community-navigation-shell {grid-template-columns:160px minmax(0,1fr) 208px;gap:32px;margin-inline:0;}
+ html[data-ui] .organic-site .space-workspace-layout.community-navigation-shell {grid-template-columns:160px minmax(0,1fr);gap:32px;}
+ html[data-ui] .organic-site .community-navigation-shell>.feed-navigation {top:16px;padding-top:0;height:calc(100dvh - 128px);min-height:480px;display:flex;flex-direction:column;}
+ html[data-ui] .organic-site .community-navigation-shell .feed-navigation>.feed-nav-links {gap:4px;}
+ html[data-ui] .organic-site .community-navigation-shell .feed-nav-links>a {font-size:15px;line-height:1.5;gap:10px;padding:8px 12px;min-height:44px;}
+ html[data-ui] .organic-site .community-navigation-shell .feed-nav-links>a>.icon {width:20px;height:20px;}
+ html[data-ui] .organic-site .community-navigation-shell .feed-navigation .feed-write {width:100%;min-height:44px;font-size:14px;margin-top:20px;}
+}
+@media(min-width:768px){
+ html[data-ui] .organic-site .community-navigation-shell>.feed-navigation>.feed-identity {position:fixed;bottom:16px;z-index:45;width:160px;min-height:64px;padding:8px 0;margin:0;background:#fff;}
+ html[data-ui] .organic-site .community-navigation-shell .feed-nav-links {max-height:calc(100dvh - 280px);overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;flex-shrink:0;}
+ html[data-ui]:not([data-ui=x-social]) .organic-site .community-navigation-shell .feed-nav-links {max-height:calc(100dvh - 328px);}
+}
+@media(min-width:768px) and (max-width:1099px){
+ html[data-ui] .organic-site .community-navigation-shell {grid-template-columns:64px minmax(0,1fr);gap:24px;margin-inline:0;}
+ html[data-ui] .organic-site .community-navigation-shell>.feed-discover {display:none;}
+ html[data-ui] .organic-site .community-navigation-shell>.feed-navigation>.feed-identity {width:64px;}
+ html[data-ui] .organic-site .community-navigation-shell .feed-nav-links>a {width:48px;min-height:44px;padding:10px;justify-content:center;position:relative;}
+ html[data-ui] .organic-site .community-navigation-shell .feed-nav-links>a>span:not(.feed-unread),
+ html[data-ui] .organic-site .community-navigation-shell .feed-account-copy,
+ html[data-ui] .organic-site .community-navigation-shell .feed-account-menu {display:none;}
+ html[data-ui] .organic-site .community-navigation-shell .feed-write {width:48px;font-size:0;padding:10px;}
+ html[data-ui] .organic-site .community-navigation-shell .feed-write>.icon {display:block;}
+}
+html[data-ui] .organic-site .space-connect-docs pre {max-width:100%;overflow:auto;background:#000;color:#ededed;border-radius:12px;padding:20px;font-size:14px;line-height:1.75;}
+html[data-ui] .organic-site .space-panel .editor-toolbar {background:#f5f5f5;border-color:#e5e5e5;}
+html[data-ui] .organic-site .space-panel .editor-surface {border-color:#d9d9d9;background:#fff;}
+
+/* The management center follows the same white / charcoal interface. */
+html[data-ui] .organic-site.organic-admin .admin-shell {grid-template-columns:216px minmax(0,1fr);}
+html[data-ui] .organic-site.organic-admin .admin-side {top:0;margin:0;padding:28px 16px;height:100dvh;gap:24px;background:transparent;border:0;border-radius:0;}
+html[data-ui] .organic-site.organic-admin .admin-side .brand {font-size:23px;font-family:inherit;font-weight:650;}
+html[data-ui] .organic-site.organic-admin .admin-nav {gap:4px;overflow:auto;scrollbar-width:thin;}
+html[data-ui] .organic-site.organic-admin .admin-nav a {min-height:44px;padding:8px 12px;gap:10px;font-size:15px;line-height:1.5;color:#454545;}
+html[data-ui] .organic-site.organic-admin .admin-nav .icon {width:20px;height:20px;}
+html[data-ui] .organic-site.organic-admin .admin-nav a:is(:hover,.active) {background:#f5f5f5;color:#171717;}
+html[data-ui] .organic-site.organic-admin .admin-bottom {padding-inline:12px;}
+html[data-ui] .organic-site.organic-admin .admin-main {max-width:1320px;width:100%;padding:28px 36px 64px;}
+html[data-ui] .organic-site.organic-admin .admin-topline {margin-bottom:28px;gap:16px;}
+html[data-ui] .organic-site.organic-admin .admin-topline .actions {gap:16px;}
+html[data-ui] .organic-site.organic-admin .admin-shell :is(.panel,.stat,.selected-file,.experience-editor) {background:transparent;border-color:transparent;box-shadow:none;}
+html[data-ui] .organic-site.organic-admin :is(.panel,.stat) {border-radius:0;}
+html[data-ui] .organic-site.organic-admin .admin-shell :is(input:not([type=checkbox]):not([type=radio]):not([type=color]):not([type=file]),select,textarea):not(.space-root *) {background:#fff;border-color:#d9d9d9;color:#171717;border-radius:10px;font-size:15px;min-height:44px;}
+html[data-ui] .organic-site.organic-admin .btn {min-height:44px;padding:10px 18px;font-size:14px;line-height:1.5;}
+html[data-ui] .organic-site.organic-admin dialog {background:#fff;border-color:#e5e5e5;border-radius:16px;}
+html[data-ui] .organic-site.organic-admin dialog::backdrop {background:#17171766;}
+html[data-ui] .organic-site .admin-overview {margin-bottom:40px;}
+html[data-ui] .organic-site .admin-overview-heading {display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:28px;}
+html[data-ui] .organic-site .admin-overview-heading h1 {font-size:32px;line-height:1.3;margin:0;letter-spacing:-.025em;}
+html[data-ui] .organic-site .admin-overview-heading p {font-size:13px;color:#656565;margin-top:10px;}
+html[data-ui] .organic-site .admin-summary-grid {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin:0 0 36px;}
+html[data-ui] .organic-site .admin-summary-grid>div {min-width:0;}
+html[data-ui] .organic-site .admin-summary-grid dt {font-size:13px;color:#656565;}
+html[data-ui] .organic-site .admin-summary-grid dd {margin:8px 0 0;font-size:30px;font-weight:650;line-height:1.3;font-variant-numeric:tabular-nums;color:#171717;}
+html[data-ui] .organic-site .admin-management-grid {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:40px;}
+html[data-ui] .organic-site .admin-management-grid>section {min-width:0;}
+html[data-ui] .organic-site .admin-management-grid h2 {font-size:19px;line-height:1.5;margin:0 0 12px;}
+html[data-ui] .organic-site .admin-task-list {display:grid;gap:4px;}
+html[data-ui] .organic-site .admin-task-list a {display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px;padding:8px 12px;background:#f5f5f5;font-size:14px;}
+html[data-ui] .organic-site .admin-task-list strong {font-size:14px;min-width:28px;text-align:center;font-variant-numeric:tabular-nums;}
+html[data-ui] .organic-site .admin-task-list .has-work {background:#171717;color:#fff;border-radius:999px;padding:2px 8px;}
+html[data-ui] .organic-site .admin-quick-links {display:flex;flex-wrap:wrap;gap:4px 20px;margin-top:12px;font-size:13px;}
+html[data-ui] .organic-site .admin-quick-links a {display:flex;align-items:center;min-height:44px;}
+html[data-ui] .organic-site .admin-recent-list a {display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:62px;padding:8px 0;}
+html[data-ui] .organic-site .admin-recent-list a>div {min-width:0;}
+html[data-ui] .organic-site .admin-recent-list strong {display:block;font-size:14px;font-weight:550;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+html[data-ui] .organic-site .admin-recent-list span,
+html[data-ui] .organic-site .admin-recent-list time {font-size:12px;color:#656565;}
+html[data-ui] .organic-site .admin-recent-list time {white-space:nowrap;flex-shrink:0;}
+html[data-ui] .organic-site .admin-empty {font-size:14px;line-height:1.8;color:#656565;margin-top:20px;}
+html[data-ui] .organic-site .admin-traffic-heading {margin-top:40px;}
+html[data-ui] .organic-site .admin-traffic-heading h2 {font-size:23px;}
+html:is([data-ui=monochrome],[data-ui=editorial]) .organic-site.organic-admin :is(.panel,.stat,dialog) {border-radius:0;}
+@media(max-width:900px){
+ html[data-ui] .organic-site.organic-admin .admin-shell {grid-template-columns:190px minmax(0,1fr);}
+ html[data-ui] .organic-site.organic-admin .admin-side {padding:24px 12px;}
+ html[data-ui] .organic-site.organic-admin .admin-main {padding:24px;}
+ html[data-ui] .organic-site .admin-management-grid {grid-template-columns:minmax(0,1fr);gap:28px;}
+ html[data-ui] .organic-site .admin-summary-grid {grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+@media(max-width:767px){
+ html[data-ui] .organic-site.organic-admin .admin-shell {display:block;}
+ html[data-ui] .organic-site.organic-admin .admin-side {height:auto;position:static;padding:20px 16px;gap:12px;}
+ html[data-ui] .organic-site.organic-admin .admin-side .brand {font-size:21px;}
+ html[data-ui] .organic-site.organic-admin .admin-side .brand small {display:none;}
+ html[data-ui] .organic-site.organic-admin .admin-nav {display:flex;flex-wrap:nowrap;overflow-x:auto;gap:4px;}
+ html[data-ui] .organic-site.organic-admin .admin-nav a {flex:0 0 auto;white-space:nowrap;font-size:13px;}
+ html[data-ui] .organic-site.organic-admin .admin-bottom {display:none;}
+ html[data-ui] .organic-site.organic-admin .admin-main {padding:16px 18px 48px;}
+ html[data-ui] .organic-site.organic-admin .admin-topline {flex-wrap:wrap;gap:8px;}
+ html[data-ui] .organic-site.organic-admin .admin-topline .actions {gap:12px;}
+ html[data-ui] .organic-site .admin-overview-heading {align-items:flex-start;gap:12px;margin-bottom:24px;}
+ html[data-ui] .organic-site .admin-overview-heading h1 {font-size:27px;}
+ html[data-ui] .organic-site .admin-overview-heading .btn {padding-inline:14px;font-size:13px;white-space:nowrap;}
+ html[data-ui] .organic-site .admin-summary-grid {gap:22px;margin-bottom:28px;}
+ html[data-ui] .organic-site .admin-summary-grid dd {font-size:27px;}
+ html[data-ui] .organic-site .admin-recent-list a {gap:10px;}
+ html[data-ui] .organic-site .admin-recent-list time {font-size:11px;}
+ html[data-ui] .organic-site.organic-admin .admin-shell :is(input:not([type=checkbox]):not([type=radio]):not([type=color]):not([type=file]),select,textarea):not(.space-root *) {font-size:16px;}
+}
+
+/* Keep editor labels intact and management secondary controls neutral. */
+html[data-ui] .organic-site .space-layer-list>div>div {justify-content:flex-start;gap:6px;flex-wrap:wrap;}
+html[data-ui] .organic-site .space-layer-list>div>div>button {font-size:12px;padding:6px 4px;white-space:nowrap;}
+html[data-ui] .organic-site.organic-admin .btn:not(.primary):not(.danger):hover {background:#f5f5f5;border-color:#bdbdbd;color:#171717;transform:none;}
+html:is([data-ui=natural-organic],[data-ui=x-social]) .organic-site.organic-admin .btn {border-radius:999px;}
+
+/* Runtime configuration stays compact and separate from content metrics. */
+html[data-ui] .organic-site .admin-services {margin-top:32px;}
+html[data-ui] .organic-site .admin-services>div {display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:12px;}
+html[data-ui] .organic-site .admin-services h2 {font-size:19px;margin:0;}
+html[data-ui] .organic-site .admin-services>div>span {font-size:12px;color:#656565;}
+html[data-ui] .organic-site .admin-services dl {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px 24px;margin:0;}
+html[data-ui] .organic-site .admin-services dt {font-size:13px;color:#656565;}
+html[data-ui] .organic-site .admin-services dd {font-size:14px;font-weight:550;margin:6px 0 0;overflow-wrap:anywhere;}
+html[data-ui] .organic-site .space-draft-recovery {margin-bottom:20px;}
+html[data-ui] .organic-site .space-draft-recovery p {margin:0 0 12px;}
+@media(max-width:900px){html[data-ui] .organic-site .admin-services dl {grid-template-columns:repeat(2,minmax(0,1fr));}}
+
+/* Functional pages share one quiet type scale and spacing rhythm. */
+html[data-ui] .organic-site {
+  --function-title:26px;
+  --function-section:32px;
+  --function-field:20px;
+}
+html[data-ui] .organic-site :is(.space-panel-heading,.space-studio-top,.community-account-heading,.admin-overview-heading,.admin-main .page-head) {gap:16px;margin:0 0 24px;align-items:center;}
+html[data-ui] .organic-site :is(.space-panel,.space-studio) h1:not(.space-root *),
+html[data-ui] .organic-site :is(.community-editor-heading,.community-account-heading,.community-report>.community-heading,.admin-overview-heading,.admin-main .page-head) h1,
+html[data-ui] .organic-site .community-workspace-page .community-route-bar>h1 {font-size:var(--function-title)!important;line-height:1.35;font-weight:650;letter-spacing:-.025em;max-width:none;margin:0;}
+html[data-ui] .organic-site :is(.space-panel-heading,.space-studio-top,.community-account-heading,.admin-overview-heading,.admin-main .page-head) p,
+html[data-ui] .organic-site .space-panel>p:not([role]):not(.space-error) {font-size:13px;line-height:1.7;color:#656565;max-width:65ch;margin:6px 0 0;}
+html[data-ui] .organic-site .space-panel>p:not([role]):not(.space-error) {margin-bottom:24px;}
+html[data-ui] .organic-site .space-panel-heading h2 {margin:0;}
+html[data-ui] .organic-site :is(.space-panel,.space-studio)>h2 {font-size:18px;font-weight:600;line-height:1.45;margin:var(--function-section) 0 16px;}
+html[data-ui] .organic-site .space-panel-heading h1 {margin:0;}
+html[data-ui] .organic-site :is(.space-panel>form>label,.space-form-grid>label,.space-experience-edit>label):not(.space-check) {gap:6px;margin:0 0 var(--function-field);font-size:13px;line-height:1.5;}
+html[data-ui] .organic-site .space-form-grid {column-gap:20px;}
+html[data-ui] .organic-site .space-panel .space-languages {margin:0 0 20px;}
+html[data-ui] .organic-site .space-key-form {margin:0 0 var(--function-section);}
+html[data-ui] .organic-site .space-key-form fieldset {margin:0 0 20px;}
+html[data-ui] .organic-site .space-key-form .space-check {margin:12px 0;line-height:1.6;}
+html[data-ui] .organic-site .space-connect .space-panel-heading>.space-link {display:inline-flex;align-items:center;min-height:44px;font-size:13px;}
+html[data-ui] .organic-site :is(.community-editor-page,.community-account-page,.community-report,.admin-main) .field {gap:6px;margin:0 0 var(--function-field);min-width:0;}
+html[data-ui] .organic-site :is(.community-editor-page,.community-account-page,.community-report,.admin-main) .field>label {font-size:13px;font-weight:550;line-height:1.5;margin:0;color:#171717;}
+html[data-ui] .organic-site :is(.community-editor-page,.community-account-page,.community-report,.admin-main) .field small {font-size:12px;line-height:1.6;margin:0;color:#656565;}
+html[data-ui] .organic-site :is(.community-editor-page,.community-report,.admin-main) .field-row {column-gap:20px;}
+html[data-ui] .organic-site .community-editor-page .community-heading {margin:0 0 20px;}
+html[data-ui] .organic-site .community-editor-aside {border:0;padding-top:24px;}
+html[data-ui] .organic-site .community-editor-aside .community-preview {margin:0;padding:0;}
+html[data-ui] .organic-site .community-form-section {font-size:18px;line-height:1.45;margin:var(--function-section) 0 16px;}
+html[data-ui] .organic-site .community-report>.community-heading {margin:0 0 24px;gap:16px;}
+html[data-ui] .organic-site .community-report>.community-heading p {font-size:13px;line-height:1.7;margin:6px 0 0;color:#656565;}
+html[data-ui] .organic-site .community-empty-detail {max-width:48ch;margin:auto;font-size:14px;line-height:1.7;color:#656565;}
+html[data-ui] .organic-site.organic-admin .admin-main .field :is(input:not([type=checkbox]):not([type=radio]):not([type=file]):not([type=color]),select,textarea) {min-height:44px;padding:10px 12px;line-height:1.5;}
+html[data-ui] .organic-site.organic-admin .admin-main .form-section {padding:0;margin-bottom:var(--function-section);border:0;}
+html[data-ui] .organic-site.organic-admin .admin-main .form-sticky {padding:0;border:0;}
+html[data-ui] .organic-site.organic-admin .admin-main :is(.panel,.form-section)>h3 {font-size:18px;line-height:1.45;font-weight:600;margin:0 0 16px;}
+html[data-ui] .organic-site.organic-admin .admin-main .form-section>.small-text {line-height:1.7;margin:0 0 20px;}
+html[data-ui] .organic-site.organic-admin .admin-main .form-section>.small-text:last-child {margin:12px 0 0;}
+@media(max-width:767px) {
+  html[data-ui] .organic-site {--function-title:24px;--function-section:28px;}
+  html[data-ui] .organic-site :is(.space-panel-heading,.space-studio-top,.community-account-heading,.admin-overview-heading,.admin-main .page-head) {gap:12px;margin-bottom:20px;}
+  html[data-ui] .organic-site .community-workspace-page .community-route-bar>h1 {font-size:21px!important;}
+  html[data-ui] .organic-site.organic-admin .admin-main .page-head {align-items:flex-start;}
+}
+
+/* Editorial type on the single shared interface; author boards own their fonts. */
+html[data-ui=x-social] .organic-site :is(h1,h2,h3,h4):not(.space-root *) {font-family:var(--organic-serif);font-weight:400!important;letter-spacing:-.04em;}
+html[data-ui=x-social] .organic-site .organic-brand {font-family:var(--organic-serif);font-weight:400;letter-spacing:.02em;}
+html[data-ui=x-social] .organic-site.organic-admin .admin-side .brand {font-family:var(--organic-serif);font-weight:400;}
+
+/* One editorial family across reading and controls; code keeps its monospace face. */
+html[data-ui=x-social] .organic-site :is(.promotion-bar,.organic-brand span,.brand small,.site-tools select) {font-family:var(--organic-serif);}
+html[data-ui=x-social] .organic-site .space-root:is([data-space-font=theme],[data-space-font=serif],:not([data-space-font])) {font-family:var(--organic-serif);--sp-heading-font:var(--organic-serif);--sp-heading-weight:400;}
+
+/* Every community destination fills the same center track at every breakpoint. */
+html[data-ui] .organic-site .community-navigation-shell:not(.space-workspace-layout) .feed-workspace-main {width:100%;max-width:none;}
+
+/* The website registration belongs at the very bottom of the shared public footer. */
+html[data-ui=x-social] .organic-footer-compact>.organic-footer-filing {display:block;margin-top:12px;text-align:center;font-size:13px;line-height:1.8;color:#656565;}
+.organic-footer-filing a {display:inline-flex;align-items:center;min-height:44px;text-decoration:none;text-underline-offset:4px;}
+.organic-footer-filing a:hover {text-decoration:underline;}

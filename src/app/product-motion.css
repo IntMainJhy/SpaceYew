@@ -1,0 +1,38 @@
+/* Content stays visible; motion clarifies an action or the structure of its preview. */
+html[data-ui] {--motion-ease:cubic-bezier(.16,1,.3,1);--motion-color:200ms;--motion-feedback:140ms;--motion-panel:180ms;}
+html[data-ui] .organic-site :is(a,button,summary,input,select,textarea) {
+  transition:color var(--motion-color) ease,background-color var(--motion-color) ease,border-color var(--motion-color) ease,opacity var(--motion-feedback) ease-out,transform var(--motion-feedback) var(--motion-ease);
+}
+html[data-ui] .organic-site :is(.space-btn,.organic-button,.btn,.community-follow-button) {
+  transition:color var(--motion-color) ease,background-color var(--motion-color) ease,border-color var(--motion-color) ease,border-radius 500ms ease,opacity var(--motion-feedback) ease-out,transform var(--motion-feedback) var(--motion-ease);
+}
+@media(prefers-reduced-motion:no-preference){
+  html:has(.product-home) {scroll-behavior:smooth;}
+}
+html[data-ui] .organic-site :is(.space-btn,.organic-button,.btn,.community-follow-button):not(:disabled):active {opacity:.78;}
+html:is([data-ui=natural-organic],[data-ui=x-social]) .organic-site :is(.space-btn,.organic-button,.btn,.community-follow-button):not(:disabled):active {transform:scale(.98);}
+html[data-ui] .organic-site .platform-showcase-cover {transition:opacity 180ms var(--motion-ease);}
+@media(hover:hover) and (pointer:fine){
+  html[data-ui] .organic-site .platform-showcase:hover .platform-showcase-cover {opacity:.9;}
+}
+html[data-ui] .organic-site .space-share-popover {animation:panel-disclose var(--motion-panel) var(--motion-ease)!important;}
+/* Existing groups keep their visual treatment; only response timing is shared. */
+html[data-ui] .organic-site :is(.feed-tabs,.space-tabs,.content-language-options,.space-languages) :is(a,button) {transition:color 180ms ease,background-color 180ms ease,border-color 180ms ease,opacity 140ms ease;}
+html[data-ui] .organic-site :is(.community-feedback,.app-feedback,.notice,.space-error,.community-comment-context,.space-recover) {animation:feedback-disclose 180ms var(--motion-ease)!important;}
+@keyframes feedback-disclose {from {opacity:.6;}to {opacity:1;}}
+html[data-ui] .organic-site :is(.community-password-section,.community-close-account,.password-recovery,.email-settings>details,.community-source-disclosure)[open]>:not(summary) {animation:panel-disclose 180ms var(--motion-ease)!important;}
+html[data-ui] .organic-site .space-history {animation:panel-disclose 180ms var(--motion-ease)!important;}
+html[data-ui] .organic-site :is(.organic-project-link,.organic-resource-card,.organic-article-row>a,.community-member-link,.space-item,.workspace-post-copy>a) {transition:color 180ms ease,background-color 180ms ease,opacity 140ms ease;}
+@media(prefers-reduced-motion:reduce){
+  html {scroll-behavior:auto!important;}
+  html[data-ui] .organic-site :is(.space-btn,.organic-button,.btn,.community-follow-button):not(:disabled):active {transform:none!important;}
+  html[data-ui] .organic-site .platform-showcase-cover {transition:none!important;}
+  html[data-ui] .organic-site :is(.space-btn,.organic-button,.btn,.community-follow-button) {transition:opacity 100ms ease-out!important;}
+  html[data-ui] .organic-site .space-share-popover {animation:none!important;}
+  html[data-ui] .organic-site :is(.community-feedback,.app-feedback,.notice,.space-error,.community-comment-context,.space-recover,.space-history,.login-card),html[data-ui] .organic-site :is(.community-password-section,.community-close-account,.password-recovery,.email-settings>details,.community-source-disclosure)[open]>:not(summary) {animation:none!important;}
+}
+@media print {
+  html[data-ui] .organic-site :where(*,*::before,*::after) {animation:none!important;transition:none!important;}
+}
+
+.feed-policy-links {display:flex;flex-wrap:wrap;gap:12px;font-size:12px;}

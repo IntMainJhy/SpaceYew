@@ -1,94 +1,96 @@
 # SpaceYew
 
-**让做过的事，成为被看见的你。**
+**English** | [简体中文](README.zh-CN.md)
 
-SpaceYew 是一个面向个人创作者与开发者的展板和技术分享社区。你可以在自己的空间里整理作品、开发手记、资源与成长经历，将它们编排成个人展板或简历；也可以把值得分享的内容提交到社区，与其他成员交流。
+**Let your work tell your story.**
 
-本仓库提供网站的完整前端、后端、测试及部署示例，方便阅读其界面、内容组织和权限治理的实现。网站基于 Next.js、React、TypeScript 和 Node.js 内置 SQLite 构建。
+SpaceYew is a personal showcase and knowledge-sharing community for creators and developers. Organize your projects, development notes, resources and experience in your own workspace, arrange them into a showcase board or résumé, and submit selected work to the community.
 
-> **源码可见，仅供阅读学习。** 修改使用、直接使用、部署（包括个人或非商业部署）、商用和再分发，均须取得 IntMainJhy 的事先书面许可。完整条款见 [LICENSE](LICENSE)。本项目不采用 MIT、Apache 或 GPL 等开放许可。
+This repository contains the website's frontend, backend, tests and deployment examples, making its interface, content model and permission system available to study. It is built with Next.js, React, TypeScript and Node.js's built-in SQLite.
 
-**本仓库只发布网站。macOS、Windows 客户端的源码、安装包和专有资源不在本仓库发布，本仓库的许可不授予客户端使用或分发权利。** GitHub 平台内的查看与 Fork 按适用的平台条款处理。
+> **Source available for reading and study only.** Direct use, modification, deployment (including personal or non-commercial deployment), commercial use and redistribution require prior written permission from IntMainJhy. See [LICENSE](LICENSE) for the full terms and English summary. This project is not offered under an open-source license such as MIT, Apache or GPL.
 
-## 界面预览
+**This repository publishes only the website. macOS and Windows client source code, installers and proprietary assets remain private. This repository's license grants no rights to use or distribute those clients.** Viewing and forking on GitHub remain subject to GitHub's applicable terms.
 
-以下为本地演示环境的网页端截图，展示当前开发版本。
+## Preview
 
-### 网站首页
+Screenshots of the current web development version in a local demo environment. These previews use the Chinese interface; the website also supports English and Japanese.
 
-欢迎介绍、Skill 安装入口与网站导航。
+### Homepage
 
-![SpaceYew 网站首页，展示杂志字体、柔彩背景和功能入口](docs/screenshots/home.jpg)
+An introduction to SpaceYew, the Skill installation entry and site navigation.
 
-### 社区动态
+![SpaceYew homepage with editorial typography, pastel backgrounds and feature links](docs/screenshots/home.jpg)
 
-分享信息流、成员推荐与分类导航。
+### Community
 
-![SpaceYew 社区动态，展示分享内容、互动操作和左右侧栏](docs/screenshots/community.jpg)
+A feed of shared work, member recommendations and category navigation.
 
-### 展板编辑器
+![SpaceYew community feed with shared posts, interaction controls and sidebars](docs/screenshots/community.jpg)
 
-模块与图层、画布预览和展板设置。
+### Showcase editor
 
-![SpaceYew 网页展板编辑器，展示图层列表、中央预览和右侧设置](docs/screenshots/editor.jpg)
+Modules and layers, a canvas preview and board settings in one workspace.
 
-## 网站功能
+![SpaceYew web showcase editor with layers, a central preview and settings](docs/screenshots/editor.jpg)
 
-| 模块 | 可以做什么 |
+## Features
+
+| Area | Capabilities |
 | --- | --- |
-| 个人展板 | 用模块或自由画布组织个人介绍、作品、手记、资源、经历与技能，预览不同屏幕尺寸并提交公开审核 |
-| 内容库与文件 | 在按账号隔离的空间中编辑作品、文章和资源，管理草稿、版本、配图、附件及文件引用 |
-| 简历与个人主页 | 根据已发布资料、成长经历和精选作品生成个人展示页面与可打印简历 |
-| 技术分享社区 | 浏览动态、发现成员、关注、点赞、收藏、转发和评论，投稿先审后发 |
-| 管理与治理 | 按站长、审核员及成员权限处理内容审核、举报工单、通知、访问统计与审计日志 |
-| 网站工具接入 | 通过投稿 Skill 与本地 MCP 接入网站工作台，按授权范围维护内容与草稿 |
+| Showcase boards | Arrange your profile, projects, notes, resources, experience and skills using modules or a freeform canvas; preview screen sizes and submit a board for publication review |
+| Content and files | Edit projects, articles and resources in account-isolated workspaces; manage drafts, versions, images, attachments and file references |
+| Profiles and résumés | Turn published profile details, experience and selected projects into a personal page and printable résumé |
+| Developer community | Browse posts, discover members, follow, like, bookmark, repost and comment; submissions are reviewed before publication |
+| Administration | Role-based content review, reports, notifications, traffic statistics and audit logs for owners, reviewers and members |
+| Tool integration | Connect to the website workspace through a submission Skill and local MCP integration, with scoped access to content and drafts |
 
-网站下载页可以配置外部客户端安装包链接，安装包及客户端源码均不存放在本仓库。
+The download page can link to externally hosted client installers. Client binaries and source code are not stored in this repository.
 
-## 界面与交互
+## Interface and interaction
 
-白底墨色、柔彩流动背景与杂志风格衬线字体构成网站的共同视觉语言。社区采用 X 社交式布局，工作台保留较宽的编辑空间；页面切换与导航通过 GSAP 衔接，广告推荐条在站内切换时保持连续滚动。
+A white-and-ink palette, flowing pastel backgrounds and editorial serif typography give the website a consistent visual language. The community uses an X-style social layout, while the workspace provides a wider editing area. GSAP connects page and navigation transitions, and the promotional strip keeps scrolling continuously during in-site navigation.
 
-界面提供中文、英文和日文，适配桌面、平板和手机，并为减少动态效果及键盘操作保留对应行为。个人展板的作者主题独立于网站共享界面。
+The interface supports English, Simplified Chinese and Japanese across desktop, tablet and mobile, with keyboard interaction and reduced-motion behavior. Themes chosen by showcase authors are independent of the shared website interface.
 
-## 技术实现
+## Technology
 
-| 层级 | 实现 |
+| Layer | Implementation |
 | --- | --- |
-| 页面与 API | Next.js 15 App Router，服务端页面与同站 API |
-| 界面 | React 19、TypeScript 5、CSS、GSAP |
-| 富文本编辑 | Tiptap |
-| 运行与数据 | Node.js 24.15+、内置 SQLite、私有文件目录 |
-| 邮件与媒体 | Nodemailer、Sharp、QRCode |
-| 验证与部署 | Node.js 测试运行器、隔离 HTTP 测试、Nginx 与 systemd 示例 |
+| Pages and API | Next.js 15 App Router, server-rendered pages and same-site APIs |
+| Interface | React 19, TypeScript 5, CSS and GSAP |
+| Rich text | Tiptap |
+| Runtime and storage | Node.js 24.15+, built-in SQLite and a private file directory |
+| Email and media | Nodemailer, Sharp and QRCode |
+| Validation and deployment | Node.js test runner, isolated HTTP tests, Nginx and systemd examples |
 
-## 当前状态
+## Project status
 
-项目仍处于开发阶段，持续完善网站功能、交互与维护流程。公开源码用于展示和阅读实现，不代表已完成生产部署、邮件投递或社区开放验收。
+SpaceYew is under active development. Publishing its source demonstrates the implementation; it does not certify production deployment, email delivery or readiness to open the community to the public.
 
-本仓库只承载网站开发；macOS 和 Windows 客户端继续保持私有。没有在仓库提供的客户端源码、安装包或真实站点数据，不属于本项目的交付内容。
+This repository covers website development only. macOS and Windows clients remain private. Client source, installers and real site data are not included.
 
-## 目录
+## Repository layout
 
-| 目录 | 内容 |
+| Directory | Contents |
 | --- | --- |
-| `src/app/` | 页面、API、媒体/下载路由与样式 |
-| `src/components/` | 网站界面及共享交互 |
-| `src/lib/` | 认证、内容、社区、空间、文件、邮件、数据库与权限 |
-| `test/` | 单元测试、隔离 HTTP 测试与显式执行的演示脚本 |
-| `scripts/` | 初始化、备份、恢复、清理与 Skill 打包 |
-| `integrations/` | 网站投稿 Skill、MCP 与请求脚本 |
-| `deploy/` | Nginx、systemd 与平台/管理分入口部署示例 |
-| `public/` | 网站静态资源与生成的投稿 Skill 包 |
-| `docs/` | 网站管理说明与第三方许可 |
+| `src/app/` | Pages, APIs, media/download routes and styles |
+| `src/components/` | Website components and shared interactions |
+| `src/lib/` | Authentication, content, community, workspaces, files, email, database and permissions |
+| `test/` | Unit tests, isolated HTTP tests and explicitly run demo scripts |
+| `scripts/` | Initialization, backup, restore, cleanup and Skill packaging |
+| `integrations/` | Website submission Skill, MCP integration and request scripts |
+| `deploy/` | Nginx, systemd and separate platform/admin deployment examples |
+| `public/` | Static website assets and the generated submission Skill package |
+| `docs/` | Website administration guides, screenshots and third-party licenses |
 
-本地数据库、用户上传、邮件记录、真实环境变量、凭据、备份、设计验收截图、临时预览、依赖和构建输出均不在仓库中。演示脚本中的测试密码仅用于隔离测试，不是现有站点凭据。
+Local databases, user uploads, captured email, real environment variables, credentials, backups, local design-review artifacts, temporary previews, dependencies and build output are excluded. Passwords in demo scripts are synthetic test values, not live site credentials.
 
-## 已授权维护者的本地开发
+## Local development for authorized maintainers
 
-以下命令只面向著作权人、维护者及已取得书面授权的人；操作说明不扩大 LICENSE 中的权限。
+These instructions are for the copyright holder, maintainers and people with separate written authorization. They do not expand the permissions in LICENSE.
 
-要求 Node.js **24.15 或更新的兼容版本**，使用 npm 和随仓库提供的锁文件。数据库采用单 Node 进程访问，不应以多个实例共写同一上传目录。
+Use Node.js **24.15 or a newer compatible version**, npm and the committed lockfile. Database access uses a single Node process; multiple instances must not write concurrently to the same upload directory.
 
 ```sh
 git clone https://github.com/IntMainJhy/SpaceYew.git
@@ -99,11 +101,11 @@ npm run setup
 npm run dev
 ```
 
-默认本地入口为 `http://127.0.0.1:3008/`。此仓库本身就是网站根目录，无需再进入 site-v1 子目录。如果已有环境文件，不要覆盖它。
+The default local URL is `http://127.0.0.1:3008/`. The repository is already the website root; there is no additional `site-v1` directory to enter. Preserve any existing environment file.
 
-`APP_DATA_DIR` 默认位于应用目录之外的 `../.site-v1-data`，可设置为其他私有绝对路径。首次初始化创建随机管理员凭据文件 `initial-admin.txt`，仅存放在实际数据目录；已有数据不会因重复 setup 自动重置。不要上传该文件、数据库或真实配置。
+`APP_DATA_DIR` defaults to `../.site-v1-data`, outside the application directory, and can be set to another private absolute path. On first initialization, randomly generated administrator credentials are saved to `initial-admin.txt` in the actual data directory. Re-running setup does not reset existing data. Never upload that file, the database or real configuration.
 
-本地环境模板只包含 loopback URL 与 Cookie 配置。需要邮件功能时，参照 [.env.example](.env.example) 配置 SMTP；本机 capture 模式只用于联调。真实 SMTP 投递、备份恢复及正式部署需在目标环境单独验证。
+The local environment template contains only loopback URLs and cookie settings. For email, configure SMTP using [.env.example](.env.example); local capture mode is for integration testing. Real SMTP delivery, backup restoration and production deployment require separate validation in the target environment.
 
 ```sh
 npm test
@@ -112,18 +114,18 @@ npm run build
 npm start
 ```
 
-HTTP 集成脚本位于 `test/`，使用临时数据目录执行；运行前确认测试端口未被开发服务占用。演示播种与数据刷新脚本不会由常规测试自动执行，应只对明确指定的测试数据运行。
+HTTP integration scripts in `test/` use temporary data directories. Check that their test ports are free before running them. Demo seeding and data-refresh scripts do not run as part of regular tests and should target only explicitly designated test data.
 
-## 部署与管理
+## Deployment and administration
 
-- [平台/管理分入口部署](deploy/README-split.md)
-- [管理中心说明](docs/管理中心说明.md)
-- 配置示例：[平台](deploy/platform.env.example)、[管理](deploy/admin.env.example)、[Nginx](deploy/nginx-split.conf.example)。
+- [Separate platform and admin deployment](deploy/README-split.en.md)
+- [Administration guide](docs/administration.en.md)
+- Configuration examples: [platform](deploy/platform.env.example), [admin](deploy/admin.env.example) and [Nginx](deploy/nginx-split.conf.example).
 
-正式环境须使用独立私有数据目录、正确的 HTTPS URL、Secure Cookie 及可信代理配置。客户端链接、备案展示、账号与邮件设置需与实际站点一致；代码中的默认资料与备案标识不可作为其他站点的授权证明。
+Production requires a separate private data directory, correct HTTPS URLs, Secure cookies and a trusted proxy configuration. Client links, ICP registration details, account settings and email settings must match the actual site. Default content and registration identifiers in the code do not authorize their use on another site.
 
-## 许可与授权
+## License and permission
 
-原创部分按 [SpaceYew 网站源码阅读与学习许可 1.0](LICENSE) 提供，仅供阅读学习，其他使用需要事先书面授权。可通过 [IntMainJhy](https://github.com/IntMainJhy) 的公开联系渠道申请，说明用途、修改范围、部署范围及商业情况。
+Original material is provided under the [SpaceYew Website Source Reading and Study License 1.0](LICENSE), for reading and study only. Other uses require prior written permission. Contact [IntMainJhy](https://github.com/IntMainJhy) through the author's public contact channels, describing your purpose, intended modifications, deployment scope and any commercial use.
 
-第三方材料继续适用各自许可，参见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+LICENSE includes an English summary; its Chinese text controls if there is a discrepancy. Third-party materials retain their own licenses; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

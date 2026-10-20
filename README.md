@@ -14,25 +14,25 @@ This repository contains the website's frontend, backend, tests and deployment e
 
 ## Preview
 
-Screenshots of the current web development version in a local demo environment. These previews use the Chinese interface; the website also supports English and Japanese.
+Screenshots of the English web interface in a local demo environment. Sample member names and posts remain in their original language. The website also supports Simplified Chinese and Japanese.
 
 ### Homepage
 
 An introduction to SpaceYew, the Skill installation entry and site navigation.
 
-![SpaceYew homepage with editorial typography, pastel backgrounds and feature links](docs/screenshots/home.jpg)
+![SpaceYew homepage in English with editorial typography, pastel backgrounds and feature links](docs/screenshots/home-en.jpg)
 
 ### Community
 
 A feed of shared work, member recommendations and category navigation.
 
-![SpaceYew community feed with shared posts, interaction controls and sidebars](docs/screenshots/community.jpg)
+![SpaceYew community feed in English with shared posts, interaction controls and sidebars](docs/screenshots/community-en.jpg)
 
 ### Showcase editor
 
-Modules and layers, a canvas preview and board settings in one workspace.
+Modules and layers, a canvas preview and editing controls in one workspace.
 
-![SpaceYew web showcase editor with layers, a central preview and settings](docs/screenshots/editor.jpg)
+![SpaceYew web showcase editor in English with layers, a central preview and module settings](docs/screenshots/editor-en.jpg)
 
 ## Features
 

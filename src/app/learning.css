@@ -76,6 +76,45 @@ html[data-ui] .skill-entry h3 {font-size:20px;line-height:1.5;margin:0 0 2px;}
 .skill-platform-heading {margin:64px 0 24px;}
 .skill-platform-heading>p {font-size:15px;color:var(--organic-muted);margin:8px 0;line-height:1.85;}
 html[data-ui] .organic-site .skill-directory :is(a,button,input):focus-visible {outline:2px solid var(--organic-ink,#0f1419);outline-offset:4px;}
+.skill-detail>.learning-back {margin-bottom:16px;}
+.skill-detail-meta {display:flex;align-items:center;flex-wrap:wrap;gap:10px 22px;margin:20px 0;font-size:12px;color:var(--organic-muted);overflow-wrap:anywhere;}
+.skill-detail-meta a {text-decoration:underline;text-underline-offset:4px;}
+.skill-detail-layout {display:grid;grid-template-columns:190px minmax(0,800px);gap:56px;align-items:start;margin-top:40px;}
+.skill-detail-nav {position:sticky;top:28px;}
+.skill-detail-nav nav {display:grid;gap:4px;}
+.skill-detail-nav a {display:flex;align-items:center;min-height:44px;font-size:14px;padding:8px 14px;border-radius:8px;}
+.skill-detail-nav a:hover {background:var(--x-hover,#f2f4f4);text-decoration:underline;text-underline-offset:4px;}
+.skill-detail-body {min-width:0;}
+.skill-detail-body>section {scroll-margin-top:28px;}
+.skill-detail-body>section+section {margin-top:40px;border-top:1px solid var(--organic-line);padding-top:28px;}
+.skill-detail-body p,.skill-feature-list {font-size:16px;line-height:1.9;max-width:70ch;}
+.skill-detail-body p {margin:12px 0;}
+.skill-feature-list {margin:16px 0 0;padding-left:22px;}
+.skill-feature-list li+li {margin-top:12px;}
+html[data-ui] .skill-detail-body h3 {font-size:18px;line-height:1.6;margin:24px 0 0;}
+.skill-supported-tools {list-style:none;margin:16px 0;padding:0;}
+.skill-supported-tools li {display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 24px;border-bottom:1px solid var(--organic-line);min-height:52px;padding:8px 0;font-size:15px;}
+.skill-supported-tools a {display:inline-flex;align-items:center;gap:8px;min-height:36px;font-size:13px;color:var(--organic-muted);text-decoration:underline;text-underline-offset:4px;}
+.skill-detail-body .learning-muted {font-size:13px;}
+.skill-install-guide {margin-top:24px;}
+.skill-install-choice {display:flex;align-items:center;flex-wrap:wrap;gap:12px 24px;}
+.skill-install-choice label {font-size:14px;}
+html[data-ui] .organic-site .skill-install-choice select {width:320px;max-width:100%;min-height:44px;padding:10px 14px;font-size:16px;color:inherit;background:#fff;border:1px solid var(--organic-line);border-radius:10px;}
+.skill-detail-body .skill-run-location {font-size:13px;color:var(--organic-muted);margin-top:16px;}
+.skill-command {margin:20px 0;background:#1c1c1c;color:#f6f6f6;border-radius:12px;overflow:hidden;}
+.skill-command-toolbar {display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:52px;padding:4px 12px 4px 18px;border-bottom:1px solid #444;font-size:12px;}
+html[data-ui] .organic-site .skill-command-toolbar button {display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;min-width:100px;border:0;border-radius:8px;padding:8px 12px;color:#fff;background:transparent;font:inherit;font-size:13px;}
+html[data-ui] .organic-site .skill-command-toolbar button:is(:hover,:focus-visible,:active) {background:#383838;color:#fff;}
+html[data-ui] .organic-site .skill-command-toolbar button:focus-visible {outline:2px solid #fff;outline-offset:-3px;}
+html[data-ui] .organic-site .skill-command pre {margin:0;padding:18px;white-space:pre-wrap;overflow-wrap:anywhere;overflow:auto;max-width:100%;background:transparent;color:inherit;border:0;border-radius:0;}
+html[data-ui] .organic-site .skill-command code {font:13px/1.9 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:0;background:transparent;color:inherit;white-space:inherit;}
+.skill-command pre:focus-visible {outline:2px solid #fff;outline-offset:-4px;}
+.skill-detail-body .skill-command-error {padding:0 18px 16px;margin:0;color:#ffe3b5;font-size:13px;}
+.skill-detail-body .skill-install-after {margin-top:24px;}
+.skill-detail-source>div {display:flex;align-items:center;flex-wrap:wrap;gap:16px 28px;}
+.skill-detail-source a,.skill-detail-related>a {display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:14px;text-decoration:underline;text-underline-offset:4px;}
+.skill-detail-related>a {display:flex;justify-content:space-between;border-bottom:1px solid var(--organic-line);padding:14px 0;}
+.skill-detail-related>h2 {margin-bottom:12px!important;}
 .skill-feature {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;border-block:1px solid var(--organic-line);padding:36px 0;align-items:start;}
 .skill-feature-copy>p {font-size:16px;line-height:1.95;max-width:65ch;margin:14px 0;}
 .skill-feature-copy .space-actions {margin-top:24px;}
@@ -99,6 +138,7 @@ html[data-ui] .home-learning-links h3 {font-size:26px;line-height:1.5;margin:0;}
 .home-learning-links span {font-size:14px;}
 .home-learning-links>a:hover span {text-decoration:underline;text-underline-offset:4px;}
 @media(max-width:900px){
+ .skill-detail-layout {grid-template-columns:160px minmax(0,1fr);gap:32px;}
  .skill-directory-layout {grid-template-columns:160px minmax(0,1fr);gap:32px;}
  .skill-directory-tools {align-items:flex-start;flex-direction:column;gap:12px;}
  .learning-layout {grid-template-columns:190px minmax(0,1fr);gap:32px;}
@@ -106,6 +146,15 @@ html[data-ui] .home-learning-links h3 {font-size:26px;line-height:1.5;margin:0;}
  .skill-workflow ol {gap:24px;}
 }
 @media(max-width:767px){
+ .skill-detail-layout {grid-template-columns:minmax(0,1fr);gap:28px;margin-top:28px;}
+ .skill-detail-nav {position:static;}
+ .skill-detail-nav nav {display:flex;flex-wrap:wrap;gap:4px 12px;padding-block:8px;border-block:1px solid var(--organic-line);}
+ .skill-detail-nav a {padding:8px 0;min-height:44px;font-size:13px;}
+ .skill-detail-meta {gap:10px 16px;}
+ .skill-detail-body>section+section {margin-top:32px;padding-top:24px;}
+ .skill-supported-tools a {min-height:44px;}
+ .skill-install-choice {display:grid;gap:8px;}
+ html[data-ui] .organic-site .skill-install-choice select {width:100%;}
  html[data-ui] .organic-site .skill-search input {font-size:16px;}
  .skill-directory-tools {margin-bottom:20px;}
  .skill-directory-layout {grid-template-columns:minmax(0,1fr);gap:20px;}

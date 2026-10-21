@@ -9710,5 +9710,469 @@
   "按类型探索 GitHub 上的 Agent Skill，查阅用途、原项目与许可。": [
     "Explore GitHub Agent Skills by category, with use cases, original sources and license links.",
     "GitHub の Agent Skill を種類別に探し、用途、原典、ライセンスを確認できます。"
+  ],
+  "按影响优先级检查数据瀑布、服务端取数、客户端渲染和包体积。": [
+    "Review data waterfalls, server fetching, client rendering and bundle size in order of impact.",
+    "データ取得の直列化、サーバー側の取得、クライアント描画、バンドルサイズを影響順に確認します。"
+  ],
+  "把性能规则用于代码审查与重构，帮助判断应该先改哪里。": [
+    "Apply performance rules during reviews and refactoring to decide what to improve first.",
+    "レビューやリファクタリングで性能ルールを使い、改善の優先順位を判断します。"
+  ],
+  "适合 Next.js 页面加载慢、React 重渲染过多，或上线前需要检查取数与打包方式的项目。": [
+    "Useful for slow Next.js pages, excessive React renders, or checking fetching and bundling before release.",
+    "遅い Next.js ページ、React の過剰な再描画、公開前のデータ取得やビルドの確認に適しています。"
+  ],
+  "需要一个 React 或 Next.js 项目；此 Skill 提供工程规则，不会替代性能测量。": [
+    "Requires a React or Next.js project. This skill provides engineering guidance and does not replace performance measurements.",
+    "React または Next.js のプロジェクトが必要です。設計指針を提供する Skill であり、性能測定の代わりにはなりません。"
+  ],
+  "用组合组件、Context 和状态提升替代不断增加的布尔参数。": [
+    "Replace growing boolean prop lists with composition, Context and lifted state.",
+    "増え続ける真偽値 props を、合成、Context、状態のリフトアップで整理します。"
+  ],
+  "围绕组件职责与公开 API 重组代码，并参考 React 19 的相关变化。": [
+    "Restructure component responsibilities and public APIs with guidance on relevant React 19 changes.",
+    "コンポーネントの責務と公開 API を再構成し、React 19 の関連変更も参照します。"
+  ],
+  "适合一个组件承载太多变体、多个页面重复相同交互，或准备建立可复用组件库时使用。": [
+    "Useful when a component has too many variants, interactions repeat across pages, or a reusable component library is needed.",
+    "バリエーションの多すぎるコンポーネント、ページ間の重複操作、再利用可能なライブラリの設計に適しています。"
+  ],
+  "面向 React 组件；采用建议前，需要结合项目的 React 版本与现有 API。": [
+    "Designed for React components. Match its advice to your React version and existing APIs.",
+    "React コンポーネント向けです。プロジェクトの React バージョンと既存 API に合わせて適用してください。"
+  ],
+  "从产品主题和受众出发，明确视觉方向、字体、配色与布局。": [
+    "Define visual direction, typography, color and layout from the product subject and audience.",
+    "製品のテーマや利用者をもとに、ビジュアル、書体、配色、レイアウトの方向性を定めます。"
+  ],
+  "指导编写前端界面，把设计选择落实到可以运行的页面。": [
+    "Turn design decisions into a working frontend interface.",
+    "デザイン上の判断を、動作するフロントエンドの画面として実装します。"
+  ],
+  "适合新建落地页、制作作品集，或希望现有界面形成明确视觉风格的改版任务。": [
+    "Useful for landing pages, portfolios, or redesigns that need a clear visual identity.",
+    "ランディングページ、作品集、明確なビジュアルを必要とするリニューアルに適しています。"
+  ],
+  "提供产品背景、页面目标和现有设计约束；实际实现依赖所用的前端技术栈。": [
+    "Provide product context, page goals and existing design constraints. Implementation depends on the chosen frontend stack.",
+    "製品の背景、ページの目的、既存のデザイン制約を用意してください。実装には使用するフロントエンド環境が必要です。"
+  ],
+  "用审查、排版、布局、适配等指令检查并改善现有界面。": [
+    "Audit and improve interfaces through commands for typography, layout, adaptation and refinement.",
+    "レビュー、タイポグラフィ、レイアウト、画面適応などの指示で UI を確認・改善します。"
+  ],
+  "把产品与设计约束保存在项目中，支持持续修改时维持视觉一致。": [
+    "Keep product and design constraints in the project to maintain consistency over ongoing changes.",
+    "製品とデザインの制約をプロジェクトに保存し、継続的な変更でも一貫性を保ちます。"
+  ],
+  "适合功能已完成但界面粗糙、手机布局不协调，或需要持续打磨可用性与设计细节的网站。": [
+    "Useful when features work but the interface feels unfinished, mobile layouts need attention, or usability needs sustained refinement.",
+    "機能は完成しているものの UI が粗い場合、モバイル表示の調整、継続的な使いやすさの改善に適しています。"
+  ],
+  "安装器使用 Node.js / npx；引擎首次运行可能下载对应平台的二进制文件，工具可能要求确认项目钩子。": [
+    "The installer uses Node.js / npx. The engine may download a platform binary on first run, and the host may ask you to approve project hooks.",
+    "インストーラーは Node.js / npx を使用します。初回に対応するバイナリを取得する場合があり、ツールからプロジェクトのフックの承認を求められることがあります。"
+  ],
+  "检索配色、字体组合、交互规则、图表和技术栈相关设计建议。": [
+    "Search palettes, font pairings, interaction rules, chart guidance and stack-specific design advice.",
+    "配色、書体の組み合わせ、操作ルール、グラフ、技術スタック別の設計助言を検索します。"
+  ],
+  "围绕页面目标生成设计系统建议，帮助比较和选择实现方向。": [
+    "Generate design system suggestions around page goals and compare implementation directions.",
+    "ページの目的に合わせてデザインシステムを提案し、実装の方向性を比較します。"
+  ],
+  "适合需要从零确定界面规范、比较视觉方案，或按前端框架查找具体设计建议的任务。": [
+    "Useful for setting up interface guidelines, comparing design approaches, or finding framework-specific design advice.",
+    "UI 規範の新規策定、デザイン案の比較、フレームワークごとの具体的な助言の検索に適しています。"
+  ],
+  "CLI 安装需要 Node.js / npm；本地搜索脚本需要 Python 3，使用标准库。": [
+    "The CLI requires Node.js / npm. Local search scripts require Python 3 and use its standard library.",
+    "CLI には Node.js / npm が必要です。ローカル検索スクリプトは Python 3 と標準ライブラリを使います。"
+  ],
+  "先复现并收集日志与边界证据，再沿调用链定位根因。": [
+    "Reproduce the issue, collect logs and boundary evidence, then trace the call chain to its cause.",
+    "まず問題を再現し、ログや境界での証拠を集め、呼び出し経路をたどって原因を探します。"
+  ],
+  "将猜测变成可检验的假设，完成最小修复后再验证原问题。": [
+    "Turn guesses into testable hypotheses and verify the original problem after the smallest suitable fix.",
+    "推測を検証可能な仮説に変え、最小限の修正後に元の問題を確認します。"
+  ],
+  "适合修了又出现的 Bug、环境相关故障，以及在多个模块之间难以定位的问题。": [
+    "Useful for recurring bugs, environment-specific failures and issues spanning multiple modules.",
+    "再発する不具合、環境固有の障害、複数モジュールにまたがる問題に適しています。"
+  ],
+  "提供可复现步骤、报错和相关代码；工具需要访问项目使用的测试或日志。": [
+    "Provide reproduction steps, errors and relevant code. The agent needs access to the project’s tests or logs.",
+    "再現手順、エラー、関連コードを用意してください。プロジェクトのテストやログへのアクセスが必要です。"
+  ],
+  "先写能暴露目标行为的失败测试，再写满足测试的实现。": [
+    "Start with a failing test for the desired behavior, then implement enough code to pass it.",
+    "目的の動作を示す失敗テストを先に作り、それを通す実装を書きます。"
+  ],
+  "按失败、通过、重构的顺序推进，保留可执行的回归检查。": [
+    "Work through red, green and refactor stages, retaining executable regression checks.",
+    "失敗、成功、リファクタリングの順で進み、実行可能な回帰テストを残します。"
+  ],
+  "适合新增业务行为、修复已知缺陷，或对需要保持行为一致的模块做重构。": [
+    "Useful for adding business behavior, fixing known defects or refactoring modules whose behavior must stay consistent.",
+    "業務機能の追加、既知の不具合の修正、動作を維持したモジュールの再構成に適しています。"
+  ],
+  "项目需要可运行的测试命令；此 Skill 约束开发流程，不附带通用测试框架。": [
+    "The project needs a runnable test command. This skill guides the development process and does not supply a universal test framework.",
+    "実行可能なテストコマンドが必要です。開発手順を導く Skill であり、汎用テストフレームワークは含まれません。"
+  ],
+  "通过 Python Playwright 操作本地网页，检查交互和页面状态。": [
+    "Use Python Playwright to interact with local websites and check their behavior and state.",
+    "Python Playwright でローカルの Web サイトを操作し、動作や状態を確認します。"
+  ],
+  "采集浏览器日志、截图和页面信息，辅助复现与验证 Web 问题。": [
+    "Capture browser logs, screenshots and page information to reproduce and verify web issues.",
+    "ブラウザのログ、スクリーンショット、ページ情報を取得して問題を再現・検証します。"
+  ],
+  "适合表单提交、导航、动态页面和本地 Web 功能的浏览器验证。": [
+    "Useful for browser checks of form submission, navigation, dynamic pages and local web features.",
+    "フォーム送信、ナビゲーション、動的ページ、ローカル Web 機能のブラウザ検証に適しています。"
+  ],
+  "本地脚本需要 Python、Playwright 与对应浏览器；需要启动被测网站。": [
+    "Local scripts require Python, Playwright and the corresponding browser. Start the website being tested first.",
+    "ローカル実行には Python、Playwright、対応ブラウザが必要です。検証対象のサイトを起動してください。"
+  ],
+  "创建、读取和修改 Word 文档，处理段落样式、表格和图片。": [
+    "Create, read and edit Word documents with paragraph styles, tables and images.",
+    "段落スタイル、表、画像を扱い、Word 文書を作成・読み取り・編集します。"
+  ],
+  "支持修订、批注及已有文档的结构调整，并附有处理脚本与参考资料。": [
+    "Work with tracked changes, comments and document structure using supporting scripts and references.",
+    "変更履歴、コメント、文書構造の調整に対応し、処理スクリプトや参考資料も付属します。"
+  ],
+  "适合制作报告、编辑正式文稿，或在已有 Word 文档中保留格式地修改内容。": [
+    "Useful for reports, formal writing and updates that preserve the formatting of an existing Word document.",
+    "レポートや正式文書の作成、既存 Word 文書の書式を保った内容更新に適しています。"
+  ],
+  "使用原项目列出的 Claude 插件或服务入口；文档脚本与转换工具的依赖见官方资料。": [
+    "Use the Claude plugin or service paths listed by the original project. See its documentation for script and conversion dependencies.",
+    "原プロジェクトに記載された Claude のプラグインやサービスを使用してください。スクリプトや変換ツールの依存関係は公式資料を参照してください。"
+  ],
+  "提取 PDF 的文字与表格，完成拆分、合并、旋转和生成。": [
+    "Extract text and tables, split, merge, rotate and generate PDF files.",
+    "PDF の文字や表の抽出、分割、結合、回転、生成を行います。"
+  ],
+  "根据任务处理 PDF 表单、扫描件与 OCR 等文档工作流。": [
+    "Work with PDF forms, scanned documents and OCR workflows as required by the task.",
+    "タスクに応じてフォーム、スキャン文書、OCR などの処理を行います。"
+  ],
+  "适合整理多份 PDF、提取研究资料、填写表单，或把扫描内容转换为可处理的信息。": [
+    "Useful for organizing PDFs, extracting research materials, filling forms and making scanned content usable.",
+    "複数 PDF の整理、研究資料の抽出、フォーム記入、スキャン内容の情報化に適しています。"
+  ],
+  "使用原项目列出的 Claude 插件或服务入口；扫描件与加密文档可能需要额外工具或授权密码。": [
+    "Use the Claude plugin or service paths listed by the original project. Scans and encrypted files may require extra tools or an authorized password.",
+    "原プロジェクトに記載された Claude のプラグインやサービスを使用してください。スキャンや暗号化文書には追加ツールや正当なパスワードが必要な場合があります。"
+  ],
+  "创建和修改演示文稿，处理页面版式、模板、图片与图表。": [
+    "Create and edit presentations, including layouts, templates, images and charts.",
+    "レイアウト、テンプレート、画像、グラフを扱い、スライドを作成・編集します。"
+  ],
+  "读取已有幻灯片及演讲备注，支持重排内容与结合渲染结果检查页面。": [
+    "Read existing slides and speaker notes, reorganize content and check rendered pages.",
+    "既存スライドや発表者ノートを読み、内容を再構成して描画結果を確認します。"
+  ],
+  "适合制作项目汇报、演讲材料，或在已有 PowerPoint 模板中更新内容。": [
+    "Useful for project reports, speaking materials and updates to existing PowerPoint templates.",
+    "プロジェクト報告、講演資料、既存 PowerPoint テンプレートの更新に適しています。"
+  ],
+  "使用原项目列出的 Claude 插件或服务入口；本地生成与预览工具以官方依赖说明为准。": [
+    "Use the Claude plugin or service paths listed by the original project. Follow its dependency guidance for local generation and previews.",
+    "原プロジェクトに記載された Claude のプラグインやサービスを使用してください。ローカル生成やプレビューの依存関係は公式資料に従ってください。"
+  ],
+  "读取、清洗和修改工作簿与 CSV 数据，设置公式、格式和图表。": [
+    "Read, clean and edit workbooks and CSV data, including formulas, formatting and charts.",
+    "ブックや CSV の読み取り、整理、編集を行い、数式、書式、グラフを設定します。"
+  ],
+  "根据任务检查公式结果与表格结构，生成可继续编辑的电子表格。": [
+    "Check formula results and table structure as needed, producing editable spreadsheets.",
+    "数式の結果や表の構造を必要に応じて確認し、編集可能なスプレッドシートを作成します。"
+  ],
+  "适合清洗杂乱数据、制作分析工作簿，以及批量更新已有 Excel 表格。": [
+    "Useful for cleaning messy data, building analysis workbooks and batch updates to existing Excel files.",
+    "乱れたデータの整理、分析ブックの作成、既存 Excel の一括更新に適しています。"
+  ],
+  "使用原项目列出的 Claude 插件或服务入口；公式重算等操作需要对应运行工具。": [
+    "Use the Claude plugin or service paths listed by the original project. Operations such as formula recalculation need the corresponding runtime tools.",
+    "原プロジェクトに記載された Claude のプラグインやサービスを使用してください。数式の再計算などには対応する実行ツールが必要です。"
+  ],
+  "编写 Obsidian 的双向链接、嵌入、提示块和属性。": [
+    "Write Obsidian wikilinks, embeds, callouts and properties.",
+    "Obsidian の内部リンク、埋め込み、コールアウト、プロパティを記述します。"
+  ],
+  "在保留 Obsidian 语法的前提下组织 Markdown 笔记与知识关系。": [
+    "Organize Markdown notes and knowledge relationships while preserving Obsidian syntax.",
+    "Obsidian の構文を保ちながら Markdown ノートと知識の関係を整理します。"
+  ],
+  "适合维护个人知识库、整理项目笔记，或把零散资料写成可互相链接的文档。": [
+    "Useful for personal knowledge bases, project notes and turning scattered material into linked documents.",
+    "個人の知識ベース、プロジェクトノート、散在する資料の相互リンク化に適しています。"
+  ],
+  "需要可读写的 Markdown 笔记目录；在 Obsidian 中查看专用语法的呈现效果。": [
+    "Requires a readable and writable Markdown notes folder. View Obsidian-specific syntax in Obsidian.",
+    "読み書き可能な Markdown ノートのフォルダーが必要です。専用構文の表示は Obsidian で確認してください。"
+  ],
+  "用 JSON 表达画布节点、连接、分组与位置。": [
+    "Represent canvas nodes, connections, groups and positions in JSON.",
+    "画布のノード、接続、グループ、位置を JSON で表現します。"
+  ],
+  "创建或修改 .canvas 文件，检查连接引用与文件结构是否有效。": [
+    "Create and edit .canvas files and validate their structure and connection references.",
+    ".canvas ファイルを作成・編集し、構造や接続の参照先を確認します。"
+  ],
+  "适合制作思维导图、研究关系图和项目流程图，并在支持 JSON Canvas 的工具中继续编辑。": [
+    "Useful for mind maps, research relationships and project flows that remain editable in JSON Canvas applications.",
+    "思考マップ、研究の関係図、プロジェクトの流れを作り、対応アプリで続けて編集する用途に適しています。"
+  ],
+  "需要能够打开 JSON Canvas 的应用，例如 Obsidian；此 Skill 编辑文件，不是独立画布应用。": [
+    "Requires an application that opens JSON Canvas, such as Obsidian. The skill edits files and is not a standalone canvas application.",
+    "Obsidian など JSON Canvas を開けるアプリが必要です。ファイルを編集する Skill であり、独立した画布アプリではありません。"
+  ],
+  "规划 MCP 工具的接口、输入输出、错误处理与服务连接方式。": [
+    "Plan MCP tool interfaces, input and output shapes, error handling and service connections.",
+    "MCP ツールのインターフェース、入出力、エラー処理、サービス接続を設計します。"
+  ],
+  "提供 Python 与 TypeScript 实现路径，并指导测试工具调用。": [
+    "Follow Python or TypeScript implementation paths and test tool calls.",
+    "Python と TypeScript の実装手順を提供し、ツール呼び出しのテストを支援します。"
+  ],
+  "适合把团队 API、内部系统或外部服务封装成 AI 助手可以调用的工具。": [
+    "Useful for exposing team APIs, internal systems or external services as tools an AI assistant can call.",
+    "チームの API、社内システム、外部サービスを AI アシスタント用のツールにする用途に適しています。"
+  ],
+  "按选用方案配置 Python 或 Node.js / TypeScript；外部 API 凭据与运行权限需要自行配置。": [
+    "Configure Python or Node.js / TypeScript for the chosen path. Supply external API credentials and runtime permissions separately.",
+    "選んだ手順に合わせて Python または Node.js / TypeScript を設定してください。外部 API の認証情報と実行権限は別途用意します。"
+  ],
+  "将重复任务写成包含触发描述、步骤和配套资料的 Skill。": [
+    "Turn recurring tasks into a skill with a trigger description, steps and supporting material.",
+    "繰り返すタスクを、トリガーの説明、手順、関連資料を持つ Skill にまとめます。"
+  ],
+  "用测试提示、评估与结果比较改进 Skill 内容及触发准确性。": [
+    "Improve the skill and its triggering accuracy using test prompts, evaluations and result comparisons.",
+    "テスト用プロンプト、評価、結果の比較で、内容と呼び出し精度を改善します。"
+  ],
+  "适合沉淀团队工作流程、制作个人常用 Skill，或改进已有 Skill 的稳定性。": [
+    "Useful for documenting team workflows, creating personal skills or improving an existing skill’s consistency.",
+    "チームの作業手順の整理、個人用 Skill の作成、既存 Skill の安定性向上に適しています。"
+  ],
+  "准备具有代表性的任务与期望结果；自动评估能力取决于所用工具和相关脚本环境。": [
+    "Prepare representative tasks and expected results. Automated evaluation depends on the selected tool and script environment.",
+    "代表的なタスクと期待する結果を用意してください。自動評価の機能は利用ツールとスクリプト環境によって異なります。"
+  ],
+  "项目目录的终端": [
+    "Terminal in your project folder",
+    "プロジェクト内のターミナル"
+  ],
+  "AI 工具的对话输入框": [
+    "Chat input in the AI tool",
+    "AI ツールのチャット入力欄"
+  ],
+  "完成后重启工具或开启新会话，在任务中明确提及该 Skill。": [
+    "Restart the tool or open a new session, then mention this skill when describing your task.",
+    "ツールを再起動するか新しいセッションを開き、タスクでこの Skill を指定してください。"
+  ],
+  "需要 Node.js 22.20 或更高版本。命令只选择当前 Skill，按安装器提示确认项目内的安装位置。": [
+    "Requires Node.js 22.20 or later. The command selects this skill; follow the installer to confirm its location in the project.",
+    "Node.js 22.20 以降が必要です。コマンドはこの Skill を選択します。インストーラーでプロジェクト内の場所を確認してください。"
+  ],
+  "下列工具由 Skills CLI 的支持列表确认；实际任务效果取决于模型、项目与所需运行环境。": [
+    "These tools appear in the Skills CLI support list. Task results depend on the model, project and required runtime.",
+    "以下のツールは Skills CLI の対応表で確認しています。タスクの結果はモデル、プロジェクト、実行環境によって異なります。"
+  ],
+  "通过 Skills CLI 安装到所选工具；原项目还提供其他安装方式。": [
+    "Install into the selected tool with Skills CLI. The original project also documents other installation methods.",
+    "Skills CLI で選択したツールに導入します。原プロジェクトには他の導入方法も記載されています。"
+  ],
+  "下列入口来自 Anthropic 官方说明。Claude.ai 与 API 的可用性取决于账号方案和服务功能。": [
+    "These paths are documented by Anthropic. Claude.ai and API availability depends on your account plan and service features.",
+    "以下は Anthropic 公式に記載された方法です。Claude.ai と API の利用可否はプランやサービス機能によります。"
+  ],
+  "此 Skill 采用专有条款，请通过官方列出的插件或服务使用，并先查阅许可。": [
+    "This skill has proprietary terms. Review its license and use the officially listed plugin or services.",
+    "この Skill には独自の利用条件があります。ライセンスを確認し、公式記載のプラグインやサービスで使用してください。"
+  ],
+  "Claude Code 需要支持插件功能；插件按整组安装，包含当前 Skill。": [
+    "Claude Code must support plugins. The plugin installs a collection that includes this skill.",
+    "プラグイン対応の Claude Code が必要です。現在の Skill を含むセット全体が導入されます。"
+  ],
+  "依次运行两条指令，安装官方插件组；组内还包含其他 Skill。": [
+    "Run both commands in order to install the official collection, which also includes other skills.",
+    "2 つの指示を順に実行して公式セットを導入します。他の Skill も含まれます。"
+  ],
+  "Claude 网页设置": [
+    "Claude web settings",
+    "Claude の Web 設定"
+  ],
+  "开发者的 API 集成": [
+    "Your API integration",
+    "開発者の API 連携"
+  ],
+  "在 API 请求中按官方指南使用 Anthropic 预置的文档 Skill，并配置所需的执行工具。": [
+    "Use Anthropic’s prebuilt document skill in API requests following the official guide, with the required execution tools enabled.",
+    "公式ガイドに従い、必要な実行ツールを設定して API リクエストで Anthropic の組み込み文書 Skill を使用します。"
+  ],
+  "按官方 API 指南上传自定义 Skill，并在请求中配置所需的执行工具。": [
+    "Upload the custom skill following the official API guide and configure its required execution tools in your requests.",
+    "公式 API ガイドに従ってカスタム Skill をアップロードし、必要な実行ツールをリクエストに設定します。"
+  ],
+  "原项目明确提供 Claude Code、Codex 和 Cursor 的插件入口；这里安装的是包含当前 Skill 的完整 Superpowers 插件。": [
+    "The original project documents plugins for Claude Code, Codex and Cursor. These methods install the full Superpowers plugin, including this skill.",
+    "原プロジェクトは Claude Code、Codex、Cursor のプラグイン導入方法を記載しています。以下ではこの Skill を含む Superpowers 全体を導入します。"
+  ],
+  "先安装并登录对应 AI 工具，插件功能需要工具版本支持。": [
+    "Install and sign in to your AI tool first. Its version must support plugins.",
+    "先に AI ツールを導入してログインしてください。プラグイン対応のバージョンが必要です。"
+  ],
+  "从 Claude Code 官方插件市场安装 Superpowers。": [
+    "Install Superpowers from the official Claude Code plugin marketplace.",
+    "Claude Code の公式プラグイン市場から Superpowers を導入します。"
+  ],
+  "工具的插件设置": [
+    "The tool’s plugin settings",
+    "ツールのプラグイン設定"
+  ],
+  "从 Codex App 侧栏的插件入口搜索 Superpowers，并选择安装。": [
+    "Open Plugins in the Codex App sidebar, search for Superpowers and choose Install.",
+    "Codex App のサイドバーでプラグインを開き、Superpowers を検索してインストールを選びます。"
+  ],
+  "输入指令后搜索 Superpowers，并选择安装。": [
+    "Enter the command, search for Superpowers and choose Install.",
+    "コマンドを入力し、Superpowers を検索してインストールを選びます。"
+  ],
+  "在 Cursor Agent 对话中安装，或在插件市场搜索 Superpowers。": [
+    "Install in Cursor Agent chat, or search for Superpowers in the plugin marketplace.",
+    "Cursor Agent のチャットで導入するか、プラグイン市場で Superpowers を検索します。"
+  ],
+  "以下为原项目安装器明确支持的常用工具；完整名单与项目钩子说明见原项目。": [
+    "These common tools are supported by the original installer. See the project for the full list and project hook guidance.",
+    "以下は原インストーラーが対応する主なツールです。全一覧とプロジェクトフックの説明は原プロジェクトを参照してください。"
+  ],
+  "在项目根目录运行，准备 Node.js / npx，并按工具提示处理项目信任与钩子权限。": [
+    "Run from the project root with Node.js / npx available. Follow your tool’s prompts for project trust and hook permissions.",
+    "Node.js / npx を用意し、プロジェクトのルートで実行します。信頼設定やフック権限はツールの案内に従ってください。"
+  ],
+  "安装完成后重新打开 AI 工具，再在对话中运行 /impeccable init 记录项目背景。": [
+    "Reopen your AI tool after installation, then run /impeccable init in chat to record the project context.",
+    "導入後に AI ツールを開き直し、チャットで /impeccable init を実行してプロジェクトの背景を記録します。"
+  ],
+  "安装到当前项目的对应工具目录；安装器可能按平台下载引擎。": [
+    "Install into this project’s directory for the selected tool. The installer may download a platform-specific engine.",
+    "このプロジェクトの選択ツール用ディレクトリに導入します。環境に応じたエンジンを取得する場合があります。"
+  ],
+  "以下为原项目明确支持的常用工具；还支持 Windsurf、GitHub Copilot、OpenCode 等，完整名单见原项目。": [
+    "These are common tools supported by the project. Windsurf, GitHub Copilot, OpenCode and others are also listed in the original documentation.",
+    "以下は原プロジェクトが対応する主なツールです。Windsurf、GitHub Copilot、OpenCode なども対応し、全一覧は原資料にあります。"
+  ],
+  "需要 Node.js / npm 和 Python 3。第一条命令安装全局 CLI，第二条命令在项目根目录执行。": [
+    "Requires Node.js / npm and Python 3. The first command installs the CLI globally; run the second from your project root.",
+    "Node.js / npm と Python 3 が必要です。最初のコマンドで CLI をグローバルに導入し、2 番目はプロジェクトのルートで実行します。"
+  ],
+  "使用当前的 ui-ux-pro-max-cli 包；安装后可在 UI/UX 任务中直接调用该 Skill。": [
+    "Use the current ui-ux-pro-max-cli package. After installation, request this skill in UI/UX tasks.",
+    "現在の ui-ux-pro-max-cli パッケージを使用します。導入後は UI/UX タスクでこの Skill を呼び出せます。"
+  ],
+  "安装命令 {0}": [
+    "Installation command {0}",
+    "インストールコマンド {0}"
+  ],
+  "命令 {0}": [
+    "Command {0}",
+    "コマンド {0}"
+  ],
+  "复制安装命令 {0}": [
+    "Copy installation command {0}",
+    "インストールコマンド {0} をコピー"
+  ],
+  "复制命令": [
+    "Copy command",
+    "コマンドをコピー"
+  ],
+  "选择 AI 工具": [
+    "Choose an AI tool",
+    "AI ツールを選択"
+  ],
+  "执行位置：{0}": [
+    "Run in: {0}",
+    "実行場所：{0}"
+  ],
+  "打开官方操作指南": [
+    "Open the official guide",
+    "公式ガイドを開く"
+  ],
+  "核对官方安装说明": [
+    "Check the official setup guide",
+    "公式の導入手順を確認"
+  ],
+  "返回 Skill 目录": [
+    "Back to the Skill directory",
+    "Skill 一覧に戻る"
+  ],
+  "资料核对：{0}": [
+    "Sources checked: {0}",
+    "資料確認：{0}"
+  ],
+  "查看安装方法": [
+    "See installation steps",
+    "インストール方法を見る"
+  ],
+  "查看原始 Skill": [
+    "View original Skill",
+    "元の Skill を見る"
+  ],
+  "详情页目录": [
+    "On this page",
+    "このページの目次"
+  ],
+  "功能": [
+    "Features",
+    "機能"
+  ],
+  "适用场景": [
+    "When to use it",
+    "利用シーン"
+  ],
+  "支持的 AI 工具": [
+    "Supported AI tools",
+    "対応する AI ツール"
+  ],
+  "安装方法": [
+    "Installation",
+    "インストール方法"
+  ],
+  "使用前准备": [
+    "Before you start",
+    "事前準備"
+  ],
+  "内容根据原项目的 Skill 定义、README 与安装文档整理。安装后所需的模型、账号及外部服务由相应工具提供。": [
+    "This guide summarizes the original skill definition, README and setup documentation. Models, accounts and external services are provided by their respective tools.",
+    "元の Skill 定義、README、導入資料をもとに整理しています。必要なモデル、アカウント、外部サービスは各ツールが提供します。"
+  ],
+  "此项采用 Anthropic 专有许可；请按官方服务和插件说明使用，许可范围以原文为准。": [
+    "This item uses Anthropic’s proprietary license. Follow the official service and plugin guidance; the original license defines permitted use.",
+    "Anthropic 独自のライセンスが適用されます。公式サービスやプラグインの案内に従い、許可範囲は原文を確認してください。"
+  ],
+  "同类 Skill": [
+    "Related skills",
+    "関連する Skill"
+  ],
+  "许可条款": [
+    "License terms",
+    "ライセンス条項"
+  ],
+  "在 Settings > Capabilities 开启代码执行与文件创建，然后在对话中上传文件并提出文档任务；Claude 会按任务使用内置文档 Skill。": [
+    "Enable code execution and file creation in Settings > Capabilities, then upload your files in chat and describe the document task. Claude uses its built-in document skill when relevant.",
+    "Settings > Capabilities でコード実行とファイル作成を有効にし、チャットに資料をアップロードして文書タスクを依頼します。必要に応じて組み込みの文書 Skill が使われます。"
+  ],
+  "先开启代码执行与文件创建。把官方仓库中该 Skill 的完整文件夹打包为 ZIP，再到 Customize > Skills，点击 +、Create skill、Upload a skill，上传并启用。": [
+    "Enable code execution and file creation. ZIP the complete skill folder from the official repository, then open Customize > Skills, choose +, Create skill, Upload a skill, upload the ZIP and enable it.",
+    "コード実行とファイル作成を有効にします。公式リポジトリの該当 Skill フォルダー全体を ZIP にし、Customize > Skills で +、Create skill、Upload a skill を選んでアップロードし、有効にします。"
   ]
 }

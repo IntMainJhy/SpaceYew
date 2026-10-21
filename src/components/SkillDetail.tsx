@@ -1,0 +1,22 @@
+import Link from 'next/link';
+import {notFound} from 'next/navigation';
+import {curatedSkills,skillCategories,skillCatalogVerifiedAt,skillFilters,skillFilterHref} from '@/lib/skill-catalog.mjs';
+import {getSkillDetail} from '@/lib/skill-details.mjs';
+import {serverI18n} from '@/lib/server-i18n';
+import {SkillInstallation} from './SkillInstallation';
+import {Icon} from './Icons';
+
+export async function SkillDetail({id,query={}}:{id:string;query?:Record<string,string|string[]|undefined>}){
+ const skill=getSkillDetail(id);if(!skill)notFound();
+ const {t}=await serverI18n(),{category,q}=skillFilters(query),type=skillCategories.find(item=>item.id===skill.category),related=curatedSkills.filter(item=>item.category===skill.category&&item.id!==id);
+ return <article className="skills-page skill-detail"><Link className="learning-back" href={skillFilterHref(category,q)}>← {t('返回 Skill 目录')}</Link><header className="learning-heading"><h1>{skill.name}</h1><p>{t(skill.summary)}</p><div className="skill-detail-meta"><Link href={skillFilterHref(skill.category)}>{t(type?.label||'Skill')}</Link><span>{skill.repo}</span><a href={skill.licenseUrl} target="_blank" rel="noopener noreferrer">{t(skill.license)}</a><span>{t('资料核对：{0}',[skillCatalogVerifiedAt])}</span></div><div className="space-actions"><a className="space-btn primary" href="#installation">{t('查看安装方法')}</a><a className="space-link" href={skill.sourceUrl} target="_blank" rel="noopener noreferrer">{t('查看原始 Skill')}<Icon name="link"/></a></div></header>
+  <div className="skill-detail-layout"><aside className="skill-detail-nav"><nav aria-label={t('详情页目录')}>{[['features','功能'],['scenarios','适用场景'],['tools','支持的 AI 工具'],['installation','安装方法']].map(([anchor,label])=><a key={anchor} href={'#'+anchor}>{t(label)}</a>)}</nav></aside><div className="skill-detail-body">
+   <section id="features"><h2>{t('功能')}</h2><ul className="skill-feature-list">{skill.features.map((feature:string)=><li key={feature}>{t(feature)}</li>)}</ul></section>
+   <section id="scenarios"><h2>{t('适用场景')}</h2><p>{t(skill.scenarios)}</p><h3>{t('使用前准备')}</h3><p>{t(skill.requirements)}</p></section>
+   <section id="tools"><h2>{t('支持的 AI 工具')}</h2><ul className="skill-supported-tools">{skill.installation.methods.map((method:{id:string;label:string;where:string;sourceUrl:string})=><li key={method.id}><span>{method.label}</span><a href={method.sourceUrl} target="_blank" rel="noopener noreferrer">{t(method.where)}<Icon name="link"/></a></li>)}</ul><p className="learning-muted">{t(skill.installation.supportNote)}</p></section>
+   <section id="installation"><h2>{t('安装方法')}</h2><p>{t(skill.installation.requirements)}</p><SkillInstallation key={skill.id} installation={skill.installation}/></section>
+   <section className="skill-detail-source"><h2>{t('来源与许可')}</h2><p>{t('内容根据原项目的 Skill 定义、README 与安装文档整理。安装后所需的模型、账号及外部服务由相应工具提供。')}</p><div><a href={skill.sourceUrl} target="_blank" rel="noopener noreferrer">SKILL.md<Icon name="link"/></a><a href={skill.installUrl} target="_blank" rel="noopener noreferrer">README<Icon name="link"/></a><a href={skill.licenseUrl} target="_blank" rel="noopener noreferrer">{t('许可条款')}<Icon name="link"/></a></div>{skill.license==='专有条款'&&<p>{t('此项采用 Anthropic 专有许可；请按官方服务和插件说明使用，许可范围以原文为准。')}</p>}</section>
+   {related.length>0&&<section className="skill-detail-related"><h2>{t('同类 Skill')}</h2>{related.map(item=><Link key={item.id} href={'/skills/'+item.id}><span>{item.name}</span><Icon name="link"/></Link>)}</section>}
+  </div></div>
+ </article>;
+}

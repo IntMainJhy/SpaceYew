@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {curatedSkills,skillCategories,skillFilters,filterSkills,skillFilterHref} from '../src/lib/skill-catalog.mjs';
 import {translate} from '../src/lib/i18n.mjs';
+import {getSkillDetail,skillDetailContent} from '../src/lib/skill-details.mjs';
 
 test('catalog keeps distinct, categorized upstream sources and per-skill license terms',()=>{
  assert.equal(new Set(curatedSkills.map(item=>item.id)).size,curatedSkills.length);
@@ -37,4 +38,37 @@ test('filters normalize untrusted URL parameters and preserve searches when chan
  const params=new URL(href,'https://example.test').searchParams;
  assert.equal(params.get('type'),'design');assert.equal(params.get('q'),'UI & <design>');
  assert.equal(skillFilterHref('all',''),'/skills');
+});
+
+test('each catalog entry has a complete, translated detail page and tool-specific setup instructions',()=>{
+ assert.deepEqual(Object.keys(skillDetailContent).sort(),curatedSkills.map(item=>item.id).sort());
+ for(const item of curatedSkills){
+  const detail=getSkillDetail(item.id);
+  assert.ok(detail.features.length>=2&&detail.scenarios&&detail.requirements);
+  assert.ok(detail.installation.methods.length>=3);
+  assert.equal(new Set(detail.installation.methods.map(method=>method.id)).size,detail.installation.methods.length);
+  assert.ok(detail.installation.methods.some(method=>method.commands.length>0));
+  function translated(value){
+   if(typeof value==='string'&&/\p{Script=Han}/u.test(value))for(const locale of ['en','ja'])assert.notEqual(translate(locale,value),value,item.id+': '+value);
+   else if(Array.isArray(value))value.forEach(translated);
+   else if(value&&typeof value==='object')Object.values(value).forEach(translated);
+  }
+  translated({features:detail.features,scenarios:detail.scenarios,requirements:detail.requirements,installation:detail.installation});
+  for(const method of detail.installation.methods){assert.equal(new URL(method.sourceUrl).protocol,'https:');for(const command of method.commands)assert.ok(command.trim()&&!command.includes('undefined'))}
+ }
+ assert.equal(getSkillDetail('not-a-skill'),null);assert.equal(getSkillDetail('../../etc/passwd'),null);
+});
+
+test('setup uses the actual skill names, selected host and official proprietary plugin paths',()=>{
+ const react=getSkillDetail('react-best-practices').installation.methods;
+ assert.ok(react.find(item=>item.id==='codex').commands[0].endsWith('--skill vercel-react-best-practices -a codex'));
+ const canvas=getSkillDetail('json-canvas').installation.methods;
+ assert.ok(canvas.find(item=>item.id==='opencode').commands[0].includes('kepano/obsidian-skills --skill json-canvas -a opencode'));
+ for(const id of ['docx','pdf','pptx','xlsx']){
+  const methods=getSkillDetail(id).installation.methods;
+  assert.deepEqual(methods.map(method=>method.id),['claude-code','claude-ai','claude-api']);
+  assert.equal(methods[0].commands[1],'/plugin install document-skills@anthropic-agent-skills');
+  assert.ok(methods.every(method=>method.commands.every(command=>!command.includes('npx skills'))));
+ }
+ assert.ok(getSkillDetail('systematic-debugging').installation.methods.find(item=>item.id==='codex-app').commands.length===0);
 });

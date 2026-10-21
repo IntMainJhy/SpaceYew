@@ -1,3 +1,4 @@
+import {catalogSchema} from './catalog-schema.mjs';
 import {spacesSchema} from './spaces-schema.mjs';
 import {DatabaseSync} from 'node:sqlite';
 import {mkdirSync,chmodSync,existsSync,writeFileSync,readdirSync,renameSync,unlinkSync} from 'node:fs';
@@ -63,6 +64,7 @@ export function db(){
  d.exec('CREATE UNIQUE INDEX IF NOT EXISTS community_notification_event ON community_notifications(event_key) WHERE event_key IS NOT NULL');
  if(!d.prepare('PRAGMA table_info(events)').all().some(column=>column.name==='resource_kind'))d.exec('ALTER TABLE events ADD COLUMN resource_kind TEXT');
  spacesSchema(d);
+ catalogSchema(d);
  chmodSync(path.join(DATA,'site.sqlite'),0o600);
  for(const name of readdirSync(FILES)){const match=/^\.delete-([a-f0-9-]{36})$/.exec(name);if(match){if(d.prepare('SELECT 1 FROM files WHERE id=?').get(match[1]))renameSync(path.join(FILES,name),path.join(FILES,match[1]));else unlinkSync(path.join(FILES,name))}}
  for(const row of d.prepare("SELECT id,status FROM uploads WHERE status IN ('pending','assembling')").all()){if(existsSync(path.join(PARTIAL,row.id))){if(row.status==='assembling')d.prepare("UPDATE uploads SET status='pending' WHERE id=?").run(row.id)}else{d.prepare("UPDATE uploads SET status='cancelled' WHERE id=?").run(row.id);d.prepare('DELETE FROM chunks WHERE upload=?').run(row.id)}}

@@ -71,7 +71,7 @@ export function CommunityNavigation({user,active='feed',compose=true}:{user:Doc|
 
 export function FeedPost({item,user,onBookmarkRemoved}:{item:Doc;user:Doc|null;onBookmarkRemoved?:()=>void}){const {t:tr,locale}=useLocale();
  return <article className="feed-post">{item.repostedBy&&<p className="feed-reposted"><Icon name="repost"/><Link href={'/community/members/'+item.repostedBy.id}>{item.repostedBy.name}</Link> {tr(" 转发了这份分享")}</p>}<div className="feed-author"><FeedAvatar name={item.authorName||tr("社区成员")} avatarId={item.authorAvatarId}/><div><Link href={'/community/members/'+item.authorId}><strong>{item.authorName}</strong></Link></div><time dateTime={item.updated}>{localeDate(item.updated,locale,true)}</time></div>
- <div className="feed-post-body"><span className="feed-category">{tr(item.category)}</span><Link className="feed-post-content" href={'/community/'+item.id}><h2>{item.title}</h2><p>{item.summary}</p><PostCover id={item.coverId} alt={item.coverAlt}/></Link>
+ <div className="feed-post-body"><span className="feed-category">{tr(item.category)}</span><Link className="feed-post-content" href={'/community/'+item.id}><h2>{item.title}</h2><p>{item.summary}</p><PostCover id={item.coverId} alt={item.coverAlt} generated={item.catalogId?{kind:item.catalogKind,title:item.title,category:tr(item.category)}:undefined}/></Link>
  <Link className="feed-source" href={'/community/'+item.id}><Icon name="link"/><span><strong>{item.sourceName}</strong><small>{new URL(item.sourceUrl).hostname}</small></span></Link>
  <PostActions item={item} user={user} onBookmarkRemoved={onBookmarkRemoved}/></div></article>;
 }

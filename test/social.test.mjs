@@ -39,6 +39,7 @@ test('reactions are explicit and idempotent; bookmarks are private; repost/follo
  assert.throws(()=>react(a,p.id,'invalid',true),e=>e.status===400);
 });
 test('comments and replies stay private until review; edits re-enter review and stale moderation cannot publish',()=>{
+ D.db().prepare("INSERT INTO config(key,value) VALUES('moderation','{\"mode\":\"manual\"}') ON CONFLICT(key) DO UPDATE SET value=excluded.value").run();
  parent=call('community/comments',{...ack,post:p.id,body:'PRIVATE_PENDING_COMMENT 这是尚未审核的评论。'},a.token);
  assert.equal(comments().items.length,0);assert.equal(comments(a).items.length,1);assert.equal(comments(b).items.length,0);
  assert.throws(()=>get('admin/community/comments',a.token),e=>e.status===403);

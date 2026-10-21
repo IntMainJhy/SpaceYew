@@ -4,7 +4,7 @@
 
 **Let your work tell your story.**
 
-SpaceYew brings personal homepages and a knowledge-sharing community together. Introduce yourself in depth through your story, experience, skills, work and contact links. Choose a built-in theme, or upload a static website you designed yourself; share it through a branded link and QR code.
+SpaceYew brings blog homepages, shared documentation, independent AI Skills and useful resources into one community. Members can introduce themselves, publish tutorials and share tools under their own accounts. Choose a built-in blog theme or upload a static website, then share it through a branded link and QR code.
 
 This repository contains the website's frontend, backend, tests and deployment examples, making its interface, content model and permission system available to study. It is built with Next.js, React, TypeScript and Node.js's built-in SQLite.
 
@@ -14,7 +14,7 @@ This repository contains the website's frontend, backend, tests and deployment e
 
 ## Preview
 
-Screenshots of the English interface with English sample posts and fictional member profiles, captured in a local demo environment. The website also supports Simplified Chinese and Japanese.
+Local previews of the English interface with English sample posts and fictional member profiles. These screenshots show the earlier homepage and community design; the current catalog and theme options are described below. The website also supports Simplified Chinese and Japanese.
 
 ### Homepage
 
@@ -28,13 +28,13 @@ A feed of shared work, member recommendations and category navigation.
 
 ![SpaceYew community feed in English with shared posts, interaction controls and sidebars](docs/screenshots/community-en.jpg)
 
-### Personal homepage settings
+### Blog homepage settings
 
-Choose an Editorial, Minimal or Developer theme, preview your personal profile, or upload an HTML/ZIP website.
+Choose a built-in theme, preview your profile or upload an HTML/ZIP website. The current editor also includes the new Folio and Panorama themes.
 
 ![SpaceYew personal homepage settings in English](docs/screenshots/editor-en.png)
 
-### Personal homepage
+### Blog homepage
 
 A profile-first page for your introduction, skills, experience and work.
 
@@ -44,26 +44,38 @@ A profile-first page for your introduction, skills, experience and work.
 
 | Area | Capabilities |
 | --- | --- |
-| Personal homepages | Present your introduction, experience, skills, work and contact details using three responsive themes, with optional notes and resources |
-| Static website hosting | Upload HTML or a ZIP with relative CSS/JS/assets, inspect an isolated preview, then submit a fixed version for review; public pages retain SpaceYew branding |
-| Content and files | Edit projects, articles and resources in account-isolated workspaces; manage drafts, versions, images, attachments and file references |
-| Sharing & community profiles | Access personal homepages from their own top-level navigation and manage them independently of the community; copy a public link, share with the system sheet or download a QR code; community profiles show a short introduction and link to the full personal homepage |
-| Developer community | Browse posts, discover members, follow, like, bookmark, repost and comment; submissions are reviewed before publication |
-| Skill directory | Discover 16 GitHub Agent Skills across engineering, design, testing, documents, knowledge management and agent extensions; search by task, filter by type and AI tool (including Codex, Claude Code and Cursor), see supported tools beside every Skill, read detailed features and use cases, and copy tool-specific installation commands and ready-to-use prompts, with practical input-to-output examples |
-| Administration | Role-based content review, reports, notifications, traffic statistics and audit logs for owners, reviewers and members |
-| Tool integration | Connect to the website workspace through a submission Skill and local MCP integration, with scoped access to content and drafts |
+| Blog homepages | Five responsive themes, including a light ruled Folio layout and a dark, cover-led Panorama layout; introduce your experience, skills, work and contact details, with optional notes and resources |
+| Static website hosting | Upload HTML or a ZIP with relative CSS/JS/assets, inspect an isolated preview and submit a fixed version for review; downloadable English/Chinese HTML starters and a stable branded URL help members get started |
+| Shared documentation | Categorized image-and-description boards, article details with section navigation, and member-authored tutorials; import text, Markdown or HTML into the editor |
+| Skill directory | 17 independently maintained GitHub Skills: Vercel React/composition, Impeccable, UI UX Pro Max, Superpowers debugging/TDD, Obsidian Markdown/JSON Canvas, eight GSAP Skills and VibeHub; cover cards, category/search/tool filters, detailed scenarios, installation commands and localized copyable prompts |
+| Other resources | Member-shared websites, tools and references; documentation and Skills have their own sections |
+| Publishing & community | One account-scoped editor for documents, Skills and resources; an approved entry creates one linked community post, subsequent revisions reuse it, and taking the entry offline also removes its share from public view |
+| Sharing & community profiles | Independent blog navigation and management, public links, system sharing and QR codes; community profiles retain a short introduction with a link to the full blog |
+| Content and files | Private account-isolated drafts, versions, blog content, uploaded images, attachments and file references |
+| Moderation & administration | Local risk screening can approve low-risk text; flagged text, images, external sources and installation commands wait for a reviewer; manual mode, reports, takedowns, notifications and audit logs remain available |
+| AI integration | The SpaceYew Skill and local stdio MCP bridge can read, save and submit documents, Skills and resources through scoped credentials; publication uses the same moderation and community-sharing pipeline as the editor |
 
 The download page can link to externally hosted client installers. Client binaries and source code are not stored in this repository.
 
 ## Interface and interaction
 
-A white-and-ink palette, flowing pastel backgrounds and editorial serif typography give the website a consistent visual language. The community uses an X-style social layout, while the workspace provides a wider editing area. GSAP connects page and navigation transitions, and the promotional strip keeps scrolling continuously during in-site navigation.
+A white-and-ink palette, flowing pastel backgrounds and editorial serif typography give the website a consistent visual language. The community uses an X-style social layout, while blog management and publishing have independent editing areas. GSAP connects page and navigation transitions, and the promotional strip keeps scrolling continuously during in-site navigation.
 
-The interface supports English, Simplified Chinese and Japanese across desktop, tablet and mobile, with keyboard interaction and reduced-motion behavior. Themes chosen by homepage authors are independent of the shared website interface.
+The interface supports English, Simplified Chinese and Japanese across desktop, tablet and mobile, with keyboard interaction and reduced-motion behavior. Themes chosen by blog authors are independent of the shared website interface.
 
 Static hosting accepts UTF-8 HTML (5 MB) or ZIP files (25 MB compressed, 50 MB extracted, up to 1,000 entries). Packages need `index.html` or `index.htm` and relative asset paths. Browser-side interactions work in an opaque-origin sandbox; external scripts, API requests, forms and server-side execution are blocked. Sources and extracted files count toward storage, with up to 20 immutable packages per account. Publishing remains limited to the existing local qualification and review workflow; this change does not enable public uploads on a production service. Backups retain source packages and restore their verified static assets.
 
-Legacy `/u/...` and `/workspace/studio` website URLs redirect to personal homepages and their settings. Existing content and backend data contracts remain intact.
+Legacy `/u/...` and `/workspace/studio` URLs redirect to blogs and their settings. Existing content and backend data contracts remain intact. See the [static hosting guide](docs/blog-hosting.md) for packaging, previews and supported interactions.
+
+## Publishing and AI workflows
+
+The top-level sections are Home, Community, Blogs, Docs, Skills and Other resources. Use **Publish** to create a document, Skill or resource, then save a private draft or submit it. Every published entry keeps its author, source and usage terms. If no image is supplied, SpaceYew generates a typographic cover. Documents and Skills appear in their own catalogs; an approved submission also creates a linked community share automatically. There is no need to submit the same content again in the community.
+
+Each member owns their drafts and credentials. Existing public content stays visible while a revision awaits review. Suspicious content remains private to the author and reviewers, and linked reports or takedowns affect public visibility. The current rules engine is local triage, not semantic AI moderation or a guarantee of legal compliance. Public production publishing remains gated; see [moderation and launch requirements](docs/moderation-and-launch.md).
+
+For AI publishing, create a credential at `/workspace/connect` with **catalog** scope, adding **submit** only if the agent may submit content for publication. Existing library/community credentials are not silently expanded. Configure the [stdio MCP bridge](integrations/spaceyew-mcp.mjs) or [SpaceYew Skill](integrations/spaceyew-post/SKILL.md) with a private site URL and token. The workflow is `catalog.save`, then `catalog.submit` after authorization and reading the current policy. A submission returns its actual published or pending status; it cannot approve its own review. Writes use stable request IDs to prevent duplicate retries. See the [API reference](integrations/spaceyew-post/references/api.md) for fields and MCP setup.
+
+The curated Skill directory links to upstream repositories rather than bundling third-party code. It focuses on independent projects rather than duplicating skills bundled with AI tools; the previously listed Anthropic examples and document Skills have been removed. Tool badges describe the installation paths documented by this directory, not universal compatibility. GSAP Skills use MIT; the GSAP runtime has separate license terms.
 
 ## Technology
 

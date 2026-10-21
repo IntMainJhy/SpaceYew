@@ -1,0 +1,114 @@
+/* Independent author-owned blog themes. The platform shell keeps its shared type system. */
+.signature-blog{--sig-bg:#fff;--sig-panel:#fff;--sig-ink:#202124;--sig-muted:#626772;--sig-line:#dedfe3;--sig-accent:#285970;max-width:1280px;margin:auto;background:var(--sig-bg);color:var(--sig-ink);font-family:Baskerville,'Songti SC','Noto Serif SC',Georgia,serif;overflow-wrap:anywhere;scrollbar-color:var(--sig-muted) var(--sig-bg)}
+.signature-blog ::selection{background:var(--sig-ink);color:var(--sig-bg)}
+.signature-blog{--organic-ink:var(--sig-ink);--organic-text:var(--sig-ink);--organic-muted:var(--sig-muted);--organic-green:var(--sig-accent)}
+.signature-blog :is(h1,h2,h3,h4),html[data-ui] .organic-site .signature-blog :is(h1,h2,h3,h4){color:var(--sig-ink)}
+.signature-blog .signature-skills h2,html[data-ui] .organic-site .signature-blog .signature-skills h2{color:var(--sig-muted)}
+.signature-blog :focus-visible{outline:2px solid var(--sig-accent);outline-offset:5px}
+.signature-blog a{color:inherit;text-underline-offset:5px}
+.signature-blog a:hover{color:var(--sig-accent)}
+.signature-topbar{min-height:76px;padding:16px 36px;display:flex;align-items:center;justify-content:space-between;gap:28px;border-bottom:1px solid var(--sig-line)}
+.signature-wordmark{font-size:23px;max-width:40%;line-height:1.25}
+.signature-topbar nav{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:8px 28px;font-size:14px}
+.signature-topbar nav a{min-height:44px;display:flex;align-items:center}
+.signature-layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:60px;padding:44px 36px 72px}
+.signature-profile{min-width:0;align-self:start}
+.signature-contact{display:flex;flex-direction:column;gap:2px}
+.signature-contact a{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;font-size:15px}
+.signature-contact svg{flex-shrink:0;width:16px}
+.signature-profile>h2{font-size:27px;font-weight:400;margin:20px 0 8px}
+.signature-profile>p{font-size:15px;color:var(--sig-muted);margin:0 0 24px;line-height:1.7}
+.signature-skills{margin-top:38px}
+.signature-skills h2{font-size:15px;font-weight:400;margin:0 0 16px;color:var(--sig-muted)}
+.signature-skills ul{display:flex;flex-wrap:wrap;gap:8px 14px;margin:0;padding:0;list-style:none;font-size:14px;line-height:1.8}
+.signature-chapters{min-width:0}
+.signature-chapters>section{scroll-margin-top:28px;margin:0 0 52px}
+.signature-chapters>section:last-child{margin-bottom:0}
+.signature-chapters h2{font-size:28px;font-weight:400;line-height:1.4;margin:0 0 22px;text-wrap:balance}
+.signature-about>p{font-size:18px;line-height:1.95;max-width:70ch;white-space:pre-line;margin:0}
+.signature-section-heading{display:flex;justify-content:space-between;align-items:baseline;gap:20px}
+.signature-section-heading>span{font-size:13px;color:var(--sig-muted);font-variant-numeric:tabular-nums}
+.signature-entries{display:grid;gap:22px}
+.signature-entry{display:grid;grid-template-columns:minmax(0,1fr) 30px;gap:24px;align-items:center;border-bottom:1px solid var(--sig-line);padding-bottom:24px;min-width:0}
+.signature-entry:has(>img){grid-template-columns:128px minmax(0,1fr) 30px}
+.signature-entry>img{width:128px;height:112px;object-fit:cover;border-radius:4px}
+.signature-entry-copy{min-width:0}
+.signature-entry-copy>small,.signature-entry-copy>span{font-size:12px;color:var(--sig-muted);line-height:1.7}
+.signature-entry h3{font-size:24px;line-height:1.45;font-weight:400;margin:6px 0 9px;text-wrap:balance}
+.signature-entry p{font-size:15px;color:var(--sig-muted);line-height:1.85;margin:0 0 12px}
+.signature-entry-arrow{color:var(--sig-accent);display:flex;align-items:center;justify-content:center;transition:transform .2s ease-out}
+a.signature-entry:hover .signature-entry-arrow{transform:translateX(4px)}
+.signature-experiences article{display:grid;grid-template-columns:120px minmax(0,1fr);gap:20px;padding:0 0 24px;margin:0 0 24px;border-bottom:1px solid var(--sig-line)}
+.signature-experiences article:last-child{margin:0}
+.signature-experiences time,.signature-experiences small{font-size:12px;color:var(--sig-muted);line-height:1.8;font-variant-numeric:tabular-nums}
+.signature-experiences h3{font-size:21px;line-height:1.5;font-weight:400;margin:4px 0 10px}
+.signature-experiences p{font-size:15px;line-height:1.8;white-space:pre-line;margin:0}
+.signature-folio{max-width:1060px;border-inline:1px solid var(--sig-line)}
+.folio-banner{padding-top:36px}
+.folio-banner>.blog-signature-visual{padding:0 36px 38px 24%;border-bottom:1px solid var(--sig-line)}
+.folio-signature{display:block;width:100%;height:clamp(140px,23vw,280px)}
+.folio-signature rect{fill:#f3f3f4;stroke:#bec1c7;stroke-width:.022}
+.folio-profile{display:grid;grid-template-columns:180px minmax(0,1fr);gap:28px;align-items:center;padding:28px 36px;border-bottom:1px solid var(--sig-line)}
+.signature-avatar{position:relative;display:grid;place-items:center;overflow:hidden;width:144px!important;height:144px!important;font-size:40px;border-radius:50%;flex-shrink:0;background:#e2e7ea;color:#26313b}
+.signature-avatar>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.folio-profile h1{font-size:clamp(34px,4vw,54px);font-weight:400;line-height:1.15;letter-spacing:-.03em;margin:0 0 16px;text-wrap:balance}
+.folio-profile p{font-size:18px;line-height:1.6;color:var(--sig-muted);margin:0}
+.folio-cover{width:100%;height:240px;object-fit:cover;display:block;border-bottom:1px solid var(--sig-line)}
+.signature-folio .signature-layout{grid-template-columns:180px minmax(0,1fr);gap:28px;padding-top:0}
+.signature-folio .signature-profile{padding-top:34px}
+.signature-folio .signature-chapters{border-left:1px solid var(--sig-line);padding:34px 0 0 28px}
+.signature-panorama{--sig-bg:#101a24;--sig-panel:#1a2835;--sig-ink:#f0f3f7;--sig-muted:#b8c7d5;--sig-line:#3b4a58;--sig-accent:#9bcdf4;max-width:none;padding:0 max(24px,calc((100% - 1280px)/2)) 64px}
+.signature-panorama .signature-topbar{position:relative;z-index:1;background:#17232f;border:0;max-width:1200px;margin:auto;border-radius:0 0 16px 16px;padding-inline:30px}
+.panorama-banner{height:430px;position:relative;margin:-76px -24px 0;overflow:hidden;background:#172e43}
+.panorama-banner>img{height:100%;width:100%;object-fit:cover;object-position:center 45%;display:block;filter:brightness(.55) saturate(.75)}
+.panorama-banner:after{content:'';position:absolute;inset:40% 0 0;background:linear-gradient(transparent,#101a24)}
+.panorama-banner>div{position:absolute;z-index:1;inset:auto 6% 56px}
+.panorama-banner span{font-size:14px;color:#d9e7f2}
+.panorama-banner h1{font-size:clamp(38px,5vw,68px);font-weight:400;line-height:1.15;letter-spacing:-.03em;max-width:18ch;margin:14px 0;text-wrap:balance}
+.panorama-banner p{max-width:60ch;line-height:1.7;font-size:19px;margin:0;color:#e2ebf3}
+.signature-panorama .signature-layout{position:relative;max-width:1200px;margin:-22px auto 0;padding:0;gap:28px;grid-template-columns:260px minmax(0,1fr)}
+.signature-panorama .signature-profile{background:var(--sig-panel);padding:28px;border-radius:16px}
+.signature-panorama .signature-avatar{width:100%!important;height:auto!important;aspect-ratio:1;border-radius:12px;overflow:hidden;background:#324e64;color:var(--sig-ink)}
+.signature-panorama .signature-contact{border-top:1px solid var(--sig-line);padding-top:18px}
+.signature-panorama .signature-skills{margin-top:24px}
+.panorama-art-note{display:block;font-size:11px;color:var(--sig-muted);margin-top:26px;line-height:1.6}
+.signature-panorama .signature-chapters>section{margin-bottom:30px}
+.signature-panorama .signature-about,.signature-panorama #blog-experience{background:var(--sig-panel);padding:30px;border-radius:16px}
+.signature-panorama .signature-about>p{font-size:17px}
+.signature-panorama .signature-entries{gap:16px}
+.signature-panorama .signature-entry{background:var(--sig-panel);border:0;border-radius:16px;padding:24px;gap:20px}
+.signature-panorama .signature-entry:has(>img){grid-template-columns:130px minmax(0,1fr) 30px}
+.signature-panorama .signature-entry>img{border-radius:10px;height:140px}
+.signature-panorama .signature-entry h3{font-size:25px}
+.signature-panorama .signature-section-heading{padding-inline:6px}
+.signature-panorama .signature-entry-arrow{min-height:44px;background:#293f51;border-radius:8px}
+.homepage-theme-picker{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px}
+.homepage-theme-option[data-theme-option=folio] .homepage-theme-mini{background:#fafafa;border:1px solid #dedfe3;grid-template-columns:1fr 2fr}
+.homepage-theme-option[data-theme-option=folio] b{font-size:38px;line-height:1;color:#d9dade;letter-spacing:.04em}
+.homepage-theme-option[data-theme-option=folio] em{background:#d4d6db}
+.homepage-theme-option[data-theme-option=panorama] .homepage-theme-mini{background:#1a2835;color:#e2ebf3;position:relative;padding-top:36px}
+.homepage-theme-option[data-theme-option=panorama] .homepage-theme-mini:before{content:'';height:28px;position:absolute;inset:0 0 auto;background:url('/images/community/lake-walk.png') center 40%/cover}
+.homepage-theme-option[data-theme-option=panorama] em{background:#6d8fa9}
+.homepage-hosting-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin:24px 0;padding:0;list-style:none;counter-reset:hosting}
+.homepage-hosting-steps li{counter-increment:hosting;border-top:1px solid #ced5cf;padding-top:16px;min-width:0}
+.homepage-hosting-steps li:before{content:counter(hosting);display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border:1px solid #bcc5be;border-radius:50%;font-size:12px;margin-bottom:10px}
+.homepage-hosting-steps strong{display:block;font-size:15px;font-weight:500}
+.homepage-hosting-steps p{margin:8px 0 0}
+.homepage-upload .homepage-starter-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:18px 0}
+.homepage-hosting-help{margin:24px 0;font-size:14px;line-height:1.8}
+.homepage-hosting-help summary{cursor:pointer;min-height:44px;display:list-item;padding:10px 0}
+.hosted-external-link{display:flex;align-items:center;flex-wrap:wrap;gap:12px 20px;padding:14px 4%;border-bottom:1px solid #dce0e3;background:#f2f5f7;color:#26313b;font-size:14px}
+.hosted-external-link a{min-height:44px;display:flex;align-items:center;text-decoration:underline;overflow-wrap:anywhere}
+.hosted-external-link button{margin-left:auto;min-height:44px}
+.homepage-preview .signature-topbar{padding:12px 24px;gap:20px}
+.homepage-preview .signature-layout{gap:24px;grid-template-columns:180px minmax(0,1fr);padding-inline:24px}
+.homepage-preview .signature-panorama{padding-inline:20px;padding-bottom:40px}
+.homepage-preview .signature-panorama .signature-layout{padding:0;grid-template-columns:180px minmax(0,1fr);gap:20px}
+.homepage-preview .signature-panorama .signature-profile{padding:18px}
+.homepage-preview .signature-panorama .signature-entry{padding:20px}
+.homepage-preview .signature-entry:has(>img){grid-template-columns:minmax(0,1fr) 24px}
+.homepage-preview .signature-entry>img{grid-column:1/-1;width:100%;height:160px}
+.home-personal-preview .signature-blog{pointer-events:none}
+@media(max-width:1000px){.signature-layout{gap:34px;padding-inline:28px;grid-template-columns:200px minmax(0,1fr)}.signature-panorama .signature-layout{grid-template-columns:220px minmax(0,1fr)}.signature-panorama .signature-entry:has(>img){grid-template-columns:minmax(0,1fr) 30px}.signature-panorama .signature-entry>img{grid-column:1/-1;width:100%;height:190px}.signature-topbar nav{gap:8px 20px}.signature-panorama .signature-profile{padding:22px}.signature-experiences article{grid-template-columns:1fr;gap:6px}}
+@media(max-width:700px){.signature-topbar,.homepage-preview .signature-topbar{padding:16px 22px;align-items:flex-start;gap:12px;flex-direction:column}.signature-topbar nav{justify-content:flex-start;gap:2px 18px}.signature-wordmark{max-width:100%;font-size:21px}.signature-layout,.signature-folio .signature-layout,.signature-panorama .signature-layout,.homepage-preview .signature-layout,.homepage-preview .signature-panorama .signature-layout{grid-template-columns:1fr;gap:32px;padding:28px 22px 42px}.folio-banner{padding-top:24px}.folio-banner>.blog-signature-visual{padding:0 22px 24px}.folio-signature{height:140px}.folio-profile{grid-template-columns:74px minmax(0,1fr);gap:20px;padding:24px 22px}.signature-avatar{width:74px!important;height:74px!important}.folio-profile h1{font-size:34px;margin-bottom:8px}.folio-profile p{font-size:15px}.signature-folio .signature-chapters{border-left:0;padding:0}.signature-folio .signature-profile{padding:0 0 28px;border-bottom:1px solid var(--sig-line)}.signature-contact{flex-direction:row;gap:10px 24px;flex-wrap:wrap}.signature-contact a{justify-content:flex-start;gap:10px}.signature-profile>p{margin-bottom:12px}.signature-skills{margin-top:24px}.signature-about>p{font-size:17px}.signature-chapters h2{font-size:25px}.signature-chapters>section{margin-bottom:36px}.signature-entry{gap:14px}.signature-entry:has(>img){grid-template-columns:90px minmax(0,1fr) 20px}.signature-entry>img{width:90px;height:100px}.signature-entry h3{font-size:21px}.signature-entry p{font-size:14px}.signature-panorama,.homepage-preview .signature-panorama{padding:0 16px 0}.signature-panorama .signature-topbar{padding:18px 22px}.panorama-banner{height:400px;margin:-122px -16px 0}.panorama-banner>div{inset:auto 24px 44px}.panorama-banner h1{font-size:42px}.panorama-banner p{font-size:17px}.signature-panorama .signature-layout,.homepage-preview .signature-panorama .signature-layout{padding:0 0 36px;margin:-14px auto 0;gap:24px}.signature-panorama .signature-profile{display:grid;grid-template-columns:72px minmax(0,1fr);gap:4px 18px;padding:20px}.signature-panorama .signature-avatar{grid-row:span 2;width:72px!important;height:72px!important;aspect-ratio:auto}.signature-panorama .signature-profile>h2{margin:4px 0;font-size:24px}.signature-panorama .signature-profile>p{margin:0}.signature-panorama .signature-contact,.signature-panorama .signature-skills,.panorama-art-note{grid-column:1/-1}.signature-panorama .signature-contact{margin-top:12px;padding-top:12px}.signature-panorama .signature-skills{margin-top:14px}.panorama-art-note{margin-top:16px}.signature-panorama .signature-about,.signature-panorama #blog-experience{padding:22px}.signature-panorama .signature-entry h3{font-size:22px}.homepage-hosting-steps{grid-template-columns:1fr;gap:16px}.homepage-theme-picker{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.homepage-theme-mini{height:100px}.homepage-theme-option{padding:10px}.homepage-theme-option strong{font-size:14px}.homepage-theme-option small{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.signature-entry-arrow{transition:none}a.signature-entry:hover .signature-entry-arrow{transform:none}}

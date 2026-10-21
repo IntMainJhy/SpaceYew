@@ -13,7 +13,7 @@ export async function pageResources(req,path=[],query={}){
  const queue=[];
  if(user&&section==='workspace'&&path[1]==='files')queue.push(load('/api/spaces/files?page=1'));
  const add=(url)=>queue.push(load(url));
- if(section==='admin'&&path[1]!=='community'){
+ if(section==='admin'&&!['community','catalog'].includes(path[1])){
   const boot=await load('/api/admin/bootstrap');
   if(boot.status===200){const current=path[1]||'',editor=['new','edit'].includes(path[2]||''),types=['projects','articles','resources'],type=current==='trash'?(types.includes(String(query.type))?String(query.type):'resources'):current;
    if(!current){add('/api/admin/statistics?'+params);add('/api/admin/overview');}
@@ -29,8 +29,9 @@ export async function pageResources(req,path=[],query={}){
   else if(config.data?.mode==='local'){
    if(section==='admin'){
     if(user?.status==='active'&&['owner','reviewer'].includes(user.role)){
-     const target=path[2]||'',prefix='/api/admin/community/';
-     if(!target)add(prefix+'overview');
+     const target=path[1]==='catalog'?'catalog':path[2]||'',prefix='/api/admin/community/';
+     if(target==='catalog')add('/api/admin/catalog');
+     else if(!target)add(prefix+'overview');
      else if(target==='spaces')add('/api/admin/spaces/reviews');
      else if(target==='comments')add(prefix+'comments?status=pending&page=1');
      else if(['reviews','reports'].includes(target))add(prefix+(target==='reports'?'cases':target));

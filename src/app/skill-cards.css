@@ -1,0 +1,24 @@
+/* Editorial covers introduce each independently maintained Skill. */
+.skill-directory-cards .skill-group>header {margin-bottom:20px;}
+.skill-directory-cards .skill-list {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 24px;}
+.skill-directory-cards .skill-entry {display:flex;flex-direction:column;gap:0;padding:0 0 20px;min-width:0;align-items:stretch;border-bottom:1px solid var(--organic-line);}
+.skill-entry-cover {display:block;overflow:hidden;border-radius:12px;margin-bottom:20px;background:#edf1ec;}
+.skill-entry-cover img {display:block;aspect-ratio:16/9;width:100%;height:auto;object-fit:cover;transition:transform .35s ease;}
+.skill-entry:hover .skill-entry-cover img {transform:scale(1.025);}
+.skill-directory-cards .skill-entry-copy {flex:1;}
+html[data-ui] .skill-directory-cards .skill-entry h3 {font-size:23px;line-height:1.3;margin:0 0 6px;text-wrap:balance;}
+.skill-directory-cards .skill-upstream {font-size:11px;overflow-wrap:anywhere;}
+.skill-directory-cards .skill-entry-copy>p {margin:12px 0 16px;line-height:1.8;}
+.skill-directory-cards .skill-entry-tools {display:block;margin:0 0 12px;}
+.skill-directory-cards .skill-entry-tools>span {display:block;margin-bottom:7px;}
+.skill-directory-cards .skill-tool-badges {gap:5px;}
+.skill-directory-cards .skill-tool-badges li {font-size:11px;padding:3px 7px;line-height:1.5;}
+.skill-directory-cards .skill-tags {font-size:11px;gap:5px 12px;}
+.skill-directory-cards .skill-entry-links {flex-direction:row;align-items:center;flex-wrap:wrap;gap:4px 20px;margin-top:18px;padding:0;}
+.skill-directory-cards .skill-entry-links .skill-license {margin-left:auto;}
+.skill-detail-cover {display:block;width:100%;height:250px;object-fit:cover;border-radius:14px;margin:0 0 32px;}
+@media(min-width:1600px) {.skill-directory-cards .skill-list {gap:40px 30px;}}
+@media(max-width:1000px) {.skill-directory-cards .skill-directory-layout {grid-template-columns:150px minmax(0,1fr);gap:24px;}.skill-directory-cards .skill-list {gap:28px 20px;}}
+@media(max-width:760px) {.skill-directory-cards .skill-directory-layout {grid-template-columns:minmax(0,1fr);}.skill-directory-cards .skill-entry-links {gap:4px 14px;}}
+@media(max-width:560px) {.skill-directory-cards .skill-list {grid-template-columns:minmax(0,1fr);gap:32px;}.skill-directory-cards .skill-entry-cover {margin-bottom:16px;}.skill-directory-cards .skill-entry-copy>p {font-size:15px;}.skill-detail-cover {height:190px;margin-bottom:24px;}}
+@media(prefers-reduced-motion:reduce) {.skill-entry-cover img {transition:none;}.skill-entry:hover .skill-entry-cover img {transform:none;}}

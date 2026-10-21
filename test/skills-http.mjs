@@ -29,14 +29,15 @@ for(const locale of ['zh','en','ja'])for(const tool of skillAiTools){
  assert.equal(response.status,200);
  const entries=[...html.matchAll(/<li class="skill-entry">([\s\S]*?)<div class="skill-entry-links">/g)];
  assert.equal(entries.length,filterSkills({tool:tool.id}).length,locale+': '+tool.id);
+ for(const [,entry] of entries)assert.ok(entry.includes('class="skill-entry-cover"')&&entry.includes('/api/covers?'), 'designed cover');
  for(const [,entry] of entries)assert.ok(entry.includes('data-selected="true">'+tool.label+'</li>'),tool.id+': selected badge');
  assert.ok(html.includes(translate(locale,'按 AI 工具筛选')));
  assert.ok(html.includes('name="tool"'));
  assert.ok(html.includes('/skills?type=design&amp;tool='+tool.id),tool.id+': category link');
  toolLists++;
 }
-const empty=await(await fetch(base+'/skills?type=documents&tool=codex',{headers:{cookie:'site-locale=en'}})).text();
-assert.ok(empty.includes(translate('en','没有找到匹配的 Skill')));
+const empty=await(await fetch(base+'/skills?type=knowledge&tool=cursor',{headers:{cookie:'site-locale=en'}})).text();
+assert.ok(empty.includes(translate('en','精选目录中没有匹配的 Skill')));
 assert.ok(empty.includes('href="/skills"'));
 const sitemap=await(await fetch(base+'/sitemap.xml')).text();
 for(const skill of curatedSkills)assert.ok(sitemap.includes('/skills/'+skill.id+'</loc>'));

@@ -52,8 +52,8 @@ test('reject oversized, forged, unsupported, malformed and excessive-pixel image
  id=(await V.changeAvatar(req(m.token,'PUT',png))).user.avatarId;
  call('admin/community/accounts',{id:m.id,action:'status',status:'restricted',reason:'测试头像上传权限限制'},owner);
  await assert.rejects(V.changeAvatar(req(m.token,'PUT',png)),e=>e.status===403);
- call('admin/community/accounts',{id:m.id,action:'avatar_remove',reason:'测试管理员清除违规头像'},owner);assert.equal(D.isFilePublic(id),false);assert.equal(C.publicPost(post).authorAvatarId,null);
- call('admin/community/accounts',{id:m.id,action:'status',status:'active',reason:'完成测试并恢复本地资格'},owner);
+ call('admin/community/accounts',{id:m.id,action:'avatar_remove',reason:'测试管理员清除违规头像'},owner);assert.equal(D.isFilePublic(id),false);assert.equal(A.currentUser(req(m.token)).avatarId,null);assert.throws(()=>C.publicPost(post),e=>e.status===404);
+ call('admin/community/accounts',{id:m.id,action:'status',status:'active',reason:'完成测试并恢复本地资格'},owner);assert.equal(C.publicPost(post).authorAvatarId,null);
  id=(await V.changeAvatar(req(m.token,'PUT',png))).user.avatarId;
  call('community/account',{action:'close',current:m.password,confirm:true});assert.equal(D.isFilePublic(id),false);assert.equal(A.currentUser(req(m.token)),null);
 });

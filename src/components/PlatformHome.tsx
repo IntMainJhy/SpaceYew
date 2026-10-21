@@ -16,12 +16,12 @@ function ShowcaseGrid({spaces,locale,t,heading='h3'}:{spaces:any[];locale:string
   const Heading=heading;
   return spaces.length?<div className="platform-showcase-grid">{spaces.map(space=>{
     const profile=localizeProfile(space.profile,locale);
-    return <Link className="platform-showcase" key={space.handle} href={'/blog/'+space.handle} aria-label={profile.name+' · '+t('查看个人主页')}>
+    return <Link className="platform-showcase" key={space.handle} href={'/blog/'+space.handle} aria-label={profile.name+' · '+t('查看博客主页')}>
       {space.coverId&&<img className="platform-showcase-cover" src={'/media/'+space.coverId} alt="" width={480} height={300} loading="lazy"/>}
       <div className="platform-showcase-info">
         <div className="platform-showcase-person"><FeedAvatar name={profile.name} avatarId={profile.avatarId}/><div><Heading>{profile.name}</Heading><small>@{space.handle}</small></div></div>
         {profile.intro&&<p>{profile.intro}</p>}
-        <span className="platform-showcase-action">{t('查看个人主页')}</span>
+        <span className="platform-showcase-action">{t('查看博客主页')}</span>
       </div>
     </Link>;
   })}</div>:<p className="space-muted platform-empty">{t('暂时没有公开主页。')}</p>;
@@ -29,7 +29,7 @@ function ShowcaseGrid({spaces,locale,t,heading='h3'}:{spaces:any[];locale:string
 export async function ShowcaseDirectory({req}:{req:Request}){
   const {t,locale}=await serverI18n(),spaces=publicSpaces(req),user=currentUser(req);
   const studioHref=user?'/workspace/blog':'/login?next=/workspace/blog';
-  return <div className="platform-page"><header className="platform-heading homepage-directory-heading"><h1>{t('个人主页')}</h1><Link className="space-btn primary" href={studioHref}>{t(user?'我的个人主页':'创建我的主页')}</Link></header><ShowcaseGrid spaces={spaces} locale={locale} t={t} heading="h2"/></div>;
+  return <div className="platform-page"><header className="platform-heading homepage-directory-heading"><h1>{t('博客主页')}</h1><Link className="space-btn primary" href={studioHref}>{t(user?'我的博客主页':'创建我的主页')}</Link></header><ShowcaseGrid spaces={spaces} locale={locale} t={t} heading="h2"/></div>;
 }
 export async function PlatformHome({req}:{req:Request}){
   const {t,locale}=await serverI18n(),spaces=publicSpaces(req),user=currentUser(req);
@@ -60,8 +60,8 @@ export async function PlatformHome({req}:{req:Request}){
 
       <section className="product-feature product-feature-reverse" id="showcase-introduction" aria-labelledby="showcase-introduction-title">
         <div className="product-story-copy">
-          <h2 id="showcase-introduction-title">{t('个人主页，')}<span>{t('由你来定义。')}</span></h2>
-          <p>{t('把个人介绍、经历、技能和作品，整理成一份有质感的个人主页。')}</p>
+          <h2 id="showcase-introduction-title">{t('博客主页，')}<span>{t('由你来定义。')}</span></h2>
+          <p>{t('把个人介绍、经历、技能和作品，整理成一份有质感的博客主页。')}</p>
           <Link className="space-link" href={studioHref}>{t('创建我的主页')}</Link>
         </div>
         <div className="home-personal-preview">{first?<BlogTheme preview data={publicSpace(req,first.handle)}/>:<div className="space-empty"><h3>{t('完整介绍你自己')}</h3><p>{t('个人介绍、经历、技能与作品。')}</p></div>}</div>

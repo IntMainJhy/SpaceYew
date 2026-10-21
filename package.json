@@ -22,7 +22,8 @@
     "test:community:http": "node test/community-http.mjs",
     "demo": "node scripts/demo.mjs",
     "test:homepage:http": "node test/blog-http.mjs",
-    "test:skills:http": "node test/skills-http.mjs"
+    "test:skills:http": "node test/skills-http.mjs",
+    "test:catalog:http": "node test/catalog-http.mjs"
   },
   "dependencies": {
     "@tiptap/extension-image": "3.32.0",

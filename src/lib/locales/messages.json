@@ -128,8 +128,8 @@
     "アップロードに失敗しました"
   ],
   "上传封面": [
-    "Upload cover",
-    "カバーを追加"
+    "Upload a cover",
+    "カバーをアップロード"
   ],
   "上传已暂停，已完成部分会保留。": [
     "Upload paused. Completed chunks are kept.",
@@ -6456,8 +6456,8 @@
     "出典・ソースコードURL"
   ],
   "来源与使用许可": [
-    "Source & usage license",
-    "出典と利用ライセンス"
+    "Source and usage permission",
+    "出典と利用許諾"
   ],
   "来自同一份内容库": [
     "Connected to your library",
@@ -10626,5 +10626,1101 @@
   "个人主页管理": [
     "Personal homepage management",
     "個人ホームページ管理"
+  ],
+  "博客主页": [
+    "Blog homes",
+    "ブログホーム"
+  ],
+  "博客主页内容": [
+    "Profile content",
+    "プロフィールの内容"
+  ],
+  "查看博客主页": [
+    "View blog home",
+    "ブログホームを見る"
+  ],
+  "转发到博客主页": [
+    "Repost to profile",
+    "プロフィールにリポスト"
+  ],
+  "邮箱仅用于登录、验证和账号恢复，不会显示在社区博客主页。": [
+    "Your email is used for sign-in, verification and account recovery. It is not shown on your community profile.",
+    "メールはログイン、認証、アカウント復旧に使用し、コミュニティのプロフィールには表示しません。"
+  ],
+  "博客主页与内容审核": [
+    "blog home & content reviews",
+    "ホームページとコンテンツの審査"
+  ],
+  "博客主页二维码": [
+    "blog home QR code",
+    "ホームページのQRコード"
+  ],
+  "博客主页审核": [
+    "Blog home review",
+    "ブログホーム審査"
+  ],
+  "博客主页导航": [
+    "blog home navigation",
+    "ホームページのナビゲーション"
+  ],
+  "博客主页已下架。": [
+    "The blog homepage is now offline.",
+    "ブログホームページを非公開にしました。"
+  ],
+  "博客主页界面预览": [
+    "blog home preview",
+    "ホームページ画面のプレビュー"
+  ],
+  "博客主页的内容结构": [
+    "The building blocks of your blog home",
+    "ホームページを構成するコンテンツ"
+  ],
+  "博客主页，": [
+    "Your blog home,",
+    "ブログホームを、"
+  ],
+  "作品、经历、资源和简历共用一份内容库。更新一次，博客主页持续生长。": [
+    "One library connects your work, experience, resources and résumé. Update once and let your blog home grow.",
+    "作品・経歴・リソース・履歴書をひとつに。更新するたび、ホームページも育ちます。"
+  ],
+  "公开博客主页封面": [
+    "Public blog home cover",
+    "公開ホームページのカバー"
+  ],
+  "分享博客主页": [
+    "Share blog home",
+    "ブログホームを共有"
+  ],
+  "发现博客主页": [
+    "Explore blog homes",
+    "ブログホームを探す"
+  ],
+  "在社区分享发现，把作品、经历与资源，整理成你的博客主页。": [
+    "Share discoveries with the community. Bring your work, experience and resources together in your own blog home.",
+    "コミュニティで発見を共有し、作品・経歴・リソースを自分のホームページにまとめよう。"
+  ],
+  "填写资料，即可拥有完整的博客主页。": [
+    "Add your details to create a complete blog homepage.",
+    "プロフィールを入力すると、ブログホームページが完成します。"
+  ],
+  "想展示作品，从博客主页开始；想交流发现，去社区看看。也可以先在内容库保存一份草稿。": [
+    "Build a blog home to show your work, visit the community to exchange ideas, or save a draft in your library.",
+    "作品を紹介するならブログホームを作り、発見を共有するならコミュニティへ。まずライブラリに下書きを保存することもできます。"
+  ],
+  "我的博客主页": [
+    "My blog home",
+    "マイホームページ"
+  ],
+  "把个人介绍、经历、技能和作品，整理成一份有质感的博客主页。": [
+    "Bring your story, experience, skills and work together in a thoughtfully designed blog home.",
+    "紹介、経歴、スキル、作品を美しいブログホームにまとめましょう。"
+  ],
+  "搭建博客主页": [
+    "Build your blog home",
+    "ブログホームを作る"
+  ],
+  "欢迎来到我的博客主页。": [
+    "Welcome to my blog home.",
+    "私のホームページへようこそ。"
+  ],
+  "正在打开博客主页…": [
+    "Opening the blog homepage…",
+    "ブログホームページを開いています…"
+  ],
+  "现有站长资料已接入博客主页，继续在原内容后台维护即可同步更新。": [
+    "Your existing owner profile is connected to your blog home. Keep editing it in the original dashblog home to update both.",
+    "既存の管理者プロフィールはホームページに接続されています。従来の管理画面で編集すると両方に反映されます。"
+  ],
+  "用模块快速搭建，或在自由画布中编排。把作品、手记与资源放在一起，做一个有你风格的博客主页。": [
+    "Start with ready-made blocks or arrange things freely on a canvas. Bring your work, notes and resources together in a blog home that reflects your style.",
+    "ブロックで手軽に組み立てても、自由なキャンバスに配置しても。作品、ノート、リソースをまとめて、あなたらしいホームページを作れます。"
+  ],
+  "登录后整理作品、经历与资源，搭建可分享的博客主页。": [
+    "Sign in to organize your work, experience and resources in a shareable blog home.",
+    "ログインして作品・経歴・リソースを整理し、共有できるホームページを作りましょう。"
+  ],
+  "看看博客主页": [
+    "Explore a blog home",
+    "ホームページを見る"
+  ],
+  "社区、博客主页与持续更新的简历。": [
+    "Community, blog homes and a résumé that grows with you.",
+    "コミュニティ、ブログホーム、更新を重ねる履歴書。"
+  ],
+  "社区、博客主页与静态网站托管。": [
+    "Community, blog homes and static website hosting.",
+    "コミュニティ、ブログホーム、静的サイトのホスティング。"
+  ],
+  "社区与博客主页": [
+    "Community & blog homes",
+    "コミュニティとブログホーム"
+  ],
+  "自由组合经历、作品与资源，搭建自己的博客主页。": [
+    "Build a blog home from your experience, work and resources.",
+    "経歴・作品・リソースを自由に組み合わせて、自分のホームページを。"
+  ],
+  "制作开发者博客主页": [
+    "Build a developer’s blog home",
+    "開発者のブログホームを制作"
+  ],
+  "可运行的博客主页、响应式样式，以及素材缺失和交互检查说明。": [
+    "A working blog home, responsive styles, and notes on missing assets and interaction checks.",
+    "動作するホームページ、レスポンシブのスタイル、不足素材と操作検証の記録。"
+  ],
+  "请使用 frontend-design Skill，为 [个人介绍与项目资料] 制作博客主页，使用 [前端技术栈]。 读者主要是潜在合作伙伴。页面需要清楚展示介绍、精选作品和联系入口，遵循 [品牌约束]，先说明一个明确的视觉方向，再实现桌面和手机布局。 使用我提供的真实内容；缺失素材请标注。检查键盘操作、文字对比度和窄屏显示。": [
+    "Use the frontend-design skill to build a blog home from [introduction and project materials] with [frontend stack].\nThe audience is potential collaborators. Clearly present an introduction, selected work and contact links. Follow [brand constraints], explain one clear visual direction, then implement desktop and mobile layouts.\nUse the real content provided and identify missing assets. Check keyboard access, text contrast and narrow screens.",
+    "frontend-design Skill を使い、[自己紹介と作品資料] をもとに [フロントエンド環境] でブログホームを作ってください。\n想定読者は協業相手です。紹介、代表作品、連絡先を明確にし、[ブランド制約] を守って一つのビジュアル方針を説明してから、PC とモバイルに実装してください。\n提供した実際の内容を使い、不足素材を明記してください。キーボード操作、文字のコントラスト、狭い画面を確認してください。"
+  ],
+  "博客主页管理": [
+    "Manage blog home",
+    "ブログホーム管理"
+  ],
+  "我的发布": [
+    "My publications",
+    "自分の公開コンテンツ"
+  ],
+  "其他资源": [
+    "Other resources",
+    "その他のリソース"
+  ],
+  "分享到这里": [
+    "Contribute here",
+    "ここに共有"
+  ],
+  "这里等待你的第一份分享。": [
+    "Your first contribution could be here.",
+    "最初の投稿をお待ちしています。"
+  ],
+  "发布后会同时出现在这个栏目和社区。": [
+    "Once approved, it appears here and in the community.",
+    "承認後、このセクションとコミュニティに掲載されます。"
+  ],
+  "值得收藏的网站、工具与灵感，由每个人一起发现。": [
+    "Useful websites, tools and inspiration, discovered together.",
+    "みんなで見つける便利なサイト、ツール、インスピレーション。"
+  ],
+  "分享资源": [
+    "Share a resource",
+    "リソースを共有"
+  ],
+  "搜索资源": [
+    "Search resources",
+    "リソースを検索"
+  ],
+  "没有匹配的资源。": [
+    "No resources match these filters.",
+    "該当するリソースはありません。"
+  ],
+  "详细内容": [
+    "Overview",
+    "詳細"
+  ],
+  "参与讨论": [
+    "Join the discussion",
+    "ディスカッションに参加"
+  ],
+  "安装命令": [
+    "Installation command",
+    "インストールコマンド"
+  ],
+  "复制安装命令": [
+    "Copy installation command",
+    "インストールコマンドをコピー"
+  ],
+  "执行前请核对来源和命令内容。": [
+    "Review the source and command before running it.",
+    "実行前に配布元とコマンドを確認してください。"
+  ],
+  "访问原始来源": [
+    "Visit the original source",
+    "配布元を見る"
+  ],
+  "在社区分享与讨论": [
+    "Share and discuss in the community",
+    "コミュニティで共有・議論"
+  ],
+  "分享你的发现": [
+    "Share your discoveries",
+    "発見を共有"
+  ],
+  "登录后即可发布文档、Skill 和其他资源。": [
+    "Sign in to publish documents, Skills and other resources.",
+    "ログインして文書、Skill、リソースを公開できます。"
+  ],
+  "一份内容，发布到栏目，也分享到社区。": [
+    "One contribution, shared in its catalog and the community.",
+    "一つの投稿をカタログとコミュニティに共有。"
+  ],
+  "用 AI 发布": [
+    "Publish with AI",
+    "AI で公開"
+  ],
+  "发布到": [
+    "Publish to",
+    "公開先"
+  ],
+  "你的下一份分享": [
+    "Your next contribution",
+    "次の投稿"
+  ],
+  "不上传图片时，自动生成专属封面。": [
+    "A cover is generated automatically if you don't upload an image.",
+    "画像がない場合はカバーを自動生成します。"
+  ],
+  "使用默认封面": [
+    "Use generated cover",
+    "自動生成カバーを使用"
+  ],
+  "导入文档": [
+    "Import document",
+    "文書をインポート"
+  ],
+  "支持 Markdown、TXT 和 HTML。导入后可编辑标题、正文与代码。": [
+    "Import Markdown, TXT or HTML, then edit the text, headings and code.",
+    "Markdown、TXT、HTML を読み込み、文章や見出しを編集できます。"
+  ],
+  "原始来源链接": [
+    "Original source URL",
+    "配布元 URL"
+  ],
+  "来源名称": [
+    "Source name",
+    "配布元の名前"
+  ],
+  "Skill 使用信息": [
+    "Using this Skill",
+    "Skill の使い方"
+  ],
+  "提示词标题": [
+    "Prompt title",
+    "プロンプトのタイトル"
+  ],
+  "提示词内容": [
+    "Prompt text",
+    "プロンプト本文"
+  ],
+  "添加提示词": [
+    "Add a prompt",
+    "プロンプトを追加"
+  ],
+  "我确认有权分享此内容，并同意发布后自动分享到社区。": [
+    "I have permission to share this content and agree to its automatic community share when published.",
+    "共有権限を確認し、公開後のコミュニティへの自動共有に同意します。"
+  ],
+  "提交发布": [
+    "Submit for publication",
+    "公開を申請"
+  ],
+  "撤回修改": [
+    "Withdraw to edit",
+    "取り下げて編集"
+  ],
+  "草稿仅自己可见；审核通过后公开。": [
+    "Drafts are private. Approved content becomes public.",
+    "下書きは非公開です。承認後に公開されます。"
+  ],
+  "新建分享": [
+    "New contribution",
+    "新しい投稿"
+  ],
+  "未命名草稿": [
+    "Untitled draft",
+    "無題の下書き"
+  ],
+  "已发布，并自动分享到社区。": [
+    "Published and automatically shared to the community.",
+    "公開し、コミュニティに自動共有しました。"
+  ],
+  "已提交，待审核通过后同步到栏目和社区。": [
+    "Submitted for review. Once approved, it will appear in its catalog and the community.",
+    "審査に提出しました。承認後にカタログとコミュニティに掲載します。"
+  ],
+  "已撤回，可以继续编辑。": [
+    "Withdrawn. You can continue editing.",
+    "取り下げました。編集を続けられます。"
+  ],
+  "已下架，社区分享同步停止公开。": [
+    "Taken offline, including the linked community share.",
+    "関連するコミュニティ投稿も非公開にしました。"
+  ],
+  "文档请控制在 500 KB 以内。": [
+    "Documents must be 500 KB or smaller.",
+    "文書は 500 KB 以下にしてください。"
+  ],
+  "文档已导入，请检查格式并保存草稿。": [
+    "Document imported. Check its formatting and save your draft.",
+    "読み込みました。書式を確認して保存してください。"
+  ],
+  "无法读取文件，请选择文本或 HTML 文档。": [
+    "Could not read the file. Choose a text or HTML document.",
+    "ファイルを読み取れません。テキストまたは HTML を選択してください。"
+  ],
+  "封面图片请控制在 5 MB 以内。": [
+    "Cover images must be 5 MB or smaller.",
+    "カバーは 5 MB 以下にしてください。"
+  ],
+  "把经验写成教程，把方法分享给更多人。": [
+    "Turn experience into tutorials. Share what you've learned.",
+    "経験をチュートリアルにして、学びを共有。"
+  ],
+  "发布文档": [
+    "Publish a document",
+    "文書を公開"
+  ],
+  "搜索文档": [
+    "Search documents",
+    "文書を検索"
+  ],
+  "没有匹配的文档。": [
+    "No documents match these filters.",
+    "該当する文書はありません。"
+  ],
+  "开发教程": [
+    "Development tutorials",
+    "開発チュートリアル"
+  ],
+  "客户端指南": [
+    "Desktop guides",
+    "デスクトップガイド"
+  ],
+  "设计与交互": [
+    "Design and interaction",
+    "デザインと操作"
+  ],
+  "AI 工作流": [
+    "AI workflows",
+    "AI ワークフロー"
+  ],
+  "开发工具": [
+    "Developer tools",
+    "開発ツール"
+  ],
+  "效率工具": [
+    "Productivity tools",
+    "生産性ツール"
+  ],
+  "让 AI 直接发布文档、Skill 和其他资源。": [
+    "Let AI publish documents, Skills and other resources for you.",
+    "AI から文書、Skill、リソースを直接投稿。"
+  ],
+  "分享 Skill": [
+    "Share a Skill",
+    "Skill を共有"
+  ],
+  "可保存草稿，或在你的明确授权下提交发布。审核通过后自动分享到社区。": [
+    "Save drafts or submit with your explicit authorization. Approved content is automatically shared to the community.",
+    "下書きを保存、または明示的な許可を得て公開申請。承認後に自動共有します。"
+  ],
+  "提供文档、Skill 或资源资料，选择对应栏目。": [
+    "Provide your document, Skill or resource and choose its catalog.",
+    "文書、Skill、リソースを用意し、カテゴリを選択します。"
+  ],
+  "工具使用你的独立凭据保存草稿，可在“我的发布”继续检查和修改。": [
+    "The tool saves a draft with your scoped credential. Review and edit it in My publications.",
+    "専用の認証情報で保存し、自分の公開コンテンツから確認できます。"
+  ],
+  "共享内容审核": [
+    "Shared content review",
+    "共有コンテンツの審査"
+  ],
+  "文档、Skill 和其他资源使用同一条审核流程。": [
+    "Documents, Skills and resources use the same review process.",
+    "文書、Skill、リソースは同じ審査手順を使用します。"
+  ],
+  "审核方式": [
+    "Review mode",
+    "審査方式"
+  ],
+  "低风险文字自动通过，其他内容人工复核": [
+    "Automatically approve low-risk text; review other content manually",
+    "低リスク文章を自動承認、その他は手動審査"
+  ],
+  "全部人工审核": [
+    "Review everything manually",
+    "すべて手動審査"
+  ],
+  "自动筛查仅识别已配置的风险信号，不构成合规保证。图片、外链与安装命令仍需复核。": [
+    "Screening detects configured risk signals; it does not guarantee compliance. Images, external links and installation commands still require review.",
+    "検出ルールは適法性を保証しません。画像、外部リンク、コマンドは手動審査が必要です。"
+  ],
+  "查看审核与上线说明": [
+    "Read the review and launch guide",
+    "審査と公開の説明を見る"
+  ],
+  "目前没有待处理的共享内容。": [
+    "There is no shared content to review.",
+    "審査対象はありません。"
+  ],
+  "已检查正文、图片、来源、许可及安装命令。": [
+    "I checked the content, images, sources, permissions and installation commands.",
+    "内容、画像、出典、許諾、コマンドを確認しました。"
+  ],
+  "评论已发布。": [
+    "Comment published.",
+    "コメントを公開しました。"
+  ],
+  "读取和编辑自己的文档、Skill 和其他资源": [
+    "Read and edit my documents, Skills and other resources",
+    "自分の文書、Skill、リソースの閲覧・編集"
+  ],
+  "默认保存草稿。你明确要求发布并授权后，AI 可直接调用 catalog.submit；低风险内容通过后，自动同步到栏目和社区，风险内容等待复核。": [
+    "Drafts are the default. After your explicit publishing instruction and authorization, AI can call catalog.submit directly. Approved content appears in its catalog and community; flagged content waits for review.",
+    "初期設定は下書きです。明示的な許可後、AI が catalog.submit を呼び出せます。承認済みの内容をカタログとコミュニティに共有します。"
+  ],
+  "认识社区、博客主页和共享内容栏目。": [
+    "Explore the community, blog homes and shared catalogs.",
+    "コミュニティ、ブログホーム、共有カタログをご紹介。"
+  ],
+  "选择你的内容栏目": [
+    "Choose a catalog",
+    "カテゴリを選択"
+  ],
+  "文档、Skill 和其他资源栏目都有发布入口；在“我的发布”查看草稿和审核状态。": [
+    "Publish from Documents, Skills or Other resources. Find your drafts and review status in My publications.",
+    "各カタログから投稿し、自分の公開コンテンツで状態を確認できます。"
+  ],
+  "打开我的发布": [
+    "Open My publications",
+    "自分の公開コンテンツを開く"
+  ],
+  "想介绍自己，从博客主页开始；想分享教程或工具，在对应栏目发布，审核通过后也会出现在社区。": [
+    "Introduce yourself with a blog home. Share tutorials or tools in their catalog; approved contributions also appear in the community.",
+    "ブログホームで自己紹介。チュートリアルやツールは承認後にコミュニティにも掲載します。"
+  ],
+  "审核与公开发布": [
+    "Review and publication",
+    "審査と公開"
+  ],
+  "了解自动筛查、人工复核与正式上线前的准备。": [
+    "Understand automated screening, human review and preparation for a public launch.",
+    "自動検出、手動審査、本公開前の準備。"
+  ],
+  "先检查，再公开": [
+    "Check before publishing",
+    "確認してから公開"
+  ],
+  "文档、Skill 和其他资源发布后会同步分享到社区。默认自动模式下，低风险纯文字可通过；风险信号、图片、外部链接和安装命令转人工复核。草稿和待审版本不会提前公开。": [
+    "Approved documents, Skills and resources are shared to the community. Automatic mode can approve low-risk plain text; risk signals, images, external links and commands require human review. Drafts and pending revisions stay private.",
+    "承認済みコンテンツをコミュニティに共有します。リスク、画像、リンク、コマンドは手動審査となり、審査中は非公開です。"
+  ],
+  "保留人工判断与申诉": [
+    "Human judgment and appeals",
+    "手動判断と申し立て"
+  ],
+  "规则命中表示需要复核，不等于违法认定。管理员可以退回、下架和处理投诉，作者可以修改后重新提交或提出申诉。平台仍需持续巡查。": [
+    "A rule match requests review; it is not a legal finding. Administrators can return or remove content and handle reports. Authors may revise or appeal. Ongoing inspection is still required.",
+    "ルールへの一致は違法との判断ではありません。修正、再提出、申し立てが可能です。"
+  ],
+  "本地测试与正式运营": [
+    "Local testing and public operation",
+    "ローカルテストと正式運用"
+  ],
+  "当前账号和发布功能保留本地测试限制，邮箱验证不等于实名认证。正式上线前需要落实身份核验、审核人员、举报处置、日志留存、隐私告知及适用的备案许可，不能只靠词表或 ICP 备案判断合规。": [
+    "Accounts and publishing remain limited to local testing. Email verification is not real-identity verification. A public launch requires applicable identity checks, staffing, report handling, records, privacy notices and filings or permits. Neither a keyword list nor ICP filing alone establishes compliance.",
+    "アカウントと公開機能はローカルテスト用です。本公開には適用される本人確認、体制、届出等が必要です。"
+  ],
+  "核对现行规定": [
+    "Check current requirements",
+    "現行の規定を確認"
+  ],
+  "审核机制参考网信办《互联网跟帖评论服务管理规定》和《网络信息内容生态治理规定》。新闻信息的跟帖评论适用先审后发；实际运营需结合服务范围核对全部适用要求。": [
+    "The workflow references CAC rules for comment services and online content governance. Comments on news require review before publication. Check all applicable requirements against the final service scope before operating publicly.",
+    "CAC のコメントとコンテンツ管理規定を参照しています。実際のサービスに適用される要件を本公開前に確認してください。"
+  ],
+  "阅读网信办规定": [
+    "Read the CAC provisions",
+    "CAC の規定を読む"
+  ],
+  "需要可运行的前端项目及 GSAP。Skill 安装不会自动替项目安装动画依赖；GSAP 运行库与插件适用其自身许可。": [
+    "Requires a working frontend project and GSAP. Installing this Skill does not add animation dependencies to your app; the GSAP runtime and plugins have their own license.",
+    "実行可能なフロントエンドプロジェクトと GSAP が必要です。Skill の導入だけではアプリにアニメーション依存関係は追加されません。GSAP 本体とプラグインには固有のライセンスが適用されます。"
+  ],
+  "用 GSAP 的补间、缓动与错峰控制界面动效，并照顾响应式和减少动态效果的偏好。": [
+    "Build interface motion with GSAP tweens, easing and stagger, with responsive and reduced-motion support.",
+    "GSAP のトゥイーン、イージング、スタガーで UI を動かし、レスポンシブと動きを減らす設定にも対応します。"
+  ],
+  "理解 to、from、fromTo 的起止状态，避免重复动画和样式覆盖。": [
+    "Choose to, from and fromTo start states and avoid overlapping animations or style conflicts.",
+    "to、from、fromTo の開始・終了状態を選び、重複アニメーションやスタイル競合を防ぎます。"
+  ],
+  "通过 matchMedia 适配屏幕尺寸与减少动态效果设置。": [
+    "Use matchMedia for viewport changes and reduced-motion preferences.",
+    "matchMedia で画面幅の変更と動きを減らす設定に対応します。"
+  ],
+  "适合按钮反馈、列表进入、抽屉展开等需要运行时控制的界面动画。": [
+    "Useful for button feedback, list entrances and drawers that need runtime control.",
+    "ボタンの反応、リストの表示、ドロワーなど、実行時の制御が必要な UI に適しています。"
+  ],
+  "为搜索结果添加进入动效": [
+    "Animate search results",
+    "検索結果に表示アニメーションを追加"
+  ],
+  "现有搜索页面、结果列表组件和加载状态。": [
+    "An existing search page, result-list component and loading states.",
+    "既存の検索ページ、結果リストのコンポーネントと読み込み状態。"
+  ],
+  "让新结果轻量进入，快速重新搜索时终止旧动效，并为减少动态效果设置提供静态呈现。": [
+    "Animate new results gently, cancel stale tweens on rapid searches and provide a static reduced-motion state.",
+    "新しい結果を控えめに表示し、連続検索では古いアニメーションを解除し、動きを減らす設定では静的に表示します。"
+  ],
+  "搜索结果动效代码、重复搜索和减少动态效果设置的验证记录。": [
+    "Animation code and checks for repeated searches and reduced motion.",
+    "アニメーションのコード、連続検索と動きを減らす設定の検証記録。"
+  ],
+  "请使用 gsap-core Skill 完成 [项目路径] 中的结果列表。 先阅读现有组件和交互约束，再实施最小必要改动，保留已有内容与键盘操作。检查状态切换、快速重复触发和减少动态效果，并提供减少动态效果时的可用回退。 只报告实际运行的验证；未测量的性能不要写成提升。": [
+    "Use the gsap-core Skill for the result list in [project path].\nRead the existing components and interaction constraints, then make the smallest necessary changes while preserving content and keyboard behavior. Check state changes, rapid repeat triggers and reduced motion and provide a usable reduced-motion fallback.\nReport only checks actually run; do not claim unmeasured performance improvements.",
+    "[プロジェクトパス] の結果リストに gsap-core Skill を使ってください。\n既存コンポーネントと操作の制約を読み、内容とキーボード操作を保って必要最小限の変更を行ってください。状態変更、素早い連続操作、動きを減らす設定を確認し、動きを減らす設定でも使える代替表示を用意してください。\n実行した検証だけを報告し、未測定の性能改善は主張しないでください。"
+  ],
+  "请复查刚才的结果列表：重点验证状态切换、快速重复触发和减少动态效果。确认内容在动画禁用时仍可阅读和操作，重复进入页面不会增加动画或监听器，并列出修正内容与尚未验证的环境。": [
+    "Review the result list just implemented, focusing on state changes, rapid repeat triggers and reduced motion. Confirm that content remains readable and usable without motion, repeated navigation does not accumulate animations or listeners, and list fixes plus environments not yet verified.",
+    "実装した結果リストを再確認し、特に状態変更、素早い連続操作、動きを減らす設定を検証してください。動作を無効にしても内容を読んで操作でき、ページを繰り返し開いてもアニメーションやリスナーが増えないことを確認し、修正内容と未検証の環境を報告してください。"
+  ],
+  "用时间线、标签与相对位置编排连续动效，统一控制播放、暂停和反向。": [
+    "Sequence motion with timelines, labels and relative positions, with shared playback and reverse controls.",
+    "タイムライン、ラベル、相対位置で動作を組み立て、再生・停止・逆再生をまとめて制御します。"
+  ],
+  "通过位置参数与标签安排并行动画、等待和嵌套时间线。": [
+    "Coordinate overlaps, pauses and nested timelines with position parameters and labels.",
+    "位置パラメーターとラベルで重なり、待機、入れ子のタイムラインを構成します。"
+  ],
+  "用统一的播放控制处理打开、关闭和中途反向。": [
+    "Use one playback controller for opening, closing and reversing midway.",
+    "共通の再生制御で開閉と途中の逆再生を扱います。"
+  ],
+  "适合多步骤介绍、导航展开，以及多个元素需要一起响应的状态切换。": [
+    "Useful for step-by-step reveals, expanding navigation and coordinated state changes.",
+    "段階的な紹介、ナビゲーションの展開、複数要素が連動する状態変更に適しています。"
+  ],
+  "编排导航菜单的打开与关闭": [
+    "Choreograph an opening navigation menu",
+    "ナビゲーションメニューの開閉を構成"
+  ],
+  "菜单组件、开关按钮和键盘焦点行为。": [
+    "A navigation component, toggle button and keyboard focus behavior.",
+    "メニューのコンポーネント、開閉ボタン、キーボードフォーカスの動作。"
+  ],
+  "把背景、菜单项和按钮放入同一时间线，通过反向播放关闭，并验证连续点击。": [
+    "Place the backdrop, links and toggle in one timeline, reverse to close and check repeated clicks.",
+    "背景、リンク、ボタンを同じタイムラインに配置し、逆再生で閉じて連続クリックを確認します。"
+  ],
+  "可中断与反向的菜单动效，以及焦点和快速点击检查。": [
+    "An interruptible, reversible menu animation with focus and rapid-click checks.",
+    "中断・逆再生ができるメニューの動作と、フォーカス・連続クリックの検証。"
+  ],
+  "请使用 gsap-timeline Skill 完成 [项目路径] 中的导航菜单。 先阅读现有组件和交互约束，再实施最小必要改动，保留已有内容与键盘操作。检查时间线重复创建、中途反向和键盘焦点，并提供减少动态效果时的可用回退。 只报告实际运行的验证；未测量的性能不要写成提升。": [
+    "Use the gsap-timeline Skill for the navigation menu in [project path].\nRead the existing components and interaction constraints, then make the smallest necessary changes while preserving content and keyboard behavior. Check duplicate timelines, mid-animation reversal and keyboard focus and provide a usable reduced-motion fallback.\nReport only checks actually run; do not claim unmeasured performance improvements.",
+    "[プロジェクトパス] のナビゲーションメニューに gsap-timeline Skill を使ってください。\n既存コンポーネントと操作の制約を読み、内容とキーボード操作を保って必要最小限の変更を行ってください。タイムラインの重複生成、途中の逆再生、キーボードフォーカスを確認し、動きを減らす設定でも使える代替表示を用意してください。\n実行した検証だけを報告し、未測定の性能改善は主張しないでください。"
+  ],
+  "请复查刚才的导航菜单：重点验证时间线重复创建、中途反向和键盘焦点。确认内容在动画禁用时仍可阅读和操作，重复进入页面不会增加动画或监听器，并列出修正内容与尚未验证的环境。": [
+    "Review the navigation menu just implemented, focusing on duplicate timelines, mid-animation reversal and keyboard focus. Confirm that content remains readable and usable without motion, repeated navigation does not accumulate animations or listeners, and list fixes plus environments not yet verified.",
+    "実装したナビゲーションメニューを再確認し、特にタイムラインの重複生成、途中の逆再生、キーボードフォーカスを検証してください。動作を無効にしても内容を読んで操作でき、ページを繰り返し開いてもアニメーションやリスナーが増えないことを確認し、修正内容と未検証の環境を報告してください。"
+  ],
+  "把滚动进度与动画连接，处理固定区块、触发范围、刷新和页面离开时的清理。": [
+    "Connect scroll progress to animation, including pinning, trigger ranges, refresh and teardown.",
+    "スクロール進捗とアニメーションを結び、固定区間、発火範囲、再計算、破棄を扱います。"
+  ],
+  "设置 start、end、scrub 与 pin，让动效对应真实滚动距离。": [
+    "Set start, end, scrub and pin so motion follows real scroll distance.",
+    "start、end、scrub、pin を設定し、実際のスクロール距離に動きを対応させます。"
+  ],
+  "在图片加载、尺寸变化和组件卸载时刷新或清理触发器。": [
+    "Refresh after image loading or resize, and clean up triggers on unmount.",
+    "画像読み込みやサイズ変更の後に再計算し、アンマウント時にトリガーを解除します。"
+  ],
+  "适合产品故事、分段演示与滚动叙事；移动端需要独立检查阅读和滚动体验。": [
+    "Useful for product stories and scroll-based walkthroughs; mobile reading and scrolling need separate checks.",
+    "製品紹介やスクロール型の説明に適しています。モバイルでの読みやすさとスクロール操作は別途検証が必要です。"
+  ],
+  "制作随滚动切换的产品说明": [
+    "Build a scroll-led product walkthrough",
+    "スクロールで切り替わる製品紹介を作成"
+  ],
+  "三段真实产品文案、对应图片和已有响应式页面。": [
+    "Three product sections, matching images and an existing responsive page.",
+    "3 つの製品説明、対応する画像、既存のレスポンシブページ。"
+  ],
+  "设置分段触发与图片进度，等待布局稳定后刷新，窄屏改为自然阅读顺序。": [
+    "Define section triggers and image progress, refresh after layout settles and keep a natural reading order on small screens.",
+    "各セクションのトリガーと画像の進行を設定し、レイアウト安定後に再計算し、小画面では自然な読書順を保ちます。"
+  ],
+  "滚动演示、移动端回退，以及返回页面后无重复触发器的检查。": [
+    "A scroll walkthrough, mobile fallback and checks for duplicate triggers after navigation.",
+    "スクロール型の紹介、モバイル用の代替表示、ページ遷移後にトリガーが重複しないことの検証。"
+  ],
+  "请使用 gsap-scrolltrigger Skill 完成 [项目路径] 中的产品介绍页。 先阅读现有组件和交互约束，再实施最小必要改动，保留已有内容与键盘操作。检查图片延迟加载、视口变化、路由返回与减少动态效果，并提供减少动态效果时的可用回退。 只报告实际运行的验证；未测量的性能不要写成提升。": [
+    "Use the gsap-scrolltrigger Skill for the product walkthrough in [project path].\nRead the existing components and interaction constraints, then make the smallest necessary changes while preserving content and keyboard behavior. Check late-loading images, viewport changes, route returns and reduced motion and provide a usable reduced-motion fallback.\nReport only checks actually run; do not claim unmeasured performance improvements.",
+    "[プロジェクトパス] の製品紹介ページに gsap-scrolltrigger Skill を使ってください。\n既存コンポーネントと操作の制約を読み、内容とキーボード操作を保って必要最小限の変更を行ってください。画像の遅延読み込み、画面幅の変更、ページに戻る操作、動きを減らす設定を確認し、動きを減らす設定でも使える代替表示を用意してください。\n実行した検証だけを報告し、未測定の性能改善は主張しないでください。"
+  ],
+  "请复查刚才的产品介绍页：重点验证图片延迟加载、视口变化、路由返回与减少动态效果。确认内容在动画禁用时仍可阅读和操作，重复进入页面不会增加动画或监听器，并列出修正内容与尚未验证的环境。": [
+    "Review the product walkthrough just implemented, focusing on late-loading images, viewport changes, route returns and reduced motion. Confirm that content remains readable and usable without motion, repeated navigation does not accumulate animations or listeners, and list fixes plus environments not yet verified.",
+    "実装した製品紹介ページを再確認し、特に画像の遅延読み込み、画面幅の変更、ページに戻る操作、動きを減らす設定を検証してください。動作を無効にしても内容を読んで操作でき、ページを繰り返し開いてもアニメーションやリスナーが増えないことを確認し、修正内容と未検証の環境を報告してください。"
+  ],
+  "按交互选择 Flip、Draggable、SplitText 等 GSAP 插件，核对注册方式、生命周期与恢复行为。": [
+    "Choose GSAP plugins such as Flip, Draggable and SplitText, with registration, lifecycle and restoration checks.",
+    "Flip、Draggable、SplitText などを選択し、登録方法、ライフサイクル、復元動作を確認します。"
+  ],
+  "区分布局过渡、拖拽、文字拆分与 SVG 动画各自需要的插件。": [
+    "Select plugins for layout transitions, dragging, text splitting or SVG animation.",
+    "レイアウト遷移、ドラッグ、文字分割、SVG アニメーションに応じたプラグインを選択します。"
+  ],
+  "检查插件注册与销毁，避免重复包裹文字或残留事件监听。": [
+    "Check plugin registration and disposal to avoid duplicate text wrappers and stale listeners.",
+    "プラグインの登録・破棄を確認し、文字の二重ラップやイベントの残留を防ぎます。"
+  ],
+  "适合筛选后的布局变换、可拖拽界面和复杂文字动效；按实际需求安装运行依赖。": [
+    "Useful for filtered-layout transitions, draggable interfaces and advanced text motion; add only required runtime dependencies.",
+    "絞り込み後のレイアウト変化、ドラッグ UI、複雑な文字表現に適しています。必要な実行時依存関係だけを追加します。"
+  ],
+  "让作品筛选后的布局平滑变化": [
+    "Smooth a filtered portfolio layout",
+    "作品の絞り込み後の配置を滑らかに変更"
+  ],
+  "已有作品网格、分类筛选和稳定的作品标识。": [
+    "An existing portfolio grid, category filters and stable item identifiers.",
+    "既存の作品グリッド、カテゴリー絞り込み、安定した項目 ID。"
+  ],
+  "用 Flip 保存改变前的位置，再在 DOM 更新后播放过渡；空结果和重复筛选保持可用。": [
+    "Capture pre-change positions with Flip and animate after the DOM update, keeping empty results and repeated filters usable.",
+    "Flip で変更前の位置を保存し、DOM 更新後に遷移します。結果なしや連続絞り込みも操作可能に保ちます。"
+  ],
+  "布局过渡、插件清理逻辑，以及空结果和快速切换验证。": [
+    "Layout transitions, plugin cleanup and checks for empty results and rapid switching.",
+    "レイアウト遷移、プラグインの解除処理、結果なしと連続切り替えの検証。"
+  ],
+  "请使用 gsap-plugins Skill 完成 [项目路径] 中的作品筛选网格。 先阅读现有组件和交互约束，再实施最小必要改动，保留已有内容与键盘操作。检查插件清理、重复操作、键盘可用性和 DOM 恢复，并提供减少动态效果时的可用回退。 只报告实际运行的验证；未测量的性能不要写成提升。": [
+    "Use the gsap-plugins Skill for the filtered portfolio grid in [project path].\nRead the existing components and interaction constraints, then make the smallest necessary changes while preserving content and keyboard behavior. Check plugin cleanup, repeated actions, keyboard access and DOM restoration and provide a usable reduced-motion fallback.\nReport only checks actually run; do not claim unmeasured performance improvements.",
+    "[プロジェクトパス] の絞り込み付き作品グリッドに gsap-plugins Skill を使ってください。\n既存コンポーネントと操作の制約を読み、内容とキーボード操作を保って必要最小限の変更を行ってください。プラグイン解除、連続操作、キーボード操作、DOM の復元を確認し、動きを減らす設定でも使える代替表示を用意してください。\n実行した検証だけを報告し、未測定の性能改善は主張しないでください。"
+  ],
+  "请复查刚才的作品筛选网格：重点验证插件清理、重复操作、键盘可用性和 DOM 恢复。确认内容在动画禁用时仍可阅读和操作，重复进入页面不会增加动画或监听器，并列出修正内容与尚未验证的环境。": [
+    "Review the filtered portfolio grid just implemented, focusing on plugin cleanup, repeated actions, keyboard access and DOM restoration. Confirm that content remains readable and usable without motion, repeated navigation does not accumulate animations or listeners, and list fixes plus environments not yet verified.",
+    "実装した絞り込み付き作品グリッドを再確認し、特にプラグイン解除、連続操作、キーボード操作、DOM の復元を検証してください。動作を無効にしても内容を読んで操作でき、ページを繰り返し開いてもアニメーションやリスナーが増えないことを確認し、修正内容と未検証の環境を報告してください。"
+  ],
+  "将 GSAP 接入 React 与 Next.js，处理作用域、依赖更新、Strict Mode 与组件卸载。": [
+    "Integrate GSAP with React and Next.js, including scoped selectors, dependency changes, Strict Mode and unmounting.",
+    "GSAP を React・Next.js に統合し、セレクターの範囲、依存変更、Strict Mode、アンマウントを扱います。"
+  ],
+  "用 useGSAP 或 gsap.context 将动画限定在组件范围内。": [
+    "Scope animation to a component with useGSAP or gsap.context.",
+    "useGSAP または gsap.context でアニメーションをコンポーネント内に限定します。"
+  ],
+  "在依赖变化与卸载时回收动画，避免 SSR 期间访问浏览器对象。": [
+    "Clean up on dependency changes and unmounts, and avoid browser objects during SSR.",
+    "依存変更とアンマウント時に解除し、SSR 中のブラウザーオブジェクト参照を避けます。"
+  ],
+  "适合 React 动态列表、页面进入和已有 GSAP 代码的生命周期修复。": [
+    "Useful for React lists, page entrances and lifecycle fixes in existing GSAP code.",
+    "React の動的リスト、ページ表示、既存 GSAP コードのライフサイクル修正に適しています。"
+  ],
+  "修复页面往返后重复播放的动画": [
+    "Fix animations duplicated after navigation",
+    "ページ往復後に重複するアニメーションを修正"
+  ],
+  "React 路由组件、现有动效代码与复现步骤。": [
+    "A React route component, existing motion code and reproduction steps.",
+    "React のルートコンポーネント、既存の動作コード、再現手順。"
+  ],
+  "检查选择器和 effect 生命周期，添加作用域与清理，再验证 Strict Mode 和路由往返。": [
+    "Review selectors and effect lifecycles, add scoped cleanup and verify Strict Mode and navigation.",
+    "セレクターと effect のライフサイクルを確認し、範囲指定と解除を追加して Strict Mode と画面遷移を検証します。"
+  ],
+  "有明确清理逻辑的 React 动效，以及路由往返的检查结果。": [
+    "React motion with explicit cleanup and navigation verification results.",
+    "明確な解除処理を持つ React アニメーションと画面遷移の検証結果。"
+  ],
+  "请使用 gsap-react Skill 完成 [项目路径] 中的React 路由组件。 先阅读现有组件和交互约束，再实施最小必要改动，保留已有内容与键盘操作。检查Strict Mode、卸载、依赖更新和服务端渲染，并提供减少动态效果时的可用回退。 只报告实际运行的验证；未测量的性能不要写成提升。": [
+    "Use the gsap-react Skill for the React route component in [project path].\nRead the existing components and interaction constraints, then make the smallest necessary changes while preserving content and keyboard behavior. Check Strict Mode, unmounting, dependency updates and server rendering and provide a usable reduced-motion fallback.\nReport only checks actually run; do not claim unmeasured performance improvements.",
+    "[プロジェクトパス] のReact のルートコンポーネントに gsap-react Skill を使ってください。\n既存コンポーネントと操作の制約を読み、内容とキーボード操作を保って必要最小限の変更を行ってください。Strict Mode、アンマウント、依存更新、サーバーレンダリングを確認し、動きを減らす設定でも使える代替表示を用意してください。\n実行した検証だけを報告し、未測定の性能改善は主張しないでください。"
+  ],
+  "请复查刚才的React 路由组件：重点验证Strict Mode、卸载、依赖更新和服务端渲染。确认内容在动画禁用时仍可阅读和操作，重复进入页面不会增加动画或监听器，并列出修正内容与尚未验证的环境。": [
+    "Review the React route component just implemented, focusing on Strict Mode, unmounting, dependency updates and server rendering. Confirm that content remains readable and usable without motion, repeated navigation does not accumulate animations or listeners, and list fixes plus environments not yet verified.",
+    "実装したReact のルートコンポーネントを再確認し、特にStrict Mode、アンマウント、依存更新、サーバーレンダリングを検証してください。動作を無効にしても内容を読んで操作でき、ページを繰り返し開いてもアニメーションやリスナーが増えないことを確認し、修正内容と未検証の環境を報告してください。"
+  ],
+  "检查动效中的布局计算、绘制与资源占用，优先用测量证据修复卡顿。": [
+    "Inspect layout, paint and resource costs, using measured evidence to address animation jank.",
+    "レイアウト計算、描画、リソース負荷を調べ、測定結果に基づいて動作の引っ掛かりを修正します。"
+  ],
+  "优先变换属性，避免循环读写布局，并控制 will-change 的范围。": [
+    "Prefer transforms, avoid repeated layout reads and writes, and limit will-change usage.",
+    "transform を優先し、レイアウトの読み書きの反復を避け、will-change の範囲を限定します。"
+  ],
+  "围绕真实设备上的性能记录检查触发器数量和动画开销。": [
+    "Use performance recordings on real devices to assess trigger counts and animation costs.",
+    "実機のパフォーマンス記録でトリガー数とアニメーションの負荷を確認します。"
+  ],
+  "适合长列表动效、滚动卡顿和低性能设备上的交互优化。": [
+    "Useful for long animated lists, scroll jank and interaction tuning on lower-powered devices.",
+    "長いリストの動作、スクロールの引っ掛かり、低性能端末での操作改善に適しています。"
+  ],
+  "排查长页面的滚动卡顿": [
+    "Investigate scrolling jank on a long page",
+    "長いページのスクロールの引っ掛かりを調査"
+  ],
+  "可复现卡顿的页面、设备信息和性能记录。": [
+    "A page with reproducible jank, device details and a performance recording.",
+    "引っ掛かりを再現できるページ、端末情報、パフォーマンス記録。"
+  ],
+  "找出高成本布局和重复触发器，集中修改后在相同环境下再次记录。": [
+    "Identify expensive layout and duplicate triggers, make focused fixes and record again under the same conditions.",
+    "負荷の大きいレイアウトと重複トリガーを特定し、絞った修正の後で同条件の記録を取り直します。"
+  ],
+  "实际测量对比、针对性修复，以及尚未验证的设备范围。": [
+    "Measured comparisons, focused fixes and a clear list of untested devices.",
+    "実測の比較、対象を絞った修正、未検証の端末範囲。"
+  ],
+  "请使用 gsap-performance Skill 完成 [项目路径] 中的滚动页面。 先阅读现有组件和交互约束，再实施最小必要改动，保留已有内容与键盘操作。检查布局抖动、重复触发器、长任务和真实设备表现，并提供减少动态效果时的可用回退。 只报告实际运行的验证；未测量的性能不要写成提升。": [
+    "Use the gsap-performance Skill for the scrolling page in [project path].\nRead the existing components and interaction constraints, then make the smallest necessary changes while preserving content and keyboard behavior. Check layout thrashing, duplicate triggers, long tasks and real-device behavior and provide a usable reduced-motion fallback.\nReport only checks actually run; do not claim unmeasured performance improvements.",
+    "[プロジェクトパス] のスクロールページに gsap-performance Skill を使ってください。\n既存コンポーネントと操作の制約を読み、内容とキーボード操作を保って必要最小限の変更を行ってください。レイアウトスラッシング、重複トリガー、長時間タスク、実機での動作を確認し、動きを減らす設定でも使える代替表示を用意してください。\n実行した検証だけを報告し、未測定の性能改善は主張しないでください。"
+  ],
+  "请复查刚才的滚动页面：重点验证布局抖动、重复触发器、长任务和真实设备表现。确认内容在动画禁用时仍可阅读和操作，重复进入页面不会增加动画或监听器，并列出修正内容与尚未验证的环境。": [
+    "Review the scrolling page just implemented, focusing on layout thrashing, duplicate triggers, long tasks and real-device behavior. Confirm that content remains readable and usable without motion, repeated navigation does not accumulate animations or listeners, and list fixes plus environments not yet verified.",
+    "実装したスクロールページを再確認し、特にレイアウトスラッシング、重複トリガー、長時間タスク、実機での動作を検証してください。動作を無効にしても内容を読んで操作でき、ページを繰り返し開いてもアニメーションやリスナーが増えないことを確認し、修正内容と未検証の環境を報告してください。"
+  ],
+  "在 Vue、Nuxt、Svelte 等框架中安排 GSAP 的初始化、作用域和卸载清理。": [
+    "Manage GSAP initialization, scoping and teardown in Vue, Nuxt, Svelte and related frameworks.",
+    "Vue、Nuxt、Svelte などで GSAP の初期化、範囲指定、アンマウント時の解除を管理します。"
+  ],
+  "把动画放到 DOM 可用的挂载阶段，并遵循框架的更新机制。": [
+    "Initialize animation when the DOM is mounted and respect framework update cycles.",
+    "DOM が使用可能なマウント時に初期化し、フレームワークの更新周期に従います。"
+  ],
+  "组件卸载时恢复样式并清理监听，避免跨页面残留。": [
+    "Restore styles and remove listeners on unmount to prevent cross-page leftovers.",
+    "アンマウント時にスタイルを復元し、リスナーを解除して別ページへの残留を防ぎます。"
+  ],
+  "适合 Vue 与 Svelte 页面过渡、动态区块和服务端渲染应用的动效接入。": [
+    "Useful for Vue and Svelte page transitions, dynamic blocks and server-rendered apps.",
+    "Vue・Svelte のページ遷移、動的ブロック、SSR アプリのアニメーション導入に適しています。"
+  ],
+  "为 Vue 组件接入可清理的动效": [
+    "Add disposable animation to a Vue component",
+    "Vue コンポーネントに解除可能な動作を追加"
+  ],
+  "Vue 组件、状态更新方式和路由配置。": [
+    "A Vue component, its state update model and route configuration.",
+    "Vue コンポーネント、状態の更新方法、ルート設定。"
+  ],
+  "在挂载后初始化动画，在更新时使用正确的 DOM 状态，并在卸载时恢复。": [
+    "Initialize after mount, use the updated DOM state and restore on unmount.",
+    "マウント後に初期化し、更新された DOM 状態を使い、アンマウント時に復元します。"
+  ],
+  "符合组件生命周期的动效实现与路由切换验证。": [
+    "Lifecycle-aware animation code and route-switching checks.",
+    "コンポーネントのライフサイクルに合う実装とルート切り替えの検証。"
+  ],
+  "请使用 gsap-frameworks Skill 完成 [项目路径] 中的Vue 或 Svelte 组件。 先阅读现有组件和交互约束，再实施最小必要改动，保留已有内容与键盘操作。检查挂载时机、DOM 更新顺序、卸载恢复和 SSR，并提供减少动态效果时的可用回退。 只报告实际运行的验证；未测量的性能不要写成提升。": [
+    "Use the gsap-frameworks Skill for the Vue or Svelte component in [project path].\nRead the existing components and interaction constraints, then make the smallest necessary changes while preserving content and keyboard behavior. Check mount timing, DOM update order, teardown restoration and SSR and provide a usable reduced-motion fallback.\nReport only checks actually run; do not claim unmeasured performance improvements.",
+    "[プロジェクトパス] のVue または Svelte のコンポーネントに gsap-frameworks Skill を使ってください。\n既存コンポーネントと操作の制約を読み、内容とキーボード操作を保って必要最小限の変更を行ってください。マウントのタイミング、DOM 更新順、解除時の復元、SSRを確認し、動きを減らす設定でも使える代替表示を用意してください。\n実行した検証だけを報告し、未測定の性能改善は主張しないでください。"
+  ],
+  "请复查刚才的Vue 或 Svelte 组件：重点验证挂载时机、DOM 更新顺序、卸载恢复和 SSR。确认内容在动画禁用时仍可阅读和操作，重复进入页面不会增加动画或监听器，并列出修正内容与尚未验证的环境。": [
+    "Review the Vue or Svelte component just implemented, focusing on mount timing, DOM update order, teardown restoration and SSR. Confirm that content remains readable and usable without motion, repeated navigation does not accumulate animations or listeners, and list fixes plus environments not yet verified.",
+    "実装したVue または Svelte のコンポーネントを再確認し、特にマウントのタイミング、DOM 更新順、解除時の復元、SSRを検証してください。動作を無効にしても内容を読んで操作でき、ページを繰り返し開いてもアニメーションやリスナーが増えないことを確認し、修正内容と未検証の環境を報告してください。"
+  ],
+  "用映射、范围限制、吸附和循环等 GSAP 工具函数简化交互计算。": [
+    "Simplify interaction calculations with GSAP mapping, clamping, snapping and wrapping helpers.",
+    "GSAP のマッピング、範囲制限、スナップ、循環ヘルパーで操作の計算を簡潔にします。"
+  ],
+  "将输入范围映射成动画数值，组合 clamp、mapRange 与 interpolate。": [
+    "Map input ranges to animation values with clamp, mapRange and interpolate.",
+    "clamp、mapRange、interpolate で入力範囲をアニメーション値に対応させます。"
+  ],
+  "用 snap、wrap 和选择器工具处理边界、循环与元素集合。": [
+    "Handle boundaries, loops and element collections with snap, wrap and selector helpers.",
+    "snap、wrap、セレクターヘルパーで境界、循環、要素集合を扱います。"
+  ],
+  "适合指针跟随、进度映射、轮播循环和拖拽吸附的计算逻辑。": [
+    "Useful for pointer-following effects, progress mapping, looping carousels and drag snapping.",
+    "ポインター追従、進捗の変換、循環カルーセル、ドラッグ吸着の計算に適しています。"
+  ],
+  "让拖动位置吸附到有限刻度": [
+    "Snap dragging to a bounded scale",
+    "ドラッグ位置を範囲内の目盛りへ吸着"
+  ],
+  "滑块控件、允许范围和需要保留的键盘行为。": [
+    "A slider, allowed range and keyboard behavior to preserve.",
+    "スライダー、許可範囲、維持すべきキーボード動作。"
+  ],
+  "将指针位置映射为值，限制边界后吸附到刻度，并与键盘更新共用同一计算。": [
+    "Map pointer position to a value, clamp and snap it, and share the calculation with keyboard updates.",
+    "ポインター位置を値に変換し、範囲制限と吸着を行い、キーボード更新にも同じ計算を使います。"
+  ],
+  "范围映射与吸附逻辑，以及边界和键盘行为检查。": [
+    "Range mapping and snapping logic, with boundary and keyboard checks.",
+    "範囲変換と吸着のロジック、および境界とキーボード動作の検証。"
+  ],
+  "请使用 gsap-utils Skill 完成 [项目路径] 中的滑块的交互计算。 先阅读现有组件和交互约束，再实施最小必要改动，保留已有内容与键盘操作。检查越界值、空集合、重复循环和键盘更新，并提供减少动态效果时的可用回退。 只报告实际运行的验证；未测量的性能不要写成提升。": [
+    "Use the gsap-utils Skill for the slider interaction logic in [project path].\nRead the existing components and interaction constraints, then make the smallest necessary changes while preserving content and keyboard behavior. Check out-of-range values, empty collections, repeated loops and keyboard updates and provide a usable reduced-motion fallback.\nReport only checks actually run; do not claim unmeasured performance improvements.",
+    "[プロジェクトパス] のスライダーの操作計算に gsap-utils Skill を使ってください。\n既存コンポーネントと操作の制約を読み、内容とキーボード操作を保って必要最小限の変更を行ってください。範囲外の値、空の集合、反復ループ、キーボード更新を確認し、動きを減らす設定でも使える代替表示を用意してください。\n実行した検証だけを報告し、未測定の性能改善は主張しないでください。"
+  ],
+  "请复查刚才的滑块的交互计算：重点验证越界值、空集合、重复循环和键盘更新。确认内容在动画禁用时仍可阅读和操作，重复进入页面不会增加动画或监听器，并列出修正内容与尚未验证的环境。": [
+    "Review the slider interaction logic just implemented, focusing on out-of-range values, empty collections, repeated loops and keyboard updates. Confirm that content remains readable and usable without motion, repeated navigation does not accumulate animations or listeners, and list fixes plus environments not yet verified.",
+    "実装したスライダーの操作計算を再確認し、特に範囲外の値、空の集合、反復ループ、キーボード更新を検証してください。動作を無効にしても内容を読んで操作でき、ページを繰り返し開いてもアニメーションやリスナーが増えないことを確認し、修正内容と未検証の環境を報告してください。"
+  ],
+  "把口语需求整理成准确的开发表达，并结合当前任务解释术语、提供可核对的词条链接。": [
+    "Turn informal requests into precise development briefs, with contextual terminology and verifiable reference links.",
+    "口語の要望を正確な開発指示に整え、文脈に沿った用語説明と確認可能な参照リンクを添えます。"
+  ],
+  "保留需求原意，只补充影响实现判断的少量准确术语。": [
+    "Preserve the original intent and add only terminology that matters to implementation.",
+    "元の意図を保ち、実装判断に関わる少数の用語だけを補います。"
+  ],
+  "用脱敏后的短术语查询词条，引用解析器真实返回的链接。": [
+    "Query short, sanitized terms and cite links actually returned by the resolver.",
+    "匿名化した短い用語を検索し、リゾルバーが実際に返したリンクを引用します。"
+  ],
+  "适合向 AI 描述界面交互、澄清含糊需求，或理解 Agent 回复中的技术表达。": [
+    "Useful when describing UI interactions to AI, clarifying vague requests or understanding technical agent replies.",
+    "AI に UI 操作を説明する場合、曖昧な要望を整理する場合、Agent の技術的な返答を理解する場合に適しています。"
+  ],
+  "需要 Node.js 20 或更高版本及网络连接。查询只发送脱敏短术语，不应发送源代码、密钥或整段项目需求。": [
+    "Requires Node.js 20 or later and network access. Queries should contain only sanitized short terms, never source code, secrets or full project briefs.",
+    "Node.js 20 以降とネット接続が必要です。送信するのは匿名化した短い用語のみで、コード、秘密情報、要望全文は送信しないでください。"
+  ],
+  "把模糊的操作描述写成可实施需求": [
+    "Turn an informal interaction request into a usable brief",
+    "曖昧な操作説明を実装可能な要望に整理"
+  ],
+  "一句描述按钮悬停提示的口语需求，以及页面上的具体使用位置。": [
+    "An informal request for a button hint and the specific page context.",
+    "ボタンのヒントに関する口語の要望と、ページ内の具体的な使用場所。"
+  ],
+  "识别真正影响实现的术语，查询可信词条，再输出保留原意的需求与简短解释。": [
+    "Identify the term that matters, check a reliable entry and return a faithful brief with a short explanation.",
+    "実装に影響する用語を特定して信頼できる項目を確認し、意図を保った要望と短い説明を返します。"
+  ],
+  "可直接发给开发 Agent 的需求，以及与当前场景相关的术语链接。": [
+    "A brief ready for a coding agent and terminology links relevant to the current task.",
+    "開発 Agent にそのまま送れる要望と、現在の作業に関連する用語リンク。"
+  ],
+  "请使用 vibehub Skill 整理这段需求：[我的口语描述]。 保留原意和现有约束，先输出一段可直接交给开发 Agent 的准确表达，再解释最多三个真正影响实现的术语。 查询只发送脱敏后的短术语，链接必须来自解析器实际结果；不要增加我没有要求的框架或功能。": [
+    "Use the vibehub Skill to clarify this request: [my informal description].\nPreserve the intent and constraints. First provide a brief I can send directly to a coding agent, then explain at most three terms that affect implementation.\nSend only sanitized short terms to the resolver and use its actual returned links. Do not add frameworks or features I did not request.",
+    "vibehub Skill で次の要望を整理してください：[口語の説明]。\n意図と制約を保ち、開発 Agent にそのまま送れる正確な表現を先に出し、実装に関わる用語を最大 3 つ説明してください。\n検索には匿名化した短い用語だけを送り、返された実際のリンクのみを使ってください。依頼していないフレームワークや機能を追加しないでください。"
+  ],
+  "请检查刚才的需求表达是否保留了我的原意，有没有把普通描述误解为具体技术方案。删除不必要的术语，核对引用链接，并把仍存在的歧义写成一条简短、容易回答的问题。": [
+    "Check whether the revised brief preserves my intent and whether any ordinary description was mistaken for a specific technical solution. Remove unnecessary jargon, verify cited links and turn remaining ambiguity into one short, easy-to-answer question.",
+    "整理した要望が元の意図を保ち、一般的な説明を特定の技術案と取り違えていないか確認してください。不要な用語を削り、リンクを確認し、残る曖昧さを短く答えやすい質問 1 つにしてください。"
+  ],
+  "动效交互": [
+    "Motion & interaction",
+    "動きとインタラクション"
+  ],
+  "从补间到滚动，让动效有序且流畅。": [
+    "From tweens to scrolling: motion with timing and purpose.",
+    "トゥイーンからスクロールまで、秩序のある滑らかな動作を。"
+  ],
+  "沟通协作": [
+    "Communication",
+    "コミュニケーション"
+  ],
+  "把想法准确地交给 AI。": [
+    "Give AI a clear description of your intent.",
+    "意図を AI に正確に伝える。"
+  ],
+  "第三方 Skill 精选": [
+    "Third-party Skill collection",
+    "サードパーティー Skill 特集"
+  ],
+  "精选独立维护的 Skill，不重复列出 AI 工具自带的功能。": [
+    "Independently maintained Skills, without duplicating features bundled with AI tools.",
+    "AI ツールに付属する機能を重複掲載せず、独立して保守される Skill を紹介します。"
+  ],
+  "试试 GSAP、设计、React 或 Obsidian，也可以清除筛选查看全部。": [
+    "Try GSAP, design, React or Obsidian, or clear the filters to see everything.",
+    "GSAP、デザイン、React、Obsidian を検索するか、絞り込みを解除してください。"
+  ],
+  "这里只做用途索引与安装指引。第三方 Skill 和其调用的软件、图片、模型服务分别适用原作者的许可。": [
+    "This directory provides descriptions and setup guides. Third-party Skills and any software, images or model services they use remain subject to their authors’ terms.",
+    "このディレクトリは用途と導入手順を紹介します。第三者の Skill と利用するソフトウェア、画像、モデルサービスには、それぞれの作者の条件が適用されます。"
+  ],
+  "GSAP Skill 的 MIT 许可不等于 GSAP 运行库的许可；使用运行库与插件前，请查阅 GSAP 标准许可。": [
+    "The MIT license for GSAP Skills is separate from the GSAP runtime license. Review the GSAP Standard License before using its runtime or plugins.",
+    "GSAP Skills の MIT ライセンスと GSAP 本体のライセンスは別です。本体・プラグインの利用前に GSAP Standard License を確認してください。"
+  ],
+  "GSAP 运行库许可": [
+    "GSAP runtime license",
+    "GSAP 本体のライセンス"
+  ],
+  "你的博客，自成一页。": [
+    "Your blog, your own page.",
+    "あなたのブログ、あなたらしい一ページ。"
+  ],
+  "选择一种风格，或上传已经做好的网站。一个地址，介绍你的经历、作品与想法。": [
+    "Choose a style, or upload a site you have already made. One address for your experience, work and ideas.",
+    "テーマを選ぶか、完成したサイトをアップロード。経験、作品、考えを一つのアドレスで紹介できます。"
+  ],
+  "博客主题": [
+    "Blog theme",
+    "ブログテーマ"
+  ],
+  "博客标题（选填）": [
+    "Blog title (optional)",
+    "ブログタイトル（任意）"
+  ],
+  "博客封面": [
+    "Blog cover",
+    "ブログのカバー"
+  ],
+  "准备网站": [
+    "Prepare your site",
+    "サイトを準備"
+  ],
+  "单页保存为 HTML；多页网站先构建，再把输出目录打包为 ZIP。": [
+    "Save a single page as HTML. For a multi-page site, build it first and ZIP the output folder.",
+    "単一ページは HTML で保存。複数ページはビルドして、出力フォルダーを ZIP にします。"
+  ],
+  "上传并预览": [
+    "Upload and preview",
+    "アップロードしてプレビュー"
+  ],
+  "检查图片、链接和手机布局。上传不会覆盖当前公开版本。": [
+    "Check images, links and the mobile layout. Uploading keeps the current public version unchanged.",
+    "画像、リンク、モバイル表示を確認します。アップロードしても公開版は変わりません。"
+  ],
+  "审核后分享": [
+    "Share after review",
+    "審査後に共有"
+  ],
+  "通过审核后，用固定博客地址或二维码分享。": [
+    "After approval, share your stable blog address or QR code.",
+    "承認後、固定ブログアドレスや QR コードで共有できます。"
+  ],
+  "下载简约 HTML 模板": [
+    "Download minimal HTML starter",
+    "シンプルな HTML テンプレートをダウンロード"
+  ],
+  "下载深色 HTML 模板": [
+    "Download dark HTML starter",
+    "ダーク HTML テンプレートをダウンロード"
+  ],
+  "已有 Astro、Vite 或其他静态网站？": [
+    "Already have an Astro, Vite or other static site?",
+    "Astro、Vite などの静的サイトをお持ちですか？"
+  ],
+  "在自己的电脑上执行项目的构建命令，上传 dist、out 或 public 等构建结果，不要上传源码、node_modules 或环境变量。ZIP 中需要有 index.html，也支持只有一层外部目录的压缩包。": [
+    "Run your project’s build command on your computer and upload the static output, such as dist, out or public. Keep source code, node_modules and environment files out. The ZIP needs index.html; one enclosing directory is supported.",
+    "自分のパソコンでビルドし、dist、out、public などの静的出力をアップロードします。ソース、node_modules、環境変数は含めないでください。ZIP には index.html が必要で、外側のフォルダーは一階層まで対応します。"
+  ],
+  "图片、CSS、JavaScript 和字体需一起打包，并使用相对路径。外部 API、第三方脚本、登录与表单服务不会运行；先在隔离预览中检查。": [
+    "Bundle images, CSS, JavaScript and fonts together using relative paths. External APIs, third-party scripts, sign-in and form services will not run; check the isolated preview first.",
+    "画像、CSS、JavaScript、フォントを相対パスでまとめてください。外部 API、外部スクリプト、ログインやフォームサービスは動作しません。分離プレビューで確認してください。"
+  ],
+  "内置模板可直接使用；现有框架生成的静态网站需要先适配这些限制，不是所有网站都能原样导入。": [
+    "Built-in templates work directly. Existing framework exports may need changes to fit these limits; not every site can be imported unchanged.",
+    "内蔵テンプレートはそのまま使用できます。既存フレームワークの出力は制約への対応が必要な場合があり、すべてのサイトを無変更で取り込めるわけではありません。"
+  ],
+  "博客栏目": [
+    "Blog sections",
+    "ブログの項目"
+  ],
+  "主题默认风景 · AI 创作": [
+    "Default theme landscape · AI-generated",
+    "テーマの標準風景 · AI 生成"
+  ],
+  "创建我的博客": [
+    "Create my blog",
+    "ブログを作成"
+  ],
+  "像素手记": [
+    "Pixel journal",
+    "ピクセル手帖"
+  ],
+  "像素签名、细线框架与开放的个人档案。": [
+    "A pixel signature, fine rules and an open profile.",
+    "ピクセルの署名、繊細な罫線、開放的なプロフィール。"
+  ],
+  "远景日记": [
+    "Scenic journal",
+    "風景日記"
+  ],
+  "宽幅风景、深色阅读面板与独立个人名片。": [
+    "A wide landscape, dark reading panels and a profile sidebar.",
+    "横長の風景、ダークな読書パネル、独立したプロフィール。"
+  ],
+  "此博客请求打开外部链接": [
+    "This blog wants to open an external link",
+    "このブログから外部リンクへの移動リクエストがあります"
+  ],
+  "博客静态主页": [
+    "Static blog homepage",
+    "静的ブログホームページ"
+  ],
+  "找到 {0} 项精选 Skill": [
+    "Found {0} curated Skills",
+    "精选 Skill {0} 件"
+  ],
+  "精选目录中没有匹配的 Skill": [
+    "No matching curated Skills",
+    "精选カタログに一致する Skill はありません"
+  ],
+  "至少 5 字，说明事实、必要范围与期限。账号限制期间，公开内容会暂停展示。": [
+    "Use at least 5 characters to record the facts, scope and duration. Public content is hidden while the account is restricted.",
+    "事実、範囲、期間を記録してください。制限中は公開コンテンツを非表示にします。"
+  ],
+  "图片说明": [
+    "Image description",
+    "画像の説明"
+  ],
+  "简介": [
+    "Summary",
+    "概要"
+  ],
+  "处理说明": [
+    "Decision notes",
+    "処理の説明"
+  ],
+  "成员分享": [
+    "Community contributions",
+    "メンバーの投稿"
+  ],
+  "本地自动检查未发现风险信号": [
+    "Local screening found no configured risk signals.",
+    "Local screening found no configured risk signals."
+  ],
+  "涉嫌色情或性交易内容": [
+    "Possible sexual content or sex-trade promotion.",
+    "Possible sexual content or sex-trade promotion."
+  ],
+  "涉嫌赌博或赌博引流": [
+    "Possible gambling content or promotion.",
+    "Possible gambling content or promotion."
+  ],
+  "涉嫌违禁药品或毒品内容": [
+    "Possible prohibited drug content.",
+    "Possible prohibited drug content."
+  ],
+  "涉嫌暴力、仇恨或犯罪招揽": [
+    "Possible violence, hatred or criminal solicitation.",
+    "Possible violence, hatred or criminal solicitation."
+  ],
+  "涉嫌诈骗、盗版或凭据交易": [
+    "Possible fraud, piracy or credential trading.",
+    "Possible fraud, piracy or credential trading."
+  ],
+  "需要人工核对服务范围": [
+    "A reviewer must check whether this service is permitted.",
+    "A reviewer must check whether this service is permitted."
+  ],
+  "可能包含敏感身份信息或密钥": [
+    "May contain sensitive identity information or credentials.",
+    "May contain sensitive identity information or credentials."
+  ],
+  "图片需要人工核对画面及使用权": [
+    "Images require review of their content and usage rights.",
+    "Images require review of their content and usage rights."
+  ],
+  "外部来源与链接需要人工核查": [
+    "External sources and links require review.",
+    "External sources and links require review."
+  ],
+  "安装命令与可执行内容需要人工核查": [
+    "Installation commands and executable content require review.",
+    "Installation commands and executable content require review."
+  ],
+  "管理员已启用人工审核": [
+    "An administrator has enabled manual review.",
+    "An administrator has enabled manual review."
+  ],
+  "社区暂停新发布": [
+    "New publications are paused.",
+    "New publications are paused."
   ]
 }

@@ -31,7 +31,7 @@ try{
  assert.ok(communityNav);
  assert.deepEqual([...communityNav.matchAll(/data-nav-key="([^"]+)"/g)].map(match=>match[1]),['feed','members','following','bookmarks','posts','notifications','account']);
  for(const route of ['/workspace/blog','/workspace/library','/workspace/files'])assert.ok(!communityNav.includes(route),'Community navigation excludes '+route);
- for(const [locale,management] of [['en','Personal homepage management'],['zh','个人主页管理']]){
+ for(const [locale,management] of [['en','Blog home management'],['zh','博客主页管理']]){
   const headers={Cookie:member+'; site-locale='+locale};
   const directory=await(await fetch(base+'/blogs',{headers})).text();
   const activeHomepage=html=>[...html.matchAll(/<a\b[^>]*>/g)].map(match=>match[0]).find(tag=>tag.includes('href="/blogs"')&&tag.includes('class="is-active"'))||'';
@@ -58,6 +58,7 @@ try{
  let signals=(await get('/api/community/posts/'+postId,member)).data;assert.equal(signals.likeCount,1);assert.equal(signals.repostCount,1);assert.equal(signals.bookmarked,true);
  assert.equal((await get('/api/community/posts/'+postId)).data.bookmarked,false);assert.equal((await get('/api/community/bookmarks',member)).data.total,1);assert.equal((await get('/api/community/bookmarks',owner)).data.total,0);
  assert.equal((await call('/api/community/follows/'+user.id,{active:true},owner)).status,200);assert.ok((await get('/api/community/posts?feed=following',owner)).data.items.some(x=>x.id===postId));assert.equal((await get('/api/community/posts?feed=following')).status,401);
+ assert.equal((await call('/api/admin/catalog/settings',{mode:'manual'},owner)).status,200);
  let comment=(await call('/api/community/comments',{...ack,post:postId,body:'HTTP_PENDING_COMMENT 这是等待人工审核的测试评论。'},member)).data;
  assert.ok(comment.id);assert.equal((await get('/api/community/comments/'+postId)).data.total,0);assert.equal((await get('/api/community/comments/'+postId,member)).data.total,1);assert.equal((await get('/api/admin/community/comments',member)).status,403);
  assert.equal((await call('/api/admin/community/comments/'+comment.id,{action:'approve',version:comment.version,checked:true,reason:'已检查评论正文与关联分享，符合规则'},owner,'POST',{Origin:'https://foreign.example'})).status,403);

@@ -10606,5 +10606,21 @@
   "复制失败，请手动选择内容。": [
     "Copy failed. Please select the text and copy it manually.",
     "コピーできませんでした。テキストを選択して手動でコピーしてください。"
+  ],
+  "按 AI 工具筛选": [
+    "Filter by AI tool",
+    "AI ツールで絞り込む"
+  ],
+  "全部 AI 工具": [
+    "All AI tools",
+    "すべての AI ツール"
+  ],
+  "支持工具": [
+    "Works with",
+    "対応ツール"
+  ],
+  "工具标签对应本站已整理的安装方式；更多兼容性请查看详情或原项目。": [
+    "Tool labels reflect the setup instructions documented here. See each detail page or upstream project for further compatibility.",
+    "ツールの表示は当サイトで整理した導入方法に基づいています。その他の互換性は詳細ページまたは元のプロジェクトを確認してください。"
   ]
 }

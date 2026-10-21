@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {curatedSkills,skillCategories,skillFilters,filterSkills,skillFilterHref} from '../src/lib/skill-catalog.mjs';
+import {curatedSkills,skillAiTools,skillCategories,skillFilters,filterSkills,skillFilterHref} from '../src/lib/skill-catalog.mjs';
 import {translate} from '../src/lib/i18n.mjs';
 import {getSkillDetail,skillDetailContent} from '../src/lib/skill-details.mjs';
 import {skillUsage} from '../src/lib/skill-usage.mjs';
@@ -32,12 +32,15 @@ test('search combines category and multilingual names, purposes, formats and ups
 });
 
 test('filters normalize untrusted URL parameters and preserve searches when changing categories',()=>{
- assert.deepEqual(skillFilters({type:['design'],q:['bad']}),{category:'all',q:''});
- assert.deepEqual(skillFilters({type:'unknown',q:'  PDF  '}),{category:'all',q:'PDF'});
+ assert.deepEqual(skillFilters({type:['design'],q:['bad']}),{category:'all',q:'',tool:'all'});
+ assert.deepEqual(skillFilters({type:'unknown',q:'  PDF  '}),{category:'all',q:'PDF',tool:'all'});
  assert.equal(skillFilters({q:'x'.repeat(130)}).q.length,120);
- const href=skillFilterHref('design','UI & <design>');
+ assert.deepEqual(skillFilters({tool:['codex']}),{category:'all',q:'',tool:'all'});
+ assert.equal(skillFilters({tool:'unlisted-tool'}).tool,'all');
+ const href=skillFilterHref('design','UI & <design>','codex');
  const params=new URL(href,'https://example.test').searchParams;
- assert.equal(params.get('type'),'design');assert.equal(params.get('q'),'UI & <design>');
+ assert.equal(params.get('type'),'design');assert.equal(params.get('q'),'UI & <design>');assert.equal(params.get('tool'),'codex');
+ assert.deepEqual(skillFilters(Object.fromEntries(params)),{category:'design',q:'UI & <design>',tool:'codex'});
  assert.equal(skillFilterHref('all',''),'/skills');
 });
 
@@ -94,4 +97,20 @@ test('all skills have distinct practical examples and complete localized prompts
   allPrompts.push(...detail.prompts.map(prompt=>prompt.text));
  }
  assert.equal(new Set(allPrompts).size,allPrompts.length);
+});
+
+
+test('tool filters combine with tasks and search, and reflect documented setup paths without duplicate Codex variants',()=>{
+ assert.equal(skillAiTools.length,7);
+ assert.deepEqual(Object.fromEntries(skillAiTools.map(tool=>[tool.id,filterSkills({tool:tool.id}).length])),{codex:8,'claude-code':16,cursor:6,'gemini-cli':4,opencode:2,'claude-ai':8,'claude-api':8});
+ assert.deepEqual(filterSkills({tool:'codex',category:'design',q:'UI'}).map(skill=>skill.id),['impeccable','ui-ux-pro-max']);
+ assert.deepEqual(filterSkills({tool:'codex',category:'documents'}),[]);
+ assert.deepEqual(filterSkills({q:'Cursor'}).map(skill=>skill.id),filterSkills({tool:'cursor'}).map(skill=>skill.id));
+ assert.deepEqual(filterSkills({q:'Claude.ai',category:'documents'}).map(skill=>skill.id),['docx','pdf','pptx','xlsx']);
+ for(const skill of curatedSkills){
+  const labels=getSkillDetail(skill.id).installation.methods.map(method=>method.label.replace(/^Codex(?: App| CLI)?$/,'Codex'));
+  assert.deepEqual(new Set(skill.tools.map(tool=>tool.label)),new Set(labels),skill.id);
+  assert.equal(skill.tools.length,new Set(skill.tools.map(tool=>tool.id)).size,skill.id+': distinct tools');
+ }
+ for(const locale of ['en','ja'])for(const label of ['按 AI 工具筛选','全部 AI 工具','支持工具','工具标签对应本站已整理的安装方式；更多兼容性请查看详情或原项目。'])assert.notEqual(translate(locale,label),label);
 });

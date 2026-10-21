@@ -49,7 +49,7 @@ A profile-first page for your introduction, skills, experience and work.
 | Content and files | Edit projects, articles and resources in account-isolated workspaces; manage drafts, versions, images, attachments and file references |
 | Sharing & community profiles | Copy a public link, share with the system sheet or download a QR code; community profiles show a short introduction and link to the full personal homepage |
 | Developer community | Browse posts, discover members, follow, like, bookmark, repost and comment; submissions are reviewed before publication |
-| Skill directory | Discover 16 GitHub Agent Skills across engineering, design, testing, documents, knowledge management and agent extensions; search by task, filter by type, open detailed features, use cases and supported AI tools, and copy tool-specific installation commands and ready-to-use prompts, with practical input-to-output examples |
+| Skill directory | Discover 16 GitHub Agent Skills across engineering, design, testing, documents, knowledge management and agent extensions; search by task, filter by type and AI tool (including Codex, Claude Code and Cursor), see supported tools beside every Skill, read detailed features and use cases, and copy tool-specific installation commands and ready-to-use prompts, with practical input-to-output examples |
 | Administration | Role-based content review, reports, notifications, traffic statistics and audit logs for owners, reviewers and members |
 | Tool integration | Connect to the website workspace through a submission Skill and local MCP integration, with scoped access to content and drafts |
 

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {curatedSkills} from '../src/lib/skill-catalog.mjs';
+import {curatedSkills,skillAiTools,filterSkills} from '../src/lib/skill-catalog.mjs';
 import {getSkillDetail} from '../src/lib/skill-details.mjs';
 import {translate} from '../src/lib/i18n.mjs';
 
@@ -19,11 +19,26 @@ for(const locale of ['zh','en','ja'])for(const skill of curatedSkills){
  for(const prompt of usage.prompts)assert.ok(html.includes(translate(locale,prompt.text)),skill.id+': localized prompt');
  pages++;
 }
-const filtered=await(await fetch(base+'/skills?type=design&q=UI',{headers:{cookie:'site-locale=en'}})).text();
-assert.ok(filtered.includes('/skills/ui-ux-pro-max?type=design&amp;q=UI'));
-const detail=await(await fetch(base+'/skills/ui-ux-pro-max?type=design&q=UI',{headers:{cookie:'site-locale=en'}})).text();
-assert.ok(detail.includes('href="/skills?type=design&amp;q=UI"'));
+const filtered=await(await fetch(base+'/skills?type=design&q=UI&tool=codex',{headers:{cookie:'site-locale=en'}})).text();
+assert.ok(filtered.includes('/skills/ui-ux-pro-max?type=design&amp;q=UI&amp;tool=codex'));
+const detail=await(await fetch(base+'/skills/ui-ux-pro-max?type=design&q=UI&tool=codex',{headers:{cookie:'site-locale=en'}})).text();
+assert.ok(detail.includes('href="/skills?type=design&amp;q=UI&amp;tool=codex"'));
+let toolLists=0;
+for(const locale of ['zh','en','ja'])for(const tool of skillAiTools){
+ const response=await fetch(base+'/skills?tool='+tool.id,{headers:{cookie:'site-locale='+locale}}),html=await response.text();
+ assert.equal(response.status,200);
+ const entries=[...html.matchAll(/<li class="skill-entry">([\s\S]*?)<div class="skill-entry-links">/g)];
+ assert.equal(entries.length,filterSkills({tool:tool.id}).length,locale+': '+tool.id);
+ for(const [,entry] of entries)assert.ok(entry.includes('data-selected="true">'+tool.label+'</li>'),tool.id+': selected badge');
+ assert.ok(html.includes(translate(locale,'按 AI 工具筛选')));
+ assert.ok(html.includes('name="tool"'));
+ assert.ok(html.includes('/skills?type=design&amp;tool='+tool.id),tool.id+': category link');
+ toolLists++;
+}
+const empty=await(await fetch(base+'/skills?type=documents&tool=codex',{headers:{cookie:'site-locale=en'}})).text();
+assert.ok(empty.includes(translate('en','没有找到匹配的 Skill')));
+assert.ok(empty.includes('href="/skills"'));
 const sitemap=await(await fetch(base+'/sitemap.xml')).text();
 for(const skill of curatedSkills)assert.ok(sitemap.includes('/skills/'+skill.id+'</loc>'));
 const missing=await fetch(base+'/skills/no-such-skill');assert.equal(missing.status,404);
-console.log(JSON.stringify({detailPages:pages,locales:3,filtersPreserved:true,sitemap:true,notFound:true}));
+console.log(JSON.stringify({detailPages:pages,toolLists,locales:3,filtersPreserved:true,sitemap:true,notFound:true}));

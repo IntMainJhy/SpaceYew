@@ -1,5 +1,7 @@
 // Editorial directory: original summaries and links only; upstream skills are not bundled.
 // Checked against each project's README, skill definition and license on this date.
+import {skillAiTools,skillSupportedTools} from './skill-installations.mjs';
+export {skillAiTools};
 export const skillCatalogVerifiedAt='2026-10-21';
 export const skillCategories=[
  {id:'engineering',label:'开发工程',description:'组件架构、代码质量与性能。'},
@@ -23,7 +25,8 @@ export const skillCategories=[
  */
 function entry(id,name,category,repo,skillPath,summary,tags,license,licensePath){
  const root='https://github.com/'+repo;
- return {id,name,category,repo,summary,tags,license,sourceUrl:root+'/blob/main/'+skillPath,installUrl:root+'#installation',licenseUrl:root+'/blob/main/'+licensePath};
+ const skill={id,name,category,repo,summary,tags,license,sourceUrl:root+'/blob/main/'+skillPath,installUrl:root+'#installation',licenseUrl:root+'/blob/main/'+licensePath};
+ return {...skill,tools:skillSupportedTools(skill)};
 }
 const anthropic=(id,name,category,summary,tags,proprietary=false)=>({...entry(id,name,category,'anthropics/skills','skills/'+id+'/SKILL.md',summary,tags,proprietary?'专有条款':'Apache-2.0','skills/'+id+'/LICENSE.txt'),installUrl:'https://github.com/anthropics/skills#try-in-claude-code-claudeai-and-the-api'});
 
@@ -48,18 +51,20 @@ export const curatedSkills=[
 
 export function skillFilters(query={}){
  const category=typeof query.type==='string'&&skillCategories.some(item=>item.id===query.type)?query.type:'all';
- return {category,q:typeof query.q==='string'?query.q.trim().slice(0,120):''};
+ const tool=typeof query.tool==='string'&&skillAiTools.some(item=>item.id===query.tool)?query.tool:'all';
+ return {category,q:typeof query.q==='string'?query.q.trim().slice(0,120):'',tool};
 }
-export function filterSkills({category='all',q=''}={},translate=text=>text){
+export function filterSkills({category='all',q='',tool='all'}={},translate=text=>text){
  const terms=q.normalize('NFKC').toLocaleLowerCase().split(/\s+/).filter(Boolean);
  return curatedSkills.filter(skill=>{
   if(category!=='all'&&skill.category!==category)return false;
+  if(tool!=='all'&&!skill.tools.some(item=>item.id===tool))return false;
   const categoryLabel=skillCategories.find(item=>item.id===skill.category)?.label||'';
-  const haystack=[skill.name,skill.id,skill.repo,skill.summary,translate(skill.summary),categoryLabel,translate(categoryLabel),...skill.tags].join(' ').normalize('NFKC').toLocaleLowerCase();
+  const haystack=[skill.name,skill.id,skill.repo,skill.summary,translate(skill.summary),categoryLabel,translate(categoryLabel),...skill.tags,...skill.tools.map(item=>item.label)].join(' ').normalize('NFKC').toLocaleLowerCase();
   return terms.every(term=>haystack.includes(term));
  });
 }
-export function skillFilterHref(category='all',q=''){
- const params=new URLSearchParams();if(category!=='all')params.set('type',category);if(q)params.set('q',q);
+export function skillFilterHref(category='all',q='',tool='all'){
+ const params=new URLSearchParams();if(category!=='all')params.set('type',category);if(q)params.set('q',q);if(tool!=='all')params.set('tool',tool);
  return '/skills'+(params.size?'?'+params.toString():'');
 }

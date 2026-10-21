@@ -84,6 +84,8 @@ export async function PlatformHome({req}:{req:Request}){
       </section>
     </div>
 
+    <section className="home-learning" aria-labelledby="home-learning-title"><div className="learning-section-heading"><h2 id="home-learning-title">{t('从这里，继续探索。')}</h2><Link className="space-link" href="/resources">{t('浏览其他资源')}</Link></div><div className="home-learning-links"><Link href="/docs"><h3>{t('文档')}</h3><p>{t('使用指南、教程与开发手记。')}</p><span>{t('开始阅读')} →</span></Link><Link href="/skills"><h3>Skill</h3><p>{t('让 AI 工具协助整理与投稿。')}</p><span>{t('探索 Skill')} →</span></Link></div></section>
+
     <section className="platform-showcases" aria-labelledby="public-showcases-heading"><div className="product-section-heading"><div><h2 id="public-showcases-heading">{t('每个展板，都是一种表达。')}</h2></div><Link className="space-link" href="/showcases">{t('发现更多展板')}</Link></div><ShowcaseGrid spaces={spaces} locale={locale} t={t}/></section>
 
     <section className="product-invitation" aria-labelledby="product-invitation-title"><h2 id="product-invitation-title">{t('下一份值得被看见的，')}<span>{t('是你的创造。')}</span></h2><div className="space-actions"><Link className="space-btn primary" href={studioHref}>{t('开始我的展板')}</Link><Link className="space-link" href="/community">{t('先逛逛社区')}</Link></div></section>

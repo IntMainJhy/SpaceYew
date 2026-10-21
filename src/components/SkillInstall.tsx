@@ -4,10 +4,10 @@ import {useEffect,useRef,useState} from 'react';
 import {useLocale} from './LocaleProvider';
 import {mountSkillTypewriter,skillInstallCommand} from '@/lib/skill-install.mjs';
 
-export function SkillInstall({baseUrl}:{baseUrl:string}){
+export function SkillInstall({baseUrl,animated=true}:{baseUrl:string;animated?:boolean}){
  const {t}=useLocale(),[status,setStatus]=useState<'idle'|'copied'|'error'>('idle');
  const [reading,setReading]=useState(false),root=useRef<HTMLDivElement>(null),typed=useRef<HTMLSpanElement>(null);
- const command=skillInstallCommand(baseUrl),stopped=reading||status==='error';
+ const command=skillInstallCommand(baseUrl),stopped=!animated||reading||status==='error';
  useEffect(()=>{
   if(!root.current||!typed.current)return;
   if(stopped){typed.current.textContent=command;return;}

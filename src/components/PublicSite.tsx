@@ -168,7 +168,7 @@ async function Collection({type, projects, articles, resources, taxonomy, query}
   const pageUrl = (n: number) => '?' + new URLSearchParams({q, category, tag, type: resourceType, page: String(n)});
   const [title, emphasis] = type === 'projects' ? ['项目与作品，', '把想法落在实处。'] : type === 'articles' ? ['随手记下，', '让思考慢慢扎根。'] : ['好用的资源，', '也想分享给你。'];
   return <div className={'catalog-page catalog-'+type}>
-    <header className="organic-page-heading"><h1>{tr(title)}<em>{tr(emphasis)}</em></h1></header>
+    <header className="organic-page-heading"><h1>{tr(title)}<em>{tr(emphasis)}</em></h1>{type==='resources'&&<><p>{tr('工具、模板、素材与实用网站，集中收在这里。')}</p><nav className="resource-shortcuts" aria-label={tr('资源入口')}><Link href="/docs">{tr('教程与文档')}<Icon name="link"/></Link><Link href="/skills">Skill<Icon name="link"/></Link></nav></>}</header>
     <Form key={'filters:'+pageUrl(1)} className="organic-filters" action={'/'+type}>
       <div className="organic-search-field"><Icon name="search"/><label className="organic-visually-hidden" htmlFor="public-search">{tr("搜索内容")}</label><input className={input} id="public-search" name="q" placeholder={type === 'resources' ? tr("找找资源名称、用途或关键词") : tr("搜索标题或摘要")} defaultValue={q}/></div>
       <div className="organic-filter-row"><label className="organic-visually-hidden" htmlFor="public-category">{tr("分类")}</label><select className={input} id="public-category" name="category" defaultValue={category}><option value="">{tr("全部分类")}</option>{taxonomy.categories.map((x: string) => <option key={x} value={x}>{tr(x)}</option>)}</select>
@@ -186,7 +186,6 @@ export async function PublicSite({path = [], query = {}}: {path?: string[], quer
   const profile = localizeProfile(getConfig('profile'),locale), site = getConfig('site'), taxonomy = getConfig('taxonomy');
   const current = '/' + path.join('/'), section = path[0] || '';
   const projects = (publicContent('projects') as Doc[]).map(item=>localizeContent(item,locale)).sort((a, b) => a.order - b.order), articles = (publicContent('articles') as Doc[]).map(item=>localizeContent(item,locale)), resources = (publicContent('resources') as Doc[]).map(item=>localizeContent(item,locale));
-  const nav = [['/', '首页'], ['/projects', '作品'], ['/articles', '手记'], ['/resources', '资源'], ['/about', '关于']];
   let body;
   if (!section) body = <Home profile={profile} projects={projects} articles={articles} resources={resources}/>;
   else if (section === 'about' && path.length === 1) body = <About profile={profile}/>;
@@ -198,19 +197,19 @@ export async function PublicSite({path = [], query = {}}: {path?: string[], quer
 }
 export async function PublicFrame({path=[],children}:{path?:string[],children:React.ReactNode}){const {t:tr,locale}=await serverI18n();
   const section=path[0]||'',current='/'+path.join('/');
-  const nav=[['/','首页'],['/community','社区'],['/showcases','发现展板'],['/downloads','下载']];
-  const active = (href: string) => href === '/' ? !section : current.startsWith(href);
+  const nav=[['/','首页'],['/community','社区'],['/docs','文档'],['/skills','Skill'],['/resources','资源']];
+  const active = (href: string) => href === '/' ? !section : current===href||current.startsWith(href+'/')||href==='/docs'&&section==='articles';
   const authPage=section==='login'||section==='join';
   return <div className={'organic-site'+(authPage?' public-auth-site':path.length?' public-content-site':'')}>
     <HomeFlowBackground interactive={!path.length}/>
     <a className="organic-skip" href="#main">{tr("跳到主要内容")}</a><Tracker/>
     <header className="organic-header"><div className="organic-container organic-header-inner"><Link href="/" className="organic-brand">SpaceYew<span>{tr('社区与个人展板')}</span></Link>
       <div className="organic-header-tools">
-      <nav className="organic-desktop-nav" aria-label={tr("主导航")}>{nav.map(([href, label]) => <Link href={href} className={active(href) ? 'is-active' : ''} aria-current={current === href ? 'page' : active(href) ? 'location' : undefined} key={href}>{tr(label)}</Link>)}<Link className="organic-career-nav" href="/my-space">{tr('我的展板')}</Link><AuthNav/></nav>
-      <details className="organic-mobile-menu" name="site-tools"><summary aria-label={tr("菜单")}><span className="organic-menu-label">{tr("菜单")}</span><span aria-hidden="true"><i/><i/></span></summary><nav aria-label={tr("手机导航")}>{nav.map(([href, label]) => <Link href={href} aria-current={active(href) ? 'page' : undefined} key={href}>{tr(label)}</Link>)}<Link href="/my-space">{tr('我的展板')}</Link><AuthNav mobile/></nav></details>
+      <nav className="organic-desktop-nav" aria-label={tr("主导航")}>{nav.map(([href, label]) => <Link href={href} className={active(href) ? 'is-active' : ''} aria-current={current === href ? 'page' : active(href) ? 'location' : undefined} key={href}>{tr(label)}</Link>)}<AuthNav/></nav>
+      <details className="organic-mobile-menu" name="site-tools"><summary aria-label={tr("菜单")}><span className="organic-menu-label">{tr("菜单")}</span><span aria-hidden="true"><i/><i/></span></summary><nav aria-label={tr("手机导航")}>{nav.map(([href, label]) => <Link href={href} aria-current={active(href) ? 'page' : undefined} key={href}>{tr(label)}</Link>)}<AuthNav mobile/></nav></details>
       <SiteTools/></div>
     </div></header>
     <main id="main" className="organic-container organic-main"><PageMotion>{children}</PageMotion></main>
-    <footer className="organic-footer organic-footer-compact"><div className="organic-container"><Link href="/" className="organic-footer-signature">SpaceYew</Link><nav aria-label={tr("页脚导航")}><Link href="/legal/community">{tr("社区规则")}</Link><Link href="/legal/terms">{tr("用户协议")}</Link><Link href="/legal/privacy">{tr("隐私政策")}</Link><Link href="/report">{tr("举报投诉")}</Link>{appSurface()!=='platform'&&<Link href="/admin">{tr("内容管理")}</Link>}</nav></div><div className="organic-container organic-footer-filing"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">蜀ICP备2026018870号-2</a></div></footer>
+    <footer className="organic-footer organic-footer-compact"><div className="organic-container"><Link href="/" className="organic-footer-signature">SpaceYew</Link><nav aria-label={tr("页脚导航")}><Link href="/downloads">{tr("客户端下载")}</Link><Link href="/showcases">{tr("发现展板")}</Link><Link href="/legal/community">{tr("社区规则")}</Link><Link href="/legal/terms">{tr("用户协议")}</Link><Link href="/legal/privacy">{tr("隐私政策")}</Link><Link href="/report">{tr("举报投诉")}</Link>{appSurface()!=='platform'&&<Link href="/admin">{tr("内容管理")}</Link>}</nav></div><div className="organic-container organic-footer-filing"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">蜀ICP备2026018870号-2</a></div></footer>
   </div>;
 }

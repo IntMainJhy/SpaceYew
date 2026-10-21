@@ -528,7 +528,7 @@
     "緊急のリスクを優先し、非公開資料を保護し、判断の根拠を説明してください。"
   ],
   "先看看社区": [
-    "Browse the community",
+    "Explore the community",
     "コミュニティを見る"
   ],
   "先确认昵称与本地测试资格，再开放投稿；角色与站长权限分开。": [
@@ -904,8 +904,8 @@
     "プロフィール設定で画像を変更"
   ],
   "前往登录": [
-    "Sign in",
-    "ログイン"
+    "Go to sign in",
+    "ログインへ"
   ],
   "前往社区审核": [
     "Open community review",
@@ -4017,7 +4017,7 @@
   ],
   "阅读社区规则": [
     "Read community rules",
-    "コミュニティ規則を読む"
+    "コミュニティルールを読む"
   ],
   "附件": [
     "Attachment",
@@ -6352,8 +6352,8 @@
     "自分のライブラリ"
   ],
   "打开展板编辑器": [
-    "Open showcase studio",
-    "ショーケース編集を開く"
+    "Open board editor",
+    "ボードエディターを開く"
   ],
   "技能，用逗号分隔": [
     "Skills, separated by commas",
@@ -6836,7 +6836,7 @@
     "公開したい情報だけを入力してください。ログイン用メールは自動的に表示されません。"
   ],
   "进入社区": [
-    "Join the conversation",
+    "Visit the community",
     "コミュニティへ"
   ],
   "选择一张图片": [
@@ -8390,5 +8390,329 @@
   "注册暂未开放": [
     "Registration is not available yet.",
     "新規登録はまだ利用できません。"
+  ],
+  "文档": [
+    "Docs",
+    "ドキュメント"
+  ],
+  "文档导航": [
+    "Documentation navigation",
+    "ドキュメントナビゲーション"
+  ],
+  "文档总览": [
+    "Documentation overview",
+    "ドキュメント一覧"
+  ],
+  "开始使用 SpaceYew": [
+    "Get started with SpaceYew",
+    "SpaceYew を使い始める"
+  ],
+  "从登录账号到找到自己的工作台。": [
+    "Sign in and find your workspace.",
+    "ログインして自分のワークスペースを開きます。"
+  ],
+  "登录你的账号": [
+    "Sign in to your account",
+    "アカウントにログイン"
+  ],
+  "使用已有的网站账号或已验证邮箱和密码登录。邀请注册是否开放，以登录页面显示为准。": [
+    "Use your existing website account or verified email and password. Check the sign-in page for invitation registration availability.",
+    "既存のアカウントまたは確認済みメールアドレスとパスワードでログインします。招待登録の受付状況はログイン画面で確認してください。"
+  ],
+  "找到你的工作台": [
+    "Find your workspace",
+    "ワークスペースを開く"
+  ],
+  "登录后，从顶部的“我的工作台”进入。你的展板、内容库、文件和账号设置都在这里。": [
+    "After signing in, choose My workspace in the header. Your board, library, files and account settings are all there.",
+    "ログイン後、ヘッダーの「マイワークスペース」を開きます。ボード、ライブラリ、ファイル、アカウント設定を管理できます。"
+  ],
+  "打开工作台": [
+    "Open workspace",
+    "ワークスペースを開く"
+  ],
+  "选择下一步": [
+    "Choose your next step",
+    "次のステップを選ぶ"
+  ],
+  "想展示作品，从个人展板开始；想交流发现，去社区看看。也可以先在内容库保存一份草稿。": [
+    "Build a board to show your work, visit the community to exchange ideas, or save a draft in your library.",
+    "作品を紹介するなら個人ボードを作り、発見を共有するならコミュニティへ。まずライブラリに下書きを保存することもできます。"
+  ],
+  "学习搭建展板": [
+    "Learn to build a board",
+    "ボードの作り方を見る"
+  ],
+  "搭建个人展板": [
+    "Build your personal board",
+    "個人ボードを作る"
+  ],
+  "整理资料、添加内容，预览后再提交公开。": [
+    "Add your profile and content, then preview before submitting for publication.",
+    "プロフィールとコンテンツを整理し、プレビューしてから公開審査へ提出します。"
+  ],
+  "完善资料与经历": [
+    "Add your profile and experience",
+    "プロフィールと経歴を整える"
+  ],
+  "填写愿意公开的昵称、介绍、技能和经历。登录邮箱与公开联系邮箱分开管理。": [
+    "Add the name, introduction, skills and experience you want to share. Your sign-in email is separate from your public contact email.",
+    "公開したい名前、紹介文、スキル、経歴を入力します。ログイン用メールと公開連絡先は別に管理されます。"
+  ],
+  "整理自己的内容": [
+    "Organize your content",
+    "コンテンツを整理する"
+  ],
+  "在内容库添加项目、文章或资源，写清楚本人贡献、来源和使用许可。保存草稿后，可继续修改。": [
+    "Add projects, articles or resources to your library. Describe your contribution, sources and permissions. Saved drafts remain editable.",
+    "ライブラリにプロジェクト、記事、リソースを追加し、自分の貢献、出典、利用許諾を明記します。保存した下書きは引き続き編集できます。"
+  ],
+  "打开内容库": [
+    "Open library",
+    "ライブラリを開く"
+  ],
+  "编排并预览展板": [
+    "Arrange and preview your board",
+    "ボードを配置してプレビュー"
+  ],
+  "在展板编辑器中选择模块或自由画布，调整内容和布局，检查桌面与手机预览。": [
+    "Choose modules or a freeform canvas in the board editor. Arrange your content and check desktop and mobile previews.",
+    "ボードエディターでモジュールまたは自由配置キャンバスを選び、内容とレイアウトを調整して、デスクトップとモバイル表示を確認します。"
+  ],
+  "提交审核后公开": [
+    "Submit for publication review",
+    "公開審査に提出する"
+  ],
+  "保存与公开是两个步骤。检查公开资料和内容后提交审核，通过后才会出现在公开展板中。": [
+    "Saving and publishing are separate steps. Check the profile and content, then submit for review. They appear on the public board after approval.",
+    "保存と公開は別の操作です。公開するプロフィールと内容を確認して審査に提出し、承認後に公開ボードへ反映されます。"
+  ],
+  "预览我的展板": [
+    "Preview my board",
+    "ボードをプレビュー"
+  ],
+  "在社区分享内容": [
+    "Share in the community",
+    "コミュニティで共有する"
+  ],
+  "写清来源与使用范围，让分享更容易被理解。": [
+    "Make your sources and permissions clear so others can understand your work.",
+    "出典と利用範囲を明記して、内容が伝わる共有にしましょう。"
+  ],
+  "浏览已公开的分享，按分类查找内容，也可以从成员主页了解作者。": [
+    "Browse published posts, explore categories and visit member profiles to learn about their authors.",
+    "公開された投稿を読み、カテゴリーから内容を探したり、メンバーページで作者を知ることができます。"
+  ],
+  "写一份有用的分享": [
+    "Write a useful post",
+    "役立つ投稿を書く"
+  ],
+  "填写标题、摘要和正文，补齐来源、目标链接与许可依据。先保存草稿，检查后再提交。": [
+    "Write a title, summary and body. Add sources, destination links and permission details. Save a draft and check it before submitting.",
+    "タイトル、概要、本文を入力し、出典、リンク、許諾の根拠を追加します。下書きを保存し、確認してから提出してください。"
+  ],
+  "确认规则并提交": [
+    "Review the rules and submit",
+    "ルールを確認して提出"
+  ],
+  "提交前阅读当前规则，确认来源和分享权限。提交后进入审核，未通过的内容可根据反馈修改。": [
+    "Read the current rules and check your sources and sharing rights. Submissions enter review; use feedback to revise anything that is not approved.",
+    "現行ルールを読み、出典と共有権限を確認します。提出後は審査に進み、不承認の場合はフィードバックに沿って修正できます。"
+  ],
+  "查看处理进度": [
+    "Check progress",
+    "進捗を確認する"
+  ],
+  "在“我的投稿”查看草稿、待审与公开版本。修改已公开内容时，新的版本仍需审核。": [
+    "My submissions shows drafts, pending reviews and published versions. Edits to published content also require review.",
+    "「自分の投稿」で下書き、審査待ち、公開済みのバージョンを確認できます。公開済みコンテンツの更新にも審査が必要です。"
+  ],
+  "查看我的投稿": [
+    "View my submissions",
+    "自分の投稿を見る"
+  ],
+  "使用桌面客户端": [
+    "Use the desktop client",
+    "デスクトップアプリを使う"
+  ],
+  "了解安装入口、服务连接与账号登录。": [
+    "Find downloads and learn how to connect and sign in.",
+    "ダウンロード、接続先の設定、ログイン方法を確認します。"
+  ],
+  "获取对应系统的客户端": [
+    "Get the client for your system",
+    "OS に合うアプリを入手"
+  ],
+  "在下载页查看 macOS 与 Windows 的可用版本。尚未提供安装包时，可以继续使用网页版。": [
+    "Check the downloads page for available macOS and Windows releases. Use the website when an installer is not yet available.",
+    "ダウンロードページで macOS と Windows の提供状況を確認できます。インストーラーが未提供の場合は Web 版を利用してください。"
+  ],
+  "查看客户端下载": [
+    "View desktop downloads",
+    "アプリのダウンロードを見る"
+  ],
+  "连接同一个网站服务": [
+    "Connect to the same website service",
+    "同じ Web サービスに接続"
+  ],
+  "在客户端的连接设置中填写你正在使用的网站地址。网站和客户端必须连接同一套服务，才能共用账号和内容。": [
+    "Enter your website address in the client connection settings. The website and client must use the same service to share accounts and content.",
+    "アプリの接続設定に利用中のサイトアドレスを入力します。アカウントと内容を共有するには、サイトとアプリを同じサービスに接続してください。"
+  ],
+  "使用网站账号登录": [
+    "Sign in with your website account",
+    "サイトのアカウントでログイン"
+  ],
+  "输入网站已有账号和密码。客户端会校验真实密码，不接受任意填写的体验登录；每次启动都需要登录。": [
+    "Enter your existing website account and password. The client verifies the stored password and does not accept arbitrary preview credentials. Sign in on every launch.",
+    "既存のサイトアカウントとパスワードを入力します。アプリは実際のパスワードを検証し、任意の体験用入力は受け付けません。起動ごとにログインが必要です。"
+  ],
+  "找不到账号或无法连接": [
+    "Account or connection problems",
+    "アカウントや接続の問題"
+  ],
+  "先检查服务地址与网络，再确认该服务是否支持客户端登录。本地服务只在运行时可连接；本地与线上服务的账号不会自动互通。": [
+    "Check the service address and network, then confirm the service supports client sign-in. A local service must be running to connect. Local and online accounts do not sync automatically.",
+    "接続先アドレスとネットワークを確認し、そのサービスがアプリのログインに対応しているか確認してください。ローカルサービスは起動中のみ接続でき、ローカルとオンラインのアカウントは自動同期されません。"
+  ],
+  "探索 Skill": [
+    "Explore Skills",
+    "Skill を見る"
+  ],
+  "浏览其他资源": [
+    "Browse more resources",
+    "その他のリソースを見る"
+  ],
+  "从第一步到进阶使用，把方法写清楚。": [
+    "Clear guides, from your first steps to advanced workflows.",
+    "最初の一歩から応用まで、使い方をわかりやすく。"
+  ],
+  "使用指南": [
+    "User guides",
+    "使い方ガイド"
+  ],
+  "教程与开发手记": [
+    "Tutorials and development notes",
+    "チュートリアルと開発ノート"
+  ],
+  "查看全部文章": [
+    "View all articles",
+    "すべての記事を見る"
+  ],
+  "教程正在整理中，可以先从使用指南开始。": [
+    "Tutorials are on the way. Start with the user guides.",
+    "チュートリアルは準備中です。まず使い方ガイドをご覧ください。"
+  ],
+  "让工具接入你的工作流": [
+    "Connect tools to your workflow",
+    "ツールをワークフローにつなぐ"
+  ],
+  "了解 API、工具授权与本地 MCP 桥接。": [
+    "Learn about the API, tool credentials and local MCP bridge.",
+    "API、ツール認可、ローカル MCP ブリッジについて確認します。"
+  ],
+  "阅读接入文档": [
+    "Read integration docs",
+    "連携ドキュメントを読む"
+  ],
+  "继续阅读": [
+    "Keep reading",
+    "続きを読む"
+  ],
+  "返回文档总览": [
+    "Back to documentation",
+    "ドキュメント一覧へ戻る"
+  ],
+  "把重复的整理，交给熟悉你工作流的工具。": [
+    "Give routine organizing to tools that understand your workflow.",
+    "繰り返す整理作業を、ワークフローを理解するツールに。"
+  ],
+  "让支持 Skill 的 AI 工具，把你的项目、文章和资源整理成 SpaceYew 草稿。": [
+    "Use a Skill-compatible AI tool to turn your projects, articles and resources into SpaceYew drafts.",
+    "Skill 対応の AI ツールで、プロジェクト、記事、リソースを SpaceYew の下書きに整理します。"
+  ],
+  "默认保存草稿；只有明确确认后才提交审核，不会直接公开。": [
+    "Saves drafts by default. Submission requires explicit confirmation and review before publication.",
+    "標準では下書きとして保存します。公開には明示的な提出確認と審査が必要です。"
+  ],
+  "下载 Skill": [
+    "Download Skill",
+    "Skill をダウンロード"
+  ],
+  "安装到本地工具": [
+    "Install for your local tools",
+    "ローカルツールにインストール"
+  ],
+  "安装后，在你的工具私密配置中设置网站地址和独立授权凭据。": [
+    "After installation, add the website URL and a separate scoped credential to your tool’s private configuration.",
+    "インストール後、ツールの非公開設定にサイト URL と専用の認可情報を追加してください。"
+  ],
+  "从想法到一份可修改的草稿": [
+    "From an idea to an editable draft",
+    "アイデアを編集できる下書きに"
+  ],
+  "说明要整理什么": [
+    "Describe what to organize",
+    "整理したい内容を伝える"
+  ],
+  "提供自己的项目、文章或资源资料，并选择内容库或社区投稿。": [
+    "Provide your project, article or resource material and choose your library or community submissions.",
+    "自分のプロジェクト、記事、リソースの資料を渡し、ライブラリまたはコミュニティ投稿を選びます。"
+  ],
+  "保存并检查草稿": [
+    "Save and check the draft",
+    "下書きを保存して確認"
+  ],
+  "工具使用当前账号的授权保存草稿，你仍可以在工作台中检查和修改。": [
+    "The tool saves a draft using your account’s authorization. Review and edit it in your workspace.",
+    "ツールは現在のアカウントの権限で下書きを保存します。ワークスペースで確認して編集できます。"
+  ],
+  "确认后再提交": [
+    "Confirm before submitting",
+    "確認してから提出"
+  ],
+  "需要公开时，明确确认提交审核。审核流程与手动投稿一致。": [
+    "When you want to publish, explicitly confirm submission for review. The same review process applies as for manual submissions.",
+    "公開したい場合は、審査への提出を明示的に確認します。手動投稿と同じ審査が適用されます。"
+  ],
+  "第一次使用？从这里开始": [
+    "New here? Start here",
+    "初めての方はこちら"
+  ],
+  "教程、使用指南与工具接入。": [
+    "Tutorials, user guides and tool integrations.",
+    "チュートリアル、使い方ガイド、ツール連携。"
+  ],
+  "工具、模板、素材与实用网站，集中收在这里。": [
+    "Tools, templates, assets and useful websites, collected in one place.",
+    "ツール、テンプレート、素材、便利なサイトをまとめました。"
+  ],
+  "资源入口": [
+    "Resource navigation",
+    "リソースナビゲーション"
+  ],
+  "教程与文档": [
+    "Tutorials and docs",
+    "チュートリアルとドキュメント"
+  ],
+  "客户端下载": [
+    "Desktop downloads",
+    "デスクトップアプリ"
+  ],
+  "从这里，继续探索。": [
+    "Keep exploring.",
+    "ここから、さらに探そう。"
+  ],
+  "使用指南、教程与开发手记。": [
+    "User guides, tutorials and development notes.",
+    "使い方ガイド、チュートリアル、開発ノート。"
+  ],
+  "开始阅读": [
+    "Start reading",
+    "読み始める"
+  ],
+  "让 AI 工具协助整理与投稿。": [
+    "Let AI tools help organize and submit your work.",
+    "AI ツールで整理や投稿を進めましょう。"
   ]
 }

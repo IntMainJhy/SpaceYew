@@ -14,7 +14,7 @@ This repository contains the website's frontend, backend, tests and deployment e
 
 ## Preview
 
-Screenshots of the English web interface in a local demo environment. Sample member names and posts remain in their original language. The website also supports Simplified Chinese and Japanese.
+Screenshots of the English interface with English sample posts and fictional member profiles, captured in a local demo environment. The website also supports Simplified Chinese and Japanese.
 
 ### Homepage
 

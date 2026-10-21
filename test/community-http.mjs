@@ -26,6 +26,25 @@ try{
  r=await call('/api/admin/community/reviews/'+row.id,{action:'approve',version:row.version,revision:row.pending_revision,checked:true,reason:'已核查来源页面、许可和所有链接',rule:'来源与许可'},owner);assert.equal(r.status,200);row=r.data;
  const publicHtml=await(await fetch(base+'/community')).text();assert.ok(publicHtml.includes('class="feed-post"'));assert.ok(publicHtml.includes(doc.title));assert.ok(!publicHtml.includes('class="skeleton"'));
  const memberHtml=await(await fetch(base+'/workspace',{headers:{Cookie:member}})).text();assert.ok(memberHtml.includes('<h1>My posts</h1>'));assert.ok(!memberHtml.includes('class="skeleton"'));
+ // Personal homepages have a top-level entry and an independent management shell.
+ const communityNav=publicHtml.match(/<nav aria-label="Community navigation"[\s\S]*?<\/nav>/)?.[0];
+ assert.ok(communityNav);
+ assert.deepEqual([...communityNav.matchAll(/data-nav-key="([^"]+)"/g)].map(match=>match[1]),['feed','members','following','bookmarks','posts','notifications','account']);
+ for(const route of ['/workspace/blog','/workspace/library','/workspace/files'])assert.ok(!communityNav.includes(route),'Community navigation excludes '+route);
+ for(const [locale,management] of [['en','Personal homepage management'],['zh','个人主页管理']]){
+  const headers={Cookie:member+'; site-locale='+locale};
+  const directory=await(await fetch(base+'/blogs',{headers})).text();
+  const activeHomepage=html=>[...html.matchAll(/<a\b[^>]*>/g)].map(match=>match[0]).find(tag=>tag.includes('href="/blogs"')&&tag.includes('class="is-active"'))||'';
+  assert.ok(activeHomepage(directory).includes('aria-current="page"'));
+  assert.ok(directory.includes('href="/workspace/blog"'));
+  for(const route of ['/workspace/blog','/workspace/profile','/workspace/library','/workspace/files']){
+   const page=await(await fetch(base+route,{headers})).text();
+   assert.ok(page.includes('space-workspace-layout is-homepage-workspace'),route);
+   assert.ok(!page.includes('class="feed-navigation"'),route);
+   assert.ok(page.includes('aria-label="'+management+'"'),route);
+   assert.ok(activeHomepage(page).includes('aria-current="location"'),route);
+  }
+ }
  const ownerHtml=await(await fetch(base+'/admin',{headers:{Cookie:owner}})).text();assert.match(ownerHtml,/<h1 id="admin-overview-title">Management center<\/h1>/);assert.ok(ownerHtml.includes('class="admin-summary-grid"'));assert.ok(!ownerHtml.includes('class="skeleton"'));
  const unauthorizedHtml=await(await fetch(base+'/admin')).text();assert.ok(unauthorizedHtml.includes('Sign in to dashboard'));assert.ok(!unauthorizedHtml.includes('class="stats-grid"'));
  for(const [language,lang,heading] of [['zh','zh-CN','我的投稿'],['ja','ja','自分の投稿']]){const localized=await(await fetch(base+'/workspace',{headers:{Cookie:member+'; site-locale='+language}})).text();assert.ok(localized.includes('lang="'+lang+'"'));assert.ok(localized.includes('<h1>'+heading+'</h1>'));assert.ok(localized.includes(doc.title));}

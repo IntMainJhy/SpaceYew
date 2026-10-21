@@ -126,3 +126,8 @@ html[data-ui] .organic-footer-compact .organic-footer-signature{font-size:20px}
 @media(max-width:767px){html[data-ui=x-social] .organic-site:has(.feed-navigation) .organic-footer.organic-footer-compact{padding-bottom:calc(84px + env(safe-area-inset-bottom))}}
 
 @media(max-width:560px){html[data-ui] .organic-header-inner{gap:10px;min-height:60px}html[data-ui] .organic-brand span{display:none}html[data-ui] .organic-header-tools{flex-shrink:0;gap:6px}html[data-ui] .organic-mobile-menu{flex-shrink:0}html[data-ui] .organic-mobile-menu summary{min-width:44px;min-height:44px;padding:8px;white-space:nowrap;justify-content:center}html[data-ui] .organic-mobile-menu summary>.organic-menu-label{display:none}}
+
+/* Personal homepage management owns its navigation, independent of the community shell. */
+.space-workspace-layout.is-homepage-workspace {display:block;margin-inline:0;}
+.homepage-directory-heading {display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+.homepage-directory-heading h1 {margin:0;}

@@ -27,8 +27,9 @@ function ShowcaseGrid({spaces,locale,t,heading='h3'}:{spaces:any[];locale:string
   })}</div>:<p className="space-muted platform-empty">{t('暂时没有公开主页。')}</p>;
 }
 export async function ShowcaseDirectory({req}:{req:Request}){
-  const {t,locale}=await serverI18n(),spaces=publicSpaces(req);
-  return <div className="platform-page"><header className="platform-heading"><h1>{t('个人主页')}</h1></header><ShowcaseGrid spaces={spaces} locale={locale} t={t} heading="h2"/></div>;
+  const {t,locale}=await serverI18n(),spaces=publicSpaces(req),user=currentUser(req);
+  const studioHref=user?'/workspace/blog':'/login?next=/workspace/blog';
+  return <div className="platform-page"><header className="platform-heading homepage-directory-heading"><h1>{t('个人主页')}</h1><Link className="space-btn primary" href={studioHref}>{t(user?'我的个人主页':'创建我的主页')}</Link></header><ShowcaseGrid spaces={spaces} locale={locale} t={t} heading="h2"/></div>;
 }
 export async function PlatformHome({req}:{req:Request}){
   const {t,locale}=await serverI18n(),spaces=publicSpaces(req),user=currentUser(req);

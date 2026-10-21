@@ -10622,5 +10622,9 @@
   "工具标签对应本站已整理的安装方式；更多兼容性请查看详情或原项目。": [
     "Tool labels reflect the setup instructions documented here. See each detail page or upstream project for further compatibility.",
     "ツールの表示は当サイトで整理した導入方法に基づいています。その他の互換性は詳細ページまたは元のプロジェクトを確認してください。"
+  ],
+  "个人主页管理": [
+    "Personal homepage management",
+    "個人ホームページ管理"
   ]
 }

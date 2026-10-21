@@ -197,8 +197,9 @@ export async function PublicSite({path = [], query = {}}: {path?: string[], quer
 }
 export async function PublicFrame({path=[],children}:{path?:string[],children:React.ReactNode}){const {t:tr,locale}=await serverI18n();
   const section=path[0]||'',current='/'+path.join('/');
-  const nav=[['/','首页'],['/community','社区'],['/docs','文档'],['/skills','Skill'],['/resources','资源']];
-  const active = (href: string) => href === '/' ? !section : current===href||current.startsWith(href+'/')||href==='/docs'&&section==='articles';
+  const nav=[['/','首页'],['/community','社区'],['/blogs','个人主页'],['/docs','文档'],['/skills','Skill'],['/resources','资源']];
+  const homepageRoute=section==='blogs'||section==='blog'||section==='workspace'&&['blog','profile','library','files','insights','connect'].includes(path[1]);
+  const active = (href: string) => href==='/blogs'?homepageRoute:href === '/' ? !section : current===href||current.startsWith(href+'/')||href==='/docs'&&section==='articles';
   const authPage=section==='login'||section==='join';
   return <div className={'organic-site'+(authPage?' public-auth-site':path.length?' public-content-site':'')}>
     <HomeFlowBackground interactive={!path.length}/>

@@ -5,7 +5,6 @@ import Form from 'next/form';
 import {curatedSkills,skillAiTools,skillCategories,skillCatalogVerifiedAt,skillFilters,filterSkills,skillFilterHref} from '@/lib/skill-catalog.mjs';
 import {serverI18n} from '@/lib/server-i18n';
 import {Icon} from './Icons';
-import {SkillToolSelect} from './SkillToolSelect';
 
 export async function SkillCatalog({query={},children}:{query?:Record<string,string|string[]|undefined>;children?:ReactNode}){
  const {t}=await serverI18n(),{category,q,tool}=skillFilters(query),results=filterSkills({category,q,tool},t);
@@ -14,11 +13,12 @@ export async function SkillCatalog({query={},children}:{query?:Record<string,str
  return <section className="skill-directory skill-directory-cards" aria-label={t('GitHub Skill 目录')}>
   <div className="skill-directory-tools"><Form action="/skills" className="skill-filter-form" role="search">
    {category!=='all'&&<input type="hidden" name="type" value={category}/>}
+   {tool!=='all'&&<input type="hidden" name="tool" value={tool}/>}
    <div className="skill-search"><label htmlFor="skill-query" className="skill-search-label">{t('搜索 Skill 名称、用途或技术')}</label><Icon name="search"/>
    <input key={q} id="skill-query" name="q" type="search" defaultValue={q} maxLength={120} placeholder={t('搜索名称、用途或技术…')}/>
    <button className="space-btn" type="submit">{t('搜索')}</button></div>
-   <SkillToolSelect selected={tool} options={toolOptions}/>
   </Form><p>{t('收录 {0} 项 · 核对于 {1}',[curatedSkills.length,skillCatalogVerifiedAt])}</p></div>
+  <div className="catalog-filter-group skill-tool-options"><span>{t('按 AI 工具筛选')}</span><nav className="catalog-filter-options" aria-label={t('按 AI 工具筛选')}>{toolOptions.map(option=><Link key={option.id} href={skillFilterHref(category,q,option.id)} scroll={false} aria-current={tool===option.id?'page':undefined}>{t(option.label)}<span>{option.count}</span></Link>)}</nav></div>
   <div className="skill-directory-layout"><aside className="skill-types"><nav aria-label={t('Skill 类型')}>
    <Link href={skillFilterHref('all',q,tool)} aria-current={category==='all'?'page':undefined}>{t('全部类型')}<span>{categoryScope.length}</span></Link>
    {skillCategories.map(type=><Link key={type.id} href={skillFilterHref(type.id,q,tool)} aria-current={category===type.id?'page':undefined}>{t(type.label)}<span>{categoryScope.filter(item=>item.category===type.id).length}</span></Link>)}

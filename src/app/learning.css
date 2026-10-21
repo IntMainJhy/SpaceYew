@@ -33,11 +33,9 @@ html[data-ui] .learning-index h3 {font-size:20px;line-height:1.5;margin:0;}
 html[data-ui] .learning-main .space-connect-docs {max-width:none;margin:0;padding:0;}
 html[data-ui] .learning-main .space-connect-docs h1 {font-size:32px;line-height:1.4;}
 .skills-page {padding:36px 0 72px;}
-.skill-directory-tools {display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:32px;}
-.skill-filter-form {display:grid;grid-template-columns:minmax(0,1fr) 220px;align-items:end;gap:16px;min-width:0;flex:1;}
-.skill-tool-filter {display:grid;gap:8px;min-width:0;}
-.skill-tool-filter label {font-size:12px;color:var(--organic-muted);}
-html[data-ui] .organic-site .skill-tool-filter select {width:100%;min-height:56px;border:1px solid var(--organic-line);border-radius:12px;padding:12px;background:var(--organic-bg,#fff);color:var(--organic-ink);font:inherit;font-size:14px;}
+.skill-directory-tools {display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:20px;}
+.skill-filter-form {min-width:0;flex:1;}
+.skill-tool-options {margin-bottom:32px;}
 .skill-directory-tools>p {padding-bottom:18px;font-size:12px;color:var(--organic-muted);margin:0;white-space:nowrap;font-variant-numeric:tabular-nums;}
 .skill-search {display:flex;align-items:center;gap:12px;width:100%;min-width:0;box-sizing:border-box;border:1px solid var(--organic-line);border-radius:12px;padding:5px 6px 5px 16px;background:var(--organic-bg,#fff);}
 .skill-search-label {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0;}
@@ -178,8 +176,6 @@ html[data-ui] .home-learning-links h3 {font-size:26px;line-height:1.5;margin:0;}
  .skill-install-choice {display:grid;gap:8px;}
  html[data-ui] .organic-site .skill-install-choice select {width:100%;}
  html[data-ui] .organic-site .skill-search input {font-size:16px;}
- .skill-filter-form {grid-template-columns:minmax(0,1fr);gap:16px;}
- html[data-ui] .organic-site .skill-tool-filter select {font-size:16px;min-height:48px;}
  .skill-directory-tools {margin-bottom:20px;}
  .skill-directory-layout {grid-template-columns:minmax(0,1fr);gap:20px;}
  .skill-types {position:static;}

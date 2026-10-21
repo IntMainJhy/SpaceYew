@@ -33,8 +33,28 @@ for(const locale of ['zh','en','ja'])for(const tool of skillAiTools){
  for(const [,entry] of entries)assert.ok(entry.includes('data-selected="true">'+tool.label+'</li>'),tool.id+': selected badge');
  assert.ok(html.includes(translate(locale,'按 AI 工具筛选')));
  assert.ok(html.includes('name="tool"'));
+ assert.ok(!/<select[^>]*name="tool"/.test(html),'AI tools are visible links, not a collapsed select');
+ const toolNav=html.split('<nav class="catalog-filter-options" aria-label="'+translate(locale,'按 AI 工具筛选')+'">')[1]?.split('</nav>')[0];
+ assert.ok(toolNav,'visible AI tool choices');
+ assert.equal((toolNav.match(/<a /g)||[]).length,skillAiTools.length+1,'all tool choices remain visible');
  assert.ok(html.includes('/skills?type=design&amp;tool='+tool.id),tool.id+': category link');
  toolLists++;
+}
+let catalogPages=0;
+for(const locale of ['zh','en','ja'])for(const kind of ['docs','resources']){
+ const response=await fetch(base+'/'+kind+'?q=SpaceYew',{headers:{cookie:'site-locale='+locale}}),html=await response.text();
+ assert.equal(response.status,200);
+ assert.ok(!/<select[^>]*name="category"/.test(html),'categories are not collapsed');
+ const nav=html.split('<nav class="catalog-filter-options" aria-label="'+translate(locale,'分类')+'">')[1]?.split('</nav>')[0];
+ assert.ok(nav&&nav.includes(translate(locale,'全部分类')),'visible catalog categories');
+ const links=[...nav.matchAll(/href="([^"]+)"/g)].map(match=>new URL(match[1].replaceAll('&amp;','&'),base));
+ assert.ok(links.every(url=>url.searchParams.get('q')==='SpaceYew'),'category changes preserve search');
+ const choice=links.find(url=>url.searchParams.has('category'));
+ if(choice){
+  const selected=await(await fetch(choice,{headers:{cookie:'site-locale='+locale}})).text();
+  assert.ok(selected.includes('type="hidden" name="category"'),'search retains the chosen category');
+ }
+ catalogPages++;
 }
 const empty=await(await fetch(base+'/skills?type=knowledge&tool=cursor',{headers:{cookie:'site-locale=en'}})).text();
 assert.ok(empty.includes(translate('en','精选目录中没有匹配的 Skill')));
@@ -42,4 +62,4 @@ assert.ok(empty.includes('href="/skills"'));
 const sitemap=await(await fetch(base+'/sitemap.xml')).text();
 for(const skill of curatedSkills)assert.ok(sitemap.includes('/skills/'+skill.id+'</loc>'));
 const missing=await fetch(base+'/skills/no-such-skill');assert.equal(missing.status,404);
-console.log(JSON.stringify({detailPages:pages,toolLists,locales:3,filtersPreserved:true,sitemap:true,notFound:true}));
+console.log(JSON.stringify({detailPages:pages,toolLists,catalogPages,locales:3,filtersPreserved:true,visibleChoices:true,sitemap:true,notFound:true}));

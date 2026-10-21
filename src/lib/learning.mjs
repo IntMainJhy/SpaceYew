@@ -2,7 +2,7 @@
 export const guides=[
  {slug:'getting-started',title:'开始使用 SpaceYew',summary:'认识社区、博客主页和共享内容栏目。',sections:[
   {title:'登录你的账号',text:'使用已有的网站账号或已验证邮箱和密码登录。邀请注册是否开放，以登录页面显示为准。',href:'/login',action:'前往登录'},
-  {title:'选择你的内容栏目',text:'文档、Skill 和其他资源栏目都有发布入口；在“我的发布”查看草稿和审核状态。',href:'/publish',action:'打开我的发布'},
+  {title:'选择你的内容栏目',text:'在文档、Skill 或其他资源页面直接发布内容，也可以在该栏目的发布页面查看草稿和审核状态。',href:'/docs',action:'浏览内容栏目'},
   {title:'选择下一步',text:'想介绍自己，从博客主页开始；想分享教程或工具，在对应栏目发布，审核通过后也会出现在社区。',href:'/docs/showcase',action:'学习搭建主页'}
  ]},
  {slug:'showcase',title:'搭建博客主页',summary:'整理资料、添加内容，预览后再提交公开。',sections:[

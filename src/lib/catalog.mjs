@@ -1,4 +1,5 @@
 import {importDocument,IMPORT_HTML_MAX} from './document-import.mjs';
+import {catalogEditorUrl} from './catalog-presentation.mjs';
 import {randomUUID} from 'node:crypto';
 import sanitize from 'sanitize-html';
 import {db,now,hash,getConfig,transaction,limited} from './db.mjs';
@@ -15,7 +16,7 @@ const staff=user=>user?.status==='active'&&['owner','reviewer'].includes(user.ro
 const policyHash=()=>hash(JSON.stringify(POLICIES));
 export function catalogUrl(kind,id){return '/'+kind+'/shared/'+id}
 function audit(user,action,id,details={}){db().prepare('INSERT INTO community_audit VALUES(?,?,?,?,?,?)').run(randomUUID(),user.id,action,id,JSON.stringify(details),now())}
-function notify(user,title,message,id){db().prepare('INSERT INTO community_notifications(id,user_id,title,message,href,created) VALUES(?,?,?,?,?,?)').run(randomUUID(),user,title,message,'/publish/'+id,now())}
+function notify(user,title,message,id){db().prepare('INSERT INTO community_notifications(id,user_id,title,message,href,created) VALUES(?,?,?,?,?,?)').run(randomUUID(),user,title,message,catalogEditorUrl(get(id).kind,id),now())}
 function member(req){const user=currentUser(req);requireValue(user,'请先登录',401);requireValue(user.status==='active'&&(user.role==='owner'||user.verification==='local_test'),'请先取得本地测试投稿资格',403);if(user.id==='owner')db().prepare("INSERT OR IGNORE INTO community_users(id,username,password,nickname,role,status,verification,created,updated) VALUES('owner',?,?,?,'owner','active','local_test',?,?)").run('owner-identity-'+randomUUID(),'!managed-owner!',getConfig('profile').name,now(),now());return user}
 function authorAllowed(id){return id==='owner'||!!db().prepare("SELECT 1 FROM community_users WHERE id=? AND status='active' AND verification='local_test'").get(id)}
 function own(user,id){const row=get(id);requireValue(row&&row.author===user.id,'内容不存在或无权访问',404);return row}

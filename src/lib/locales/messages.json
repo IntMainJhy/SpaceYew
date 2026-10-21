@@ -11722,5 +11722,41 @@
   "社区暂停新发布": [
     "New publications are paused.",
     "New publications are paused."
+  ],
+  "我的文档": [
+    "My documents",
+    "自分のドキュメント"
+  ],
+  "我的 Skill": [
+    "My Skills",
+    "自分の Skill"
+  ],
+  "我的资源": [
+    "My resources",
+    "自分のリソース"
+  ],
+  "返回栏目": [
+    "Back to catalog",
+    "一覧に戻る"
+  ],
+  "此内容位于其他栏目。": [
+    "This content belongs to another catalog.",
+    "このコンテンツは別の一覧にあります。"
+  ],
+  "前往所属栏目": [
+    "Open its catalog",
+    "該当する一覧を開く"
+  ],
+  "工具使用你的独立凭据保存草稿，可在对应栏目的发布页面继续检查和修改。": [
+    "The tool saves drafts with your scoped credential. Continue reviewing and editing from the publishing page in the relevant catalog.",
+    "ツールは専用の認証情報で下書きを保存します。該当する一覧の投稿ページで確認・編集を続けられます。"
+  ],
+  "在文档、Skill 或其他资源页面直接发布内容，也可以在该栏目的发布页面查看草稿和审核状态。": [
+    "Publish directly from Docs, Skills or Other resources. Drafts and review status are available on the publishing page in each catalog.",
+    "ドキュメント、Skill、その他のリソースから直接投稿できます。各一覧の投稿ページで下書きや審査状況を確認できます。"
+  ],
+  "浏览内容栏目": [
+    "Explore the catalogs",
+    "コンテンツ一覧を見る"
   ]
 }

@@ -5,6 +5,8 @@ import path from 'node:path';
 import {spawn} from 'node:child_process';
 import {createInterface} from 'node:readline';
 import {startServer,stopServer,loginServer} from './server.mjs';
+import {catalogEditorUrl} from '../src/lib/catalog-presentation.mjs';
+import {translate} from '../src/lib/i18n.mjs';
 const directory=await mkdtemp(path.join(tmpdir(),'site-catalog-http-'));let server;
 try{
  server=await startServer(path.join(directory,'data'),3136);const base=server.base,owner=await loginServer(base);
@@ -18,6 +20,17 @@ try{
  assert.equal((await call('/api/community/register',{...accepted,adult:true,email,code,challenge:challenge.challenge,username:'catalog_member',password,nickname:'Catalog tester',invite:invite.token})).status,200);
  const member=(await call('/api/auth/login',{username:'catalog_member',password})).cookie,user=(await get('/api/auth/me',member)).data.user;
  assert.equal((await call('/api/admin/community/accounts',{id:user.id,action:'qualify',checked:true,reason:'Local-only integration test account qualification'},owner)).status,200);
+ for(const locale of ['zh','en','ja'])for(const [kind,title,history] of [['docs','发布文档','我的文档'],['skills','分享 Skill','我的 Skill'],['resources','分享资源','我的资源']]){
+  const headers={Cookie:member+'; site-locale='+locale},list=await(await fetch(base+'/'+kind,{headers})).text(),editor=await(await fetch(base+catalogEditorUrl(kind),{headers})).text();
+  assert.ok(list.includes('href="'+catalogEditorUrl(kind)+'"'),'catalog has its own publish action');
+  assert.ok(!list.includes(translate(locale,'我的发布')),'global publications entry is removed');
+  assert.ok(editor.includes('<h1>'+translate(locale,title)+'</h1>')&&editor.includes('<h2>'+translate(locale,history)+'</h2>'),'contextual editor and history');
+  assert.ok(editor.includes('noindex, nofollow'),'private composer is not indexable');
+  assert.ok(!editor.includes('<label>'+translate(locale,'发布到')+'<select'),'content kind is fixed by its catalog');
+ }
+ for(const kind of ['docs','skills','resources']){
+  const legacy=await fetch(base+'/publish?kind='+kind,{redirect:'manual'});assert.equal(legacy.status,307);assert.equal(legacy.headers.get('location'),catalogEditorUrl(kind));
+ }
  const input={kind:'docs',title:'Build an accessible form',summary:'A short tutorial covering labels, clear errors and keyboard interaction.',bodyHtml:'<h2>Clear labels</h2><p>Connect every field to a visible label and explain each validation error in plain language.</p>',category:'Frontend',license:'Original test content; no external assets.'};
  assert.equal((await call('/api/catalog/save',input)).status,401);
  assert.equal((await call('/api/catalog/save',input,member,'POST',{Origin:'https://foreign.example'})).status,403);
@@ -39,8 +52,16 @@ try{
  // External source and installation commands are never auto-published by the local rule pass.
  let skill=(await call('/api/catalog/save',{...input,kind:'skills',title:'Reviewed third-party Skill',sourceUrl:'https://github.com/example/project',installCommand:'npx skills add example/project',supportedTools:['Codex','Claude Code'],prompts:[{title:'Try it',text:'Review the labels and keyboard interaction in this form.'}]},member)).data;
  skill=(await call('/api/catalog/'+skill.id+'/action',{...accepted,action:'submit',version:skill.version},member)).data;assert.equal(skill.status,'pending');assert.equal((await get('/api/catalog/'+skill.id)).status,404);
+ const resource=(await call('/api/catalog/save',{...input,kind:'resources',title:'Private resource draft'},member)).data;
+ for(const [kind,present,absent] of [['docs',input.title,'Reviewed third-party Skill'],['skills','Reviewed third-party Skill',input.title],['resources',resource.draft.title,input.title]]){
+  const html=await(await fetch(base+catalogEditorUrl(kind),{headers:{Cookie:member}})).text(),history=html.match(/<aside class="publisher-history">([\s\S]*?)<\/aside>/)?.[1];
+  assert.ok(history?.includes(present)&&!history.includes(absent),'history stays inside its catalog');
+ }
+ const legacy=await fetch(base+'/publish/'+skill.id,{headers:{Cookie:member},redirect:'manual'});assert.equal(legacy.status,307);assert.equal(legacy.headers.get('location'),catalogEditorUrl('skills',skill.id));
+ assert.equal((await fetch(base+'/publish/'+skill.id,{headers:{Cookie:owner},redirect:'manual'})).status,404,'legacy redirect does not expose another author’s draft');
+ const wrongCatalog=await(await fetch(base+catalogEditorUrl('docs',skill.id),{headers:{Cookie:member+'; site-locale=en'}})).text();assert.ok(wrongCatalog.includes(translate('en','此内容位于其他栏目。'))&&!wrongCatalog.includes('class="publisher-layout"'),'wrong catalog cannot edit the item');
  assert.equal((await get('/api/admin/catalog',member)).status,403);assert.equal((await get('/api/admin/catalog',owner)).data.items.some(entry=>entry.id===skill.id),true);
  skill=(await call('/api/admin/catalog/'+skill.id,{action:'approve',version:skill.version,checked:true,reason:'Checked this fixture source, license and command for integration testing.'},owner)).data;assert.equal(skill.status,'published');assert.ok((await(await fetch(base+skill.url)).text()).includes('Reviewed third-party Skill'));
  assert.equal((await call('/api/catalog/'+skill.id+'/action',{action:'offline',version:skill.version},member)).status,200);assert.equal((await get('/api/catalog/'+skill.id)).status,404);assert.equal((await get('/api/community/posts/'+skill.communityPostId)).status,404);
- console.log('PASS: catalog HTTP auth/CSRF, draft isolation, automatic publication, one linked community share, shared detail rendering, scoped MCP draft/submit/retry, external-content review, and coupled takedown');
+ console.log('PASS: contextual publishing in three catalogs/locales, scoped draft histories, safe legacy redirects, catalog HTTP auth/CSRF, automatic publication, linked community share, scoped MCP, review, and coupled takedown');
 }finally{await stopServer(server);await rm(directory,{recursive:true,force:true})}

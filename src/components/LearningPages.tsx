@@ -7,6 +7,7 @@ import {serverI18n} from '@/lib/server-i18n';
 import {ConnectDocs} from './SpaceConnect';
 import {SkillInstall} from './SkillInstall';
 import {Icon} from './Icons';
+import {SkillCatalog} from './SkillCatalog';
 
 export async function DocsPage({path}:{path:string[]}){
  const {t,locale}=await serverI18n(),slug=path[1]||'';
@@ -34,9 +35,11 @@ export async function DocsPage({path}:{path:string[]}){
  </div>;
 }
 
-export async function SkillsPage({baseUrl}:{baseUrl:string}){
+export async function SkillsPage({baseUrl,query={}}:{baseUrl:string,query?:Record<string,string|string[]|undefined>}){
  const {t}=await serverI18n();
- return <div className="skills-page"><header className="learning-heading"><h1>Skill</h1><p>{t('把重复的整理，交给熟悉你工作流的工具。')}</p></header>
+ return <div className="skills-page"><header className="learning-heading"><h1>{t('GitHub Skill 精选')}</h1><p>{t('从写代码到整理知识，按任务找到适合你的 Agent Skill。')}</p></header>
+  <SkillCatalog query={query}/>
+  <div className="skill-platform-heading"><h2>{t('连接 SpaceYew')}</h2><p>{t('把重复的整理，交给熟悉你工作流的工具。')}</p></div>
   <article className="skill-feature"><div className="skill-feature-copy"><h2>spaceyew-post</h2><p>{t('让支持 Skill 的 AI 工具，把你的项目、文章和资源整理成 SpaceYew 草稿。')}</p><p className="learning-muted">{t('默认保存草稿；只有明确确认后才提交审核，不会直接公开。')}</p><div className="space-actions"><a className="space-btn primary" href="/skills/spaceyew-post.tar.gz" download>{t('下载 Skill')}</a><Link className="space-link" href="/docs/connect">{t('阅读接入文档')}</Link></div></div>
    <div className="skill-setup"><h3>{t('安装到本地工具')}</h3><SkillInstall baseUrl={baseUrl} animated={false}/><p>{t('安装后，在你的工具私密配置中设置网站地址和独立授权凭据。')}</p><Link className="space-link" href="/workspace/connect">{t('管理工具授权')}</Link></div>
   </article>

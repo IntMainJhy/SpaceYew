@@ -9510,5 +9510,205 @@
   "预览操作过于频繁": [
     "Too many preview requests. Please try again later.",
     "プレビュー回数が多すぎます。しばらくしてから再試行してください。"
+  ],
+  "开发工程": [
+    "Engineering",
+    "開発・設計"
+  ],
+  "组件架构、代码质量与性能。": [
+    "Component architecture, code quality and performance.",
+    "コンポーネント設計、コード品質、パフォーマンス。"
+  ],
+  "界面设计": [
+    "Interface design",
+    "UI デザイン"
+  ],
+  "从视觉方向到界面细节。": [
+    "From visual direction to interface details.",
+    "ビジュアルの方向性から UI の細部まで。"
+  ],
+  "测试排错": [
+    "Testing & debugging",
+    "テスト・デバッグ"
+  ],
+  "复现问题、定位根因、验证结果。": [
+    "Reproduce issues, find causes and verify fixes.",
+    "問題の再現、原因の特定、修正の検証。"
+  ],
+  "文档办公": [
+    "Documents & office",
+    "ドキュメント・事務"
+  ],
+  "处理文档、演示文稿与表格。": [
+    "Work with documents, slides and spreadsheets.",
+    "文書、スライド、スプレッドシートを扱う。"
+  ],
+  "知识管理": [
+    "Knowledge management",
+    "ナレッジ管理"
+  ],
+  "把笔记和想法组织起来。": [
+    "Give your notes and ideas a structure.",
+    "ノートやアイデアを整理する。"
+  ],
+  "Agent 扩展": [
+    "Agent extensions",
+    "Agent の拡張"
+  ],
+  "创建 Skill，连接外部工具。": [
+    "Create skills and connect external tools.",
+    "Skill を作り、外部ツールとつなぐ。"
+  ],
+  "检查 React 与 Next.js 的数据请求、渲染和包体积，适合开发新功能或做性能优化。": [
+    "Review data fetching, rendering and bundle size in React and Next.js when building features or improving performance.",
+    "React と Next.js のデータ取得、レンダリング、バンドルサイズを見直し、機能開発や性能改善に役立てます。"
+  ],
+  "用组合组件、Context 与状态提升整理复杂组件，适合重构组件 API 和建设组件库。": [
+    "Organize complex React components with composition, Context and lifted state when refining APIs or building a component library.",
+    "合成、Context、状態のリフトアップで複雑な React コンポーネントを整理し、API やライブラリを設計します。"
+  ],
+  "帮助确定视觉方向、字体和布局，让新页面或改版拥有更鲜明的设计。": [
+    "Choose a visual direction, typography and layout for a more distinctive new interface or redesign.",
+    "ビジュアルの方向性、書体、レイアウトを定め、新しい UI やリニューアルに個性を持たせます。"
+  ],
+  "围绕已有界面做审查、排版、响应式适配与细节打磨，适合持续改进网站体验。": [
+    "Audit and refine existing interfaces through typography, responsive layouts and usability improvements.",
+    "既存 UI のレビュー、タイポグラフィ、レスポンシブ対応、細部の改善を通じて使いやすさを磨きます。"
+  ],
+  "检索配色、字体搭配、交互规范与技术栈建议，适合搭建设计系统和比较设计方向。": [
+    "Search palettes, font pairings, interaction guidelines and stack-specific advice when exploring directions or building a design system.",
+    "配色、フォントの組み合わせ、操作指針、技術スタック別の助言を検索し、デザインの方向性やシステムを検討します。"
+  ],
+  "按复现、收集证据、验证假设的顺序排查问题，适合反复出现的故障和难定位的错误。": [
+    "Investigate recurring or elusive bugs by reproducing the issue, collecting evidence and testing hypotheses.",
+    "再現、証拠の収集、仮説の検証という順序で、繰り返す不具合や原因不明のエラーを調べます。"
+  ],
+  "用先失败、再通过、再重构的测试流程约束实现，适合为新功能和修复建立回归保障。": [
+    "Follow a red, green, refactor workflow to add regression coverage for new features and bug fixes.",
+    "失敗するテスト、成功する実装、リファクタリングの順で進め、新機能や修正の回帰テストを整えます。"
+  ],
+  "通过 Python 与 Playwright 检查本地网页交互、浏览器日志和截图，适合验证 Web 功能。": [
+    "Use Python and Playwright to check local web interactions, browser logs and screenshots when validating features.",
+    "Python と Playwright でローカル Web の操作、ブラウザログ、スクリーンショットを確認し、機能を検証します。"
+  ],
+  "创建、读取和修改 Word 文档，处理样式、图片、修订与批注，适合报告和正式文稿。": [
+    "Create, read and edit Word documents, including styles, images, tracked changes and comments for reports and formal writing.",
+    "Word 文書の作成、読み取り、編集を行い、スタイル、画像、変更履歴、コメントを扱います。"
+  ],
+  "提取文本和表格、拆分合并 PDF、处理表单与扫描件，适合资料整理和文档转换。": [
+    "Extract text and tables, split or merge PDFs, and work with forms and scanned documents.",
+    "テキストや表の抽出、PDF の分割・結合、フォームやスキャン文書の処理を行います。"
+  ],
+  "创建或编辑演示文稿，处理模板、版式、备注与已有页面，适合汇报和演讲材料。": [
+    "Create and edit presentations, working with templates, layouts, speaker notes and existing slides.",
+    "テンプレート、レイアウト、発表者ノート、既存スライドを扱い、プレゼン資料を作成・編集します。"
+  ],
+  "整理表格数据、编写公式并设置格式和图表，适合数据清洗、分析和工作簿制作。": [
+    "Clean and analyze tabular data, write formulas, and format charts and workbooks.",
+    "表データの整理と分析、数式の作成、書式やグラフの設定を行います。"
+  ],
+  "编写和整理带双向链接、属性、提示块与嵌入内容的 Obsidian 笔记，适合维护个人知识库。": [
+    "Write and organize Obsidian notes with wikilinks, properties, callouts and embeds for a personal knowledge base.",
+    "内部リンク、プロパティ、コールアウト、埋め込みを使い、Obsidian の個人ノートを整理します。"
+  ],
+  "用节点、分组和连线创建或修改 .canvas 文件，适合在 Obsidian 等工具中梳理思路。": [
+    "Create and edit .canvas files with nodes, groups and connections to map ideas in Obsidian and compatible tools.",
+    "ノード、グループ、接続で .canvas ファイルを作成・編集し、Obsidian などでアイデアを可視化します。"
+  ],
+  "指导设计和实现 MCP 服务，把外部 API 封装为 AI 可调用的工具，提供 Python 与 TypeScript 路径。": [
+    "Design and build MCP servers that expose external APIs as AI tools, with Python and TypeScript guidance.",
+    "Python と TypeScript の手順で MCP サーバーを設計・実装し、外部 API を AI 用ツールとして公開します。"
+  ],
+  "从需求编写 Skill，再用测试提示和评估结果改进描述与流程，适合沉淀重复工作。": [
+    "Turn a recurring workflow into a skill, then improve its description and process with test prompts and evaluations.",
+    "繰り返す作業を Skill にまとめ、テスト用プロンプトと評価で説明や手順を改善します。"
+  ],
+  "专有条款": [
+    "Proprietary terms",
+    "独自の利用条件"
+  ],
+  "GitHub Skill 精选": [
+    "GitHub Skills, curated",
+    "GitHub Skill セレクション"
+  ],
+  "从写代码到整理知识，按任务找到适合你的 Agent Skill。": [
+    "Find an Agent Skill for your next task, from writing code to organizing knowledge.",
+    "コードを書くことから知識の整理まで、作業に合った Agent Skill を探しましょう。"
+  ],
+  "GitHub Skill 目录": [
+    "GitHub Skill directory",
+    "GitHub Skill ディレクトリ"
+  ],
+  "搜索 Skill 名称、用途或技术": [
+    "Search skill names, uses or technologies",
+    "Skill 名、用途、技術を検索"
+  ],
+  "搜索名称、用途或技术…": [
+    "Search names, uses or technologies…",
+    "名前、用途、技術を検索…"
+  ],
+  "收录 {0} 项 · 核对于 {1}": [
+    "{0} skills · Sources checked {1}",
+    "{0} 件 · 出典確認 {1}"
+  ],
+  "Skill 类型": [
+    "Skill categories",
+    "Skill の種類"
+  ],
+  "按任务挑选，再按原作者说明使用。": [
+    "Choose by task, then follow the original author’s guide.",
+    "作業に合わせて選び、原作者の手順で使いましょう。"
+  ],
+  "找到 {0} 项 Skill": [
+    "Results: {0}",
+    "{0} 件の Skill"
+  ],
+  "清除筛选": [
+    "Clear filters",
+    "絞り込みを解除"
+  ],
+  "适用技术": [
+    "Technologies and formats",
+    "技術・形式"
+  ],
+  "使用说明": [
+    "Usage guide",
+    "使い方"
+  ],
+  "安装说明": [
+    "Install guide",
+    "インストール方法"
+  ],
+  "{0} 的许可：{1}": [
+    "{0} license: {1}",
+    "{0} のライセンス：{1}"
+  ],
+  "没有找到匹配的 Skill": [
+    "No matching skills",
+    "一致する Skill はありません"
+  ],
+  "试试 React、设计、PDF 或 Obsidian，也可以清除筛选查看全部。": [
+    "Try React, design, PDF or Obsidian, or clear the filters to see every skill.",
+    "React、デザイン、PDF、Obsidian などを検索するか、絞り込みを解除してください。"
+  ],
+  "查看全部 Skill": [
+    "View all skills",
+    "すべての Skill を見る"
+  ],
+  "收录依据：原作者仓库、明确的使用说明、配套资料与可查阅的许可。这里提供用途索引和原始链接，不打包第三方源码。": [
+    "Selections have an original repository, clear usage guidance, supporting materials and readable license terms. This directory provides original summaries and source links; third-party skill code is not bundled.",
+    "原作者のリポジトリ、明確な使用手順、関連資料、確認できるライセンスを基準に選定。用途の要約と原典へのリンクを掲載し、第三者のソースコードは同梱していません。"
+  ],
+  "办公类的四项 Anthropic Skill 采用专有条款，使用范围以各项许可为准。各工具的安装方式与运行依赖请查看原项目说明。": [
+    "The four Anthropic document skills have proprietary terms; their licenses define permitted use. Check each original project for setup and runtime requirements.",
+    "Anthropic の文書系 4 件は独自の利用条件があり、許可範囲は各ライセンスに従います。導入方法や実行環境は原プロジェクトをご確認ください。"
+  ],
+  "连接 SpaceYew": [
+    "Connect to SpaceYew",
+    "SpaceYew と連携"
+  ],
+  "按类型探索 GitHub 上的 Agent Skill，查阅用途、原项目与许可。": [
+    "Explore GitHub Agent Skills by category, with use cases, original sources and license links.",
+    "GitHub の Agent Skill を種類別に探し、用途、原典、ライセンスを確認できます。"
   ]
 }

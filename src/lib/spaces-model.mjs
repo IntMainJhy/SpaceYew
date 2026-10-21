@@ -2,7 +2,7 @@ import {randomUUID} from 'node:crypto';
 import {requireValue,cleanText,httpUrl,contentData} from './content.mjs';
 export const spaceKinds=['intro','experience','skills','projects','articles','resources','text','image','button','resume','group'];
 export const spaceThemes=['natural-organic','monochrome','editorial','x-social'];
-export const blogThemes=['journal','minimal','terminal','folio','panorama'];
+export const blogThemes=['anx','journal','minimal','terminal','folio','panorama'];
 export function blogSettings(input){requireValue(input&&typeof input==='object'&&!Array.isArray(input),'主页设置格式无效');requireValue(['theme','static'].includes(input.mode)&&blogThemes.includes(input.theme),'请选择有效的主页主题');const bundleId=cleanText(input.bundleId,50);requireValue(!bundleId||/^[a-f0-9-]{36}$/.test(bundleId),'网站包标识无效');requireValue(input.mode!=='static'||bundleId,'请先上传静态网站');return{mode:input.mode,theme:input.theme,bundleId,title:cleanText(input.title,120),description:cleanText(input.description,500),sections:[...new Set((Array.isArray(input.sections)?input.sections:['projects','articles','resources']).filter(x=>['articles','projects','resources'].includes(x)))]}}
 export const widths={desktop:1120,tablet:768,mobile:390};
 const number=(value,min,max,fallback)=>Number.isFinite(Number(value))?Math.min(max,Math.max(min,Math.round(Number(value)))):fallback;

@@ -61,7 +61,7 @@ test('blog settings use fixed reviews, reject foreign bundles, and publication h
 });
 test('new signature themes retain reviewed snapshots and cannot publish draft theme changes',()=>{
  d.prepare("UPDATE community_users SET status='active' WHERE id='alice'").run();
- for(const theme of ['folio','panorama']){
+ for(const theme of ['anx','folio','panorama']){
   const mine=S.mine(req()),saved=S.spacesApi(req(),['spaces','save'],{...mine,layout:{...mine.layout,blog:{mode:'theme',theme,bundleId:'',title:'My reviewed blog',sections:['articles']}}},new URL(req().url));
   const pending=S.spacesApi(req(),['spaces','submit'],{revision:saved.revision,accepted:true},new URL(req().url)),review=pending.reviews.find(row=>row.kind==='board'&&row.status==='pending');
   S.spacesApi(req(),['spaces','save'],{...pending,layout:{...pending.layout,blog:{...pending.layout.blog,theme:'minimal',title:'Private changed title'}}},new URL(req().url));

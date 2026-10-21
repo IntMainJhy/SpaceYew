@@ -29,7 +29,7 @@ function ShowcaseGrid({spaces,locale,t,heading='h3'}:{spaces:any[];locale:string
 export async function ShowcaseDirectory({req}:{req:Request}){
   const {t,locale}=await serverI18n(),spaces=publicSpaces(req),user=currentUser(req);
   const studioHref=user?'/workspace/blog':'/login?next=/workspace/blog';
-  return <div className="platform-page"><header className="platform-heading homepage-directory-heading"><h1>{t('博客主页')}</h1><Link className="space-btn primary" href={studioHref}>{t(user?'我的博客主页':'创建我的主页')}</Link></header><ShowcaseGrid spaces={spaces} locale={locale} t={t} heading="h2"/></div>;
+  return <div className="platform-page"><header className="platform-heading homepage-directory-heading"><h1>{t('博客主页')}</h1><Link className="space-btn primary" href={studioHref}>{t(user?'我的博客主页':'创建我的主页')}</Link></header><p className="space-muted">{t('用 Anx Portfolio 模板建立自己的博客，或上传已经做好的静态网站。')}</p><Link className="anx-hosting-link" href="/workspace/blog?template=anx">{t('使用 Anx Portfolio 模板')} ↗</Link><ShowcaseGrid spaces={spaces} locale={locale} t={t} heading="h2"/></div>;
 }
 export async function PlatformHome({req}:{req:Request}){
   const {t,locale}=await serverI18n(),spaces=publicSpaces(req),user=currentUser(req);

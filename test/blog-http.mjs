@@ -38,5 +38,22 @@ try{
  assert.equal((await fetch(base+'/u/'+mine.handle,{redirect:'manual'})).status,307);assert.equal((await fetch(base+'/api/spaces/blog-qr/'+mine.handle)).status,200);
  const profile=await(await fetch(base+'/api/community/members/'+id)).json();assert.equal(profile.blog,'/blog/'+mine.handle);
  const latest=await json('/api/spaces/mine',undefined,member);await json('/api/spaces/offline',{revision:latest.revision},member);assert.equal((await fetch(raw)).status,404);
- console.log('Homepage HTTP checks passed: upload, private preview, review, headers, sharing, redirects and takedown.');
+ // The actual upstream-derived template uses the member's reviewed snapshot, not source-author data.
+ let anx=await json('/api/spaces/mine',undefined,member);
+ anx=await json('/api/spaces/save',{...anx,profile:{...anx.profile,name:'Taylor Quinn',intro:'Independent designer building useful tools.',github:'https://github.com/example',skills:['TypeScript','Interface design'],experiences:[{id:randomUUID(),title:'Independent developer',type:'Design & engineering',start:'2024-01',end:'',description:'Building small, thoughtful products.',visible:true,career:true}]},layout:{...anx.layout,blog:{mode:'theme',theme:'anx',bundleId:'',sections:['projects','articles']}}},member);
+ let anxReview=await json('/api/spaces/submit',{revision:anx.revision,accepted:true},member);
+ assert.equal((await fetch(base+'/blog/'+anx.handle)).status,404,'An unapproved theme stays private');
+ const pendingAnx=anxReview.reviews.find(x=>x.kind==='board'&&x.status==='pending');
+ await json('/api/admin/spaces/reviews',{id:pendingAnx.id,action:'approve',checked:true,reason:'Checked Anx template and member-owned data'},owner);
+ for(const language of ['en','zh']){
+  const themed=await fetch(base+'/blog/'+anx.handle,{headers:{Cookie:'site-locale='+language}});assert.equal(themed.status,200);const html=await themed.text();
+  assert.match(html,/data-home-theme="anx"/);assert.match(html,/Taylor Quinn/);assert.match(html,/Independent designer building useful tools/);assert.match(html,/anx-portfolio/);assert.match(html,/anx-body-/);assert.doesNotMatch(html,/Avatar with sketch|4498 contributions|USER\.avatar/);
+  assert.match(html,language==='en'?/Template adapted from/:/模板改编自/);
+ }
+ assert.equal((await fetch(base+'/api/spaces/blog-qr/'+anx.handle)).status,200);
+ const changed=await json('/api/spaces/mine',undefined,member);await json('/api/spaces/save',{...changed,profile:{...changed.profile,name:'Unreviewed replacement'}},member);
+ const stillReviewed=await(await fetch(base+'/blog/'+anx.handle)).text();assert.match(stillReviewed,/Taylor Quinn/);assert.doesNotMatch(stillReviewed,/Unreviewed replacement/);
+ const directoryPage=await(await fetch(base+'/blogs')).text();assert.match(directoryPage,/workspace\/blog\?template=anx/);
+ const finalAnx=await json('/api/spaces/mine',undefined,member);await json('/api/spaces/offline',{revision:finalAnx.revision},member);assert.equal((await fetch(base+'/blog/'+anx.handle)).status,404);
+ console.log('Homepage HTTP checks passed: static uploads, sandbox, reviewed Anx template, bilingual content, stable sharing and takedown.');
 }finally{if(adminServer)await stopServer(adminServer);if(server)await stopServer(server);await rm(directory,{recursive:true,force:true})}

@@ -4,9 +4,24 @@ Each member has a blog at `/blog/<handle>`. A member can use a built-in theme or
 
 ## Built-in themes
 
-The theme picker includes **Pixel journal**, **Scenic journal**, **Editorial journal**, **Minimal profile** and **Developer**. Profile, skills, experience, projects, writing and links use the member's own data. Empty optional sections are hidden. Covers and avatars must be files owned by that member. Saving changes only changes the draft; approval publishes a fixed snapshot.
+The theme picker includes **Anx Portfolio**, **Pixel journal**, **Scenic journal**, **Editorial journal**, **Minimal profile** and **Developer**. Profile, skills, experience, projects, writing and links use the member's own data. Empty optional sections are hidden. Covers and avatars must be files owned by that member. Saving changes only changes the draft; approval publishes a fixed snapshot.
 
-Pixel journal uses an original geometric monogram and a fine-rule profile layout inspired by [Anx's portfolio](https://github.com/AnxForever/anx-portfolio). Scenic journal uses a wide banner, profile column and dark reading cards inspired by [Fuwari](https://github.com/saicaca/fuwari). Both reference repositories use MIT licenses. These SpaceYew themes were implemented independently: no upstream code, branding, avatars or illustrations were copied. The default landscape is an existing original, AI-generated SpaceYew demo asset, labelled as such; members may replace it with their own cover. No GitHub activity or personal facts are invented.
+Pixel journal uses an original geometric monogram and a fine-rule profile layout inspired by [Anx's portfolio](https://github.com/AnxForever/anx-portfolio). Scenic journal uses a wide banner, profile column and dark reading cards inspired by [Fuwari](https://github.com/saicaca/fuwari). Both reference repositories use MIT licenses. These two SpaceYew themes (Pixel journal and Scenic journal) were implemented independently: no upstream code, branding, avatars or illustrations were copied. The default landscape is an existing original, AI-generated SpaceYew demo asset, labelled as such; members may replace it with their own cover. No GitHub activity or personal facts are invented.
+
+## Use Anx Portfolio
+
+The built-in Anx Portfolio template adapts actual [anx-portfolio source](https://github.com/AnxForever/anx-portfolio/tree/a7434847797658402d50fba29827eef246102bb7): the layered pixel signature, profile-header grid, ruled panels and work layout. The original branding, portraits and personal facts are replaced by each member's profile. No verification badge, contribution graph, statistics or endorsements are fabricated.
+
+1. Choose **Blog homes → Use Anx Portfolio**, or open `/workspace/blog?template=anx`. Sign in if needed; your choice survives sign-in and only changes the draft.
+2. Fill in your profile, avatar, introduction, public contacts and experience. Manage optional projects, articles and resources in your blog's content area. Empty sections are hidden.
+3. Preview, save the draft, confirm publication rights and submit for review.
+4. Once approved, share `/blog/<handle>` using a copied link, system sharing or a QR code. Updates keep the same address; the approved version remains visible while a revision awaits review. Taking it offline removes public access.
+
+Every member can use this template independently, without installing dependencies, connecting GitHub or running a build. Existing account isolation, upload ownership and review snapshots apply. The adaptation covers the profile, skills, experience and optional content; it does not include upstream GitHub APIs, search, advertising, sponsorship or site administration services.
+
+The original repository is a Next.js server application. Its source ZIP is **not** a deployable static archive. Use the built-in adaptation, or complete your own compatible static export before following the upload instructions below. SpaceYew does not install or execute arbitrary user repositories or server programs.
+
+The adapted code retains its [MIT notice](licenses/anx-portfolio-MIT.txt) and [brand policy](licenses/anx-portfolio-BRAND.md). SpaceYew's restrictive license does not override these third-party rights.
 
 ## Upload an existing site
 

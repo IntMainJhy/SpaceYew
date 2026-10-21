@@ -30,7 +30,7 @@ SpaceYew 将博客主页、共享文档、独立 AI Skill 和实用资源汇聚�
 
 ### 博客主页设置
 
-选择内置主题、预览个人资料，或上传 HTML / ZIP 静态网站。当前编辑器还新增了像素手记与远景日记两种主题。
+选择内置主题、预览个人资料，或上传 HTML / ZIP 静态网站。当前编辑器支持 Anx Portfolio 源码适配版、像素手记与远景日记等六套主题。
 
 ![SpaceYew 个人主页设置，展示制作方式与内置主题](docs/screenshots/editor.png)
 
@@ -44,7 +44,7 @@ SpaceYew 将博客主页、共享文档、独立 AI Skill 和实用资源汇聚�
 
 | 模块 | 可以做什么 |
 | --- | --- |
-| 博客主页 | 五套适配手机与桌面的主题，包括浅色格线 Folio 与深色大封面 Panorama；以介绍、经历、技能、作品和联系方式为主，文章与资源为可选栏目 |
+| 博客主页 | 六套适配手机与桌面的主题，包括 Anx Portfolio 源码适配版、浅色格线 Folio 与深色大封面 Panorama；以介绍、经历、技能、作品和联系方式为主，文章与资源为可选栏目 |
 | 静态网站托管 | 上传 HTML 或包含相对路径 CSS / JS / 素材的 ZIP；隔离预览、固定版本审核、稳定的分享地址，并提供中英文 HTML 入门模板 |
 | 共享文档 | 分类封面看板、图片加简介、带左侧目录的详情阅读；成员可发布教程，将文本、Markdown 或 HTML 导入编辑器 |
 | Skill 目录 | 17 项独立维护的 GitHub Skill：Vercel React/组件组合、Impeccable、UI UX Pro Max、Superpowers 排错/TDD、Obsidian Markdown/JSON Canvas、8 项 GSAP 与 VibeHub；支持封面卡片、分类/搜索/AI 工具筛选，以及场景、示例、安装命令和多语言提示词一键复制 |

@@ -11758,5 +11758,45 @@
   "浏览内容栏目": [
     "Explore the catalogs",
     "コンテンツ一覧を見る"
+  ],
+  "Anx Portfolio": [
+    "Anx Portfolio",
+    "Anx Portfolio"
+  ],
+  "使用 Anx Portfolio 模板": [
+    "Use Anx Portfolio",
+    "Anx Portfolio を使う"
+  ],
+  "保持联系": [
+    "Keep in touch",
+    "つながる"
+  ],
+  "原项目与 MIT 许可": [
+    "Original project & MIT license",
+    "元のプロジェクトと MIT ライセンス"
+  ],
+  "想用 Anx Portfolio？选择内置模板即可发布；这里上传你已构建好的静态网站，不是 GitHub 源码。": [
+    "Want Anx Portfolio? Choose the built-in template. This upload accepts a built static website, rather than GitHub source code.",
+    "Anx Portfolio を使う場合は内蔵テンプレートを選択してください。ここでは GitHub のソースではなく、ビルド済みの静的サイトをアップロードします。"
+  ],
+  "来自 anx-portfolio 的内置适配版，立体像素签名与细线个人档案。": [
+    "An anx-portfolio adaptation with a dimensional pixel signature and ruled profile layout.",
+    "anx-portfolio をベースにした、立体的なピクセル署名と細線レイアウトのテンプレート。"
+  ],
+  "模板使用成员自己的资料，不包含原作者的头像、个人经历或虚构贡献记录。": [
+    "The template uses your own profile, without the original author’s portrait, personal history or fabricated contributions.",
+    "自分のプロフィールを使用します。原作者の顔写真や経歴、架空の貢献記録は含まれません。"
+  ],
+  "模板改编自": [
+    "Template adapted from",
+    "テンプレートのベース"
+  ],
+  "用 Anx Portfolio 模板建立自己的博客，或上传已经做好的静态网站。": [
+    "Build your blog with Anx Portfolio, or upload your own finished static website.",
+    "Anx Portfolio で自分のブログを作るか、完成した静的サイトをアップロードできます。"
+  ],
+  "直接使用 Anx Portfolio 模板：编辑自己的资料与作品，预览后提交审核，无需安装或构建。": [
+    "Use Anx Portfolio directly: edit your profile and work, preview, then submit for review. No installation or build needed.",
+    "Anx Portfolio テンプレートをそのまま利用。プロフィールと作品を編集し、プレビューして審査に提出できます。インストールやビルドは不要です。"
   ]
 }

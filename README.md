@@ -44,7 +44,7 @@ A profile-first page for your introduction, skills, experience and work.
 
 | Area | Capabilities |
 | --- | --- |
-| Blog homepages | Five responsive themes, including a light ruled Folio layout and a dark, cover-led Panorama layout; introduce your experience, skills, work and contact details, with optional notes and resources |
+| Blog homepages | Six responsive themes, including the MIT-derived Anx Portfolio adaptation, a light ruled Folio layout and a dark, cover-led Panorama layout; introduce your experience, skills, work and contact details, with optional notes and resources |
 | Static website hosting | Upload HTML or a ZIP with relative CSS/JS/assets, inspect an isolated preview and submit a fixed version for review; downloadable English/Chinese HTML starters and a stable branded URL help members get started |
 | Shared documentation | Categorized image-and-description boards, article details with section navigation, and member-authored tutorials; import text, Markdown or HTML into the editor |
 | Skill directory | 17 independently maintained GitHub Skills: Vercel React/composition, Impeccable, UI UX Pro Max, Superpowers debugging/TDD, Obsidian Markdown/JSON Canvas, eight GSAP Skills and VibeHub; cover cards, category/search/tool filters, detailed scenarios, installation commands and localized copyable prompts |

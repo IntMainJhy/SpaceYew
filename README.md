@@ -4,7 +4,7 @@
 
 **Let your work tell your story.**
 
-SpaceYew is a personal showcase and knowledge-sharing community for creators and developers. Organize your projects, development notes, resources and experience in your own workspace, arrange them into a showcase board or résumé, and submit selected work to the community.
+SpaceYew brings personal homepages and a knowledge-sharing community together. Introduce yourself in depth through your story, experience, skills, work and contact links. Choose a built-in theme, or upload a static website you designed yourself; share it through a branded link and QR code.
 
 This repository contains the website's frontend, backend, tests and deployment examples, making its interface, content model and permission system available to study. It is built with Next.js, React, TypeScript and Node.js's built-in SQLite.
 
@@ -28,19 +28,26 @@ A feed of shared work, member recommendations and category navigation.
 
 ![SpaceYew community feed in English with shared posts, interaction controls and sidebars](docs/screenshots/community-en.jpg)
 
-### Showcase editor
+### Personal homepage settings
 
-Modules and layers, a canvas preview and editing controls in one workspace.
+Choose an Editorial, Minimal or Developer theme, preview your personal profile, or upload an HTML/ZIP website.
 
-![SpaceYew web showcase editor in English with layers, a central preview and module settings](docs/screenshots/editor-en.jpg)
+![SpaceYew personal homepage settings in English](docs/screenshots/editor-en.png)
+
+### Personal homepage
+
+A profile-first page for your introduction, skills, experience and work.
+
+![SpaceYew personal homepage in English](docs/screenshots/personal-homepage-en.png)
 
 ## Features
 
 | Area | Capabilities |
 | --- | --- |
-| Showcase boards | Arrange your profile, projects, notes, resources, experience and skills using modules or a freeform canvas; preview screen sizes and submit a board for publication review |
+| Personal homepages | Present your introduction, experience, skills, work and contact details using three responsive themes, with optional notes and resources |
+| Static website hosting | Upload HTML or a ZIP with relative CSS/JS/assets, inspect an isolated preview, then submit a fixed version for review; public pages retain SpaceYew branding |
 | Content and files | Edit projects, articles and resources in account-isolated workspaces; manage drafts, versions, images, attachments and file references |
-| Profiles and résumés | Turn published profile details, experience and selected projects into a personal page and printable résumé |
+| Sharing & community profiles | Copy a public link, share with the system sheet or download a QR code; community profiles show a short introduction and link to the full personal homepage |
 | Developer community | Browse posts, discover members, follow, like, bookmark, repost and comment; submissions are reviewed before publication |
 | Administration | Role-based content review, reports, notifications, traffic statistics and audit logs for owners, reviewers and members |
 | Tool integration | Connect to the website workspace through a submission Skill and local MCP integration, with scoped access to content and drafts |
@@ -51,7 +58,11 @@ The download page can link to externally hosted client installers. Client binari
 
 A white-and-ink palette, flowing pastel backgrounds and editorial serif typography give the website a consistent visual language. The community uses an X-style social layout, while the workspace provides a wider editing area. GSAP connects page and navigation transitions, and the promotional strip keeps scrolling continuously during in-site navigation.
 
-The interface supports English, Simplified Chinese and Japanese across desktop, tablet and mobile, with keyboard interaction and reduced-motion behavior. Themes chosen by showcase authors are independent of the shared website interface.
+The interface supports English, Simplified Chinese and Japanese across desktop, tablet and mobile, with keyboard interaction and reduced-motion behavior. Themes chosen by homepage authors are independent of the shared website interface.
+
+Static hosting accepts UTF-8 HTML (5 MB) or ZIP files (25 MB compressed, 50 MB extracted, up to 1,000 entries). Packages need `index.html` or `index.htm` and relative asset paths. Browser-side interactions work in an opaque-origin sandbox; external scripts, API requests, forms and server-side execution are blocked. Sources and extracted files count toward storage, with up to 20 immutable packages per account. Publishing remains limited to the existing local qualification and review workflow; this change does not enable public uploads on a production service. Backups retain source packages and restore their verified static assets.
+
+Legacy `/u/...` and `/workspace/studio` website URLs redirect to personal homepages and their settings. Existing content and backend data contracts remain intact.
 
 ## Technology
 
@@ -111,6 +122,7 @@ The local environment template contains only loopback URLs and cookie settings. 
 npm test
 npm run typecheck
 npm run build
+npm run test:homepage:http
 npm start
 ```
 

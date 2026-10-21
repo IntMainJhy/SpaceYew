@@ -216,8 +216,8 @@
     "新しいパスワードが一致しません。"
   ],
   "个人主页": [
-    "Profile",
-    "プロフィール"
+    "Personal homepage",
+    "個人ホームページ"
   ],
   "个人主页内容": [
     "Profile content",
@@ -261,7 +261,7 @@
   ],
   "个文件": [
     "files",
-    "件のファイル"
+    "ファイル"
   ],
   "主动下架": [
     "Take my post offline",
@@ -2572,8 +2572,8 @@
     "表示"
   ],
   "查看个人主页": [
-    "View profile",
-    "プロフィールを見る"
+    "View personal homepage",
+    "個人ホームページを見る"
   ],
   "查看作者": [
     "View author",
@@ -8448,8 +8448,8 @@
     "個人ボードを作る"
   ],
   "整理资料、添加内容，预览后再提交公开。": [
-    "Add your profile and content, then preview before submitting for publication.",
-    "プロフィールとコンテンツを整理し、プレビューしてから公開審査へ提出します。"
+    "Add your details and work, preview your homepage, then submit it for publication.",
+    "資料と作品を追加し、プレビューして公開を申請。"
   ],
   "完善资料与经历": [
     "Add your profile and experience",
@@ -8714,5 +8714,801 @@
   "让 AI 工具协助整理与投稿。": [
     "Let AI tools help organize and submit your work.",
     "AI ツールで整理や投稿を進めましょう。"
+  ],
+  "一句话介绍（选填）": [
+    "One-line introduction (optional)",
+    "ひとこと紹介（任意）"
+  ],
+  "上传 HTML 或 ZIP 静态网站，保留你的设计与交互，用一个地址分享。": [
+    "Upload a static HTML or ZIP website. Keep your design and interactions, and share it with one link.",
+    "HTMLやZIPサイトをアップロード。自分のデザインと操作を一つのURLで共有。"
+  ],
+  "上传单个 HTML（5MB以内），或包含 index.html、CSS、JavaScript、图片与字体的 ZIP（25MB以内，解压后50MB以内）。": [
+    "Upload a single HTML file (up to 5 MB), or a ZIP with index.html, CSS, JavaScript, images and fonts (25 MB compressed, 50 MB extracted).",
+    "HTML（5MBまで）、またはindex.html、CSS、JavaScript、画像、フォントを含むZIP（圧縮25MB、展開50MBまで）をアップロード。"
+  ],
+  "上传我的网站": [
+    "Upload my website",
+    "自作サイトをアップロード"
+  ],
+  "上传静态网站": [
+    "Upload a static website",
+    "静的サイトをアップロード"
+  ],
+  "下架主页": [
+    "Take homepage offline",
+    "ホームページを非公開にする"
+  ],
+  "下架后公开链接将无法访问，确定继续吗？": [
+    "Your public link will stop working. Take this homepage offline?",
+    "公開URLにアクセスできなくなります。非公開にしますか？"
+  ],
+  "不使用封面": [
+    "No cover image",
+    "カバーなし"
+  ],
+  "个人主页与内容审核": [
+    "Homepage & content reviews",
+    "ホームページとコンテンツの審査"
+  ],
+  "个人主页二维码": [
+    "Personal homepage QR code",
+    "ホームページのQRコード"
+  ],
+  "个人主页审核": [
+    "Personal homepage reviews",
+    "個人ホームページの審査"
+  ],
+  "个人主页导航": [
+    "Homepage navigation",
+    "ホームページのナビゲーション"
+  ],
+  "个人主页已下架。": [
+    "Your homepage is now offline.",
+    "ホームページを非公開にしました。"
+  ],
+  "个人主页界面预览": [
+    "Homepage preview",
+    "ホームページ画面のプレビュー"
+  ],
+  "个人主页的内容结构": [
+    "The building blocks of your homepage",
+    "ホームページを構成するコンテンツ"
+  ],
+  "个人主页，": [
+    "Your personal homepage,",
+    "個人ホームページを、"
+  ],
+  "个人介绍、经历、技能与作品。": [
+    "Your story, experience, skills and work.",
+    "自己紹介、経歴、スキル、作品。"
+  ],
+  "个人介绍正在整理中。": [
+    "This introduction is still taking shape.",
+    "自己紹介は準備中です。"
+  ],
+  "个人档案": [
+    "Personal profile",
+    "プロフィール"
+  ],
+  "个人静态主页": [
+    "Personal static website",
+    "個人の静的サイト"
+  ],
+  "主页": [
+    "Homepage",
+    "ホームページ"
+  ],
+  "主页不存在": [
+    "Homepage not found.",
+    "ホームページが見つかりません。"
+  ],
+  "主页不存在或暂未公开": [
+    "This homepage is unavailable or not published.",
+    "このホームページは利用できないか、まだ公開されていません。"
+  ],
+  "主页主题": [
+    "Homepage theme",
+    "ホームページのテーマ"
+  ],
+  "主页主题对访客生效，独立于界面主题。": [
+    "The homepage theme is visible to visitors and separate from your interface theme.",
+    "展示テーマは訪問者に適用され、画面テーマとは独立しています。"
+  ],
+  "主页主题独立于界面主题，访客打开分享链接时看到你选择的样式。": [
+    "Your homepage theme is independent of the interface theme. Visitors see the style you choose.",
+    "ホームページのテーマは画面のテーマとは独立しています。訪問者にはあなたが選んだスタイルが表示されます。"
+  ],
+  "主页内容": [
+    "Homepage content",
+    "ホームページの内容"
+  ],
+  "主页内容审核通过": [
+    "Homepage content approved",
+    "ホームページの内容が承認されました"
+  ],
+  "主页内容已提交审核": [
+    "Homepage content submitted",
+    "ホームページの内容を審査に提出しました"
+  ],
+  "主页内容未通过审核": [
+    "Homepage content needs changes",
+    "ホームページの内容に修正が必要です"
+  ],
+  "主页地址": [
+    "Homepage address",
+    "ホームページのURL"
+  ],
+  "主页地址更改次数已达上限": [
+    "The homepage URL change limit has been reached.",
+    "ホームページURLの変更回数が上限に達しました。"
+  ],
+  "主页地址需为3–32位小写字母、数字和短横线，以字母开头": [
+    "Use 3–32 lowercase letters, numbers or hyphens, starting with a letter.",
+    "英小文字で始まる3〜32文字の英小文字・数字・ハイフンを使ってください。"
+  ],
+  "主页封面": [
+    "Homepage cover",
+    "カバー画像"
+  ],
+  "主页已提交审核。": [
+    "Homepage submitted for review.",
+    "審査を申請しました。"
+  ],
+  "主页已设为私密": [
+    "Homepage is now private",
+    "ホームページを非公開にしました"
+  ],
+  "主页文字过多，请精简至200KB以内": [
+    "Keep homepage text under 200 KB.",
+    "ホームページのテキストは200KB以内にしてください。"
+  ],
+  "主页最多60个模块": [
+    "A homepage supports up to 60 modules.",
+    "ホームページは60モジュールまでです。"
+  ],
+  "主页标题（选填）": [
+    "Homepage title (optional)",
+    "タイトル（任意）"
+  ],
+  "主页栏目": [
+    "Homepage sections",
+    "ホームページの項目"
+  ],
+  "主页编辑器": [
+    "Homepage studio",
+    "ホームページ編集"
+  ],
+  "主页草稿": [
+    "Homepage draft",
+    "ホームページの下書き"
+  ],
+  "主页草稿已保存。": [
+    "Homepage draft saved.",
+    "下書きを保存しました。"
+  ],
+  "主页草稿预览": [
+    "Homepage draft preview",
+    "ホームページの下書きプレビュー"
+  ],
+  "主页设置": [
+    "Homepage settings",
+    "ホームページの設定"
+  ],
+  "主页访问数据": [
+    "Homepage analytics",
+    "ホームページのアクセス解析"
+  ],
+  "主页链接": [
+    "Homepage link",
+    "ホームページのリンク"
+  ],
+  "主页，由你来定义。": [
+    "A homepage that is yours.",
+    "自分らしく作るホームページ。"
+  ],
+  "了解完整的我": [
+    "Visit my personal homepage",
+    "詳しいプロフィールを見る"
+  ],
+  "仅自己可见": [
+    "Visible only to you",
+    "自分にのみ表示"
+  ],
+  "作品、手记与资源共用一份内容库，发布后在主页和简历中同步展示。": [
+    "One library for your projects, notes and resources. Published content stays in sync across your homepage and résumé.",
+    "作品・ノート・リソースを一元管理。公開後はホームページと履歴書に反映されます。"
+  ],
+  "作品、经历、资源和简历共用一份内容库。更新一次，个人主页持续生长。": [
+    "One library connects your work, experience, resources and résumé. Update once and let your homepage grow.",
+    "作品・経歴・リソース・履歴書をひとつに。更新するたび、ホームページも育ちます。"
+  ],
+  "作品、经历与资源，一个主页。": [
+    "Your work, experience and resources. One homepage.",
+    "作品、経歴、リソースをひとつに。"
+  ],
+  "作品与项目": [
+    "Work & projects",
+    "作品とプロジェクト"
+  ],
+  "使用内置主题": [
+    "Use a built-in theme",
+    "内蔵テーマを使用"
+  ],
+  "侧栏名片与清晰的个人信息。": [
+    "A compact identity sidebar and a clear personal profile.",
+    "サイドバーの名刺と読みやすいプロフィール。"
+  ],
+  "保存与公开是两个步骤。检查公开资料和内容后提交审核，通过后才会出现在公开主页中。": [
+    "Saving and publishing are separate. Check your public details and content, then submit them for review. They appear on your public homepage after approval.",
+    "保存と公開は別の手順です。情報と内容を確認して審査を申請し、承認後に公開されます。"
+  ],
+  "保存只更新草稿。审核通过后，公开链接才会切换到新版本。": [
+    "Saving updates the draft. Your public link switches to the new version only after approval.",
+    "保存は下書きに反映されます。承認後に公開版が更新されます。"
+  ],
+  "保留原管理入口，已发布内容会自动显示在站长主页。": [
+    "Your existing management tools remain available. Published content also appears on your homepage.",
+    "既存の管理画面は引き続き利用でき、公開済みの内容はホームページにも反映されます。"
+  ],
+  "允许搜索引擎收录主页": [
+    "Allow search indexing",
+    "検索エンジンへの掲載を許可"
+  ],
+  "公开个人主页封面": [
+    "Public homepage cover",
+    "公開ホームページのカバー"
+  ],
+  "公开主页": [
+    "Public homepages",
+    "公開ホームページ"
+  ],
+  "公开后允许出现在主页发现页": [
+    "Include my published homepage in discovery",
+    "公開後に発見ページへ掲載する"
+  ],
+  "公开地址": [
+    "Public address",
+    "公開URL"
+  ],
+  "公开或待审主页的地址不能更改": [
+    "Published or pending homepage URLs cannot be changed.",
+    "公開済みまたは審査待ちのホームページのURLは変更できません。"
+  ],
+  "关于我": [
+    "About me",
+    "私について"
+  ],
+  "关闭收录不会让主页私密，公开链接仍可访问与转发。": [
+    "Turning off indexing does not make your homepage private. The public link can still be read and shared.",
+    "検索への掲載をオフにしても非公開にはなりません。公開リンクへのアクセスや共有は引き続き可能です。"
+  ],
+  "分享个人主页": [
+    "Share personal homepage",
+    "個人ホームページを共有"
+  ],
+  "分享主页": [
+    "Share homepage",
+    "ホームページを共有"
+  ],
+  "分享主页后，访问记录会在这里出现。": [
+    "Visits will appear here after you share your homepage.",
+    "ホームページを共有すると、アクセス記録が表示されます。"
+  ],
+  "分享的资源": [
+    "Shared resources",
+    "共有リソース"
+  ],
+  "创建我的主页": [
+    "Create my homepage",
+    "ホームページを作成"
+  ],
+  "发布与分享": [
+    "Publish & share",
+    "公開と共有"
+  ],
+  "发现个人主页": [
+    "Discover homepages",
+    "ホームページを探す"
+  ],
+  "发现主页": [
+    "Discover homepages",
+    "ホームページを探す"
+  ],
+  "发现更多主页": [
+    "Discover more homepages",
+    "もっとホームページを見る"
+  ],
+  "发现此浏览器中尚未保存的主页。": [
+    "An unsaved homepage draft was found in this browser.",
+    "このブラウザーに未保存のホームページが見つかりました。"
+  ],
+  "叙事杂志": [
+    "Editorial",
+    "エディトリアル"
+  ],
+  "可选内容栏目": [
+    "Optional content sections",
+    "追加できるセクション"
+  ],
+  "在主页展示": [
+    "Show on homepage",
+    "ホームページに表示"
+  ],
+  "在主页编辑器中选择内置主题或静态网站，调整内容和布局，检查桌面与手机预览。": [
+    "Choose a built-in theme or upload a static website. Preview the result before submitting it.",
+    "内蔵テーマを選ぶか静的サイトをアップロードし、公開前にプレビューで確認。"
+  ],
+  "在主页编辑器中选择模块或自由画布，调整内容和布局，检查桌面与手机预览。": [
+    "Choose modules or a freeform canvas in the homepage editor. Arrange your content and check desktop and mobile previews.",
+    "ホームページエディターでモジュールまたは自由配置キャンバスを選び、内容とレイアウトを調整して、デスクトップとモバイル表示を確認します。"
+  ],
+  "在发现主页中展示": [
+    "List in homepage discovery",
+    "ホームページ一覧に掲載する"
+  ],
+  "在社区分享发现，把作品、经历与资源，整理成你的个人主页。": [
+    "Share discoveries with the community. Bring your work, experience and resources together in your own homepage.",
+    "コミュニティで発見を共有し、作品・経歴・リソースを自分のホームページにまとめよう。"
+  ],
+  "填写资料，即可拥有完整的个人主页。": [
+    "Add your details to create a complete personal homepage.",
+    "情報を入力してホームページを作成。"
+  ],
+  "复制主页链接": [
+    "Copy homepage link",
+    "ホームページのリンクをコピー"
+  ],
+  "学习搭建主页": [
+    "Learn to build a homepage",
+    "ホームページの作り方"
+  ],
+  "完整介绍你自己": [
+    "Tell your story",
+    "あなたを詳しく紹介"
+  ],
+  "宽幅标题、留白与细致的经历编排。": [
+    "Expressive type, generous space and a considered timeline.",
+    "印象的な文字と余白、丁寧な経歴レイアウト。"
+  ],
+  "导入网站包后，打开隔离预览检查实际页面。": [
+    "Import a website package, then open its isolated preview to check the actual pages.",
+    "パッケージを読み込み、分離プレビューで実際のページを確認してください。"
+  ],
+  "已上传的网站版本": [
+    "Uploaded website versions",
+    "アップロード済みバージョン"
+  ],
+  "已发布内容同步到站长主页。": [
+    "Published content also appears on the owner's homepage.",
+    "公開コンテンツは運営者のホームページにも表示されます。"
+  ],
+  "已有一个固定版本等待审核，继续修改不会影响该版本。": [
+    "A fixed version is awaiting review. Further edits will not change that submission.",
+    "固定バージョンが審査中です。追加の編集は審査中の内容に影響しません。"
+  ],
+  "开发者": [
+    "Developer",
+    "デベロッパー"
+  ],
+  "开始我的主页": [
+    "Start my homepage",
+    "自分のホームページを始める"
+  ],
+  "待审主页": [
+    "Homepages awaiting review",
+    "審査待ちホームページ"
+  ],
+  "想展示作品，从个人主页开始；想交流发现，去社区看看。也可以先在内容库保存一份草稿。": [
+    "Build a homepage to show your work, visit the community to exchange ideas, or save a draft in your library.",
+    "作品を紹介するなら個人ホームページを作り、発見を共有するならコミュニティへ。まずライブラリに下書きを保存することもできます。"
+  ],
+  "我们来托管。": [
+    "We host it.",
+    "私たちが届ける。"
+  ],
+  "我的个人主页": [
+    "My homepage",
+    "マイホームページ"
+  ],
+  "我确认拥有资料、图片和网站文件的发布权利，并已检查全部页面与链接。": [
+    "I have the rights to publish these details, images and website files, and have checked every page and link.",
+    "資料、画像、サイトファイルの公開権を持ち、すべてのページとリンクを確認しました。"
+  ],
+  "打开主页编辑器": [
+    "Open homepage settings",
+    "ホームページの設定を開く"
+  ],
+  "打开隔离预览": [
+    "Open isolated preview",
+    "分離プレビューを開く"
+  ],
+  "托管自己制作的 HTML 或 ZIP 静态网站。": [
+    "Host a static website you built, as HTML or ZIP.",
+    "自作のHTMLまたはZIPサイトをホスティング。"
+  ],
+  "扫码打开公开主页": [
+    "Scan to open the public homepage",
+    "スキャンして公開ページを開く"
+  ],
+  "技能与专长": [
+    "Skills & expertise",
+    "スキルと専門分野"
+  ],
+  "把个人介绍、经历、技能和作品，整理成一份有质感的个人主页。": [
+    "Bring your story, experience, skills and work together in a thoughtfully designed personal homepage.",
+    "紹介、経歴、スキル、作品を美しい個人ホームページにまとめましょう。"
+  ],
+  "把经历、作品、手记和资源汇集成自己的主页。在社区分享，也让未来的合作从这里开始。": [
+    "Your experience, work and resources, in one shareable space. Build a homepage and find your community.",
+    "経歴・作品・ノート・リソースを、自分だけのホームページに。コミュニティでの共有から、次のつながりが生まれます。"
+  ],
+  "把自己，介绍得更完整。": [
+    "A fuller picture of you.",
+    "あなたを、もっと詳しく。"
+  ],
+  "提交主页审核": [
+    "Submit homepage for review",
+    "ホームページの審査を申請"
+  ],
+  "搭建个人主页": [
+    "Build your personal homepage",
+    "個人ホームページを作る"
+  ],
+  "文字与思考": [
+    "Notes & thoughts",
+    "文章と思考"
+  ],
+  "暂时没有公开主页。": [
+    "No public homepages yet.",
+    "公開ホームページはまだありません。"
+  ],
+  "更多图片可在“我的文件”中上传。": [
+    "Upload more images in My files.",
+    "画像は「マイファイル」で追加できます。"
+  ],
+  "最多保留20个网站版本；上传的源文件与解压文件均计入个人存储。": [
+    "Keep up to 20 website versions. Source uploads and extracted files both count toward your storage quota.",
+    "最大20バージョンを保存。元ファイルと展開ファイルは両方とも容量に含まれます。"
+  ],
+  "最近30天。仅统计此账号的公开主页，自己的访问不计入。": [
+    "Last 30 days. Only this account’s public homepage is counted; your own visits are excluded.",
+    "過去30日間。このアカウントの公開ホームページのみを集計し、自分のアクセスは除外します。"
+  ],
+  "有公开内容时才显示这些栏目，个人介绍始终是主页的重点。": [
+    "Sections appear when they contain published content. Your personal profile stays at the heart of the page.",
+    "公開コンテンツがあるセクションを表示します。自己紹介がページの中心です。"
+  ],
+  "查看主页": [
+    "View homepage",
+    "ホームページを見る"
+  ],
+  "查看公开主页": [
+    "View public homepage",
+    "公開ホームページを見る"
+  ],
+  "欢迎来到我的个人主页。": [
+    "Welcome to my homepage.",
+    "私のホームページへようこそ。"
+  ],
+  "正在打开个人主页…": [
+    "Opening this homepage…",
+    "ホームページを開いています…"
+  ],
+  "此主页地址不可使用": [
+    "This homepage URL cannot be used.",
+    "このホームページURLは利用できません。"
+  ],
+  "此主页地址已被使用": [
+    "This homepage URL is already in use.",
+    "このホームページURLはすでに使われています。"
+  ],
+  "每个主页，都是一种表达。": [
+    "Every homepage tells a story.",
+    "ホームページの数だけ、表現がある。"
+  ],
+  "每个人，都是一份独特的故事。": [
+    "Every person has a story to tell.",
+    "一人ひとりに、固有の物語。"
+  ],
+  "每个人，都有自己的空间。": [
+    "A space of your own.",
+    "一人ひとりに、自分の空間。"
+  ],
+  "浏览公开主页": [
+    "Browse public homepages",
+    "公開ホームページを見る"
+  ],
+  "深色界面与等宽字体，专注技术与作品。": [
+    "Dark tones and monospace type for your skills and work.",
+    "ダークカラーと等幅フォントで技術と作品を紹介。"
+  ],
+  "独立设计 · 由 SpaceYew 托管": [
+    "Independently designed · Hosted by SpaceYew",
+    "独自のデザイン · SpaceYewがホスティング"
+  ],
+  "现有站长资料已接入个人主页，继续在原内容后台维护即可同步更新。": [
+    "Your existing owner profile is connected to your homepage. Keep editing it in the original dashhomepage to update both.",
+    "既存の管理者プロフィールはホームページに接続されています。従来の管理画面で編集すると両方に反映されます。"
+  ],
+  "用模块快速搭建，或在自由画布中编排。把作品、手记与资源放在一起，做一个有你风格的个人主页。": [
+    "Start with ready-made blocks or arrange things freely on a canvas. Bring your work, notes and resources together in a homepage that reflects your style.",
+    "ブロックで手軽に組み立てても、自由なキャンバスに配置しても。作品、ノート、リソースをまとめて、あなたらしいホームページを作れます。"
+  ],
+  "由 SpaceYew 托管": [
+    "Hosted by SpaceYew",
+    "SpaceYewがホスティング"
+  ],
+  "登录后整理作品、经历与资源，搭建可分享的个人主页。": [
+    "Sign in to organize your work, experience and resources in a shareable homepage.",
+    "ログインして作品・経歴・リソースを整理し、共有できるホームページを作りましょう。"
+  ],
+  "登录后编辑主页。": [
+    "Sign in to edit your homepage.",
+    "ログインしてホームページを編集。"
+  ],
+  "登录后，从顶部的“我的工作台”进入。你的主页、内容库、文件和账号设置都在这里。": [
+    "After signing in, choose My workspace in the header. Your homepage, library, files and account settings are all there.",
+    "ログイン後、ヘッダーの「マイワークスペース」を開きます。ホームページ、ライブラリ、ファイル、アカウント設定を管理できます。"
+  ],
+  "目前没有待审主页或内容。": [
+    "No homepages or content are awaiting review.",
+    "審査待ちのホームページやコンテンツはありません。"
+  ],
+  "目标主页或内容暂不可用": [
+    "The target homepage or content is unavailable.",
+    "対象のホームページまたはコンテンツは現在利用できません。"
+  ],
+  "看看个人主页": [
+    "Explore a homepage",
+    "ホームページを見る"
+  ],
+  "社区、个人主页与持续更新的简历。": [
+    "Community, personal homepages and a résumé that grows with you.",
+    "コミュニティ、個人ホームページ、更新を重ねる履歴書。"
+  ],
+  "社区、个人主页与静态网站托管。": [
+    "Community, personal homepages and static website hosting.",
+    "コミュニティ、個人ホームページ、静的サイトホスティング。"
+  ],
+  "社区与个人主页": [
+    "Community & personal homepages",
+    "コミュニティと個人ホームページ"
+  ],
+  "社区名片": [
+    "Community profile",
+    "コミュニティのプロフィール"
+  ],
+  "站长资料与主页同步，在内容后台编辑。": [
+    "The site owner's profile is shared with this homepage. Edit it in content management.",
+    "運営者の情報はホームページと共有されています。管理画面で編集できます。"
+  ],
+  "简洁档案": [
+    "Minimal",
+    "ミニマル"
+  ],
+  "管理作品与内容": [
+    "Manage work & content",
+    "作品とコンテンツを管理"
+  ],
+  "编排并预览主页": [
+    "Design and preview your homepage",
+    "テーマを選んでプレビュー"
+  ],
+  "编辑个人资料": [
+    "Edit personal details",
+    "プロフィールを編集"
+  ],
+  "编辑我的主页": [
+    "Edit my homepage",
+    "ホームページを編集"
+  ],
+  "网站包已导入，请预览并保存。": [
+    "Website imported. Preview it, then save your draft.",
+    "サイトを読み込みました。プレビュー後に保存してください。"
+  ],
+  "自己制作，": [
+    "You build it.",
+    "自分で作り、"
+  ],
+  "自我介绍": [
+    "Introduction",
+    "自己紹介"
+  ],
+  "自由组合经历、作品与资源，搭建自己的个人主页。": [
+    "Build a personal homepage from your experience, work and resources.",
+    "経歴・作品・リソースを自由に組み合わせて、自分のホームページを。"
+  ],
+  "设计我的主页": [
+    "Design my homepage",
+    "自分のホームページをデザインする"
+  ],
+  "详细介绍、经历、技能和作品，汇成一个可以分享的地址。": [
+    "Your story, experience, skills and work, at one shareable address.",
+    "紹介、経歴、スキル、作品を一つのURLに。"
+  ],
+  "请使用相对路径引用文件。支持浏览器内交互，不支持后端、表单提交、外部脚本或接口请求。": [
+    "Use relative file paths. In-browser interactions work; backends, form submissions, external scripts and API requests are not supported.",
+    "ファイルは相対パスで参照してください。ブラウザー内の操作に対応。サーバー処理、フォーム送信、外部スクリプト、API通信には非対応です。"
+  ],
+  "资料已保存，提交主页审核后公开。": [
+    "Details saved. Submit your homepage for review to publish them.",
+    "保存しました。公開にはホームページの審査が必要です。"
+  ],
+  "近30天的公开主页访问，不含本人。": [
+    "Public homepage visits over the last 30 days, excluding your own.",
+    "直近30日間の公開ページへのアクセス（自分を除く）。"
+  ],
+  "还没有文件，上传后即可在内容和主页中使用。": [
+    "Upload files to use them in your content and homepage.",
+    "ファイルをアップロードすると、コンテンツやホームページで使用できます。"
+  ],
+  "这位成员还没有填写公开简介。": [
+    "This member has not added a public introduction yet.",
+    "このメンバーはまだ公開の紹介を書いていません。"
+  ],
+  "选择主页的制作方式": [
+    "Choose how to build your homepage",
+    "ホームページの作成方法"
+  ],
+  "选择网站包": [
+    "Choose a website package",
+    "サイトパッケージを選択"
+  ],
+  "静态主页预览": [
+    "Static website preview",
+    "静的サイトのプレビュー"
+  ],
+  "静态网站托管": [
+    "Static website hosting",
+    "静的サイトホスティング"
+  ],
+  "预览我的主页": [
+    "Preview my homepage",
+    "ホームページをプレビュー"
+  ],
+  "预览有效期为5分钟，过期后请重新打开。": [
+    "Previews expire after 5 minutes. Reopen the preview when needed.",
+    "プレビューの有効期限は5分です。期限後はもう一度開いてください。"
+  ],
+  "选择内置主题预览自己的资料；也可以上传 HTML 或 ZIP 静态网站，并打开隔离预览检查页面。": [
+    "Preview your details in a built-in theme, or upload an HTML/ZIP website and inspect it in an isolated preview.",
+    "内蔵テーマで資料を確認するか、HTML/ZIPサイトをアップロードして分離プレビューで確認してください。"
+  ],
+  "ZIP 根目录需要包含 index.html": [
+    "The ZIP root must contain index.html or index.htm.",
+    "ZIPのルートにindex.htmlまたはindex.htmが必要です。"
+  ],
+  "ZIP 网站包损坏或使用了不支持的压缩格式": [
+    "The ZIP is damaged or uses an unsupported compression format.",
+    "ZIPが破損しているか、未対応の圧縮形式です。"
+  ],
+  "个人空间存储不足": [
+    "Your workspace has insufficient storage.",
+    "保存容量が不足しています。"
+  ],
+  "主页设置格式无效": [
+    "Invalid homepage settings.",
+    "ホームページの設定形式が無効です。"
+  ],
+  "分享内容不存在": [
+    "This shared content is unavailable.",
+    "共有コンテンツが見つかりません。"
+  ],
+  "分享地址无效": [
+    "Invalid share address.",
+    "共有URLが無効です。"
+  ],
+  "单个 HTML 请控制在5MB以内": [
+    "A single HTML file must be no larger than 5 MB.",
+    "HTMLファイルは5MB以下にしてください。"
+  ],
+  "只能托管自己上传的文件": [
+    "You can only host files uploaded to your own account.",
+    "自分のアカウントでアップロードしたファイルのみ利用できます。"
+  ],
+  "已撤回审核。": [
+    "Review submission withdrawn.",
+    "審査申請を取り下げました。"
+  ],
+  "每个主页最多保留20个静态网站版本": [
+    "Each homepage can retain up to 20 static website versions.",
+    "静的サイトのバージョンは最大20件まで保存できます。"
+  ],
+  "社交链接格式无效": [
+    "Invalid social link format.",
+    "ソーシャルリンクの形式が無効です。"
+  ],
+  "经历格式无效": [
+    "Invalid experience format.",
+    "経歴の形式が無効です。"
+  ],
+  "网站包不存在": [
+    "Website package not found.",
+    "サイトパッケージが見つかりません。"
+  ],
+  "网站包不能包含符号链接或特殊文件": [
+    "Website packages cannot contain symbolic links or special files.",
+    "シンボリックリンクや特殊ファイルは含められません。"
+  ],
+  "网站包包含不支持的文件格式": [
+    "The website package contains an unsupported file type.",
+    "未対応のファイル形式が含まれています。"
+  ],
+  "网站包包含重复文件路径": [
+    "The website package contains duplicate file paths.",
+    "ファイルパスが重複しています。"
+  ],
+  "网站包导入过于频繁": [
+    "Too many website imports. Please try again later.",
+    "読み込み回数が多すぎます。しばらくしてから再試行してください。"
+  ],
+  "网站包最多包含1000个文件": [
+    "A website package may contain up to 1,000 entries.",
+    "サイトパッケージは最大1000項目までです。"
+  ],
+  "网站包标识无效": [
+    "Invalid website package identifier.",
+    "サイトパッケージのIDが無効です。"
+  ],
+  "网站包解压后最多50MB，单个文件最多10MB": [
+    "Extracted files may total up to 50 MB, with at most 10 MB per file.",
+    "展開後は合計50MB、1ファイル10MBまでです。"
+  ],
+  "网站包请控制在25MB以内": [
+    "The website package must be no larger than 25 MB.",
+    "サイトパッケージは25MB以下にしてください。"
+  ],
+  "网页与文件名请使用 UTF-8 编码": [
+    "Use UTF-8 encoding for HTML and file names.",
+    "HTMLとファイル名にはUTF-8を使用してください。"
+  ],
+  "请上传 HTML 或 ZIP 静态网站包": [
+    "Upload an HTML file or a ZIP static website package.",
+    "HTMLファイルまたはZIPサイトパッケージをアップロードしてください。"
+  ],
+  "请先上传静态网站": [
+    "Upload a static website first.",
+    "先に静的サイトをアップロードしてください。"
+  ],
+  "请求过于频繁，请稍后再试": [
+    "Too many requests. Please try again later.",
+    "リクエストが多すぎます。しばらくしてから再試行してください。"
+  ],
+  "请选择有效的 HTML 网页": [
+    "Choose a valid HTML page.",
+    "有効なHTMLページを選択してください。"
+  ],
+  "请选择有效的主页主题": [
+    "Choose a valid homepage theme.",
+    "有効なホームページのテーマを選択してください。"
+  ],
+  "请选择自己上传的网站文件": [
+    "Choose a website file from your own uploads.",
+    "自分でアップロードしたサイトファイルを選択してください。"
+  ],
+  "请重新登录后预览": [
+    "Sign in again to open the preview.",
+    "プレビューするには再度ログインしてください。"
+  ],
+  "静态文件路径无效": [
+    "Invalid static file path.",
+    "静的ファイルのパスが無効です。"
+  ],
+  "页面不存在": [
+    "Page not found.",
+    "ページが見つかりません。"
+  ],
+  "页面不存在或暂未公开": [
+    "This page is unavailable or has not been published.",
+    "ページが存在しないか、まだ公開されていません。"
+  ],
+  "预览已失效，请重新打开": [
+    "This preview has expired. Open a new preview.",
+    "プレビューの期限が切れました。再度開いてください。"
+  ],
+  "预览操作过于频繁": [
+    "Too many preview requests. Please try again later.",
+    "プレビュー回数が多すぎます。しばらくしてから再試行してください。"
   ]
 }

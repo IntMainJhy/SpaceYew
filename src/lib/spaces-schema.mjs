@@ -12,4 +12,6 @@ export function spacesSchema(d){d.exec(`
  CREATE TABLE IF NOT EXISTS connect_requests(key_id TEXT NOT NULL,request_id TEXT NOT NULL,fingerprint TEXT NOT NULL,response TEXT NOT NULL,created INTEGER NOT NULL,PRIMARY KEY(key_id,request_id));
  CREATE TABLE IF NOT EXISTS space_versions(id TEXT PRIMARY KEY,space TEXT NOT NULL REFERENCES spaces(id),revision INTEGER NOT NULL,data TEXT NOT NULL,created TEXT NOT NULL);
  CREATE TABLE IF NOT EXISTS space_case_targets(case_id TEXT PRIMARY KEY,space TEXT NOT NULL REFERENCES spaces(id),content TEXT);
+ CREATE TABLE IF NOT EXISTS blog_bundles(id TEXT PRIMARY KEY,space TEXT NOT NULL REFERENCES spaces(id),file TEXT NOT NULL REFERENCES files(id),manifest TEXT NOT NULL,size INTEGER NOT NULL,entry TEXT NOT NULL,created TEXT NOT NULL);
+ CREATE TABLE IF NOT EXISTS blog_previews(token TEXT PRIMARY KEY,bundle TEXT NOT NULL REFERENCES blog_bundles(id) ON DELETE CASCADE,session TEXT NOT NULL,actor TEXT NOT NULL,expires INTEGER NOT NULL);
  `);if(!d.prepare('PRAGMA table_info(uploads)').all().some(x=>x.name==='space_id'))d.exec('ALTER TABLE uploads ADD COLUMN space_id TEXT');}

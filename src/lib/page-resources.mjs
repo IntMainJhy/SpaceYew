@@ -9,7 +9,7 @@ export async function pageResources(req,path=[],query={}){
  async function load(path){const key=resourceKey(path);if(resources[key])return resources[key];const response=await handle(new Request(new URL(path,req.url),{headers:req.headers})),data=await response.json();return resources[key]={data:response.ok?data:null,error:response.ok?'':data.error,status:response.status};}
  const auth=await load('/api/auth/me'),user=auth.data?.user;
  const section=path[0]||'',params=new URLSearchParams(Object.entries(query).map(([key,value])=>[key,String(value||'')]));
- if(user&&section==='workspace'&&['studio','profile','library','files','insights','preview'].includes(path[1]))await load('/api/spaces/mine');
+ if(user&&section==='workspace'&&['blog','studio','profile','library','files','insights','preview'].includes(path[1]))await load('/api/spaces/mine');
  const queue=[];
  if(user&&section==='workspace'&&path[1]==='files')queue.push(load('/api/spaces/files?page=1'));
  const add=(url)=>queue.push(load(url));
@@ -39,7 +39,7 @@ export async function pageResources(req,path=[],query={}){
     }
    }else if(section==='community'){
     if(path[1]==='members'){
-     if(path[2]){const id=encodeURIComponent(path[2]);add('/api/community/members/'+id);add('/api/community/posts?member='+id+'&page=1');add('/api/community/members/'+id+'/following?page=1');add('/api/community/members/'+id+'/followers?page=1');}
+     if(path[2]){const id=encodeURIComponent(path[2]);add('/api/community/members/'+id);}
      else add('/api/community/members?'+new URLSearchParams({q:String(query.q||''),page:'1'}));
     }else if(path[1]){const id=encodeURIComponent(path[1]);add('/api/community/posts/'+id);add('/api/community/comments/'+id+'?page=1');}
     else add('/api/community/posts?'+params);

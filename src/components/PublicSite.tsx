@@ -203,13 +203,13 @@ export async function PublicFrame({path=[],children}:{path?:string[],children:Re
   return <div className={'organic-site'+(authPage?' public-auth-site':path.length?' public-content-site':'')}>
     <HomeFlowBackground interactive={!path.length}/>
     <a className="organic-skip" href="#main">{tr("跳到主要内容")}</a><Tracker/>
-    <header className="organic-header"><div className="organic-container organic-header-inner"><Link href="/" className="organic-brand">SpaceYew<span>{tr('社区与个人展板')}</span></Link>
+    <header className="organic-header"><div className="organic-container organic-header-inner"><Link href="/" className="organic-brand">SpaceYew<span>{tr('社区与个人主页')}</span></Link>
       <div className="organic-header-tools">
       <nav className="organic-desktop-nav" aria-label={tr("主导航")}>{nav.map(([href, label]) => <Link href={href} className={active(href) ? 'is-active' : ''} aria-current={current === href ? 'page' : active(href) ? 'location' : undefined} key={href}>{tr(label)}</Link>)}<AuthNav/></nav>
       <details className="organic-mobile-menu" name="site-tools"><summary aria-label={tr("菜单")}><span className="organic-menu-label">{tr("菜单")}</span><span aria-hidden="true"><i/><i/></span></summary><nav aria-label={tr("手机导航")}>{nav.map(([href, label]) => <Link href={href} aria-current={active(href) ? 'page' : undefined} key={href}>{tr(label)}</Link>)}<AuthNav mobile/></nav></details>
       <SiteTools/></div>
     </div></header>
     <main id="main" className="organic-container organic-main"><PageMotion>{children}</PageMotion></main>
-    <footer className="organic-footer organic-footer-compact"><div className="organic-container"><Link href="/" className="organic-footer-signature">SpaceYew</Link><nav aria-label={tr("页脚导航")}><Link href="/downloads">{tr("客户端下载")}</Link><Link href="/showcases">{tr("发现展板")}</Link><Link href="/legal/community">{tr("社区规则")}</Link><Link href="/legal/terms">{tr("用户协议")}</Link><Link href="/legal/privacy">{tr("隐私政策")}</Link><Link href="/report">{tr("举报投诉")}</Link>{appSurface()!=='platform'&&<Link href="/admin">{tr("内容管理")}</Link>}</nav></div><div className="organic-container organic-footer-filing"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">蜀ICP备2026018870号-2</a></div></footer>
+    <footer className="organic-footer organic-footer-compact"><div className="organic-container"><Link href="/" className="organic-footer-signature">SpaceYew</Link><nav aria-label={tr("页脚导航")}><Link href="/downloads">{tr("客户端下载")}</Link><Link href="/blogs">{tr("发现主页")}</Link><Link href="/legal/community">{tr("社区规则")}</Link><Link href="/legal/terms">{tr("用户协议")}</Link><Link href="/legal/privacy">{tr("隐私政策")}</Link><Link href="/report">{tr("举报投诉")}</Link>{appSurface()!=='platform'&&<Link href="/admin">{tr("内容管理")}</Link>}</nav></div><div className="organic-container organic-footer-filing"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">蜀ICP备2026018870号-2</a></div></footer>
   </div>;
 }

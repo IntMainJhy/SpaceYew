@@ -1,7 +1,7 @@
 import {registrationEnabled} from './app-access.mjs';
 import {attachContentCase,linkContentCase,contentCaseInfo,contentCaseAction} from './content-cases.mjs';
 import {caseTargetIds} from './navigation.mjs';
-import {attachSpaceCase,spaceCaseAction,publicSpaceLink} from './spaces.mjs';
+import {attachSpaceCase,spaceCaseAction,publicSpaceLink,publicSpace} from './spaces.mjs';
 import {normalizeEmail,verifyEmailChallenge,consumeEmailChallenge,emailAccount} from './email-auth.mjs';
 import {clientIp} from './request-security.mjs';
 import {ownsCover} from './covers.mjs';
@@ -102,7 +102,8 @@ function memberProfile(id,viewer=''){
  const person=actorInfo(id);requireValue(person,'成员主页暂不可用',404);const d=db();
  const posts=d.prepare(`SELECT COUNT(*) n FROM community_posts p JOIN community_users u ON u.id=p.author WHERE ${publicSelection} AND p.author=?`).get(id).n;
  const likes=d.prepare(`SELECT COUNT(*) n FROM community_reactions r JOIN community_posts p ON p.id=r.post JOIN community_users u ON u.id=p.author WHERE ${publicSelection} AND p.author=? AND r.kind='like'`).get(id).n;
- return{...person,showcase:publicSpaceLink({url:process.env.PUBLIC_URL||'http://localhost:3008',headers:new Headers()},id),postCount:posts,likeCount:likes,followerCount:d.prepare('SELECT COUNT(*) n FROM community_follows WHERE following=?').get(id).n,followingCount:d.prepare('SELECT COUNT(*) n FROM community_follows WHERE follower=?').get(id).n,following:!!d.prepare('SELECT 1 FROM community_follows WHERE follower=? AND following=?').get(viewer,id)};
+ const showcase=publicSpaceLink({url:process.env.PUBLIC_URL||'http://localhost:3008',headers:new Headers()},id);let intro='',introTranslations={};if(showcase){const profile=publicSpace({url:process.env.PUBLIC_URL||'http://localhost:3008',headers:new Headers()},showcase.split('/')[2]).profile;intro=profile.intro.slice(0,260);introTranslations=Object.fromEntries(Object.entries(profile.translations||{}).map(([locale,value])=>[locale,value.intro?.slice(0,260)||intro]));}
+ return{...person,showcase,blog:showcase?.replace('/u/','/blog/')||null,intro,introTranslations,postCount:posts,likeCount:likes,followerCount:d.prepare('SELECT COUNT(*) n FROM community_follows WHERE following=?').get(id).n,followingCount:d.prepare('SELECT COUNT(*) n FROM community_follows WHERE follower=?').get(id).n,following:!!d.prepare('SELECT 1 FROM community_follows WHERE follower=? AND following=?').get(viewer,id)};
 }
 function graph(id,kind,viewer,page){requireValue(actorInfo(id),'成员主页暂不可用',404);const field=kind==='following'?'following':'follower',other=kind==='following'?'follower':'following';const people=db().prepare(`SELECT ${field} id FROM community_follows WHERE ${other}=? ORDER BY created DESC`).all(id).map(row=>actorInfo(row.id)).filter(Boolean);const total=people.length,pages=Math.max(1,Math.ceil(total/12)),current=Math.max(1,Math.min(pages,Math.floor(Number(page))||1));return{items:people.slice((current-1)*12,current*12).map(p=>memberProfile(p.id,viewer)),total,pages,page:current}}
 function directory(query,viewer){

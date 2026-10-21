@@ -2,14 +2,14 @@
 export const guides=[
  {slug:'getting-started',title:'开始使用 SpaceYew',summary:'从登录账号到找到自己的工作台。',sections:[
   {title:'登录你的账号',text:'使用已有的网站账号或已验证邮箱和密码登录。邀请注册是否开放，以登录页面显示为准。',href:'/login',action:'前往登录'},
-  {title:'找到你的工作台',text:'登录后，从顶部的“我的工作台”进入。你的展板、内容库、文件和账号设置都在这里。',href:'/workspace',action:'打开工作台'},
-  {title:'选择下一步',text:'想展示作品，从个人展板开始；想交流发现，去社区看看。也可以先在内容库保存一份草稿。',href:'/docs/showcase',action:'学习搭建展板'}
+  {title:'找到你的工作台',text:'登录后，从顶部的“我的工作台”进入。你的主页、内容库、文件和账号设置都在这里。',href:'/workspace',action:'打开工作台'},
+  {title:'选择下一步',text:'想展示作品，从个人主页开始；想交流发现，去社区看看。也可以先在内容库保存一份草稿。',href:'/docs/showcase',action:'学习搭建主页'}
  ]},
- {slug:'showcase',title:'搭建个人展板',summary:'整理资料、添加内容，预览后再提交公开。',sections:[
+ {slug:'showcase',title:'搭建个人主页',summary:'整理资料、添加内容，预览后再提交公开。',sections:[
   {title:'完善资料与经历',text:'填写愿意公开的昵称、介绍、技能和经历。登录邮箱与公开联系邮箱分开管理。',href:'/workspace/profile',action:'编辑资料'},
   {title:'整理自己的内容',text:'在内容库添加项目、文章或资源，写清楚本人贡献、来源和使用许可。保存草稿后，可继续修改。',href:'/workspace/library',action:'打开内容库'},
-  {title:'编排并预览展板',text:'在展板编辑器中选择模块或自由画布，调整内容和布局，检查桌面与手机预览。',href:'/workspace/studio',action:'打开展板编辑器'},
-  {title:'提交审核后公开',text:'保存与公开是两个步骤。检查公开资料和内容后提交审核，通过后才会出现在公开展板中。',href:'/workspace/preview',action:'预览我的展板'}
+  {title:'编排并预览主页',text:'选择内置主题预览自己的资料；也可以上传 HTML 或 ZIP 静态网站，并打开隔离预览检查页面。',href:'/workspace/blog',action:'打开主页编辑器'},
+  {title:'提交审核后公开',text:'保存与公开是两个步骤。检查公开资料和内容后提交审核，通过后才会出现在公开主页中。',href:'/workspace/blog',action:'预览我的主页'}
  ]},
  {slug:'community',title:'在社区分享内容',summary:'写清来源与使用范围，让分享更容易被理解。',sections:[
   {title:'先看看社区',text:'浏览已公开的分享，按分类查找内容，也可以从成员主页了解作者。',href:'/community',action:'进入社区'},

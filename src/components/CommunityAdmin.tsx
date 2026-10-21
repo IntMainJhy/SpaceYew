@@ -14,7 +14,7 @@ import {PostCover} from './PostCover';
 import {Badge,CommunityField,CommunityText,Doc,Empty,Notice,Retry,Loading,Logout,primary,secondary,date,useResource} from './CommunityUI';
 
 const root='/api/admin/community/';
-const nav=[['spaces','grid','个人展板审核'],['','chart','治理概览'],['reviews','file','投稿审核'],['comments','comment','评论审核'],['reports','folder','举报与投诉'],['accounts','user','账号与邀请'],['audit','eye','治理记录']];
+const nav=[['spaces','grid','个人主页审核'],['','chart','治理概览'],['reviews','file','投稿审核'],['comments','comment','评论审核'],['reports','folder','举报与投诉'],['accounts','user','账号与邀请'],['audit','eye','治理记录']];
 function ReviewDocument({item,type}:{item:Doc,type?:string}){
  const {t:tr}=useLocale();
  if(typeof item.bodyHtml==='string')return <article className="case-site-snapshot">

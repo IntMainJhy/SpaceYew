@@ -29,6 +29,7 @@ import './product-motion.css';
 import './site-unified.css';
 import './management-tools.css';
 import './learning.css';
+import './blog.css';
 export const viewport:Viewport={width:'device-width',initialScale:1,viewportFit:'cover'};
 export const metadata:Metadata={applicationName:'SpaceYew',title:'SpaceYew',description:'Projects, experience, and shared resources.'};
 const designContract='<!-- SpaceYew: one shared X-style interface with white surfaces, ink controls, and the existing flowing background. Baskerville/Songti editorial type unifies headings, body copy and controls; code retains monospace. Public, workspace and management pages share this appearance; author-owned boards keep their independent styles. -->';

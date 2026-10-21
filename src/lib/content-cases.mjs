@@ -21,11 +21,11 @@ export function attachContentCase(req,caseId,target){
  const path=url.pathname.split('/').filter(Boolean).map(part=>{try{return decodeURIComponent(part)}catch{return part}});
  let type,slug,board;
  if(path.length===2&&types.includes(path[0]))[type,slug]=path;
- else if(path.length===4&&path[0]==='u'&&types.includes(path[2])){board=db().prepare('SELECT s.* FROM spaces s JOIN space_handles h ON h.space=s.id WHERE h.handle=? COLLATE NOCASE').get(path[1]);if(!board?.legacy)return false;[type,slug]=path.slice(2)}else return false;
+ else if(path.length===4&&['u','blog'].includes(path[0])&&types.includes(path[2])){board=db().prepare('SELECT s.* FROM spaces s JOIN space_handles h ON h.space=s.id WHERE h.handle=? COLLATE NOCASE').get(path[1]);if(!board?.legacy)return false;[type,slug]=path.slice(2)}else return false;
  const user=currentUser(req),content=db().prepare('SELECT * FROM content WHERE type=? AND slug=? AND deleted IS NULL').get(type,slug);
  if(!content)return false;
  if(board){
-  try{const visible=publicSpaceDocument(req,path[1],type,slug);if(visible.id!==content.id)return false}catch{requireValue(user?.role==='owner','目标展板或内容暂不可用',404)}
+  try{const visible=publicSpaceDocument(req,path[1],type,slug);if(visible.id!==content.id)return false}catch{requireValue(user?.role==='owner','目标主页或内容暂不可用',404)}
  }
  const accessible=content.status==='published'&&!contentHeld(content.id);
  requireValue(accessible||user?.role==='owner','目标内容暂不可用',404);

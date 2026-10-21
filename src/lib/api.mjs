@@ -1,8 +1,9 @@
+import {blogBundles} from './blog-hosting.mjs';
 import {accessConfig,apiAllowed,registrationEnabled,appSurface} from './app-access.mjs';
 import {managementLog,changedFields} from './management-log.mjs';
 import {spaceFiles} from './space-files.mjs';
 import {connectApi,manageKeys} from './connect.mjs';
-import {spaceQr} from './spaces-qr.mjs';
+import {spaceQr,blogQr} from './spaces-qr.mjs';
 import {spacesApi} from './spaces.mjs';
 import {spaceUploads} from './spaces-uploads.mjs';
 import {emailStatus,requestEmail,bindEmail,resetEmailPassword} from './email-auth.mjs';
@@ -26,6 +27,9 @@ export async function handle(req){try{const url=new URL(req.url),p=url.pathname.
  if(p.length===2&&p[0]==='community'&&p[1]==='avatar'&&['PUT','DELETE'].includes(method))return json(await changeAvatar(req));
  if(p.length===2&&p[0]==='community'&&p[1]==='covers'&&method==='PUT')return json(await uploadCover(req));
  if(p[0]==='community'||p[0]==='admin'&&p[1]==='community'){const input=method==='GET'?{}:await body(req,p[1]==='register'?8192:2200000);return json(communityApi(req,p,input,url))}
+ if(p[0]==='admin'&&p[1]==='spaces'&&p[2]==='blog-preview'&&p.length===4&&method==='POST'){requireValue(principal,'请先登录',401);requireValue(['owner','reviewer'].includes(principal.role),'没有审核权限',403);return json(await blogBundles(req,['spaces','blog-bundles',p[3],'preview'],await body(req,8192)))}
+ if(p[0]==='spaces'&&p[1]==='blog-bundles')return json(await blogBundles(req,p,method==='GET'?{}:await body(req,8192)));
+ if(p[0]==='spaces'&&p[1]==='blog-qr'&&p.length===3&&method==='GET')return await blogQr(req,p[2]);
  if(p[0]==='spaces'&&p[1]==='qr'&&p.length===3&&method==='GET')return await spaceQr(req,p[2]);
  if(p[0]==='spaces'&&p[1]==='keys')return json(manageKeys(req,method==='GET'?{}:await body(req,8192)));
  if(p[0]==='spaces'&&p[1]==='files')return json(await spaceFiles(req,p,{},url));

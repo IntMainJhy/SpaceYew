@@ -1,5 +1,5 @@
 import {db} from './db.mjs';
-import {spaceActor,ensureSpace} from './spaces.mjs';
+import {spaceActor,ensureSpace,spaceStorageBytes} from './spaces.mjs';
 import {cleanText,requireValue} from './content.mjs';
 import {removeFile,uploadInfo} from './uploads.mjs';
 
@@ -23,7 +23,7 @@ export async function spaceFiles(req,p,input,url){
  const q=cleanText(url.searchParams.get('q'),100),kind=url.searchParams.get('kind')||'all',status=url.searchParams.get('status')||'all';
  requireValue(['all','image','file'].includes(kind)&&['all','used','unused'].includes(status),'文件筛选无效');
  let items=d.prepare('SELECT f.*,a.created uploaded FROM files f JOIN space_assets a ON a.file=f.id WHERE a.space=? ORDER BY a.created DESC,f.id DESC').all(space.id).map(file=>({...file,references:spaceFileReferences(space.id,file.id)}));
- const used=items.reduce((sum,file)=>sum+file.size,0),count=items.length;
+ const used=spaceStorageBytes(space.id),count=items.length;
  items=items.filter(file=>(!q||file.name.toLowerCase().includes(q.toLowerCase()))&&(kind==='all'||(kind==='image')===file.mime.startsWith('image/'))&&(status==='all'||(status==='used')===(file.references.length>0)));
  const total=items.length,pages=Math.max(1,Math.ceil(total/20)),page=Math.max(1,Math.min(pages,Math.floor(Number(url.searchParams.get('page')))||1));
  const pending=d.prepare("SELECT * FROM uploads WHERE space_id=? AND status IN ('pending','assembling') ORDER BY updated DESC").all(space.id).map(uploadInfo);

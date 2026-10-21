@@ -84,9 +84,10 @@ test('legacy public detail and board section complaints are accepted without mis
  const ownerToken=A.login(request(),{username:'admin',password:process.env.INITIAL_ADMIN_PASSWORD});
  S.spacesApi(request(ownerToken),['spaces','content'],{type:'articles',slug:item.slug,data:{title:'同地址的私有草稿'}},new URL(process.env.PUBLIC_URL));
  assert.equal(S.publicSpaceDocument(request(),owner.handle,'articles',item.slug).id,item.id);
- const receipt=call('/u/'+owner.handle+'/articles/'+item.slug);
+ for(const prefix of ['u','blog']){const receipt=call('/'+prefix+'/'+owner.handle+'/articles/'+item.slug);
  assert.equal(d.prepare('SELECT author FROM community_cases WHERE id=?').get(receipt.id).author,'owner');
- assert.equal(d.prepare('SELECT 1 FROM space_case_targets WHERE case_id=?').get(receipt.id),undefined);
+ assert.equal(d.prepare('SELECT content FROM content_case_targets WHERE case_id=?').get(receipt.id).content,item.id);
+ assert.equal(d.prepare('SELECT 1 FROM space_case_targets WHERE case_id=?').get(receipt.id),undefined);}
  for(const section of ['resume','experience','projects','articles','resources']){
   const sectionReceipt=call('/u/'+owner.handle+'/'+section);
   assert.equal(d.prepare('SELECT space FROM space_case_targets WHERE case_id=?').get(sectionReceipt.id).space,owner.id);

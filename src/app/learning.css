@@ -110,6 +110,18 @@ html[data-ui] .organic-site .skill-command pre {margin:0;padding:18px;white-spac
 html[data-ui] .organic-site .skill-command code {font:13px/1.9 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:0;background:transparent;color:inherit;white-space:inherit;}
 .skill-command pre:focus-visible {outline:2px solid #fff;outline-offset:-4px;}
 .skill-detail-body .skill-command-error {padding:0 18px 16px;margin:0;color:#ffe3b5;font-size:13px;}
+.skill-usage-example {margin:20px 0 0;max-width:70ch;}
+.skill-usage-example>div+div {margin-top:20px;}
+.skill-usage-example dt {font-size:13px;font-weight:700;line-height:1.7;}
+.skill-usage-example dd {margin:6px 0 0;font-size:16px;line-height:1.9;}
+.skill-prompt {background:#f7f8f8;color:var(--organic-ink,#171717);border:1px solid var(--organic-line);}
+.skill-prompt .skill-command-toolbar {border-color:var(--organic-line);}
+.skill-prompt .skill-command-toolbar>span {font-size:14px;font-weight:700;}
+.skill-prompt-text {padding:18px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px;line-height:1.9;}
+html[data-ui] .organic-site .skill-prompt .skill-command-toolbar button {color:var(--organic-ink,#171717);}
+html[data-ui] .organic-site .skill-prompt .skill-command-toolbar button:is(:hover,:focus-visible,:active) {background:#e6e9e9;color:var(--organic-ink,#171717);}
+html[data-ui] .organic-site .skill-prompt .skill-command-toolbar button:focus-visible,.skill-prompt-text:focus-visible {outline:2px solid var(--organic-ink,#171717);outline-offset:-3px;}
+.skill-detail-body .skill-prompt .skill-command-error {color:#813526;}
 .skill-detail-body .skill-install-after {margin-top:24px;}
 .skill-detail-source>div {display:flex;align-items:center;flex-wrap:wrap;gap:16px 28px;}
 .skill-detail-source a,.skill-detail-related>a {display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:14px;text-decoration:underline;text-underline-offset:4px;}

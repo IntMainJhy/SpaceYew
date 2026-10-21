@@ -10174,5 +10174,437 @@
   "先开启代码执行与文件创建。把官方仓库中该 Skill 的完整文件夹打包为 ZIP，再到 Customize > Skills，点击 +、Create skill、Upload a skill，上传并启用。": [
     "Enable code execution and file creation. ZIP the complete skill folder from the official repository, then open Customize > Skills, choose +, Create skill, Upload a skill, upload the ZIP and enable it.",
     "コード実行とファイル作成を有効にします。公式リポジトリの該当 Skill フォルダー全体を ZIP にし、Customize > Skills で +、Create skill、Upload a skill を選んでアップロードし、有効にします。"
+  ],
+  "优化商品列表页的首次加载": [
+    "Improve a product listing’s initial load",
+    "商品一覧の初回読み込みを改善"
+  ],
+  "一个 Next.js 项目、商品列表页及其组件，以及现有的加载记录。": [
+    "A Next.js project, its product page and components, and an existing loading trace.",
+    "Next.js プロジェクト、商品ページとコンポーネント、既存の読み込み記録。"
+  ],
+  "定位串行请求和不必要的客户端渲染，先排优先级，再做最小修改并比较同一条件下的加载表现。": [
+    "Identify sequential requests and unnecessary client rendering, prioritize issues, then make a small change and compare under the same conditions.",
+    "直列リクエストと不要なクライアント描画を探し、優先順位を決め、最小限の変更を同じ条件で比較します。"
+  ],
+  "问题清单、修改后的代码、实际运行的检查结果，以及仍未验证的部分。": [
+    "A prioritized issue list, updated code, actual check results and any unverified areas.",
+    "優先順位付きの問題一覧、修正コード、実行した検証結果、未検証の項目。"
+  ],
+  "请使用 vercel-react-best-practices Skill 检查 [项目路径] 中的 [页面路径]。 重点检查数据请求瀑布、客户端重渲染和包体积。先按影响说明问题及证据，再做最小范围的优化，保持界面和业务行为一致。 运行项目已有的检查，并记录实际结果；性能数值只使用真实测量，未测量的项目请明确标注。": [
+    "Use the vercel-react-best-practices skill to review [page path] in [project path].\nFocus on request waterfalls, client rerenders and bundle size. Rank issues by impact with evidence, then make the smallest useful changes while preserving the interface and business behavior.\nRun the project’s existing checks and report actual results. Use measured performance figures only and label anything not measured.",
+    "vercel-react-best-practices Skill を使い、[プロジェクトパス] の [ページパス] を確認してください。\n取得の直列化、クライアントの再描画、バンドルサイズに注目し、証拠と影響順を示してから最小限の修正を行ってください。UI と業務動作は維持してください。\n既存の検証を実行して実際の結果を記録し、性能値は実測のみを使い、未測定の項目を明記してください。"
+  ],
+  "请复查刚才的性能修改：在相同环境下比较加载行为和构建结果，确认没有新增请求、缓存错误或交互回归。列出已验证的改进、未验证的假设，以及下一步最值得测量的一项。": [
+    "Review the performance changes under the same environment. Compare loading behavior and build output, and check for extra requests, caching errors or interaction regressions. Separate verified improvements from assumptions and suggest the next most useful measurement.",
+    "同じ環境で修正後の読み込み動作とビルド結果を比較し、追加リクエスト、キャッシュ不具合、操作の回帰がないか確認してください。検証済みの改善と仮説を分け、次に測るべき項目を一つ示してください。"
+  ],
+  "整理变体过多的共享组件": [
+    "Refactor a shared component with too many variants",
+    "バリエーションが多すぎる共通部品を整理"
+  ],
+  "一个带多组布尔参数的组件、调用它的页面和现有测试。": [
+    "A component with several boolean props, its callers and existing tests.",
+    "複数の真偽値 props を持つ部品、呼び出し元、既存テスト。"
+  ],
+  "梳理调用方式，区分独立职责，提出组合 API，再迁移代表性调用并验证行为。": [
+    "Inspect usage, separate responsibilities, propose a composable API, migrate representative callers and verify behavior.",
+    "利用箇所と責務を整理し、合成可能な API を提案して代表的な呼び出しを移行・検証します。"
+  ],
+  "组件 API 方案、重构代码、迁移前后用法和兼容性检查结果。": [
+    "An API proposal, refactored code, before-and-after usage and compatibility checks.",
+    "API 案、修正コード、移行前後の使用例、互換性の確認結果。"
+  ],
+  "请使用 vercel-composition-patterns Skill 重构 [组件路径]。 先阅读调用处和测试，找出布尔参数之间的耦合，再提出组合组件或 Context 方案。保留现有可观察行为，优先兼容已有调用；如需破坏性 API 变更，先列明迁移范围。 实现最小改动，补充有意义的回归检查，并给出迁移前后的使用示例。": [
+    "Use the vercel-composition-patterns skill to refactor [component path].\nRead callers and tests first. Identify coupled boolean props, then propose composition or Context. Preserve observable behavior and prefer compatibility; identify the migration scope before making a breaking API change.\nImplement the smallest useful change, add meaningful regression checks and show before-and-after usage.",
+    "vercel-composition-patterns Skill で [コンポーネントパス] を再構成してください。\n先に呼び出し元とテストを読み、真偽値 props の結合を整理して合成または Context を提案してください。観測可能な動作と既存の呼び出しとの互換性を優先し、破壊的変更の前には移行範囲を示してください。\n最小限の変更と有意義な回帰テストを実装し、移行前後の使用例を示してください。"
+  ],
+  "请从调用者角度复查新 API：检查默认值、受控与非受控状态、组合顺序和无障碍属性。找出仍需过多参数的调用，确认示例与实际导出一致，并报告已有调用的验证情况。": [
+    "Review the new API from the caller’s perspective: defaults, controlled and uncontrolled state, composition order and accessibility attributes. Find remaining parameter-heavy callers, confirm examples match actual exports and report compatibility checks.",
+    "呼び出し側から、既定値、制御・非制御状態、合成順、アクセシビリティ属性を確認してください。パラメーターが多い呼び出しが残っていないか調べ、例と実際の export が一致することと互換性の検証結果を報告してください。"
+  ],
+  "制作开发者个人主页": [
+    "Build a developer’s personal homepage",
+    "開発者の個人ホームページを制作"
+  ],
+  "真实的个人介绍、项目资料、联系方式和现有品牌约束。": [
+    "A real introduction, project details, contact links and existing brand constraints.",
+    "実際の自己紹介、作品資料、連絡先、既存のブランド制約。"
+  ],
+  "围绕受众选定视觉方向，组织介绍与作品，再实现桌面和手机布局。": [
+    "Choose a direction for the intended audience, structure the story and work, then implement desktop and mobile layouts.",
+    "想定読者に合う方向を選び、紹介と作品を整理してデスクトップ・モバイルに実装します。"
+  ],
+  "可运行的个人主页、响应式样式，以及素材缺失和交互检查说明。": [
+    "A working homepage, responsive styles, and notes on missing assets and interaction checks.",
+    "動作するホームページ、レスポンシブのスタイル、不足素材と操作検証の記録。"
+  ],
+  "请使用 frontend-design Skill，为 [个人介绍与项目资料] 制作个人主页，使用 [前端技术栈]。 读者主要是潜在合作伙伴。页面需要清楚展示介绍、精选作品和联系入口，遵循 [品牌约束]，先说明一个明确的视觉方向，再实现桌面和手机布局。 使用我提供的真实内容；缺失素材请标注。检查键盘操作、文字对比度和窄屏显示。": [
+    "Use the frontend-design skill to build a personal homepage from [introduction and project materials] with [frontend stack].\nThe audience is potential collaborators. Clearly present an introduction, selected work and contact links. Follow [brand constraints], explain one clear visual direction, then implement desktop and mobile layouts.\nUse the real content provided and identify missing assets. Check keyboard access, text contrast and narrow screens.",
+    "frontend-design Skill を使い、[自己紹介と作品資料] をもとに [フロントエンド環境] で個人ページを作ってください。\n想定読者は協業相手です。紹介、代表作品、連絡先を明確にし、[ブランド制約] を守って一つのビジュアル方針を説明してから、PC とモバイルに実装してください。\n提供した実際の内容を使い、不足素材を明記してください。キーボード操作、文字のコントラスト、狭い画面を確認してください。"
+  ],
+  "请复查已实现的主页：确认视觉方向一致、内容层次清楚、所有链接有实际目标，手机没有横向溢出。验证键盘焦点、可读性和主要联系入口，修正发现的问题并说明实际检查方式。": [
+    "Review the implemented homepage for a consistent visual direction, clear hierarchy and working link destinations. Check mobile overflow, keyboard focus, readability and the main contact action. Fix findings and describe how you verified them.",
+    "実装したページの視覚的一貫性、情報の階層、リンク先を確認してください。モバイルの横はみ出し、キーボード焦点、可読性、主要な連絡操作を検証し、問題の修正と確認方法を報告してください。"
+  ],
+  "打磨已有的设置页面": [
+    "Refine an existing settings page",
+    "既存の設定画面を磨く"
+  ],
+  "已经可运行的设置页、现有设计规范和要保留的业务流程。": [
+    "A working settings page, established design guidance and business flows to preserve.",
+    "動作する設定画面、既存のデザイン規範、維持すべき業務フロー。"
+  ],
+  "先审查层级、表单状态与窄屏布局，再集中修复最影响使用的问题。": [
+    "Audit hierarchy, form states and narrow layouts, then fix the highest-impact usability issues together.",
+    "階層、フォーム状態、狭い画面を先に確認し、使いやすさへの影響が大きい問題をまとめて修正します。"
+  ],
+  "问题优先级、界面修改，以及桌面、手机和键盘操作的验证记录。": [
+    "Prioritized findings, interface changes and desktop, mobile and keyboard verification notes.",
+    "問題の優先順位、画面修正、PC・モバイル・キーボードの確認記録。"
+  ],
+  "请使用 impeccable Skill 改善 [设置页面路径]。 先读取项目的产品与设计约束，保留当前品牌和业务流程，检查信息层级、表单状态、间距、响应式和无障碍。按影响列出问题，再集中修复最关键的几项。 完成后检查桌面、手机和键盘操作；只报告实际验证的结果。": [
+    "Use the impeccable skill to improve [settings page path].\nRead the product and design constraints first. Preserve the brand and business flow while checking hierarchy, form states, spacing, responsive behavior and accessibility. Rank issues by impact, then fix the most important ones in one batch.\nCheck desktop, mobile and keyboard operation, and report only what was actually verified.",
+    "impeccable Skill で [設定画面パス] を改善してください。\n先に製品とデザインの制約を読み、ブランドと業務フローを維持して、階層、フォーム状態、余白、レスポンシブ、アクセシビリティを確認してください。問題を影響順に示してから重要な項目をまとめて修正してください。\nPC、モバイル、キーボード操作を確認し、実際に検証した結果だけを報告してください。"
+  ],
+  "请对本次修改做一次收尾复查：检查表单默认、聚焦、错误、禁用和保存反馈是否完整，确认没有破坏原有流程。把仍需用户内容或后端支持的部分单独列明，不将它们写成已完成。": [
+    "Do one closing review of the changes. Check default, focus, error, disabled and save-feedback states without breaking the existing flow. Separately list anything that still requires user content or backend work rather than marking it complete.",
+    "修正の最終確認を一度行い、フォームの初期、焦点、エラー、無効、保存フィードバックの状態と既存フローを確認してください。利用者の資料やバックエンド実装が必要な部分は、完了扱いにせず分けて示してください。"
+  ],
+  "为预约产品建立界面规范": [
+    "Define interface guidelines for a booking product",
+    "予約サービスの UI 規範を作る"
+  ],
+  "产品定位、目标用户、主要页面清单和使用的技术栈。": [
+    "Product positioning, target users, key page types and the technology stack.",
+    "製品の位置付け、対象ユーザー、主要ページ、技術スタック。"
+  ],
+  "检索适合的色彩、字体和交互建议，将它们整理成可复用的设计约束。": [
+    "Find suitable color, typography and interaction guidance and turn it into reusable design constraints.",
+    "配色、書体、操作の助言を調べ、再利用可能なデザイン制約に整理します。"
+  ],
+  "设计系统建议、关键组件状态、选型理由和一页应用示例。": [
+    "Design system guidance, key component states, selection rationale and one applied page example.",
+    "システムの提案、主要部品の状態、選定理由、適用したページ例。"
+  ],
+  "请使用 ui-ux-pro-max Skill，为 [产品定位与目标用户] 建立 UI 设计规范，技术栈为 [技术栈]。 围绕预约、列表和详情三个页面，检索合适的配色、字体、间距和交互规则，解释选择理由，定义主要组件的状态与无障碍要求。 输出可复用的设计约束和一个页面的应用示例，并区分推荐规则与项目尚未确定的内容。": [
+    "Use the ui-ux-pro-max skill to define UI guidelines for [product positioning and audience] using [technology stack].\nCover booking, listing and detail pages. Research suitable colors, typography, spacing and interaction rules, explain the choices, and define key component states and accessibility requirements.\nDeliver reusable design constraints and one applied page example. Separate recommendations from unresolved product decisions.",
+    "ui-ux-pro-max Skill を使い、[製品と対象ユーザー] 向けに [技術スタック] の UI 規範を作ってください。\n予約、一覧、詳細ページを対象に、配色、書体、余白、操作ルールを調べ、選定理由と主要部品の状態、アクセシビリティ要件を示してください。\n再利用可能な制約と一つの適用ページ例を出し、推奨と製品側の未決定事項を区別してください。"
+  ],
+  "请用刚才的规范复查页面示例：检查颜色、字体、间距和组件状态是否一致，验证文字对比度与触控尺寸。发现冲突时给出具体调整，不新增与产品目标无关的视觉风格。": [
+    "Review the page example against the guidelines. Check consistency in colors, type, spacing and component states, plus text contrast and touch targets. Resolve conflicts with specific changes without introducing unrelated visual styles.",
+    "規範に沿ってページ例を確認し、配色、書体、余白、部品状態の一貫性と、文字のコントラスト、タッチ領域を検証してください。矛盾には具体的な修正を示し、製品目的に無関係なスタイルを追加しないでください。"
+  ],
+  "定位偶发的登录失败": [
+    "Diagnose intermittent login failures",
+    "断続的なログイン失敗を調査"
+  ],
+  "复现步骤、已脱敏的错误日志、登录相关代码和当前环境信息。": [
+    "Reproduction steps, sanitized error logs, authentication code and environment details.",
+    "再現手順、機密情報を除いたログ、認証コード、環境情報。"
+  ],
+  "稳定复现后沿请求链收集证据，逐一检验假设，定位原因再修复。": [
+    "Establish reproduction, collect evidence along the request chain, test hypotheses and fix the identified cause.",
+    "再現条件を確認し、要求経路の証拠を集め、仮説を検証して原因を修正します。"
+  ],
+  "根因说明、证据、最小修复和能覆盖原故障的回归检查。": [
+    "A root-cause explanation, evidence, minimal fix and regression coverage for the original failure.",
+    "根本原因、証拠、最小修正、元の障害を対象にした回帰チェック。"
+  ],
+  "请使用 systematic-debugging Skill 排查 [项目路径] 的登录失败。 复现步骤为 [步骤]，已知报错为 [脱敏日志]。先确认复现条件并沿请求链收集证据，提出可验证的假设；找到根因后再做最小修复。 运行能覆盖原故障的检查，区分确定事实与待验证判断，并报告实际结果。": [
+    "Use the systematic-debugging skill to investigate login failures in [project path].\nReproduction steps: [steps]. Known errors: [sanitized logs]. Establish reproduction conditions and collect evidence along the request chain before testing hypotheses. Find the cause before making the smallest suitable fix.\nRun checks that cover the original failure, distinguish facts from unverified judgments and report actual results.",
+    "systematic-debugging Skill で [プロジェクトパス] のログイン失敗を調べてください。\n再現手順は [手順]、エラーは [機密情報を除いたログ] です。再現条件と要求経路の証拠を確認し、検証可能な仮説を立て、根本原因が分かってから最小修正をしてください。\n元の障害を対象にした検証を実行し、確定した事実と未検証の判断を分けて実際の結果を報告してください。"
+  ],
+  "请复查修复是否解决了根因：重新执行原复现步骤，补查相关边界和失败路径。若仍无法稳定复现，请列出缺少的证据和下一次采集方式，不用猜测的结果代替验证。": [
+    "Check whether the fix addresses the cause. Repeat the original steps and test relevant boundaries and failure paths. If reproduction is still unreliable, list missing evidence and how to capture it next time instead of treating guesses as verification.",
+    "元の手順と関連する境界・失敗経路を試し、修正が根本原因を解消したか確認してください。安定して再現できない場合は、不足する証拠と次回の収集方法を示し、推測を検証結果として扱わないでください。"
+  ],
+  "为分页参数增加校验": [
+    "Add validation for pagination parameters",
+    "ページ番号パラメーターを検証"
+  ],
+  "现有项目、参数校验位置和可以运行的测试命令。": [
+    "An existing project, its parameter validation layer and a runnable test command.",
+    "既存プロジェクト、パラメーター検証箇所、実行可能なテストコマンド。"
+  ],
+  "先写覆盖默认值与异常输入的失败测试，再实现校验并重构。": [
+    "Write failing tests for defaults and invalid inputs, implement validation, then refactor.",
+    "既定値と不正入力の失敗テストを先に作り、検証処理を実装してリファクタリングします。"
+  ],
+  "校验实现、失败到通过的测试记录和可重复运行的回归测试。": [
+    "A validator, red-to-green execution notes and repeatable regression tests.",
+    "検証処理、失敗から成功への実行記録、再実行できる回帰テスト。"
+  ],
+  "请使用 test-driven-development Skill，在 [项目路径] 实现分页参数校验，测试命令为 [测试命令]。 规则：page 默认 1，pageSize 默认 20；二者必须为正整数，pageSize 大于 100 时拒绝。先写失败测试并运行，再完成最小实现，最后在测试通过的前提下重构。 覆盖默认值、边界、非整数和非法输入，给出实际执行记录。": [
+    "Use the test-driven-development skill to add pagination validation in [project path]. Test command: [test command].\nRules: page defaults to 1 and pageSize to 20. Both must be positive integers; reject pageSize above 100. Write and run failing tests first, implement the minimum code, then refactor while tests remain green.\nCover defaults, boundaries, non-integers and invalid inputs, and report actual execution.",
+    "test-driven-development Skill を使い、[プロジェクトパス] にページ指定の検証を追加してください。テストは [テストコマンド] です。\npage の既定値は 1、pageSize は 20。両方とも正の整数とし、pageSize が 100 を超えたら拒否します。先に失敗テストを実行し、最小実装を作り、成功を保ちながら整理してください。\n既定値、境界、整数以外、不正入力を対象にして実行記録を示してください。"
+  ],
+  "请检查测试是否能捕获原本缺失的行为，而不是只重复实现逻辑。确认成功与失败路径、默认值和边界都有覆盖，再运行相关测试并报告结果；未运行的检查请标明。": [
+    "Check that the tests expose previously missing behavior rather than mirror implementation details. Verify success and failure paths, defaults and boundaries, then run the relevant tests and report results. Clearly label checks you did not run.",
+    "テストが実装をなぞるだけでなく、欠けていた動作を検出するか確認してください。成功・失敗経路、既定値、境界を確認して関連テストを実行し、未実行の検証を明記してください。"
+  ],
+  "验证本地站点的搜索流程": [
+    "Verify search in a local website",
+    "ローカルサイトの検索を検証"
+  ],
+  "已启动的网站、页面地址、预期搜索行为和项目提供的测试数据。": [
+    "A running site, page URL, expected search behavior and project test data.",
+    "起動済みサイト、URL、期待される検索動作、既存のテストデータ。"
+  ],
+  "通过浏览器执行搜索、空结果与清空条件的流程，收集截图和浏览器日志。": [
+    "Use the browser to test search, empty results and clearing filters, collecting screenshots and browser logs.",
+    "検索、該当なし、条件解除の流れをブラウザで操作し、画像とログを集めます。"
+  ],
+  "可重跑的 Playwright 脚本、关键截图、错误日志及通过和失败的步骤。": [
+    "A repeatable Playwright script, key screenshots, logs and passed or failed steps.",
+    "再実行可能な Playwright スクリプト、主要画像、ログ、成功・失敗の手順。"
+  ],
+  "请使用 webapp-testing Skill 验证 [本地网站 URL] 的搜索流程。 使用项目已有的测试数据，覆盖正常搜索、无结果和清空筛选，检查 URL、结果列表和返回操作。需要账号时使用已有测试账号或 mock。 输出可重跑的 Python Playwright 脚本、关键截图和浏览器日志，并分别报告通过、失败和未执行的步骤。": [
+    "Use the webapp-testing skill to verify search at [local website URL].\nUse existing project test data. Cover matching searches, no results and clearing filters; check the URL, results and return navigation. Use an existing test account or mock if authentication is needed.\nDeliver a repeatable Python Playwright script, key screenshots and browser logs. Separately report passed, failed and unexecuted steps.",
+    "webapp-testing Skill で [ローカルサイト URL] の検索を検証してください。\n既存のテストデータで通常検索、該当なし、条件解除を試し、URL、結果一覧、戻る操作を確認してください。認証が必要なら既存のテストアカウントか mock を使ってください。\n再実行できる Python Playwright スクリプト、主要画像、ブラウザログを作り、成功・失敗・未実行を分けて報告してください。"
+  ],
+  "请复查浏览器验证结果：确认断言针对真实页面状态，截图与步骤对应，异步内容使用可靠等待。重跑失败步骤，区分产品问题、测试数据问题和环境问题，保留可复现信息。": [
+    "Review the browser test results. Confirm assertions check actual page state, screenshots match steps and asynchronous content uses reliable waits. Rerun failures, distinguish product defects from test-data or environment issues, and preserve reproduction details.",
+    "実際の画面状態を検証しているか、画像と手順が一致するか、非同期処理を適切に待っているか確認してください。失敗箇所を再実行し、製品、データ、環境の問題を区別して再現情報を残してください。"
+  ],
+  "修订现有项目方案": [
+    "Revise an existing project proposal",
+    "既存の提案書を修訂"
+  ],
+  "proposal.docx、修改意见和需要保留的样式、表格及图片。": [
+    "proposal.docx, revision notes and styles, tables and images to preserve.",
+    "proposal.docx、変更指示、維持する書式・表・画像。"
+  ],
+  "按照修改意见更新文档内容，保留结构与格式，检查分页和修订记录。": [
+    "Apply revisions while preserving structure and formatting, then check pagination and revision history.",
+    "指示に沿って構造と書式を保ちながら更新し、改ページと変更履歴を確認します。"
+  ],
+  "proposal-revised.docx、修改摘要，以及需要人工确认的内容清单。": [
+    "proposal-revised.docx, a change summary and items needing human confirmation.",
+    "proposal-revised.docx、変更概要、人による確認が必要な項目。"
+  ],
+  "请使用 docx Skill 根据 [修改意见] 修订 [Word 文件路径]。 保留既有标题层级、表格与图片，并按 [是否保留修订记录] 处理修改。缺少事实或数据时标注待确认，不自行补写。 另存为 proposal-revised.docx，检查分页、目录和图片位置，附上修改摘要与未解决事项。": [
+    "Use the docx skill to revise [Word file path] according to [revision notes].\nPreserve heading hierarchy, tables and images, and follow [tracked-change preference]. Mark missing facts or data for confirmation instead of inventing them.\nSave a separate proposal-revised.docx, check pagination, the contents list and image placement, and include a change summary and unresolved items.",
+    "docx Skill で [Word ファイルパス] を [変更指示] に沿って修訂してください。\n見出し、表、画像を維持し、[変更履歴を残すか] に従ってください。事実やデータが不足する場合は創作せず要確認としてください。\nproposal-revised.docx として別名保存し、改ページ、目次、画像位置を確認して、変更概要と未解決項目を添えてください。"
+  ],
+  "请复查修订稿的内容和版式：核对修改意见是否落实、表格是否跨页异常、目录与标题是否对应、图片和批注是否保留。若无法渲染预览，请明确说明并列出尚需人工检查的位置。": [
+    "Review content and layout in the revised file. Check that feedback was applied, tables paginate correctly, headings match the contents list, and images and comments remain intact. If rendering is unavailable, say so and list the locations requiring manual review.",
+    "指示の反映、表の不自然な改ページ、目次と見出しの一致、画像とコメントの維持を確認してください。プレビューを描画できない場合は明記し、手動確認が必要な位置を示してください。"
+  ],
+  "合并会议资料并建立索引": [
+    "Merge meeting PDFs with a source index",
+    "会議 PDF を結合し索引を作る"
+  ],
+  "三份会议 PDF，其中一份为扫描件，以及需要采用的文件顺序。": [
+    "Three meeting PDFs, including a scanned file, and the required file order.",
+    "スキャン一件を含む三つの会議 PDF と、指定の並び順。"
+  ],
+  "按指定顺序合并，必要时识别扫描文字，并记录各来源在合并文件中的页码范围。": [
+    "Merge in the requested order, recognize scanned text if needed and record source page ranges in the combined file.",
+    "指定順に結合し、必要なスキャン文字を認識して、結合後の各出典のページ範囲を記録します。"
+  ],
+  "merged.pdf、来源页码索引，以及 OCR 不确定内容的说明。": [
+    "merged.pdf, a source-page index and notes on uncertain OCR content.",
+    "merged.pdf、出典ページ索引、OCR が不確かな箇所の説明。"
+  ],
+  "请使用 pdf Skill 处理 [PDF 文件列表]，按 [指定顺序] 合并为 merged.pdf，保留原文件。 检查哪些页面是扫描件，仅在需要时进行 OCR；识别不确定的文字请标记，不猜测缺失内容。 生成来源索引，列出文件名、原页码与合并后的页码范围，并核对总页数和阅读顺序。": [
+    "Use the pdf skill to merge [PDF file list] in [required order] into merged.pdf, keeping the originals.\nIdentify scanned pages and use OCR only where needed. Mark uncertain text rather than guessing missing content.\nCreate a source index with file names, original page numbers and merged page ranges. Verify the total page count and reading order.",
+    "pdf Skill で [PDF 一覧] を [指定順] に結合し、merged.pdf として保存してください。元のファイルは残してください。\nスキャンを判定し、必要な箇所だけ OCR を行って、不確かな文字は推測せず印を付けてください。\nファイル名、元のページ、結合後のページ範囲を索引にし、総ページ数と読む順を確認してください。"
+  ],
+  "请复查合并结果：核对总页数、文件顺序、页面方向和索引范围，抽查扫描页是否可读。对 OCR 结果与原图存在疑问的地方注明页码，并报告实际执行过的检查。": [
+    "Review the merged PDF’s page count, file order, orientation and index ranges. Sample scanned pages for readability. Mark page numbers where OCR is uncertain against the image, and report checks actually performed.",
+    "総ページ数、ファイル順、ページの向き、索引の範囲を確認し、スキャンの読みやすさを抜き取り確認してください。OCR と画像が一致するか不明な場所はページ番号を付け、実行した確認を報告してください。"
+  ],
+  "把发布说明整理成演示文稿": [
+    "Turn release notes into a presentation",
+    "リリースノートをスライドにする"
+  ],
+  "release-notes.md、已有截图和团队提供的演示模板。": [
+    "release-notes.md, available screenshots and a team presentation template.",
+    "release-notes.md、既存の画像、チームのテンプレート。"
+  ],
+  "提炼发布重点，按受众组织叙事，再套用模板并检查每页呈现。": [
+    "Extract release highlights, build a story for the audience, apply the template and review each slide.",
+    "リリースの要点と読者向けの流れを整理し、テンプレートに適用して各ページを確認します。"
+  ],
+  "八页 release-brief.pptx、演讲备注，以及素材或事实缺失项。": [
+    "An eight-slide release-brief.pptx, speaker notes and a list of missing assets or facts.",
+    "八枚の release-brief.pptx、発表者ノート、不足する素材や事実の一覧。"
+  ],
+  "请使用 pptx Skill，把 [发布说明文件] 整理为八页产品发布演示，面向 [受众]，使用 [模板路径]。 每页围绕一个要点，优先使用提供的截图和真实信息，不编造指标。补充演讲备注；缺少素材或事实时明确标注。 保存为 release-brief.pptx，并检查文字溢出、对齐、图像裁切和页面顺序。": [
+    "Use the pptx skill to turn [release notes file] into an eight-slide product release presentation for [audience], using [template path].\nKeep one main idea per slide. Prefer the supplied screenshots and real information; do not invent metrics. Add speaker notes and mark missing assets or facts.\nSave release-brief.pptx and check text overflow, alignment, image cropping and slide order.",
+    "pptx Skill で [リリースノート] を [対象読者] 向けの八枚の発表資料にし、[テンプレートパス] を使ってください。\n各ページは一つの要点に絞り、提供された画像と実際の情報を優先して、指標を創作しないでください。発表者ノートを加え、不足する素材や事実を明記してください。\nrelease-brief.pptx に保存し、文字のはみ出し、整列、画像の切り取り、ページ順を確認してください。"
+  ],
+  "请复查演示稿：核对要点与来源一致、八页叙事顺畅、文字和图表清晰。渲染后逐页检查溢出、遮挡与对齐；未能渲染的页面请说明，不将它们算作通过。": [
+    "Review the presentation for source accuracy, a coherent eight-slide story and readable text and charts. Render and inspect slides for overflow, overlap and alignment. Identify anything that could not be rendered rather than counting it as passed.",
+    "出典との一致、八枚の流れ、文字とグラフの可読性を確認してください。描画後に各ページのはみ出し、重なり、整列を確認し、描画できなかったページを合格に含めず明記してください。"
+  ],
+  "清洗问卷数据并生成分析表": [
+    "Clean survey data and build an analysis workbook",
+    "アンケートを整理して分析ブックを作る"
+  ],
+  "feedback.csv，包含响应编号、日期和一到五分的评分。": [
+    "feedback.csv with response IDs, dates and ratings from one to five.",
+    "回答 ID、日付、一から五の評価を含む feedback.csv。"
+  ],
+  "保留原始数据，识别重复编号和异常评分，整理清洗表及汇总图表。": [
+    "Preserve raw data, identify duplicate IDs and invalid ratings, and produce cleaned data, summaries and charts.",
+    "元データを維持し、重複 ID と不正評価を特定して、整理表、集計、グラフを作ります。"
+  ],
+  "analysis.xlsx，包含原始、清洗和汇总工作表，以及异常数据记录。": [
+    "analysis.xlsx with Raw, Clean and Summary sheets, plus an anomaly record.",
+    "Raw、Clean、Summary と異常記録を持つ analysis.xlsx。"
+  ],
+  "请使用 xlsx Skill 分析 [问卷 CSV 路径]，生成 analysis.xlsx。 保留原始数据，按响应编号标记重复项；评分应为 1 到 5，空值和异常值单独记录，不猜测填补。输出清洗数据、评分分布和汇总图表。 工作簿包含 Raw、Clean、Summary 三张表，检查公式错误与行数对应关系，说明清洗规则及实际验证结果。": [
+    "Use the xlsx skill to analyze [survey CSV path] and create analysis.xlsx.\nPreserve the raw data and flag duplicate response IDs. Ratings must be 1 to 5; log missing and invalid values separately rather than guessing replacements. Produce cleaned data, rating distributions and summary charts.\nInclude Raw, Clean and Summary sheets. Check formula errors and row-count reconciliation, and report cleaning rules and actual validation results.",
+    "xlsx Skill で [アンケート CSV パス] を分析し、analysis.xlsx を作ってください。\n元データを残し、回答 ID の重複を印付けしてください。評価は 1 から 5 とし、空値と異常値は推測で埋めず別に記録して、整理データ、評価分布、集計グラフを出してください。\nRaw、Clean、Summary の三シートを用意し、数式エラーと件数の対応を確認して、整理規則と実際の検証結果を示してください。"
+  ],
+  "请复查工作簿：确认原始数据完整、重复和异常记录可追溯、汇总总数与有效记录数一致。检查公式错误和图表引用；如果没有执行公式重算，请明确说明这一限制。": [
+    "Review the workbook for complete raw data, traceable duplicates and anomalies, and summary counts matching valid records. Check formula errors and chart references. Clearly state if formula recalculation was not performed.",
+    "元データの完全性、重複や異常の追跡、集計数と有効回答数の一致を確認してください。数式エラーとグラフの参照を調べ、数式の再計算を実行していない場合は明記してください。"
+  ],
+  "把项目笔记整理为知识入口": [
+    "Create an entry point for project notes",
+    "プロジェクトノートの入口を作る"
+  ],
+  "一个 Obsidian 笔记目录，包含项目说明、会议记录和待办笔记。": [
+    "An Obsidian folder with project descriptions, meeting notes and task notes.",
+    "概要、会議、作業ノートを含む Obsidian フォルダー。"
+  ],
+  "阅读现有文件，新增索引和合适的双向链接，保留原有内容与文件名。": [
+    "Read existing files, add an index and useful wikilinks, and preserve original content and file names.",
+    "既存ファイルを読み、原文と名前を保って索引と適切な内部リンクを加えます。"
+  ],
+  "index.md、可解析的笔记链接和属性，以及修改文件清单。": [
+    "index.md, resolvable links and properties, and a list of changed files.",
+    "index.md、解決できるリンクとプロパティ、変更ファイル一覧。"
+  ],
+  "请使用 obsidian-markdown Skill 整理 [笔记目录]。 先读取已有项目笔记，创建 index.md，按主题组织入口，并为相关内容添加指向真实文件的 wikilinks。按现有规则补充属性和提示块，保留原文及文件名。 不要创建指向不存在笔记的链接；输出修改清单，并检查 Markdown 与 Obsidian 专用语法。": [
+    "Use the obsidian-markdown skill to organize [notes folder].\nRead existing project notes, create index.md with topic-based entry points and add wikilinks to actual related files. Follow existing conventions for properties and callouts while preserving original text and file names.\nDo not link to nonexistent notes. List changed files and check Markdown and Obsidian-specific syntax.",
+    "obsidian-markdown Skill で [ノートフォルダー] を整理してください。\n既存ノートを読み、index.md にテーマ別の入口を作り、実在する関連ファイルへの wikilinks を加えてください。既存規則に沿ってプロパティとコールアウトを整え、原文とファイル名を維持してください。\n存在しないノートにはリンクせず、変更一覧と Markdown、Obsidian 構文の確認結果を示してください。"
+  ],
+  "请复查笔记结构：核对链接目标、嵌入路径、属性格式和提示块语法，确认没有覆盖原文或丢失附件引用。指出仍需内容补充的孤立笔记，不用空文件凑齐链接。": [
+    "Review link destinations, embed paths, properties and callout syntax. Confirm original text and attachment references remain intact. Identify isolated notes needing content without creating empty files merely to satisfy links.",
+    "リンク先、埋め込みパス、プロパティ、コールアウト構文を確認し、原文や添付参照が失われていないことを検証してください。内容の不足した孤立ノートを示し、リンクを埋めるだけの空ファイルは作らないでください。"
+  ],
+  "把研究提纲变成可编辑画布": [
+    "Turn a research brief into an editable canvas",
+    "研究提綱を編集できる画布にする"
+  ],
+  "research-brief.md 和可以引用的既有笔记文件。": [
+    "research-brief.md and existing notes that may be referenced.",
+    "research-brief.md と参照できる既存ノート。"
+  ],
+  "把问题、证据与下一步整理成节点和分组，连接相关内容并检查文件结构。": [
+    "Create nodes and groups for questions, evidence and next steps, connect related content and validate the file.",
+    "問い、証拠、次の手順をノードとグループにし、関連付けてファイル構造を確認します。"
+  ],
+  "research.canvas、有效的节点及连接，以及节点内容的来源说明。": [
+    "research.canvas with valid nodes and edges, plus content provenance notes.",
+    "有効なノードと接続、内容の出典を持つ research.canvas。"
+  ],
+  "请使用 json-canvas Skill，把 [研究提纲路径] 转为 research.canvas。 按研究问题、已有证据和下一步三个分组组织节点，引用笔记时使用真实路径，连线要说明关系，避免节点重叠。 输出有效 JSON Canvas 文件，检查节点 ID 唯一、连接端点存在和坐标尺寸合理，并说明内容来自哪里。": [
+    "Use the json-canvas skill to turn [research brief path] into research.canvas.\nGroup nodes into research questions, existing evidence and next steps. Use real paths for note references, label relationships and avoid overlapping nodes.\nProduce valid JSON Canvas, check unique node IDs, existing edge endpoints and sensible coordinates and dimensions, and explain the source of the content.",
+    "json-canvas Skill で [研究提綱パス] を research.canvas に変換してください。\n研究の問い、既存の証拠、次の手順の三グループに整理し、実在するノートパスを参照して関係を連線で説明し、重なりを避けてください。\n有効な JSON Canvas を作り、ID の一意性、接続端点、座標と寸法を確認して、内容の出典を示してください。"
+  ],
+  "请复查画布文件的 JSON、节点 ID、连接端点与引用路径。检查布局可读性和分组关系，修复悬空连接与重叠；如果尚未在支持的应用中打开预览，请明确标注。": [
+    "Review the JSON, node IDs, edge endpoints and referenced paths. Check layout readability and grouping, and fix dangling edges or overlaps. Clearly state if the file has not yet been previewed in a compatible application.",
+    "JSON、ノード ID、接続端点、参照パスを確認してください。配置とグループの読みやすさを調べ、切れた接続や重なりを直し、対応アプリで未プレビューの場合は明記してください。"
+  ],
+  "为只读查询接口制作 MCP 服务": [
+    "Build an MCP server for read-only queries",
+    "読み取り専用 API の MCP サービスを作る"
+  ],
+  "api-spec.yaml、接口示例和预期的查询工作流。": [
+    "api-spec.yaml, API examples and the intended query workflow.",
+    "api-spec.yaml、API 例、想定する問い合わせ手順。"
+  ],
+  "梳理 API 能力，设计工具及输入输出，再实现服务与成功、失败调用的检查。": [
+    "Map API capabilities to tools and schemas, then implement the service and check successful and failed calls.",
+    "API をツールと schema に整理し、サービスを実装して成功・失敗を確認します。"
+  ],
+  "MCP 服务代码、环境变量示例、调用示例和实际测试结果。": [
+    "MCP server code, environment variable examples, sample calls and actual test results.",
+    "MCP コード、環境変数の例、呼び出し例、実際のテスト結果。"
+  ],
+  "请使用 mcp-builder Skill，基于 [API 规范路径] 创建 [Python 或 TypeScript] MCP 服务。 本次只提供查询能力。先设计工具名称、输入输出 schema、分页和错误处理，再实现最小服务；认证配置使用环境变量，示例中只放占位值。 补充成功、空结果和失败调用的检查及启动说明，报告实际测试结果和未接通的外部依赖。": [
+    "Use the mcp-builder skill to build a [Python or TypeScript] MCP server from [API specification path].\nExpose read-only queries for this task. Design tool names, input/output schemas, pagination and errors before implementing a minimal service. Use environment variables for authentication and placeholders only in examples.\nAdd checks for successful calls, empty results and failures, plus startup instructions. Report actual test results and external dependencies not connected yet.",
+    "mcp-builder Skill で [API 仕様パス] から [Python または TypeScript] の MCP サーバーを作ってください。\n今回は読み取りだけを公開します。ツール名、入出力 schema、ページ処理、エラーを設計してから最小実装を作り、認証は環境変数、設定例は占位値だけにしてください。\n成功、空結果、失敗の検証と起動方法を用意し、実際の結果と未接続の依存先を示してください。"
+  ],
+  "请复查工具契约与实现是否一致，重点检查输入校验、分页、超时和错误信息。确认只读范围没有扩大，日志未输出凭据；用测试响应覆盖失败路径，并标明尚未真实连接的接口。": [
+    "Review contract-to-implementation consistency, input validation, pagination, timeouts and errors. Confirm the read-only scope has not expanded and logs do not expose credentials. Cover failures with test responses and identify endpoints not connected to a real service.",
+    "契約と実装、入力検証、ページ処理、タイムアウト、エラーを確認してください。読み取り範囲を拡大せず、ログに認証情報を出していないことを確認し、テスト応答で失敗経路を検証して未接続の API を明記してください。"
+  ],
+  "把发布记录整理流程写成 Skill": [
+    "Package a release-notes workflow as a skill",
+    "リリース記録の手順を Skill にする"
+  ],
+  "已有工作流说明、输入样例和期望的发布记录格式。": [
+    "An existing workflow, representative inputs and the required release-notes format.",
+    "既存の作業手順、入力例、期待するリリース記録の形式。"
+  ],
+  "明确触发条件与处理步骤，编写 Skill，再用正例和反例检查触发与产出。": [
+    "Define triggers and steps, write the skill and check triggering and output with positive and negative cases.",
+    "呼び出し条件と手順を定め、Skill を書き、正例と反例で発火と出力を確認します。"
+  ],
+  "SKILL.md、必要参考资料、测试提示和评估记录。": [
+    "SKILL.md, necessary references, test prompts and evaluation notes.",
+    "SKILL.md、必要な参考資料、テスト用プロンプト、評価記録。"
+  ],
+  "请使用 skill-creator Skill，把 [发布记录整理工作流] 做成可复用 Skill。 输入样例位于 [样例路径]，期望格式为 [格式说明]。先明确触发条件、步骤和输出边界，再编写 SKILL.md；只在确有需要时添加脚本或参考文件。 提供应触发与不应触发的测试提示，按可用环境运行评估，区分已验证结果与待验证项，不自动安装。": [
+    "Use the skill-creator skill to package [release-notes workflow] as a reusable skill.\nInputs are in [sample path]; the expected format is [format description]. Define triggering conditions, steps and output boundaries, then write SKILL.md. Add scripts or references only when needed.\nProvide prompts that should and should not trigger it. Run evaluations where the environment permits, distinguish verified results from pending checks and do not install it automatically.",
+    "skill-creator Skill で [リリース記録の作業手順] を再利用できる Skill にしてください。\n入力例は [サンプルパス]、期待形式は [形式説明] です。呼び出し条件、手順、出力範囲を定めて SKILL.md を書き、必要な場合だけスクリプトや参考資料を加えてください。\n呼び出すべき正例と反例を作り、環境が許す評価を実行して、検証済みと未検証を区別し、自動インストールはしないでください。"
+  ],
+  "请复查 Skill 的描述是否准确触发、步骤是否依赖隐含上下文、示例是否与输出约定一致。根据测试结果做最小修改，保留失败案例和下一轮评估建议；未执行的评估不要写成通过。": [
+    "Review the trigger description, hidden context dependencies and consistency between examples and output rules. Make minimal changes based on tests, retain failing cases and suggest the next evaluation. Do not mark evaluations that were not run as passed.",
+    "呼び出し説明の正確さ、暗黙の文脈への依存、例と出力規則の一致を確認してください。テストに基づく最小修正を行い、失敗例と次の評価案を残して、未実行の評価を合格扱いにしないでください。"
+  ],
+  "实际使用示例": [
+    "Usage example",
+    "使用例"
+  ],
+  "推荐提示词": [
+    "Recommended prompts",
+    "おすすめのプロンプト"
+  ],
+  "以下是可照着操作的示例流程，文件名和目标请按实际项目替换。": [
+    "Follow this illustrative workflow, replacing file names and goals with your own project details.",
+    "以下は操作の参考例です。ファイル名と目的は実際のプロジェクトに合わせてください。"
+  ],
+  "准备资料": [
+    "What to prepare",
+    "準備する資料"
+  ],
+  "操作过程": [
+    "Workflow",
+    "操作の流れ"
+  ],
+  "预期交付": [
+    "Expected deliverables",
+    "期待する成果物"
+  ],
+  "先替换方括号中的内容，再粘贴到已安装对应 Skill 的 AI 工具中。提示词随界面语言切换，复制时保留完整文字和换行。": [
+    "Replace the bracketed placeholders, then paste into an AI tool with this skill installed. Prompts follow the interface language; copying preserves the full text and line breaks.",
+    "角括弧の内容を置き換え、この Skill を導入した AI ツールに貼り付けてください。表示言語に合わせて切り替わり、全文と改行をコピーできます。"
+  ],
+  "开始任务": [
+    "Start the task",
+    "タスクを始める"
+  ],
+  "复查结果": [
+    "Review the result",
+    "結果を確認する"
+  ],
+  "复制提示词": [
+    "Copy prompt",
+    "プロンプトをコピー"
+  ],
+  "复制「{0}」提示词": [
+    "Copy the “{0}” prompt",
+    "「{0}」のプロンプトをコピー"
+  ],
+  "复制失败，请手动选择内容。": [
+    "Copy failed. Please select the text and copy it manually.",
+    "コピーできませんでした。テキストを選択して手動でコピーしてください。"
   ]
 }

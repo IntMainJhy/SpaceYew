@@ -1,4 +1,5 @@
 import {curatedSkills} from './skill-catalog.mjs';
+import {skillUsage} from './skill-usage.mjs';
 
 export const skillDetailContent={
  'react-best-practices':{
@@ -117,5 +118,5 @@ export function skillInstallation(skill){
 
 export function getSkillDetail(id){
  const skill=curatedSkills.find(item=>item.id===id);
- return skill&&skillDetailContent[id]?{...skill,...skillDetailContent[id],installation:skillInstallation(skill)}:null;
+ return skill&&skillDetailContent[id]&&skillUsage[id]?{...skill,...skillDetailContent[id],...skillUsage[id],installation:skillInstallation(skill)}:null;
 }

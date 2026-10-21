@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {curatedSkills,skillCategories,skillFilters,filterSkills,skillFilterHref} from '../src/lib/skill-catalog.mjs';
 import {translate} from '../src/lib/i18n.mjs';
 import {getSkillDetail,skillDetailContent} from '../src/lib/skill-details.mjs';
+import {skillUsage} from '../src/lib/skill-usage.mjs';
 
 test('catalog keeps distinct, categorized upstream sources and per-skill license terms',()=>{
  assert.equal(new Set(curatedSkills.map(item=>item.id)).size,curatedSkills.length);
@@ -71,4 +72,26 @@ test('setup uses the actual skill names, selected host and official proprietary 
   assert.ok(methods.every(method=>method.commands.every(command=>!command.includes('npx skills'))));
  }
  assert.ok(getSkillDetail('systematic-debugging').installation.methods.find(item=>item.id==='codex-app').commands.length===0);
+});
+
+test('all skills have distinct practical examples and complete localized prompts with intact line breaks',()=>{
+ assert.deepEqual(Object.keys(skillUsage).sort(),curatedSkills.map(item=>item.id).sort());
+ const allPrompts=[];
+ for(const skill of curatedSkills){
+  const detail=getSkillDetail(skill.id);
+  assert.deepEqual(Object.keys(detail.example).sort(),['action','input','output','title']);
+  assert.equal(detail.prompts.length,2);
+  for(const locale of ['zh','en','ja']){
+   for(const value of Object.values(detail.example))assert.ok(translate(locale,value).trim());
+   for(const [index,prompt] of detail.prompts.entries()){
+    const text=translate(locale,prompt.text);assert.ok(text.length>50);
+    if(locale!=='zh')assert.notEqual(text,prompt.text,skill.id+': '+locale);
+    if(locale==='en')assert.ok(!/\p{Script=Han}/u.test(text),skill.id+': untranslated prompt');
+    if(index===0){assert.ok(text.includes('\n'));assert.ok(/\[[^\]]+\]/.test(text),skill.id+': editable placeholders')}
+   }
+  }
+  for(const value of Object.values(detail.example))for(const locale of ['en','ja'])assert.notEqual(translate(locale,value),value);
+  allPrompts.push(...detail.prompts.map(prompt=>prompt.text));
+ }
+ assert.equal(new Set(allPrompts).size,allPrompts.length);
 });

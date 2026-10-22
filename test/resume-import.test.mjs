@@ -40,4 +40,20 @@ test('saved résumé sections and media are public only through validated refere
  const {resume,...legacySave}=saved;C.saveConfiguration('profile',legacySave);assert.equal(D.getConfig('profile').resume.resumeId,pdf);const publicData=S.publicSpace(new Request(process.env.PUBLIC_URL+'/blogs'),S.ownerSpace().handle);assert.equal(publicData.profile.resume.sections[1].id,'projects');assert.equal(publicData.profile.resume.resumeId,pdf);
  assert.throws(()=>C.saveConfiguration('profile',{...saved,resume:{...resume,resumeId:image}}),e=>e.status===400);C.saveConfiguration('profile',{...saved,resume:null});assert.equal(d.prepare("SELECT COUNT(*) n FROM refs WHERE owner='config:profile' AND file=?").get(pdf).n,0);
 });
+test('members import only their own files, with CSRF checks and no implicit publication',async()=>{
+ const space=S.ensureSpace({id:'reader',username:'reader',nickname:'Reader'}),id=await file('member-resume.txt',Buffer.from(source));
+ assert.equal((await call('/api/spaces/resume/import',{fileId:id},member)).status,403);
+ d.prepare('INSERT INTO space_assets VALUES(?,?,?)').run(space.id,id,D.now());
+ assert.equal((await call('/api/spaces/resume/import',{fileId:id},member,'https://foreign.invalid')).status,403);
+ assert.equal((await call('/api/spaces/resume/import',{fileId:id},'')).status,401);
+ const response=await call('/api/spaces/resume/import',{fileId:id},member);assert.equal(response.status,200);
+ assert.equal((await response.json()).profile.name,'Alex Example');assert.equal(d.prepare('SELECT COUNT(*) n FROM refs WHERE file=?').get(id).n,0);
+ assert.throws(()=>S.publicSpace(new Request(process.env.PUBLIC_URL),'reader'),e=>e.status===404);
+});
+test('DOCX rejects custom entities and expansion bombs before reading content',async()=>{
+ const entity=await file('entities.docx',docx('<!DOCTYPE x [<!ENTITY x SYSTEM "file:///etc/passwd">]><w:document><w:t>&x;</w:t></w:document>'));
+ await assert.rejects(()=>R.importResumeFile(entity,{id:'owner'}),e=>e.status===422&&/实体/.test(e.message));
+ const bomb=docx('<w:document/>'),central=bomb.indexOf(Buffer.from([0x50,0x4b,0x01,0x02]));bomb.writeUInt32LE(50000000,central+24);
+ const id=await file('bomb.docx',bomb);await assert.rejects(()=>R.importResumeFile(id,{id:'owner'}),e=>e.status===422&&/解压/.test(e.message));
+});
 test.after(async()=>{d.close();delete globalThis.__personalSiteDb;await rm(directory,{recursive:true,force:true})});

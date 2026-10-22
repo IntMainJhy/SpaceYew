@@ -7,6 +7,7 @@ import {serverI18n} from '@/lib/server-i18n';
    FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
 */
 import Link from 'next/link';
+import {BrandMark} from './BrandMark';
 import Form from 'next/form';
 import {PageMotion} from './PageMotion';
 import {HomeFlowBackground} from './HomeFlowBackground';
@@ -204,7 +205,7 @@ export async function PublicFrame({path=[],children}:{path?:string[],children:Re
   return <div className={'organic-site'+(authPage?' public-auth-site':path.length?' public-content-site':'')}>
     <HomeFlowBackground interactive={!path.length}/>
     <a className="organic-skip" href="#main">{tr("跳到主要内容")}</a><Tracker/>
-    <header className="organic-header"><div className="organic-container organic-header-inner"><Link href="/" className="organic-brand">SpaceYew<span>{tr('社区与博客主页')}</span></Link>
+    <header className="organic-header"><div className="organic-container organic-header-inner"><Link href="/" className="organic-brand"><BrandMark/><div className="site-brand-copy">SpaceYew<span>{tr('社区与博客主页')}</span></div></Link>
       <div className="organic-header-tools">
       <nav className="organic-desktop-nav" aria-label={tr("主导航")}>{nav.map(([href, label]) => <Link href={href} className={active(href) ? 'is-active' : ''} aria-current={current === href ? 'page' : active(href) ? 'location' : undefined} key={href}>{tr(label)}</Link>)}<AuthNav/></nav>
       <details className="organic-mobile-menu" name="site-tools"><summary aria-label={tr("菜单")}><span className="organic-menu-label">{tr("菜单")}</span><span aria-hidden="true"><i/><i/></span></summary><nav aria-label={tr("手机导航")}>{nav.map(([href, label]) => <Link href={href} aria-current={active(href) ? 'page' : undefined} key={href}>{tr(label)}</Link>)}<AuthNav mobile/></nav></details>

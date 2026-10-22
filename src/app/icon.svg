@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <title>SpaceYew</title>
-  <rect width="64" height="64" rx="15" fill="#fff"/>
-  <text x="32" y="43" text-anchor="middle" fill="#111" font-family="Baskerville,Georgia,serif" font-size="34" font-weight="600" letter-spacing="-3">SY</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
+<title>SpaceYew · SY</title>
+<rect width="64" height="64" rx="15" fill="#171717"/>
+<path d="M29 17H21C14.9 17 11 20.6 11 26c0 5.1 3.3 7.5 8.8 9.1l3.1.9c2.6.8 3.6 1.7 3.6 3.4 0 2.1-1.8 3.6-5.1 3.6H12v5h9.4c6.6 0 10.6-3.5 10.6-9 0-5-3-7.3-8.6-9l-3.3-1c-2.5-.8-3.7-1.8-3.7-3.5 0-2.2 1.8-3.5 4.8-3.5H29v-5Z" fill="#FAFAF9"/>
+<path d="M30 17h6.3l7.2 12 7.2-12H57L46.5 34.3V48h-6V34.3L30 17Z" fill="#FAFAF9"/>
 </svg>

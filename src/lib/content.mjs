@@ -17,7 +17,7 @@ export function resumeData(input){
  const result={version:1,updated:cleanText(input.updated,20),resumeId:fileId(input.resumeId),metrics:list(input.metrics,8).map(x=>({...textVersion(x,[['label',80],['value',80],['note',300]]),translations:translated(x,[['label',80],['value',80],['note',300]])})),sections:list(input.sections,12).map((section,i)=>{
   const id=cleanText(section.id||'section-'+i,50);requireValue(/^[a-z][a-z0-9-]*$/.test(id),'简历栏目标识无效');
   return{id,title:cleanText(section.title,100),translations:translated(section,[['title',100]]),items:list(section.items,20).map(item=>({...textVersion(item,itemFields),coverId:fileId(item.coverId),url:httpUrl(item.url),translations:translated(item,itemFields)}))};
- }),gallery:list(input.gallery,8).map(x=>({imageId:fileId(x.imageId),caption:cleanText(x.caption,300),translations:translated(x,[['caption',300]])}))};
+ }),certificates:list(input.certificates,20).map(x=>({imageId:fileId(x.imageId),caption:cleanText(x.caption,300),translations:translated(x,[['caption',300]])})),gallery:list(input.gallery,8).map(x=>({imageId:fileId(x.imageId),caption:cleanText(x.caption,300),translations:translated(x,[['caption',300]])}))};
  requireValue(new Set(result.sections.map(x=>x.id)).size===result.sections.length,'简历栏目不能重复');requireValue(JSON.stringify(result).length<=160000,'简历内容请精简至160KB以内');return result;
 }
 
@@ -86,6 +86,6 @@ export function saveConfiguration(key,input){requireValue(input&&typeof input===
   for(const category of previous.categories.filter(x=>!value.categories.includes(x)))requireValue(!db().prepare(`SELECT 1 FROM (${documents}) WHERE json_extract(data,'$.category')=? LIMIT 1`).get(category),`分类“${category}”仍被内容使用，请先修改这些内容的分类`);
   for(const tag of previous.tags.filter(x=>!value.tags.includes(x)))requireValue(!db().prepare(`SELECT 1 FROM (${documents}) WHERE EXISTS(SELECT 1 FROM json_each(json_extract(data,'$.tags')) WHERE value=?) LIMIT 1`).get(tag),`标签“${tag}”仍被内容使用，请先处理引用`)
  }
- if(value.resume){for(const id of [...value.resume.gallery.map(x=>x.imageId),...value.resume.sections.flatMap(x=>x.items.map(y=>y.coverId))].filter(Boolean))requireValue(fileInfo(id)?.mime.startsWith('image/'),'简历配图必须是有效图片');if(value.resume.resumeId)requireValue(fileInfo(value.resume.resumeId)?.mime==='application/pdf','简历必须为可用的 PDF 文件')}
+ if(value.resume){for(const id of [...(value.resume.certificates||[]).map(x=>x.imageId),...value.resume.gallery.map(x=>x.imageId),...value.resume.sections.flatMap(x=>x.items.map(y=>y.coverId))].filter(Boolean))requireValue(fileInfo(id)?.mime.startsWith('image/'),'简历配图必须是有效图片');if(value.resume.resumeId)requireValue(fileInfo(value.resume.resumeId)?.mime==='application/pdf','简历必须为可用的 PDF 文件')}
  for(const field of ['avatarId','shareImageId'])if(value[field])requireValue(fileInfo(value[field])?.mime.startsWith('image/'),'头像和分享封面需要使用有效图片');
  return transaction(()=>{syncRefs('config:'+key,value,'public');setConfig(key,value);return value})}

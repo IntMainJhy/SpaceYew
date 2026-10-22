@@ -4,7 +4,7 @@
 
 `/blogs` directly displays the site owner's public profile, experience, skills and work in the Anx Portfolio layout. Main navigation, language selection and the site footer remain. The page has no workspace navigation, export, draft preview, theme picker, upload settings or publishing panel.
 
-Legacy `/workspace/blog` (including `?template=anx`), `/workspace/studio`, `/workspace/preview`, `/workspace/profile`, `/workspace/library`, `/workspace/files`, `/workspace/insights`, `/workspace/connect` and `/my-space` redirect to `/blogs`. Signed-in visitors see the owner's public profile rather than their private draft.
+`/workspace/blog` is the independent member editor. Former workspace tabs redirect there. `/my-space` keeps opening the default public `/blogs` page. See the [editing guide](blog-editor.md). Signed-in visitors at `/blogs` still see the owner’s public profile, never a private draft.
 
 The owner's existing `/blog/<handle>` sharing URL remains valid and uses the same Anx Portfolio style. Attribution remains on the page and in the [third-party notices](../THIRD_PARTY_NOTICES.md).
 
@@ -12,7 +12,7 @@ The owner's existing `/blog/<handle>` sharing URL remains valid and uses the sam
 
 Content still comes from existing public profile data and reviewed documents. This changes routing and the owner's presentation; it does not overwrite accounts, content, review snapshots, uploaded files or stored theme settings. Takedown, complaint freezes and account restrictions still prevent public access. Work links open their public details. A structured résumé, when present, replaces the legacy project list on the owner’s Anx page; see [résumé import](resume-import.md).
 
-Existing member `/blog/<handle>` URLs, static bundles, account isolation, moderation and APIs remain compatible. The main blog entry no longer provides a member site editor. Authorized administration or tool APIs can manage existing data.
+Existing member `/blog/<handle>` URLs, static bundles, account isolation, moderation and APIs remain compatible. The main blog entry links to the independent member editor. Existing static packages remain available through the hosting APIs; the new editor focuses on the built-in Anx résumé template.
 
 ## Existing static sites
 

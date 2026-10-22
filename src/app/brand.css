@@ -1,0 +1,5 @@
+/* SpaceYew's custom SY monogram; editorial typography remains in the wordmark. */
+img.site-brand-mark{display:block;width:32px;height:32px;flex:0 0 32px;max-width:none;border-radius:0}
+html[data-ui] .organic-brand,.blog-platform-logo{display:flex;align-items:center;gap:10px}
+.site-brand-copy{min-width:0}
+@media(max-width:540px){img.site-brand-mark{width:30px;height:30px;flex-basis:30px}}

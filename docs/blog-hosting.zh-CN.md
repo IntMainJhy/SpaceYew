@@ -4,7 +4,7 @@
 
 `/blogs` 直接展示站长已公开的个人资料、经历、技能与作品，使用 Anx Portfolio 排版。主导航、语言切换和网站页脚保留；不展示主页管理导航、导出、草稿预览、主题选择、上传设置或发布面板。
 
-旧地址 `/workspace/blog`（包括 `?template=anx`）、`/workspace/studio`、`/workspace/preview`、`/workspace/profile`、`/workspace/library`、`/workspace/files`、`/workspace/insights`、`/workspace/connect` 和 `/my-space` 统一跳转到 `/blogs`。已登录访客也看到站长公开主页，不会把自己的私有草稿当作展示内容。
+`/workspace/blog` 是独立的成员编辑器，原工作区标签页地址跳转到该编辑器；`/my-space` 仍跳转到默认公开的 `/blogs`。详见[编辑指南](blog-editor.zh-CN.md)。无论是否登录，`/blogs` 仍展示站长公开内容，不展示私人草稿。
 
 站长原有 `/blog/<handle>` 分享地址继续有效，并展示相同的 Anx Portfolio 风格。原作者源码改编说明与许可保留在页面底部及 [第三方声明](../THIRD_PARTY_NOTICES.md)。
 
@@ -12,7 +12,7 @@
 
 展示内容仍来自既有公开资料与审核后的内容。此变更只调整页面入口和站长主页的呈现，不重写账号资料、内容、审核快照、上传文件或数据库中的旧主题设置。下架、投诉冻结或账号限制仍使主页不可公开访问。页面内作品链接继续进入其公开详情。
 
-既有成员 `/blog/<handle>`、静态网站包、账号隔离、后台审核和 API 保持兼容。主博客入口不再提供成员建站编辑器；需要处理既有资料时使用已授权的后台或工具 API。
+既有成员 `/blog/<handle>`、静态网站包、账号隔离、后台审核和 API 保持兼容。主博客入口链接到独立成员编辑器。既有静态网站包仍可通过托管 API 管理；新编辑器聚焦当前内置 Anx 简历模板。
 
 ## 既有静态网站兼容
 

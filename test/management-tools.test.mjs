@@ -22,7 +22,7 @@ test('personal files isolate owners, expose quota and filters, and refuse refere
  let list=(await call('/api/spaces/files?q=fixture&status=unused',undefined,alice.token)).data;
  assert.equal(list.total,1);assert.equal(list.used,uploaded.size);assert.equal(list.quota,1000000000);
  assert.equal((await call('/api/spaces/files/'+uploaded.id,undefined,bob.token,'DELETE')).status,404);
- let mine=S.mine(request(alice.token));mine=S.spacesApi(request(alice.token,'/api/spaces/save','POST'),['spaces','save'],{...mine,profile:{...mine.profile,avatarId:uploaded.id}},new URL(process.env.PUBLIC_URL));
+ let mine=S.mine(request(alice.token));mine.layout.nodes[0].assetId=uploaded.id;mine=S.spacesApi(request(alice.token,'/api/spaces/save','POST'),['spaces','save'],mine,new URL(process.env.PUBLIC_URL));
  list=(await call('/api/spaces/files?status=used',undefined,alice.token)).data;assert.equal(list.items[0].references[0].kind,'展板草稿');
  assert.equal((await call('/api/spaces/files/'+uploaded.id,undefined,alice.token,'DELETE')).status,409);
  assert.deepEqual(await readFile(path.join(D.FILES,uploaded.id)),Buffer.from('synthetic fixture'));

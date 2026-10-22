@@ -30,7 +30,7 @@ A feed of shared work, member recommendations and category navigation.
 
 ### Blog homepage
 
-The main Blog homes entry opens the site owner’s public Anx Portfolio homepage directly, with their introduction, skills, experience and work. Theme selection, upload settings and workspace panels are removed from this entry.
+The main Blog homes entry opens the site owner’s public Anx Portfolio homepage directly, with their introduction, skills, experience and work. Editing stays on a separate page: **Create / edit my blog** opens the signed-in member’s own content. The owner can use **Administration → Blog homes** at `/admin/blog`. See the [blog editing guide](docs/blog-editor.md).
 
 ![SpaceYew personal homepage in English](docs/screenshots/personal-homepage-en.png)
 
@@ -38,7 +38,7 @@ The main Blog homes entry opens the site owner’s public Anx Portfolio homepage
 
 | Area | Capabilities |
 | --- | --- |
-| Blog homepages | The site owner’s public Anx Portfolio profile opens directly, without a template picker or workspace panels; existing member blog URLs and reviewed content remain available |
+| Blog homepages | The site owner’s public Anx Portfolio profile opens directly, without a template picker or workspace panels; each signed-in member can edit their own profile, résumé sections, metrics, certificates, images and public PDF at `/workspace/blog`, then preview and submit a fixed version for review |
 | Static website hosting | Upload HTML or a ZIP with relative CSS/JS/assets, inspect an isolated preview and submit a fixed version for review; downloadable English/Chinese HTML starters and a stable branded URL help members get started |
 | Shared documentation | Categorized image-and-description boards, article details with section navigation, and member-authored tutorials; import text, Markdown or HTML into the editor |
 | Skill directory | 17 independently maintained GitHub Skills: Vercel React/composition, Impeccable, UI UX Pro Max, Superpowers debugging/TDD, Obsidian Markdown/JSON Canvas, eight GSAP Skills and VibeHub; cover cards, category/search/tool filters, detailed scenarios, installation commands and localized copyable prompts |
@@ -59,11 +59,11 @@ The interface supports English, Simplified Chinese and Japanese across desktop, 
 
 Static hosting accepts UTF-8 HTML (5 MB) or ZIP files (25 MB compressed, 50 MB extracted, up to 1,000 entries). Packages need `index.html` or `index.htm` and relative asset paths. Browser-side interactions work in an opaque-origin sandbox; external scripts, API requests, forms and server-side execution are blocked. Sources and extracted files count toward storage, with up to 20 immutable packages per account. Publishing remains limited to the existing local qualification and review workflow; this change does not enable public uploads on a production service. Backups retain source packages and restore their verified static assets.
 
-Legacy `/u/...` and `/workspace/studio` URLs redirect to blogs and their settings. Existing content and backend data contracts remain intact. See the [static hosting guide](docs/blog-hosting.md) for packaging, previews and supported interactions.
+Legacy `/u/...` URLs redirect to public blogs; former workspace pages redirect to the independent blog editor. Existing content and backend data contracts remain intact. See the [static hosting guide](docs/blog-hosting.md) for packaging, previews and supported interactions.
 
 ## Publishing and AI workflows
 
-The top-level sections are Home, Community, Blogs, Docs, Skills and Other resources. Use **Publish** to create a document, Skill or resource, then save a private draft or submit it. Every published entry keeps its author, source and usage terms. If no image is supplied, SpaceYew generates a typographic cover. Documents and Skills appear in their own catalogs; an approved submission also creates a linked community share automatically. There is no need to submit the same content again in the community.
+The top-level sections are Home, Community, Blogs, Docs, Skills and Other resources. Use the publish action on each catalog page to create a document, Skill or resource, then save a private draft or submit it. Every published entry keeps its author, source and usage terms. If no image is supplied, SpaceYew generates a typographic cover. Documents and Skills appear in their own catalogs; an approved submission also creates a linked community share automatically. There is no need to submit the same content again in the community.
 
 Each member owns their drafts and credentials. Existing public content stays visible while a revision awaits review. Suspicious content remains private to the author and reviewers, and linked reports or takedowns affect public visibility. The current rules engine is local triage, not semantic AI moderation or a guarantee of legal compliance. Public production publishing remains gated; see [moderation and launch requirements](docs/moderation-and-launch.md).
 

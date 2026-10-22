@@ -31,7 +31,7 @@ test('experience and legacy platform sessions never become password-authenticate
  const experience=signIn('arbitrary','anything',''),real=signIn('alice');
  assert.equal(A.currentUser(req('/api/auth/me',experience)).authentication,'experience');
  assert.equal(A.currentUser(req('/api/auth/me',experience)).experience,true);
- assert.equal((await API.handle(req('/api/spaces/keys',experience))).status,403);
+ assert.equal((await API.handle(req('/api/spaces/keys',experience))).status,403);assert.equal((await API.handle(req('/api/spaces/mine',experience))).status,403,'Shared experience accounts cannot read private blog drafts');
  d.prepare("UPDATE session_realms SET authentication='legacy' WHERE token=?").run(D.hash(experience));
  assert.equal(A.currentUser(req('/api/auth/me',experience)).authentication,'experience');
  process.env.PLATFORM_LOGIN_MODE='password';

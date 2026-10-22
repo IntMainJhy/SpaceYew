@@ -7,7 +7,7 @@
     "node": ">=24.15.0"
   },
   "scripts": {
-    "prebuild": "node scripts/package-skill.mjs",
+    "prebuild": "node scripts/brand-icons.mjs && node scripts/package-skill.mjs",
     "package:skill": "node scripts/package-skill.mjs",
     "dev": "next dev --hostname 127.0.0.1 --port 3008",
     "build": "next build",
@@ -24,7 +24,9 @@
     "test:homepage:http": "node test/blog-http.mjs",
     "test:skills:http": "node test/skills-http.mjs",
     "test:catalog:http": "node test/catalog-http.mjs",
-    "test:resume:http": "node test/resume-http.mjs"
+    "test:resume:http": "node test/resume-http.mjs",
+    "brand:icons": "node scripts/brand-icons.mjs",
+    "test:blog-editor:http": "node test/blog-editor-http.mjs"
   },
   "dependencies": {
     "@tiptap/extension-image": "3.32.0",
@@ -32,7 +34,8 @@
     "@tiptap/react": "3.32.0",
     "@tiptap/starter-kit": "3.32.0",
     "gsap": "3.15.0",
-    "mammoth": "1.13.0",
+    "htmlparser2": "12.0.0",
+    "jszip": "3.10.2",
     "next": "15.5.28",
     "nodemailer": "10.1.7",
     "pdfjs-dist": "5.4.296",

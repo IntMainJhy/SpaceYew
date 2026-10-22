@@ -13,7 +13,7 @@ export function serviceRequest(req){
   if(url.origin===configured.origin)return true;
   // Next receives an HTTP loopback request behind Nginx. Only a proxy that
   // overwrites Host and X-Forwarded-Proto may supply the external origin.
-  return process.env.TRUST_PROXY==='true'&&url.protocol==='http:'&&(isLoopback(url.hostname)||url.host===configured.host)&&req.headers.get('x-forwarded-proto')==='https';
+  return process.env.TRUST_PROXY==='true'&&['http:','https:'].includes(url.protocol)&&(isLoopback(url.hostname)||url.host===configured.host)&&req.headers.get('x-forwarded-proto')==='https';
  }catch{return false}
 }
 

@@ -30,7 +30,7 @@ test('public origins reject invalid deployment URLs, host spoofing and cross-ori
 test('proxy normalization requires explicit trust and Nginx HTTPS metadata; forwarding alone never enables access',()=>{
  Object.assign(process.env,{PUBLIC_URL:'https://space.example.com',PUBLIC_FEATURES_ENABLED:'true',TRUST_PROXY:'false'});
  const proxy=request('http://127.0.0.1:3008/api/community/posts',{host:'space.example.com','x-forwarded-proto':'https'});
- assert.equal(serviceRequest(proxy),false);process.env.TRUST_PROXY='true';assert.equal(serviceRequest(proxy),true);
+ assert.equal(serviceRequest(proxy),false);process.env.TRUST_PROXY='true';assert.equal(serviceRequest(proxy),true);assert.equal(serviceRequest(request('https://localhost:3008/api/community/posts',{host:'space.example.com','x-forwarded-proto':'https'})),true);
  assert.equal(serviceRequest(request('http://space.example.com/api/community/posts',{'x-forwarded-proto':'https'})),true);
  for(const headers of [{host:'space.example.com'},{host:'space.example.com','x-forwarded-proto':'http'},{host:'attacker.example','x-forwarded-host':'space.example.com','x-forwarded-proto':'https'},{host:'space.example.com','x-forwarded-proto':'https',origin:'https://attacker.example'}])assert.equal(serviceRequest(request('http://127.0.0.1:3008/api/community/posts',headers)),false);
  assert.equal(serviceRequest(request('http://attacker.example/api/community/posts',{host:'space.example.com','x-forwarded-proto':'https'})),false);

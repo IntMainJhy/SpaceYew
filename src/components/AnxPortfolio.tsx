@@ -27,8 +27,8 @@ function PortfolioMark({handle}:{handle:string}){
 
 function NoteArrow(){return <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M34 4c1 15-5 26-21 30"/><path d="m22 37-9-3 7.5-8"/></svg>}
 
-export function AnxPortfolio({data,p,content,preview=false}:{data:SpaceData;p:SpaceData;content:SpaceData[];preview?:boolean}){
- const {t}=useLocale(),[failedAvatar,setFailedAvatar]=useState(''),settings=data.layout.blog||{},base='/blog/'+data.handle,Chapters=preview?'div':'main';
+export function AnxPortfolio({data,p,content,preview=false,embedded=false}:{data:SpaceData;p:SpaceData;content:SpaceData[];preview?:boolean;embedded?:boolean}){
+ const {t}=useLocale(),[failedAvatar,setFailedAvatar]=useState(''),settings=data.layout.blog||{},base='/blog/'+data.handle,Chapters=preview||embedded?'div':'main';
  const experiences=(p.experiences||[]).filter((item:SpaceData)=>item.visible!==false),sections=(settings.sections||['projects','articles','resources']).filter((key:string)=>content.some(item=>item.type===key));
  const labels:Record<string,string>={projects:'作品与项目',articles:'文字与思考',resources:'分享的资源'};
  const contacts=[...(p.github?[{label:'GitHub',url:p.github}]:[]),...(p.socials||[])];

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import {serverI18n} from '@/lib/server-i18n';
 import {publicSpace,publicSpaces} from '@/lib/spaces.mjs';
-import {currentUser,localRequest} from '@/lib/auth.mjs';
+import {localRequest} from '@/lib/auth.mjs';
 import {publicPosts} from '@/lib/community.mjs';
 import {localizeContent,localizeProfile} from '@/lib/content-locales.mjs';
 import {FeedAvatar} from './FeedAvatar';
@@ -26,14 +26,9 @@ function ShowcaseGrid({spaces,locale,t,heading='h3'}:{spaces:any[];locale:string
     </Link>;
   })}</div>:<p className="space-muted platform-empty">{t('暂时没有公开主页。')}</p>;
 }
-export async function ShowcaseDirectory({req}:{req:Request}){
-  const {t,locale}=await serverI18n(),spaces=publicSpaces(req),user=currentUser(req);
-  const studioHref=user?'/workspace/blog':'/login?next=/workspace/blog';
-  return <div className="platform-page"><header className="platform-heading homepage-directory-heading"><h1>{t('博客主页')}</h1><Link className="space-btn primary" href={studioHref}>{t(user?'我的博客主页':'创建我的主页')}</Link></header><p className="space-muted">{t('用 Anx Portfolio 模板建立自己的博客，或上传已经做好的静态网站。')}</p><Link className="anx-hosting-link" href="/workspace/blog?template=anx">{t('使用 Anx Portfolio 模板')} ↗</Link><ShowcaseGrid spaces={spaces} locale={locale} t={t} heading="h2"/></div>;
-}
 export async function PlatformHome({req}:{req:Request}){
-  const {t,locale}=await serverI18n(),spaces=publicSpaces(req),user=currentUser(req);
-  const first=spaces[0],studioHref=user?'/workspace/blog':'/login?next=%2Fworkspace%2Fblog';
+  const {t,locale}=await serverI18n(),spaces=publicSpaces(req);
+  const first=spaces[0],studioHref='/blogs';
   const download=homeDownload(req.headers,getConfig('site').desktopDownloads);
   // Keep community gates and discovery opt-in; never use the visitor's private workspace as a demo.
   const posts=localRequest(req)?publicPosts().items.slice(0,2):[];
@@ -62,7 +57,7 @@ export async function PlatformHome({req}:{req:Request}){
         <div className="product-story-copy">
           <h2 id="showcase-introduction-title">{t('博客主页，')}<span>{t('由你来定义。')}</span></h2>
           <p>{t('把个人介绍、经历、技能和作品，整理成一份有质感的博客主页。')}</p>
-          <Link className="space-link" href={studioHref}>{t('创建我的主页')}</Link>
+          <Link className="space-link" href={studioHref}>{t('查看博客主页')}</Link>
         </div>
         <div className="home-personal-preview">{first?<BlogTheme preview data={publicSpace(req,first.handle)}/>:<div className="space-empty"><h3>{t('完整介绍你自己')}</h3><p>{t('个人介绍、经历、技能与作品。')}</p></div>}</div>
       </section>
@@ -71,7 +66,6 @@ export async function PlatformHome({req}:{req:Request}){
         <div className="product-story-copy">
           <h2 id="resume-introduction-title">{t('自己制作，')}<span>{t('我们来托管。')}</span></h2>
           <p>{t('上传 HTML 或 ZIP 静态网站，保留你的设计与交互，用一个地址分享。')}</p>
-          <Link className="space-link" href={studioHref}>{t('上传我的网站')}</Link>
         </div>
         <div className="homepage-hosting-preview" aria-label={t('静态网站托管')}><span>index.html</span><pre>{'<main>\n  <h1>Hello, world.</h1>\n  <p>This is my space.</p>\n</main>'}</pre><div><span>CSS · JavaScript · Images</span><strong>SpaceYew ↗</strong></div></div>
       </section>
@@ -81,6 +75,6 @@ export async function PlatformHome({req}:{req:Request}){
 
     <section className="platform-showcases" aria-labelledby="public-showcases-heading"><div className="product-section-heading"><div><h2 id="public-showcases-heading">{t('每个人，都是一份独特的故事。')}</h2></div><Link className="space-link" href="/blogs">{t('发现更多主页')}</Link></div><ShowcaseGrid spaces={spaces} locale={locale} t={t}/></section>
 
-    <section className="product-invitation" aria-labelledby="product-invitation-title"><h2 id="product-invitation-title">{t('下一份值得被看见的，')}<span>{t('是你的创造。')}</span></h2><div className="space-actions"><Link className="space-btn primary" href={studioHref}>{t('创建我的主页')}</Link><Link className="space-link" href="/community">{t('先逛逛社区')}</Link></div></section>
+    <section className="product-invitation" aria-labelledby="product-invitation-title"><h2 id="product-invitation-title">{t('下一份值得被看见的，')}<span>{t('是你的创造。')}</span></h2><div className="space-actions"><Link className="space-btn primary" href={studioHref}>{t('查看博客主页')}</Link><Link className="space-link" href="/community">{t('先逛逛社区')}</Link></div></section>
   </ProductHomeMotion>;
 }

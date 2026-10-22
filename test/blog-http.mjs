@@ -53,7 +53,11 @@ try{
  assert.equal((await fetch(base+'/api/spaces/blog-qr/'+anx.handle)).status,200);
  const changed=await json('/api/spaces/mine',undefined,member);await json('/api/spaces/save',{...changed,profile:{...changed.profile,name:'Unreviewed replacement'}},member);
  const stillReviewed=await(await fetch(base+'/blog/'+anx.handle)).text();assert.match(stillReviewed,/Taylor Quinn/);assert.doesNotMatch(stillReviewed,/Unreviewed replacement/);
- const directoryPage=await(await fetch(base+'/blogs')).text();assert.match(directoryPage,/workspace\/blog\?template=anx/);
+ const ownerHome=await(await fetch(base+'/blogs')).text();assert.match(ownerHome,/data-home-theme="anx"/);assert.doesNotMatch(ownerHome,/homepage-studio|homepage-theme-picker|space-tabs|Unreviewed replacement/);assert.doesNotMatch(ownerHome,/workspace\/blog\?template=anx/);
+ for(const route of ['/workspace/blog?template=anx','/workspace/profile','/workspace/library','/workspace/files','/workspace/insights','/workspace/connect','/workspace/preview','/my-space']){const redirect=await fetch(base+route,{redirect:'manual',headers:{Cookie:member}});assert.equal(redirect.status,307);assert.equal(new URL(redirect.headers.get('location'),base).pathname,'/blogs');}
+ const ownerData=await json('/api/admin/bootstrap',undefined,owner);const ownerHandle=ownerData.profile.alias.toLowerCase().replace(/[^a-z0-9-]/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'').slice(0,28)||'member';
+ const ownerCanonical=await(await fetch(base+'/blog/'+ownerHandle)).text();assert.match(ownerCanonical,/data-home-theme="anx"/);assert.doesNotMatch(ownerCanonical,/blog-create-link|homepage-studio/);
  const finalAnx=await json('/api/spaces/mine',undefined,member);await json('/api/spaces/offline',{revision:finalAnx.revision},member);assert.equal((await fetch(base+'/blog/'+anx.handle)).status,404);
+ const ownerMine=await json('/api/spaces/mine',undefined,owner);await json('/api/spaces/offline',{revision:ownerMine.revision},owner);assert.equal((await fetch(base+'/blogs')).status,404,'Owner takedown must also hide the direct blog entry');
  console.log('Homepage HTTP checks passed: static uploads, sandbox, reviewed Anx template, bilingual content, stable sharing and takedown.');
 }finally{if(adminServer)await stopServer(adminServer);if(server)await stopServer(server);await rm(directory,{recursive:true,force:true})}

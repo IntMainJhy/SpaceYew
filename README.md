@@ -28,15 +28,9 @@ A feed of shared work, member recommendations and category navigation.
 
 ![SpaceYew community feed in English with shared posts, interaction controls and sidebars](docs/screenshots/community-en.jpg)
 
-### Blog homepage settings
-
-Choose a built-in theme, preview your profile or upload an HTML/ZIP website. The current editor also includes the new Folio and Panorama themes.
-
-![SpaceYew personal homepage settings in English](docs/screenshots/editor-en.png)
-
 ### Blog homepage
 
-A profile-first page for your introduction, skills, experience and work.
+The main Blog homes entry opens the site owner’s public Anx Portfolio homepage directly, with their introduction, skills, experience and work. Theme selection, upload settings and workspace panels are removed from this entry.
 
 ![SpaceYew personal homepage in English](docs/screenshots/personal-homepage-en.png)
 
@@ -44,13 +38,13 @@ A profile-first page for your introduction, skills, experience and work.
 
 | Area | Capabilities |
 | --- | --- |
-| Blog homepages | Six responsive themes, including the MIT-derived Anx Portfolio adaptation, a light ruled Folio layout and a dark, cover-led Panorama layout; introduce your experience, skills, work and contact details, with optional notes and resources |
+| Blog homepages | The site owner’s public Anx Portfolio profile opens directly, without a template picker or workspace panels; existing member blog URLs and reviewed content remain available |
 | Static website hosting | Upload HTML or a ZIP with relative CSS/JS/assets, inspect an isolated preview and submit a fixed version for review; downloadable English/Chinese HTML starters and a stable branded URL help members get started |
 | Shared documentation | Categorized image-and-description boards, article details with section navigation, and member-authored tutorials; import text, Markdown or HTML into the editor |
 | Skill directory | 17 independently maintained GitHub Skills: Vercel React/composition, Impeccable, UI UX Pro Max, Superpowers debugging/TDD, Obsidian Markdown/JSON Canvas, eight GSAP Skills and VibeHub; cover cards, category/search/tool filters, detailed scenarios, installation commands and localized copyable prompts |
 | Other resources | Member-shared websites, tools and references; documentation and Skills have their own sections |
 | Publishing & community | One account-scoped editor for documents, Skills and resources; an approved entry creates one linked community post, subsequent revisions reuse it, and taking the entry offline also removes its share from public view |
-| Sharing & community profiles | Independent blog navigation and management, public links, system sharing and QR codes; community profiles retain a short introduction with a link to the full blog |
+| Sharing & community profiles | Direct public blog navigation, public links, system sharing and QR codes; community profiles retain a short introduction with a link to the full blog |
 | Content and files | Private account-isolated drafts, versions, blog content, uploaded images, attachments and file references |
 | Moderation & administration | Local risk screening can approve low-risk text; flagged text, images, external sources and installation commands wait for a reviewer; manual mode, reports, takedowns, notifications and audit logs remain available |
 | AI integration | The SpaceYew Skill and local stdio MCP bridge can read, save and submit documents, Skills and resources through scoped credentials; publication uses the same moderation and community-sharing pipeline as the editor |

@@ -8,11 +8,11 @@ import {AnxPortfolio} from './AnxPortfolio';
 import type {SpaceData} from './SpaceBoard';
 
 export const homepageThemes=[['anx','Anx Portfolio','来自 anx-portfolio 的内置适配版，立体像素签名与细线个人档案。'],['folio','像素手记','像素签名、细线框架与开放的个人档案。'],['panorama','远景日记','宽幅风景、深色阅读面板与独立个人名片。'],['journal','叙事杂志','宽幅标题、留白与细致的经历编排。'],['minimal','简洁档案','侧栏名片与清晰的个人信息。'],['terminal','开发者','深色界面与等宽字体，专注技术与作品。']];
-export function BlogTheme({data,preview=false}:{data:SpaceData;preview?:boolean}){
+export function BlogTheme({data,preview=false,embedded=false}:{data:SpaceData;preview?:boolean;embedded?:boolean}){
  const Chapters=preview?'div':'main';
- const {t,locale}=useLocale(),p=localizeProfile(data.profile,locale),settings=data.layout.blog||{},theme=settings.theme||'journal',content=(data.content||[]).map((x:SpaceData)=>localizeContent(x,locale)),base='/blog/'+data.handle;
+ const {t,locale}=useLocale(),p=localizeProfile(data.profile,locale),settings=data.layout.blog||{},theme=data.owner==='owner'?'anx':settings.theme||'journal',content=(data.content||[]).map((x:SpaceData)=>localizeContent(x,locale)),base='/blog/'+data.handle;
  const experiences=(p.experiences||[]).filter((x:SpaceData)=>x.visible!==false),sections=(settings.sections||['projects','articles','resources']).filter((key:string)=>content.some((x:SpaceData)=>x.type===key)),labels:Record<string,string>={projects:'作品与项目',articles:'文字与思考',resources:'分享的资源'};
- if(theme==='anx')return <AnxPortfolio data={data} p={p} content={content} preview={preview}/>;
+ if(theme==='anx')return <AnxPortfolio data={data} p={p} content={content} preview={preview} embedded={embedded}/>;
  if(['folio','panorama'].includes(theme))return <BlogSignatureTheme data={data} p={p} content={content} preview={preview}/>;
  return <div className="personal-homepage" data-home-theme={theme}>
   <div className="homepage-masthead"><span>{p.alias||'@'+data.handle}</span><span>{t('个人档案')}</span></div>

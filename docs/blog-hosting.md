@@ -1,43 +1,27 @@
-# Blog homepages and static hosting
+# Blog homepage and existing static hosting
 
-Each member has a blog at `/blog/<handle>`. A member can use a built-in theme or upload a self-contained static website. Both modes share the same stable address, account isolation, review history, reporting and takedown controls.
+## Current blog entry
 
-## Built-in themes
+`/blogs` directly displays the site owner's public profile, experience, skills and work in the Anx Portfolio layout. Main navigation, language selection and the site footer remain. The page has no workspace navigation, export, draft preview, theme picker, upload settings or publishing panel.
 
-The theme picker includes **Anx Portfolio**, **Pixel journal**, **Scenic journal**, **Editorial journal**, **Minimal profile** and **Developer**. Profile, skills, experience, projects, writing and links use the member's own data. Empty optional sections are hidden. Covers and avatars must be files owned by that member. Saving changes only changes the draft; approval publishes a fixed snapshot.
+Legacy `/workspace/blog` (including `?template=anx`), `/workspace/studio`, `/workspace/preview`, `/workspace/profile`, `/workspace/library`, `/workspace/files`, `/workspace/insights`, `/workspace/connect` and `/my-space` redirect to `/blogs`. Signed-in visitors see the owner's public profile rather than their private draft.
 
-Pixel journal uses an original geometric monogram and a fine-rule profile layout inspired by [Anx's portfolio](https://github.com/AnxForever/anx-portfolio). Scenic journal uses a wide banner, profile column and dark reading cards inspired by [Fuwari](https://github.com/saicaca/fuwari). Both reference repositories use MIT licenses. These two SpaceYew themes (Pixel journal and Scenic journal) were implemented independently: no upstream code, branding, avatars or illustrations were copied. The default landscape is an existing original, AI-generated SpaceYew demo asset, labelled as such; members may replace it with their own cover. No GitHub activity or personal facts are invented.
+The owner's existing `/blog/<handle>` sharing URL remains valid and uses the same Anx Portfolio style. Attribution remains on the page and in the [third-party notices](../THIRD_PARTY_NOTICES.md).
 
-## Use Anx Portfolio
+## Data and permissions
 
-The built-in Anx Portfolio template adapts actual [anx-portfolio source](https://github.com/AnxForever/anx-portfolio/tree/a7434847797658402d50fba29827eef246102bb7): the layered pixel signature, profile-header grid, ruled panels and work layout. The original branding, portraits and personal facts are replaced by each member's profile. No verification badge, contribution graph, statistics or endorsements are fabricated.
+Content still comes from existing public profile data and reviewed documents. This changes routing and the owner's presentation; it does not overwrite accounts, content, review snapshots, uploaded files or stored theme settings. Takedown, complaint freezes and account restrictions still prevent public access. Work links open their public details.
 
-1. Choose **Blog homes → Use Anx Portfolio**, or open `/workspace/blog?template=anx`. Sign in if needed; your choice survives sign-in and only changes the draft.
-2. Fill in your profile, avatar, introduction, public contacts and experience. Manage optional projects, articles and resources in your blog's content area. Empty sections are hidden.
-3. Preview, save the draft, confirm publication rights and submit for review.
-4. Once approved, share `/blog/<handle>` using a copied link, system sharing or a QR code. Updates keep the same address; the approved version remains visible while a revision awaits review. Taking it offline removes public access.
+Existing member `/blog/<handle>` URLs, static bundles, account isolation, moderation and APIs remain compatible. The main blog entry no longer provides a member site editor. Authorized administration or tool APIs can manage existing data.
 
-Every member can use this template independently, without installing dependencies, connecting GitHub or running a build. Existing account isolation, upload ownership and review snapshots apply. The adaptation covers the profile, skills, experience and optional content; it does not include upstream GitHub APIs, search, advertising, sponsorship or site administration services.
+## Existing static sites
 
-The original repository is a Next.js server application. Its source ZIP is **not** a deployable static archive. Use the built-in adaptation, or complete your own compatible static export before following the upload instructions below. SpaceYew does not install or execute arbitrary user repositories or server programs.
+Existing sites still run in sandboxed iframes without same-origin permissions. Supported inputs are HTML or ZIP static build output, with a root index.html and relative assets. Limits remain 5 MiB per standalone page, 25 MiB per ZIP and 50 MiB expanded. User repository builds and Next.js server programs are not executed. Preview tokens remain session-bound; only approved snapshots become public, and reports/takedowns still apply.
 
-The adapted code retains its [MIT notice](licenses/anx-portfolio-MIT.txt) and [brand policy](licenses/anx-portfolio-BRAND.md). SpaceYew's restrictive license does not override these third-party rights.
+Original upload archives are not publicly downloadable. Existing limits of 1 GB per account and 20 imported site versions remain.
 
-## Upload an existing site
+## Source and license
 
-1. Build the site on your own computer. For a framework such as Astro or Vite, use that project's documented build command. Upload the **static output**, not source code, dependencies or environment files.
-2. A standalone page can be uploaded as `.html` or `.htm` (up to 5 MiB). A multi-file site should be a ZIP (up to 25 MiB compressed / 50 MiB expanded) containing `index.html` or `index.htm`, CSS, JavaScript, images and fonts. A ZIP with one enclosing build directory is supported.
-3. Use relative asset and page paths. Put external scripts and fonts into the bundle if their license permits it. Check every page in the isolated preview before requesting publication.
-4. Save, confirm publication rights and submit for review. The current public revision remains unchanged until the new revision is approved. Share the stable blog link or its QR code after approval.
+The Anx adaptation is based on [anx-portfolio](https://github.com/AnxForever/anx-portfolio/tree/a7434847797658402d50fba29827eef246102bb7), retaining the profile-header grid, ruled panels and layered pixel-signature structure. The identity and signature use site-owned content, without the original author's portrait, personal facts or fabricated contributions. The full [MIT notice](licenses/anx-portfolio-MIT.txt) and [brand policy](licenses/anx-portfolio-BRAND.md) are retained; SpaceYew's restrictive license does not override those third-party rights.
 
-Two standalone HTML starters are available in the editor, in English and Chinese. Download, edit the text and colors, open the file locally, then upload it. They use no external scripts, fonts, images or APIs.
-
-This host deliberately does not execute builds or backend code. Server rendering, API calls, third-party scripts, embedded frames, forms, service workers and cookies/shared-origin storage are unavailable in hosted pages. An arbitrary exported Astro/Fuwari/Next/Vite site is **not guaranteed to work unchanged**: absolute paths, runtime integrations and search services may require adaptation. The preview is the compatibility check.
-
-## Isolation and production
-
-Uploaded sites run in a sandboxed iframe without same-origin privileges. Their CSP blocks network connections, forms, workers and nested frames; scripts are limited to the site bundle and inline scripts. Direct public HTML navigation returns to the SpaceYew wrapper. External links clicked inside a site appear in the trusted wrapper, where visitors can explicitly open the destination; the uploaded site itself never receives popup or top-navigation privileges. Private preview links are short-lived and bound to an active account session. Site imports reject traversal, symlinks, executable server files and excessive archives.
-
-Accounts have a 1 GB storage quota and up to 20 imported site versions. Source archives and expanded files both count toward storage. Uploading a site does not bypass review, the account gate or complaints. The current repository remains a local testing implementation, not a claim that public multi-tenant hosting is ready for regulatory launch. Before production, use a dedicated content origin and object storage/CDN, complete identity and moderation operations, establish backups and abuse response, and review CSP and browser isolation with the actual deployment.
-
-See [中文说明](blog-hosting.zh-CN.md).
+[简体中文](blog-hosting.zh-CN.md)

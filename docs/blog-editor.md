@@ -24,3 +24,5 @@ Personal images and populated profiles live in private application storage and b
 ## Default public blog
 
 The `/blogs` entry, its canonical metadata and homepage preview share one public selection. An operator may configure the private `featuredBlog` record as `{"handle":"public-handle"}`; unset retains the owner default. The selection never grants editing rights or bypasses publication/takedown checks. See [the community completion review](community-finish-2026-10-22.md).
+
+The public “Site owner” verification badge is assigned separately through the private `siteOwnerAccount` configuration (`{"id":"member-id"}`). It identifies the author across blogs and community surfaces, cannot be set by editing a profile, and grants no administrative permission. Editing always opens the signed-in member’s own space.

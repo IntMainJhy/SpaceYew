@@ -1,3 +1,4 @@
+import {SiteOwnerBadge} from './SiteOwnerBadge';
 import Link from 'next/link';
 import {serverI18n} from '@/lib/server-i18n';
 import {defaultBlogSpace,publicSpaces} from '@/lib/spaces.mjs';
@@ -19,7 +20,7 @@ function ShowcaseGrid({spaces,locale,t,heading='h3'}:{spaces:any[];locale:string
     return <Link className="platform-showcase" key={space.handle} href={'/blog/'+space.handle} aria-label={profile.name+' · '+t('查看博客主页')}>
       {space.coverId&&<img className="platform-showcase-cover" src={'/media/'+space.coverId} alt="" width={480} height={300} loading="lazy"/>}
       <div className="platform-showcase-info">
-        <div className="platform-showcase-person"><FeedAvatar name={profile.name} avatarId={profile.avatarId}/><div><Heading>{profile.name}</Heading><small>@{space.handle}</small></div></div>
+        <div className="platform-showcase-person"><FeedAvatar name={profile.name} avatarId={profile.avatarId}/><div><Heading>{profile.name}<SiteOwnerBadge siteOwner={space.siteOwner} compact/></Heading><small>@{space.handle}</small></div></div>
         {profile.intro&&<p>{profile.intro}</p>}
         <span className="platform-showcase-action">{t('查看博客主页')}</span>
       </div>

@@ -1,5 +1,6 @@
 'use client';
 import {useLocale} from './LocaleProvider';
+import {SiteOwnerBadge} from './SiteOwnerBadge';
 import {useEffect,useState} from 'react';
 import Link from 'next/link';
 import Form from 'next/form';
@@ -41,7 +42,7 @@ function CommunityDiscovery({config,user,query,membersOnly=false}:{config:Doc;us
  const categoryLink=(category:string)=>'/community?'+new URLSearchParams({...query,category,page:'1'});
  return <aside className="feed-discover" aria-label={tr("发现与社区信息")}>
   {!membersOnly&&<CommunitySearch config={config} query={query} discovery/>}
-  {members.data?.items?.length>0&&<section className="feed-suggestions"><h2>{tr("值得认识的人")}</h2>{members.data.items.filter((person:Doc)=>person.id!==user?.id).slice(0,3).map((person:Doc)=><div className="feed-suggestion" key={person.id}><Link href={'/community/members/'+person.id}><FeedAvatar name={person.name} avatarId={person.avatarId}/><span><strong>{person.name}</strong><small>{tr(person.postCount===1?"1 份分享":"{0} 份分享",[person.postCount])}</small></span></Link><FollowButton person={person} user={user}/></div>)}<Link className="organic-text-link" href="/community/members">{tr("发现更多成员")}</Link></section>}
+  {members.data?.items?.some((person:Doc)=>person.id!==user?.id)&&<section className="feed-suggestions"><h2>{tr("值得认识的人")}</h2>{members.data.items.filter((person:Doc)=>person.id!==user?.id).slice(0,3).map((person:Doc)=><div className="feed-suggestion" key={person.id}><Link href={'/community/members/'+person.id}><FeedAvatar name={person.name} avatarId={person.avatarId}/><span><strong>{person.name}<SiteOwnerBadge siteOwner={person.siteOwner} compact/></strong><small>{tr(person.postCount===1?"1 份分享":"{0} 份分享",[person.postCount])}</small></span></Link><FollowButton person={person} user={user}/></div>)}<Link className="organic-text-link" href="/community/members">{tr("发现更多成员")}</Link></section>}
   {!membersOnly&&<section><h2>{tr("分类")}</h2><nav aria-label={tr("资源分类")}>{['',...config.taxonomy.categories].map((category:string)=><Link href={categoryLink(category)} key={category} aria-current={String(query.category||'')===category?'page':undefined}><span>{tr(category||"全部分享")}</span></Link>)}</nav></section>}
  </aside>;
 }
@@ -62,7 +63,7 @@ function CommunityDetail({id,user,config}:{id:string;user:Doc|null;config:Doc}){
  return <article className="community-post-detail" aria-labelledby="community-post-title">
   <Link className="community-post-back" href="/community">{tr("返回社区")}</Link>
   <header className="community-post-heading">
-   <div className="community-post-author"><Link className="community-post-author-link" href={authorHref}><FeedAvatar name={item.authorName} avatarId={item.authorAvatarId}/><strong>{item.authorName}</strong></Link><time className="community-post-time" dateTime={item.updated}>{date(item.updated,locale)}</time></div>
+   <div className="community-post-author"><Link className="community-post-author-link" href={authorHref}><FeedAvatar name={item.authorName} avatarId={item.authorAvatarId}/><strong>{item.authorName}<SiteOwnerBadge siteOwner={item.authorSiteOwner} compact/></strong></Link><time className="community-post-time" dateTime={item.updated}>{date(item.updated,locale)}</time></div>
    <h1 id="community-post-title">{item.title}</h1>
   </header>
   <div className="community-post-reading"><PostCover id={item.coverId} alt={item.coverAlt} generated={item.catalogId?{kind:item.catalogKind,title:item.title,category:tr(item.category)}:undefined}/><CommunityText body={item.body}/>

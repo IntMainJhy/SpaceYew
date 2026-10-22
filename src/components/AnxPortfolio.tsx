@@ -7,6 +7,7 @@ import Link from 'next/link';
 import {ResumeSections,resumeText} from './ResumeSections';
 import {useId,useRef,useState} from 'react';
 import {useLocale} from './LocaleProvider';
+import {SiteOwnerBadge} from './SiteOwnerBadge';
 import {pixels} from './BlogSignatureThemes';
 import {Icon} from './Icons';
 import type {SpaceData} from './SpaceBoard';
@@ -38,7 +39,7 @@ export function AnxPortfolio({data,p,content,preview=false,embedded=false}:{data
   <header className="anx-profile-header">
    <figure className="anx-signature"><PortfolioMark handle={/[a-z]/i.test(p.alias||'')?p.alias:data.handle}/><figcaption>Fig. 1.</figcaption></figure>
    <div className="anx-portrait"><span aria-hidden="true">{[...(p.name||'?')][0]}{p.avatarId&&failedAvatar!==p.avatarId&&<img src={'/media/'+p.avatarId} alt="" onError={()=>setFailedAvatar(p.avatarId)}/>}</span></div>
-   <div className="anx-name"><h1>{settings.title||p.name}</h1><p>{settings.description||p.alias||'@'+data.handle}</p></div>
+   <div className="anx-name"><h1>{settings.title||p.name}<SiteOwnerBadge siteOwner={data.siteOwner}/></h1><p>{settings.description||p.alias||'@'+data.handle}</p></div>
   </header>
   <div className="anx-separator" aria-hidden="true"/>
   {(contacts.length>0||p.email)&&<section className="anx-contact" aria-label={t('联系我')}><span className="anx-note" aria-hidden="true">{t('保持联系')}<NoteArrow/></span>{contacts.map((item:SpaceData,index:number)=><a key={item.url+index} href={item.url} target="_blank" rel="noopener noreferrer"><Icon name="link"/>{item.label}</a>)}{p.email&&<a href={'mailto:'+p.email}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M3 5h18v14H3zM3 5l9 7 9-7"/></svg>{p.email}</a>}{resume?.resumeId&&<a href={'/download/'+resume.resumeId}>{locale==='en'?'Download résumé PDF':'下载简历 PDF'}<Icon name="download"/></a>}</section>}

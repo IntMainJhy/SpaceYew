@@ -1,0 +1,4 @@
+.site-owner-badge{--site-owner-blue:var(--x-link,#0068a8);--site-owner-check:#fff;display:inline-flex;align-items:center;gap:4px;margin-inline-start:6px;vertical-align:middle;color:var(--site-owner-blue);font-family:inherit;font-size:12px;font-weight:600;line-height:1.4;letter-spacing:normal;white-space:nowrap}
+.site-owner-badge svg{display:block;width:18px;height:18px;flex:none}
+.site-owner-check{stroke:var(--site-owner-check)}
+:is([data-home-theme=terminal],[data-home-theme=panorama]) .site-owner-badge{--site-owner-blue:#79bfff;--site-owner-check:#101a24}

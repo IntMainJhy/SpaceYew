@@ -86,6 +86,9 @@ export function db(){
  return d;
 }
 export function getConfig(key){return JSON.parse(db().prepare('SELECT value FROM config WHERE key=?').get(key).value)}
+// Public identity only: this configuration never participates in authorization.
+export function siteOwnerAccountId(){let selected;try{selected=JSON.parse(db().prepare("SELECT value FROM config WHERE key='siteOwnerAccount'").get()?.value||'null')}catch{return ''}return typeof selected?.id==='string'&&db().prepare("SELECT 1 FROM community_users WHERE id=? AND status='active'").get(selected.id)?selected.id:''}
+export function isSiteOwnerAccount(id){return typeof id==='string'&&!!id&&siteOwnerAccountId()===id}
 export function setConfig(key,value){db().prepare('UPDATE config SET value=? WHERE key=?').run(JSON.stringify(value),key)}
 const transactionDepth=new WeakMap();
 export function transaction(fn){const d=db(),depth=transactionDepth.get(d)||0,savepoint='site_nested_'+depth;d.exec(depth?'SAVEPOINT '+savepoint:'BEGIN IMMEDIATE');transactionDepth.set(d,depth+1);try{const result=fn(d);d.exec(depth?'RELEASE SAVEPOINT '+savepoint:'COMMIT');return result}catch(error){d.exec(depth?'ROLLBACK TO SAVEPOINT '+savepoint:'ROLLBACK');if(depth)d.exec('RELEASE SAVEPOINT '+savepoint);throw error}finally{transactionDepth.set(d,depth)}}

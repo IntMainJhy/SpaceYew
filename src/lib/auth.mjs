@@ -1,6 +1,6 @@
 import {appSurface} from './app-access.mjs';
 import {randomBytes} from 'node:crypto';
-import {db,hash,limited,passwordMatches,passwordHash,DATA,getConfig,transaction} from './db.mjs';
+import {db,hash,limited,passwordMatches,passwordHash,DATA,getConfig,transaction,isSiteOwnerAccount} from './db.mjs';
 import {requireValue} from './content.mjs';
 import {unlinkSync,existsSync} from 'node:fs';
 import path from 'node:path';
@@ -23,13 +23,13 @@ export function currentUser(req){
  if(!row.user_id){
   if(appSurface()==='platform')return null;
   const profile=getConfig('profile');
-  return{id:'owner',...db().prepare('SELECT username,email,email_verified_at AS emailVerifiedAt FROM admins WHERE id=1').get(),nickname:'站长',displayName:profile.name,handle:profile.alias,avatarId:profile.avatarId,role:'owner',status:'active',verification:'owner',authentication};
+  return{id:'owner',...db().prepare('SELECT username,email,email_verified_at AS emailVerifiedAt FROM admins WHERE id=1').get(),nickname:'站长',displayName:profile.name,handle:profile.alias,avatarId:profile.avatarId,role:'owner',status:'active',verification:'owner',siteOwner:isSiteOwnerAccount('owner'),authentication};
  }
  if(!localRequest(req))return null;
  const user=db().prepare("SELECT id,username,nickname,role,status,verification,avatar_id AS avatarId,email,email_verified_at AS emailVerifiedAt FROM community_users WHERE id=? AND status<>'closed'").get(row.user_id)||null;
  if(appSurface()==='admin'&&!['owner','reviewer'].includes(user?.role))return null;
  if(appSurface()==='platform'&&user?.role!=='member')return null;
- return user?{...user,authentication}:null;
+ return user?{...user,siteOwner:isSiteOwnerAccount(user.id),authentication}:null;
 }
 export function session(req){return currentUser(req)?.role==='owner'}
 export function admin(req){requireValue(session(req),'请先登录管理后台',401)}

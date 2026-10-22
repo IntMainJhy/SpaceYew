@@ -9,7 +9,7 @@ import {ownsCover} from './covers.mjs';
 import {clearAvatar} from './avatars.mjs';
 import {randomUUID,randomBytes} from 'node:crypto';
 import {isIP} from 'node:net';
-import {db,now,hash,limited,transaction,passwordHash,passwordMatches,getConfig,setConfig} from './db.mjs';
+import {db,now,hash,limited,transaction,passwordHash,passwordMatches,getConfig,setConfig,siteOwnerAccountId,isSiteOwnerAccount} from './db.mjs';
 import {currentUser,localRequest,login,sessionCookie,COOKIE,cookie} from './auth.mjs';
 import {requireValue,cleanText,HttpError} from './content.mjs';
 import {POLICIES,POLICY_VERSION} from './community-policies.mjs';
@@ -61,12 +61,12 @@ function data(input,complete=false,author=''){requireValue(input&&typeof input==
 }
 function catalogOrigin(id){const entry=db().prepare('SELECT id,kind FROM catalog_entries WHERE community_post=?').get(id);return{catalogId:entry?.id||'',catalogKind:entry?.kind||'',origin:entry?'catalog':'manual'}}
 function decorate(row,includeHistory=false){const revisions=db().prepare('SELECT * FROM community_revisions WHERE post=? ORDER BY number DESC').all(row.id);const author=db().prepare('SELECT nickname,status,avatar_id FROM community_users WHERE id=?').get(row.author);return{...row,...catalogOrigin(row.id),latestStatus:revisions[0]?.status||'draft',draft:parse(row.draft),public:parse(getRevision(row.public_revision)?.data),pending:revisions.find(r=>r.id===row.pending_revision)?{...revisions.find(r=>r.id===row.pending_revision),data:parse(revisions.find(r=>r.id===row.pending_revision).data)}:null,authorName:author?.nickname||'已注销成员',frozen:!!db().prepare('SELECT 1 FROM community_cases WHERE post=? AND frozen=1 LIMIT 1').get(row.id),...(includeHistory?{revisions:revisions.map(r=>({...r,data:parse(r.data)})),cases:db().prepare('SELECT id,kind,status,frozen,decision,response,created,version FROM community_cases WHERE post=? AND author=? ORDER BY created DESC LIMIT 50').all(row.id,row.author)}:{})}}
-function publicRow(row){const revision=getRevision(row.public_revision),doc=parse(revision?.data),author=db().prepare('SELECT nickname,status,avatar_id FROM community_users WHERE id=?').get(row.author);if(!doc)return null;const {note,...visible}=doc;return{...visible,...catalogOrigin(row.id),id:row.id,revision:revision.id,authorId:row.author,authorName:row.author==='owner'?getConfig('profile').name:author?.status==='closed'?'已注销成员':author?.nickname||'社区成员',authorAvatarId:row.author==='owner'?getConfig('profile').avatarId:author?.status==='closed'?null:author?.avatar_id||null,authorRegion:'本地测试 · 未启用属地核验',updated:revision.decided}}
+function publicRow(row){const revision=getRevision(row.public_revision),doc=parse(revision?.data),author=db().prepare('SELECT nickname,status,avatar_id FROM community_users WHERE id=?').get(row.author);if(!doc)return null;const {note,...visible}=doc;return{...visible,...catalogOrigin(row.id),id:row.id,revision:revision.id,authorId:row.author,authorSiteOwner:isSiteOwnerAccount(row.author),authorName:row.author==='owner'?getConfig('profile').name:author?.status==='closed'?'已注销成员':author?.nickname||'社区成员',authorAvatarId:row.author==='owner'?getConfig('profile').avatarId:author?.status==='closed'?null:author?.avatar_id||null,authorRegion:'本地测试 · 未启用属地核验',updated:revision.decided}}
 const publicSelection="p.visibility='public' AND p.public_revision IS NOT NULL AND u.status='active' AND (p.author='owner' OR u.verification='local_test') AND NOT EXISTS(SELECT 1 FROM community_cases c WHERE c.post=p.id AND c.frozen=1)";
 function actorInfo(id){
- if(id==='owner'){const p=getConfig('profile');return{id,name:p.name,avatarId:p.avatarId||null,joined:null};}
+ if(id==='owner'){const p=getConfig('profile');return{id,name:p.name,avatarId:p.avatarId||null,siteOwner:isSiteOwnerAccount(id),joined:null};}
  const row=db().prepare("SELECT id,nickname,avatar_id,created FROM community_users WHERE id=? AND status='active' AND verification='local_test'").get(id);
- return row?{id:row.id,name:row.nickname,avatarId:row.avatar_id,joined:row.created}:null;
+ return row?{id:row.id,name:row.nickname,avatarId:row.avatar_id,siteOwner:isSiteOwnerAccount(row.id),joined:row.created}:null;
 }
 function socialActive(user){requireValue(user.status==='active'&&(user.role==='owner'||user.verification==='local_test'),'账号正常且已确认本地测试资格后可使用此项互动',403)}
 function withActivity(items,actor=''){
@@ -121,7 +121,7 @@ function memberProfile(id,viewer=''){
 }
 function graph(id,kind,viewer,page){requireValue(actorInfo(id),'成员主页暂不可用',404);const field=kind==='following'?'following':'follower',other=kind==='following'?'follower':'following';const people=db().prepare(`SELECT ${field} id FROM community_follows WHERE ${other}=? ORDER BY created DESC`).all(id).map(row=>actorInfo(row.id)).filter(Boolean);const total=people.length,pages=Math.max(1,Math.ceil(total/12)),current=Math.max(1,Math.min(pages,Math.floor(Number(page))||1));return{items:people.slice((current-1)*12,current*12).map(p=>memberProfile(p.id,viewer)),total,pages,page:current}}
 function directory(query,viewer){
- const ids=new Set(['owner']);for(const row of db().prepare(`SELECT p.author FROM community_posts p JOIN community_users u ON u.id=p.author WHERE ${publicSelection} ORDER BY (SELECT decided FROM community_revisions WHERE id=p.public_revision) DESC,p.id DESC`).all())ids.add(row.author);
+ const ids=new Set([siteOwnerAccountId()||'owner']);for(const row of db().prepare(`SELECT p.author FROM community_posts p JOIN community_users u ON u.id=p.author WHERE ${publicSelection} ORDER BY (SELECT decided FROM community_revisions WHERE id=p.public_revision) DESC,p.id DESC`).all())ids.add(row.author);
  for(const row of db().prepare(`SELECT c.author FROM community_comments c JOIN community_posts p ON p.id=c.post JOIN community_users u ON u.id=p.author WHERE c.status='approved' AND (c.author='owner' OR EXISTS(SELECT 1 FROM community_users cu WHERE cu.id=c.author AND cu.status='active' AND cu.verification='local_test')) AND ${publicSelection}`).all())ids.add(row.author);
  const q=String(query.get('q')||'').trim().toLowerCase(),people=[...ids].map(actorInfo).filter(p=>p&&(!q||p.name.toLowerCase().includes(q))),total=people.length,pages=Math.max(1,Math.ceil(total/12)),page=Math.max(1,Math.min(pages,Math.floor(Number(query.get('page')))||1));
  return{items:people.slice((page-1)*12,page*12).map(p=>memberProfile(p.id,viewer)),total,pages,page};

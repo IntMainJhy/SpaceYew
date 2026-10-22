@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import {useLocale} from './LocaleProvider';
+import {SiteOwnerBadge} from './SiteOwnerBadge';
 import {localizeProfile,localizeContent} from '@/lib/content-locales.mjs';
 import {FeedAvatar} from './FeedAvatar';
 import {BlogSignatureTheme} from './BlogSignatureThemes';
@@ -17,7 +18,7 @@ export function BlogTheme({data,preview=false,embedded=false}:{data:SpaceData;pr
  return <div className="personal-homepage" data-home-theme={theme}>
   <div className="homepage-masthead"><span>{p.alias||'@'+data.handle}</span><span>{t('个人档案')}</span></div>
   {data.layout.coverId&&<img className="homepage-cover" src={'/media/'+data.layout.coverId} alt=""/>}
-  <div className="homepage-layout"><aside className="homepage-identity"><FeedAvatar name={p.name} avatarId={p.avatarId} className="homepage-avatar"/><h1>{settings.title||p.name}</h1>{p.alias&&<p className="homepage-alias">{p.alias}</p>}{settings.description&&<p className="homepage-deck">{settings.description}</p>}<nav aria-label={t('主页栏目')}><a href="#about">{t('关于我')}</a>{p.skills?.length>0&&<a href="#skills">{t('技能')}</a>}{experiences.length>0&&<a href="#experience">{t('经历')}</a>}{sections.map((key:string)=><a key={key} href={'#'+key}>{t(labels[key])}</a>)}</nav><div className="homepage-contact">{p.email&&<a href={'mailto:'+p.email}>{t('联系我')} ↗</a>}{p.github&&<a href={p.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>}{p.socials?.map((x:SpaceData)=><a href={x.url} key={x.url} target="_blank" rel="noopener noreferrer">{x.label} ↗</a>)}</div></aside>
+  <div className="homepage-layout"><aside className="homepage-identity"><FeedAvatar name={p.name} avatarId={p.avatarId} className="homepage-avatar"/><h1>{settings.title||p.name}<SiteOwnerBadge siteOwner={data.siteOwner}/></h1>{p.alias&&<p className="homepage-alias">{p.alias}</p>}{settings.description&&<p className="homepage-deck">{settings.description}</p>}<nav aria-label={t('主页栏目')}><a href="#about">{t('关于我')}</a>{p.skills?.length>0&&<a href="#skills">{t('技能')}</a>}{experiences.length>0&&<a href="#experience">{t('经历')}</a>}{sections.map((key:string)=><a key={key} href={'#'+key}>{t(labels[key])}</a>)}</nav><div className="homepage-contact">{p.email&&<a href={'mailto:'+p.email}>{t('联系我')} ↗</a>}{p.github&&<a href={p.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>}{p.socials?.map((x:SpaceData)=><a href={x.url} key={x.url} target="_blank" rel="noopener noreferrer">{x.label} ↗</a>)}</div></aside>
   <Chapters className="homepage-chapters"><section id="about" className="homepage-about"><h2 className="homepage-section-label">{t('关于我')}</h2><p className="homepage-intro">{p.intro||t('个人介绍正在整理中。')}</p></section>
    {p.skills?.length>0&&<section id="skills"><h2 className="homepage-section-label">{t('技能与专长')}</h2><div className="homepage-skills">{p.skills.map((skill:string)=><span key={skill}>{skill}</span>)}</div></section>}
    {experiences.length>0&&<section id="experience"><h2 className="homepage-section-label">{t('经历')}</h2><div className="homepage-timeline">{experiences.map((x:SpaceData)=><article key={x.id}><time>{x.start} — {x.end||t('至今')}</time><div><small>{x.type}</small><h3>{x.title}</h3>{x.description&&<p>{x.description}</p>}</div></article>)}</div></section>}

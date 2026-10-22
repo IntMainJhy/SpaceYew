@@ -2,7 +2,7 @@ import {importDocument,IMPORT_HTML_MAX} from './document-import.mjs';
 import {catalogEditorUrl} from './catalog-presentation.mjs';
 import {randomUUID} from 'node:crypto';
 import sanitize from 'sanitize-html';
-import {db,now,hash,getConfig,transaction,limited} from './db.mjs';
+import {db,now,hash,getConfig,transaction,limited,isSiteOwnerAccount} from './db.mjs';
 import {currentUser,localRequest} from './auth.mjs';
 import {requireValue,cleanText,HttpError} from './content.mjs';
 import {sourceUrl} from './community.mjs';
@@ -39,7 +39,7 @@ function content(input,author,kind,complete=false){
 }
 function view(row){const latest=db().prepare('SELECT status,reason,reviewer,created,decided FROM catalog_revisions WHERE entry=? ORDER BY rowid DESC LIMIT 1').get(row.id);return{reviewReason:latest?.reason||'',latestDecision:latest||null,id:row.id,kind:row.kind,authorId:row.author,version:row.version,status:row.status,visibility:row.visibility,draft:parse(row.draft),published:parse(row.published),pending:parse(row.pending),moderation:parse(row.moderation),communityPostId:row.community_post,url:catalogUrl(row.kind,row.id),created:row.created,updated:row.updated}}
 const visible="e.visibility='public' AND e.published IS NOT NULL AND u.status='active' AND (u.verification='local_test' OR u.role='owner') AND p.visibility='public' AND NOT EXISTS(SELECT 1 FROM community_cases c WHERE c.post=p.id AND c.frozen=1)";
-function publicView(row){const author=db().prepare('SELECT nickname FROM community_users WHERE id=?').get(row.author);return{...parse(row.published),id:row.id,kind:row.kind,authorId:row.author,authorName:row.author==='owner'?getConfig('profile').name:author?.nickname||'社区成员',url:catalogUrl(row.kind,row.id),updated:row.public_updated||row.created,communityPostId:row.community_post}}
+function publicView(row){const author=db().prepare('SELECT nickname FROM community_users WHERE id=?').get(row.author);return{...parse(row.published),id:row.id,kind:row.kind,authorId:row.author,authorSiteOwner:isSiteOwnerAccount(row.author),authorName:row.author==='owner'?getConfig('profile').name:author?.nickname||'社区成员',url:catalogUrl(row.kind,row.id),updated:row.public_updated||row.created,communityPostId:row.community_post}}
 function localPublic(req){return !!req&&localRequest(req)}
 export function publicCatalog({kind='',q='',category='',tool=''}={},req){if(!localPublic(req))return{items:[],total:0};requireValue(!kind||catalogKinds.includes(kind),'分类无效');const needle=String(q).slice(0,200).trim().toLowerCase();const items=db().prepare(`SELECT e.* FROM catalog_entries e JOIN community_users u ON u.id=e.author JOIN community_posts p ON p.id=e.community_post WHERE ${visible} ORDER BY COALESCE(e.public_updated,e.created) DESC,e.id DESC LIMIT 1000`).all().filter(row=>!kind||row.kind===kind).map(publicView).filter(item=>(!category||item.category===category)&&(!tool||item.supportedTools.includes(tool))&&(!needle||(item.title+' '+item.summary+' '+item.category).toLowerCase().includes(needle)));return{items,total:items.length}}
 export function publicCatalogItem(id,req){requireValue(localPublic(req),'共享内容目前仅供本地体验',503);const row=db().prepare(`SELECT e.* FROM catalog_entries e JOIN community_users u ON u.id=e.author JOIN community_posts p ON p.id=e.community_post WHERE e.id=? AND ${visible}`).get(id);requireValue(row,'内容暂不可用',404);return publicView(row)}

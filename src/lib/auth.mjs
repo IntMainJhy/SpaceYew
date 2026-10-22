@@ -1,7 +1,7 @@
-import {appSurface,experienceLogin} from './app-access.mjs';
-import {randomBytes,randomUUID} from 'node:crypto';
+import {appSurface} from './app-access.mjs';
+import {randomBytes} from 'node:crypto';
 import {db,hash,limited,passwordMatches,passwordHash,DATA,getConfig,transaction} from './db.mjs';
-import {HttpError,requireValue} from './content.mjs';
+import {requireValue} from './content.mjs';
 import {unlinkSync,existsSync} from 'node:fs';
 import path from 'node:path';
 import {clientIp} from './request-security.mjs';
@@ -12,29 +12,24 @@ export function cookie(req,key){const part=(req.headers.get('cookie')||'').split
 const delegatedUsers=new WeakMap();
 // Only verified server adapters can attach a principal; HTTP headers cannot set this map.
 export function delegatedRequest(req,user){const clone=new Request(req.url,{method:req.method,headers:req.headers});delegatedUsers.set(clone,user);return clone}
-export function demoUser(req){
- if(appSurface()!=='combined'||process.env.SITE_DEMO!=='true'||process.env.DEMO_SKIP_LOGIN!=='true'||!localRequest(req))return null;
- const user=db().prepare("SELECT id,username,nickname,role,status,verification,avatar_id AS avatarId,email,email_verified_at AS emailVerifiedAt FROM community_users WHERE username='demo_member' AND role='member' AND status='active' AND verification='local_test'").get();
- return user?{...user,experience:true,authentication:'experience'}:null;
-}
 export function currentUser(req){
  if(delegatedUsers.has(req))return delegatedUsers.get(req);
- const token=cookie(req,COOKIE);if(!token)return demoUser(req);
+ const token=cookie(req,COOKIE);if(!token)return null;
  const row=db().prepare("SELECT s.user_id,COALESCE(r.realm,'combined') realm,r.authentication FROM sessions s LEFT JOIN session_realms r ON r.token=s.token WHERE s.token=? AND s.expires>?").get(hash(token),Date.now());
- if(!row||row.realm!==appSurface())return demoUser(req);
- // Old platform tokens may come from arbitrary-input sign-in; never upgrade them to password authentication.
- const authentication=row.authentication==='password'?'password':row.authentication==='experience'||row.realm==='platform'?'experience':'password';
- if(authentication==='experience'&&!experienceLogin())return null;
+ if(!row||row.realm!==appSurface())return null;
+ // Only legacy combined sessions are known to have verified a real password.
+ if(row.authentication!=='password'&&!(row.realm==='combined'&&[null,'legacy'].includes(row.authentication)))return null;
+ const authentication='password';
  if(!row.user_id){
-  if(appSurface()==='platform'||authentication!=='password')return null;
+  if(appSurface()==='platform')return null;
   const profile=getConfig('profile');
   return{id:'owner',...db().prepare('SELECT username,email,email_verified_at AS emailVerifiedAt FROM admins WHERE id=1').get(),nickname:'站长',displayName:profile.name,handle:profile.alias,avatarId:profile.avatarId,role:'owner',status:'active',verification:'owner',authentication};
  }
- if(!localRequest(req)&&authentication!=='experience')return null;
+ if(!localRequest(req))return null;
  const user=db().prepare("SELECT id,username,nickname,role,status,verification,avatar_id AS avatarId,email,email_verified_at AS emailVerifiedAt FROM community_users WHERE id=? AND status<>'closed'").get(row.user_id)||null;
  if(appSurface()==='admin'&&!['owner','reviewer'].includes(user?.role))return null;
  if(appSurface()==='platform'&&user?.role!=='member')return null;
- return user?{...user,authentication,...(authentication==='experience'?{experience:true}:{})}:null;
+ return user?{...user,authentication}:null;
 }
 export function session(req){return currentUser(req)?.role==='owner'}
 export function admin(req){requireValue(session(req),'请先登录管理后台',401)}
@@ -45,20 +40,6 @@ export function login(req,{username,email,password,authentication}){
  const raw=email||username;
  requireValue(typeof raw==='string'&&typeof password==='string'&&password.length<=256,'账号或密码错误',401);
  const identifier=raw.trim().toLowerCase();requireValue(identifier.length>0&&identifier.length<=254,'账号或密码错误',401);
- if(experienceLogin()&&authentication!=='password'){
-  requireValue(password.length>0,'请填写账号和密码',400);
-  requireValue(!limited('experience-login:'+hash(clientIp(req)),50,900000),'尝试次数过多，请稍后重试',429);
-  // The input is not an identity or a password to persist: all visitors use the ordinary preview space.
-  return transaction(d=>{
-   let user=d.prepare("SELECT id FROM community_users WHERE username='demo_member' AND role='member' AND status='active' AND verification='local_test'").get();
-   if(!user){
-    requireValue(!d.prepare("SELECT 1 FROM community_users WHERE username='demo_member'").get(),'体验账号暂不可用，请联系管理员',503);
-    const id=randomUUID(),time=new Date().toISOString();
-    d.prepare("INSERT INTO community_users(id,username,password,nickname,role,status,verification,created,updated) VALUES(?,'demo_member',?,'体验访客','member','active','local_test',?,?)").run(id,passwordHash(randomBytes(32).toString('hex')),time,time);user={id};
-   }
-   return createSession(user.id,'experience');
-  });
- }
  const d=db(),owner=d.prepare('SELECT * FROM admins WHERE id=1').get();
  const row=owner.username.toLowerCase()===identifier||(owner.email_verified_at&&owner.email===identifier)?owner:d.prepare("SELECT * FROM community_users WHERE (username=? COLLATE NOCASE OR (email=? AND email_verified_at IS NOT NULL)) AND status<>'closed'").get(identifier,identifier);
  const key=hash(row?(row===owner?'owner':row.id):identifier),ip=hash(clientIp(req));
@@ -70,13 +51,13 @@ export function login(req,{username,email,password,authentication}){
  requireValue(row===owner||localRequest(req),'社区账号当前仅供本机联调',503);
  return createSession(row===owner?null:row.id);
 }
-function createSession(userId,authentication='password'){
+function createSession(userId){
  const token=randomBytes(32).toString('base64url');
  transaction(d=>{
   d.prepare('DELETE FROM sessions WHERE expires<=?').run(Date.now());
-  d.prepare('DELETE FROM sessions WHERE user_id IS ? AND token NOT IN (SELECT token FROM sessions WHERE user_id IS ? ORDER BY expires DESC LIMIT '+(authentication==='experience'?49:9)+')').run(userId,userId);
+  d.prepare('DELETE FROM sessions WHERE user_id IS ? AND token NOT IN (SELECT token FROM sessions WHERE user_id IS ? ORDER BY expires DESC LIMIT 9)').run(userId,userId);
   d.prepare('INSERT INTO sessions(token,expires,user_id) VALUES(?,?,?)').run(hash(token),Date.now()+7*86400000,userId);
-  d.prepare('INSERT INTO session_realms(token,realm,authentication) VALUES(?,?,?)').run(hash(token),appSurface(),authentication);
+  d.prepare('INSERT INTO session_realms(token,realm,authentication) VALUES(?,?,?)').run(hash(token),appSurface(),'password');
  });return token;
 }
 export function sessionCookie(token,expires=false){const secure=process.env.PUBLIC_URL?.startsWith('https://')||process.env.COOKIE_SECURE==='true'||(process.env.COOKIE_SECURE!=='false'&&process.env.NODE_ENV==='production');return `${COOKIE}=${encodeURIComponent(token)}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${expires?0:604800}${secure?'; Secure':''}`}

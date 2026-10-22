@@ -1,0 +1,38 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {mkdtemp,rm} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import path from 'node:path';
+import {randomUUID} from 'node:crypto';
+const directory=await mkdtemp(path.join(tmpdir(),'spaceyew-featured-blog-'));
+Object.assign(process.env,{APP_DATA_DIR:directory,PUBLIC_URL:'http://localhost:3197',APP_SURFACE:'combined',INITIAL_ADMIN_PASSWORD:'isolated-featured-password'});
+const D=await import('../src/lib/db.mjs'),S=await import('../src/lib/spaces.mjs');
+const d=D.db(),users=['alice','bravo'].map(name=>{const token=randomUUID();d.prepare('INSERT INTO community_users(id,username,password,nickname,verification,created,updated) VALUES(?,?,?,?,?,?,?)').run(name,name,'unused',name,'local_test',D.now(),D.now());d.prepare('INSERT INTO sessions VALUES(?,?,?)').run(D.hash(token),Date.now()+600000,name);return{id:name,token}}),owner=randomUUID();d.prepare('INSERT INTO sessions VALUES(?,?,NULL)').run(D.hash(owner),Date.now()+600000);
+const req=(token='',method='GET',base=process.env.PUBLIC_URL)=>new Request(base+'/api/spaces/mine',{method,headers:{Cookie:'site_admin='+token,Origin:base}});
+const select=handle=>d.prepare("INSERT OR REPLACE INTO config VALUES('featuredBlog',?)").run(JSON.stringify({handle}));
+let alice;
+test('default blog selection preserves the owner fallback and publishes only the selected reviewed member snapshot',()=>{
+ const original=S.defaultBlogSpace(req());assert.equal(original.owner,'owner');
+ alice=S.mine(req(users[0].token));
+ alice=S.spacesApi(req(users[0].token,'POST'),['spaces','save'],{...alice,profile:{...alice.profile,name:'Reviewed member profile'},layout:{...alice.layout,blog:{mode:'theme',theme:'anx',sections:[]}}},null);
+ select(alice.handle);assert.throws(()=>S.defaultBlogSpace(req()),e=>e.status===404,'An unpublished selection cannot fall back to owner content');
+ const submitted=S.spacesApi(req(users[0].token,'POST'),['spaces','submit'],{revision:alice.revision,accepted:true},null),review=submitted.reviews.find(x=>x.kind==='board'&&x.status==='pending');
+ S.spacesApi(req(owner,'POST'),['admin','spaces'],{id:review.id,action:'approve',checked:true,reason:'Reviewed isolated homepage selection'},null);
+ assert.equal(S.defaultBlogSpace(req()).owner,users[0].id);assert.equal(S.defaultBlogSpace(req()).profile.name,'Reviewed member profile');
+ const latest=S.mine(req(users[0].token));S.spacesApi(req(users[0].token,'POST'),['spaces','save'],{...latest,profile:{...latest.profile,name:'Private revised profile'}},null);
+ assert.equal(S.defaultBlogSpace(req(users[1].token)).profile.name,'Reviewed member profile','The visitor session and private edits cannot replace the selected public version');
+ assert.throws(()=>S.defaultBlogSpace(req('','GET','https://public.example')),e=>e.status===404,'Selection must honor the existing public-host restriction');
+ select('missing-homepage');assert.throws(()=>S.defaultBlogSpace(req()),e=>e.status===404);
+ select('');assert.equal(S.defaultBlogSpace(req()).owner,'owner');
+});
+test('default blog cannot bypass selected author restrictions, freezes or takedown',()=>{
+ select(alice.handle);
+ d.prepare("UPDATE community_users SET status='restricted' WHERE id=?").run(users[0].id);assert.throws(()=>S.defaultBlogSpace(req()),e=>e.status===404);d.prepare("UPDATE community_users SET status='active' WHERE id=?").run(users[0].id);
+ const caseId=randomUUID();d.prepare("INSERT INTO community_cases(id,token,kind,category,description,frozen,created,updated) VALUES(?,?,'report','Privacy','Isolated review case',1,?,?)").run(caseId,randomUUID(),D.now(),D.now());d.prepare('INSERT INTO space_case_targets VALUES(?,?,NULL)').run(caseId,alice.id);
+ assert.throws(()=>S.defaultBlogSpace(req()),e=>e.status===404);d.prepare('UPDATE community_cases SET frozen=0 WHERE id=?').run(caseId);
+ assert.equal(S.defaultBlogSpace(req()).owner,users[0].id);
+ const current=S.mine(req(users[0].token));S.spacesApi(req(users[0].token,'POST'),['spaces','offline'],{revision:current.revision},null);
+ assert.throws(()=>S.defaultBlogSpace(req()),e=>e.status===404,'Taking down a featured blog cannot reveal the previous owner homepage');
+ d.prepare("DELETE FROM config WHERE key='featuredBlog'").run();assert.equal(S.defaultBlogSpace(req()).owner,'owner');
+});
+test.after(async()=>{d.close();delete globalThis.__personalSiteDb;await rm(directory,{recursive:true,force:true})});

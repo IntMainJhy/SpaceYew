@@ -10,3 +10,10 @@ export function caseTargetIds(value,origin){
 
 // A platform login must not use an admin/login return path, including normalized paths.
 export function platformDestination(value,fallback='/workspace',surface='combined'){const target=internalDestination(value,fallback);return surface==='platform'&&/^\/(?:admin|login|join)(?:[/?#]|$)/.test(target)?'/workspace':target;}
+
+export function communityProfileDestination(user,fallback='/workspace/account'){
+ return user?.id&&user.status==='active'&&(user.role==='owner'||user.verification==='local_test')?'/community/members/'+encodeURIComponent(user.id):fallback;
+}
+export function submissionEditDestination(row){
+ return row.catalogId&&['docs','skills','resources'].includes(row.catalogKind)?'/'+row.catalogKind+'?'+new URLSearchParams({compose:'1',edit:row.catalogId}):'/workspace/submissions/'+encodeURIComponent(row.id);
+}

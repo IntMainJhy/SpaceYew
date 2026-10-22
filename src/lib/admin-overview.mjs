@@ -7,7 +7,7 @@ export function adminOverview(req){
  const d=db(),count=sql=>d.prepare(sql).get().n,downloads=getConfig('site').desktopDownloads;
  return {
   services:{
-   environment:process.env.SITE_DEMO==='true'&&localRequest(req)?'demo':'standard',
+   environment:'standard',
    community:localRequest(req)?getConfig('community').paused?'paused':'local':'closed',
    mail:emailStatus(req).mode,
    downloads:{macos:!!downloads?.macos?.url,windows:!!downloads?.windows?.url}

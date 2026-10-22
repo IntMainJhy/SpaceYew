@@ -11,7 +11,7 @@ for(const [id,role] of [['alice','member'],['bob','member'],['reviewer','reviewe
 const req=(pathname='/api/auth/me',token='',body,base=process.env.PUBLIC_URL)=>new Request(base+pathname,{method:body?'POST':'GET',headers:{cookie:'site_platform='+token,Origin:base,'Content-Type':'application/json'},...(body?{body:JSON.stringify(body)}:{})});
 const signIn=(username,pw=password,authentication='password',base)=>A.login(req('/api/auth/login','',undefined,base),{username,password:pw,...(authentication?{authentication}:{})});
 
-test('password authentication verifies the existing website identity even when the platform offers experience login',async()=>{
+test('password authentication always verifies the existing website identity despite obsolete preview settings',async()=>{
  assert.throws(()=>signIn('alice','wrong'),error=>error.status===401);
  assert.throws(()=>signIn('unknown','arbitrary'),error=>error.status===401);
  assert.throws(()=>signIn('alice',password,'unknown'),error=>error.status===400);
@@ -27,19 +27,23 @@ test('password authentication verifies the existing website identity even when t
  assert.equal((await API.handle(wrongOrigin)).status,403);
 });
 
-test('experience and legacy platform sessions never become password-authenticated sessions',async()=>{
- const experience=signIn('arbitrary','anything',''),real=signIn('alice');
- assert.equal(A.currentUser(req('/api/auth/me',experience)).authentication,'experience');
- assert.equal(A.currentUser(req('/api/auth/me',experience)).experience,true);
- assert.equal((await API.handle(req('/api/spaces/keys',experience))).status,403);assert.equal((await API.handle(req('/api/spaces/mine',experience))).status,403,'Shared experience accounts cannot read private blog drafts');
- d.prepare("UPDATE session_realms SET authentication='legacy' WHERE token=?").run(D.hash(experience));
- assert.equal(A.currentUser(req('/api/auth/me',experience)).authentication,'experience');
+test('arbitrary-input login and old experience or unverified platform sessions cannot authenticate',async()=>{
+ const before=d.prepare('SELECT COUNT(*) n FROM community_users').get().n;
+ assert.throws(()=>signIn('arbitrary','anything',''),error=>error.status===401);
+ assert.throws(()=>signIn('alice','wrong',''),error=>error.status===401);
+ const real=signIn('alice',password,'');
+ assert.equal(A.currentUser(req('/api/auth/me',real)).authentication,'password');
+ for(const authentication of ['experience','legacy']){
+  const token='obsolete-'+authentication;
+  d.prepare('INSERT INTO sessions(token,expires,user_id) VALUES(?,?,?)').run(D.hash(token),Date.now()+60000,'alice');
+  d.prepare('INSERT INTO session_realms(token,realm,authentication) VALUES(?,?,?)').run(D.hash(token),'platform',authentication);
+  assert.equal(A.currentUser(req('/api/auth/me',token)),null);
+  assert.equal((await API.handle(req('/api/spaces/keys',token))).status,401);
+  assert.equal((await API.handle(req('/api/spaces/mine',token))).status,401);
+ }
  process.env.PLATFORM_LOGIN_MODE='password';
- assert.equal(A.currentUser(req('/api/auth/me',experience)),null);
  assert.equal(A.currentUser(req('/api/auth/me',real)).authentication,'password');
  process.env.PLATFORM_LOGIN_MODE='experience';
- const before=d.prepare('SELECT COUNT(*) n FROM community_users').get().n;
- assert.throws(()=>signIn('not-a-new-account','arbitrary'),error=>error.status===401);
  assert.equal(d.prepare('SELECT COUNT(*) n FROM community_users').get().n,before);
 });
 

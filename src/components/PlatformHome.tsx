@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import {serverI18n} from '@/lib/server-i18n';
-import {publicSpace,publicSpaces} from '@/lib/spaces.mjs';
+import {defaultBlogSpace,publicSpaces} from '@/lib/spaces.mjs';
 import {localRequest} from '@/lib/auth.mjs';
 import {publicPosts} from '@/lib/community.mjs';
 import {localizeContent,localizeProfile} from '@/lib/content-locales.mjs';
@@ -28,7 +28,8 @@ function ShowcaseGrid({spaces,locale,t,heading='h3'}:{spaces:any[];locale:string
 }
 export async function PlatformHome({req}:{req:Request}){
   const {t,locale}=await serverI18n(),spaces=publicSpaces(req);
-  const first=spaces[0],studioHref='/blogs';
+  let featured=null;try{featured=defaultBlogSpace(req)}catch{}
+  const studioHref='/blogs';
   const download=homeDownload(req.headers,getConfig('site').desktopDownloads);
   // Keep community gates and discovery opt-in; never use the visitor's private workspace as a demo.
   const posts=localRequest(req)?publicPosts().items.slice(0,2):[];
@@ -59,7 +60,7 @@ export async function PlatformHome({req}:{req:Request}){
           <p>{t('把个人介绍、经历、技能和作品，整理成一份有质感的博客主页。')}</p>
           <Link className="space-link" href={studioHref}>{t('查看博客主页')}</Link>
         </div>
-        <div className="home-personal-preview">{first?<BlogTheme preview data={publicSpace(req,first.handle)}/>:<div className="space-empty"><h3>{t('完整介绍你自己')}</h3><p>{t('个人介绍、经历、技能与作品。')}</p></div>}</div>
+        <div className="home-personal-preview">{featured?<BlogTheme preview data={featured}/>:<div className="space-empty"><h3>{t('完整介绍你自己')}</h3><p>{t('个人介绍、经历、技能与作品。')}</p></div>}</div>
       </section>
 
       <section className="product-feature" id="resume-introduction" aria-labelledby="resume-introduction-title">

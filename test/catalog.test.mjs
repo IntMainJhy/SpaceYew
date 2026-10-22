@@ -76,4 +76,45 @@ test('document import uses the local authenticated cookie boundary and never sav
  const response=await handle(request(alice.token));assert.equal(response.status,200);const parsed=await response.json();assert.equal(parsed.title,'safe');assert.match(parsed.bodyHtml,/<ul>/);assert.equal(d.prepare('SELECT COUNT(*) n FROM catalog_entries').get().n,before);
 });
 
+test('all catalog kinds keep one linked share across rejected/withdrawn revisions and repeated publication',()=>{
+ call('admin/catalog/settings',{mode:'manual'},owner);
+ try{for(const kind of ['docs','skills','resources']){
+  const value={...doc,kind,title:'Lifecycle '+kind,...(kind==='docs'?{}:{sourceUrl:'https://github.com/example/lifecycle',sourceName:'Lifecycle upstream'})};
+  let entry=save(value);assert.equal(entry.communityPostId,null);entry=submit(entry);assert.equal(entry.status,'pending');assert.equal(entry.communityPostId,null);entry=approve(entry);
+  const post=entry.communityPostId,originalTitle=value.title;assert.equal(Community.publicPost(post).title,originalTitle);assert.equal(Community.publicPost(post).catalogKind,kind);
+  entry=save({...value,id:entry.id,version:entry.version,title:originalTitle+' revised'});entry=submit(entry);
+  assert.equal(C.publicCatalogItem(entry.id,req(alice,'GET')).title,originalTitle);assert.equal(Community.publicPost(post).title,originalTitle);
+  entry=call('admin/catalog/'+entry.id,{action:'reject',version:entry.version,reason:'The revision requires a clearer explanation of the original material.'},reviewer);
+  assert.equal(C.publicCatalogItem(entry.id,req(alice,'GET')).title,originalTitle);assert.equal(Community.publicPost(post).title,originalTitle);
+  entry=submit(entry);entry=call('catalog/'+entry.id+'/action',{action:'withdraw',version:entry.version});assert.equal(entry.status,'draft');assert.equal(Community.publicPost(post).title,originalTitle);
+  entry=approve(submit(entry));assert.equal(entry.communityPostId,post);assert.equal(Community.publicPost(post).title,originalTitle+' revised');assert.equal(d.prepare('SELECT COUNT(*) n FROM community_posts WHERE id=?').get(post).n,1);
+  assert.equal(d.prepare("SELECT COUNT(*) n FROM community_revisions WHERE post=? AND status='approved'").get(post).n,2);
+  entry=call('admin/catalog/'+entry.id,{action:'offline',version:entry.version,reason:'Take this fixture offline for lifecycle verification.'},reviewer);
+  assert.throws(()=>C.publicCatalogItem(entry.id,req(alice,'GET')),e=>e.status===404);assert.throws(()=>Community.publicPost(post),e=>e.status===404);
+  entry=approve(submit(entry));assert.equal(entry.communityPostId,post);assert.equal(C.publicCatalogItem(entry.id,req(alice,'GET')).communityPostId,post);
+ }}finally{call('admin/catalog/settings',{mode:'automatic'},owner)}
+});
+
+test('restricted qualified authors can inspect, withdraw and take down their own entries without regaining publishing rights',()=>{
+ let published=submit(save({...doc,title:'Voluntary takedown'}));
+ let pending=submit(save({...doc,kind:'skills',title:'Withdraw restricted Skill',sourceUrl:'https://github.com/example/restricted'}));assert.equal(pending.status,'pending');
+ try{for(const status of ['restricted','banned']){
+  d.prepare('UPDATE community_users SET status=? WHERE id=?').run(status,alice.id);
+  assert.equal(call('catalog/mine/'+published.id,{},alice,'GET').id,published.id);assert.ok(call('catalog/mine',{},alice,'GET').items.some(x=>x.id===pending.id));
+  assert.throws(()=>save({...doc,id:published.id,version:published.version}),e=>e.status===403);assert.throws(()=>submit(pending),e=>e.status===403);
+  assert.throws(()=>call('catalog/mine/'+pending.id,{},bob,'GET'),e=>e.status===404);
+  if(status==='restricted'){pending=call('catalog/'+pending.id+'/action',{action:'withdraw',version:pending.version});assert.equal(pending.status,'draft')}
+  else{published=call('catalog/'+published.id+'/action',{action:'offline',version:published.version});assert.equal(published.visibility,'offline');assert.equal(d.prepare('SELECT visibility FROM community_posts WHERE id=?').get(published.communityPostId).visibility,'offline')}
+ }}finally{d.prepare("UPDATE community_users SET status='active' WHERE id=?").run(alice.id)}
+ assert.throws(()=>C.publicCatalogItem(published.id,req(alice,'GET')),e=>e.status===404);
+});
+
+test('failed publication rolls back the catalog revision and auto-share together, then retries exactly once',()=>{
+ let entry=save({...doc,title:'Atomic publish recovery'}),before=d.prepare('SELECT COUNT(*) n FROM community_posts').get().n;
+ d.exec(`CREATE TEMP TRIGGER reject_catalog_publication BEFORE UPDATE ON catalog_entries WHEN NEW.id='${entry.id}' AND NEW.visibility='public' BEGIN SELECT RAISE(ABORT,'fixture publish failure');END`);
+ try{assert.throws(()=>submit(entry),/fixture publish failure/)}finally{d.exec('DROP TRIGGER reject_catalog_publication')}
+ const original=call('catalog/mine/'+entry.id,{},alice,'GET');assert.equal(original.version,entry.version);assert.equal(original.status,'draft');assert.equal(original.communityPostId,null);assert.equal(d.prepare('SELECT COUNT(*) n FROM community_posts').get().n,before);assert.equal(d.prepare('SELECT COUNT(*) n FROM catalog_revisions WHERE entry=?').get(entry.id).n,0);
+ entry=submit(original);assert.equal(entry.status,'published');assert.equal(d.prepare('SELECT COUNT(*) n FROM community_posts').get().n,before+1);assert.equal(d.prepare('SELECT COUNT(*) n FROM community_revisions WHERE post=?').get(entry.communityPostId).n,1);
+});
+
 test.after(async()=>{d.close();delete globalThis.__personalSiteDb;await rm(dir,{recursive:true,force:true})});

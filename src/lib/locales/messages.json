@@ -11874,5 +11874,65 @@
   "注册成功，请登录。": [
     "Account created. Please sign in.",
     "登録が完了しました。ログインしてください。"
+  ],
+  "已发布到社区。": [
+    "Published to the community.",
+    "コミュニティに公開しました。"
+  ],
+  "选填；留空时从正文生成摘要。": [
+    "Optional; leave blank to create a summary from the post.",
+    "任意。空欄の場合は本文から要約します。"
+  ],
+  "补充来源与许可（选填）": [
+    "Source and license (optional)",
+    "出典とライセンス（任意）"
+  ],
+  "非原创分享请补齐正式来源页和目标链接": [
+    "Add the official source and destination links for third-party content.",
+    "他者のコンテンツには正式な出典とリンクを記入してください。"
+  ],
+  "请补齐分类、作者或机构和许可依据": [
+    "Add the category, author or organization, and usage rights.",
+    "分類、作者または組織、利用許諾を記入してください。"
+  ],
+  "本人原创，保留所有权利。": [
+    "Original work by the author. All rights reserved.",
+    "著者のオリジナル作品。無断転載を禁じます。"
+  ],
+  "自动同步": [
+    "Automatically shared",
+    "自動共有"
+  ],
+  "手动发文": [
+    "Direct post",
+    "直接投稿"
+  ],
+  "来自文档": [
+    "From Docs",
+    "ドキュメントから"
+  ],
+  "来自 Skill": [
+    "From Skills",
+    "Skill から"
+  ],
+  "来自其他资源": [
+    "From other resources",
+    "その他リソースから"
+  ],
+  "分享你的开发经验，或推荐一份实用资源。": [
+    "Share your development experience or recommend a useful resource.",
+    "開発の経験や便利なリソースを共有しましょう。"
+  ],
+  "通过审核后，就会在这里展示。": [
+    "Once approved, your post will appear here.",
+    "審査を通過すると、ここに表示されます。"
+  ],
+  "发表评论": [
+    "Post comment",
+    "コメントを投稿"
+  ],
+  "保存修改": [
+    "Save changes",
+    "変更を保存"
   ]
 }

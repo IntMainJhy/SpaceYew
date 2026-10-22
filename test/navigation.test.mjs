@@ -21,3 +21,15 @@ test('platform sign-in cannot return to admin or authentication routes',async()=
  assert.equal(platformDestination('/workspace/files','/workspace','platform'),'/workspace/files');
  assert.equal(platformDestination('/admin','/workspace','combined'),'/admin');
 });
+
+test('private members and catalog submissions use reachable account-scoped destinations',async()=>{
+ const {communityProfileDestination,submissionEditDestination}=await import('../src/lib/navigation.mjs');
+ const user={id:'member-id',role:'member',status:'active',verification:'pending'};
+ assert.equal(communityProfileDestination(user),'/workspace/account');
+ assert.equal(communityProfileDestination(user,'/workspace/blog'),'/workspace/blog');
+ assert.equal(communityProfileDestination({...user,verification:'local_test'}),'/community/members/member-id');
+ assert.equal(communityProfileDestination({...user,verification:'local_test',status:'restricted'}),'/workspace/account');
+ assert.equal(communityProfileDestination({...user,id:'owner',role:'owner'}),'/community/members/owner');
+ for(const kind of ['docs','skills','resources'])assert.equal(submissionEditDestination({id:'post-id',catalogId:'entry-id',catalogKind:kind}),'/'+kind+'?compose=1&edit=entry-id');
+ assert.equal(submissionEditDestination({id:'post-id'}),'/workspace/submissions/post-id');
+});

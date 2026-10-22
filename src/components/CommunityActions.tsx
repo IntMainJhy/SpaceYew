@@ -32,7 +32,7 @@ export function PostActions({item,user,onBookmarkRemoved}:{item:Doc;user:Doc|nul
  return <div className="feed-actions-wrap"><div className="feed-post-actions" aria-label={tr("分享互动")}>
   <button type="button" aria-label={state.liked?tr("取消点赞"):tr("点赞")} aria-pressed={!!state.liked} className={state.liked?'is-selected':''} disabled={!!busy} data-reaction="like" onClick={()=>void react('like')}><Icon name="heart"/><span>{state.likeCount||0}</span></button>
   <Link href={'/community/'+item.id+'#comments'} aria-label={tr('评论 {0} 条',[state.commentCount||0])}><Icon name="comment"/><span>{state.commentCount||0}</span></Link>
-  <button type="button" aria-label={state.reposted?tr("取消转发"):tr("转发到个人主页")} aria-pressed={!!state.reposted} className={state.reposted?'is-selected':''} disabled={!!busy} data-reaction="repost" onClick={()=>void react('repost')}><Icon name="repost"/><span>{state.repostCount||0}</span></button>
+  <button type="button" aria-label={state.reposted?tr("取消转发"):tr("转发")} aria-pressed={!!state.reposted} className={state.reposted?'is-selected':''} disabled={!!busy} data-reaction="repost" onClick={()=>void react('repost')}><Icon name="repost"/><span>{state.repostCount||0}</span></button>
   <button type="button" aria-label={state.bookmarked?tr("取消收藏"):tr("收藏")} aria-pressed={!!state.bookmarked} className={state.bookmarked?'is-selected':''} disabled={!!busy} data-reaction="bookmark" onClick={()=>void react('bookmark')}><Icon name="bookmark"/><span>{state.bookmarked?tr("已收藏"):tr("收藏")}</span></button>
   <ShareLink id={item.id} title={item.title}/><Link href={'/report?post='+item.id} className="feed-report-link">{tr("举报")}</Link>
  </div>{busy&&<span className="community-sr" role="status">{tr("正在保存互动…")}</span>}{error&&<p role="alert" className="feed-action-error">{tr(error)}{!user&&<Link href="/login">{tr("前往登录")}</Link>}</p>}</div>;
@@ -43,6 +43,6 @@ export function FollowButton({person,user,onSaved}:{person:Doc;user:Doc|null;onS
  if(user?.id===person.id)return null;
  return <span className="community-follow-control"><button className={'community-follow-button'+(following?' is-following':'')} type="button" title={following?tr("取消关注"):tr("关注这位成员")} aria-pressed={following} disabled={busy} onClick={async()=>{
   if(!user){router.push('/login?next='+encodeURIComponent(window.location.pathname+window.location.search));return;}
-  setBusy(true);setError('');try{const result=await post('/api/community/follows/'+person.id,{active:!following});setFollowing(result.following);onSaved?.(result);window.dispatchEvent(new Event('community-social-change'));}catch(e:any){setError(e.message);}finally{setBusy(false);}
+  setBusy(true);setError('');try{const result=await post('/api/community/follows/'+person.id,{active:!following});setFollowing(result.following);onSaved?.({...person,...result});window.dispatchEvent(new Event('community-social-change'));}catch(e:any){setError(e.message);}finally{setBusy(false);}
  }}>{busy?tr("保存中…"):following?tr("已关注"):tr("关注")}</button>{error&&<small role="alert">{tr(error)}</small>}</span>;
 }

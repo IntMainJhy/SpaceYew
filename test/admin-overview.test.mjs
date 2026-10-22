@@ -34,7 +34,7 @@ test('management overview uses real counts, excludes trash and stays owner-only'
   D.setConfig('site',{...D.getConfig('site'),desktopDownloads:{macos:{url:'https://example.com/test.dmg',version:'1'},windows:{url:''}}});
   D.setConfig('community',{paused:true});
   const local=(await (await API.handle(owner)).json()).services;
-  assert.equal(local.environment,'demo');assert.equal(local.community,'paused');assert.equal(local.mail,'capture');assert.deepEqual(local.downloads,{macos:true,windows:false});
+  assert.equal(local.environment,'standard');assert.equal(local.community,'paused');assert.equal(local.mail,'capture');assert.deepEqual(local.downloads,{macos:true,windows:false});
   process.env.PUBLIC_URL='https://example.com';
   const remote=await (await API.handle(owner)).json();
   assert.equal(remote.services.community,'closed');assert.equal(remote.services.environment,'standard');assert.equal(remote.services.mail,'unconfigured');

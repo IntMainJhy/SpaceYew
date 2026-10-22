@@ -57,7 +57,7 @@ The main Blog homes entry opens the site owner’s public Anx Portfolio homepage
 | Shared documentation | Categorized image-and-description boards, article details with section navigation, and member-authored tutorials; import text, Markdown or HTML into the editor |
 | Skill directory | 17 independently maintained GitHub Skills: Vercel React/composition, Impeccable, UI UX Pro Max, Superpowers debugging/TDD, Obsidian Markdown/JSON Canvas, eight GSAP Skills and VibeHub; cover cards, category/search/tool filters, detailed scenarios, installation commands and localized copyable prompts |
 | Other resources | Member-shared websites, tools and references; documentation and Skills have their own sections |
-| Publishing & community | One account-scoped editor for documents, Skills and resources; an approved entry creates one linked community post, subsequent revisions reuse it, and taking the entry offline also removes its share from public view |
+| Publishing & community | Write an original text post directly in the community, or publish from the Docs, Skills or Other resources editor; an approved catalog entry creates one linked community post, later revisions reuse it, and taking the entry offline removes its share from public view |
 | Sharing & community profiles | Direct public blog navigation, public links, system sharing and QR codes; community profiles retain a short introduction with a link to the full blog |
 | Résumé import | Local PDF, DOCX, TXT and Markdown text extraction into a reviewable profile draft; original uploads stay private, and a separate redacted PDF can be selected for public download |
 | Content and files | Private account-isolated drafts, versions, blog content, uploaded images, attachments and file references |
@@ -78,7 +78,7 @@ Legacy `/u/...` URLs redirect to public blogs; former workspace pages redirect t
 
 ## Publishing and AI workflows
 
-The top-level sections are Home, Community, Blogs, Docs, Skills and Other resources. Use the publish action on each catalog page to create a document, Skill or resource, then save a private draft or submit it. Every published entry keeps its author, source and usage terms. If no image is supplied, SpaceYew generates a typographic cover. Documents and Skills appear in their own catalogs; an approved submission also creates a linked community share automatically. There is no need to submit the same content again in the community.
+The top-level sections are Home, Community, Blogs, Docs, Skills and Other resources. For an original community post, write a title and text directly; external links and a separate summary are optional. Normal original text can publish after automatic checks, while images, external sources, flagged content or manual mode require review. Use the publish action on each catalog page to create a document, Skill or resource, then save a private draft or submit it. Every published entry keeps its author, source and usage terms. If no image is supplied, SpaceYew generates a typographic cover. Documents and Skills appear in their own catalogs; an approved submission also creates a linked community share automatically. There is no need to submit the same content again in the community.
 
 Each member owns their drafts and credentials. Existing public content stays visible while a revision awaits review. Suspicious content remains private to the author and reviewers, and linked reports or takedowns affect public visibility. The current rules engine is local triage, not semantic AI moderation or a guarantee of legal compliance. Public production publishing remains gated; see [moderation and launch requirements](docs/moderation-and-launch.md).
 
@@ -111,7 +111,7 @@ SpaceYew is under active development. Publishing its source demonstrates the imp
 
 This repository covers website development only. macOS and Windows clients remain private. Client source, installers and real site data are not included.
 
-The [2026-10-22 audit report](docs/audit-2026-10-22.md) records the latest scoped review and its checks, including 162 unit tests, type checking, a production build and three HTTP suites. That result applies to the reviewed version and environment, not a guarantee of production readiness.
+The [2026-10-22 audit report](docs/audit-2026-10-22.md) records an earlier scoped review and its checks, including 162 unit tests, type checking, a production build and three HTTP suites. That result applies to the reviewed version and environment, not a guarantee of production readiness.
 
 ## Documentation
 
@@ -133,14 +133,14 @@ The [2026-10-22 audit report](docs/audit-2026-10-22.md) records the latest scope
 | `src/app/` | Pages, APIs, media/download routes and styles |
 | `src/components/` | Website components and shared interactions |
 | `src/lib/` | Authentication, content, community, workspaces, files, email, database and permissions |
-| `test/` | Unit tests, isolated HTTP tests and explicitly run demo scripts |
+| `test/` | Unit tests and isolated HTTP tests with disposable fixtures |
 | `scripts/` | Initialization, backup, restore, cleanup and Skill packaging |
 | `integrations/` | Website submission Skill, MCP integration and request scripts |
 | `deploy/` | Nginx, systemd and separate platform/admin deployment examples |
 | `public/` | Static website assets and the generated submission Skill package |
 | `docs/` | Website administration guides, screenshots and third-party licenses |
 
-Local databases, user uploads, captured email, real environment variables, credentials, backups, local design-review artifacts, temporary previews, dependencies and build output are excluded. Passwords in demo scripts are synthetic test values, not live site credentials.
+Local databases, user uploads, captured email, real environment variables, credentials, backups, local design-review artifacts, temporary previews, dependencies and build output are excluded. Runtime demo accounts, automatic sign-in and data-seeding scripts have been removed. Automated regression tests use disposable fixtures, never live credentials.
 
 ## Local development for authorized maintainers
 
@@ -173,9 +173,11 @@ npm run test:blog-editor:http
 npm start
 ```
 
-HTTP integration scripts in `test/` use temporary data directories. Check that their test ports are free before running them. Demo seeding and data-refresh scripts do not run as part of regular tests and should target only explicitly designated test data.
+HTTP integration scripts in `test/` use temporary data directories. Check that their test ports are free before running them. Tests create and remove their own accounts and content; they must not target an existing site data directory.
 
 ## Deployment and administration
+
+The recommended deployment uses one codebase and database with separate platform and administration subdomains. `APP_SURFACE` and server-side permissions isolate the two services and their sessions. Administrators sign in only on the admin surface, members on the platform; neither arbitrary-account experience login nor automatic demo access is available.
 
 - [Separate platform and admin deployment](deploy/README-split.en.md)
 - [Administration guide](docs/administration.en.md)
@@ -188,3 +190,5 @@ Production requires a separate private data directory, correct HTTPS URLs, Secur
 Original material is provided under the [SpaceYew Website Source Reading and Study License 1.0](LICENSE), for reading and study only. Other uses require prior written permission. Contact [IntMainJhy](https://github.com/IntMainJhy) through the author's public contact channels, describing your purpose, intended modifications, deployment scope and any commercial use.
 
 LICENSE includes an English summary; its Chinese text controls if there is a discrepancy. Third-party materials retain their own licenses; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+- [Community completion review](docs/community-finish-2026-10-22.md)

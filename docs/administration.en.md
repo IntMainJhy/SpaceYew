@@ -2,7 +2,7 @@
 
 **English** | [简体中文](管理中心说明.md)
 
-Updated: 2026-10-20. The administration area at `/admin` uses the website's existing accounts, APIs and server-side permissions. It requires no separate website, domain or duplicate administrator registration. This is a development version; see the [website README](../README.md) for deployment status and license scope.
+Updated: 2026-10-22. The administration area at `/admin` shares the website's code, backend and database, with separate admin and platform entry points, cookies and server-side permissions. For deployment, run the two surfaces on separate subdomains using the [deployment guide](../deploy/README-split.en.md). This is a development version; see the [website README](../README.md) for deployment status and license scope.
 
 ## Access and accounts
 
@@ -10,11 +10,11 @@ Updated: 2026-10-20. The administration area at `/admin` uses the website's exis
 | --- | --- |
 | Owner | `/admin`: site content, profile, settings, taxonomy, files, statistics, members and governance |
 | Reviewer | `/admin/community`: permitted submission, comment and board reviews and ordinary reports; no owner overview or original site-content management |
-| Member | Their own `/workspace/*`; no access to owner administration pages or APIs |
+| Member | Platform login and their own `/workspace/*`; no access to administration pages or APIs |
 
-Open `/admin` when signed in, or use `/login?next=/admin` with the existing owner account. There is no universal production password. On first initialization, credentials are stored in `initial-admin.txt` inside the actual `APP_DATA_DIR`; changing the password deletes that file. Never include real credentials in documentation or screenshots.
+Use `/admin/login` on the administration surface with the existing owner or authorized reviewer account. The platform surface redirects admin pages to its configured admin origin and refuses administrator login. There is no universal production password. On first initialization, credentials are stored in `initial-admin.txt` inside the actual `APP_DATA_DIR`; changing the password deletes that file. Never include real credentials in documentation or screenshots.
 
-The local preview on port 3010 can explicitly provide access as an ordinary demo member. This does not confer owner access; use the existing owner account through the login entry when required. Documentation, UI development and isolated screenshots do not create or elevate real accounts.
+Demo accounts and automatic or arbitrary-account experience sign-in are no longer part of the runtime. Existing members must verify their real password again when an old experience session is rejected. Registration creates a member account, never an administrator.
 
 ## Available pages
 
@@ -30,7 +30,7 @@ The unified `/admin/logs` view uses `community_audit`, filtering by site/workspa
 
 ## Service status and delivery scope
 
-Labels such as demo/standard environment, local-only/paused/closed community, capture/SMTP/unconfigured email and configured download URLs describe application configuration only. Capture mode does not send email externally. Complete SMTP settings do not prove delivery; configured download URLs do not prove that binaries install or that production is ready.
+Labels such as local-only/paused/closed community, capture/SMTP/unconfigured email and configured download URLs describe application configuration only. Capture mode does not send email externally. Complete SMTP settings do not prove delivery; configured download URLs do not prove that binaries install or that production is ready.
 
 macOS and Windows client source code and installers are not published in this website repository. The website stores external download URL configuration only; its license grants no client distribution or usage rights.
 

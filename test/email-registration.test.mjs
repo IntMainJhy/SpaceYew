@@ -33,10 +33,10 @@ test('password platform supports verified email signup without an invitation and
  const duplicate=await(await call('/api/auth/email/request',{purpose:'register',email})).json();assert.deepEqual(Object.keys(duplicate),Object.keys(sent));assert.equal(duplicate.message,sent.message);assert.equal(D.db().prepare('SELECT COUNT(*) n FROM community_users WHERE email=?').get(email).n,1);
 });
 
-test('disabled, experience and admin surfaces do not allow registration; remote requests remain gated',async()=>{
+test('disabled and admin surfaces block registration; obsolete preview flags cannot bypass password signup or remote gates',async()=>{
  try{
   process.env.REGISTRATION_ENABLED='false';assert.equal((await call('/api/auth/email/request',{purpose:'register',email:'disabled@example.com'})).status,403);assert.equal((await call('/api/community/register',{})).status,403);assert.equal(Access.pageRedirect('/join'),'/login');
-  process.env.REGISTRATION_ENABLED='true';process.env.PLATFORM_LOGIN_MODE='experience';assert.equal(Access.registrationEnabled(),false);assert.equal((await call('/api/auth/email/request',{purpose:'register',email:'experience@example.com'})).status,403);
+  process.env.REGISTRATION_ENABLED='true';process.env.PLATFORM_LOGIN_MODE='experience';assert.equal(Access.registrationEnabled(),true);assert.equal(Access.accessConfig().experience,false);assert.equal((await call('/api/auth/email/request',{purpose:'register',email:'real-signup@example.com'})).status,200);
   process.env.PLATFORM_LOGIN_MODE='password';process.env.APP_SURFACE='admin';assert.equal(Access.registrationEnabled(),false);assert.equal((await call('/api/community/register',{})).status,404);
   process.env.APP_SURFACE='platform';process.env.PUBLIC_URL='https://public.example.com';assert.equal(E.emailStatus(req('/api/auth/email/status')).available,false);
   await assert.rejects(E.requestEmail(req('/api/auth/email/request'),{purpose:'register',email:'remote@example.com'}),e=>e.status===503);

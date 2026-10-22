@@ -31,7 +31,7 @@ try{
  assert.ok(communityNav);
  assert.deepEqual([...communityNav.matchAll(/data-nav-key="([^"]+)"/g)].map(match=>match[1]),['feed','members','following','bookmarks','posts','notifications','account']);
  for(const route of ['/workspace/blog','/workspace/library','/workspace/files'])assert.ok(!communityNav.includes(route),'Community navigation excludes '+route);
- for(const [locale,management] of [['en','Blog home management'],['zh','博客主页管理']]){
+ for(const [locale,heading] of [['en','Edit my blog'],['zh','编辑我的博客']]){
   const headers={Cookie:member+'; site-locale='+locale};
   const directory=await(await fetch(base+'/blogs',{headers})).text();
   const activeHomepage=html=>[...html.matchAll(/<a\b[^>]*>/g)].map(match=>match[0]).find(tag=>tag.includes('href="/blogs"')&&tag.includes('class="is-active"'))||'';
@@ -39,10 +39,10 @@ try{
   assert.ok(directory.includes('href="/workspace/blog"'));
   for(const route of ['/workspace/blog','/workspace/profile','/workspace/library','/workspace/files']){
    const page=await(await fetch(base+route,{headers})).text();
-   assert.ok(page.includes('space-workspace-layout is-homepage-workspace'),route);
+   assert.ok(page.includes('blog-editor be-loading'),route);
    assert.ok(!page.includes('class="feed-navigation"'),route);
-   assert.ok(page.includes('aria-label="'+management+'"'),route);
-   assert.ok(activeHomepage(page).includes('aria-current="location"'),route);
+   assert.ok(page.includes('<h1>'+heading+'</h1>'),route);
+   assert.ok(activeHomepage(page).includes('aria-current="page"'),route);
   }
  }
  const ownerHtml=await(await fetch(base+'/admin',{headers:{Cookie:owner}})).text();assert.match(ownerHtml,/<h1 id="admin-overview-title">Management center<\/h1>/);assert.ok(ownerHtml.includes('class="admin-summary-grid"'));assert.ok(!ownerHtml.includes('class="skeleton"'));
@@ -88,6 +88,14 @@ try{
  await stopServer(server);server=await startServer(path.join(directory,'data'),3118);
  assert.equal((await get('/api/auth/me',member)).data.user.id,user.id);assert.equal((await get('/api/community/workspace',member)).data.posts.length,1);assert.equal((await get('/api/community/bookmarks',member)).data.unavailable,1);assert.equal((await get('/api/community/members/'+user.id,owner)).data.following,true);
  for(const route of ['/community','/login','/join','/workspace','/workspace/submissions/new','/report','/legal/terms','/legal/community','/legal/privacy','/legal/rights','/admin/community','/admin/community/reviews','/admin/community/reports','/admin/community/accounts','/admin/community/comments','/workspace/bookmarks','/community/members','/community/members/'+user.id])assert.equal((await fetch(base+route)).status,200,route);
+ // Manual original posts are independent of catalog-generated shares and need no external-source scaffolding.
+ assert.equal((await call('/api/admin/catalog/settings',{mode:'automatic'},owner)).status,200);
+ const authored={title:'直接撰写的技术经验',body:'这是一份直接在社区撰写的原创记录，说明如何整理组件并检查界面交互。\n```html\n<button>保存</button>\n```'};
+ let direct=await call('/api/community/submissions',{data:authored},member);assert.equal(direct.status,200);assert.equal(direct.data.origin,'manual');
+ direct=await call('/api/community/submissions/'+direct.data.id,{...ack,action:'submit',version:direct.data.version},member);assert.equal(direct.status,200);assert.equal(direct.data.latestStatus,'approved');assert.equal(direct.data.pending_revision,null);
+ const directId=direct.data.id,original=(await get('/api/community/posts/'+directId)).data;assert.equal(original.sourceUrl,'');assert.equal(original.url,'');assert.equal(original.catalogId,'');assert.equal(original.origin,'manual');assert.equal(original.body,authored.body);
+ const authoredPage=await(await fetch(base+'/community/'+directId)).text();assert.ok(authoredPage.includes(authored.title));assert.ok(authoredPage.includes('&lt;button&gt;保存&lt;/button&gt;'));assert.ok(!authoredPage.includes('<button>保存</button>'));
+ assert.equal((await call('/api/community/submissions/'+directId,{action:'offline',version:direct.data.version},member)).status,200);assert.equal((await get('/api/community/posts/'+directId)).status,404);
  assert.equal((await call('/api/auth/logout',{},member)).status,200);assert.equal((await get('/api/community/workspace',member)).status,401);
  console.log('PASS：社区真实 HTTP 邀请注册、统一登录、资格与越权、草稿保密、先审后发、修改隔离、匿名举报与凭证、冻结、进程重启持久化、点赞收藏转发关注、评论复审与自审隔离、通知及页面入口。');
 }catch(error){console.error(server?.log()||'');throw error}finally{if(server)await stopServer(server);await rm(directory,{recursive:true,force:true})}

@@ -36,7 +36,7 @@ export function AnxPortfolio({data,p,content,preview=false,embedded=false}:{data
  return <div className="anx-portfolio" data-home-theme="anx">
   <div className="anx-topbar"><a className="anx-handle" href="#anx-about">@{data.handle}</a><nav aria-label={t('博客栏目')}><a href="#anx-about">{t('关于我')}</a>{resume?.sections?.slice(0,5).map((section:SpaceData)=><a key={section.id} href={'#anx-'+section.id}>{resumeText(section,locale).title}</a>)}{experiences.length>0&&<a href="#anx-experience">{t('经历')}</a>}{sections.map((key:string)=><a href={'#anx-'+key} key={key}>{t(labels[key])}</a>)}</nav></div>
   <header className="anx-profile-header">
-   <figure className="anx-signature"><PortfolioMark handle={data.handle}/><figcaption>Fig. 1.</figcaption></figure>
+   <figure className="anx-signature"><PortfolioMark handle={/[a-z]/i.test(p.alias||'')?p.alias:data.handle}/><figcaption>Fig. 1.</figcaption></figure>
    <div className="anx-portrait"><span aria-hidden="true">{[...(p.name||'?')][0]}{p.avatarId&&failedAvatar!==p.avatarId&&<img src={'/media/'+p.avatarId} alt="" onError={()=>setFailedAvatar(p.avatarId)}/>}</span></div>
    <div className="anx-name"><h1>{settings.title||p.name}</h1><p>{settings.description||p.alias||'@'+data.handle}</p></div>
   </header>

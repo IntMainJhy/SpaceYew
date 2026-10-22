@@ -17,6 +17,10 @@ Use **Content language** to edit original, English or Chinese text. Images and o
 
 For the site owner, **Administration → Blog homes** (`/admin/blog`) edits the default profile using the administration session. Its explicit **Save & publish homepage** action updates the public owner profile immediately and records an audit event. Member accounts cannot use that endpoint.
 
-The deployment example defaults to password login. Shared experience sessions cannot access private blog workspaces or upload résumés. This repository still limits member publication to qualified local test accounts; it does not activate public registration or production hosting. Existing static-site APIs and approved hosted sites remain compatible.
+Only real password-authenticated accounts can access private blog workspaces or upload résumés; demo and experience sign-in have been removed. This repository still limits member publication to qualified local test accounts; it does not activate public registration or production hosting. Existing static-site APIs and approved hosted sites remain compatible.
 
 Personal images and populated profiles live in private application storage and backups; this repository contains the reusable editor and tests.
+
+## Default public blog
+
+The `/blogs` entry, its canonical metadata and homepage preview share one public selection. An operator may configure the private `featuredBlog` record as `{"handle":"public-handle"}`; unset retains the owner default. The selection never grants editing rights or bypasses publication/takedown checks. See [the community completion review](community-finish-2026-10-22.md).

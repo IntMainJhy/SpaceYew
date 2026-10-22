@@ -2,7 +2,7 @@ import Link from 'next/link';
 import {BrandMark} from './BrandMark';
 import {notFound} from 'next/navigation';
 import {serverI18n} from '@/lib/server-i18n';
-import {ownerSpace,publicSpace,publicSpaceDocument} from '@/lib/spaces.mjs';
+import {defaultBlogSpace,publicSpace,publicSpaceDocument} from '@/lib/spaces.mjs';
 import {publicBlogBundle,staticPage} from '@/lib/blog-hosting.mjs';
 import {localizeContent,localizeProfile} from '@/lib/content-locales.mjs';
 import {BlogTheme} from './BlogTheme';
@@ -18,8 +18,8 @@ export async function BlogPublic({req,path,query}:{req:Request;path:string[];que
  </div>;
 }
 
-// The main blog entry is the site owner's public homepage, never the visitor's draft workspace.
+// The main blog entry is the configured public homepage, never the visitor's draft workspace.
 export async function OwnerBlog({req}:{req:Request}){
- let data;try{data=publicSpace(req,ownerSpace().handle)}catch{notFound()}
+ let data;try{data=defaultBlogSpace(req)}catch{notFound()}
  return <><div className="blog-owner-edit"><Link href="/workspace/blog">{(await serverI18n()).locale==='en'?'Create / edit my blog':'创建 / 编辑我的博客'}</Link></div><BlogTheme data={data} embedded/></>;
 }

@@ -62,6 +62,20 @@ try{
  const wrongCatalog=await(await fetch(base+catalogEditorUrl('docs',skill.id),{headers:{Cookie:member+'; site-locale=en'}})).text();assert.ok(wrongCatalog.includes(translate('en','此内容位于其他栏目。'))&&!wrongCatalog.includes('class="publisher-layout"'),'wrong catalog cannot edit the item');
  assert.equal((await get('/api/admin/catalog',member)).status,403);assert.equal((await get('/api/admin/catalog',owner)).data.items.some(entry=>entry.id===skill.id),true);
  skill=(await call('/api/admin/catalog/'+skill.id,{action:'approve',version:skill.version,checked:true,reason:'Checked this fixture source, license and command for integration testing.'},owner)).data;assert.equal(skill.status,'published');assert.ok((await(await fetch(base+skill.url)).text()).includes('Reviewed third-party Skill'));
+ const skillPost=skill.communityPostId;
+ let revision=(await call('/api/catalog/save',{...skill.published,kind:'skills',id:skill.id,version:skill.version,title:'Reviewed Skill revised'},member)).data;
+ revision=(await call('/api/catalog/'+revision.id+'/action',{...accepted,action:'submit',version:revision.version},member)).data;
+ assert.equal(revision.status,'pending');assert.equal((await get('/api/community/posts/'+skillPost)).data.title,'Reviewed third-party Skill');
+ assert.equal((await call('/api/catalog/'+revision.id+'/action',{...accepted,action:'submit',version:revision.version},member)).status,409,'pending versions cannot create duplicate shares');
+ skill=(await call('/api/admin/catalog/'+revision.id,{action:'approve',version:revision.version,checked:true,reason:'Checked the revised source and text for lifecycle verification.'},owner)).data;
+ assert.equal(skill.communityPostId,skillPost);assert.equal((await get('/api/community/posts/'+skillPost)).data.title,'Reviewed Skill revised');
  assert.equal((await call('/api/catalog/'+skill.id+'/action',{action:'offline',version:skill.version},member)).status,200);assert.equal((await get('/api/catalog/'+skill.id)).status,404);assert.equal((await get('/api/community/posts/'+skill.communityPostId)).status,404);
- console.log('PASS: contextual publishing in three catalogs/locales, scoped draft histories, safe legacy redirects, catalog HTTP auth/CSRF, automatic publication, linked community share, scoped MCP, review, and coupled takedown');
+ let other=(await call('/api/catalog/save',{...resource.draft,kind:'resources',id:resource.id,version:resource.version,sourceUrl:'https://example.com/official-tool'},member)).data;
+ other=(await call('/api/catalog/'+other.id+'/action',{...accepted,action:'submit',version:other.version},member)).data;assert.equal(other.status,'pending');
+ other=(await call('/api/admin/catalog/'+other.id,{action:'approve',version:other.version,checked:true,reason:'Verified the official resource source and rights for this test.'},owner)).data;assert.equal(other.status,'published');assert.equal((await get('/api/community/posts/'+other.communityPostId)).data.catalogKind,'resources');
+ assert.equal((await call('/api/admin/community/accounts',{id:user.id,action:'status',status:'restricted',reason:'Restrict this disposable account for removal-rights verification.'},owner)).status,200);
+ assert.equal((await get('/api/catalog/mine/'+other.id,member)).status,200);assert.equal((await call('/api/catalog/save',{...other.published,id:other.id,version:other.version},member)).status,403);
+ assert.equal((await call('/api/catalog/'+other.id+'/action',{action:'offline',version:other.version},member)).status,200);assert.equal((await get('/api/catalog/'+other.id)).status,404);assert.equal((await get('/api/community/posts/'+other.communityPostId)).status,404);
+
+ console.log('PASS: contextual publishing in three catalogs/locales, scoped draft histories, safe legacy redirects, catalog HTTP auth/CSRF, automatic publication, linked community share, scoped MCP, all three catalog kinds, revision reuse, review, and restricted-author coupled takedown');
 }finally{await stopServer(server);await rm(directory,{recursive:true,force:true})}

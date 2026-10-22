@@ -11,7 +11,7 @@ W.writeContent({type:'articles',slug:'published-guide',action:'publish',data:doc
 W.writeContent({type:'articles',slug:'private-guide',action:'save',data:{...doc,title:'PRIVATE_TUTORIAL_DRAFT'}});
 let server;
 try{
- server=await startServer(directory,3196,1048576,{APP_SURFACE:'platform',PLATFORM_LOGIN_MODE:'experience',REGISTRATION_ENABLED:'false'});
+ server=await startServer(directory,3196,1048576,{APP_SURFACE:'platform',PLATFORM_LOGIN_MODE:'password',REGISTRATION_ENABLED:'false'});
  const read=async(route,locale='zh')=>{const r=await fetch(server.base+route,{headers:{Cookie:'site-locale='+locale}});return{status:r.status,html:await r.text()}};
  for(const [locale,label] of [['zh','文档'],['en','Docs'],['ja','ドキュメント']]){
   const docs=await read('/docs',locale);assert.equal(docs.status,200);assert.ok(docs.html.includes('>'+label+'</h1>'));

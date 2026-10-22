@@ -10,7 +10,7 @@ The owner's existing `/blog/<handle>` sharing URL remains valid and uses the sam
 
 ## Data and permissions
 
-Content still comes from existing public profile data and reviewed documents. This changes routing and the owner's presentation; it does not overwrite accounts, content, review snapshots, uploaded files or stored theme settings. Takedown, complaint freezes and account restrictions still prevent public access. Work links open their public details.
+Content still comes from existing public profile data and reviewed documents. This changes routing and the owner's presentation; it does not overwrite accounts, content, review snapshots, uploaded files or stored theme settings. Takedown, complaint freezes and account restrictions still prevent public access. Work links open their public details. A structured résumé, when present, replaces the legacy project list on the owner’s Anx page; see [résumé import](resume-import.md).
 
 Existing member `/blog/<handle>` URLs, static bundles, account isolation, moderation and APIs remain compatible. The main blog entry no longer provides a member site editor. Authorized administration or tool APIs can manage existing data.
 

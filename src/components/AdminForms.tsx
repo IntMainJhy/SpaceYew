@@ -1,4 +1,5 @@
 'use client';
+import {ResumeImport} from './ResumeImport';
 import {EmailSettings} from './EmailSettings';
 import {DesktopDownloadsSettings} from './DesktopDownloadsSettings';
 import {ContentLanguageTabs,type ContentLanguage} from './ContentLanguageTabs';
@@ -35,6 +36,7 @@ export function ProfileForm({value,max,notify,refresh}:{value:Any,max:number,not
   textPatch({experiences:{...textData.experiences,[id]:{...textData.experiences?.[id],...v}}});
  }
  return <><div className="page-head"><div><h1>{tr('个人资料与经历')}</h1><p>{tr('公开页面共用此资料。')}</p></div></div>
+ <ResumeImport resume={data.resume} disabled={busy} onBusy={setUploading} onChange={resume=>patch({resume})} onImport={profile=>{const next={...data,...profile,name:profile.name||data.name,email:profile.email||data.email,github:profile.github||data.github,alias:data.alias,translations:{}};setData(next);setSkills(skillValues(next));setContentLanguage('original')}}/>
  <ContentLanguageTabs value={contentLanguage} onChange={setContentLanguage} disabled={busy||uploading}/>
  <form inert={busy} className="form-grid" onSubmit={async e=>{e.preventDefault();if(uploading)return;setBusy(true);try{await post('/api/admin/config',{key:'profile',value:data});committed();notify('个人资料与经历已更新');refresh()}catch(e:any){notify(e.message)}finally{setBusy(false)}}}>
  <div><section className="panel form-section"><h3>{tr('个人资料')}</h3>

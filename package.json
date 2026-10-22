@@ -23,7 +23,8 @@
     "demo": "node scripts/demo.mjs",
     "test:homepage:http": "node test/blog-http.mjs",
     "test:skills:http": "node test/skills-http.mjs",
-    "test:catalog:http": "node test/catalog-http.mjs"
+    "test:catalog:http": "node test/catalog-http.mjs",
+    "test:resume:http": "node test/resume-http.mjs"
   },
   "dependencies": {
     "@tiptap/extension-image": "3.32.0",
@@ -31,8 +32,10 @@
     "@tiptap/react": "3.32.0",
     "@tiptap/starter-kit": "3.32.0",
     "gsap": "3.15.0",
+    "mammoth": "1.13.0",
     "next": "15.5.28",
     "nodemailer": "10.1.7",
+    "pdfjs-dist": "5.4.296",
     "qrcode": "1.5.4",
     "react": "19.2.8",
     "react-dom": "19.2.8",

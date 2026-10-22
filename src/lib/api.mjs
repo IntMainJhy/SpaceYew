@@ -1,3 +1,4 @@
+import {importResumeFile,parseResume} from './resume-import.mjs';
 import {catalogApi} from './catalog.mjs';
 import {blogBundles} from './blog-hosting.mjs';
 import {accessConfig,apiAllowed,registrationEnabled,appSurface} from './app-access.mjs';
@@ -40,6 +41,8 @@ export async function handle(req){try{const url=new URL(req.url),p=url.pathname.
  if(p[0]==='analytics'&&method==='POST'){const result=track(req,await body(req));return json({ok:true},200,result.cookie?{'Set-Cookie':result.cookie}:{})}
  admin(req);
  const actor=currentUser(req);
+ if(p.length===3&&p[0]==='admin'&&p[1]==='resume'&&method==='POST'){const input=await body(req,650000);if(p[2]==='import')return json(await importResumeFile(input.fileId,actor));if(p[2]==='parse')return json(parseResume(input.text));throw new HttpError(404,'接口不存在')}
+
  if(p[0]==='admin'&&p[1]==='logs'&&p.length===2&&method==='GET')return json(managementLog(req,url.searchParams));
  if(p[0]==='admin'&&p[1]==='overview'&&p.length===2&&method==='GET')return json(adminOverview(req));
  if(p[0]==='auth'&&p[1]==='password'&&method==='POST'){changePassword(await body(req));return json({ok:true},200,{'Set-Cookie':sessionCookie('',true)})}

@@ -25,3 +25,5 @@
 Anx 模板适配自 [anx-portfolio](https://github.com/AnxForever/anx-portfolio/tree/a7434847797658402d50fba29827eef246102bb7)，保留头像与标题网格、细线分区、分层像素签名的结构。签名和资料均使用站点自己的内容，不引入原作者的个人身份、头像或虚构贡献记录。完整 [MIT 声明](licenses/anx-portfolio-MIT.txt) 与 [品牌政策](licenses/anx-portfolio-BRAND.md) 已保留；SpaceYew 的限制性许可不覆盖第三方原有权利。
 
 [English guide](blog-hosting.md)
+
+所有者资料含结构化简历时，Anx 页面展示对应栏目，替代旧作品列表；详见[简历导入](resume-import.zh-CN.md)。

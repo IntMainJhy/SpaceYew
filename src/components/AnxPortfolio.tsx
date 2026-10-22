@@ -4,6 +4,7 @@
 // profile-header, panel, handwritten-note and anx-mark-solid. MIT, © 2026 Chánh Đại / Anx.
 // Full notice: docs/licenses/anx-portfolio-MIT.txt. Branding and personal data are replaced.
 import Link from 'next/link';
+import {ResumeSections,resumeText} from './ResumeSections';
 import {useId,useRef,useState} from 'react';
 import {useLocale} from './LocaleProvider';
 import {pixels} from './BlogSignatureThemes';
@@ -28,23 +29,24 @@ function PortfolioMark({handle}:{handle:string}){
 function NoteArrow(){return <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M34 4c1 15-5 26-21 30"/><path d="m22 37-9-3 7.5-8"/></svg>}
 
 export function AnxPortfolio({data,p,content,preview=false,embedded=false}:{data:SpaceData;p:SpaceData;content:SpaceData[];preview?:boolean;embedded?:boolean}){
- const {t}=useLocale(),[failedAvatar,setFailedAvatar]=useState(''),settings=data.layout.blog||{},base='/blog/'+data.handle,Chapters=preview||embedded?'div':'main';
- const experiences=(p.experiences||[]).filter((item:SpaceData)=>item.visible!==false),sections=(settings.sections||['projects','articles','resources']).filter((key:string)=>content.some(item=>item.type===key));
+ const {t,locale}=useLocale(),[failedAvatar,setFailedAvatar]=useState(''),settings=data.layout.blog||{},base='/blog/'+data.handle,Chapters=preview||embedded?'div':'main';
+ const resume=p.resume,experiences=(resume?[]:p.experiences||[]).filter((item:SpaceData)=>item.visible!==false),sections=(resume?[]:settings.sections||['projects','articles','resources']).filter((key:string)=>content.some(item=>item.type===key));
  const labels:Record<string,string>={projects:'作品与项目',articles:'文字与思考',resources:'分享的资源'};
  const contacts=[...(p.github?[{label:'GitHub',url:p.github}]:[]),...(p.socials||[])];
  return <div className="anx-portfolio" data-home-theme="anx">
-  <div className="anx-topbar"><a className="anx-handle" href="#anx-about">@{data.handle}</a><nav aria-label={t('博客栏目')}><a href="#anx-about">{t('关于我')}</a>{experiences.length>0&&<a href="#anx-experience">{t('经历')}</a>}{sections.map((key:string)=><a href={'#anx-'+key} key={key}>{t(labels[key])}</a>)}</nav></div>
+  <div className="anx-topbar"><a className="anx-handle" href="#anx-about">@{data.handle}</a><nav aria-label={t('博客栏目')}><a href="#anx-about">{t('关于我')}</a>{resume?.sections?.slice(0,5).map((section:SpaceData)=><a key={section.id} href={'#anx-'+section.id}>{resumeText(section,locale).title}</a>)}{experiences.length>0&&<a href="#anx-experience">{t('经历')}</a>}{sections.map((key:string)=><a href={'#anx-'+key} key={key}>{t(labels[key])}</a>)}</nav></div>
   <header className="anx-profile-header">
    <figure className="anx-signature"><PortfolioMark handle={data.handle}/><figcaption>Fig. 1.</figcaption></figure>
    <div className="anx-portrait"><span aria-hidden="true">{[...(p.name||'?')][0]}{p.avatarId&&failedAvatar!==p.avatarId&&<img src={'/media/'+p.avatarId} alt="" onError={()=>setFailedAvatar(p.avatarId)}/>}</span></div>
    <div className="anx-name"><h1>{settings.title||p.name}</h1><p>{settings.description||p.alias||'@'+data.handle}</p></div>
   </header>
   <div className="anx-separator" aria-hidden="true"/>
-  {(contacts.length>0||p.email)&&<section className="anx-contact" aria-label={t('联系我')}><span className="anx-note" aria-hidden="true">{t('保持联系')}<NoteArrow/></span>{contacts.map((item:SpaceData,index:number)=><a key={item.url+index} href={item.url} target="_blank" rel="noopener noreferrer"><Icon name="link"/>{item.label}</a>)}{p.email&&<a href={'mailto:'+p.email}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M3 5h18v14H3zM3 5l9 7 9-7"/></svg>{t('联系我')}</a>}</section>}
+  {(contacts.length>0||p.email)&&<section className="anx-contact" aria-label={t('联系我')}><span className="anx-note" aria-hidden="true">{t('保持联系')}<NoteArrow/></span>{contacts.map((item:SpaceData,index:number)=><a key={item.url+index} href={item.url} target="_blank" rel="noopener noreferrer"><Icon name="link"/>{item.label}</a>)}{p.email&&<a href={'mailto:'+p.email}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M3 5h18v14H3zM3 5l9 7 9-7"/></svg>{p.email}</a>}{resume?.resumeId&&<a href={'/download/'+resume.resumeId}>{locale==='en'?'Download résumé PDF':'下载简历 PDF'}<Icon name="download"/></a>}</section>}
   {data.layout.coverId&&<img className="anx-cover" src={'/media/'+data.layout.coverId} alt=""/>}
   <Chapters className="anx-chapters">
    <section id="anx-about" className="anx-panel"><header><h2>{t('关于我')}</h2></header><div className="anx-panel-body anx-intro"><p>{p.intro||t('个人介绍正在整理中。')}</p></div></section>
    {p.skills?.length>0&&<><div className="anx-separator" aria-hidden="true"/><section className="anx-panel"><header><h2>{t('技能与专长')}</h2></header><ul className="anx-skills">{p.skills.map((skill:string)=><li key={skill}>{skill}</li>)}</ul></section></>}
+   {resume&&<ResumeSections resume={resume}/> }
    {experiences.length>0&&<><div className="anx-separator" aria-hidden="true"/><section id="anx-experience" className="anx-panel"><header><h2>{t('经历')}</h2></header><div className="anx-experiences">{experiences.map((item:SpaceData)=><article key={item.id}><time>{item.start}{item.start&&' — '}{item.end||t('至今')}</time><div><h3>{item.title}</h3>{item.type&&<small>{item.type}</small>}{item.description&&<p>{item.description}</p>}</div></article>)}</div></section></>}
    {sections.map((key:string)=>{const items=content.filter(item=>item.type===key);return <div key={key}><div className="anx-separator" aria-hidden="true"/><section id={'anx-'+key} className="anx-panel"><header><h2>{t(labels[key])} <sup>({items.length})</sup></h2></header><div className="anx-entries">{items.map(item=>{const body=<>{item.coverId&&<img src={'/media/'+item.coverId} alt="" loading="lazy"/>}<div><h3>{item.title}<Icon name="resize"/></h3>{item.category&&<small>{item.category}</small>}{item.summary&&<p>{item.summary}</p>}{item.tags?.length>0&&<span>{item.tags.slice(0,4).join(' / ')}</span>}</div></>;return preview?<article key={item.id} className="anx-entry">{body}</article>:<Link key={item.id} className="anx-entry" href={base+'/'+key+'/'+encodeURIComponent(item.slug)}>{body}</Link>})}</div></section></div>})}
   </Chapters>

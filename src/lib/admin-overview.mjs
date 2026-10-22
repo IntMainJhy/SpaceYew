@@ -1,4 +1,5 @@
-import {admin,localRequest} from './auth.mjs';
+import {admin} from './auth.mjs';
+import {localRequest,serviceRequest} from './deployment-policy.mjs';
 import {db,now,getConfig} from './db.mjs';
 import {emailStatus} from './email-auth.mjs';
 
@@ -8,7 +9,7 @@ export function adminOverview(req){
  return {
   services:{
    environment:'standard',
-   community:localRequest(req)?getConfig('community').paused?'paused':'local':'closed',
+   community:serviceRequest(req)?getConfig('community').paused?'paused':localRequest(req)?'local':'public':'closed',
    mail:emailStatus(req).mode,
    downloads:{macos:!!downloads?.macos?.url,windows:!!downloads?.windows?.url}
   },

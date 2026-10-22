@@ -5,9 +5,10 @@ import {requireValue} from './content.mjs';
 import {unlinkSync,existsSync} from 'node:fs';
 import path from 'node:path';
 import {clientIp} from './request-security.mjs';
+import {localRequest,serviceRequest,publishingQualified} from './deployment-policy.mjs';
 export {clientIp} from './request-security.mjs';
+export {localRequest,serviceRequest,publishingQualified} from './deployment-policy.mjs';
 export const COOKIE=appSurface()==='platform'?'site_platform':'site_admin';
-export function localRequest(req){try{const local=h=>['127.0.0.1','localhost','[::1]'].includes(h);return local(new URL(req.url).hostname)&&local(new URL('http://'+(req.headers.get('host')||new URL(req.url).host)).hostname)&&(!process.env.PUBLIC_URL||local(new URL(process.env.PUBLIC_URL).hostname))}catch{return false}}
 export function cookie(req,key){const part=(req.headers.get('cookie')||'').split(';').map(x=>x.trim()).find(x=>x.startsWith(key+'='));try{return part?decodeURIComponent(part.slice(key.length+1)):''}catch{return ''}}
 const delegatedUsers=new WeakMap();
 // Only verified server adapters can attach a principal; HTTP headers cannot set this map.
@@ -23,13 +24,14 @@ export function currentUser(req){
  if(!row.user_id){
   if(appSurface()==='platform')return null;
   const profile=getConfig('profile');
-  return{id:'owner',...db().prepare('SELECT username,email,email_verified_at AS emailVerifiedAt FROM admins WHERE id=1').get(),nickname:'站长',displayName:profile.name,handle:profile.alias,avatarId:profile.avatarId,role:'owner',status:'active',verification:'owner',siteOwner:isSiteOwnerAccount('owner'),authentication};
+  return{id:'owner',...db().prepare('SELECT username,email,email_verified_at AS emailVerifiedAt FROM admins WHERE id=1').get(),nickname:'站长',displayName:profile.name,handle:profile.alias,avatarId:profile.avatarId,role:'owner',status:'active',verification:'owner',siteOwner:isSiteOwnerAccount('owner'),authentication,canPublish:publishingQualified({role:'owner',status:'active'},req)};
  }
- if(!localRequest(req))return null;
+ if(!serviceRequest(req))return null;
  const user=db().prepare("SELECT id,username,nickname,role,status,verification,avatar_id AS avatarId,email,email_verified_at AS emailVerifiedAt FROM community_users WHERE id=? AND status<>'closed'").get(row.user_id)||null;
+ if(!localRequest(req)&&!user?.emailVerifiedAt)return null;
  if(appSurface()==='admin'&&!['owner','reviewer'].includes(user?.role))return null;
  if(appSurface()==='platform'&&user?.role!=='member')return null;
- return user?{...user,siteOwner:isSiteOwnerAccount(user.id),authentication}:null;
+ return user?{...user,siteOwner:isSiteOwnerAccount(user.id),authentication,canPublish:publishingQualified(user,req)}:null;
 }
 export function session(req){return currentUser(req)?.role==='owner'}
 export function admin(req){requireValue(session(req),'请先登录管理后台',401)}
@@ -48,7 +50,8 @@ export function login(req,{username,email,password,authentication}){
  const valid=passwordMatches(password,row?.password||dummyPassword);requireValue(row&&valid,'账号或密码错误',401);
  requireValue(appSurface()!=='admin'||row===owner||row.role==='reviewer'&&row.status==='active','此账号没有管理权限',403);
  requireValue(appSurface()!=='platform'||row!==owner&&row.role==='member','请使用独立管理网站登录',403);
- requireValue(row===owner||localRequest(req),'社区账号当前仅供本机联调',503);
+ requireValue(row===owner||serviceRequest(req),'当前入口尚未开放账号服务',503);
+ requireValue(row===owner||localRequest(req)||row.email_verified_at,'请先完成邮箱验证',403);
  return createSession(row===owner?null:row.id);
 }
 function createSession(userId){

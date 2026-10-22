@@ -1,4 +1,7 @@
-// Draft policies: operational details and legal review are required before production.
+import {createHash} from 'node:crypto';
+import {localRequest,serviceRequest} from './deployment-policy.mjs';
+import {productionPolicies} from './production-policies.mjs';
+// Local drafts remain available for isolated testing; public acceptance is separate.
 export const POLICY_VERSION="community-v1.5-shared-publishing-draft";
 export const POLICIES={
   "terms": {
@@ -18,3 +21,11 @@ export const POLICIES={
     "text": "# 版权投诉与申诉指引草案\n\n版本：社区 V1.0　起草日期：2026 年 10 月 17 日  \n发布状态：待受理渠道、适用程序及期限核对，尚未生效，不可原样上线。  \n适用平台：【待填写：平台名称及域名】  \n运营者：【待填写：真实运营主体】  \n权利通知受理渠道：【待填写：可私密提交的表单、邮箱及依法所需的通信地址】  \n生效日期：【待填写：正式生效日期】\n\n本指引用于接收版权及其他权利问题，说明通知、必要措施、反通知、恢复和申诉。任何权利人均可提出，不要求成为注册成员或付费。平台处理不代替行政机关或法院对权利归属和侵权事实的认定。\n\n## 1 普通举报与权利通知的区别\n\n链接失效、可疑资源和一般规则问题，可通过举报入口提供 URL 与事实说明，不强制提供身份。要求平台依据特定权利采取措施的通知，应提供相应真实身份信息、准确位置和初步证据。\n\n未按正式通知要求填写，不意味着平台可以忽略已发现的明显违法或侵权风险。平台会按事实分流，必要时先停止传播并联系补充。\n\n## 2 提交权利通知\n\n请提供以下必要内容；不相关信息可遮盖，不在公开帖子中发布材料：\n\n1. 您的真实姓名或名称、有效联系信息；委托他人提出的，附必要授权说明与代理关系证明。\n2. 受保护作品、表演、录音录像制品或其他权益的名称、内容说明，以及权利归属或合法主张依据。\n3. 本站涉嫌侵害内容的准确 URL 或可定位标识；多个地址请逐项列明。平台无法仅凭资源名称定位时会请求补充。\n4. 侵害事实、对比说明及初步证据，例如原始发布记录、权利证书、授权文件的相关部分或其他可核验依据。\n5. 请求采取的措施，以及对通知真实性、合法性负责的声明；依法或具体程序需要签名、盖章等形式时按要求提供。\n\n对于隐私、肖像、名誉等非版权问题，请说明具体权利、相关内容和初步依据，平台按对应规则处理，不要求提供并不适用的著作权证书。请勿为了举证而重复散布完整隐私数据。\n\n社区 V1 不开放网页证据文件上传。需提交证明文件时，使用上述私密受理渠道并按材料说明发送最小必要部分；平台应在启用渠道前落实访问权限、恶意文件防护和保留期限。不会要求您在公开网盘暴露证件或合同。\n\n## 3 接收与采取措施\n\n平台登记回执和接收时间，核查通知是否可定位、身份及初步证据是否满足相应程序；需补充时说明具体缺项。对明显紧急或违法侵害风险优先采取必要措施，补充材料过程不妨碍依法必须进行的及时处置。\n\n结合证据、服务类型和适用法律，平台依法及时采取删除、断开链接、暂停公开等必要措施；适用信息网络传播权通知程序时遵守相应立即处理要求，不等待普通举报队列结束。\n\n平台依法向相关投稿人转送必要通知，说明措施及提出声明的方式。私密联系方式和证据不在社区公开；依法必须转送的身份信息和必要材料，在告知范围内处理，并去除无关信息。请在提交前了解此转送用途。\n\n## 4 投稿人提出不侵权声明\n\n认为措施错误的，可通过受理渠道提交：\n\n1. 原工单、受影响内容的 URL 或标识，以及希望恢复的具体内容。\n2. 真实身份和有效联系信息。\n3. 不存在侵权行为的说明和初步证据，例如原创证明、有效授权、适用许可或其他合法依据。\n4. 对声明真实性负责的确认，以及适用程序要求的签名等必要形式。\n\n平台核对后依法向通知人转送声明及必要证据，告知可向有关部门投诉或向人民法院起诉，记录转送到达时间及后续情况。不得要求投稿人通过公开发帖披露真实身份。\n\n## 5 后续与恢复\n\n平台依据适用法律、双方材料和有效文书处理后续措施。收到权利人已经投诉或提起诉讼的有效通知，应核查并依法处理；不能因工单系统显示“超时”就自动恢复。\n\n《民法典》第 1196 条规定了反通知转送后合理期限内未收到已投诉或起诉通知时及时终止措施的程序；《信息网络传播权保护条例》第 14–17 条还规定了版权特定通知和书面说明程序。**平台需结合具体服务和请求性质确定适用规则，不能把所有案件统一设为十五天等待，也不能无限期维持措施。**具体适用处理卡、期限和负责人须在对外开放前核对完成。[民法典官方全文](https://gdca.miit.gov.cn/zwgk/zcwj/flfg/art/2020/art_573d6ef5018b46b6a4e1f31ca085a710.html)、[条例官方全文](https://www.cac.gov.cn/2013-02/18/c_126468776.htm)。\n\n解除某一权利争议措施前，平台核查是否有其他有效法律要求或独立规则依据；如仍不恢复，应向投稿人说明独立理由和相应申诉渠道，不能以模糊“平台决定”架空依法应有的恢复程序。恢复指定的已核查版本，不同时发布未经审核的新修改。\n\n## 6 对处理决定有异议\n\n通知人和投稿人均可对程序错误、遗漏证据或不当措施提出复核，提供原工单、异议和新材料。平台记录复核依据并反馈；复杂争议不以内部复核代替法定救济。司法、行政等法定程序和期限不受平台一般申诉期限限制。\n\n错误通知、虚假声明或恶意捏造造成损害的，依法承担相应责任；善意误报与恶意行为应结合事实区分。平台不能仅因一次投诉不成立就认定投诉人恶意。\n\n## 7 材料保护与联系\n\n材料仅供获授权人员在核查、必要转送、依法配合和争议处理范围内使用。平台按 [隐私政策](隐私政策.md) 限制访问与保存，不公开投诉人名单，不将材料用于营销或作为资源展示。\n\n查询进度请保留回执和私密查询凭证；普通工单号本身不构成访问私密材料的凭证。权利通知及复核联系：【待填写：有效受理渠道】。如涉及正在发生的重大安全或人身风险，可同时依法向有权机关反映。\n"
   }
 };
+
+export function policyBundle(req){
+ const local=localRequest(req),operator=process.env.LEGAL_OPERATOR?.trim(),email=process.env.LEGAL_CONTACT_EMAIL?.trim(),date=process.env.LEGAL_EFFECTIVE_DATE;
+ let origin='';try{const url=new URL(process.env.PLATFORM_URL||process.env.PUBLIC_URL);if(url.protocol==='https:'&&!url.username&&!url.password&&url.pathname==='/'&&!url.search&&!url.hash)origin=url.origin}catch{}
+ const ready=!local&&serviceRequest(req)&&!!operator&&operator.length<=200&&!!email&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)&&/^\d{4}-\d{2}-\d{2}$/.test(date||'')&&!!origin;
+ const documents=ready?productionPolicies({operator,email,date,origin,address:process.env.LEGAL_ADDRESS?.trim()||''}):POLICIES;
+ return{status:ready?'active':'draft',ready:local||ready,version:ready?'community-v1.0-production-'+date:POLICY_VERSION,hash:createHash('sha256').update(JSON.stringify(documents)).digest('hex'),documents};
+}

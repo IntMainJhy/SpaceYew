@@ -2,7 +2,7 @@ import {SiteOwnerBadge} from './SiteOwnerBadge';
 import Link from 'next/link';
 import {serverI18n} from '@/lib/server-i18n';
 import {defaultBlogSpace,publicSpaces} from '@/lib/spaces.mjs';
-import {localRequest} from '@/lib/auth.mjs';
+import {serviceRequest} from '@/lib/deployment-policy.mjs';
 import {publicPosts} from '@/lib/community.mjs';
 import {localizeContent,localizeProfile} from '@/lib/content-locales.mjs';
 import {FeedAvatar} from './FeedAvatar';
@@ -33,7 +33,7 @@ export async function PlatformHome({req}:{req:Request}){
   const studioHref='/blogs';
   const download=homeDownload(req.headers,getConfig('site').desktopDownloads);
   // Keep community gates and discovery opt-in; never use the visitor's private workspace as a demo.
-  const posts=localRequest(req)?publicPosts().items.slice(0,2):[];
+  const posts=serviceRequest(req)?publicPosts().items.slice(0,2):[];
   const previewPosts=posts.map((post:any)=>Object.fromEntries(['id','title','summary','coverId','coverAlt','authorName','authorAvatarId'].map(key=>[key,post[key]])));
   return <ProductHomeMotion>
     <section className="product-hero" aria-labelledby="product-title">

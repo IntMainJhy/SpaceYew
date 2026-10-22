@@ -30,7 +30,7 @@ export async function pageResources(req,path=[],query={}){
  }else if(['community','workspace','login','join','report','legal'].includes(section)||section==='admin'){
   const config=await load('/api/community/config');
   if(section==='legal')add('/api/community/policies/'+encodeURIComponent(path[1]||'terms'));
-  else if(config.data?.mode==='local'){
+  else if(['local','public'].includes(config.data?.mode)){
    if(section==='admin'){
     if(user?.status==='active'&&['owner','reviewer'].includes(user.role)){
      const target=path[1]==='catalog'?'catalog':path[2]||'',prefix='/api/admin/community/';

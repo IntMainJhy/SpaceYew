@@ -28,6 +28,8 @@ test('private members and catalog submissions use reachable account-scoped desti
  assert.equal(communityProfileDestination(user),'/workspace/account');
  assert.equal(communityProfileDestination(user,'/workspace/blog'),'/workspace/blog');
  assert.equal(communityProfileDestination({...user,verification:'local_test'}),'/community/members/member-id');
+ assert.equal(communityProfileDestination({...user,verification:'verified',canPublish:true}),'/community/members/member-id');
+ assert.equal(communityProfileDestination({...user,verification:'local_test',canPublish:false}),'/workspace/account');
  assert.equal(communityProfileDestination({...user,verification:'local_test',status:'restricted'}),'/workspace/account');
  assert.equal(communityProfileDestination({...user,id:'owner',role:'owner'}),'/community/members/owner');
  for(const kind of ['docs','skills','resources'])assert.equal(submissionEditDestination({id:'post-id',catalogId:'entry-id',catalogKind:kind}),'/'+kind+'?compose=1&edit=entry-id');

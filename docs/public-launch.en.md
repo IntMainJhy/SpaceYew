@@ -1,0 +1,21 @@
+# Public deployment and operating boundaries
+
+**English** | [简体中文](public-launch.md)
+
+Production accounts and community routes are explicitly configurable. Deployment does not certify legal compliance or grant regulatory permission. Operators must satisfy the requirements applicable to their actual services.
+
+Follow the [separate-surface deployment guide](../deploy/README-split.en.md): actual HTTPS origins, independent platform/admin processes, shared private data, a trusted reverse proxy and strong administrator credentials. Set `PUBLIC_FEATURES_ENABLED=true` on both services and separately enable platform email registration with `REGISTRATION_ENABLED=true`. Public routes remain closed by default; never impersonate localhost to enable them.
+
+Configure `LEGAL_OPERATOR`, `LEGAL_CONTACT_EMAIL` and `LEGAL_EFFECTIVE_DATE` in private environment files; optionally supply `LEGAL_ADDRESS`. Public notices use those operating details. Missing configuration blocks registration and submission. Acceptance records bind the actual policy version and document hash. Local draft acceptance cannot stand in for public policy acceptance. Production email requires SMTP; capture is restricted to loopback.
+
+Email verification establishes mailbox control, not a real identity. New accounts can sign in and edit private drafts. Public posts, comments, avatars and blog submissions require an active account with separately recorded `verification=verified`, followed by the existing content, ownership, version and complaint checks. Historical `local_test` eligibility grants no production publishing rights. The site-owner badge conveys neither administrator access nor real-identity verification.
+
+The administrator's verification action records an **already completed** identity check, nickname review, method, traceable evidence reference, operator and time. It does not contact a verification provider. Do not substitute checkboxes for actual checks or put raw identity-document numbers in ordinary review notes. This repository includes no SMS/identity provider or IP geolocation database. Operators must arrange an appropriate verification process and its privacy notice. Account-region requirements also need a reliable source; email and server location are not substitutes. **Do not grant ordinary users public publishing rights while these conditions remain unmet.** Existing approved featured-blog content may stay readable without granting its owner permission to publish revisions.
+
+Manual community posts and automatic catalog shares use the same governance boundaries. Low-risk text can pass rule-based screening; flagged text, links, images and installation commands require review. Static blogs require manual review. These rules are not semantic AI moderation or a compliance guarantee. Operators still need inspections, reports, incident handling and adequate staffing. Author restrictions, complaint holds and takedowns affect both the catalog original and synchronized share.
+
+Provide guest-accessible reporting and rights-complaint channels, an effective operating contact, timely handling and necessary audit records. Check any applicable filing scope, special qualifications and new-function safety assessments; ICP filing alone does not authorize every community feature.
+
+Keep production databases, uploads, SMTP secrets and credentials outside Git. Migrate consistent backups; restoration revokes old sessions, challenges and tool credentials. Replace weak migrated administrator passwords before exposure. Schedule `scripts/cleanup.mjs`, private backups, restore checks and protected log rotation without destroying records subject to legal retention. Verify TLS renewal, actual email delivery, session separation, tenant isolation, both submission paths, deduplication, moderation, reports, freezes and restart recovery. Never create test users or posts in production.
+
+Primary references: [Internet User Account Information provisions](https://www.cac.gov.cn/2022-06/26/c_1657868775042841.htm), Articles 9 and 12; [Comment Service provisions](https://www.cac.gov.cn/2022-11/16/c_1670253725725039.htm), Article 4; and [non-commercial Internet filing provisions](https://www.miit.gov.cn/zcfg/xxtxl/art/2024/art_7e48434c08c24131b4b7eecfca5b2b6c.html), Article 13. Assess applicability to the actual service.

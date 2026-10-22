@@ -6,11 +6,12 @@ After=network.target
 Type=simple
 User=spaceyew
 Group=spaceyew
-WorkingDirectory=/opt/spaceyew/app
+WorkingDirectory=/opt/spaceyew/current
 Environment=NODE_ENV=production
 EnvironmentFile=/etc/spaceyew/common.env
 EnvironmentFile=/etc/spaceyew/%i.env
-ExecStart=/usr/bin/node /opt/spaceyew/app/node_modules/next/dist/bin/next start --hostname 127.0.0.1 --port ${PORT}
+ExecStart=/opt/spaceyew/node/bin/node node_modules/next/dist/bin/next start --hostname 127.0.0.1 --port ${PORT}
+Environment=PATH=/opt/spaceyew/node/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 Restart=on-failure
 RestartSec=5
 TimeoutStopSec=30

@@ -11938,5 +11938,325 @@
   "站长认证账号": [
     "Verified site owner",
     "サイト管理者の認証済みアカウント"
+  ],
+  "我已成年": [
+    "I am an adult",
+    "私は成人です"
+  ],
+  "注册暂未开放，请稍后再试。": [
+    "Registration is currently unavailable. Please try again later.",
+    "現在、新規登録を受け付けていません。しばらくしてから再度お試しください。"
+  ],
+  "编辑博客主页": [
+    "Edit blog home",
+    "ブログホームを編集"
+  ],
+  "申请注销账号": [
+    "Close your account",
+    "アカウントの削除を申請"
+  ],
+  "。仅提供处理问题所需的材料，请勿提交无关敏感信息。": [
+    ". Provide only the material needed to resolve the issue; do not submit unrelated sensitive information.",
+    "。問題の処理に必要な資料のみを提出し、関係のない機微な情報は送信しないでください。"
+  ],
+  "成员提交内容后，会在这里出现。可在成员管理中处理发布资格。": [
+    "Member submissions will appear here. Manage publishing eligibility in member management.",
+    "メンバーが投稿すると、ここに表示されます。公開資格はメンバー管理で処理できます。"
+  ],
+  "已删除": [
+    "Deleted",
+    "削除済み"
+  ],
+  "按适用权利通知程序及时处理，记录必要转送与送达；不得统一设为十五天自动恢复。仅访问核查所需的私密材料。": [
+    "Follow the applicable rights notice process promptly and record required forwarding and delivery. Do not apply a blanket automatic restoration after 15 days. Access only private material needed for review.",
+    "適用される権利通知手続きに従って速やかに処理し、必要な転送と送達を記録してください。一律に15日後の自動復旧を設定せず、確認に必要な非公開資料のみを閲覧してください。"
+  ],
+  "邮箱验证只确认邮箱控制权；发布前需完成适用的身份及昵称核验，审核角色不含站长权限。": [
+    "Email verification confirms control of an email address only. Publishing requires the applicable identity and nickname checks; reviewers do not receive site owner permissions.",
+    "メール認証はメールアドレスの管理権限のみを確認します。公開前には適用される本人確認とニックネームの確認が必要で、審査担当者にサイト管理者権限は付与されません。"
+  ],
+  "例如：合作成员邀请": [
+    "For example: collaborator invitation",
+    "例：共同作業メンバーの招待"
+  ],
+  "邀请码仅本次显示，请私下提供给受邀者。": [
+    "This invitation code is shown only once. Share it privately with the invitee.",
+    "招待コードは今回のみ表示されます。招待する相手に非公開の方法で渡してください。"
+  ],
+  "前往邮箱注册": [
+    "Go to email registration",
+    "メールアドレスで登録"
+  ],
+  "核验必须有实际核查依据，不能仅凭邮箱或勾选确认。仅记录核验方式和私密凭证索引，不在此填写原始证件号码、照片或敏感材料。": [
+    "Verification requires actual supporting checks; an email address or a checkbox is insufficient. Record only the method and a private evidence reference. Do not enter original identity numbers, photos or sensitive material here.",
+    "本人確認には実際の確認根拠が必要です。メールやチェックボックスのみでは不十分です。確認方法と非公開の証拠参照のみを記録し、証明書番号の原文、写真、機微な資料はここに入力しないでください。"
+  ],
+  "成员完成邮箱注册后，会显示在这里。": [
+    "Members will appear here after registering by email.",
+    "メンバーがメールアドレスで登録すると、ここに表示されます。"
+  ],
+  "记录身份核验并开放发布": [
+    "Record identity verification and allow publishing",
+    "本人確認を記録して公開を許可"
+  ],
+  "核验方式": [
+    "Verification method",
+    "本人確認の方法"
+  ],
+  "填写实际采用的核验方式，至少 2 字。": [
+    "Enter the verification method actually used, at least 2 characters.",
+    "実際に使用した確認方法を2文字以上で入力してください。"
+  ],
+  "私密核验凭证索引": [
+    "Private verification evidence reference",
+    "非公開の本人確認記録の参照"
+  ],
+  "填写受控核验记录的索引，至少 3 字；不要填写证件号码或原始材料。": [
+    "Enter a reference to the restricted verification record, at least 3 characters. Do not enter identity numbers or original material.",
+    "アクセス制限された確認記録の参照を3文字以上で入力してください。証明書番号や原資料は入力しないでください。"
+  ],
+  "已核查昵称与账号资料，未发现冒用或违规。": [
+    "I checked the nickname and account details and found no impersonation or violations.",
+    "ニックネームとアカウント情報を確認し、なりすましや違反がないことを確認しました。"
+  ],
+  "已依据实际核验材料完成适用的真实身份核验，并保存受控核验记录。": [
+    "I completed the applicable identity verification using actual evidence and retained a restricted verification record.",
+    "実際の資料に基づいて適用される本人確認を完了し、アクセス制限された確認記録を保存しました。"
+  ],
+  "社区已开放。新账号可保存草稿；取得发布资格后方可提交审核。请持续处理审核、举报与申诉。": [
+    "The community is open. New accounts can save drafts and submit for review after obtaining publishing eligibility. Keep reviewing content, reports and appeals.",
+    "コミュニティは公開中です。新規アカウントは下書きを保存でき、公開資格の確認後に審査へ提出できます。審査、通報、異議申立ての処理を継続してください。"
+  ],
+  "恢复新投稿": [
+    "Resume new submissions",
+    "新規投稿を再開"
+  ],
+  "暂停新投稿": [
+    "Pause new submissions",
+    "新規投稿を一時停止"
+  ],
+  "发布资格核验": [
+    "Publishing eligibility verification",
+    "公開資格の確認"
+  ],
+  "公开服务 · 发布资格核验、内容审核与投诉处置": [
+    "Public service · Publishing eligibility, content review and complaint handling",
+    "公開サービス · 公開資格の確認、コンテンツ審査、苦情対応"
+  ],
+  "账号已受限，仍可查看历史并申诉。": [
+    "Your account is restricted. You can still view its history and appeal.",
+    "アカウントは制限されていますが、履歴の閲覧と異議申立ては可能です。"
+  ],
+  "可先保存草稿，站长确认本地测试资格后再提交。": [
+    "You can save a draft now and submit after the site owner confirms local testing eligibility.",
+    "下書きは保存できます。サイト管理者がローカルテスト資格を確認した後に提出できます。"
+  ],
+  "可先保存草稿，完成发布资格核验后再提交审核。": [
+    "You can save a draft now and submit it for review after your publishing eligibility is verified.",
+    "下書きは保存できます。公開資格の確認後に審査へ提出できます。"
+  ],
+  "，确认有合法分享依据且不含个人敏感信息；同意将审核通过的正文、来源与昵称在社区公开展示。": [
+    ", confirm that I have a lawful basis to share this content and that it contains no sensitive personal information, and agree to display the approved text, sources and nickname publicly in the community.",
+    "を読み、共有する適法な根拠があり、機微な個人情報を含まないことを確認しました。承認された本文、出典、ニックネームをコミュニティで公開することに同意します。"
+  ],
+  "发布资格已核验": [
+    "Publishing eligibility verified",
+    "公開資格確認済み"
+  ],
+  "你可以先保存草稿；完成发布资格核验后，可提交审核并参与互动。": [
+    "You can save drafts now. After your publishing eligibility is verified, you can submit for review and participate in interactions.",
+    "下書きは保存できます。公開資格の確認後、審査への提出や交流に参加できます。"
+  ],
+  "完成发布资格核验且账号正常后，可上传头像。": [
+    "Avatar uploads are available after publishing eligibility is verified and while your account is active.",
+    "公開資格が確認済みでアカウントが有効な場合、アバターをアップロードできます。"
+  ],
+  "对外开放": [
+    "Publicly available",
+    "一般公開中"
+  ],
+  "暂停投稿": [
+    "Submissions paused",
+    "投稿受付を一時停止"
+  ],
+  "暂未开放": [
+    "Not yet available",
+    "現在は利用できません"
+  ],
+  "macOS 下载": [
+    "macOS download",
+    "macOS ダウンロード"
+  ],
+  "Windows 下载": [
+    "Windows download",
+    "Windows ダウンロード"
+  ],
+  "使用已有的网站账号或已验证邮箱和密码登录。邮箱注册是否开放，以登录页面显示为准。": [
+    "Sign in with your existing account or verified email and password. The login page indicates whether email registration is available.",
+    "既存のアカウント、または認証済みメールアドレスとパスワードでログインしてください。メールアドレスでの登録が可能かどうかはログインページで確認できます。"
+  ],
+  "账号与发布资格": [
+    "Accounts and publishing eligibility",
+    "アカウントと公開資格"
+  ],
+  "邮箱验证用于登录和账号恢复，不等于真实身份核验。新账号可编辑并保存自己的草稿；发布博客、社区投稿与互动需要完成适用的身份及昵称核验。核验通过后，内容仍按规则进行自动筛查或人工审核。": [
+    "Email verification is used for login and account recovery; it is not identity verification. New accounts can edit and save their own drafts. Publishing blogs, community submissions and interactions requires the applicable identity and nickname checks. Content remains subject to automatic screening or human review after verification.",
+    "メール認証はログインとアカウント復旧のために使用され、本人確認とは異なります。新規アカウントは自分の下書きを編集・保存できます。ブログ公開、コミュニティへの投稿、交流には適用される本人確認とニックネームの確認が必要です。確認後も、コンテンツには規則に基づく自動チェックまたは人による審査が適用されます。"
+  ],
+  "本政策提供中文原文。": [
+    "This policy is provided in its original Chinese version.",
+    "本ポリシーは中国語の原文で提供しています。"
+  ],
+  "当前入口尚未开放账号服务": [
+    "Account services are not available at this entry point.",
+    "この入口ではアカウントサービスを利用できません。"
+  ],
+  "请先完成邮箱验证": [
+    "Verify your email address first.",
+    "先にメール認証を完了してください。"
+  ],
+  "头像服务暂未开放": [
+    "Avatar services are currently unavailable.",
+    "現在、アバターサービスを利用できません。"
+  ],
+  "账号暂不能更换头像，请先确认发布资格或联系站长": [
+    "This account cannot change its avatar yet. Verify your publishing eligibility or contact the site owner.",
+    "このアカウントではまだアバターを変更できません。公開資格を確認するか、サイト管理者にお問い合わせください。"
+  ],
+  "请先取得发布资格": [
+    "Obtain publishing eligibility first.",
+    "先に公開資格の確認を完了してください。"
+  ],
+  "共享内容服务暂未开放": [
+    "Shared content services are currently unavailable.",
+    "現在、共有コンテンツサービスを利用できません。"
+  ],
+  "请先完成真实身份与发布资格核查": [
+    "Complete identity and publishing eligibility verification first.",
+    "先に本人確認と公開資格の確認を完了してください。"
+  ],
+  "共享投稿服务暂未开放，请稍后再试": [
+    "Shared submissions are currently unavailable. Please try again later.",
+    "現在、共有投稿を受け付けていません。しばらくしてから再度お試しください。"
+  ],
+  "当前账号没有投稿资格，请联系站长核查": [
+    "This account is not eligible to submit. Contact the site owner for verification.",
+    "このアカウントには投稿資格がありません。サイト管理者に確認をご依頼ください。"
+  ],
+  "属地信息暂未核验": [
+    "Location information has not been verified.",
+    "所在地情報は未確認です。"
+  ],
+  "账号正常且已确认发布资格后可使用此项互动": [
+    "This interaction requires an active account with verified publishing eligibility.",
+    "この操作には、有効なアカウントと確認済みの公開資格が必要です。"
+  ],
+  "每个账号最多收藏 1000 份内容": [
+    "Each account can bookmark up to 1,000 items.",
+    "各アカウントでブックマークできるのは最大1,000件です。"
+  ],
+  "最多关注 1000 位成员": [
+    "You can follow up to 1,000 members.",
+    "フォローできるメンバーは最大1,000人です。"
+  ],
+  "当前仅向成年人开放注册": [
+    "Registration is currently available to adults only.",
+    "現在、登録は成人の方のみ受け付けています。"
+  ],
+  "账号已创建，请登录。可编辑个人草稿，完成发布身份核验后可投稿。": [
+    "Your account has been created. Sign in to edit private drafts. You can submit content after identity verification for publishing is complete.",
+    "アカウントを作成しました。ログインして非公開の下書きを編集できます。公開に必要な本人確認を完了すると投稿できます。"
+  ],
+  "每个账号最多保留 500 条投稿": [
+    "Each account can retain up to 500 submissions.",
+    "各アカウントで保存できる投稿は最大500件です。"
+  ],
+  "账号尚未取得发布资格": [
+    "This account does not have publishing eligibility yet.",
+    "このアカウントの公開資格はまだ確認されていません。"
+  ],
+  "社区服务暂未开放，请稍后再试": [
+    "Community services are currently unavailable. Please try again later.",
+    "現在、コミュニティサービスを利用できません。しばらくしてから再度お試しください。"
+  ],
+  "请明确确认注销账号": [
+    "Explicitly confirm that you want to close your account.",
+    "アカウントを削除することを明示的に確認してください。"
+  ],
+  "本地测试资格不能用于正式发布，请使用身份核验流程": [
+    "Local testing eligibility cannot authorize public publishing. Use the identity verification workflow.",
+    "ローカルテスト資格では正式公開できません。本人確認の手続きを使用してください。"
+  ],
+  "请确认已实际完成昵称和真实身份核验": [
+    "Confirm that nickname and identity verification have actually been completed.",
+    "ニックネームと本人確認を実際に完了したことを確認してください。"
+  ],
+  "请记录核验方式和可追溯的凭证索引": [
+    "Record the verification method and a traceable evidence reference.",
+    "確認方法と追跡可能な証拠記録の参照を記録してください。"
+  ],
+  "不要在核验记录中填写原始身份证号码，请使用凭证索引": [
+    "Do not enter an original identity card number in the verification record. Use an evidence reference.",
+    "確認記録には身分証明書番号の原文を入力せず、証拠記録の参照を使用してください。"
+  ],
+  "工具接入服务暂未开放": [
+    "Tool integration services are currently unavailable.",
+    "現在、ツール連携サービスを利用できません。"
+  ],
+  "投稿封面服务暂未开放": [
+    "Submission cover uploads are currently unavailable.",
+    "現在、投稿のカバー画像をアップロードできません。"
+  ],
+  "确认发布资格后才能上传投稿封面": [
+    "Verify your publishing eligibility before uploading submission covers.",
+    "投稿のカバー画像をアップロードするには、公開資格の確認が必要です。"
+  ],
+  "每个账号最多保存200张封面，请联系站长清理未使用图片": [
+    "Each account can store up to 200 covers. Contact the site owner to remove unused images.",
+    "各アカウントで保存できるカバー画像は最大200枚です。未使用画像の削除はサイト管理者にご相談ください。"
+  ],
+  "博客发布服务暂未开放": [
+    "Blog publishing is currently unavailable.",
+    "現在、ブログを公開できません。"
+  ],
+  "请先完成发布资格核查": [
+    "Complete publishing eligibility verification first.",
+    "先に公開資格の確認を完了してください。"
+  ],
+  "可保存私有草稿；完成真实身份和发布资格核查后可提交公开。": [
+    "You can save private drafts. Complete identity and publishing checks before submitting for publication.",
+    "非公開の下書きを保存できます。公開するには本人確認と投稿資格の審査が必要です。"
+  ],
+  "运营规则尚未配置完成，暂不能注册或提交": [
+    "Operating policies are not configured yet. Registration and submissions are unavailable.",
+    "運営ポリシーの設定が完了していないため、登録と投稿は利用できません。"
+  ],
+  "请阅读并确认当前版本的协议和社区规则": [
+    "Read and accept the current terms and community rules.",
+    "最新の利用規約とコミュニティルールを確認して同意してください。"
+  ],
+  "请先保存草稿，不能重复提交待审版本": [
+    "Save a draft first; an existing pending version cannot be submitted again.",
+    "下書きを保存してください。審査中の版を重複して提出することはできません。"
+  ],
+  "请先处理关联投诉限制": [
+    "Resolve the related complaint restrictions first.",
+    "関連する通報の制限を先に処理してください。"
+  ],
+  "资料已在其他页面更新，请先刷新再继续": [
+    "Your profile changed on another page. Refresh before continuing.",
+    "別のページでプロフィールが更新されました。更新してから続行してください。"
+  ],
+  "每天最多提交 30 次共享内容或修订": [
+    "You can submit up to 30 shared entries or revisions per day.",
+    "共有コンテンツや更新の提出は1日30回までです。"
+  ],
+  "共享原文已下架或有待审版本，请先在共享内容审核中处理": [
+    "The shared original is offline or awaiting review. Resolve it in catalog review first.",
+    "共有元のコンテンツが非公開または審査中です。共有コンテンツの審査で先に処理してください。"
+  ],
+  "此身份由平台管理员账号管理": [
+    "This identity is managed by the platform administrator account.",
+    "このIDはプラットフォーム管理者アカウントで管理されています。"
   ]
 }

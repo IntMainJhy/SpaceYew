@@ -11,7 +11,7 @@ export function MemberAvatarSettings({user,onSaved}:{user:Doc;onSaved:(user:Doc)
  const picker=useRef<HTMLInputElement>(null);
  function clearSelection(){setFile(null);if(picker.current)picker.current.value=''}
  useEffect(()=>{if(!file){setPreview('');return}const url=URL.createObjectURL(file);setPreview(url);return()=>URL.revokeObjectURL(url)},[file]);
- const qualified=user.status==='active'&&user.verification==='local_test';
+ const qualified=user.canPublish===true;
  async function save(remove=false){setBusy(true);setError('');setMessage('');try{
   const result=await api('/api/community/avatar',remove?{method:'DELETE'}:{method:'PUT',headers:{'Content-Type':file!.type},body:file!});
   onSaved(result.user);clearSelection();setMessage(remove?'已移除头像，恢复默认图片头像。':'头像已更新，账号区和所有投稿会同步使用新头像。');
@@ -20,7 +20,7 @@ export function MemberAvatarSettings({user,onSaved}:{user:Doc;onSaved:(user:Doc)
   <div className="member-avatar-preview">{preview?<span className="feed-avatar"><img src={preview} alt={tr("待保存的新头像")}/></span>:<FeedAvatar name={user.displayName||user.nickname} avatarId={user.avatarId}/>}</div>
   <div className="member-avatar-controls">{user.role==='owner'?<><p>{tr("站长头像与主站个人资料共用。")}</p><Link className={secondary} href="/admin/profile">{tr("前往个人资料更换头像")}</Link></>:<>
    <p>{tr("JPG、PNG、WebP，最大2 MB，居中裁切。")}</p><p className="community-fine">{tr("请确保图片使用权并遵守社区规则，保存后公开显示。")}</p>
-   {!qualified&&<p className="community-fine">{tr("账号正常且已确认本地测试资格后可上传头像。")}</p>}
+   {!qualified&&<p className="community-fine">{tr("完成发布资格核验且账号正常后，可上传头像。")}</p>}
    <div className="field"><label htmlFor="member-avatar-file">{tr("选择头像图片")}</label><input ref={picker} type="file" id="member-avatar-file" accept="image/jpeg,image/png,image/webp" disabled={busy||!qualified} onChange={event=>{
     const next=event.target.files?.[0];setError('');setMessage('');
     if(!next)return;

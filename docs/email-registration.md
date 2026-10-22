@@ -6,9 +6,9 @@ The password-login platform supports `/join`: email, a six-digit code, nickname,
 
 ## Configuration / 配置
 
-For authorized local maintainers, set `REGISTRATION_ENABLED=true` on the combined or platform surface. `false` hides registration and blocks both registration and code requests. The admin surface never permits registration. All sign-ins require a real saved account password. Requests still require a loopback deployment; this change does not activate public production registration or publication.
+For authorized local maintainers, set `REGISTRATION_ENABLED=true` on the combined or platform surface. `false` hides registration and blocks both registration and code requests. The admin surface never permits registration. All sign-ins require a real saved account password. Public HTTPS deployments additionally require `PUBLIC_FEATURES_ENABLED=true` and configured operating policies. Registration grants private drafts, not identity verification or public publishing eligibility; see [public launch requirements](public-launch.en.md).
 
-已授权维护者可在本地 combined 或 platform 入口设置 `REGISTRATION_ENABLED=true`。设置为 `false` 时同时关闭页面、注册接口与注册验证码请求；管理端不开放注册，所有登录均校验已有账号的真实密码。服务端继续校验本地部署环境，不会因此开放公网生产注册或投稿。
+已授权维护者可在本地 combined 或 platform 入口设置 `REGISTRATION_ENABLED=true`。设置为 `false` 时同时关闭页面、注册接口与注册验证码请求；管理端不开放注册，所有登录均校验已有账号的真实密码。公网 HTTPS 部署另需显式设置 `PUBLIC_FEATURES_ENABLED=true` 并配置正式运营政策。注册允许编辑私有草稿，不等于完成身份核验或取得公开发布资格；参见[公开运营要求](public-launch.md)。
 
 QQ SMTP example, with placeholders only:
 

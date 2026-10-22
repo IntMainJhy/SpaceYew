@@ -3,17 +3,17 @@ import {randomUUID} from 'node:crypto';
 import {writeFile,unlink,statfs} from 'node:fs/promises';
 import path from 'node:path';
 import {db,FILES,now,hash,limited,transaction,syncRefs} from './db.mjs';
-import {currentUser,localRequest,origin,clientIp} from './auth.mjs';
+import {currentUser,serviceRequest,publishingQualified,origin,clientIp} from './auth.mjs';
 import {requireValue,HttpError} from './content.mjs';
 import {readLimited,lock} from './uploads.mjs';
 
 export const AVATAR_MAX_BYTES=2*1024*1024;
 const permitted=new Set(['image/jpeg','image/png','image/webp']);
 function avatarUser(req,upload=false){
- requireValue(localRequest(req),'社区头像目前仅供本地体验',503);
+ requireValue(serviceRequest(req),'头像服务暂未开放',503);
  const user=currentUser(req);requireValue(user,'请先登录',401);
  requireValue(user.role!=='owner','站长头像请在个人资料中更换',403);
- requireValue(user.status==='active'&&(!upload||user.verification==='local_test'),'账号暂不能更换头像，请先确认本地测试资格或联系站长',403);
+ requireValue(user.status==='active'&&(!upload||publishingQualified(user,req)),'账号暂不能更换头像，请先确认发布资格或联系站长',403);
  return user;
 }
 function record(actor,action,target,details={}){db().prepare('INSERT INTO community_audit VALUES(?,?,?,?,?,?)').run(randomUUID(),actor,action,target,JSON.stringify(details),now())}

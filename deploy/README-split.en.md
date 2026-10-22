@@ -8,7 +8,7 @@ Build the code once and run two Next.js services sharing the same `APP_DATA_DIR`
 
 | Surface | Example | Local upstream | Mode |
 | --- | --- | --- | --- |
-| Platform | https://app.example.com | 127.0.0.1:3008 | Experience login; no registered accounts are created |
+| Platform | https://app.example.com | 127.0.0.1:3008 | Password login; public registration disabled |
 | Admin | https://admin.example.com/admin/login | 127.0.0.1:3009 | Existing administrator credentials |
 
 1. Place the code in `/opt/spaceyew/app`, then run `npm ci` and `npm run build`. Do not overwrite server data with local demo data.
@@ -20,7 +20,9 @@ Build the code once and run two Next.js services sharing the same `APP_DATA_DIR`
 
 The platform cookie is `site_platform`; the admin cookie is `site_admin`. Both are host-only, HttpOnly and SameSite=Lax, with Secure enabled over HTTPS. Do not set a parent-domain cookie. Cookies and server sessions are also bound to their platform/admin realm: copying a cookie to the other surface does not confer that identity. Logging out of one surface does not log out of the other.
 
-`PLATFORM_LOGIN_MODE=experience` is explicitly a demo mode. Any non-empty username and password enter the same ordinary experience workspace. Entered passwords are not stored. Users cannot change account security settings, delete the account or create tool credentials, and do not receive admin access. Registration pages and APIs are disabled. Replace this mode when implementing real user accounts; it must not be presented as real identity verification.
+The platform example defaults to `PLATFORM_LOGIN_MODE=password`, which verifies existing website accounts. This does not create users or grant local publishing qualification.
+
+`PLATFORM_LOGIN_MODE=experience` remains an explicitly selected demo mode. Any non-empty username and password enter the same ordinary experience workspace. Entered passwords are not stored. Shared experience sessions cannot access private blog workspaces, upload résumés, change account security settings, delete the account or create tool credentials, and do not receive admin access. Registration pages and APIs are disabled. Use password mode for real account authentication; experience mode must not be presented as identity verification.
 
 This template configures separate entry points only. Existing local-only community restrictions remain in effect: separate domains do not automatically enable public registration, submissions or tool APIs. A public community launch requires separate acceptance checks and explicit enablement. Do not bypass restrictions through Host headers, proxy headers or removal of admin checks.
 

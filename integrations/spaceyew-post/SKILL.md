@@ -2,7 +2,7 @@
 name: spaceyew-post
 description: Create documents, Skills and useful resources in SpaceYew, or save personal-library/community drafts. Submit when the user requests publishing; platform moderation decides whether publication is immediate or pending. Uses scoped credentials and automatically shares approved catalog entries to community.
 ---
-Use the user's configured `SPACEYEW_URL` and `SPACEYEW_TOKEN`. Credentials belong in the client's private environment, never in this skill, generated content, logs, query strings or screenshots. Missing credentials require the user to configure an appropriately scoped credential in their account's Connect page; do not use an administrator password as a substitute.
+Use the user's configured `SPACEYEW_URL` and `SPACEYEW_TOKEN`. Credentials belong in the client's private environment, never in this skill, generated content, logs, query strings or screenshots. If credentials are missing, ask the account owner to configure a scoped local credential using the credential-setup section in the reference. The legacy Connect page currently redirects to the blog editor. Do not create credentials on the user's behalf or use an administrator password as a substitute for a token.
 
 Prefer the connected `spaceyew_*` MCP tools when available. The fallback is `node scripts/request.mjs <operation> [input.json] [stable-request-id]`, resolved relative to this skill. Read [the field and operation reference](references/api.md) for the selected destination.
 

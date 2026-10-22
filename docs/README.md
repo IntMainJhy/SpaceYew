@@ -10,6 +10,7 @@ SpaceYew 将可编辑的开发者博客主页与共享文档、独立 AI Skill�
 
 | Topic / 主题 | English | 简体中文 |
 | --- | --- | --- |
+| Email registration / 邮箱验证码注册 | [Registration and SMTP](email-registration.md) | 同页含中文说明 |
 | Blog editing and publication / 博客编辑与发布 | [Blog editor](blog-editor.md) | [博客编辑](blog-editor.zh-CN.md) |
 | Résumé extraction and privacy / 简历提取与隐私 | [Résumé import](resume-import.md) | [简历导入](resume-import.zh-CN.md) |
 | Existing static-site hosting / 已有静态托管 | [Hosting](blog-hosting.md) | [托管说明](blog-hosting.zh-CN.md) |

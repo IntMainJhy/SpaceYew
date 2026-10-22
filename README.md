@@ -51,6 +51,7 @@ The main Blog homes entry opens the site owner’s public Anx Portfolio homepage
 
 | Area | Capabilities |
 | --- | --- |
+| Accounts | Invitation-free email registration with a six-digit, expiring code; real email/password sign-in, private blog drafts and separate publication qualification; currently local only |
 | Blog homepages | The site owner’s public Anx Portfolio profile opens directly, without a template picker or workspace panels; each signed-in member can edit their own profile, résumé sections, metrics, certificates, images and public PDF at `/workspace/blog`, then preview and submit a fixed version for review |
 | Existing static website hosting | Backend APIs accept HTML or ZIP packages with relative CSS/JS/assets, isolate previews and submit fixed versions for review; existing hosted sites and stable sharing URLs remain supported |
 | Shared documentation | Categorized image-and-description boards, article details with section navigation, and member-authored tutorials; import text, Markdown or HTML into the editor |
@@ -116,6 +117,7 @@ The [2026-10-22 audit report](docs/audit-2026-10-22.md) records the latest scope
 
 | Task | Guide |
 | --- | --- |
+| Register and configure email | [Email registration and SMTP](docs/email-registration.md) |
 | Edit and publish a blog | [Blog editor](docs/blog-editor.md) |
 | Import a résumé safely | [Résumé import](docs/resume-import.md) |
 | Understand static hosting | [Hosting and sandbox limits](docs/blog-hosting.md) |

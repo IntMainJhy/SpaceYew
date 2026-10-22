@@ -11798,5 +11798,45 @@
   "直接使用 Anx Portfolio 模板：编辑自己的资料与作品，预览后提交审核，无需安装或构建。": [
     "Use Anx Portfolio directly: edit your profile and work, preview, then submit for review. No installation or build needed.",
     "Anx Portfolio テンプレートをそのまま利用。プロフィールと作品を編集し、プレビューして審査に提出できます。インストールやビルドは不要です。"
+  ],
+  "用邮箱创建账号": [
+    "Create your account",
+    "メールでアカウント作成"
+  ],
+  "验证邮箱后，即可登录并创建自己的博客主页。": [
+    "Verify your email to sign in and create your own blog homepage.",
+    "メール認証後、ログインして自分のブログホームを作成できます。"
+  ],
+  "邮箱用于登录与账号恢复，不会公开。": [
+    "Your email is used for sign-in and account recovery. It stays private.",
+    "メールはログインとアカウント復旧に使用し、公開しません。"
+  ],
+  "请输入邮件中的 6 位验证码，10 分钟内有效。": [
+    "Enter the 6-digit code from your email. It expires in 10 minutes.",
+    "メールの6桁のコードを入力してください。有効期限は10分です。"
+  ],
+  "我已成年，了解当前服务仅用于本地测试。": [
+    "I am an adult and understand this service is currently for local testing.",
+    "私は成人であり、現在はローカルテスト用のサービスであることを理解しています。"
+  ],
+  "注册目前仅在本地测试环境开放。": [
+    "Registration is currently available only in the local test environment.",
+    "登録は現在、ローカルテスト環境でのみ利用できます。"
+  ],
+  "验证邮箱并创建账号": [
+    "Verify email and create account",
+    "メールを認証してアカウント作成"
+  ],
+  "没有账号？邮箱注册": [
+    "New here? Sign up with email",
+    "アカウントをお持ちでない方：メールで登録"
+  ],
+  "公开投稿仍需资格确认与内容审核。": [
+    "Public submissions still require account qualification and content review.",
+    "公開投稿には引き続き利用資格の確認とコンテンツ審査が必要です。"
+  ],
+  "邮箱注册": [
+    "Email registration",
+    "メール登録"
   ]
 }

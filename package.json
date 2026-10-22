@@ -26,7 +26,8 @@
     "test:catalog:http": "node test/catalog-http.mjs",
     "test:resume:http": "node test/resume-http.mjs",
     "brand:icons": "node scripts/brand-icons.mjs",
-    "test:blog-editor:http": "node test/blog-editor-http.mjs"
+    "test:blog-editor:http": "node test/blog-editor-http.mjs",
+    "test:registration:http": "node test/email-registration-http.mjs"
   },
   "dependencies": {
     "@tiptap/extension-image": "3.32.0",

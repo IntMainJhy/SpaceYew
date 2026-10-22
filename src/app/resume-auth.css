@@ -51,3 +51,17 @@ html:is([data-ui=monochrome],[data-ui=editorial]) .organic-site .community-auth 
  .public-auth-site>.organic-main {padding-block:40px 48px;}
  html[data-ui] .organic-site .community-auth-form h1 {font-size:30px;margin-bottom:30px;}
 }
+
+.public-auth-site:has(.is-registration)>.organic-main {padding-block:24px 32px;}
+html[data-ui] .organic-site .community-auth.is-registration {max-width:380px;}
+html[data-ui] .organic-site .is-registration h1 {font-size:28px;margin-bottom:22px;}
+html[data-ui] .organic-site .is-registration .field {gap:6px;margin-bottom:14px;min-width:0;}
+html[data-ui] .organic-site .is-registration .field>input:not([type=checkbox]) {min-height:44px;height:44px;padding:10px 12px;min-width:0;width:100%;}
+html[data-ui] .organic-site .is-registration .registration-code {display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 10px;}
+.registration-code>label,.registration-code p {grid-column:1/-1;}
+.registration-code .email-code-control.is-compact {display:contents;}
+html[data-ui] .organic-site .is-registration .registration-code .btn {height:44px;min-height:44px;padding:8px 14px;white-space:nowrap;font-size:13px;}
+.registration-passwords {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+html[data-ui] .organic-site .is-registration .community-check {padding:5px 0;min-height:34px;font-size:12px;line-height:1.7;gap:9px;}
+html[data-ui] .organic-site .is-registration form>.organic-button {min-height:44px;margin-top:12px;}
+html[data-ui] .organic-site .is-registration .community-auth-links {margin-top:10px;}

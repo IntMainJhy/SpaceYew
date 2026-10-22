@@ -8,7 +8,7 @@ let server;
 try{
  server=await startServer(directory,3181,1048576,{APP_SURFACE:'platform',PLATFORM_LOGIN_MODE:'password',REGISTRATION_ENABLED:'true',SITE_DEMO:'false',DEMO_SKIP_LOGIN:'false'});
  const call=(url,body,cookie='')=>fetch(server.base+url,{method:body===undefined?'GET':'POST',redirect:'manual',headers:{Origin:server.base,'Content-Type':'application/json',Cookie:cookie},body:body===undefined?undefined:JSON.stringify(body)});
- for(const [locale,title] of [['zh','用邮箱创建账号'],['en','Create your account'],['ja','メールでアカウント作成']]){
+ for(const [locale,title] of [['zh','邮箱注册'],['en','Email registration'],['ja','メール登録']]){
   const response=await call('/join',undefined,'site-locale='+locale);assert.equal(response.status,200);const html=await response.text();assert.ok(html.includes(title));assert.ok(html.includes('name="confirm"'));assert.ok(html.includes('name="code"'));assert.doesNotMatch(html,/id="community-invite"/);
  }
  assert.ok((await(await call('/login')).text()).includes('href="/join"'));

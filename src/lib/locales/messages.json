@@ -11838,5 +11838,41 @@
   "邮箱注册": [
     "Email registration",
     "メール登録"
+  ],
+  "创建账号": [
+    "Create account",
+    "アカウント作成"
+  ],
+  "确认密码": [
+    "Confirm password",
+    "パスワード確認"
+  ],
+  "验证码": [
+    "Verification code",
+    "認証コード"
+  ],
+  "昵称": [
+    "Nickname",
+    "ニックネーム"
+  ],
+  "至少 12 位": [
+    "12+ characters",
+    "12文字以上"
+  ],
+  "6 位数字": [
+    "6 digits",
+    "6桁の数字"
+  ],
+  "我已成年（本地测试）": [
+    "I am an adult (local testing).",
+    "私は成人です（ローカルテスト）。"
+  ],
+  "我同意": [
+    "I agree to",
+    "同意します："
+  ],
+  "注册成功，请登录。": [
+    "Account created. Please sign in.",
+    "登録が完了しました。ログインしてください。"
   ]
 }

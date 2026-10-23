@@ -59,12 +59,23 @@ try{
  function featured(handle){const database=D.db();database.prepare("INSERT OR REPLACE INTO config VALUES('featuredBlog',?)").run(JSON.stringify({handle}));database.close();delete globalThis.__personalSiteDb;}
  featured(anx.handle);
  const selectedHome=await(await fetch(base+'/blogs')).text();assert.match(selectedHome,/Taylor Quinn/);assert.doesNotMatch(selectedHome,/Unreviewed replacement/);assert.ok(selectedHome.includes('<link rel="canonical" href="'+base+'/blog/'+anx.handle+'"'));assert.ok(selectedHome.includes('<title>Taylor Quinn · SpaceYew</title>'));
+ // Sharing the featured entry always points at that author's permanent public URL.
+ for(const [language,label] of [['en','Share homepage'],['zh','分享主页']]){
+  const featuredPage=await(await fetch(base+'/blogs',{headers:{Cookie:'site-locale='+language}})).text();
+  assert.match(featuredPage,new RegExp('<a[^>]*class="blog-permalink"[^>]*href="/blog/'+anx.handle+'"'));
+  assert.ok(featuredPage.includes(label));
+  assert.ok(featuredPage.includes('/api/spaces/blog-qr/'+anx.handle+'?path='));
+  assert.ok(!featuredPage.includes('/api/spaces/blog-qr/undefined'));
+ }
+ const qr=await fetch(base+'/api/spaces/blog-qr/'+anx.handle+'?path='+encodeURIComponent('/blog/'+anx.handle));
+ assert.equal(qr.status,200);assert.match(qr.headers.get('content-type'),/image\/svg\+xml/);
+ assert.equal((await fetch(base+'/blog/unknown-public-author')).status,404);
  const landingHome=await(await fetch(base+'/')).text(),previewStart=landingHome.indexOf('class="home-personal-preview"'),previewEnd=landingHome.indexOf('id="resume-introduction"',previewStart);assert.ok(landingHome.slice(previewStart,previewEnd).includes('Taylor Quinn'));assert.ok(!landingHome.slice(previewStart,previewEnd).includes('Unreviewed replacement'));
 
  for(const route of ['/workspace/profile','/workspace/library','/workspace/files','/workspace/insights','/workspace/connect','/workspace/preview']){const redirect=await fetch(base+route,{redirect:'manual',headers:{Cookie:member}});assert.equal(redirect.status,307);assert.equal(new URL(redirect.headers.get('location'),base).pathname,'/workspace/blog');}const editor=await fetch(base+'/workspace/blog?template=anx',{redirect:'manual',headers:{Cookie:member}});assert.equal(editor.status,200);assert.match(await editor.text(),/blog-editor/);const legacyHome=await fetch(base+'/my-space',{redirect:'manual'});assert.equal(new URL(legacyHome.headers.get('location'),base).pathname,'/blogs');
  const ownerData=await json('/api/admin/bootstrap',undefined,owner);const ownerHandle=ownerData.profile.alias.toLowerCase().replace(/[^a-z0-9-]/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'').slice(0,28)||'member';
  const ownerCanonical=await(await fetch(base+'/blog/'+ownerHandle)).text();assert.match(ownerCanonical,/data-home-theme="anx"/);assert.doesNotMatch(ownerCanonical,/blog-create-link|homepage-studio/);
- const finalAnx=await json('/api/spaces/mine',undefined,member);await json('/api/spaces/offline',{revision:finalAnx.revision},member);assert.equal((await fetch(base+'/blog/'+anx.handle)).status,404);assert.equal((await fetch(base+'/blogs')).status,404,'A selected homepage takedown cannot fall back to a different profile');featured('');assert.equal((await fetch(base+'/blogs')).status,200);
+ const finalAnx=await json('/api/spaces/mine',undefined,member);await json('/api/spaces/offline',{revision:finalAnx.revision},member);assert.equal((await fetch(base+'/blog/'+anx.handle)).status,404);assert.equal((await fetch(base+'/api/spaces/blog-qr/'+anx.handle)).status,404,'A hidden homepage cannot be shared via QR');assert.equal((await fetch(base+'/blogs')).status,404,'A selected homepage takedown cannot fall back to a different profile');featured('');assert.equal((await fetch(base+'/blogs')).status,200);
  const ownerMine=await json('/api/spaces/mine',undefined,owner);await json('/api/spaces/offline',{revision:ownerMine.revision},owner);assert.equal((await fetch(base+'/blogs')).status,404,'Owner takedown must also hide the direct blog entry');
  console.log('Homepage HTTP checks passed: static uploads, sandbox, reviewed Anx template, bilingual content, reviewed default selection and metadata, stable sharing and takedown.');
 }finally{if(adminServer)await stopServer(adminServer);if(server)await stopServer(server);await rm(directory,{recursive:true,force:true})}

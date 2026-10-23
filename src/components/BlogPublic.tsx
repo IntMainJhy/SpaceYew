@@ -21,5 +21,6 @@ export async function BlogPublic({req,path,query}:{req:Request;path:string[];que
 // The main blog entry is the configured public homepage, never the visitor's draft workspace.
 export async function OwnerBlog({req}:{req:Request}){
  let data;try{data=defaultBlogSpace(req)}catch{notFound()}
- return <><div className="blog-owner-edit"><Link href="/workspace/blog">{(await serverI18n()).locale==='en'?'Create / edit my blog':'创建 / 编辑我的博客'}</Link></div><BlogTheme data={data} embedded/></>;
+ const {t}=await serverI18n(),path='/blog/'+encodeURIComponent(data.handle);
+ return <><div className="blog-owner-edit"><Link className="blog-permalink" href={path} aria-label={t('主页链接')}>{path}</Link><div className="space-actions"><BlogShare path={path}/><Link href="/workspace/blog">{t('创建 / 编辑我的博客')}</Link></div></div><BlogTheme data={data} embedded/></>;
 }

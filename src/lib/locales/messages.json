@@ -12258,5 +12258,9 @@
   "此身份由平台管理员账号管理": [
     "This identity is managed by the platform administrator account.",
     "このIDはプラットフォーム管理者アカウントで管理されています。"
+  ],
+  "创建 / 编辑我的博客": [
+    "Create / edit my blog",
+    "ブログを作成・編集"
   ]
 }

@@ -25,6 +25,26 @@ test('default blog selection preserves the owner fallback and publishes only the
  select('missing-homepage');assert.throws(()=>S.defaultBlogSpace(req()),e=>e.status===404);
  select('');assert.equal(S.defaultBlogSpace(req()).owner,'owner');
 });
+test('blog entry distinguishes the visitor’s reviewed homepage from the public example',()=>{
+ select('');
+ assert.equal(S.blogEntry(req()).example,true);
+ assert.equal(S.blogEntry(req(owner)).example,false);
+ const count=d.prepare('SELECT COUNT(*) n FROM spaces').get().n;
+ assert.equal(S.blogEntry(req(users[1].token)).space.owner,'owner');
+ assert.equal(S.blogEntry(req(users[1].token)).example,true);
+ assert.equal(d.prepare('SELECT COUNT(*) n FROM spaces').get().n,count,'Viewing an example must not create a homepage');
+ const own=S.blogEntry(req(users[0].token));assert.equal(own.example,false);assert.equal(own.space.owner,users[0].id);assert.equal(own.space.profile.name,'Reviewed member profile');
+ let bravo=S.mine(req(users[1].token));
+ bravo=S.spacesApi(req(users[1].token,'POST'),['spaces','save'],{...bravo,profile:{...bravo.profile,name:'Private Bravo draft'}},null);
+ const example=S.blogEntry(req(users[1].token));assert.equal(example.example,true);assert.equal(example.space.owner,'owner');assert.notEqual(example.space.profile.name,'Private Bravo draft');
+ const submitted=S.spacesApi(req(users[1].token,'POST'),['spaces','submit'],{revision:bravo.revision,accepted:true},null),review=submitted.reviews.find(x=>x.kind==='board'&&x.status==='pending');
+ S.spacesApi(req(owner,'POST'),['admin','spaces'],{id:review.id,action:'approve',checked:true,reason:'Reviewed second member entry'},null);
+ select(alice.handle);
+ assert.equal(S.blogEntry(req(users[1].token)).space.owner,users[1].id,'A published member sees their own page instead of the featured author');
+ assert.equal(S.blogEntry(req(users[1].token)).example,false);
+ const current=S.mine(req(users[1].token));S.spacesApi(req(users[1].token,'POST'),['spaces','offline'],{revision:current.revision},null);
+ assert.equal(S.blogEntry(req(users[1].token)).example,true);assert.equal(S.blogEntry(req(users[1].token)).space.owner,users[0].id);
+});
 test('default blog cannot bypass selected author restrictions, freezes or takedown',()=>{
  select(alice.handle);
  d.prepare("UPDATE community_users SET status='restricted' WHERE id=?").run(users[0].id);assert.throws(()=>S.defaultBlogSpace(req()),e=>e.status===404);d.prepare("UPDATE community_users SET status='active' WHERE id=?").run(users[0].id);

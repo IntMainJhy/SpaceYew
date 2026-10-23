@@ -16,6 +16,8 @@ try{
  async function call(url,input,cookie='',method=input===undefined?'GET':'POST',extra={}){return fetch(base+url,{method,headers:{Origin:base,Cookie:cookie,...(Buffer.isBuffer(input)?{}:{'Content-Type':'application/json'}),...extra},...(input===undefined?{}:{body:Buffer.isBuffer(input)?input:JSON.stringify(input)})})}
  async function json(url,input,cookie){const response=await call(url,input,cookie),data=await response.json();assert.ok(response.ok,url+' '+JSON.stringify(data));return data}
  const login=await call('/api/auth/login',{username:'hosting_http',password:'hosting-http-password-2026'});assert.equal(login.status,200);const member=login.headers.get('set-cookie').split(';')[0];
+ const guestEntry=await(await fetch(base+'/blogs')).text();assert.match(guestEntry,/data-example="true"/);
+ const newMemberEntry=await(await fetch(base+'/blogs',{headers:{Cookie:member}})).text();assert.match(newMemberEntry,/data-example="true"/);
  const html=Buffer.from('<!doctype html><html><head><meta charset="utf-8"><title>Independent homepage</title></head><body><h1>Independent homepage</h1><script>document.body.dataset.interactive="yes";</script></body></html>');
  const task=await json('/api/spaces/uploads',{name:'homepage.html',size:html.length,fingerprint:D.hash(html)},member);
  assert.equal((await call('/api/spaces/uploads/'+task.id+'?index=0',html,member,'PUT',{'x-chunk-sha256':D.hash(html)})).status,200);
@@ -37,6 +39,8 @@ try{
  const anchored=await fetch(base+'/blog/'+mine.handle+'?page='+encodeURIComponent('index.html?view=full#anchor'));assert.equal(anchored.status,200);assert.match(await anchored.text(),/index\.html\?view=full#anchor/);
  const page=await fetch(base+'/blog/'+mine.handle);assert.equal(page.status,200);assert.match(await page.text(),/sandbox="allow-scripts"/);
  assert.equal((await fetch(base+'/u/'+mine.handle,{redirect:'manual'})).status,307);assert.equal((await fetch(base+'/api/spaces/blog-qr/'+mine.handle)).status,200);
+ const hostedEntry=await(await fetch(base+'/blogs',{headers:{Cookie:member}})).text();assert.match(hostedEntry,/data-example="false"/);assert.match(hostedEntry,/sandbox="allow-scripts"/);
+ assert.ok(hostedEntry.includes('<link rel="canonical" href="'+base+'/blog/'+mine.handle+'"'));
  const profile=await(await fetch(base+'/api/community/members/'+id)).json();assert.equal(profile.blog,'/blog/'+mine.handle);
  const latest=await json('/api/spaces/mine',undefined,member);await json('/api/spaces/offline',{revision:latest.revision},member);assert.equal((await fetch(raw)).status,404);
  // The actual upstream-derived template uses the member's reviewed snapshot, not source-author data.
@@ -46,6 +50,8 @@ try{
  assert.equal((await fetch(base+'/blog/'+anx.handle)).status,404,'An unapproved theme stays private');
  const pendingAnx=anxReview.reviews.find(x=>x.kind==='board'&&x.status==='pending');
  await json('/api/admin/spaces/reviews',{id:pendingAnx.id,action:'approve',checked:true,reason:'Checked Anx template and member-owned data'},owner);
+ const ownEntry=await(await fetch(base+'/blogs',{headers:{Cookie:member}})).text();assert.match(ownEntry,/data-example="false"/);assert.match(ownEntry,/Taylor Quinn/);
+ assert.ok(ownEntry.includes('<link rel="canonical" href="'+base+'/blog/'+anx.handle+'"'));
  for(const language of ['en','zh']){
   const themed=await fetch(base+'/blog/'+anx.handle,{headers:{Cookie:'site-locale='+language}});assert.equal(themed.status,200);const html=await themed.text();
   assert.match(html,/data-home-theme="anx"/);assert.match(html,/Taylor Quinn/);assert.match(html,/Independent designer building useful tools/);assert.match(html,/anx-portfolio/);assert.match(html,/anx-body-/);assert.doesNotMatch(html,/Avatar with sketch|4498 contributions|USER\.avatar/);
@@ -63,7 +69,7 @@ try{
  for(const [language,label] of [['en','Share homepage'],['zh','分享主页']]){
   const featuredPage=await(await fetch(base+'/blogs',{headers:{Cookie:'site-locale='+language}})).text();
   assert.match(featuredPage,new RegExp('<a[^>]*class="blog-permalink"[^>]*href="/blog/'+anx.handle+'"'));
-  assert.ok(featuredPage.includes(label));
+  assert.ok(featuredPage.includes(label));assert.match(featuredPage,/data-example="true"/);assert.ok(featuredPage.includes(language==='en'?'Example':'示例'));
   assert.ok(featuredPage.includes('/api/spaces/blog-qr/'+anx.handle+'?path='));
   assert.ok(!featuredPage.includes('/api/spaces/blog-qr/undefined'));
  }

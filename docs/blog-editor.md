@@ -34,3 +34,5 @@ Personal images and populated profiles remain in private application storage and
 Use **Preview** for desktop/mobile draft views. The dot grid belongs only to the editing workspace and can be switched off. **Stack sections** arranges layers at full page width using measured content heights. Saving does not publish a member draft; the existing review and media-access rules still apply.
 
 Template changes use an inline confirmation and keep profile data. Undo/redo remains available when returning from Preview. Custom blocks use the same typography and colour rules in editing and publication.
+
+The canvas toolbar provides explicit Select (V), Pan (H), zoom percentages and Fit width (F). Cmd/Ctrl Z and Shift Cmd/Ctrl Z undo and redo outside text fields; typing retains the browser’s text undo. Layer icons distinguish profile, contact, image and text content.

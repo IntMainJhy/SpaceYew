@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {moveCanvasSection,canvasResume,canvasText,editCanvasText,previewCanvasProfile,arrangeCanvasCards} from '../src/lib/blog-canvas.mjs';
+import {moveCanvasSection,canvasResume,canvasText,editCanvasText,previewCanvasProfile,arrangeCanvasCards,recordCanvasMeasurements} from '../src/lib/blog-canvas.mjs';
 test('reordering a section preserves its nested content, images and translations',()=>{
  const items=[{id:'education',items:[{title:'First',coverId:'asset'}],translations:{en:{title:'Education'}}},{id:'work'},{id:'writing'}];
  const moved=moveCanvasSection(items,0,2);
@@ -43,3 +43,17 @@ test('arranging cards aligns each row and uses measured height to avoid collisio
 });
 
 test('skill editing keeps spaces while a multiword skill is being typed',async()=>{const {canvasSkills}=await import('../src/lib/blog-canvas.mjs');assert.deepEqual(canvasSkills('HarmonyOS · React '),['HarmonyOS','React ']);assert.deepEqual(canvasSkills('HarmonyOS · React Native'),['HarmonyOS','React Native']);assert.deepEqual(canvasSkills('React Native, User research'),['React Native','User research']);});
+
+
+test('controlled pointer updates retain measured sizes without redundant render cycles',()=>{
+ const initial={};const first=recordCanvasMeasurements(initial,[{id:'paper',type:'dimensions',dimensions:{width:188,height:86}}]);assert.notEqual(first,initial);assert.deepEqual(initial,{});
+ const repeated=recordCanvasMeasurements(first,[{id:'paper',type:'position',position:{x:300,y:200}},{id:'paper',type:'dimensions',dimensions:{width:188,height:86}}]);assert.equal(repeated,first);
+ const resized=recordCanvasMeasurements(first,[{id:'paper',type:'dimensions',dimensions:{width:200,height:90}},{id:'header',type:'dimensions',dimensions:{width:940,height:440}}]);assert.deepEqual(resized.paper,{width:200,height:90});assert.equal(first.paper.width,188);assert.deepEqual(resized.header,{width:940,height:440});
+ assert.equal(recordCanvasMeasurements(first,[{id:'paper',type:'dimensions',dimensions:{width:0,height:0}},{id:'paper',type:'dimensions',dimensions:{width:Infinity,height:90}}]),first);
+});
+
+test('React Flow stays initialized through repeated controlled drag positions',async()=>{
+ const {adoptUserNodes}=await import('@xyflow/system'),measurements=recordCanvasMeasurements({},[{id:'paper',type:'dimensions',dimensions:{width:188,height:86}}]);
+ const run=keepMeasurements=>{const lookup=new Map(),parents=new Map();let hidden=0;for(let step=0;step<30;step++){const state=adoptUserNodes([{id:'paper',position:{x:100+step,y:200},data:{},style:{width:188},...(keepMeasurements?{measured:measurements.paper}:{})}],lookup,parents);if(!state.nodesInitialized)hidden++}return hidden};
+ assert.equal(run(false),30,'Dropping measured dimensions reproduces the old hide/re-measure cycle');assert.equal(run(true),0,'Retained dimensions keep the dragged layer initialized');
+});

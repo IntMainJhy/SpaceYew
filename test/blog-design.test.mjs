@@ -62,3 +62,17 @@ test('auto measurement and arrangement do not inject transient fields or make an
 });
 
 test('an empty or decoration-only page inserts its first content at the top',()=>{assert.equal(designContentBottom({nodes:[]}),0);assert.equal(designContentBottom({nodes:[{id:'note',kind:'sticker',frame:{x:0,y:900,w:100,h:100}}]}),0);assert.equal(designContentBottom({nodes:[{id:'content',kind:'text',frame:{x:0,y:100,w:200,h:80}}]}),180);});
+
+
+test('anchored stickers track transient section movement without changing saved offsets',()=>{
+ const d=defaultBlogDesign(p),note=d.nodes.find(n=>n.id==='contact-note'),contact=d.nodes.find(n=>n.id===note.anchor),before=structuredClone(d);
+ assert.equal(resolveDesignFrame(d,note,{[contact.id]:{x:50,y:700}}).x,-80);assert.equal(resolveDesignFrame(d,note,{[contact.id]:{x:50,y:700}}).y,688);
+ assert.equal(resolveDesignFrame(d,note,{[note.id]:{x:17,y:42},[contact.id]:{x:50,y:700}}).y,42);assert.deepEqual(d,before);
+});
+
+test('every curated hand-drawn preset survives schema and translated preview',async()=>{
+ const {stickerPresets}=await import('../src/lib/blog-stickers.mjs');assert.equal(stickerPresets.length,16);assert.equal(new Set(stickerPresets.map(n=>n.id)).size,16);
+ const design={...defaultBlogDesign(p),nodes:stickerPresets.map(n=>({id:'sticker-'+n.id,kind:'sticker',sticker:n.id,text:n.text,translations:{en:{text:n.english}},frame:{x:10,y:10,w:n.w,h:100},style:{fontSize:n.fontSize,rotation:5}}))};
+ const clean=settings(design).design;assert.deepEqual(clean.nodes.map(n=>n.sticker),stickerPresets.map(n=>n.id));assert.equal(clean.nodes.find(n=>n.sticker==='heart').frame.w,96);
+ const {previewCanvasLayout}=await import('../src/lib/blog-canvas.mjs');assert.equal(previewCanvasLayout({blog:{design:clean}},'en').blog.design.nodes.find(n=>n.sticker==='note').text,'Keep in touch');
+});

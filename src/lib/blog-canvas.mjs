@@ -25,3 +25,17 @@ export function previewCanvasLayout(layout,language){if(!layout.blog?.design)ret
 
 // Preserve unfinished words and spaces during typing; the server normalizes on save.
 export const canvasSkills=value=>value.split(/\s*[·\n,，]\s*/).slice(0,30);
+
+// React Flow hides unmeasured nodes. Preserve measured sizes across controlled moves.
+export function recordCanvasMeasurements(previous,changes){
+ let next=previous;
+ for(const change of changes){
+  if(change.type!=='dimensions'||!change.dimensions)continue;
+  const {width,height}=change.dimensions;
+  if(!Number.isFinite(width)||!Number.isFinite(height)||width<=0||height<=0)continue;
+  if(next[change.id]?.width===width&&next[change.id]?.height===height)continue;
+  if(next===previous)next={...previous};
+  next[change.id]={width,height};
+ }
+ return next;
+}

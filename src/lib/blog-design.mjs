@@ -1,6 +1,6 @@
 // Shared page geometry. Content remains account-scoped; decoration never copies an identity.
 export const designParts=['header','contacts','cover','about','skills','metrics','certificates','gallery','updated','legacy','credit'];
-export const stickerStyles=['note','tape','stamp','smile','sparkle','emoji'];
+export {stickerStyles} from './blog-stickers.mjs';
 export function withBlogDecorations(design){
  if(design.decorations===1)return design;
  const target=design.nodes.find(n=>n.kind==='template'&&n.part==='contacts'),id='contact-note';
@@ -14,7 +14,7 @@ export function defaultBlogDesign(profile,layout={},content=[]){
 export const designAssetIds=design=>(design?.nodes||[]).filter(n=>n.kind==='image'&&n.assetId).map(n=>n.assetId);
 export function visibleDesignNodes(nodes){const visible=new Set(nodes.filter(n=>!n.hidden).map(n=>n.id));return nodes.filter(n=>!n.hidden&&(!n.anchor||visible.has(n.anchor)))}
 export function publicBlogDesign(design){return {...design,nodes:visibleDesignNodes(design.nodes)}}
-export function resolveDesignFrame(design,node){const target=node.anchor&&design.nodes.find(n=>n.id===node.anchor);return target?{...node.frame,x:target.frame.x+node.frame.x,y:target.frame.y+node.frame.y}:node.frame}
+export function resolveDesignFrame(design,node,positions={}){if(positions[node.id])return {...node.frame,...positions[node.id]};const target=node.anchor&&design.nodes.find(n=>n.id===node.anchor),frame=target&&(positions[target.id]||target.frame);return frame?{...node.frame,x:frame.x+node.frame.x,y:frame.y+node.frame.y}:node.frame}
 export const designOrder=nodes=>visibleDesignNodes(nodes).map((node,index)=>({node,index})).sort((a,b)=>a.node.frame.y-b.node.frame.y||a.node.frame.x-b.node.frame.x||a.index-b.index).map(x=>x.node);
 export function designHeight(design){return Math.max(500,...visibleDesignNodes(design.nodes).map(n=>{const f=resolveDesignFrame(design,n);return f.y+f.h}))+24}
 export function designBounds(design){const frames=visibleDesignNodes(design.nodes).map(n=>resolveDesignFrame(design,n));return {left:Math.min(0,...frames.map(f=>f.x)),right:Math.max(design.width,...frames.map(f=>f.x+f.w)),top:Math.min(0,...frames.map(f=>f.y))}}

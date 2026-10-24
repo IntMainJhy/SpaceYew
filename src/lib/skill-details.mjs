@@ -141,7 +141,12 @@ export const skillDetailContent={
   }
 };
 
+const gsapIds=['gsap-core','gsap-timeline','gsap-scrolltrigger','gsap-plugins','gsap-utils','gsap-react','gsap-performance','gsap-frameworks'];
+skillDetailContent.gsap={features:['补间、缓动、时间线与滚动动画统一收录在一个技能合集。','包含插件选择、React / Vue 生命周期、性能优化与常用工具函数。'],scenarios:skillDetailContent['gsap-core'].scenarios,requirements:skillDetailContent['gsap-core'].requirements,modules:gsapIds.map(id=>({id,description:skillDetailContent[id].features[0],sourceUrl:'https://github.com/greensock/gsap-skills/blob/main/skills/'+id+'/SKILL.md'}))};
+skillUsage.gsap=skillUsage['gsap-scrolltrigger'];
+for(const id of gsapIds){delete skillDetailContent[id];delete skillUsage[id]}
 export function getSkillDetail(id){
+ if(/^gsap-(core|timeline|scrolltrigger|plugins|react|performance|frameworks|utils)$/.test(id))id='gsap';
  const skill=curatedSkills.find(item=>item.id===id);
  return skill&&skillDetailContent[id]&&skillUsage[id]?{...skill,...skillDetailContent[id],...skillUsage[id],installation:skillInstallation(skill)}:null;
 }

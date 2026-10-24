@@ -14,8 +14,9 @@ export function ownsCover(actor,id){return !!db().prepare("SELECT 1 FROM refs WH
 export function canReadCover(req,id){
  if(!serviceRequest(req))return false;
  const user=currentUser(req);
- if(user?.status==='active'&&(ownsCover(user.id,id)||['owner','reviewer'].includes(user.role)&&db().prepare("SELECT 1 FROM catalog_entries WHERE json_extract(pending,'$.coverId')=? LIMIT 1").get(id)||user.role==='reviewer'&&db().prepare("SELECT 1 FROM community_revisions WHERE json_extract(data,'$.coverId')=? LIMIT 1").get(id)))return true;
+ if(user?.status==='active'&&(ownsCover(user.id,id)||['owner','reviewer'].includes(user.role)&&db().prepare("SELECT 1 FROM catalog_entries WHERE json_extract(pending,'$.coverId')=? OR EXISTS(SELECT 1 FROM json_each(catalog_entries.pending,'$.imageIds') WHERE value=?) LIMIT 1").get(id,id)||user.role==='reviewer'&&db().prepare("SELECT 1 FROM community_revisions WHERE json_extract(data,'$.coverId')=? LIMIT 1").get(id)))return true;
  const verification=localRequest(req)?"IN ('verified','local_test')":"= 'verified'";
+ if(db().prepare(`SELECT 1 FROM catalog_entries e JOIN community_posts p ON p.id=e.community_post JOIN community_users u ON u.id=e.author WHERE e.visibility='public' AND p.visibility='public' AND u.status='active' AND (u.role='owner' OR u.verification ${verification}) AND EXISTS(SELECT 1 FROM json_each(e.published,'$.imageIds') WHERE value=?) AND NOT EXISTS(SELECT 1 FROM community_cases c WHERE c.post=p.id AND c.frozen=1) LIMIT 1`).get(id))return true;
  return !!db().prepare(`SELECT 1 FROM community_posts p JOIN community_revisions r ON r.id=p.public_revision JOIN community_users u ON u.id=p.author WHERE p.visibility='public' AND u.status='active' AND (u.role='owner' OR u.verification ${verification}) AND json_extract(r.data,'$.coverId')=? AND NOT EXISTS(SELECT 1 FROM community_cases c WHERE c.post=p.id AND c.frozen=1) LIMIT 1`).get(id);
 }
 export async function uploadCover(req){

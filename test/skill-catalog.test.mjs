@@ -12,13 +12,13 @@ test('catalog keeps distinct, categorized upstream sources and per-skill license
   for(const field of ['sourceUrl','installUrl','licenseUrl']){
    const url=new URL(skill[field]);assert.equal(url.protocol,'https:');assert.equal(url.hostname,'github.com');assert.ok(url.pathname==='/'+skill.repo||url.pathname.startsWith('/'+skill.repo+'/'));
   }
-  assert.ok(skill.sourceUrl.endsWith('/SKILL.md'));
+  assert.ok(skill.sourceUrl.endsWith(skill.id==='gsap'?'/README.md':'/SKILL.md'));
   assert.ok(skill.summary&&skill.tags.length);
   for(const locale of ['en','ja'])assert.notEqual(translate(locale,skill.summary),skill.summary);
  }
- assert.equal(curatedSkills.length,17);
+ assert.equal(curatedSkills.length,10);
  assert.ok(curatedSkills.every(item=>!['anthropics/skills','openai/skills'].includes(item.repo)));
- assert.equal(curatedSkills.filter(item=>item.repo==='greensock/gsap-skills').length,8);
+ assert.equal(curatedSkills.filter(item=>item.repo==='greensock/gsap-skills').length,1);
  assert.ok(curatedSkills.some(item=>item.id==='vibehub'));
  assert.ok(curatedSkills.some(item=>item.id==='ui-ux-pro-max'));
  for(const id of ['docx','pdf','pptx','xlsx','frontend-design','webapp-testing','mcp-builder','skill-creator'])assert.equal(getSkillDetail(id),null);
@@ -30,9 +30,9 @@ test('search combines category and multilingual names, purposes, formats and ups
  assert.deepEqual(filterSkills({category:'engineering',q:'react next.js'},en).map(item=>item.id),['react-best-practices']);
  assert.deepEqual(filterSkills({category:'motion',q:'Vercel'},en),[]);
  assert.deepEqual(filterSkills({q:'Ｏｂｓｉｄｉａｎ'}).map(item=>item.id),['obsidian-markdown','json-canvas']);
- assert.ok(filterSkills({category:'motion',q:'scroll'},en).some(item=>item.id==='gsap-scrolltrigger'));
+ assert.ok(filterSkills({category:'motion',q:'scroll'},en).some(item=>item.id==='gsap'));
  assert.ok(filterSkills({q:'双向链接'}).some(item=>item.id==='obsidian-markdown'));
- assert.ok(filterSkills({q:'スクロール'},ja).some(item=>item.id==='gsap-scrolltrigger'));
+ assert.ok(filterSkills({q:'スクロール'},ja).some(item=>item.id==='gsap'));
  assert.equal(filterSkills({q:'nonexistent-skill-3792'},en).length,0);
 });
 
@@ -75,7 +75,8 @@ test('setup uses actual upstream skill names and preserves independent host sele
  assert.ok(canvas.find(item=>item.id==='opencode').commands[0].includes('kepano/obsidian-skills --skill json-canvas -a opencode'));
  for(const id of ['gsap-core','gsap-timeline','gsap-scrolltrigger','gsap-plugins','gsap-utils','gsap-react','gsap-performance','gsap-frameworks','vibehub']){
   const detail=getSkillDetail(id);
-  for(const tool of ['codex','claude-code','cursor'])assert.ok(detail.installation.methods.find(item=>item.id===tool).commands[0].endsWith('--skill '+id+' -a '+tool));
+  for(const tool of ['codex','claude-code','cursor'])assert.ok(detail.installation.methods.find(item=>item.id===tool).commands[0].endsWith((id.startsWith('gsap-')?'greensock/gsap-skills':'--skill '+id)+' -a '+tool));
+  if(id.startsWith('gsap-')){assert.equal(detail.id,'gsap');assert.equal(detail.modules.length,8)}
  }
  assert.ok(getSkillDetail('systematic-debugging').installation.methods.find(item=>item.id==='codex-app').commands.length===0);
 });
@@ -105,12 +106,12 @@ test('all skills have distinct practical examples and complete localized prompts
 
 test('tool filters combine with tasks and search, and reflect documented setup paths without duplicate Codex variants',()=>{
  assert.equal(skillAiTools.length,5);
- assert.deepEqual(Object.fromEntries(skillAiTools.map(tool=>[tool.id,filterSkills({tool:tool.id}).length])),{codex:17,'claude-code':17,cursor:15,'gemini-cli':13,opencode:13});
+ assert.deepEqual(Object.fromEntries(skillAiTools.map(tool=>[tool.id,filterSkills({tool:tool.id}).length])),{codex:10,'claude-code':10,cursor:8,'gemini-cli':6,opencode:6});
  assert.deepEqual(filterSkills({tool:'codex',category:'design',q:'UI'}).map(skill=>skill.id),['impeccable','ui-ux-pro-max']);
  assert.deepEqual(filterSkills({tool:'cursor',category:'knowledge'}),[]);
  assert.deepEqual(filterSkills({q:'Cursor'}).map(skill=>skill.id),filterSkills({tool:'cursor'}).map(skill=>skill.id));
  assert.deepEqual(filterSkills({q:'Claude.ai'}),[]);
- assert.equal(filterSkills({tool:'codex',category:'motion'}).length,8);
+ assert.equal(filterSkills({tool:'codex',category:'motion'}).length,1);
  for(const skill of curatedSkills){
   const labels=getSkillDetail(skill.id).installation.methods.map(method=>method.label.replace(/^Codex(?: App| CLI)?$/,'Codex'));
   assert.deepEqual(new Set(skill.tools.map(tool=>tool.label)),new Set(labels),skill.id);

@@ -24,6 +24,20 @@ try{
  const submission=await(await call('/api/spaces/submit',{revision:mine.revision,accepted:true},alex)).json(),review=submission.reviews.find(x=>x.kind==='board'&&x.status==='pending');assert.ok(review);
  const approved=await call('/api/admin/spaces/reviews',{id:review.id,action:'approve',checked:true,reason:'Checked isolated synthetic certificate and profile'},owner);assert.equal(approved.status,200,await approved.clone().text());assert.equal((await fetch(base+'/media/'+image)).status,200);
  const page=await(await fetch(base+'/blog/'+mine.handle)).text();assert.match(page,/Alex Rivera/);assert.match(page,/anx-certificates/);
+ // Canvas saves reuse the reviewed profile API, with translations and section order intact.
+ let canvas=await(await call('/api/spaces/mine',undefined,alex)).json();
+ const section=canvas.profile.resume.sections[0];
+ canvas.profile.resume.sections=[{id:'notes',title:'Notes',items:[{title:'Canvas note',description:'Plain text edited in the canvas.'}]},{...section,translations:{en:{title:'Selected work in English'}}}];
+ canvas.layout.blog.canvasPositions={profile:{x:-140,y:230},'s-notes':{x:720,y:420}};
+ canvas.profile.translations={en:{name:'Alex English',intro:'An English introduction.'}};
+ const canvasSaved=await call('/api/spaces/save',canvas,alex);assert.equal(canvasSaved.status,200);canvas=await canvasSaved.json();
+ const reopened=await(await call('/api/spaces/mine',undefined,alex)).json();assert.deepEqual(reopened.profile.resume.sections.map(x=>x.id),['notes',section.id]);assert.equal(reopened.profile.resume.sections[1].translations.en.title,'Selected work in English');assert.equal(reopened.profile.resume.certificates[0].imageId,image);assert.deepEqual(reopened.layout.blog.canvasPositions,canvas.layout.blog.canvasPositions);assert.equal(reopened.profile.translations.en.intro,'An English introduction.');
+ assert.doesNotMatch(await(await fetch(base+'/blog/'+canvas.handle)).text(),/Plain text edited in the canvas/,'A saved canvas remains private until review');
+ // Older experience fields must remain editable without being truncated into résumé fields.
+ let old=await(await call('/api/spaces/mine',undefined,blair)).json();old.profile.experiences=[{id:'legacy-work',title:'Existing experience',type:'Engineering',start:'2020-01',end:'',description:'x'.repeat(4800),visible:true}];old.layout.blog={mode:'theme',theme:'anx',showLegacyContent:true,sections:[]};old.profile.resume={sections:[{id:'new-work',title:'New section',items:[{description:'New canvas content'}]}]};
+ const oldSaved=await call('/api/spaces/save',old,blair);assert.equal(oldSaved.status,200);old=await oldSaved.json();assert.equal(old.layout.blog.showLegacyContent,true);assert.equal(old.profile.experiences[0].description.length,4800);
+ const oldSubmit=await(await call('/api/spaces/submit',{revision:old.revision,accepted:true},blair)).json(),oldReview=oldSubmit.reviews.find(x=>x.kind==='board'&&x.status==='pending');assert.ok(oldReview);assert.equal((await call('/api/admin/spaces/reviews',{id:oldReview.id,action:'approve',checked:true,reason:'Checked preserved legacy text and new canvas section'},owner)).status,200);
+ const oldPage=await(await fetch(base+'/blog/'+old.handle)).text();assert.match(oldPage,/Existing experience/);assert.match(oldPage,/New canvas content/);
  const own=await(await call('/api/admin/blog/mine',undefined,owner)).json();assert.equal((await call('/api/admin/blog/save',{...own,profile:{...own.profile,name:'Synthetic default owner'},publish:true},owner)).status,200);assert.match(await(await fetch(base+'/blogs')).text(),/Synthetic default owner/);
  if(process.env.EDITOR_UI==='true'){console.log('UI fixture ready: http://127.0.0.1:3177/login?next=/workspace/blog · editor_alex · editor-fixture-password-2026');await new Promise(resolve=>process.once('SIGTERM',resolve))}
  mine=await(await call('/api/spaces/mine',undefined,alex)).json();const offline=await call('/api/spaces/offline',{revision:mine.revision},alex);assert.equal(offline.status,200);assert.equal((await fetch(base+'/media/'+image)).status,404);

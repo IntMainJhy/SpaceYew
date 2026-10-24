@@ -9,7 +9,7 @@ export function skillInstallation(skill){
  if(['vercel-labs/agent-skills','kepano/obsidian-skills','greensock/gsap-skills','oil-oil/vibe-hub-skill'].includes(skill.repo)){
   const name=skill.repo==='vercel-labs/agent-skills'?'vercel-'+skill.id:skill.id;
   const agents=skill.repo==='kepano/obsidian-skills'?[['claude-code','Claude Code'],['codex','Codex'],['opencode','OpenCode']]:[['claude-code','Claude Code'],['codex','Codex'],['cursor','Cursor'],['gemini-cli','Gemini CLI'],['opencode','OpenCode']];
-  return {supportNote:'下列工具由 Skills CLI 的支持列表确认；实际任务效果取决于模型、项目与所需运行环境。',requirements:cliRequirements,after:reload,methods:agents.map(([id,label])=>tool(id,label,terminal,[`npx skills add ${skill.repo} --skill ${name} -a ${id}`],'通过 Skills CLI 安装到所选工具；原项目还提供其他安装方式。',cliGuide))};
+  return {supportNote:'下列工具由 Skills CLI 的支持列表确认；实际任务效果取决于模型、项目与所需运行环境。',requirements:skill.id==='gsap'?'需要 Node.js 22.20 或更高版本。一次安装 GSAP 官方技能合集，按安装器提示选择模块。':cliRequirements,after:reload,methods:agents.map(([id,label])=>tool(id,label,terminal,[`npx skills add ${skill.repo}${skill.id==='gsap'?'':' --skill '+name} -a ${id}`],'通过 Skills CLI 安装到所选工具；原项目还提供其他安装方式。',cliGuide))};
  }
  if(skill.repo==='obra/superpowers')return {supportNote:'原项目明确提供 Claude Code、Codex 和 Cursor 的插件入口；这里安装的是包含当前 Skill 的完整 Superpowers 插件。',requirements:'先安装并登录对应 AI 工具，插件功能需要工具版本支持。',after:reload,methods:[
   tool('claude-code','Claude Code',chat,['/plugin install superpowers@claude-plugins-official'],'从 Claude Code 官方插件市场安装 Superpowers。',root+'#claude-code'),

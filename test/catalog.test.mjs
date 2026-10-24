@@ -117,4 +117,15 @@ test('failed publication rolls back the catalog revision and auto-share together
  entry=submit(original);assert.equal(entry.status,'published');assert.equal(d.prepare('SELECT COUNT(*) n FROM community_posts').get().n,before+1);assert.equal(d.prepare('SELECT COUNT(*) n FROM community_revisions WHERE post=?').get(entry.communityPostId).n,1);
 });
 
+test('minimal link submissions keep safe defaults and produce one reviewed community share',()=>{
+ for(const kind of ['skills','resources']){let row=submit(save({kind,title:'Useful project',sourceUrl:'https://example.com/project'}));assert.equal(row.status,'pending');assert.equal(row.pending.summary,'Useful project');assert.match(row.pending.license,/未注明许可/);row=approve(row);assert.equal(Community.publicPost(row.communityPostId).catalogKind,kind);assert.equal(C.publicCatalogItem(row.id,req(bob,'GET')).title,'Useful project')}
+ assert.throws(()=>submit(save({kind:'resources',title:'Missing source'})),e=>e.status===400);
+});
+test('document tables survive sanitization; inline images stay owner-scoped, reviewed and coupled to publication',async()=>{
+ const {canReadCover}=await import('../src/lib/covers.mjs');const image=randomUUID(),foreign=randomUUID();for(const [id,user]of [[image,alice],[foreign,bob]]){d.prepare('INSERT INTO files VALUES(?,?,?,?,?,?)').run(id,'inline.webp',20,'image/webp','fixture-sha-'+id,D.now());d.prepare('INSERT INTO refs VALUES(?,?,?)').run('community-cover:'+user.id,id,'private')}
+ assert.throws(()=>save({...doc,bodyHtml:'<p>Foreign image</p><img src="/media/'+foreign+'"/>'}),e=>e.status===400);assert.throws(()=>save({...doc,bodyHtml:'<img src="https://example.com/track.png"/>'}),e=>e.status===400);
+ let row=save({...doc,bodyHtml:'<h2>Example table</h2><table><tr><th colspan="2">Name</th></tr><tr><td>One</td><td>Two</td></tr></table><img src="/media/'+image+'" alt="An original diagram" onerror="alert(1)"/><script>alert(1)</script>',imageIds:[foreign]});assert.deepEqual(row.draft.imageIds,[image]);assert.match(row.draft.bodyHtml,/<table>/);assert.match(row.draft.bodyHtml,/colspan="2"/);assert.doesNotMatch(row.draft.bodyHtml,/onerror|script/);assert.equal(canReadCover(req(bob,'GET'),image),false);
+ row=submit(row);assert.equal(row.status,'pending');assert.ok(row.moderation.signals.some(x=>x.code==='media'));assert.equal(canReadCover(req(reviewer,'GET'),image),true);row=approve(row);assert.equal(canReadCover(req(bob,'GET'),image),true);
+ row=call('catalog/'+row.id+'/action',{action:'offline',version:row.version});assert.equal(canReadCover(req(bob,'GET'),image),false);assert.throws(()=>C.publicCatalogItem(row.id,req(bob,'GET')),e=>e.status===404);assert.equal(canReadCover(req(alice,'GET'),image),true);
+});
 test.after(async()=>{d.close();delete globalThis.__personalSiteDb;await rm(dir,{recursive:true,force:true})});

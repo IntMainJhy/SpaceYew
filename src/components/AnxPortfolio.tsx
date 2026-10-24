@@ -31,7 +31,7 @@ function NoteArrow(){return <svg viewBox="0 0 40 40" fill="none" stroke="current
 
 export function AnxPortfolio({data,p,content,preview=false,embedded=false}:{data:SpaceData;p:SpaceData;content:SpaceData[];preview?:boolean;embedded?:boolean}){
  const {t,locale}=useLocale(),[failedAvatar,setFailedAvatar]=useState(''),settings=data.layout.blog||{},base='/blog/'+data.handle,Chapters=preview||embedded?'div':'main';
- const resume=p.resume,experiences=(resume?[]:p.experiences||[]).filter((item:SpaceData)=>item.visible!==false),sections=(resume?[]:settings.sections||['projects','articles','resources']).filter((key:string)=>content.some(item=>item.type===key));
+ const resume=p.resume,experiences=(resume&&!settings.showLegacyContent?[]:p.experiences||[]).filter((item:SpaceData)=>item.visible!==false),sections=(resume&&!settings.showLegacyContent?[]:settings.sections||['projects','articles','resources']).filter((key:string)=>content.some(item=>item.type===key));
  const labels:Record<string,string>={projects:'作品与项目',articles:'文字与思考',resources:'分享的资源'};
  const contacts=[...(p.github?[{label:'GitHub',url:p.github}]:[]),...(p.socials||[])];
  return <div className="anx-portfolio" data-home-theme="anx">

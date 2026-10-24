@@ -46,6 +46,7 @@ function data(input,complete=false,author=''){requireValue(input&&typeof input==
  const links=[result.sourceUrl,result.url,...(prose.match(/https?:\/\/[^\s<>]+/g)||[])].filter(Boolean);requireValue(links.length<=5,'全部外部链接合计最多 5 个');for(const link of links)sourceUrl(link);
  requireValue(!/(?:javascript|data|file):|www\./i.test(prose),'请使用完整 HTTPS 链接，不支持其他链接写法');
  if(complete){
+  result.title=result.title||result.body.split(/\n/).find(line=>line.trim())?.trim().slice(0,80)||'';
   requireValue(['original','authorized','open','official'].includes(result.basis),'请选择权利依据');
   if(result.basis==='original'){
    result.summary=result.summary||result.body.slice(0,300);
@@ -53,7 +54,7 @@ function data(input,complete=false,author=''){requireValue(input&&typeof input==
    result.sourceName=result.sourceName||(author==='owner'?getConfig('profile').name:db().prepare('SELECT nickname FROM community_users WHERE id=?').get(author)?.nickname)||'社区成员';
    result.license=result.license||'本人原创，保留所有权利。';
   }
-  requireValue(result.title.length>=2&&result.summary.length>=20&&result.body.length>=20,'标题至少 2 字，摘要与正文至少各 20 字');
+  requireValue(result.title.length>=1&&result.summary.length>=1&&result.body.length>=1,'请填写分享内容');
   requireValue(result.category&&result.sourceName&&result.license,'请补齐分类、作者或机构和许可依据');
   if(result.basis!=='original')requireValue(result.sourceUrl&&result.url,'非原创分享请补齐正式来源页和目标链接');
  }

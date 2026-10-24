@@ -16,6 +16,10 @@ The full notice is preserved in [docs/licenses/SocialKit-MIT.txt](docs/licenses/
 
 The complete [MIT notice](docs/licenses/anx-portfolio-MIT.txt) and [upstream brand policy](docs/licenses/anx-portfolio-BRAND.md) are retained. Original author names, portraits, wordmarks, personal facts and contribution data are replaced by the signed-in member's content and SpaceYew's original pixel alphabet. This is a SpaceYew template adaptation, not the complete upstream Next.js application or an endorsement.
 
+### React Flow
+
+The blog editor uses `@xyflow/react` (MIT) for viewport gestures, node selection and dragging. Copyright and full MIT notice are preserved in [docs/licenses/React-Flow-MIT.txt](docs/licenses/React-Flow-MIT.txt). The public portfolio layout remains independent of canvas coordinates.
+
 ### npm dependencies
 
 `package.json` and `package-lock.json` record website dependencies and versions. Dependencies are installed through npm; `node_modules` is not distributed in this repository. Their licenses, copyright notices and usage conditions are governed by each package and upstream project, including GSAP's upstream terms. This project's license neither grants nor restricts independent rights in those dependencies.
@@ -41,6 +45,10 @@ macOS and Windows client source code, installers and proprietary assets are not 
 `src/components/AnxPortfolio.tsx` 与 `src/app/anx-portfolio.css` 改编自 [AnxForever/anx-portfolio](https://github.com/AnxForever/anx-portfolio) 的头像与标题布局、Panel 组合、手绘箭头及分层 SVG 立体效果，固定来源提交为 `a7434847797658402d50fba29827eef246102bb7`，原作者为 Chánh Đại、Anx，许可为 MIT。改编部分仍适用 MIT，本项目的限制性许可不覆盖其原有权利。
 
 完整保留 [MIT 声明](docs/licenses/anx-portfolio-MIT.txt) 与 [上游品牌政策](docs/licenses/anx-portfolio-BRAND.md)。原作者的头像、字标、个人事实与贡献记录没有引入；替换为当前成员自己的内容与 SpaceYew 原创像素字母。此处为适配后的平台模板，不代表完整上游 Next.js 应用或原作者背书。
+
+### React Flow
+
+博客编辑器使用 MIT 许可的 `@xyflow/react` 实现画布平移、缩放、卡片选择与拖动。完整版权及许可保留于 [docs/licenses/React-Flow-MIT.txt](docs/licenses/React-Flow-MIT.txt)。公开博客的阅读排版独立于编辑画布坐标。
 
 ### npm 依赖
 

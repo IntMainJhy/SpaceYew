@@ -816,7 +816,7 @@
     "共有の根拠"
   ],
   "分享内容": [
-    "Post content",
+    "Share something",
     "投稿内容"
   ],
   "分享方式": [
@@ -1097,7 +1097,7 @@
   ],
   "名称": [
     "Name",
-    "名称"
+    "名前"
   ],
   "后台分页": [
     "Dashboard pagination",
@@ -2740,8 +2740,8 @@
     "本文の画像は20 MB以下にしてください。"
   ],
   "正文格式": [
-    "Body format",
-    "本文形式"
+    "Text formatting",
+    "書式"
   ],
   "正文链接地址": [
     "Body link URL",
@@ -4400,7 +4400,7 @@
     "言語を変更しましたが、ブラウザーに設定を保存できませんでした。"
   ],
   "正文编辑器": [
-    "Body editor",
+    "Document editor",
     "本文エディター"
   ],
   "自然有机": [
@@ -12266,5 +12266,169 @@
   "示例": [
     "Example",
     "サンプル"
+  ],
+  "补间、缓动、时间线与滚动动画统一收录在一个技能合集。": [
+    "Tweens, easing, timelines and scroll animation in one Skill collection.",
+    "トゥイーン、イージング、タイムライン、スクロールアニメーションを1つのスキル集に統合。"
+  ],
+  "包含插件选择、React / Vue 生命周期、性能优化与常用工具函数。": [
+    "Includes plugin guidance, React / Vue lifecycles, performance and utility functions.",
+    "プラグイン、React / Vueのライフサイクル、パフォーマンス、ユーティリティを収録。"
+  ],
+  "包含的模块": [
+    "Included modules",
+    "収録モジュール"
+  ],
+  "统一收录 GSAP 核心、时间线、滚动、插件、框架与性能等八个模块，一次安装按需使用。": [
+    "Eight GSAP modules covering core APIs, timelines, scroll, plugins, frameworks and performance, installed together.",
+    "GSAPのコア、タイムライン、スクロール、プラグイン、フレームワーク、パフォーマンスなど8モジュールをまとめてインストール。"
+  ],
+  "一次安装整个官方技能集；AI 会按任务选用核心、时间线、滚动、插件等模块。": [
+    "Install the entire official collection once; your AI selects the modules needed for each task.",
+    "公式スキル集を一度にインストールし、AIがタスクに応じてモジュールを選びます。"
+  ],
+  "更多选项": [
+    "More options",
+    "その他の設定"
+  ],
+  "无标题文档": [
+    "Untitled document",
+    "無題のドキュメント"
+  ],
+  "Skill 名称": [
+    "Skill name",
+    "Skill名"
+  ],
+  "资源名称": [
+    "Resource name",
+    "リソース名"
+  ],
+  "项目或安装链接": [
+    "Project or installation URL",
+    "プロジェクト・インストールURL"
+  ],
+  "资源链接": [
+    "Resource URL",
+    "リソースURL"
+  ],
+  "简单介绍（选填）": [
+    "Short description (optional)",
+    "簡単な説明（任意）"
+  ],
+  "它能解决什么问题？": [
+    "What does it help with?",
+    "どのような課題を解決しますか？"
+  ],
+  "简介（选填）": [
+    "Summary (optional)",
+    "概要（任意）"
+  ],
+  "详细说明（选填）": [
+    "Details (optional)",
+    "詳細（任意）"
+  ],
+  "参考来源（选填）": [
+    "References (optional)",
+    "参考元（任意）"
+  ],
+  "来源名称（选填）": [
+    "Source name (optional)",
+    "出典名（任意）"
+  ],
+  "许可说明（选填）": [
+    "License notes (optional)",
+    "ライセンスの説明（任意）"
+  ],
+  "我确认有权分享，并同意同步到社区。": [
+    "I have the right to share this and agree to publish it to the community.",
+    "共有する権利を持ち、コミュニティへの公開に同意します。"
+  ],
+  "文档大纲": [
+    "Outline",
+    "目次"
+  ],
+  "新建文档": [
+    "New document",
+    "新規ドキュメント"
+  ],
+  "共享文档": [
+    "Shared documents",
+    "共有ドキュメント"
+  ],
+  "本文暂无目录。": [
+    "No headings in this document yet.",
+    "この文書にはまだ見出しがありません。"
+  ],
+  "添加标题后，目录会显示在这里。": [
+    "Add headings to see the outline here.",
+    "見出しを追加すると目次が表示されます。"
+  ],
+  "插入内容": [
+    "Insert content",
+    "コンテンツを挿入"
+  ],
+  "输入 / 插入标题、列表、代码块或表格": [
+    "Type / to insert headings, lists, code or tables",
+    "/ を入力して見出し、リスト、コード、表を挿入"
+  ],
+  "开始输入正文…": [
+    "Start writing…",
+    "本文を入力…"
+  ],
+  "表格": [
+    "Table",
+    "表"
+  ],
+  "分隔线": [
+    "Divider",
+    "区切り線"
+  ],
+  "没有匹配的内容类型。": [
+    "No matching content type.",
+    "一致する項目がありません。"
+  ],
+  "正文将自动生成标题，可在更多选项中修改。": [
+    "A title is generated from your text. Change it in More options.",
+    "本文からタイトルを自動生成します。その他の設定で変更できます。"
+  ],
+  "未注明许可；请访问来源核对使用条件。": [
+    "License not specified; check the source for usage terms.",
+    "ライセンス未記載。利用条件は出典で確認してください。"
+  ],
+  "作者未额外授予转载或商用许可。": [
+    "The author has not granted additional redistribution or commercial rights.",
+    "著者は転載や商用利用の追加許可を付与していません。"
+  ],
+  "一套完整的 GSAP 动效技能，涵盖基础补间、时间线、滚动、插件、React、Vue、性能与工具函数。": [
+    "A complete GSAP Skill collection covering tweens, timelines, scroll, plugins, React, Vue, performance and utilities.",
+    "トゥイーン、タイムライン、スクロール、プラグイン、React、Vue、パフォーマンス、ユーティリティを含むGSAPスキル集。"
+  ],
+  "需要 Node.js 22.20 或更高版本。一次安装 GSAP 官方技能合集，按安装器提示选择模块。": [
+    "Requires Node.js 22.20 or later. Install the official GSAP collection and select modules in the installer.",
+    "Node.js 22.20以降が必要です。公式GSAPスキル集をインストールし、必要なモジュールを選択してください。"
+  ],
+  "选填；留空时从正文生成标题。": [
+    "Optional; generated from your text when left blank.",
+    "任意。空欄の場合は本文からタイトルを生成します。"
+  ],
+  "我同意 ": [
+    "I agree to ",
+    "同意します："
+  ],
+  "，并确认有权分享以上内容。": [
+    " and confirm I have the right to share this content.",
+    "。このコンテンツを共有する権利を持つことを確認します。"
+  ],
+  "三级标题": [
+    "Heading 3",
+    "見出し3"
+  ],
+  "图片请控制在 5 MB 以内。": [
+    "Keep images under 5 MB.",
+    "画像は5 MB以内にしてください。"
+  ],
+  "支持段落、## 标题和代码块。": [
+    "Supports paragraphs, ## headings and code blocks.",
+    "段落、## 見出し、コードブロックに対応。"
   ]
 }

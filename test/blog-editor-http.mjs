@@ -47,7 +47,7 @@ try{
  const designSubmit=await(await call('/api/spaces/submit',{revision:designed.revision,accepted:true},alex)).json(),designReview=designSubmit.reviews.find(x=>x.kind==='board'&&x.status==='pending');assert.ok(designReview);
  designed.profile.intro='A later draft must not change the fixed review';assert.equal((await call('/api/spaces/save',designed,alex)).status,200);
  assert.equal((await call('/api/admin/spaces/reviews',{id:designReview.id,action:'approve',checked:true,reason:'Checked layout, text, owned images and visibility'},owner)).status,200);
- const designPage=await(await fetch(base+'/blog/'+designed.handle)).text();assert.match(designPage,/Private page design publication marker/);assert.match(designPage,/--bd-x:5.319/);assert.doesNotMatch(designPage,/Hidden layer must not leak|A later draft must not change the fixed review/);
+ const designPage=await(await fetch(base+'/blog/'+designed.handle)).text();assert.match(designPage,/Private page design publication marker/);assert.match(designPage,/--bd-x:5.319/);assert.match(designPage,/data-sticker="note"/);assert.match(designPage,/bd-public-annotation/);assert.doesNotMatch(designPage,/Hidden layer must not leak|A later draft must not change the fixed review/);
  // Keep the interactive fixture on the default template with its real reviewed data.
  designed=await(await call('/api/spaces/mine',undefined,alex)).json();designed.layout.blog.design=template;assert.equal((await call('/api/spaces/save',designed,alex)).status,200);
  // Older experience fields must remain editable without being truncated into résumé fields.

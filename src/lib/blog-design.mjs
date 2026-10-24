@@ -1,11 +1,27 @@
-// A page design is shared by the editor, private preview and reviewed public release.
+// Shared page geometry. Content remains account-scoped; decoration never copies an identity.
 export const designParts=['header','contacts','cover','about','skills','metrics','certificates','gallery','updated','legacy','credit'];
+export const stickerStyles=['note','tape','stamp','smile','sparkle','emoji'];
+export function withBlogDecorations(design){
+ if(design.decorations===1)return design;
+ const target=design.nodes.find(n=>n.kind==='template'&&n.part==='contacts'),id='contact-note';
+ const note={id,kind:'sticker',sticker:'note',anchor:target?.id||'',label:'',text:'保持联系',translations:{en:{text:'Keep in touch'},ja:{text:'連絡しよう'}},hidden:false,frame:{x:-130,y:-12,w:120,h:94},style:{fontSize:18,rotation:-6,padding:4}};
+ return {...design,decorations:1,nodes:target&&design.nodes.length<60&&!design.nodes.some(n=>n.id===id)?[...design.nodes,note]:design.nodes};
+}
 export function defaultBlogDesign(profile,layout={},content=[]){
  const r=profile.resume,parts=['header','contacts',...(layout.coverId?['cover']:[]),'about','skills',...(r?.metrics?.length?['metrics']:[]),...(r?.sections||[]).map(s=>'section:'+s.id),...(r?.certificates?.length?['certificates']:[]),...(r?.gallery?.length?['gallery']:[]),...(r?.updated?['updated']:[]),...((!r||layout.blog?.showLegacyContent)&&profile.experiences?.length?['legacy']:[]),...((!r||layout.blog?.showLegacyContent)?(layout.blog?.sections||['projects','articles','resources']).filter(key=>content.some(item=>item.type===key)).map(key=>'content:'+key):[]),'credit'];
- return {version:1,width:940,background:'#ffffff',autoLayout:true,nodes:parts.map((part,i)=>({id:'template-'+i,kind:'template',part,label:'',hidden:false,frame:{x:0,y:i*300,w:940,h:part==='header'?440:300},style:{}}))};
+ return withBlogDecorations({version:1,width:940,background:'#ffffff',autoLayout:true,nodes:parts.map((part,i)=>({id:'template-'+i,kind:'template',part,label:'',hidden:false,frame:{x:0,y:i*300,w:940,h:part==='header'?440:300},style:{}}))});
 }
 export const designAssetIds=design=>(design?.nodes||[]).filter(n=>n.kind==='image'&&n.assetId).map(n=>n.assetId);
-export function publicBlogDesign(design){return {...design,nodes:design.nodes.filter(n=>!n.hidden)}}
-export const designOrder=nodes=>nodes.filter(n=>!n.hidden).map((n,i)=>({...n,order:i})).sort((a,b)=>a.frame.y-b.frame.y||a.frame.x-b.frame.x||a.order-b.order);
-export function designHeight(design){return Math.max(500,...design.nodes.filter(n=>!n.hidden).map(n=>n.frame.y+n.frame.h))+24}
-export function arrangeBlogDesign(design){let y=0;return {...design,autoLayout:true,nodes:design.nodes.map(n=>{const next={...n,frame:{...n.frame,x:0,y,w:design.width}};if(!n.hidden)y+=n.frame.h;return next})}}
+export function visibleDesignNodes(nodes){const visible=new Set(nodes.filter(n=>!n.hidden).map(n=>n.id));return nodes.filter(n=>!n.hidden&&(!n.anchor||visible.has(n.anchor)))}
+export function publicBlogDesign(design){return {...design,nodes:visibleDesignNodes(design.nodes)}}
+export function resolveDesignFrame(design,node){const target=node.anchor&&design.nodes.find(n=>n.id===node.anchor);return target?{...node.frame,x:target.frame.x+node.frame.x,y:target.frame.y+node.frame.y}:node.frame}
+export const designOrder=nodes=>visibleDesignNodes(nodes).map((node,index)=>({node,index})).sort((a,b)=>a.node.frame.y-b.node.frame.y||a.node.frame.x-b.node.frame.x||a.index-b.index).map(x=>x.node);
+export function designHeight(design){return Math.max(500,...visibleDesignNodes(design.nodes).map(n=>{const f=resolveDesignFrame(design,n);return f.y+f.h}))+24}
+export function designBounds(design){const frames=visibleDesignNodes(design.nodes).map(n=>resolveDesignFrame(design,n));return {left:Math.min(0,...frames.map(f=>f.x)),right:Math.max(design.width,...frames.map(f=>f.x+f.w)),top:Math.min(0,...frames.map(f=>f.y))}}
+export function arrangeBlogDesign(design){let y=0;const flow=designOrder(design.nodes).filter(n=>n.kind!=='sticker'),ordered=[...flow,...design.nodes.filter(n=>n.hidden&&n.kind!=='sticker'),...design.nodes.filter(n=>n.kind==='sticker')];return {...design,autoLayout:!ordered.some(n=>n.locked&&n.kind!=='sticker'),nodes:ordered.map(n=>{if(n.kind==='sticker')return n;if(n.locked){if(!n.hidden)y=Math.max(y,n.frame.y+n.frame.h);return n;}const next={...n,frame:{...n.frame,x:0,y,w:design.width}};if(!n.hidden)y+=n.frame.h;return next})}}
+export function moveDesignNode(design,id,position){const node=design.nodes.find(n=>n.id===id);if(!node||node.locked)return design;const target=node.anchor&&design.nodes.find(n=>n.id===node.anchor),x=position.x-(target?.frame.x||0),y=position.y-(target?.frame.y||0);return {...design,autoLayout:node.kind==='sticker'?design.autoLayout:false,nodes:design.nodes.map(n=>n.id===id?{...n,frame:{...n.frame,x:Math.round(Math.max(n.kind==='sticker'?-240:0,Math.min(design.width-(n.kind==='sticker'?40:n.frame.w),x))),y:Math.round(Math.max(n.kind==='sticker'?-240:0,Math.min(40000,y)))}}:n)}}
+export function removeDesignNode(design,id){const node=design.nodes.find(n=>n.id===id);if(!node||node.locked||node.part==='credit')return design;const next={...design,nodes:design.nodes.filter(n=>n.id!==id&&n.anchor!==id)};return next.autoLayout?arrangeBlogDesign(next):next}
+export function resizeDesignPage(design,width){const previous=design.width,next={...design,width,nodes:design.nodes.map(n=>n.kind==='sticker'||n.locked?n:{...n,frame:{...n.frame,x:Math.round(n.frame.x*width/previous),w:Math.max(100,Math.round(n.frame.w*width/previous))}})};return design.autoLayout?arrangeBlogDesign(next):next}
+export function canvasDraftSignature(profile,layout,discoverable){const design=layout.blog?.design;return JSON.stringify({profile,layout:design?{...layout,blog:{...layout.blog,design:{...design,nodes:design.nodes.map(n=>({...n,frame:{...n.frame,h:0,...(design.autoLayout&&n.kind!=='sticker'?{y:0}:{})}}))}}}:layout,discoverable})}
+
+export const designContentBottom=design=>Math.max(0,...visibleDesignNodes(design.nodes).filter(n=>n.kind!=='sticker').map(n=>n.frame.y+n.frame.h));

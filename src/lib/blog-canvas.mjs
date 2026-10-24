@@ -15,3 +15,8 @@ export function previewCanvasProfile(profile,language){
  if(profile.resume){const r=profile.resume;result.resume={...r,metrics:r.metrics.map(x=>translated(x,['label','value','note'])),sections:r.sections.map(x=>({...translated(x,['title']),items:x.items.map(item=>translated(item,['title','subtitle','period','description','caption']))})),certificates:r.certificates.map(x=>translated(x,['caption'])),gallery:r.gallery.map(x=>translated(x,['caption']))}}
  return result;
 }
+
+// Pack real measured card heights. Explicitly saved positions are respected on first open.
+export function arrangeCanvasCards(nodes,saved={}){
+ let rowY=0;return nodes.map((node,index)=>{const position=saved[node.id]||{x:(index%2)*648,y:rowY};if(index%2===1||index===nodes.length-1){const previous=nodes[index-1],left=previous?(saved[previous.id]?.y??rowY)+(previous.measured?.height||280):rowY;rowY=Math.max(left,position.y+(node.measured?.height||280))+40}return {...node,position}});
+}

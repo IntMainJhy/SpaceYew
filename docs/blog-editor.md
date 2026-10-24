@@ -29,3 +29,5 @@ The curated GSAP entry groups eight modules; legacy module URLs redirect to that
 `/blogs`, canonical metadata and the homepage preview share the same public selection. An operator may set the private `featuredBlog` record to `{"handle":"public-handle"}`; unset retains the owner default. This does not grant editing rights or bypass publication/takedown checks. The separate private `siteOwnerAccount` record (`{"id":"member-id"}`) assigns the public owner badge without granting administration rights. Editing always opens the signed-in member’s own space. See the [community completion review](community-finish-2026-10-22.md).
 
 Personal images and populated profiles remain in private application storage and backups; this repository contains the reusable website and tests.
+
+Use **Preview** to inspect the current draft, including unsaved edits, in desktop or mobile view. The preview is rendered in a local browser frame so template media queries use the actual preview width; no draft is published. The dotted workspace keeps manual card positions. **Arrange cards** lays out measured cards in aligned rows and marks the layout as an unsaved change.

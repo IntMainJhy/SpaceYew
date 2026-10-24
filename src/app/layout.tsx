@@ -38,6 +38,7 @@ import './anx-portfolio.css';
 import './blog-editor.css';
 import '@xyflow/react/dist/style.css';
 import './blog-canvas.css';
+import './blog-design.css';
 import './site-owner.css';
 import './document-workspace.css';
 export const viewport:Viewport={width:'device-width',initialScale:1,viewportFit:'cover'};

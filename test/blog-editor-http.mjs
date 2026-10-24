@@ -4,6 +4,7 @@ import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import sharp from 'sharp';
+import {defaultBlogDesign} from '../src/lib/blog-design.mjs';
 import {startServer,stopServer,loginServer} from './server.mjs';
 const directory=await mkdtemp(path.join(tmpdir(),'spaceyew-editor-http-')),base='http://127.0.0.1:3177';let server;
 try{
@@ -33,6 +34,22 @@ try{
  const canvasSaved=await call('/api/spaces/save',canvas,alex);assert.equal(canvasSaved.status,200);canvas=await canvasSaved.json();
  const reopened=await(await call('/api/spaces/mine',undefined,alex)).json();assert.deepEqual(reopened.profile.resume.sections.map(x=>x.id),['notes',section.id]);assert.equal(reopened.profile.resume.sections[1].translations.en.title,'Selected work in English');assert.equal(reopened.profile.resume.certificates[0].imageId,image);assert.deepEqual(reopened.layout.blog.canvasPositions,canvas.layout.blog.canvasPositions);assert.equal(reopened.profile.translations.en.intro,'An English introduction.');
  assert.doesNotMatch(await(await fetch(base+'/blog/'+canvas.handle)).text(),/Plain text edited in the canvas/,'A saved canvas remains private until review');
+ // Page designs use the same ownership, revision, fixed-review and takedown boundaries.
+ let designed=await(await call('/api/spaces/mine',undefined,alex)).json();
+ const template=defaultBlogDesign(designed.profile,designed.layout);
+ const free={...template,autoLayout:false,nodes:[...template.nodes,{id:'custom-story',kind:'text',text:'Private page design publication marker',frame:{x:50,y:4900,w:700,h:100},style:{fontSize:32,padding:24}},{id:'custom-image',kind:'image',assetId:image,alt:'Owned design image',frame:{x:50,y:5100,w:400,h:300},style:{}},{id:'hidden-text',kind:'text',text:'Hidden layer must not leak',hidden:true,frame:{x:0,y:5500,w:300,h:100},style:{}}]};
+ designed.layout.blog.design=free;
+ assert.equal((await call('/api/spaces/save',{...designed,layout:{...designed.layout,blog:{...designed.layout.blog,design:{...free,nodes:[{...free.nodes.at(-2),assetId:foreign}]}}}},alex)).status,403);
+ assert.equal((await call('/api/spaces/save',{...designed,layout:{...designed.layout,blog:{...designed.layout.blog,design:{...free,nodes:[{...free.nodes.at(-2),assetId:source}]}}}},alex)).status,400);
+ let designedSave=await call('/api/spaces/save',designed,alex);assert.equal(designedSave.status,200,await designedSave.clone().text());designed=await designedSave.json();
+ assert.equal(designed.layout.blog.design.nodes.find(n=>n.id==='custom-story').frame.x,50);
+ assert.doesNotMatch(await(await fetch(base+'/blog/'+designed.handle)).text(),/Private page design publication marker/);
+ const designSubmit=await(await call('/api/spaces/submit',{revision:designed.revision,accepted:true},alex)).json(),designReview=designSubmit.reviews.find(x=>x.kind==='board'&&x.status==='pending');assert.ok(designReview);
+ designed.profile.intro='A later draft must not change the fixed review';assert.equal((await call('/api/spaces/save',designed,alex)).status,200);
+ assert.equal((await call('/api/admin/spaces/reviews',{id:designReview.id,action:'approve',checked:true,reason:'Checked layout, text, owned images and visibility'},owner)).status,200);
+ const designPage=await(await fetch(base+'/blog/'+designed.handle)).text();assert.match(designPage,/Private page design publication marker/);assert.match(designPage,/--bd-x:5.319/);assert.doesNotMatch(designPage,/Hidden layer must not leak|A later draft must not change the fixed review/);
+ // Keep the interactive fixture on the default template with its real reviewed data.
+ designed=await(await call('/api/spaces/mine',undefined,alex)).json();designed.layout.blog.design=template;assert.equal((await call('/api/spaces/save',designed,alex)).status,200);
  // Older experience fields must remain editable without being truncated into résumé fields.
  let old=await(await call('/api/spaces/mine',undefined,blair)).json();old.profile.experiences=[{id:'legacy-work',title:'Existing experience',type:'Engineering',start:'2020-01',end:'',description:'x'.repeat(4800),visible:true}];old.layout.blog={mode:'theme',theme:'anx',showLegacyContent:true,sections:[]};old.profile.resume={sections:[{id:'new-work',title:'New section',items:[{description:'New canvas content'}]}]};
  const oldSaved=await call('/api/spaces/save',old,blair);assert.equal(oldSaved.status,200);old=await oldSaved.json();assert.equal(old.layout.blog.showLegacyContent,true);assert.equal(old.profile.experiences[0].description.length,4800);

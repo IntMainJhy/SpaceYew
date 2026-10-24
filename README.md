@@ -6,7 +6,7 @@
 
 SpaceYew is a developer portfolio and knowledge-sharing platform. Turn a résumé into an editable blog homepage, present your work and certificates, and share tutorials, independent AI Skills and useful tools through a connected community. Each member owns their profile, drafts and uploaded files.
 
-The blog editor uses an MIT-licensed React Flow canvas; public pages retain the Anx Portfolio résumé layout. Existing HTML/ZIP hosting remains available through the backend APIs; a static-site upload interface and theme selector are not part of the current editor.
+The blog editor uses MIT-licensed React Flow to design the actual homepage, with the existing Anx layout as its default template. Inline editing, movable/resizable sections, custom text, images and links share one design between preview and reviewed public pages. HTML/ZIP static hosting remains available through the backend APIs.
 
 [GitHub repository](https://github.com/IntMainJhy/SpaceYew) · [AtomGit mirror](https://atomgit.com/InMainJhy/SpaceYew) · [Documentation](docs/README.md)
 
@@ -52,7 +52,7 @@ The main Blog homes entry opens the site owner’s public Anx Portfolio homepage
 | Area | Capabilities |
 | --- | --- |
 | Accounts | Invitation-free email registration with a six-digit, expiring code; real email/password sign-in, private blog drafts and separate publication qualification; production access is explicitly configured |
-| Blog homepages | MIT-licensed React Flow canvas with movable text/image cards, inline plain-text editing, zoom/pan and saved positions; public section order is independent and the public Anx Portfolio remains orderly. Preserve profiles, résumé sections, metrics, certificates, images, PDFs and translations; explicitly save, preview and submit a fixed version for review |
+| Blog homepages | Design the actual Anx template or a blank page; inline editing, layers, properties, width/position controls, custom blocks, undo/redo, dot grid and desktop/mobile preview. Preserve résumé sections, certificates, PDFs and translations; save a private draft and submit a fixed version for review |
 | Existing static website hosting | Backend APIs accept HTML or ZIP packages with relative CSS/JS/assets, isolate previews and submit fixed versions for review; existing hosted sites and stable sharing URLs remain supported |
 | Shared documentation | Title-and-body editor with slash insertion, lists, code, tables, account-scoped inline images, imports and a heading outline; document-only private autosave after 1,600 ms preserves typing. Reading uses library/document/outline navigation |
 | Skill directory | Independent upstream Skills with category/search/tool filters, scenarios, installation commands and localized copyable prompts; GSAP is one entry with eight modules and legacy module redirects. Member submissions start with a name and HTTPS URL, with optional description and collapsed metadata |
@@ -70,7 +70,7 @@ The download page can link to externally hosted client installers. Client binari
 
 A white-and-ink palette, flowing pastel backgrounds and editorial serif typography give the website a consistent visual language. The community uses an X-style social layout, while blog management and publishing have independent editing areas. GSAP connects page and navigation transitions, and the promotional strip keeps scrolling continuously during in-site navigation.
 
-The interface supports English, Simplified Chinese and Japanese across desktop, tablet and mobile, with keyboard interaction and reduced-motion behavior. Members edit on a free canvas while public Anx pages retain their reading order; stored theme settings remain compatible with existing content. Canvas and document controls use black, white and gray. Live collaboration is not provided.
+The interface supports English, Simplified Chinese and Japanese across desktop, tablet and mobile. The page designer uses the homepage’s black, white and gray palette. Desktop public pages follow the saved design; narrow screens maintain a stacked reading layout. Existing templates remain compatible. Live collaboration is not provided.
 
 Static hosting accepts UTF-8 HTML (5 MB) or ZIP files (25 MB compressed, 50 MB extracted, up to 1,000 entries). Packages need `index.html` or `index.htm` and relative asset paths. Browser-side interactions work in an opaque-origin sandbox; external scripts, API requests, forms and server-side execution are blocked. Sources and extracted files count toward storage, with up to 20 immutable packages per account. Publishing requires separate identity, eligibility and review checks; production access is configured by the operator. Backups retain source packages and restore their verified static assets.
 

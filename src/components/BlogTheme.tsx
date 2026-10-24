@@ -5,6 +5,7 @@ import {SiteOwnerBadge} from './SiteOwnerBadge';
 import {localizeProfile,localizeContent} from '@/lib/content-locales.mjs';
 import {FeedAvatar} from './FeedAvatar';
 import {BlogSignatureTheme} from './BlogSignatureThemes';
+import {BlogDesignedPage} from './BlogDesignedPage';
 import {AnxPortfolio} from './AnxPortfolio';
 import type {SpaceData} from './SpaceBoard';
 
@@ -13,6 +14,7 @@ export function BlogTheme({data,preview=false,embedded=false}:{data:SpaceData;pr
  const Chapters=preview?'div':'main';
  const {t,locale}=useLocale(),p=localizeProfile(data.profile,locale),settings=data.layout.blog||{},theme=data.owner==='owner'?'anx':settings.theme||'journal',content=(data.content||[]).map((x:SpaceData)=>localizeContent(x,locale)),base='/blog/'+data.handle;
  const experiences=(p.experiences||[]).filter((x:SpaceData)=>x.visible!==false),sections=(settings.sections||['projects','articles','resources']).filter((key:string)=>content.some((x:SpaceData)=>x.type===key)),labels:Record<string,string>={projects:'作品与项目',articles:'文字与思考',resources:'分享的资源'};
+ if(settings.design)return <BlogDesignedPage data={data} profile={p} preview={preview}/>;
  if(theme==='anx')return <AnxPortfolio data={data} p={p} content={content} preview={preview} embedded={embedded}/>;
  if(['folio','panorama'].includes(theme))return <BlogSignatureTheme data={data} p={p} content={content} preview={preview}/>;
  return <div className="personal-homepage" data-home-theme={theme}>

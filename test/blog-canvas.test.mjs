@@ -41,3 +41,5 @@ test('arranging cards aligns each row and uses measured height to avoid collisio
  assert.deepEqual(result.map(n=>n.position),[{x:0,y:0},{x:648,y:0},{x:0,y:380},{x:648,y:380},{x:0,y:1340}]);assert.equal(nodes[0].position,undefined);
  const custom=arrangeCanvasCards(nodes,{work:{x:-200,y:1500}});assert.deepEqual(custom[2].position,{x:-200,y:1500});assert.ok(custom[4].position.y>=2460);
 });
+
+test('skill editing keeps spaces while a multiword skill is being typed',async()=>{const {canvasSkills}=await import('../src/lib/blog-canvas.mjs');assert.deepEqual(canvasSkills('HarmonyOS · React '),['HarmonyOS','React ']);assert.deepEqual(canvasSkills('HarmonyOS · React Native'),['HarmonyOS','React Native']);assert.deepEqual(canvasSkills('React Native, User research'),['React Native','User research']);});

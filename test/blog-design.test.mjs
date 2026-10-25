@@ -70,9 +70,9 @@ test('anchored stickers track transient section movement without changing saved 
  assert.equal(resolveDesignFrame(d,note,{[note.id]:{x:17,y:42},[contact.id]:{x:50,y:700}}).y,42);assert.deepEqual(d,before);
 });
 
-test('every curated hand-drawn preset survives schema and translated preview',async()=>{
- const {stickerPresets}=await import('../src/lib/blog-stickers.mjs');assert.equal(stickerPresets.length,16);assert.equal(new Set(stickerPresets.map(n=>n.id)).size,16);
- const design={...defaultBlogDesign(p),nodes:stickerPresets.map(n=>({id:'sticker-'+n.id,kind:'sticker',sticker:n.id,text:n.text,translations:{en:{text:n.english}},frame:{x:10,y:10,w:n.w,h:100},style:{fontSize:n.fontSize,rotation:5}}))};
- const clean=settings(design).design;assert.deepEqual(clean.nodes.map(n=>n.sticker),stickerPresets.map(n=>n.id));assert.equal(clean.nodes.find(n=>n.sticker==='heart').frame.w,96);
+test('every curated sticker family survives schema and translated preview',async()=>{
+ const {stickerPresets,stickerGroups}=await import('../src/lib/blog-stickers.mjs');assert.equal(stickerPresets.length,42);assert.equal(new Set(stickerPresets.map(n=>n.id)).size,stickerPresets.length);assert.equal(stickerGroups.length,6);
+ const design={...defaultBlogDesign(p),nodes:stickerPresets.map(n=>({id:'sticker-'+n.id,kind:'sticker',sticker:n.id,text:n.text,translations:{en:{text:n.english}},frame:{x:10,y:10,w:n.w,h:100},style:{fontSize:n.fontSize,rotation:5,...n.style}}))};
+ const clean=settings(design).design;assert.deepEqual(clean.nodes.map(n=>n.sticker),stickerPresets.map(n=>n.id));assert.equal(clean.nodes.find(n=>n.sticker==='heart').frame.w,96);assert.equal(clean.nodes.find(n=>n.sticker==='label-solid').style.background,'#202124');assert.equal(clean.nodes.find(n=>n.sticker==='label-solid').style.color,'#ffffff');
  const {previewCanvasLayout}=await import('../src/lib/blog-canvas.mjs');assert.equal(previewCanvasLayout({blog:{design:clean}},'en').blog.design.nodes.find(n=>n.sticker==='note').text,'Keep in touch');
 });

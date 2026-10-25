@@ -38,7 +38,7 @@ Template changes use an inline confirmation and keep profile data. Undo/redo rem
 The canvas toolbar provides explicit Select (V), Pan (H), zoom percentages and Fit width (F). Cmd/Ctrl Z and Shift Cmd/Ctrl Z undo and redo outside text fields; typing retains the browser’s text undo. Layer icons distinguish profile, contact, image and text content.
 
 
-The default **Keep in touch** arrow is an editable sticker attached to Contact links. Moving, hiding or deleting that section also moves, hides or removes its sticker; Undo restores both. The 16-piece library groups handwritten annotations, pen drawings, paper notes and emoji. Curved and looping arrows, underlines, circle marks, check marks, hearts, flowers, suns, stars and idea rays join the existing notes, stamps, smiles and sparkles. Stickers support text translations, rotation, duplication, stacking order and either free placement or attachment to a template section. Removing the default arrow is remembered.
+The default **Keep in touch** arrow is an editable sticker attached to Contact links. Moving, hiding or deleting that section also moves, hides or removes its sticker; Undo restores both. The 42-piece library has six visible style groups: annotations, pen drawings, paper journal, color cutouts, pixel art and type labels. Search matches names and default text in English or Chinese; style selection and search combine. Existing sticker IDs and saved designs remain supported. Stickers support text translations, rotation, duplication, stacking order and either free placement or attachment to a template section. Removing the default arrow is remembered.
 
 Position and size fields commit on Enter or blur; Escape cancels the pending input. Lock a layer to protect its content and position. Arrow keys nudge an unlocked selected layer by 1 px, or 10 px with Shift; Delete removes it, and holding Space temporarily pans. Cmd/Ctrl S saves a changed draft. These canvas shortcuts leave text-field editing alone.
 
@@ -46,3 +46,6 @@ Opening properties or returning from Preview preserves the canvas camera. New cu
 
 
 Drag a sticker by its body or label; double-click its text to edit in place, or use the inspector. Dragging keeps measured layer sizes and stable content, so layers do not hide and re-measure on every move. Attached stickers follow the section during the drag as well as after release. The workspace dot grid maintains a readable screen spacing while zooming; it stays out of the public page. The editor uses the shared SY website mark and a pinned inspector heading.
+
+
+The wider sticker rail keeps search and style controls visible while results scroll. On phones, the library opens as a closable sheet with real thumbnails; adding a sticker returns to the canvas. The inspector places editable content before geometry, and intermediate screens use a dismissible inspector overlay. Canvas controls occupy a reserved bottom band instead of covering page content.

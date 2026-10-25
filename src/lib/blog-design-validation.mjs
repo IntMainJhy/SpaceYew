@@ -12,7 +12,7 @@ export function validateBlogDesign(input,url){
  requireValue(input.appearance===undefined||blogAppearances.some(t=>t.id===input.appearance),'视觉主题无效');
  const typography=input.typography, motion=input.motion;
  if(typography!==undefined){requireValue(typography&&typeof typography==='object'&&!Array.isArray(typography),'字体配置无效');requireValue(chineseFonts.some(f=>f.id===(typography.chinese||'theme'))&&latinFonts.some(f=>f.id===(typography.latin||'theme')),'字体无效');}
- if(motion!==undefined){requireValue(motion&&typeof motion==='object'&&!Array.isArray(motion),'动效配置无效');for(const key of ['marquee','entrance'])requireValue(motion[key]===undefined||typeof motion[key]==='boolean','动效选项无效');}
+ if(motion!==undefined){requireValue(motion&&typeof motion==='object'&&!Array.isArray(motion),'动效配置无效');for(const key of ['marquee','entrance','interactions'])requireValue(motion[key]===undefined||typeof motion[key]==='boolean','动效选项无效');}
  const appearance=blogAppearance(input.appearance);
  const nodes=input.nodes.map((n,i)=>{
   requireValue(n&&typeof n==='object'&&/^[a-z][a-z0-9-]{0,59}$/.test(n.id)&&['template','text','image','button','sticker'].includes(n.kind),'页面图层格式无效');
@@ -30,5 +30,5 @@ export function validateBlogDesign(input,url){
  });
  for(const node of nodes)if(node.anchor)requireValue(nodes.some(n=>n.id===node.anchor&&n.kind==='template'),'贴纸只能跟随页面中的内容图层');
  requireValue(new Set(nodes.map(n=>n.id)).size===nodes.length,'图层标识重复');requireValue(JSON.stringify(nodes).length<=240000,'页面内容过多，请精简至240KB以内');
- return {version:1,...(typography?{typography:{chinese:typography.chinese||'theme',latin:typography.latin||'theme'}}:{}),...(motion?{motion:{marquee:motion.marquee===true,entrance:motion.entrance!==false}}:{}),...(input.appearance?{appearance:input.appearance}:{}),...(input.decorations===1?{decorations:1}:{}),...(input.template?{template:input.template}:{}),width,background,autoLayout:input.autoLayout===true,nodes};
+ return {version:1,...(typography?{typography:{chinese:typography.chinese||'theme',latin:typography.latin||'theme'}}:{}),...(motion?{motion:{marquee:motion.marquee===true,entrance:motion.entrance!==false,interactions:motion.interactions!==false}}:{}),...(input.appearance?{appearance:input.appearance}:{}),...(input.decorations===1?{decorations:1}:{}),...(input.template?{template:input.template}:{}),width,background,autoLayout:input.autoLayout===true,nodes};
 }

@@ -104,13 +104,13 @@ test('font pairs and motion survive validation without changing content or geome
  const design=defaultBlogDesign(profile);
  for(const chinese of chineseFonts)for(const latin of latinFonts){
   const typography={chinese:chinese.id,latin:latin.id},saved=clean({...design,typography,motion:{marquee:true,entrance:false}});
-  assert.deepEqual(saved.typography,typography);assert.deepEqual(saved.motion,{marquee:true,entrance:false});
+  assert.deepEqual(saved.typography,typography);assert.deepEqual(saved.motion,{marquee:true,entrance:false,interactions:true});
   assert.deepEqual(saved.nodes,clean(design).nodes);
   if(chinese.family)assert.ok(blogFontStack(typography).includes(chinese.family));
   if(latin.family)assert.ok(blogFontStack(typography).startsWith(latin.family));
  }
  for(const typography of [{chinese:'unknown'},{latin:'url(evil)'},[],null])assert.throws(()=>clean({...design,typography}),/字体/);
- for(const motion of [{marquee:'true'},{entrance:1},[],null])assert.throws(()=>clean({...design,motion}),/动效/);
+ for(const motion of [{marquee:'true'},{entrance:1},{interactions:'yes'},[],null])assert.throws(()=>clean({...design,motion}),/动效/);
  assert.equal(clean(design).typography,undefined);assert.equal(clean(design).motion,undefined);
 });
 
@@ -120,3 +120,8 @@ test('font pairs and motion survive validation without changing content or geome
  assert.ok(blogFontStack({chinese:'xiaowei'},'Inter,"PingFang SC",sans-serif').startsWith('Inter,"ZCOOL XiaoWei"'));
  assert.ok(blogFontStack({chinese:'xiaowei'},'"Kaiti SC",STKaiti,KaiTi,Georgia,serif').startsWith('Georgia,"ZCOOL XiaoWei"'));
  });
+
+test('theme interaction opt-out persists across visual themes',()=>{
+ const design=defaultBlogDesign(profile);
+ for(const appearance of ['original','sketch','mint-docs','mint-serif','night-player','memphis','volt-terminal'])assert.equal(clean({...design,appearance,motion:{interactions:false}}).motion.interactions,false);
+});

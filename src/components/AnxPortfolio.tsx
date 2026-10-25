@@ -51,7 +51,7 @@ export function AnxPortfolio({data,p,content,preview=false,embedded=false,part}:
   ...(visible('certificates')&&resume?.certificates?.some((item:SpaceData)=>item.imageId||editing)?[{id:'certificates',label:locale==='en'?'Certificates':locale==='ja'?'証明書':'证书影像'}]:[]),
   ...(visible('gallery')&&resume?.gallery?.some((item:SpaceData)=>item.imageId||editing)?[{id:'gallery',label:locale==='en'?'Gallery':locale==='ja'?'ギャラリー':'分享现场'}]:[])
  ];
- return <div className="anx-portfolio" data-home-theme="anx" data-design-part={part}>
+ return <div className="anx-portfolio" data-home-theme="anx" data-theme-motion={!editing&&settings.design?.motion?.interactions!==false} data-design-part={part}>
   {show('header')&&<>
   <div className="anx-topbar" id="anx-top"><a className="anx-handle" href={navigation.length?'#anx-'+navigation[0].id:'#anx-top'}>@{data.handle}</a>{navigation.length>0&&<nav aria-label={t('博客栏目')}>{settings.design?.appearance&&settings.design.appearance!=='original'?<><div className="anx-nav-shortcuts">{navigation.slice(0,3).map((item:SpaceData)=><a key={item.id} href={'#anx-'+item.id}>{item.label}</a>)}</div><details className="anx-nav-menu"><summary>{locale==='en'?'All sections':locale==='ja'?'すべての項目':'全部栏目'} <span aria-hidden="true">＋</span></summary><div>{navigation.map((item:SpaceData)=><a key={item.id} href={'#anx-'+item.id} onClick={e=>e.currentTarget.closest('details')?.removeAttribute('open')}>{item.label}</a>)}</div></details></>:navigation.map((item:SpaceData)=><a key={item.id} href={'#anx-'+item.id}>{item.label}</a>)}</nav>}</div>
   <header ref={hero} className="anx-profile-header">

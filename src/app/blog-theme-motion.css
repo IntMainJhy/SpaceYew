@@ -1,0 +1,65 @@
+/* Interaction vocabulary follows each visual world. Content is visible at rest. */
+.anx-portfolio[data-theme-motion=true]{--theme-speed:220ms;--theme-ease:cubic-bezier(.16,1,.3,1)}
+.bd-block[data-appearance] .anx-portfolio :is(a,button,summary){-webkit-tap-highlight-color:transparent}
+.bd-block[data-appearance] .anx-nav-menu>div{scrollbar-width:thin;scrollbar-color:var(--anx-muted) var(--anx-paper)}
+.bd-block[data-appearance] .anx-portfolio :is(a,button,summary):focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.bd-block[data-appearance] .anx-portfolio .anx-nav-shortcuts a{text-decoration-thickness:1px;text-underline-offset:6px}
+.bd-block[data-appearance] .anx-portfolio .anx-resume-facts{font-variant-numeric:tabular-nums}
+/* Retain a stable editing canvas and a quiet opt-out. */
+.anx-portfolio[data-theme-motion=false] .anx-contact>a:hover{transform:none!important}
+.anx-portfolio[data-theme-motion=false] .anx-nav-menu[open]>div{animation:none!important}
+@media(prefers-reduced-motion:no-preference){
+ .anx-portfolio[data-theme-motion=true] :is(.anx-contact>a,.anx-topbar a,.anx-nav-menu summary){transition:color var(--theme-speed) ease,background-color var(--theme-speed) ease,transform var(--theme-speed) var(--theme-ease)}
+ .anx-portfolio[data-theme-motion=true] :is(.anx-inline-media,.anx-certificates button,.anx-resume-gallery button){overflow:hidden}
+ .anx-portfolio[data-theme-motion=true] :is(.anx-inline-media,.anx-certificates button,.anx-resume-gallery button) img{transition:transform .45s var(--theme-ease)}
+ .anx-portfolio[data-theme-motion=true] .anx-topbar a{background-image:linear-gradient(currentColor,currentColor);background-size:0 1px;background-position:0 100%;background-repeat:no-repeat;transition:background-size var(--theme-speed) var(--theme-ease),color var(--theme-speed) ease}
+ .anx-portfolio[data-theme-motion=true] .anx-topbar a:is(:hover,:focus-visible){background-size:100% 1px}
+ .anx-portfolio[data-theme-motion=true] .anx-nav-menu summary span{transition:transform var(--theme-speed) var(--theme-ease)}
+ .anx-portfolio[data-theme-motion=true] .anx-contact>a:hover{transform:none}
+ .anx-portfolio[data-theme-motion=true] .anx-contact>a:active{transform:scale(.98)}
+ /* Pencil: a drawn baseline and the small give of paper under a press. */
+ .bd-block[data-appearance=sketch] .anx-portfolio[data-theme-motion=true]{--theme-speed:320ms}
+ .bd-block[data-appearance=sketch] .anx-portfolio[data-theme-motion=true] .anx-topbar a{background-size:0 2px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 3'%3E%3Cpath d='M1 2Q40 0 70 2T119 1' fill='none' stroke='%235a5147' stroke-width='1.4'/%3E%3C/svg%3E")}
+ .bd-block[data-appearance=sketch] .anx-portfolio[data-theme-motion=true] .anx-topbar a:is(:hover,:focus-visible){background-size:100% 2px}
+ .bd-block[data-appearance=sketch] .anx-portfolio[data-theme-motion=true] .anx-contact>a:active{transform:rotate(-1.5deg) scale(.98)}
+ .bd-block[data-appearance=sketch] .anx-portfolio[data-theme-motion=true] .anx-nav-menu[open]>div{animation:theme-paper .24s var(--theme-ease);transform-origin:top right}
+ /* Documentation: exact, fast feedback with a green rule. */
+ .bd-block[data-appearance=mint-docs] .anx-portfolio[data-theme-motion=true]{--theme-speed:160ms}
+ .bd-block[data-appearance=mint-docs] .anx-portfolio[data-theme-motion=true] .anx-topbar a:is(:hover,:focus-visible){color:#16734f}
+ .bd-block[data-appearance=mint-docs] .anx-portfolio[data-theme-motion=true] .anx-nav-menu[open]>div{animation:theme-clip .18s var(--theme-ease)}
+ /* Editorial: a centered rule and slow reframing of the photograph. */
+ .bd-block[data-appearance=mint-serif] .anx-portfolio[data-theme-motion=true]{--theme-speed:420ms}
+ .bd-block[data-appearance=mint-serif] .anx-portfolio[data-theme-motion=true] .anx-topbar a{background-position:50% 100%}
+ .bd-block[data-appearance=mint-serif] .anx-portfolio[data-theme-motion=true] :is(.anx-inline-media,.anx-certificates button,.anx-resume-gallery button) img{transition-duration:.65s;transform-origin:50% 40%}
+ .bd-block[data-appearance=mint-serif] .anx-portfolio[data-theme-motion=true] :is(.anx-inline-media,.anx-certificates button,.anx-resume-gallery button):is(:hover,:focus-visible) img{transform:scale(1.035) translateY(-.5%)}
+ .bd-block[data-appearance=mint-serif] .anx-portfolio[data-theme-motion=true] .anx-nav-menu[open]>div{animation:theme-paper .35s var(--theme-ease);transform-origin:top right}
+ /* Record: cover focus and a tactile control, with no fake player. */
+ .bd-block[data-appearance=night-player] .anx-portfolio[data-theme-motion=true] :is(.anx-inline-media,.anx-certificates button,.anx-resume-gallery button):is(:hover,:focus-visible) img{transform:scale(1.055)}
+ .bd-block[data-appearance=night-player] .anx-portfolio[data-theme-motion=true] .anx-contact>a:is(:hover,:focus-visible){transform:scale(1.035)}
+ .bd-block[data-appearance=night-player] .anx-portfolio[data-theme-motion=true] .anx-contact>a:active{transform:scale(.96)}
+ .bd-block[data-appearance=night-player] .anx-portfolio[data-theme-motion=true] .anx-nav-menu[open]>div{animation:theme-record .22s var(--theme-ease);transform-origin:top right}
+ /* Memphis: geometric rotation belongs to controls, never the reading text. */
+ .bd-block[data-appearance=memphis] .anx-portfolio[data-theme-motion=true] .anx-contact>a:is(:hover,:focus-visible){transform:rotate(-2deg)}
+ .bd-block[data-appearance=memphis] .anx-portfolio[data-theme-motion=true] .anx-contact>a:active{transform:translate(3px,3px);box-shadow:none}
+ .bd-block[data-appearance=memphis] .anx-portfolio[data-theme-motion=true] :is(.anx-inline-media,.anx-certificates button,.anx-resume-gallery button)>.icon{transition:transform .25s var(--theme-ease)}
+ .bd-block[data-appearance=memphis] .anx-portfolio[data-theme-motion=true] :is(.anx-inline-media,.anx-certificates button,.anx-resume-gallery button):is(:hover,:focus-visible)>.icon{transform:rotate(90deg)}
+ .bd-block[data-appearance=memphis] .anx-portfolio[data-theme-motion=true] .anx-nav-menu[open]>div{animation:theme-geometric .28s var(--theme-ease);transform-origin:top right}
+ /* Terminal: one stepped scan on interaction, never flashing or looping. */
+ .bd-block[data-appearance=volt-terminal] .anx-portfolio[data-theme-motion=true]{--theme-speed:180ms;--theme-ease:steps(4,end)}
+ .bd-block[data-appearance=volt-terminal] .anx-portfolio[data-theme-motion=true] .anx-topbar a:is(:hover,:focus-visible){color:#00d992}
+ .bd-block[data-appearance=volt-terminal] .anx-portfolio[data-theme-motion=true] .anx-nav-menu[open]>div{animation:theme-clip .24s steps(5,end)}
+ .bd-block[data-appearance=volt-terminal] .anx-portfolio[data-theme-motion=true] .anx-contact>a:is(:hover,:focus-visible){outline:1px solid #00d992;outline-offset:4px}
+ .anx-portfolio[data-theme-motion=true] .anx-panel:target>header{animation:theme-locate .65s ease-out}
+ .bd-block[data-appearance=sketch] .anx-portfolio[data-theme-motion=true] .anx-panel:target>header{animation:theme-locate .65s steps(6,end)}
+ .bd-block[data-appearance=volt-terminal] .anx-portfolio[data-theme-motion=true] .anx-panel:target>header{animation:theme-locate .4s steps(3,end)}
+ @keyframes theme-paper{from{clip-path:inset(0 0 12% 0);transform:rotate(-1deg)}to{clip-path:inset(0);transform:rotate(0)}}
+ @keyframes theme-clip{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0)}}
+ @keyframes theme-record{from{opacity:.65;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+ @keyframes theme-geometric{from{opacity:.8;transform:rotate(3deg) scale(.97)}to{opacity:1;transform:rotate(0) scale(1)}}
+ @keyframes theme-locate{from{background-color:var(--theme-surface)}to{background-color:transparent}}
+}
+@media(prefers-reduced-motion:reduce){
+ .anx-portfolio[data-theme-motion] :is(a,button,summary,img){transition:none!important}
+ .anx-portfolio[data-theme-motion] .anx-contact>a:is(:hover,:active){transform:none!important}
+ .anx-portfolio[data-theme-motion] .anx-nav-menu[open]>div,.anx-portfolio[data-theme-motion] .anx-panel:target>header{animation:none!important}
+}

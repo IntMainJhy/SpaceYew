@@ -1,4 +1,5 @@
 // Shared page geometry. Content remains account-scoped; decoration never copies an identity.
+import {blogTemplates} from './blog-templates.mjs';
 export const designParts=['header','contacts','cover','about','skills','metrics','certificates','gallery','updated','legacy','credit'];
 export {stickerStyles} from './blog-stickers.mjs';
 export function withBlogDecorations(design){
@@ -19,7 +20,20 @@ export const designOrder=nodes=>visibleDesignNodes(nodes).map((node,index)=>({no
 function visualFrame(design,node){const f=resolveDesignFrame(design,node),angle=node.kind==='sticker'?(node.style?.rotation||0)*Math.PI/180:0,c=Math.abs(Math.cos(angle)),s=Math.abs(Math.sin(angle)),w=f.w*c+f.h*s,h=f.w*s+f.h*c;return {x:f.x+(f.w-w)/2,y:f.y+(f.h-h)/2,w,h}}
 export function designHeight(design){return designBounds(design).bottom+24}
 export function designBounds(design){const frames=visibleDesignNodes(design.nodes).map(n=>visualFrame(design,n));return {left:Math.min(0,...frames.map(f=>f.x)),right:Math.max(design.width,...frames.map(f=>f.x+f.w)),top:Math.min(0,...frames.map(f=>f.y)),bottom:Math.max(500,...frames.map(f=>f.y+f.h))}}
-export function arrangeBlogDesign(design){let y=0;const flow=designOrder(design.nodes).filter(n=>n.kind!=='sticker'),ordered=[...flow,...design.nodes.filter(n=>n.hidden&&n.kind!=='sticker'),...design.nodes.filter(n=>n.kind==='sticker')];return {...design,autoLayout:!ordered.some(n=>n.locked&&n.kind!=='sticker'),nodes:ordered.map(n=>{if(n.kind==='sticker')return n;if(n.locked){if(!n.hidden)y=Math.max(y,n.frame.y+n.frame.h);return n;}const next={...n,frame:{...n.frame,x:0,y,w:design.width}};if(!n.hidden)y+=n.frame.h;return next})}}
+export function arrangeBlogDesign(design){
+ let y=0;const flow=designOrder(design.nodes).filter(n=>n.kind!=='sticker'),ordered=[...flow,...design.nodes.filter(n=>n.hidden&&n.kind!=='sticker'),...design.nodes.filter(n=>n.kind==='sticker')];
+ if(design.template==='columns'&&!ordered.some(n=>n.locked&&n.kind!=='sticker')){
+  const frames=new Map(),place=(nodes,x,w,start)=>{let top=start;for(const n of nodes){frames.set(n.id,{...n.frame,x,y:top,w});top+=n.frame.h}return top};
+  const head=flow.filter(n=>['header','contacts','cover'].includes(n.part)),side=flow.filter(n=>['about','skills','metrics','updated'].includes(n.part)),main=flow.filter(n=>!head.includes(n)&&!side.includes(n)&&n.part!=='credit'),bottom=flow.filter(n=>n.part==='credit');
+  const start=place(head,0,design.width,0),sideWidth=Math.round(design.width*.3),gap=24;
+  const end=Math.max(place(side,0,sideWidth,start),place(main,sideWidth+gap,design.width-sideWidth-gap,start));place(bottom,0,design.width,end);
+  return {...design,autoLayout:true,nodes:design.nodes.map(n=>frames.has(n.id)?{...n,frame:frames.get(n.id)}:n)};
+ }
+ return {...design,autoLayout:!ordered.some(n=>n.locked&&n.kind!=='sticker'),nodes:ordered.map(n=>{if(n.kind==='sticker')return n;if(n.locked){if(!n.hidden)y=Math.max(y,n.frame.y+n.frame.h);return n;}const next={...n,frame:{...n.frame,x:0,y,w:design.width}};if(!n.hidden)y+=n.frame.h;return next})};
+}
+export function applyBlogTemplate(design,id){const template=blogTemplates.find(item=>item.id===id);if(!template)return design;return arrangeBlogDesign({...design,template:id,nodes:design.nodes.map(n=>n.locked?n:{...n,...(n.part?.startsWith('section:')?{presentation:template.section}:{})})})}
+export const positionedBlogDesign=design=>!design.autoLayout||design.template==='columns';
+export const mobileBlogDesign=width=>width>0&&width<=600;
 export function moveDesignNode(design,id,position){const node=design.nodes.find(n=>n.id===id);if(!node||node.locked)return design;const target=node.anchor&&design.nodes.find(n=>n.id===node.anchor),x=position.x-(target?.frame.x||0),y=position.y-(target?.frame.y||0);return {...design,autoLayout:node.kind==='sticker'?design.autoLayout:false,nodes:design.nodes.map(n=>n.id===id?{...n,frame:{...n.frame,x:Math.round(Math.max(n.kind==='sticker'?-240:0,Math.min(design.width-(n.kind==='sticker'?40:n.frame.w),x))),y:Math.round(Math.max(n.kind==='sticker'?-240:0,Math.min(40000,y)))}}:n)}}
 export function removeDesignNode(design,id){const node=design.nodes.find(n=>n.id===id);if(!node||node.locked||node.part==='credit')return design;const next={...design,nodes:design.nodes.filter(n=>n.id!==id&&n.anchor!==id)};return next.autoLayout?arrangeBlogDesign(next):next}
 export function duplicateDesignNode(design,id,newId){const node=design.nodes.find(n=>n.id===id);if(!node||node.locked||node.kind==='template'||design.nodes.length>=60||design.nodes.some(n=>n.id===newId))return design;const next={...structuredClone(node),id:newId,frame:{...node.frame,x:Math.max(node.kind==='sticker'?-240:0,Math.min(design.width-node.frame.w,node.frame.x+20)),y:Math.min(40000,node.frame.y+20)}};return {...design,autoLayout:node.kind==='sticker'?design.autoLayout:false,nodes:[...design.nodes,next]}}

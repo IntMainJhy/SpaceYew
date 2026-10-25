@@ -58,3 +58,9 @@ Preview supports desktop, tablet and phone widths, reports the actual frame widt
 Public Anx pages link to every available, visible section, including skills and image collections. The compact title area retains the signature, while certificate and photo grids use small consistent thumbnails with readable captions. Certificates keep the whole image visible; gallery and résumé images open a native image viewer with close, loading/error feedback and keyboard focus return. Empty captions do not reserve blank rows.
 
 Editor modes, publication settings and preview device changes use brief, interruptible transitions. Library and inspector arrivals, layer navigation and zoom provide continuity without animating draggable node transforms. Native image dialogs and public section anchors also transition smoothly; reduced-motion preferences remove spatial effects. Undo, delete and duplication close stale image-upload controls.
+
+## Page templates and résumé section styles
+
+The Templates panel offers Original Anx, Clean résumé, Career timeline, Two-column résumé, Project gallery and Editorial story. Applying a template rearranges the page and assigns a section style while preserving text, images, links, translations and custom layers. The change is undoable and must be saved as a private draft before the existing review process can update the public version.
+
+Insert résumé sections as Classic, Timeline, Project cards, Compact list, Side heading or Showcase. Select an existing section to change its style in Properties. Entries support text, images, URLs, duplication and reordering. Duplicated sections contain independent copies; deleted section layers can be restored from Insert → Your existing content. Desktop and tablet previews retain the authored layout; containers at 600px or below stack content in reading order.

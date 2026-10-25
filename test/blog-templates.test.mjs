@@ -1,0 +1,66 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {blogTemplates,resumePresentations} from '../src/lib/blog-templates.mjs';
+import {defaultBlogDesign,applyBlogTemplate,arrangeBlogDesign,canvasDraftSignature,mobileBlogDesign,positionedBlogDesign} from '../src/lib/blog-design.mjs';
+import {duplicateCanvasSection} from '../src/lib/blog-canvas.mjs';
+import {blogSettings} from '../src/lib/spaces-model.mjs';
+const asset='aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa';
+const profile={name:'Synthetic author',resume:{sections:[{id:'work',title:'Experience',translations:{en:{title:'Work'}},items:[{title:'Example project',description:'Synthetic fixture',coverId:asset,translations:{en:{description:'English fixture'}}}]}],metrics:[{label:'Projects',value:'3'}]}};
+const clean=design=>blogSettings({mode:'theme',theme:'anx',design}).design;
+
+test('all six page templates preserve content layers and survive a save/reopen',()=>{
+ const design=defaultBlogDesign(profile),before=structuredClone(design);
+ design.nodes.push({id:'custom-image',kind:'image',assetId:asset,text:'Image caption',frame:{x:20,y:6000,w:300,h:200},style:{}});
+ for(const template of blogTemplates){
+  const applied=applyBlogTemplate(design,template.id),saved=clean(applied);
+  assert.equal(saved.template,template.id);
+  assert.deepEqual(new Set(saved.nodes.map(n=>n.id)),new Set(design.nodes.map(n=>n.id)));
+  assert.equal(saved.nodes.find(n=>n.id==='custom-image').assetId,asset);
+  assert.equal(saved.nodes.find(n=>n.part==='section:work').presentation,template.section);
+  assert.ok(saved.nodes.some(n=>n.part==='credit'));
+ }
+ assert.equal(blogTemplates.length,6);assert.equal(resumePresentations.length,6);
+ assert.deepEqual(design.nodes.slice(0,-1),before.nodes);assert.equal(profile.resume.sections[0].items[0].coverId,asset);
+ assert.equal(applyBlogTemplate(design,'unrecognized'),design);
+});
+
+test('section styles survive validation and unknown template/style input is rejected',()=>{
+ const design=defaultBlogDesign(profile),node=design.nodes.find(n=>n.part==='section:work');
+ for(const item of resumePresentations)assert.equal(clean({...design,nodes:[{...node,presentation:item.id}]}).nodes[0].presentation,item.id);
+ assert.throws(()=>clean({...design,template:'../../private'}),/模板/);
+ assert.throws(()=>clean({...design,nodes:[{...node,presentation:'html'}]}),/样式/);
+ assert.throws(()=>clean({...design,nodes:[{...node,kind:'text',presentation:'cards'}]}),/样式/);
+});
+
+test('two columns reflow from measured heights without dirtying an untouched draft',()=>{
+ const design=applyBlogTemplate(defaultBlogDesign(profile),'columns');
+ const side=design.nodes.find(n=>n.part==='about'),main=design.nodes.find(n=>n.part==='section:work');
+ assert.ok(main.frame.x>side.frame.x+side.frame.w);
+ assert.equal(main.frame.y,side.frame.y);
+ assert.ok(positionedBlogDesign(design));
+ const signature=canvasDraftSignature(profile,{blog:{design}},true);
+ const measured=arrangeBlogDesign({...design,nodes:design.nodes.map(n=>({...n,frame:{...n.frame,h:n.frame.h+120}}))});
+ assert.equal(canvasDraftSignature(profile,{blog:{design:measured}},true),signature);
+ const footer=measured.nodes.find(n=>n.part==='credit');
+ for(const node of measured.nodes.filter(n=>n.kind!=='sticker'&&n.part!=='credit'))assert.ok(node.frame.y+node.frame.h<=footer.frame.y);
+ const locked={...design,nodes:design.nodes.map(n=>n.id===main.id?{...n,locked:true}:n)};
+ assert.deepEqual(applyBlogTemplate(locked,'resume').nodes.find(n=>n.id===main.id),locked.nodes.find(n=>n.id===main.id));
+});
+
+test('only a phone-sized viewport stacks an authored desktop layout',()=>{
+ assert.equal(mobileBlogDesign(390),true);assert.equal(mobileBlogDesign(600),true);
+ assert.equal(mobileBlogDesign(601),false);assert.equal(mobileBlogDesign(768),false);assert.equal(mobileBlogDesign(0),false);
+});
+
+test('duplicating a résumé section creates independent content and keeps translations and owned images',()=>{
+ const design=defaultBlogDesign(profile),node=design.nodes.find(n=>n.part==='section:work');
+ const next=duplicateCanvasSection(profile,design,node.id,'copied-section','second-work');
+ assert.equal(next.profile.resume.sections.length,2);
+ assert.equal(next.profile.resume.sections[1].items[0].coverId,asset);
+ assert.equal(next.profile.resume.sections[1].items[0].translations.en.description,'English fixture');
+ next.profile.resume.sections[1].items[0].title='Changed copy';assert.equal(profile.resume.sections[0].items[0].title,'Example project');
+ assert.ok(clean(next.design).nodes.some(n=>n.part==='section:second-work'));
+ assert.equal(duplicateCanvasSection(profile,design,node.id,node.id,'third-work'),null);
+ assert.equal(duplicateCanvasSection(profile,{...design,nodes:design.nodes.map(n=>({...n,locked:true}))},node.id,'copied-section','third-work'),null);
+ assert.equal(profile.resume.sections.length,1);
+});

@@ -6,6 +6,11 @@ export function moveCanvasSection(items,from,to){
 export function canvasResume(profile){
  return profile.resume||{version:1,updated:'',resumeId:'',metrics:[],certificates:[],gallery:[],sections:[]};
 }
+export function duplicateCanvasSection(profile,design,nodeId,newNodeId,newSectionId){
+ const node=design.nodes.find(n=>n.id===nodeId),sections=profile.resume?.sections,section=sections?.find(s=>'section:'+s.id===node?.part);
+ if(!section||node.locked||sections.length>=12||design.nodes.length>=60||sections.some(s=>s.id===newSectionId)||design.nodes.some(n=>n.id===newNodeId))return null;
+ return {profile:{...profile,resume:{...profile.resume,sections:[...sections,{...structuredClone(section),id:newSectionId}]}},design:{...design,nodes:[...design.nodes,{...structuredClone(node),id:newNodeId,part:'section:'+newSectionId,frame:{...node.frame,y:Math.min(40000,node.frame.y+node.frame.h)}}]}};
+}
 export function canvasText(item,key,language=''){return language?item.translations?.[language]?.[key]??item[key]??'':item[key]??''}
 export function editCanvasText(item,key,value,language=''){return language?{...item,translations:{...item.translations,[language]:{...item.translations?.[language],[key]:value}}}:{...item,[key]:value}}
 

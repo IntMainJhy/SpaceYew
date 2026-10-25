@@ -61,6 +61,8 @@ Editor modes, publication settings and preview device changes use brief, interru
 
 ## Page templates and résumé section styles
 
-The Templates panel offers Original Anx, Clean résumé, Career timeline, Two-column résumé, Project gallery and Editorial story. Applying a template rearranges the page and assigns a section style while preserving text, images, links, translations and custom layers. The change is undoable and must be saved as a private draft before the existing review process can update the public version.
+The Page style button above the canvas and the Styles sidebar tab offer Original Anx, Clean résumé, Career timeline, Two-column résumé, Project gallery and Editorial story. Applying a template rearranges the page and assigns a section style while preserving text, images, links, translations and custom layers. The change is undoable and must be saved as a private draft before the existing review process can update the public version.
 
 Insert résumé sections as Classic, Timeline, Project cards, Compact list, Side heading or Showcase. Select an existing section to change its style in Properties. Entries support text, images, URLs, duplication and reordering. Duplicated sections contain independent copies; deleted section layers can be restored from Insert → Your existing content. Desktop and tablet previews retain the authored layout; containers at 600px or below stack content in reading order.
+
+Select a résumé section and use Section style above the canvas to reveal its six presentations. The library names the current template; reselecting it creates no extra undo entry. Panel, template and preview transitions respect the system reduced-motion preference.

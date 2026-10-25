@@ -14,10 +14,10 @@ export function BlogPreview({children,say,device,onDevice}:{children:ReactNode;s
  useLayoutEffect(()=>{
   const element=deviceFrame.current,oldWidth=previousWidth.current;if(!element||!oldWidth)return;
   const width=element.getBoundingClientRect().width;previousWidth.current=0;
-  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const media=gsap.matchMedia();
   // FLIP the frame once; the iframe gets its final viewport immediately rather than reflowing every animation frame.
-  const context=gsap.context(()=>{gsap.fromTo(element,{scaleX:reduced?1:oldWidth/Math.max(1,width),opacity:.7},{scaleX:1,opacity:1,duration:reduced?.08:.26,ease:'power3.out',clearProps:'transform,opacity'})},element);
-  return()=>context.revert();
+  media.add('(prefers-reduced-motion: no-preference)',()=>{gsap.fromTo(element,{scaleX:oldWidth/Math.max(1,width),opacity:.7},{scaleX:1,opacity:1,duration:.26,ease:'power3.out',clearProps:'transform,opacity'})},element);
+  return()=>media.revert();
  },[device]);
  function switchDevice(next:string){if(next===device)return;previousWidth.current=deviceFrame.current?.getBoundingClientRect().width||0;const win=root?.ownerDocument.defaultView;if(win)progress.current=win.scrollY/Math.max(1,root.ownerDocument.documentElement.scrollHeight-win.innerHeight);onDevice(next)}
  function scrollBehavior():ScrollBehavior{return window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'}

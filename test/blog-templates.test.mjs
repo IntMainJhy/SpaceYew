@@ -64,3 +64,22 @@ test('duplicating a résumé section creates independent content and keeps trans
  assert.equal(duplicateCanvasSection(profile,{...design,nodes:design.nodes.map(n=>({...n,locked:true}))},node.id,'copied-section','third-work'),null);
  assert.equal(profile.resume.sections.length,1);
 });
+
+
+test('visual themes compose with every layout and preserve geometry, content and custom colors',async()=>{
+ const {blogAppearances,applyBlogAppearance,blogNodeColors,colorContrast}=await import('../src/lib/blog-appearances.mjs');
+ const design=defaultBlogDesign(profile);
+ for(const theme of blogAppearances)for(const template of blogTemplates){
+  const base=applyBlogTemplate(design,template.id),themed=applyBlogAppearance(base,theme.id),saved=clean(themed);
+  assert.equal(saved.appearance,theme.id);assert.equal(saved.template,template.id);
+  assert.deepEqual(themed.nodes,base.nodes);
+  for(const style of [{},{background:'#ffffff'},{color:'#202124'},{background:'#121212'}]){
+   const colors=blogNodeColors(style,theme.id);assert.ok(colorContrast(colors.background,colors.color)>=4.5);
+   assert.doesNotThrow(()=>clean({...themed,nodes:[{...themed.nodes[0],style}]}));
+  }
+ }
+ assert.throws(()=>clean({...design,appearance:'unknown'}),/主题/);
+ assert.throws(()=>clean({...design,nodes:[{...design.nodes[0],style:{background:'#ffffff',color:'#ffffff'}}]}),/对比度/);
+ assert.deepEqual(applyBlogAppearance(applyBlogAppearance(design,'night-player'),'original').nodes,design.nodes);
+ assert.equal(applyBlogAppearance(design,'unknown'),design);
+});

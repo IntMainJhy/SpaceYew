@@ -5,6 +5,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import sharp from 'sharp';
 import {defaultBlogDesign,applyBlogTemplate} from '../src/lib/blog-design.mjs';
+import {blogAppearances,applyBlogAppearance} from '../src/lib/blog-appearances.mjs';
 import {blogTemplates,resumePresentations} from '../src/lib/blog-templates.mjs';
 import {startServer,stopServer,loginServer} from './server.mjs';
 const directory=await mkdtemp(path.join(tmpdir(),'spaceyew-editor-http-')),base='http://127.0.0.1:3177';let server;
@@ -50,7 +51,12 @@ try{
   const response=await call('/api/spaces/save',next,alex);assert.equal(response.status,200,await response.clone().text());designed=await response.json();
   const reopened=await(await call('/api/spaces/mine',undefined,alex)).json();assert.equal(reopened.layout.blog.design.template,template.id);assert.equal(reopened.profile.resume.certificates[0].imageId,image);assert.equal(reopened.layout.blog.design.nodes.find(n=>n.id==='custom-image').assetId,image);
  }
- designed.layout.blog.design={...free,template:'portfolio',nodes:free.nodes.map(n=>n.part?.startsWith('section:')?{...n,presentation:resumePresentations.find(s=>s.id==='cards').id}:n)};
+ for(const appearance of blogAppearances){
+  designed.layout.blog.design=applyBlogAppearance(designed.layout.blog.design,appearance.id);
+  const themed=await call('/api/spaces/save',designed,alex);assert.equal(themed.status,200,await themed.clone().text());designed=await themed.json();
+  const reopened=await(await call('/api/spaces/mine',undefined,alex)).json();assert.equal(reopened.layout.blog.design.appearance,appearance.id);
+ }
+ designed.layout.blog.design={...free,appearance:'night-player',template:'portfolio',nodes:free.nodes.map(n=>n.part?.startsWith('section:')?{...n,presentation:resumePresentations.find(s=>s.id==='cards').id}:n)};
  const styled=await call('/api/spaces/save',designed,alex);assert.equal(styled.status,200);designed=await styled.json();
  assert.equal(designed.layout.blog.design.nodes.find(n=>n.part==='section:work').presentation,'cards');
  assert.doesNotMatch(await(await fetch(base+'/blog/'+designed.handle)).text(),/Private page design publication marker/);
@@ -58,7 +64,7 @@ try{
  designed.profile.intro='A later draft must not change the fixed review';assert.equal((await call('/api/spaces/save',designed,alex)).status,200);
  assert.equal((await call('/api/admin/spaces/reviews',{id:designReview.id,action:'approve',checked:true,reason:'Checked layout, text, owned images and visibility'},owner)).status,200);
  const designPage=await(await fetch(base+'/blog/'+designed.handle)).text();assert.match(designPage,/Private page design publication marker/);assert.match(designPage,/--bd-x:5.319/);assert.match(designPage,/data-sticker="note"/);assert.match(designPage,/bd-public-annotation/);assert.doesNotMatch(designPage,/href="#anx-skills"/);assert.match(designPage,/href="https:\/\/example.org\/fixture" target="_blank" rel="noopener noreferrer"/);for(const sticker of ['heart','loop','circle','pop-rainbow','pixel-heart','label-solid'])assert.ok(designPage.includes('data-sticker="'+sticker+'"'));assert.doesNotMatch(designPage,/Hidden layer must not leak|A later draft must not change the fixed review/);
- assert.match(designPage,/data-page-template="portfolio"/);assert.match(designPage,/data-presentation="cards"/);
+ assert.match(designPage,/data-appearance="night-player"/);assert.match(designPage,/data-page-template="portfolio"/);assert.match(designPage,/data-presentation="cards"/);
  // Keep the interactive fixture on the default template with its real reviewed data.
  designed=await(await call('/api/spaces/mine',undefined,alex)).json();designed.layout.blog.design=template;assert.equal((await call('/api/spaces/save',designed,alex)).status,200);
  // Older experience fields must remain editable without being truncated into résumé fields.

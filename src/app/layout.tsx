@@ -40,6 +40,7 @@ import '@xyflow/react/dist/style.css';
 import './blog-canvas.css';
 import './blog-design.css';
 import './blog-templates.css';
+import './blog-appearances.css';
 import './site-owner.css';
 import './document-workspace.css';
 export const viewport:Viewport={width:'device-width',initialScale:1,viewportFit:'cover'};

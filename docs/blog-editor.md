@@ -66,3 +66,11 @@ The Page style button above the canvas and the Styles sidebar tab offer Original
 Insert résumé sections as Classic, Timeline, Project cards, Compact list, Side heading or Showcase. Select an existing section to change its style in Properties. Entries support text, images, URLs, duplication and reordering. Duplicated sections contain independent copies; deleted section layers can be restored from Insert → Your existing content. Desktop and tablet previews retain the authored layout; containers at 600px or below stack content in reading order.
 
 Select a résumé section and use Section style above the canvas to reveal its six presentations. The library names the current template; reselecting it creates no extra undo entry. Panel, template and preview transitions respect the system reduced-motion preference.
+
+## Visual themes
+
+Page style opens Visual theme by default: Original, Pencil sketch, Mint docs (Mintlify inspired), Mint editorial (the supplied serif/mint reference) and Night record (Spotify inspired). Page layout remains a separate six-option control. Themes preserve geometry, text, media and section presentation; undo, draft persistence, preview and reviewed publication share the same model.
+
+Explicit node colors remain intact. If only text or background is customized, its inherited counterpart resolves to a readable contrast. Original restores the authored page background. Editor controls remain neutral.
+
+Inter, Geist Mono and Cormorant Garamond are self-hosted SIL OFL fonts, sourced from the Google Fonts repository under `ofl/inter`, `ofl/geistmono` and `ofl/cormorantgaramond`; licenses ship beside the font files in `public/fonts`. CJK uses device fallbacks. No Spotify proprietary fonts are redistributed.

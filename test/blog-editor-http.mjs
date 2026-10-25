@@ -56,15 +56,16 @@ try{
   const themed=await call('/api/spaces/save',designed,alex);assert.equal(themed.status,200,await themed.clone().text());designed=await themed.json();
   const reopened=await(await call('/api/spaces/mine',undefined,alex)).json();assert.equal(reopened.layout.blog.design.appearance,appearance.id);
  }
- designed.layout.blog.design={...free,appearance:'night-player',template:'portfolio',nodes:free.nodes.map(n=>n.part?.startsWith('section:')?{...n,presentation:resumePresentations.find(s=>s.id==='cards').id}:n)};
+ designed.layout.blog.design={...free,typography:{chinese:'xiaowei',latin:'newsreader'},motion:{marquee:true,entrance:false},appearance:'night-player',template:'portfolio',nodes:free.nodes.map(n=>n.part?.startsWith('section:')?{...n,presentation:resumePresentations.find(s=>s.id==='cards').id}:n)};
  const styled=await call('/api/spaces/save',designed,alex);assert.equal(styled.status,200);designed=await styled.json();
  assert.equal(designed.layout.blog.design.nodes.find(n=>n.part==='section:work').presentation,'cards');
+ const personalization=(await(await call('/api/spaces/mine',undefined,alex)).json()).layout.blog.design;assert.deepEqual(personalization.typography,{chinese:'xiaowei',latin:'newsreader'});assert.deepEqual(personalization.motion,{marquee:true,entrance:false});
  assert.doesNotMatch(await(await fetch(base+'/blog/'+designed.handle)).text(),/Private page design publication marker/);
  const designSubmit=await(await call('/api/spaces/submit',{revision:designed.revision,accepted:true},alex)).json(),designReview=designSubmit.reviews.find(x=>x.kind==='board'&&x.status==='pending');assert.ok(designReview);
  designed.profile.intro='A later draft must not change the fixed review';assert.equal((await call('/api/spaces/save',designed,alex)).status,200);
  assert.equal((await call('/api/admin/spaces/reviews',{id:designReview.id,action:'approve',checked:true,reason:'Checked layout, text, owned images and visibility'},owner)).status,200);
  const designPage=await(await fetch(base+'/blog/'+designed.handle)).text();assert.match(designPage,/Private page design publication marker/);assert.match(designPage,/--bd-x:5.319/);assert.doesNotMatch(designPage,/data-sticker="note"/);assert.ok(designed.layout.blog.design.nodes.some(n=>n.id==='contact-note'));assert.doesNotMatch(designPage,/href="#anx-skills"/);assert.match(designPage,/href="https:\/\/example.org\/fixture" target="_blank" rel="noopener noreferrer"/);for(const sticker of ['heart','loop','circle','pop-rainbow','pixel-heart','label-solid'])assert.ok(designPage.includes('data-sticker="'+sticker+'"'));assert.doesNotMatch(designPage,/Hidden layer must not leak|A later draft must not change the fixed review/);
- assert.match(designPage,/data-appearance="night-player"/);assert.match(designPage,/data-page-template="portfolio"/);assert.match(designPage,/data-presentation="cards"/);
+ assert.match(designPage,/data-appearance="night-player"/);assert.match(designPage,/data-font-custom="true"/);assert.match(designPage,/Newsreader/);assert.match(designPage,/data-page-template="portfolio"/);assert.match(designPage,/data-presentation="cards"/);
  // Keep the interactive fixture on the default template with its real reviewed data.
  designed=await(await call('/api/spaces/mine',undefined,alex)).json();designed.layout.blog.design=template;assert.equal((await call('/api/spaces/save',designed,alex)).status,200);
  // Older experience fields must remain editable without being truncated into résumé fields.

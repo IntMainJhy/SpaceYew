@@ -76,3 +76,9 @@ Explicit node colors remain intact. If only text or background is customized, it
 Inter, Geist Mono and Cormorant Garamond are self-hosted SIL OFL fonts, sourced from the Google Fonts repository under `ofl/inter`, `ofl/geistmono` and `ofl/cormorantgaramond`; licenses ship beside the font files in `public/fonts`. CJK uses device fallbacks. No Spotify proprietary fonts are redistributed.
 
 The visual themes also include Memphis (cream, bold geometry and playful color) and Volt terminal (near-black, emerald signals and monospace metadata). Each theme defines its own masthead composition, portrait shape, type hierarchy and section rhythm. The All sections menu replaces the long horizontal navigation on phones. Non-original themes omit only the unedited built-in contact annotation, ignoring measured height changes; returning to Original restores it. Authored stickers remain visible. Menu and button motion respects reduced-motion preferences.
+
+## Typography and motion
+
+Switch styles now includes Typography and Motion alongside themes and page layouts. Chinese and Latin faces can be chosen independently with a bilingual specimen. Bundled OFL fonts are self-hosted; see `public/fonts/README.md` for provenance. Theme default restores the inherited type; authored stickers keep their own lettering. Draft persistence, undo, preview and reviewed publication use the same settings.
+
+Skills marquee uses the member's own skills and provides pause/resume, hover/focus pause, offscreen/hidden-tab suspension and a reduced-motion static wrapping list. Skill editing stays still. The optional header entrance animates only the portrait and title. The letter-free folded-space brand symbol generates SVG, ICO, Apple and PNG assets from a single source.

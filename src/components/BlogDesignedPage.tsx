@@ -1,5 +1,6 @@
 'use client';
 import {useLayoutEffect,useRef,useState,type CSSProperties} from 'react';
+import {blogFontStack,customBlogFont} from '@/lib/blog-typography.mjs';
 import {blogAppearance,blogPaper,blogNodeColors} from '@/lib/blog-appearances.mjs';
 import {useLocale} from './LocaleProvider';
 import {BlogSticker} from './BlogSticker';
@@ -7,12 +8,12 @@ import {AnxPortfolio} from './AnxPortfolio';
 import {BlogDesignLabel} from './BlogDesignFields';
 import {designHeight,designOrder,visibleDesignNodes,designBounds,themedDesignNodes,positionedBlogDesign,mobileBlogDesign} from '@/lib/blog-design.mjs';
 import type {SpaceData} from './SpaceBoard';
-export function designBlockStyle(node:SpaceData,appearance='original'):CSSProperties{
- const s=node.style||{},theme=blogAppearance(appearance),resolved=blogNodeColors(s,appearance);return {...({'--sticker-paper':s.background||'#f5f0df'} as CSSProperties),background:s.background||(s.color?resolved.background:undefined),color:s.color||(appearance!=='original'||s.background?resolved.color:undefined),borderRadius:s.radius||0,padding:s.padding||0,textAlign:s.align||'left',...(node.kind!=='template'?{fontSize:s.fontSize||28,fontFamily:appearance!=='original'&&node.kind!=='sticker'&&(!s.font||s.font==='serif')?theme.font:s.font==='sans'?'Arial,"PingFang SC",sans-serif':s.font==='mono'?'ui-monospace,monospace':node.kind==='sticker'?'"Kaiti SC",STKaiti,cursive':'Baskerville,"Songti SC",serif'}:{}),...(node.kind==='template'?{'--anx-paper':resolved.background,'--anx-ink':resolved.color,'--anx-muted':theme.muted,'--anx-line':theme.line,'--theme-accent':theme.accent,'--theme-surface':theme.surface,'--theme-font':theme.font} as CSSProperties:{})};
+export function designBlockStyle(node:SpaceData,appearance='original',typography:SpaceData={}):CSSProperties{
+ const s=node.style||{},theme=blogAppearance(appearance),resolved=blogNodeColors(s,appearance);return {...({'--sticker-paper':s.background||'#f5f0df','--blog-font':blogFontStack(typography,theme.font)} as CSSProperties),background:s.background||(s.color?resolved.background:undefined),color:s.color||(appearance!=='original'||s.background?resolved.color:undefined),borderRadius:s.radius||0,padding:s.padding||0,textAlign:s.align||'left',...(node.kind!=='template'?{fontSize:s.fontSize||28,fontFamily:customBlogFont({typography})&&node.kind!=='sticker'?blogFontStack(typography,theme.font):appearance!=='original'&&node.kind!=='sticker'&&(!s.font||s.font==='serif')?blogFontStack(typography,theme.font):s.font==='sans'?'Arial,"PingFang SC",sans-serif':s.font==='mono'?'ui-monospace,monospace':node.kind==='sticker'?'"Kaiti SC",STKaiti,cursive':'Baskerville,"Songti SC",serif'}:{}),...(node.kind==='template'?{'--anx-paper':resolved.background,'--anx-ink':resolved.color,'--anx-muted':theme.muted,'--anx-line':theme.line,'--theme-accent':theme.accent,'--theme-surface':theme.surface,'--theme-font':theme.font} as CSSProperties:{})};
 }
 export function BlogDesignBlock({node,data,profile,preview=false}:{node:SpaceData;data:SpaceData;profile:SpaceData;preview?:boolean}){
  const settings=data.layout.blog||{},content=[...(data.content||[]),...(data.legacyContent||[])];
- return <div className={'bd-block bd-kind-'+node.kind} data-appearance={settings.design?.appearance||'original'} data-page-template={settings.design?.template||'anx'} data-presentation={node.presentation||'classic'} style={designBlockStyle(node,settings.design?.appearance)}>
+ return <div className={'bd-block bd-kind-'+node.kind} data-appearance={settings.design?.appearance||'original'} data-font-custom={customBlogFont(settings.design)} data-page-template={settings.design?.template||'anx'} data-presentation={node.presentation||'classic'} style={designBlockStyle(node,settings.design?.appearance,settings.design?.typography)}>
   {node.kind==='template'&&<BlogDesignLabel.Provider value={node.label||''}><AnxPortfolio data={{...data,layout:{...data.layout,blog:settings}}} p={profile} content={content} part={node.part} preview={preview} embedded/></BlogDesignLabel.Provider>}
   {node.kind==='sticker'&&<BlogSticker node={node}/>}
   {node.kind==='text'&&<p className="bd-custom-text">{node.text}</p>}

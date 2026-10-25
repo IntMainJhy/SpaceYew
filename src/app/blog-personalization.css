@@ -1,0 +1,46 @@
+@font-face{font-family:"ZCOOL XiaoWei";src:url('/fonts/ZCOOLXiaoWei-Regular.woff2') format('woff2');font-weight:400;font-display:swap;unicode-range:U+2E80-9FFF,U+F900-FAFF,U+FE10-FE1F,U+FE30-FE4F,U+FF00-FFEF,U+20000-2FFFF}
+@font-face{font-family:"ZCOOL KuaiLe";src:url('/fonts/ZCOOLKuaiLe-Regular.woff2') format('woff2');font-weight:400;font-display:swap;unicode-range:U+2E80-9FFF,U+F900-FAFF,U+FE10-FE1F,U+FE30-FE4F,U+FF00-FFEF,U+20000-2FFFF}
+@font-face{font-family:"Ma Shan Zheng";src:url('/fonts/MaShanZheng-Regular.woff2') format('woff2');font-weight:400;font-display:swap;unicode-range:U+2E80-9FFF,U+F900-FAFF,U+FE10-FE1F,U+FE30-FE4F,U+FF00-FFEF,U+20000-2FFFF}
+@font-face{font-family:Newsreader;src:url('/fonts/Newsreader-Variable.woff2') format('woff2');font-weight:200 800;font-display:swap}
+@font-face{font-family:"DM Sans";src:url('/fonts/DMSans-Variable.woff2') format('woff2');font-weight:100 1000;font-display:swap}
+.bd-block[data-font-custom=true] .anx-portfolio,.bd-block[data-font-custom=true] .anx-portfolio :is(h1,h2,h3,p,li,button,a,code,pre,.anx-resume-meta,.anx-resume-updated){font-family:var(--blog-font)!important}
+.bt-mode{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.bt-personalization{padding:8px 0 24px;display:grid;gap:18px;color:#202124}
+.bt-personalization h3{font-size:18px;font-weight:600;letter-spacing:-.02em;margin:0;line-height:1.5}
+.bt-personalization p{font-size:13px;line-height:1.75;color:#60656d;margin:0}
+.bt-personalization>label:not(.bt-motion-option){display:grid;gap:8px;font-size:13px;font-weight:600}
+.bt-personalization select{width:100%;min-height:44px;padding:10px;border:1px solid #cdd0d5;background:#fff;border-radius:6px;color:#202124;font:inherit;font-weight:400}
+.bt-personalization :is(select,button,input):focus-visible{outline:2px solid #202124;outline-offset:3px}
+.bt-font-specimen{padding:24px 16px;border-top:1px solid #d9dce0;border-bottom:1px solid #d9dce0;display:grid;gap:12px;background:#fcfcfa}
+.bt-font-specimen strong{font-size:27px;font-weight:400;line-height:1.5}
+.bt-font-specimen>span{font-size:25px;line-height:1.35;letter-spacing:-.02em}
+.bt-font-specimen p{font-family:inherit;font-size:15px;color:#42464c}
+.bt-font-specimen small{font-size:14px;color:#60656d}
+.bt-reset-personalization{min-height:42px;background:transparent;border:1px solid #d7d9dd;border-radius:6px;color:#202124;font:inherit;font-size:13px;cursor:pointer}
+.bt-reset-personalization:disabled{opacity:.45;cursor:default}
+.bt-motion-option{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:16px 0;border-top:1px solid #e0e2e5;cursor:pointer}
+.bt-motion-option>span{display:grid;gap:7px}.bt-motion-option strong{font-size:14px}.bt-motion-option small{font-size:12px;line-height:1.7;color:#60656d}
+.bt-motion-option input{appearance:none;position:relative;flex:0 0 36px;height:22px;border-radius:20px;background:#d5d8dd;cursor:pointer;margin:0;border:1px solid #b9bdc4}
+.bt-motion-option input:before{content:'';position:absolute;width:16px;height:16px;left:2px;top:2px;border-radius:50%;background:#fff}
+.bt-motion-option input:checked{background:#202124;border-color:#202124}.bt-motion-option input:checked:before{transform:translateX(14px)}
+.bt-motion-option input:disabled{opacity:.45;cursor:default}
+.bt-motion-demo{--anx-ink:#202124;--anx-muted:#60656d;--anx-line:#e0e2e5;--anx-paper:#fff;padding:12px 0;border-block:1px solid #e0e2e5;min-width:0}
+.bt-motion-demo>span{font-size:11px;color:#60656d}.bt-motion-demo .anx-skills{font-family:Inter,"PingFang SC",sans-serif;font-size:16px;padding:18px 0;gap:24px}
+.blog-skill-motion{min-width:0;position:relative;color:var(--anx-ink,inherit)}
+.blog-marquee-window{overflow:hidden;min-width:0}.blog-marquee-track{display:block}
+.blog-marquee-toggle{display:flex;gap:7px;align-items:center;margin:0 24px 8px auto;padding:6px 8px;min-height:36px;border:0;background:transparent;color:var(--anx-muted,#60656d);font:inherit;font-size:12px;cursor:pointer}
+.blog-marquee-toggle .icon{width:14px;height:14px}.blog-marquee-toggle:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+.blog-skill-motion[data-marquee=true] .blog-marquee-track{display:flex;width:max-content;animation:blog-marquee var(--marquee-duration,28s) linear infinite;animation-play-state:paused}
+.blog-skill-motion[data-marquee=true] .anx-skills{flex-shrink:0;flex-wrap:nowrap;align-items:center;margin:0;padding:18px 0 26px!important;gap:32px}
+.blog-skill-motion[data-marquee=true] .anx-skills li{white-space:nowrap;flex-shrink:0}.blog-skill-motion[data-marquee=true] .anx-skills:after{content:'';width:32px;flex-shrink:0}
+.blog-skill-motion[data-running=true] .blog-marquee-track{animation-play-state:running}
+.blog-skill-motion:hover .blog-marquee-track,.blog-skill-motion:focus-within .blog-marquee-track{animation-play-state:paused}
+@keyframes blog-marquee{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.blog-skill-motion[data-marquee=true] .blog-marquee-track{display:block;width:auto;animation:none}.blog-skill-motion[data-marquee=true] .anx-skills{flex-wrap:wrap;padding:18px 24px!important}.blog-marquee-copy,.blog-marquee-toggle{display:none!important}}
+@media(prefers-reduced-motion:no-preference){.bt-motion-option input,.bt-motion-option input:before{transition:transform .18s ease,background-color .18s ease}.bt-personalization{animation:personalization-in .2s ease-out}@keyframes personalization-in{from{opacity:.7;transform:translateX(6px)}to{opacity:1;transform:translateX(0)}}.bd-layer-row{transition:background-color .16s ease}.bd-layer-row-actions button,.bt-mode button{transition:background-color .15s ease,color .15s ease}.site-brand-mark{transition:transform .25s cubic-bezier(.16,1,.3,1)}a:hover>.site-brand-mark{transform:rotate(-6deg)}}
+/* The tool UI stays crisp and neutral while the page keeps its chosen voice. */
+.blog-editor.blog-canvas-editor{font-family:Inter,"PingFang SC","Microsoft YaHei",sans-serif}
+.blog-canvas-editor :is(.be-heading,.bd-sidebar,.bd-properties,.bp-toolbar,.bc-publish-panel) :is(h1,h2,h3,button,input,select,textarea){font-family:inherit}
+.blog-canvas-editor .bt-library>header h2{font-size:21px;font-weight:600;letter-spacing:-.025em}
+.bt-font-specimen strong{font-size:22px;text-wrap:balance}
+.blog-canvas-editor :is(.be-heading,.bd-sidebar,.bd-properties,.bp-toolbar,.bc-publish-panel,.bd-stage-top,.bd-toolbar){font-family:Inter,"PingFang SC","Microsoft YaHei",sans-serif}

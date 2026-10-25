@@ -12,7 +12,7 @@ const box=(element:Element):Box=>{const {left,top,width,height}=element.getBound
 
 export function PageMotion({children,className=''}:{children:React.ReactNode;className?:string}){
  const path=usePathname(),query=useSearchParams().toString(),route=path+(query?'?'+query:'');
- const root=useRef<HTMLDivElement>(null);
+ const root=useRef<HTMLDivElement>(null),lastRoute=useRef(route);
  useEffect(()=>{
   document.querySelectorAll<HTMLDetailsElement>('.organic-mobile-menu[open],.feed-mobile-account[open]').forEach(menu=>{menu.open=false;});
  },[path,query]);
@@ -37,7 +37,12 @@ export function PageMotion({children,className=''}:{children:React.ReactNode;cla
  },[]);
  useLayoutEffect(()=>{
   const element=root.current,previous=pending?.to===route?pending:null;pending=null;
-  if(!element?.querySelector('.community-navigation-shell'))return;
+  const changed=lastRoute.current!==route;lastRoute.current=route;
+  if(!element)return;
+  if(!element.querySelector('.community-navigation-shell')){
+   if(!changed)return;
+   const media=gsap.matchMedia();media.add('(prefers-reduced-motion: no-preference)',()=>{gsap.fromTo(element,{opacity:.86},{opacity:1,duration:.2,ease:'power2.out',clearProps:'opacity'})},element);return()=>media.revert();
+  }
   const nav=element.querySelector<HTMLElement>('.feed-nav-links');
   if(previous&&nav)nav.scrollTop=previous.scroll;
   if(previous?.keyboard&&previous.key){const link=Array.from(element.querySelectorAll<HTMLElement>('[data-nav-key]')).find(link=>link.dataset.navKey===previous.key);link?.focus({preventScroll:true});}

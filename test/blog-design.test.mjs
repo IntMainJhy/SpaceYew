@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {defaultBlogDesign,arrangeBlogDesign,designOrder,designHeight,publicBlogDesign,resolveDesignFrame,moveDesignNode,removeDesignNode,visibleDesignNodes,resizeDesignPage,canvasDraftSignature,withBlogDecorations,designContentBottom} from '../src/lib/blog-design.mjs';
+import {defaultBlogDesign,arrangeBlogDesign,designOrder,designHeight,publicBlogDesign,resolveDesignFrame,moveDesignNode,removeDesignNode,visibleDesignNodes,resizeDesignPage,canvasDraftSignature,withBlogDecorations,designContentBottom,duplicateDesignNode,designBounds} from '../src/lib/blog-design.mjs';
 import {blogSettings,spaceUrl,layoutAssetIds,defaultLayout} from '../src/lib/spaces-model.mjs';
 const p={name:'Reader',resume:{metrics:[{value:'12'}],sections:[{id:'work',title:'Work'}],certificates:[{imageId:'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa'}]}};
 const settings=design=>blogSettings({mode:'theme',theme:'anx',design});
@@ -75,4 +75,17 @@ test('every curated sticker family survives schema and translated preview',async
  const design={...defaultBlogDesign(p),nodes:stickerPresets.map(n=>({id:'sticker-'+n.id,kind:'sticker',sticker:n.id,text:n.text,translations:{en:{text:n.english}},frame:{x:10,y:10,w:n.w,h:100},style:{fontSize:n.fontSize,rotation:5,...n.style}}))};
  const clean=settings(design).design;assert.deepEqual(clean.nodes.map(n=>n.sticker),stickerPresets.map(n=>n.id));assert.equal(clean.nodes.find(n=>n.sticker==='heart').frame.w,96);assert.equal(clean.nodes.find(n=>n.sticker==='label-solid').style.background,'#202124');assert.equal(clean.nodes.find(n=>n.sticker==='label-solid').style.color,'#ffffff');
  const {previewCanvasLayout}=await import('../src/lib/blog-canvas.mjs');assert.equal(previewCanvasLayout({blog:{design:clean}},'en').blog.design.nodes.find(n=>n.sticker==='note').text,'Keep in touch');
+});
+
+
+test('duplicating an edge-aligned layer preserves its dimensions through saving',()=>{
+ const d={version:1,width:940,background:'#ffffff',autoLayout:false,nodes:[{id:'wide-copy',kind:'text',text:'A full-width story',translations:{en:{text:'Original'}},frame:{x:0,y:39999,w:940,h:100},style:{fontSize:28}}]};
+ const copy=duplicateDesignNode(d,'wide-copy','second-copy'),node=copy.nodes[1];assert.equal(node.frame.x,0);assert.equal(node.frame.y,40000);assert.equal(node.frame.w,940);assert.equal(settings(copy).design.nodes[1].frame.w,940);assert.equal(node.translations.en.text,'Original');assert.notEqual(node.translations,d.nodes[0].translations);assert.equal(d.nodes.length,1);
+ assert.equal(duplicateDesignNode({...d,nodes:[{...d.nodes[0],locked:true}]},'wide-copy','second-copy').nodes.length,1);assert.equal(duplicateDesignNode(d,'wide-copy','wide-copy'),d);
+ const template=defaultBlogDesign(p);assert.equal(duplicateDesignNode(template,template.nodes[0].id,'duplicate-template'),template);
+});
+
+test('display bounds reserve the whole rotated sticker above and beside the page',()=>{
+ const d={width:940,nodes:[{id:'top-star',kind:'sticker',sticker:'star',frame:{x:-80,y:-100,w:120,h:80},style:{rotation:30}}]},bounds=designBounds(d);assert.ok(bounds.top<-100);assert.ok(bounds.left<-80);assert.equal(bounds.right,940);assert.ok(bounds.bottom>=500);assert.ok(designHeight(d)-bounds.top>600);
+ const hidden=designBounds({...d,nodes:[{...d.nodes[0],hidden:true}]});assert.equal(hidden.top,0);assert.equal(hidden.left,0);
 });

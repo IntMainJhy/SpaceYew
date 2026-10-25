@@ -49,3 +49,12 @@ Drag a sticker by its body or label; double-click its text to edit in place, or 
 
 
 The wider sticker rail keeps search and style controls visible while results scroll. On phones, the library opens as a closable sheet with real thumbnails; adding a sticker returns to the canvas. The inspector places editable content before geometry, and intermediate screens use a dismissible inspector overlay. Canvas controls occupy a reserved bottom band instead of covering page content.
+
+
+Selected layers have quick Duplicate, Hide, Lock and Delete actions above the canvas; layer rows also expose visibility and locking. Cmd/Ctrl D duplicates an unlocked custom layer. Duplicates stay within page bounds without changing their saved width; Undo/Redo restores the selection as well as content. Pan mode and saving prevent node dragging.
+
+Preview supports desktop, tablet and phone widths, reports the actual frame width and keeps reading progress when switching sizes. Back to top returns to the beginning, and the chosen device remains selected when returning to edit. Valid custom link buttons open a separate tab in preview and public pages. Rotated ornaments outside the top or sides reserve matching display space.
+
+Public Anx pages link to every available, visible section, including skills and image collections. The compact title area retains the signature, while certificate and photo grids use small consistent thumbnails with readable captions. Certificates keep the whole image visible; gallery and résumé images open a native image viewer with close, loading/error feedback and keyboard focus return. Empty captions do not reserve blank rows.
+
+Editor modes, publication settings and preview device changes use brief, interruptible transitions. Library and inspector arrivals, layer navigation and zoom provide continuity without animating draggable node transforms. Native image dialogs and public section anchors also transition smoothly; reduced-motion preferences remove spatial effects. Undo, delete and duplication close stale image-upload controls.

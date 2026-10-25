@@ -83,3 +83,18 @@ test('visual themes compose with every layout and preserve geometry, content and
  assert.deepEqual(applyBlogAppearance(applyBlogAppearance(design,'night-player'),'original').nodes,design.nodes);
  assert.equal(applyBlogAppearance(design,'unknown'),design);
 });
+
+test('themes omit only the untouched built-in note without deleting author decorations',async()=>{
+ const {themedDesignNodes,designBounds}=await import('../src/lib/blog-design.mjs');
+ const original=defaultBlogDesign(profile),design={...original,appearance:'volt-terminal'};
+ assert.ok(themedDesignNodes(original).some(n=>n.id==='contact-note'));
+ assert.ok(!themedDesignNodes(design).some(n=>n.id==='contact-note'));
+ assert.equal(designBounds(design).left,0);
+ assert.ok(!themedDesignNodes(clean(design)).some(n=>n.id==='contact-note'));
+ assert.ok(!themedDesignNodes({...design,nodes:design.nodes.map(n=>n.id==='contact-note'?{...n,frame:{...n.frame,h:87}}:n)}).some(n=>n.id==='contact-note'));
+ assert.ok(design.nodes.some(n=>n.id==='contact-note'));
+ for(const change of [{text:'Write to me'},{frame:{x:-140,y:-12,w:120,h:94}},{style:{fontSize:18,rotation:-5,padding:4}},{translations:{en:{text:'My note'}}}]){
+  const edited={...design,nodes:design.nodes.map(n=>n.id==='contact-note'?{...n,...change}:n)};
+  assert.ok(themedDesignNodes(edited).some(n=>n.id==='contact-note'));
+ }
+});

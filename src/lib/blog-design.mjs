@@ -14,12 +14,17 @@ export function defaultBlogDesign(profile,layout={},content=[]){
 }
 export const designAssetIds=design=>(design?.nodes||[]).filter(n=>n.kind==='image'&&n.assetId).map(n=>n.assetId);
 export function visibleDesignNodes(nodes){const visible=new Set(nodes.filter(n=>!n.hidden).map(n=>n.id));return nodes.filter(n=>!n.hidden&&(!n.anchor||visible.has(n.anchor)))}
+export function themedDesignNodes(design){
+ const nodes=visibleDesignNodes(design.nodes);
+ if(!design.appearance||design.appearance==='original')return nodes;
+ return nodes.filter(n=>!(n.id==='contact-note'&&n.kind==='sticker'&&n.sticker==='note'&&n.text==='保持联系'&&!n.label&&n.frame.x===-130&&n.frame.y===-12&&n.frame.w===120&&n.style?.rotation===-6&&n.style?.fontSize===18&&n.style?.padding===4&&!n.style.background&&!n.style.color&&(!n.style.font||n.style.font==='serif')&&(!n.style.align||n.style.align==='left')&&!n.style.radius&&Object.entries(n.translations||{}).every(([locale,value])=>!value.label&&!value.alt&&value.text===({en:'Keep in touch',ja:'連絡しよう'})[locale])));
+}
 export function publicBlogDesign(design){return {...design,nodes:visibleDesignNodes(design.nodes)}}
 export function resolveDesignFrame(design,node,positions={}){if(positions[node.id])return {...node.frame,...positions[node.id]};const target=node.anchor&&design.nodes.find(n=>n.id===node.anchor),frame=target&&(positions[target.id]||target.frame);return frame?{...node.frame,x:frame.x+node.frame.x,y:frame.y+node.frame.y}:node.frame}
 export const designOrder=nodes=>visibleDesignNodes(nodes).map((node,index)=>({node,index})).sort((a,b)=>a.node.frame.y-b.node.frame.y||a.node.frame.x-b.node.frame.x||a.index-b.index).map(x=>x.node);
 function visualFrame(design,node){const f=resolveDesignFrame(design,node),angle=node.kind==='sticker'?(node.style?.rotation||0)*Math.PI/180:0,c=Math.abs(Math.cos(angle)),s=Math.abs(Math.sin(angle)),w=f.w*c+f.h*s,h=f.w*s+f.h*c;return {x:f.x+(f.w-w)/2,y:f.y+(f.h-h)/2,w,h}}
 export function designHeight(design){return designBounds(design).bottom+24}
-export function designBounds(design){const frames=visibleDesignNodes(design.nodes).map(n=>visualFrame(design,n));return {left:Math.min(0,...frames.map(f=>f.x)),right:Math.max(design.width,...frames.map(f=>f.x+f.w)),top:Math.min(0,...frames.map(f=>f.y)),bottom:Math.max(500,...frames.map(f=>f.y+f.h))}}
+export function designBounds(design){const frames=themedDesignNodes(design).map(n=>visualFrame(design,n));return {left:Math.min(0,...frames.map(f=>f.x)),right:Math.max(design.width,...frames.map(f=>f.x+f.w)),top:Math.min(0,...frames.map(f=>f.y)),bottom:Math.max(500,...frames.map(f=>f.y+f.h))}}
 export function arrangeBlogDesign(design){
  let y=0;const flow=designOrder(design.nodes).filter(n=>n.kind!=='sticker'),ordered=[...flow,...design.nodes.filter(n=>n.hidden&&n.kind!=='sticker'),...design.nodes.filter(n=>n.kind==='sticker')];
  if(design.template==='columns'&&!ordered.some(n=>n.locked&&n.kind!=='sticker')){

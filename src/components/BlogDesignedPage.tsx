@@ -5,7 +5,7 @@ import {useLocale} from './LocaleProvider';
 import {BlogSticker} from './BlogSticker';
 import {AnxPortfolio} from './AnxPortfolio';
 import {BlogDesignLabel} from './BlogDesignFields';
-import {designHeight,designOrder,visibleDesignNodes,designBounds,positionedBlogDesign,mobileBlogDesign} from '@/lib/blog-design.mjs';
+import {designHeight,designOrder,visibleDesignNodes,designBounds,themedDesignNodes,positionedBlogDesign,mobileBlogDesign} from '@/lib/blog-design.mjs';
 import type {SpaceData} from './SpaceBoard';
 export function designBlockStyle(node:SpaceData,appearance='original'):CSSProperties{
  const s=node.style||{},theme=blogAppearance(appearance),resolved=blogNodeColors(s,appearance);return {...({'--sticker-paper':s.background||'#f5f0df'} as CSSProperties),background:s.background||(s.color?resolved.background:undefined),color:s.color||(appearance!=='original'||s.background?resolved.color:undefined),borderRadius:s.radius||0,padding:s.padding||0,textAlign:s.align||'left',...(node.kind!=='template'?{fontSize:s.fontSize||28,fontFamily:appearance!=='original'&&node.kind!=='sticker'&&(!s.font||s.font==='serif')?theme.font:s.font==='sans'?'Arial,"PingFang SC",sans-serif':s.font==='mono'?'ui-monospace,monospace':node.kind==='sticker'?'"Kaiti SC",STKaiti,cursive':'Baskerville,"Songti SC",serif'}:{}),...(node.kind==='template'?{'--anx-paper':resolved.background,'--anx-ink':resolved.color,'--anx-muted':theme.muted,'--anx-line':theme.line,'--theme-accent':theme.accent,'--theme-surface':theme.surface,'--theme-font':theme.font} as CSSProperties:{})};
@@ -21,7 +21,7 @@ export function BlogDesignBlock({node,data,profile,preview=false}:{node:SpaceDat
  </div>;
 }
 export function BlogDesignedPage({data,profile,preview=false}:{data:SpaceData;profile:SpaceData;preview?:boolean}){
- const {locale}=useLocale(),design=data.layout.blog.design,nodes=designOrder(visibleDesignNodes(design.nodes)).map((n:SpaceData)=>({...n,...Object.fromEntries(['label','text','alt'].map(key=>[key,n.translations?.[locale]?.[key]?.trim()?n.translations[locale][key]:n[key]]))}));
+ const {locale}=useLocale(),design=data.layout.blog.design,nodes=designOrder(themedDesignNodes(design)).map((n:SpaceData)=>({...n,...Object.fromEntries(['label','text','alt'].map(key=>[key,n.translations?.[locale]?.[key]?.trim()?n.translations[locale][key]:n[key]]))}));
  const shell=useRef<HTMLDivElement>(null),page=useRef<HTMLDivElement>(null),[view,setView]=useState({width:0,height:0});
  useLayoutEffect(()=>{const outer=shell.current,inner=page.current;if(!outer||!inner)return;let frame=0;const measure=()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>{const width=outer.clientWidth,height=Math.max(inner.offsetHeight,inner.scrollHeight);setView(v=>v.width===width&&v.height===height?v:{width,height})})};const observer=new ResizeObserver(measure);observer.observe(outer);observer.observe(inner);setView({width:outer.clientWidth,height:Math.max(inner.offsetHeight,inner.scrollHeight)});measure();return()=>{cancelAnimationFrame(frame);observer.disconnect()}},[design]);
  const bounds=designBounds(design),span=bounds.right-bounds.left,mobile=mobileBlogDesign(view.width),scale=view.width&&!mobile?Math.min(1,view.width/span):1,left=mobile?0:Math.max(0,(view.width-span*scale)/2)-bounds.left*scale;

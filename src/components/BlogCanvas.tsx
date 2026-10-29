@@ -96,7 +96,7 @@ export function BlogCanvas({profile,layout,language,onProfile,onLayout,say,media
  function fit(){fitted.current=true;const el=viewport.current;if(!el||!flow.current||el.clientWidth===0)return;const d=live.current.layout.blog?.design||design,b=designBounds(d),gutter=el.clientWidth<600?24:48,z=Math.max(.15,Math.min(1,(el.clientWidth-gutter)/(b.right-b.left)));void flow.current.setViewport({x:(el.clientWidth-(b.right-b.left)*z)/2-b.left*z,y:40-b.top*z,zoom:z},{duration:0})}
  useEffect(()=>{const el=viewport.current;if(!el)return;let width=el.clientWidth;const observer=new ResizeObserver(()=>{const next=el.clientWidth;if(!next)return;if(width&&width!==next){if(fitted.current||(width<600)!==(next<600))requestAnimationFrame(fit);else{const v=flow.current?.getViewport();if(v)void flow.current?.setViewport({...v,x:v.x+(next-width)/2},{duration:0})}}width=next});observer.observe(el);return()=>observer.disconnect()},[]);
  useEffect(()=>{
-  const ignored=(e:KeyboardEvent)=>disabled||viewport.current?.closest('[hidden]')||(e.target instanceof Element&&e.target.closest('input,textarea,select,[contenteditable=true]'));
+  const ignored=(e:KeyboardEvent)=>disabled||viewport.current?.closest('[hidden]')||(e.target instanceof Element&&e.target.closest('input,textarea,select,[contenteditable=true],.bd-text-toolbar'));
   const keydown=(e:KeyboardEvent)=>{if(ignored(e))return;const key=e.key.toLowerCase();if((e.metaKey||e.ctrlKey)&&key==='z'){e.preventDefault();undo(e.shiftKey);return}
    if((e.metaKey||e.ctrlKey)&&key==='d'&&selected){e.preventDefault();duplicateLayer();return}
    if(e.metaKey||e.ctrlKey||e.altKey)return;

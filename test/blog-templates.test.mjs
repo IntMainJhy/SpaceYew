@@ -149,3 +149,11 @@ test('selection formatting is bounded, escaped data and survives save without ch
  assert.throws(()=>validateInlineText({[key]:[{text:'x'.repeat(6001)}]},requireValue));
  assert.equal(validateInlineText({[key]:[{text:'<script>alert(1)</script>',bold:true}]},requireValue)[key][0].text,'<script>alert(1)</script>');
 });
+
+test('inline synchronization compares normalized documents without splitting selection on equivalent runs',async()=>{
+ const {canonicalInlineRuns}=await import('../src/lib/blog-inline-text.mjs');
+ const merged=[{text:'One\nTwo',size:24,font:'inter',color:'#2454a4',italic:true,bold:true}];
+ const split=[{text:'One',bold:true,italic:true,color:'#2454a4',font:'inter',size:24},{text:'\n'},{text:'Two',bold:true,italic:true,color:'#2454a4',font:'inter',size:24}];
+ assert.deepEqual(canonicalInlineRuns('One\nTwo',merged),canonicalInlineRuns('One\nTwo',split));
+ assert.deepEqual(canonicalInlineRuns('Changed',merged),[{text:'Changed'}]);
+});

@@ -43,7 +43,7 @@ function ColorCutout({id,label}:{id:string;label?:string}){
 }
 export function BlogSticker({node,children,inlineEditing=true}:{node:SpaceData;children?:ReactNode;inlineEditing?:boolean}){
  const {locale}=useLocale(),edit=useBlogEditing(),text=node.translations?.[locale]?.text?.trim()?node.translations[locale].text:node.text||'',preset=stickerPresets.find(p=>p.id===node.sticker),label=locale==='en'?preset?.en:preset?.zh,drawing=drawings[node.sticker],pixel=pixels[node.sticker],cutout=node.sticker.startsWith('pop-'),graphic=!!(drawing||pixel||cutout);
- const copy=children??(edit&&inlineEditing?<DesignText path={['$sticker']} label={locale==='en'?'Sticker text':'贴纸文字'} max={300}>{text}</DesignText>:text);
+ const copy=children??((edit&&inlineEditing)||!edit?<DesignText path={['$sticker']} label={locale==='en'?'Sticker text':'贴纸文字'} max={300}>{text}</DesignText>:text);
  const customPaint=!!(node.style?.color||node.style?.background),inkLabel=node.sticker==='label-solid',style={'--sticker-turn':(node.style?.rotation||0)+'deg','--sticker-accent':node.style?.color||undefined,'--sticker-surface':node.style?.background||undefined,...(inkLabel?{background:customPaint?node.style?.background||'#ffffff':'#202124',color:customPaint?node.style?.color||'#202124':'#ffffff'}:{})} as CSSProperties;
  return <div className={'bd-sticker bd-sticker-'+node.sticker} style={style} data-sticker={node.sticker} data-family={preset?.group}>
   {drawing&&<svg className="bd-sticker-symbol" viewBox={drawing.box||'0 0 80 80'} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" role="img" aria-label={node.alt||label}><path d={drawing.path}/></svg>}

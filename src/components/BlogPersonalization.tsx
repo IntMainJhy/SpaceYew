@@ -11,7 +11,7 @@ export function BlogPersonalization({design,mode,say,onChange,disabled}:{design:
  const colors=['textColor','headingColor','linkColor'];
  const lowContrast=colors.some(key=>typography[key]&&colorContrast(typography[key],paper)<4.5);
  const update=(key:string,value:string)=>onChange('typography',{...typography,[key]:value});
- if(mode==='fonts')return <div className="bt-personalization"><h3>{say('让文字有自己的性格','Give your words a voice')}</h3><p>{say('中文与英文字体可独立搭配。应用到页面文字，也可自定义文字颜色和标题效果。','Pair Chinese and Latin type independently, with custom colors and heading treatments.')}</p>
+ if(mode==='fonts')return <div className="bt-personalization"><h3>{say('让文字有自己的性格','Give your words a voice')}</h3><p>{say('这里设置整页默认样式。点击页面文字并拖选，可单独设置选区的字体、颜色和效果。','Set page defaults here. Select text on the canvas to format only that selection.')}</p>
   <label>{say('中文字体','Chinese typeface')}<select aria-label={say('中文字体','Chinese typeface')} disabled={disabled} value={typography.chinese||'theme'} onChange={e=>onChange('typography',{...typography,chinese:e.target.value})}>{chineseFonts.map(f=><option key={f.id} value={f.id}>{say(f.name,f.en)}</option>)}</select></label>
   <label>{say('英文字体','Latin typeface')}<select aria-label={say('英文字体','Latin typeface')} disabled={disabled} value={typography.latin||'theme'} onChange={e=>onChange('typography',{...typography,latin:e.target.value})}>{latinFonts.map(f=><option key={f.id} value={f.id}>{say(f.name,f.en)}</option>)}</select></label>
   <h3>{say('文字颜色与效果','Text colors & effects')}</h3>

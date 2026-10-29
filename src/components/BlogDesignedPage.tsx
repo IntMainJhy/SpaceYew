@@ -1,24 +1,26 @@
 'use client';
-import {useLayoutEffect,useRef,useState,type CSSProperties} from 'react';
+import {useContext,useLayoutEffect,useRef,useState,type CSSProperties} from 'react';
 import {blogFontStack,customBlogFont} from '@/lib/blog-typography.mjs';
 import {blogAppearance,blogPaper,blogNodeColors} from '@/lib/blog-appearances.mjs';
 import {useLocale} from './LocaleProvider';
 import {BlogSticker} from './BlogSticker';
 import {AnxPortfolio} from './AnxPortfolio';
-import {BlogDesignLabel} from './BlogDesignFields';
+import {BlogDesignLabel,BlogInlineContext,DesignText,useBlogEditing} from './BlogDesignFields';
 import {designHeight,designOrder,visibleDesignNodes,designBounds,themedDesignNodes,positionedBlogDesign,mobileBlogDesign} from '@/lib/blog-design.mjs';
 import type {SpaceData} from './SpaceBoard';
 export function designBlockStyle(node:SpaceData,appearance='original',typography:SpaceData={}):CSSProperties{
  const s=node.style||{},theme=blogAppearance(appearance),resolved=blogNodeColors(s,appearance);return {...({'--sticker-paper':s.background||'#f5f0df','--blog-font':blogFontStack(typography,theme.font),'--blog-text-color':s.color||typography.textColor||undefined,'--blog-heading-color':s.color||typography.headingColor||undefined,'--blog-link-color':s.color||typography.linkColor||undefined} as CSSProperties),background:s.background||(s.color?resolved.background:undefined),color:s.color||(node.kind!=='sticker'&&typography.textColor)||(appearance!=='original'||s.background?resolved.color:undefined),borderRadius:s.radius||0,padding:s.padding||0,textAlign:s.align||'left',...(node.kind!=='template'?{fontSize:s.fontSize||28,fontFamily:customBlogFont({typography})&&node.kind!=='sticker'?blogFontStack(typography,theme.font):appearance!=='original'&&node.kind!=='sticker'&&(!s.font||s.font==='serif')?blogFontStack(typography,theme.font):s.font==='sans'?'Arial,"PingFang SC",sans-serif':s.font==='mono'?'ui-monospace,monospace':node.kind==='sticker'?'"Kaiti SC",STKaiti,cursive':'Baskerville,"Songti SC",serif'}:{}),...(node.kind==='template'?{'--anx-paper':resolved.background,'--anx-ink':resolved.color,'--anx-muted':theme.muted,'--anx-line':theme.line,'--theme-accent':theme.accent,'--theme-surface':theme.surface,'--theme-font':theme.font} as CSSProperties:{})};
 }
 export function BlogDesignBlock({node,data,profile,preview=false}:{node:SpaceData;data:SpaceData;profile:SpaceData;preview?:boolean}){
+ const {locale}=useLocale(),inlineContext=useContext(BlogInlineContext),editing=useBlogEditing(),useLocaleLanguage=editing?inlineContext.language:locale;
+ const inlineText=(text:string)=><BlogInlineContext.Provider value={{runs:node.richText||{},language:useLocaleLanguage}}><DesignText path={['text']} label="文字内容" max={6000}>{text}</DesignText></BlogInlineContext.Provider>;
  const settings=data.layout.blog||{},content=[...(data.content||[]),...(data.legacyContent||[])];
  return <div className={'bd-block bd-kind-'+node.kind} data-appearance={settings.design?.appearance||'original'} data-font-custom={customBlogFont(settings.design)} data-heading-effect={settings.design?.typography?.headingEffect||'none'} data-page-template={settings.design?.template||'anx'} data-presentation={node.presentation||'classic'} style={designBlockStyle(node,settings.design?.appearance,settings.design?.typography)}>
-  {node.kind==='template'&&<BlogDesignLabel.Provider value={node.label||''}><AnxPortfolio data={{...data,layout:{...data.layout,blog:settings}}} p={profile} content={content} part={node.part} preview={preview} embedded/></BlogDesignLabel.Provider>}
-  {node.kind==='sticker'&&<BlogSticker node={node}/>}
-  {node.kind==='text'&&<p className="bd-custom-text">{node.text}</p>}
-  {node.kind==='image'&&(node.assetId?<figure className="bd-custom-image"><img src={'/media/'+node.assetId} alt={node.alt||''}/>{node.text&&<figcaption>{node.text}</figcaption>}</figure>:null)}
-  {node.kind==='button'&&(!node.url?<span className="bd-custom-button">{node.text}</span>:<a className="bd-custom-button" href={node.url} target="_blank" rel="noopener noreferrer">{node.text}</a>)}
+  {node.kind==='template'&&<BlogInlineContext.Provider value={{runs:node.richText||{},language:useLocaleLanguage}}><BlogDesignLabel.Provider value={node.label||''}><AnxPortfolio data={{...data,layout:{...data.layout,blog:settings}}} p={profile} content={content} part={node.part} preview={preview} embedded/></BlogDesignLabel.Provider></BlogInlineContext.Provider>}
+  {node.kind==='sticker'&&<BlogInlineContext.Provider value={{runs:node.richText||{},language:useLocaleLanguage}}><BlogSticker node={node}/></BlogInlineContext.Provider>}
+  {node.kind==='text'&&<p className="bd-custom-text"><BlogInlineContext.Provider value={{runs:node.richText||{},language:useLocaleLanguage}}><DesignText path={['text']} label="文字内容" max={6000}>{node.text}</DesignText></BlogInlineContext.Provider></p>}
+  {node.kind==='image'&&(node.assetId?<figure className="bd-custom-image"><img src={'/media/'+node.assetId} alt={node.alt||''}/>{node.text&&<figcaption>{inlineText(node.text)}</figcaption>}</figure>:null)}
+  {node.kind==='button'&&(!node.url?<span className="bd-custom-button">{inlineText(node.text)}</span>:<a className="bd-custom-button" href={node.url} target="_blank" rel="noopener noreferrer">{inlineText(node.text)}</a>)}
  </div>;
 }
 export function BlogDesignedPage({data,profile,preview=false}:{data:SpaceData;profile:SpaceData;preview?:boolean}){

@@ -136,3 +136,16 @@ test('custom text colors and heading effects validate and retain author content'
  assert.equal(night.typography.textColor,'#93c5fd');
  assert.equal(clean({...design,typography:{textColor:'',headingEffect:'none'}}).typography.textColor,'');
 });
+
+test('selection formatting is bounded, escaped data and survives save without changing text',async()=>{
+ const {inlineKey,inlineDocument,inlineRuns,validateInlineText}=await import('../src/lib/blog-inline-text.mjs');
+ const key=inlineKey('',['intro']),runs=[{text:'中文 '},{text:'Hello',bold:true,italic:true,color:'#2454a4',font:'newsreader',size:24},{text:'\nWorld',underline:true}];
+ assert.deepEqual(inlineRuns(inlineDocument(runs.map(r=>r.text).join(''),runs)),[{text:'中文 '},runs[1],{text:'\n'},{text:'World',underline:true}]);
+ const design=defaultBlogDesign(profile),node=design.nodes.find(n=>n.part==='about'),saved=clean({...design,nodes:design.nodes.map(n=>n.id===node.id?{...n,richText:{[key]:runs}}:n)});
+ assert.deepEqual(saved.nodes.find(n=>n.id===node.id).richText[key],runs);
+ assert.deepEqual(inlineRuns(inlineDocument('Changed content',runs)),[{text:'Changed content'}]);
+ const requireValue=(ok,message)=>{if(!ok)throw Error(message)};
+ for(const run of [{text:'x',color:'red'},{text:'x',size:400},{text:'x',font:'url(evil)'},{text:'x',bold:'yes'}])assert.throws(()=>validateInlineText({[key]:[run]},requireValue));
+ assert.throws(()=>validateInlineText({[key]:[{text:'x'.repeat(6001)}]},requireValue));
+ assert.equal(validateInlineText({[key]:[{text:'<script>alert(1)</script>',bold:true}]},requireValue)[key][0].text,'<script>alert(1)</script>');
+});

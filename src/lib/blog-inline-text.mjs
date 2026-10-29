@@ -1,0 +1,15 @@
+import {chineseFonts,latinFonts} from './blog-typography.mjs';
+export const inlineFonts=[...chineseFonts,...latinFonts].filter(f=>f.id!=='theme');
+export const inlineKey=(language,path)=>JSON.stringify([language||'',...path]);
+export function inlineStyle(run){return {color:run.color||undefined,fontFamily:inlineFonts.find(f=>f.id===run.font)?.family||undefined,fontSize:run.size?run.size+'px':undefined,fontWeight:run.bold?700:undefined,fontStyle:run.italic?'italic':undefined,textDecoration:run.underline?'underline':undefined}}
+export function inlineDocument(text,runs){
+ const source=Array.isArray(runs)&&runs.map(r=>r.text).join('')===text?runs:[{text}];
+ const content=[];for(const run of source){const marks=[];for(const name of ['bold','italic','underline'])if(run[name])marks.push({type:name});if(run.color||run.font||run.size)marks.push({type:'selectionStyle',attrs:{color:run.color||null,font:run.font||null,size:run.size||null}});for(const [i,part] of run.text.split('\n').entries()){if(i)content.push({type:'hardBreak'});if(part)content.push({type:'text',text:part,...(marks.length?{marks}:{})})}}
+ return {type:'doc',content:[{type:'paragraph',...(content.length?{content}:{})}]};
+}
+export function inlineRuns(doc){const runs=[];for(const [i,p] of (doc.content||[]).entries()){if(i)runs.push({text:'\n'});for(const node of p.content||[]){if(node.type==='hardBreak'){runs.push({text:'\n'});continue}if(node.type!=='text')continue;const run={text:node.text};for(const mark of node.marks||[]){if(['bold','italic','underline'].includes(mark.type))run[mark.type]=true;else if(mark.type==='selectionStyle'){for(const key of ['color','font','size'])if(mark.attrs?.[key])run[key]=mark.attrs[key]}}runs.push(run)}}return runs}
+export function validateInlineText(input,requireValue){
+ requireValue(input&&typeof input==='object'&&!Array.isArray(input)&&Object.keys(input).length<=100,'局部文字格式无效');
+ const out={};for(const [key,runs] of Object.entries(input)){let path;try{path=JSON.parse(key)}catch{}requireValue(Array.isArray(path)&&['','zh','en','ja'].includes(path[0])&&path.length>1&&path.length<=16&&path.slice(1).every(part=>(typeof part==='string'&&part.length<=100&&!['__proto__','constructor','prototype'].includes(part))||(Number.isInteger(part)&&part>=0&&part<=1000)),'局部文字位置无效');requireValue(key.length<=400&&Array.isArray(runs)&&runs.length<=1000,'局部文字格式过多');let length=0;out[key]=runs.map(run=>{requireValue(run&&typeof run.text==='string','局部文字内容无效');length+=run.text.length;const clean={text:run.text};if(run.color!==undefined){requireValue(/^#[0-9a-f]{6}$/i.test(run.color),'局部文字颜色无效');clean.color=run.color}if(run.font!==undefined){requireValue(inlineFonts.some(f=>f.id===run.font),'局部文字字体无效');clean.font=run.font}if(run.size!==undefined){requireValue(Number.isInteger(run.size)&&run.size>=12&&run.size<=96,'局部文字字号无效');clean.size=run.size}for(const key of ['bold','italic','underline'])if(run[key]!==undefined){requireValue(typeof run[key]==='boolean','局部文字效果无效');if(run[key])clean[key]=true}return clean});requireValue(length<=6000,'局部文字内容过长')}
+ requireValue(JSON.stringify(out).length<=120000,'局部文字格式过多');return out;
+}

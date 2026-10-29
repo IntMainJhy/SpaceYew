@@ -28,7 +28,7 @@ The current editor uses Anx Portfolio and supports original, English and Chinese
 | Platform/admin deployment / 分入口部署 | [Deployment](../deploy/README-split.en.md) | [部署说明](../deploy/README-split.md) |
 | Moderation and launch / 审核与上线 | [Launch checklist](moderation-and-launch.md) | 同页含中文说明 |
 | Scoped audit and validation / 审计与验证 | [2026-10-22 audit](audit-2026-10-22.md) | 同页含中文说明 |
-| SY identity and generated icons / SY 标识与图标生成 | [Brand assets](brand.md) | 英文技术说明 |
+| SpaceYew identity and generated icons / 站点标识与图标生成 | [Brand assets](brand.md) | 英文技术说明 |
 | Third-party attribution / 第三方署名 | [Notices](../THIRD_PARTY_NOTICES.md) | 以原始许可条款为准 |
 
 Public registration and production publishing remain gated. Local rule screening is triage, not a compliance certificate. There is no public production demo URL at present. Application data, real résumé sources and user media belong in private storage; macOS and Windows clients are outside this repository.

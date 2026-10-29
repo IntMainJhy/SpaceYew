@@ -1,6 +1,6 @@
 # SpaceYew brand assets
 
-The SpaceYew symbol is the original letter-free “Joined leaves / 合叶” mark: two asymmetric solid leaves in periwinkle `#6456C0` and warm gold `#D69B32`, separated by a curved transparent channel. It has no background tile. The source of truth is `src/app/icon.svg`; the SpaceYew wordmark keeps the website’s editorial serif type. Portfolio illustrations, résumé images, certificates and test screenshots are content, not reusable brand assets.
+The SpaceYew symbol is the original letter-free “Joined leaves / 合叶” mark: two asymmetric solid leaves in deep sea blue `#3976A8` and coral orange `#D87560`, separated by a curved transparent channel. It has no background tile. The source of truth is `src/app/icon.svg`; the SpaceYew wordmark keeps the website’s editorial serif type. Portfolio illustrations, résumé images, certificates and test screenshots are content, not reusable brand assets.
 
 Run `npm run brand:icons` after changing the SVG. `scripts/brand-icons.mjs` uses Sharp to deterministically generate `src/app/favicon.ico` (16, 32 and 48 px), `src/app/apple-icon.png` (180 px) and `public/brand/spaceyew-icon.png` (512 px). PNG exports include an origin note; no image generation model is involved.
 

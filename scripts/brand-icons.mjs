@@ -4,7 +4,7 @@ import sharp from 'sharp';
 import {createHash} from 'node:crypto';
 import {crc32} from 'node:zlib';
 function withOrigin(png){
- const text=Buffer.from('impeccable:prompt\0Original SpaceYew joined-leaves symbol: two asymmetric solid leaves in periwinkle and warm gold, separated by a transparent curved channel; no letters or background tile. Vector: src/app/icon.svg. Deterministic sharp export via scripts/brand-icons.mjs; no image-generation model used.');
+ const text=Buffer.from('impeccable:prompt\0Original SpaceYew joined-leaves symbol: two asymmetric solid leaves in deep sea blue and coral orange, separated by a transparent curved channel; no letters or background tile. Vector: src/app/icon.svg. Deterministic sharp export via scripts/brand-icons.mjs; no image-generation model used.');
  const chunk=Buffer.alloc(text.length+12);chunk.writeUInt32BE(text.length);chunk.write('tEXt',4);text.copy(chunk,8);chunk.writeUInt32BE(crc32(chunk.subarray(4,-4)),chunk.length-4);
  return Buffer.concat([png.subarray(0,-12),chunk,png.subarray(-12)]);
 }

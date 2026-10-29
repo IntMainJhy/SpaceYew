@@ -6,6 +6,6 @@
 <path d="M55 17C58 35 48 50 33 55C31 56 29 56 27 56C29 37 39 24 55 17Z" fill="black" stroke="black" stroke-width="5" stroke-linejoin="round"/>
 </mask>
 </defs>
-<path d="M12 8C30 7 42 16 42 31C42 40 38 46 32 51C18 45 9 36 8 24C7 17 9 11 12 8Z" fill="#6456C0" mask="url(#leaf-gap)"/>
-<path d="M55 17C58 35 48 50 33 55C31 56 29 56 27 56C29 37 39 24 55 17Z" fill="#D69B32"/>
+<path d="M12 8C30 7 42 16 42 31C42 40 38 46 32 51C18 45 9 36 8 24C7 17 9 11 12 8Z" fill="#3976A8" mask="url(#leaf-gap)"/>
+<path d="M55 17C58 35 48 50 33 55C31 56 29 56 27 56C29 37 39 24 55 17Z" fill="#D87560"/>
 </svg>

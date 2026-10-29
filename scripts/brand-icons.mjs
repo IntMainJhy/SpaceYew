@@ -4,7 +4,7 @@ import sharp from 'sharp';
 import {createHash} from 'node:crypto';
 import {crc32} from 'node:zlib';
 function withOrigin(png){
- const text=Buffer.from('impeccable:prompt\0Original SpaceYew open-pages symbol, three rounded paper planes rotating around a central negative space; no letters. Vector: src/app/icon.svg. Deterministic sharp export via scripts/brand-icons.mjs; no image-generation model used.');
+ const text=Buffer.from('impeccable:prompt\0Original SpaceYew oblique-window symbol, a static rounded diamond with an off-center square aperture; no letters. Vector: src/app/icon.svg. Deterministic sharp export via scripts/brand-icons.mjs; no image-generation model used.');
  const chunk=Buffer.alloc(text.length+12);chunk.writeUInt32BE(text.length);chunk.write('tEXt',4);text.copy(chunk,8);chunk.writeUInt32BE(crc32(chunk.subarray(4,-4)),chunk.length-4);
  return Buffer.concat([png.subarray(0,-12),chunk,png.subarray(-12)]);
 }

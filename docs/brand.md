@@ -1,6 +1,6 @@
 # SpaceYew brand assets
 
-The SpaceYew symbol is an original letter-free “Open pages” symbol: three rounded paper planes rotate around a central negative space on an ink rounded square. The source of truth is `src/app/icon.svg`; the SpaceYew wordmark keeps the website’s editorial serif type. Portfolio illustrations, résumé images, certificates and test screenshots are content, not reusable brand assets.
+The SpaceYew symbol is an original letter-free “Oblique window” symbol: a rounded diamond surrounds an off-center square aperture on an ink rounded square. The source of truth is `src/app/icon.svg`; the SpaceYew wordmark keeps the website’s editorial serif type. Portfolio illustrations, résumé images, certificates and test screenshots are content, not reusable brand assets.
 
 Run `npm run brand:icons` after changing the SVG. `scripts/brand-icons.mjs` uses Sharp to deterministically generate `src/app/favicon.ico` (16, 32 and 48 px), `src/app/apple-icon.png` (180 px) and `public/brand/spaceyew-icon.png` (512 px). PNG exports include an origin note; no image generation model is involved.
 

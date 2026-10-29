@@ -125,3 +125,14 @@ test('theme interaction opt-out persists across visual themes',()=>{
  const design=defaultBlogDesign(profile);
  for(const appearance of ['original','sketch','mint-docs','mint-serif','night-player','memphis','volt-terminal'])assert.equal(clean({...design,appearance,motion:{interactions:false}}).motion.interactions,false);
 });
+
+test('custom text colors and heading effects validate and retain author content',()=>{
+ const design=defaultBlogDesign(profile),typography={textColor:'#2454a4',headingColor:'#6b3780',linkColor:'#16634b',headingEffect:'marker'};
+ const saved=clean({...design,typography});
+ assert.deepEqual(saved.typography,{chinese:'theme',latin:'theme',...typography});
+ assert.deepEqual(saved.nodes,clean(design).nodes);
+ for(const invalid of [{textColor:'red'},{linkColor:'url(x)'},{headingEffect:'blink'},{textColor:'#ffffff'}])assert.throws(()=>clean({...design,typography:invalid}));
+ const night=clean({...design,appearance:'night-player',typography:{textColor:'#93c5fd',headingColor:'#d8b4fe',linkColor:'#86efac',headingEffect:'underline'}});
+ assert.equal(night.typography.textColor,'#93c5fd');
+ assert.equal(clean({...design,typography:{textColor:'',headingEffect:'none'}}).typography.textColor,'');
+});

@@ -56,10 +56,10 @@ try{
   const themed=await call('/api/spaces/save',designed,alex);assert.equal(themed.status,200,await themed.clone().text());designed=await themed.json();
   const reopened=await(await call('/api/spaces/mine',undefined,alex)).json();assert.equal(reopened.layout.blog.design.appearance,appearance.id);
  }
- designed.layout.blog.design={...free,typography:{chinese:'xiaowei',latin:'newsreader'},motion:{marquee:true,entrance:false,interactions:false},appearance:'night-player',template:'portfolio',nodes:free.nodes.map(n=>n.part?.startsWith('section:')?{...n,presentation:resumePresentations.find(s=>s.id==='cards').id}:n)};
+ designed.layout.blog.design={...free,typography:{chinese:'xiaowei',latin:'newsreader',textColor:'#93c5fd',headingColor:'#d8b4fe',linkColor:'#86efac',headingEffect:'marker'},motion:{marquee:true,entrance:false,interactions:false},appearance:'night-player',template:'portfolio',nodes:free.nodes.map(n=>n.part?.startsWith('section:')?{...n,presentation:resumePresentations.find(s=>s.id==='cards').id}:n)};
  const styled=await call('/api/spaces/save',designed,alex);assert.equal(styled.status,200);designed=await styled.json();
  assert.equal(designed.layout.blog.design.nodes.find(n=>n.part==='section:work').presentation,'cards');
- const personalization=(await(await call('/api/spaces/mine',undefined,alex)).json()).layout.blog.design;assert.deepEqual(personalization.typography,{chinese:'xiaowei',latin:'newsreader'});assert.deepEqual(personalization.motion,{marquee:true,entrance:false,interactions:false});
+ const personalization=(await(await call('/api/spaces/mine',undefined,alex)).json()).layout.blog.design;assert.deepEqual(personalization.typography,{chinese:'xiaowei',latin:'newsreader',textColor:'#93c5fd',headingColor:'#d8b4fe',linkColor:'#86efac',headingEffect:'marker'});assert.deepEqual(personalization.motion,{marquee:true,entrance:false,interactions:false});
  assert.doesNotMatch(await(await fetch(base+'/blog/'+designed.handle)).text(),/Private page design publication marker/);
  const designSubmit=await(await call('/api/spaces/submit',{revision:designed.revision,accepted:true},alex)).json(),designReview=designSubmit.reviews.find(x=>x.kind==='board'&&x.status==='pending');assert.ok(designReview);
  designed.profile.intro='A later draft must not change the fixed review';assert.equal((await call('/api/spaces/save',designed,alex)).status,200);

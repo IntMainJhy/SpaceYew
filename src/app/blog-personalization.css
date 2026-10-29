@@ -44,3 +44,14 @@
 .blog-canvas-editor .bt-library>header h2{font-size:21px;font-weight:600;letter-spacing:-.025em}
 .bt-font-specimen strong{font-size:22px;text-wrap:balance}
 .blog-canvas-editor :is(.be-heading,.bd-sidebar,.bd-properties,.bp-toolbar,.bc-publish-panel,.bd-stage-top,.bd-toolbar){font-family:Inter,"PingFang SC","Microsoft YaHei",sans-serif}
+/* Author text colors are scoped to content; editor controls keep their own palette. */
+.bd-block[style*="--blog-text-color"] .anx-portfolio :is(p,li,.anx-resume-meta,.anx-resume-updated,.anx-resume-facts):not(.anx-skills li){color:var(--blog-text-color)!important}
+.bd-block[style*="--blog-heading-color"] .anx-portfolio :is(h1,h2,h3){color:var(--blog-heading-color)!important}
+.bd-block[style*="--blog-link-color"] .anx-portfolio .anx-topbar a,.bd-block[style*="--blog-link-color"] .anx-portfolio .anx-panel-body a{color:var(--blog-link-color)!important}
+.bd-block[data-heading-effect=underline] .anx-portfolio :is(h1,h2,h3),.bt-font-specimen [data-heading-effect=underline]{text-decoration:underline;text-decoration-thickness:.055em;text-underline-offset:.2em}
+.bd-block[data-heading-effect=marker] .anx-portfolio :is(h1,h2,h3),.bt-font-specimen [data-heading-effect=marker]{text-decoration:underline;text-decoration-color:color-mix(in srgb,currentColor 22%,transparent);text-decoration-thickness:.45em;text-underline-offset:-.18em;text-decoration-skip-ink:none}
+.bt-color-field{border:0;padding:0;margin:0;min-width:0}.bt-color-field legend{font-size:13px;font-weight:600;margin-bottom:8px}
+.bt-color-field>div{display:flex;gap:6px}.bt-color-field input[type=color]{width:42px;height:44px;padding:3px;border:1px solid #cdd0d5;border-radius:5px;background:#fff;flex-shrink:0}
+.bt-color-field input:not([type=color]){width:0;min-width:0;flex:1;height:44px;border:1px solid #cdd0d5;border-radius:5px;padding:8px;font:inherit;font-size:13px}
+.bt-color-field button{border:0;background:#f1f2f3;border-radius:5px;padding:6px;font:inherit;font-size:12px;min-height:44px;cursor:pointer}.bt-color-field button:disabled{opacity:.45;cursor:default}.bt-color-field small{font-size:12px;line-height:1.6}
+.bt-color-presets{display:flex;gap:10px}.bt-color-presets button{width:40px;height:40px;border:3px solid #fff;outline:1px solid #cdd0d5;border-radius:50%;cursor:pointer}

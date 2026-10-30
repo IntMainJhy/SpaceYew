@@ -10,7 +10,6 @@ import Link from 'next/link';
 import {BrandMark} from './BrandMark';
 import Form from 'next/form';
 import {PageMotion} from './PageMotion';
-import {HomeFlowBackground} from './HomeFlowBackground';
 import {notFound} from 'next/navigation';
 import {localizeContent,localizeProfile} from '@/lib/content-locales.mjs';
 import {getConfig, publicContent, publicBySlug, fileInfo} from '@/lib/db.mjs';
@@ -202,8 +201,7 @@ export async function PublicFrame({path=[],children}:{path?:string[],children:Re
   const homepageRoute=section==='blogs'||section==='blog'||section==='workspace'&&['blog','profile','library','files','insights','connect'].includes(path[1]);
   const active = (href: string) => href==='/blogs'?homepageRoute:href === '/' ? !section : current===href||current.startsWith(href+'/')||href==='/docs'&&section==='articles';
   const authPage=section==='login'||section==='join';
-  return <div className={'organic-site'+(authPage?' public-auth-site':path.length?' public-content-site':'')}>
-    <HomeFlowBackground interactive={!path.length}/>
+  return <div className={'organic-site v2-site'+(!path.length?' v2-landing':'')+(authPage?' public-auth-site':path.length?' public-content-site':'')}>
     <a className="organic-skip" href="#main">{tr("跳到主要内容")}</a><Tracker/>
     <header className="organic-header"><div className="organic-container organic-header-inner"><Link href="/" className="organic-brand"><BrandMark/><div className="site-brand-copy">SpaceYew<span>{tr('社区与博客主页')}</span></div></Link>
       <div className="organic-header-tools">

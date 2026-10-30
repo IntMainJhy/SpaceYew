@@ -408,7 +408,7 @@ html[data-ui] .organic-site.organic-admin .admin-main .form-section>.small-text:
 }
 
 /* Editorial type on the single shared interface; author boards own their fonts. */
-html[data-ui=x-social] .organic-site :is(h1,h2,h3,h4):not(.space-root *) {font-family:var(--organic-serif);font-weight:400!important;letter-spacing:-.04em;}
+html[data-ui=x-social] .organic-site:not(.v2-site) :is(h1,h2,h3,h4):not(.space-root *) {font-family:var(--organic-serif);font-weight:400!important;letter-spacing:-.04em;}
 html[data-ui=x-social] .organic-site .organic-brand {font-family:var(--organic-serif);font-weight:400;letter-spacing:.02em;}
 html[data-ui=x-social] .organic-site.organic-admin .admin-side .brand {font-family:var(--organic-serif);font-weight:400;}
 

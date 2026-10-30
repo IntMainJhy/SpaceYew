@@ -1,8 +1,6 @@
-/* Custom SY letterforms; the wordmark keeps the site's editorial type. */
+/* The open-space symbol stays independent of the active wordmark typography. */
 img.site-brand-mark{display:block;width:36px;height:36px;flex:0 0 36px;max-width:none;border-radius:0}
 html[data-ui] .organic-brand,.blog-platform-logo{display:flex;align-items:center;gap:12px}
 .site-brand-copy{min-width:0}
 html[data-ui] a:hover>.site-brand-mark{transform:none}
 @media(max-width:540px){img.site-brand-mark{width:32px;height:32px;flex-basis:32px}}
-
-html[data-color-mode=dark] img.site-brand-mark{filter:invert(1)}

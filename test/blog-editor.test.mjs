@@ -33,6 +33,6 @@ test('owner editor is privileged, checks CSRF and synchronizes the default publi
 });
 test('admin branding stays on its own origin without opening arbitrary public routes',()=>{
  Object.assign(process.env,{APP_SURFACE:'admin',PLATFORM_URL:'http://localhost:3010',ADMIN_URL:'http://localhost:3011'});
- try{for(const asset of ['/icon.svg','/favicon.ico','/apple-icon.png','/brand/spaceyew-icon.png'])assert.equal(pageRedirect(asset),null);assert.equal(pageRedirect('/blogs'),'http://localhost:3010/blogs');assert.equal(pageRedirect('/brand/private.svg'),'http://localhost:3010/brand/private.svg')}finally{process.env.APP_SURFACE='combined'}
+ try{for(const asset of ['/icon.svg','/favicon.ico','/apple-icon.png','/brand/spaceyew-icon.png','/brand/spaceyew-symbol.svg'])assert.equal(pageRedirect(asset),null);assert.equal(pageRedirect('/blogs'),'http://localhost:3010/blogs');assert.equal(pageRedirect('/brand/private.svg'),'http://localhost:3010/brand/private.svg')}finally{process.env.APP_SURFACE='combined'}
 });
 test.after(async()=>{d.close();delete globalThis.__personalSiteDb;await rm(directory,{recursive:true,force:true})});

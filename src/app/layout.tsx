@@ -51,9 +51,10 @@ import './document-workspace.css';
 import './site-appearance.css';
 import './blog-reading-finish.css';
 import './blog-entry.css';
+import './v2.css';
 export const viewport:Viewport={width:'device-width',initialScale:1,viewportFit:'cover'};
 export const metadata:Metadata={applicationName:'SpaceYew',title:'SpaceYew',description:'Projects, experience, and shared resources.'};
-const designContract='<!-- SpaceYew: one shared editorial interface with warm paper and ink surfaces, the established Baskerville/Songti typography and Inter editor controls, and persistent light/dark/system appearance. Public, workspace and management controls share this system; code retains monospace and author-owned pages keep their independent styles. -->';
+const designContract='<!-- SpaceYew UI v2 experiment: user-pinned blue atmospheric creator showcase, original open-frame brand, modern sans typography and persistent light/dark appearance. Public portfolio content, editing controls and author-selected formatting retain their own boundaries. -->';
 export default async function RootLayout({children}:{children:React.ReactNode}){
   const locale=normalizeLocale((await cookies()).get('site-locale')?.value);
   const nonce=(await headers()).get('x-nonce')||undefined;

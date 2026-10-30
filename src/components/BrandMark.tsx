@@ -1,3 +1,3 @@
-// The label belongs to the surrounding wordmark link; the symbol is decorative there.
-import {brandIconUrl} from '@/lib/brand-icon';
-export function BrandMark(){return <img className="site-brand-mark" src={brandIconUrl} width={32} height={32} alt="" aria-hidden="true"/>}
+// The surrounding wordmark link owns the label; the abstract symbol is decorative.
+import {brandSymbolUrl} from '@/lib/brand-icon';
+export function BrandMark(){return <img className="site-brand-mark" src={brandSymbolUrl} width={36} height={36} alt="" aria-hidden="true"/>}

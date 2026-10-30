@@ -2,7 +2,11 @@
 
 [简体中文](blog-editor.zh-CN.md)
 
-`/blogs` opens the configured public homepage, normally the site owner’s. **Create / edit my blog** opens `/workspace/blog` for the signed-in member’s own content. New members start with their nickname and empty content; existing profiles, certificates, images, PDFs and translations are preserved.
+`/blogs` opens the signed-in member’s published homepage when available, otherwise the configured public author’s homepage. The toolbar identifies **My homepage** or the author by name, rather than labelling a real author as an example. The edit action always opens the signed-in member’s own content; guests see **Sign in to create**. New members start with their nickname and empty content; existing profiles, certificates, images, PDFs and translations are preserved.
+
+**Appearance** in the navigation and editor toolbar offers Light, Dark and System modes, saved only in the current browser. Platform text uses locally hosted Newsreader and ZCOOL XiaoWei; code keeps its monospace face. The default original homepage can follow the reading appearance, while author-selected themes, backgrounds, text colours and custom fonts remain intact. This control does not modify drafts; page design remains under **Change style**.
+
+**Share homepage** opens a QR and link card with copy feedback, system sharing and a QR download. Its link always opens the published version, never unsaved or unreviewed drafts. Escape, the close button or a click outside dismisses the card. Longer blog navigation moves into **All sections**, keeping common shortcuts without horizontal scrolling on phones.
 
 The editor is a page designer built on MIT-licensed React Flow. The existing Anx homepage is the default template: edit text directly on the page, drag section labels, resize block widths from either side, and add text, images, links or stickers. The left panel contains layers, insert tools and a sticker library; the right panel edits position, colours, spacing and typography. Start from the default template or a blank design. Undo/redo covers content and layout changes. Designs are stored with the draft and rendered by the same component in preview and the reviewed public page. Desktop visitors see the saved layout; narrow screens stack blocks in visual reading order.
 
@@ -10,7 +14,7 @@ Edit your name, biography, skills, metrics, résumé sections, entries and publi
 
 **Save draft** saves private changes, including page geometry. Blog drafts require this explicit save. **Submit for publication** fixes a version for review, with the required publication consent; later edits leave the approved public version unchanged. Concurrent edits return a conflict. Share the stable `/blog/<handle>` URL after approval. The publication panel also contains the handle, discovery setting, review feedback, withdrawal and takedown actions. Taking a blog offline removes public access to its space-owned files.
 
-Private workspaces and résumé uploads require real password authentication. Files and references remain account-scoped, and publication requires separately verified identity and eligibility plus server-side review. Production accounts and community access depend on the operator’s explicit HTTPS deployment configuration; this editor change does not establish a deployment. Existing static-site APIs and approved hosted sites remain supported; the editor has no static HTML/ZIP upload interface or theme selector.
+Private workspaces and résumé uploads require real password authentication. Files and references remain account-scoped, and publication requires separately verified identity and eligibility plus server-side review. Production accounts and community access depend on the operator’s explicit HTTPS deployment configuration; this editor change does not establish a deployment. Existing static-site APIs and approved hosted sites remain supported; the editor has no static HTML/ZIP upload interface.
 
 For the owner, **Administration → Blog homes** (`/admin/blog`) uses the administration session. Its explicit **Save & publish homepage** action immediately updates the default public profile and records an audit event; members cannot use that endpoint.
 

@@ -153,13 +153,15 @@ git clone https://github.com/IntMainJhy/SpaceYew.git
 cd SpaceYew
 npm ci
 cp .env.local.example .env.local
-npm run setup
+node --env-file=.env.local scripts/setup.mjs
 npm run dev
 ```
 
 The default local URL is `http://127.0.0.1:3008/`. The repository is already the website root; there is no additional `site-v1` directory to enter. Preserve any existing environment file.
 
 `APP_DATA_DIR` defaults to `../.site-v1-data`, outside the application directory, and can be set to another private absolute path. On first initialization, randomly generated administrator credentials are saved to `initial-admin.txt` in the actual data directory. Re-running setup does not reset existing data. Never upload that file, the database or real configuration.
+
+When continuing an existing site, pin `APP_DATA_DIR=/absolute/path/to/existing-data` in the local `.env.local` file and keep `PUBLIC_URL` aligned with the browser hostname and port. Restart the server after changes. If default profiles, demo accounts or missing avatars suddenly appear, check the active data directory first: a different directory opens a different database and does not mean the original data was deleted. Do not overwrite the original database with an empty one. Direct Node scripts require `node --env-file=.env.local scripts/setup.mjs` or explicitly supplied environment variables; plain Node does not load `.env.local` automatically.
 
 The local environment template contains only loopback URLs and cookie settings. For email, configure SMTP using [.env.example](.env.example); local capture mode is for integration testing. Real SMTP delivery, backup restoration and production deployment require separate validation in the target environment.
 

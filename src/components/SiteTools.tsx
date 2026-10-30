@@ -1,5 +1,6 @@
 import {LanguageSwitcher} from './LocaleProvider';
+import {AppearanceSwitch} from './AppearanceSwitch';
 
 export function SiteTools() {
-  return <div className="site-tools"><LanguageSwitcher/></div>;
+  return <div className="site-tools"><AppearanceSwitch/><LanguageSwitcher/></div>;
 }

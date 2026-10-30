@@ -1492,7 +1492,7 @@
     "は公開を停止しました"
   ],
   "已公开": [
-    "Public",
+    "Published",
     "公開済み"
   ],
   "已公开评论": [
@@ -12430,5 +12430,97 @@
   "支持段落、## 标题和代码块。": [
     "Supports paragraphs, ## headings and code blocks.",
     "段落、## 見出し、コードブロックに対応。"
+  ],
+  "切换外观": [
+    "Change appearance",
+    "外観を切り替える"
+  ],
+  "外观": [
+    "Appearance",
+    "外観"
+  ],
+  "阅读外观": [
+    "Reading appearance",
+    "閲覧時の外観"
+  ],
+  "仅影响当前设备": [
+    "On this device",
+    "この端末のみ"
+  ],
+  "外观模式": [
+    "Appearance mode",
+    "外観モード"
+  ],
+  "浅色": [
+    "Light",
+    "ライト"
+  ],
+  "深色": [
+    "Dark",
+    "ダーク"
+  ],
+  "跟随系统": [
+    "System",
+    "システムに合わせる"
+  ],
+  "明亮纸面，适合日间阅读": [
+    "Bright paper for daytime reading",
+    "昼間に読みやすい明るい紙面"
+  ],
+  "柔和墨色，适合夜间阅读": [
+    "Soft ink tones for evening reading",
+    "夜間に読みやすい柔らかな墨色"
+  ],
+  "随设备外观自动切换": [
+    "Match your device automatically",
+    "端末の設定に自動で合わせる"
+  ],
+  "外观已切换，浏览器暂未允许保存偏好。": [
+    "Appearance changed. Your browser could not save the preference.",
+    "外観を変更しました。ブラウザに設定を保存できませんでした。"
+  ],
+  "主页操作": [
+    "Homepage actions",
+    "ホームページの操作"
+  ],
+  "{0}的主页": [
+    "{0}’s homepage",
+    "{0}のホームページ"
+  ],
+  "登录并创建主页": [
+    "Sign in to create",
+    "ログインして作成"
+  ],
+  "管理我的主页": [
+    "Manage my homepage",
+    "自分のページを管理"
+  ],
+  "编辑主页": [
+    "Edit homepage",
+    "ホームページを編集"
+  ],
+  "关闭分享": [
+    "Close sharing",
+    "共有を閉じる"
+  ],
+  "把作品与经历，分享给更多人。": [
+    "Share your work and your story.",
+    "作品と経験を、もっと多くの人に。"
+  ],
+  "二维码暂时不可用，仍可复制链接分享。": [
+    "The QR code is unavailable. You can still share the link.",
+    "QRコードを読み込めません。リンクは共有できます。"
+  ],
+  "复制未成功，请选中下方链接手动复制": [
+    "Copy failed. Select the link below and copy it manually.",
+    "コピーできませんでした。下のリンクを選択してコピーしてください。"
+  ],
+  "正在分享…": [
+    "Sharing…",
+    "共有中…"
+  ],
+  "公开链接始终指向已发布的主页。": [
+    "This link opens the published homepage.",
+    "このリンクは公開済みのページを開きます。"
   ]
 }

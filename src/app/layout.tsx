@@ -1,6 +1,8 @@
 import type {Metadata,Viewport} from 'next';
-import {cookies} from 'next/headers';
+import {cookies,headers} from 'next/headers';
 import {LocaleProvider} from '@/components/LocaleProvider';
+import {AppearanceProvider} from '@/components/AppearanceProvider';
+import {appearanceInitScript} from '@/lib/site-appearance.mjs';
 import {SitePromotion} from '@/components/PromotionBar';
 import {getConfig} from '@/lib/db.mjs';
 import {appSurface} from '@/lib/app-access.mjs';
@@ -46,11 +48,15 @@ import './blog-theme-motion.css';
 import './blog-editor-controls.css';
 import './site-owner.css';
 import './document-workspace.css';
+import './site-appearance.css';
+import './blog-reading-finish.css';
+import './blog-entry.css';
 export const viewport:Viewport={width:'device-width',initialScale:1,viewportFit:'cover'};
 export const metadata:Metadata={applicationName:'SpaceYew',title:'SpaceYew',description:'Projects, experience, and shared resources.'};
-const designContract='<!-- SpaceYew: one shared X-style interface with white surfaces, ink controls, and the existing flowing background. Baskerville/Songti editorial type unifies headings, body copy and controls; code retains monospace. Public, workspace and management pages share this appearance; author-owned boards keep their independent styles. -->';
+const designContract='<!-- SpaceYew: one shared editorial interface with warm paper and ink surfaces, local Newsreader and ZCOOL XiaoWei typography, and persistent light/dark/system appearance. Public, workspace and management controls share this system; code retains monospace and author-owned pages keep their independent styles. -->';
 export default async function RootLayout({children}:{children:React.ReactNode}){
   const locale=normalizeLocale((await cookies()).get('site-locale')?.value);
+  const nonce=(await headers()).get('x-nonce')||undefined;
   const promotion=appSurface()==='admin'?null:getConfig('site').promotionBar||defaultPromotionBar;
-  return <html lang={htmlLocale(locale)} data-ui="x-social"><body><template id="public-design-contract" dangerouslySetInnerHTML={{__html:designContract}}/><LocaleProvider initialLocale={locale}>{promotion&&<SitePromotion config={promotion}/>} {children}</LocaleProvider></body></html>
+  return <html lang={htmlLocale(locale)} data-ui="x-social" data-color-mode="light" suppressHydrationWarning><head><script nonce={nonce} dangerouslySetInnerHTML={{__html:appearanceInitScript}}/></head><body><template id="public-design-contract" dangerouslySetInnerHTML={{__html:designContract}}/><LocaleProvider initialLocale={locale}><AppearanceProvider>{promotion&&<SitePromotion config={promotion}/>} {children}</AppearanceProvider></LocaleProvider></body></html>
 }

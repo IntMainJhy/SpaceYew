@@ -1,0 +1,175 @@
+/* Shared chrome owns reading appearance. Authored portfolios and canvas nodes
+   retain their own palette and explicit text formatting. Font assets are local. */
+html[data-ui] {
+ --site-font:Newsreader,"ZCOOL XiaoWei","Songti SC",STSong,Georgia,serif;
+ --site-canvas:#f8f7f4;--site-surface:#fff;--site-raised:#f0efeb;
+ --site-text:#252a2d;--site-body:#454c50;--site-muted:#656d72;
+ --site-line:#dedfdb;--site-control-line:#bfc6c8;--site-accent:#30688f;
+ --site-accent-soft:#e8f0f5;--site-action:#273f50;--site-on-action:#fff;
+ --site-focus:#3976a8;--site-selection:#d5e7f3;--site-danger:#a33d39;
+ --site-error-surface:#fff0ee;--site-menu-shadow:0 14px 40px #182b3d1f;
+ --chrome-surface:var(--site-surface);--chrome-ink:var(--site-text);--chrome-muted:var(--site-muted);--chrome-accent:var(--site-accent);
+ background:var(--site-canvas);color:var(--site-text);color-scheme:light;
+ scrollbar-color:var(--site-control-line) var(--site-canvas);
+}
+html[data-ui][data-color-mode=dark] {
+ --site-canvas:#171b1e;--site-surface:#1e2428;--site-raised:#293137;
+ --site-text:#eeeae2;--site-body:#d2d0c9;--site-muted:#a5afb5;
+ --site-line:#3a444b;--site-control-line:#596972;--site-accent:#9fc8e5;
+ --site-accent-soft:#293f4f;--site-action:#c0d9e8;--site-on-action:#172a36;
+ --site-focus:#9fc8e5;--site-selection:#345771;--site-danger:#f4a49c;
+ --site-error-surface:#412a2a;--site-menu-shadow:0 16px 44px #0005;
+ color-scheme:dark;
+}
+html[data-ui][data-color-mode]:has(.organic-site),html[data-ui][data-color-mode] body {background:var(--site-canvas);color:var(--site-text)}
+html[data-ui][data-color-mode] :is(.organic-site,.organic-admin,.blog-public-shell) {
+ --bg:var(--site-canvas);--paper:var(--site-surface);--ink:var(--site-text);--muted:var(--site-muted);--line:var(--site-line);--blue:var(--site-accent);--blue-soft:var(--site-accent-soft);--red:var(--site-danger);
+ --organic-paper:var(--site-surface);--organic-ink:var(--site-text);--organic-text:var(--site-body);--organic-muted:var(--site-muted);--organic-line:var(--site-line);--organic-green:var(--site-accent);--organic-brown:var(--site-accent);--organic-tan:var(--site-raised);--organic-serif:var(--site-font);
+ --x-ink:var(--site-text);--x-muted:var(--site-muted);--x-border:var(--site-line);--x-hover:var(--site-raised);
+ background:var(--site-canvas);color:var(--site-text);font-family:var(--site-font);color-scheme:inherit;line-height:1.7;
+}
+html[data-ui][data-color-mode] .organic-site :is(.platform-page,.space-public,.space-workspace-layout,.space-panel,.community-navigation-shell,.feed-layout,.feed-workspace-layout,.organic-admin) {
+ --sp-accent:var(--site-accent);--sp-soft:var(--site-raised);--sp-ink:var(--site-text);--sp-muted:var(--site-muted);--sp-paper:var(--site-surface);--sp-line:var(--site-line);
+ --feed-ink:var(--site-text);--feed-text:var(--site-body);--feed-muted:var(--site-muted);--feed-line:var(--site-line);--feed-accent:var(--site-accent);--feed-surface:var(--site-raised);
+}
+/* The repeated exception is deliberate: custom fonts and colors inside member
+   content always take priority over the platform's visual preferences. */
+html[data-ui][data-color-mode] :is(.organic-site,.blog-public-shell) :is(h1,h2,h3,h4,p,li,label,button,input,select,textarea,summary,small,strong,a,th,td):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *,.homepage-document *,.bt-font-specimen *,.tiptap *,.organic-prose *,.community-prose *,.dw-document-editor *)) {font-family:var(--site-font)}
+html[data-ui][data-color-mode] .organic-site :is(h1,h2,h3,h4):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *,.bt-font-specimen *,.tiptap *,.organic-prose *,.community-prose *)) {color:var(--site-text);letter-spacing:-.02em;line-height:1.35;font-weight:500!important}
+html[data-ui][data-color-mode] .organic-site :is(.organic-brand,.organic-brand span,.brand small,.site-tools select,.blog-canvas-editor) {font-family:var(--site-font)}
+html[data-ui][data-color-mode] :is(.organic-header,.organic-footer,.blog-platform-bar,.blog-platform-footer) {background:var(--site-surface);color:var(--site-text);border-color:var(--site-line)}
+html[data-ui][data-color-mode] .organic-header {position:relative;z-index:60}
+html[data-ui][data-color-mode] :is(.organic-header-inner,.organic-header-tools,.site-tools) {overflow:visible}
+html[data-ui][data-color-mode] .site-tools {gap:7px}
+html[data-ui][data-color-mode] .organic-site .organic-header .site-tools .language-control select {font-family:var(--site-font);color:var(--site-body);font-size:14px;max-width:88px;padding-inline:7px}
+html[data-ui][data-color-mode] :is(.organic-brand span,.site-brand-copy>span,.organic-footer-filing,.organic-footer-compact,.blog-platform-footer) {color:var(--site-muted)}
+html[data-ui][data-color-mode] .organic-site .organic-desktop-nav>a {color:var(--site-body);font-size:14px}
+html[data-ui][data-color-mode] .organic-site .organic-desktop-nav>a[aria-current=page] {color:var(--site-text);border-color:var(--site-accent)}
+html[data-ui][data-color-mode] .organic-site :is(.organic-mobile-menu summary,.organic-mobile-menu nav) {color:var(--site-text);background:var(--site-surface);border-color:var(--site-line)}
+html[data-ui][data-color-mode] .organic-site :is(.organic-mobile-menu nav a,.feed-nav-links a) {color:var(--site-text)}
+
+.appearance-switch {position:relative;color:var(--site-text);font-family:var(--site-font)}
+.appearance-trigger {list-style:none;display:flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:8px 11px;border:1px solid var(--site-line);border-radius:10px;background:var(--site-surface);color:var(--site-body);font-size:14px;line-height:1.4;cursor:pointer;user-select:none}
+.appearance-trigger::-webkit-details-marker {display:none}
+.appearance-trigger>.icon {width:18px;height:18px}
+.appearance-trigger:hover,.appearance-switch[open]>.appearance-trigger {color:var(--site-text);background:var(--site-raised)}
+.appearance-menu {position:absolute;top:calc(100% + 12px);right:0;width:286px;max-width:calc(100vw - 24px);padding:8px;border-radius:16px;background:var(--site-surface);box-shadow:var(--site-menu-shadow);z-index:120}
+.appearance-menu-heading {display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:12px 10px 14px}
+.appearance-menu-heading>strong {font-size:16px;font-weight:500;color:var(--site-text)}
+.appearance-menu-heading>span {font-size:12px;color:var(--site-muted)}
+.appearance-options {display:grid;gap:4px}
+.appearance-options>button {width:100%;display:flex;align-items:center;gap:12px;padding:12px 10px;border:0;border-radius:10px;background:transparent;text-align:left;font:inherit;color:var(--site-body);min-height:65px;cursor:pointer}
+.appearance-options>button>span {flex:1;display:grid;gap:3px}
+.appearance-options strong {font-size:15px;font-weight:500;line-height:1.3;color:inherit}
+.appearance-options small {font-size:12px;line-height:1.5;color:var(--site-muted)}
+.appearance-options>button:hover {background:var(--site-raised)}
+.appearance-options>button[aria-pressed=true] {background:var(--site-accent-soft);color:var(--site-accent)}
+.appearance-check {width:18px;height:18px;visibility:hidden;flex:none}
+.appearance-options>button[aria-pressed=true]>.appearance-check {visibility:visible}
+.appearance-trigger:focus-visible,.appearance-options>button:focus-visible {outline:2px solid var(--site-focus);outline-offset:3px}
+.appearance-notice {padding:8px 10px;font-size:12px;color:var(--site-muted)}
+@media(prefers-reduced-motion:no-preference){
+ .appearance-trigger,.appearance-options>button {transition:background-color 160ms ease,color 160ms ease}
+ .appearance-switch[open]>.appearance-menu {animation:appearance-open 160ms cubic-bezier(.16,1,.3,1)}
+ @keyframes appearance-open {from{opacity:.4;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+}
+@media(max-width:767px){
+ html[data-ui][data-color-mode] .site-tools {gap:3px}
+ .appearance-trigger {width:42px;padding:10px}
+ .appearance-trigger>span {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+ .appearance-menu {right:-80px}
+ html[data-ui][data-color-mode] .organic-site .organic-header .site-tools .language-control select {max-width:74px;font-size:14px}
+}
+
+/* Reusable public controls: one vocabulary across reading and operating pages. */
+html[data-ui][data-color-mode] .organic-site :is(.space-btn,.btn,.organic-button,.community-follow-button):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *)) {border-radius:10px;min-height:42px;padding:10px 16px;background:var(--site-surface);border-color:var(--site-control-line);color:var(--site-text);font-weight:500;line-height:1.4}
+html[data-ui][data-color-mode] .organic-site :is(.space-btn,.btn,.organic-button,.community-follow-button):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *)):hover {background:var(--site-raised);color:var(--site-text)}
+html[data-ui][data-color-mode] .organic-site :is(.space-btn.primary,.btn.primary,.organic-button.is-primary,.community-follow-button:not(.is-following)):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *)) {background:var(--site-action);color:var(--site-on-action);border-color:transparent}
+html[data-ui][data-color-mode] .organic-site :is(.space-btn.primary,.btn.primary,.organic-button.is-primary,.community-follow-button:not(.is-following)):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *)):hover {background:var(--site-accent);color:var(--site-on-action)}
+html[data-ui][data-color-mode] .organic-site :is(input:not([type=color]):not([type=checkbox]):not([type=radio]):not([type=file]),textarea,select):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *,.bt-font-specimen *)) {background:var(--site-surface);border-color:var(--site-control-line);color:var(--site-text);caret-color:var(--site-focus);border-radius:9px}
+html[data-ui][data-color-mode] .organic-site :is(input,textarea)::placeholder {color:var(--site-muted);opacity:1}
+html[data-ui][data-color-mode] .organic-site :is(input[type=checkbox],input[type=radio]) {accent-color:var(--site-accent)}
+html[data-ui][data-color-mode] .organic-site :is(a,button,summary,input,textarea,select):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *)):focus-visible {outline:2px solid var(--site-focus);outline-offset:3px}
+html[data-ui][data-color-mode] .organic-site :not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *))::selection {background:var(--site-selection);color:var(--site-text)}
+html[data-ui][data-color-mode] ::-webkit-scrollbar-thumb {background:var(--site-control-line)}
+html[data-ui][data-color-mode] ::-webkit-scrollbar-track {background:var(--site-canvas)}
+
+/* Legacy surfaces had literal white/black values. Theme only their platform
+   containers; never invert uploaded artwork or member-authored blocks. */
+html[data-ui][data-color-mode=dark] .organic-site :is(.organic-card,.panel,.stat,.login-card,.community-auth-form,.space-panel,.community-queue>button,.selected-file,.experience-editor,.feed-account-popover,.feed-share-popover,.space-share-popover,.community-dialog,.community-profile-header,.catalog-compose-panel,.shared-detail,.dw-sidebar,.dw-content,.dw-toolbar,.dw-outline,.dw-document,.dw-library,.dw-topbar,.learning-panel,.learning-sidebar,.skill-card,.catalog-card,.resource-card,.community-sticky-actions,.community-route-bar,.feed-tabs,.feed-identity,.feed-main,.feed-workspace-main,.feed-navigation,.feed-mobile-nav,.community-member-row,.homepage-studio,.homepage-theme-option) {background:var(--site-surface);color:var(--site-text);border-color:var(--site-line)}
+html[data-ui][data-color-mode=dark] .organic-site :is(.feed-discover>section,.feed-suggestions,.feed-discovery-search,.feed-search,.workspace-search,.community-cover-field,.community-mode-note,.community-notice,.notice,.tag,.organic-tags li,.platform-showcase,.space-studio-toolbar,.space-experience-edit,.organic-detail-aside,.community-post-source,.shared-detail-source,.community-badge,.community-member-bio,.be-preview-note,.homepage-hosting-help,.workspace-notification.is-unread,.bt-font-specimen) {background:var(--site-raised);color:var(--site-body);border-color:var(--site-line)}
+html[data-ui][data-color-mode=dark] .organic-site :is(p,small,label,legend,time,figcaption):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *,.homepage-document *,.bt-font-specimen *,.tiptap *,.organic-prose *,.community-prose *,.product-hero *,.product-motion *)) {color:var(--site-body)}
+html[data-ui][data-color-mode=dark] .organic-site :is(.space-muted,.muted,.community-fine,.workspace-row-meta,.feed-post-meta,.feed-post-time,.feed-account-copy small,.field small,.organic-card-meta,.catalog-meta,.community-editor-identity small,.community-post-meta,.homepage-theme-option small,.bc-save-state,.bd-stage-hint) {color:var(--site-muted)}
+html[data-ui][data-color-mode=dark] .organic-site :is(.feed-tabs a,.feed-tabs button,.workspace-tabs button,.feed-action,.feed-post h2,.feed-post h3,.community-profile-tabs a,.community-route-bar a,.community-password-section summary,.community-close-account summary,.community-preview summary,.community-history-row,.community-member-row,.organic-text-link,.catalog-filter,.skill-filter,.feed-discovery-search button,.feed-post-source,.feed-source-link,.community-post-source a,.shared-detail a,.learning-sidebar a,.learning-nav a,.space-icon-btn) {color:var(--site-text);border-color:var(--site-line)}
+html[data-ui][data-color-mode=dark] .organic-site :is(.feed-navigation nav a,.organic-mobile-menu nav a,.admin-nav a,.workspace-tabs button,.feed-tabs a,.feed-tabs button):is(:hover,[aria-current=page],[aria-pressed=true],.active) {background:var(--site-raised);color:var(--site-text)}
+html[data-ui][data-color-mode=dark] .organic-site :is(.feed-post,.workspace-post-row,.community-member-row):hover {background:var(--site-raised)}
+html[data-ui][data-color-mode=dark] .organic-site :is(.organic-prose,.community-prose,.shared-detail-body,.learning-article,.prose,.tiptap) {color:var(--site-body)}
+html[data-ui][data-color-mode=dark] .organic-site :is(.organic-prose,.community-prose,.shared-detail-body,.learning-article,.prose,.tiptap) :is(p,li,strong,h1,h2,h3,h4) {color:inherit}
+html[data-ui][data-color-mode=dark] .organic-site :is(pre,blockquote,.editor-surface,.editor-toolbar,.community-code-block):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *,.skill-install *)) {background:var(--site-raised);color:var(--site-body);border-color:var(--site-line)}
+html[data-ui][data-color-mode=dark] .organic-site :is(.notice.error,.app-feedback.error,.community-notice.is-error,.community-feedback.is-error) {background:var(--site-error-surface);color:var(--site-danger)}
+html[data-ui][data-color-mode=dark] .organic-site :is(.danger-text,.btn.danger) {color:var(--site-danger)}
+html[data-ui][data-color-mode=dark] .home-flow-background {opacity:.09}
+html[data-ui][data-color-mode=dark] :is(.blog-platform-logo,.blog-platform-bar a,.blog-platform-footer a) {color:var(--site-text)}
+html[data-ui][data-color-mode=dark] .organic-site :is(th,td,.table-wrap,.editor-toolbar,.content-outline,.community-form-section) {border-color:var(--site-line)}
+html[data-ui][data-color-mode=dark] .organic-site th {background:var(--site-raised);color:var(--site-body)}
+html[data-ui][data-color-mode=dark] .organic-site :is(.document-reader,.document-prose,.simple-publisher,.document-editor,.document-library,.document-outline,.document-write-outline) {color:var(--site-body);border-color:var(--site-line)}
+html[data-ui][data-color-mode=dark] .organic-site :is(.document-library,.document-outline,.document-write-outline,.document-breadcrumb,.skill-module-list,.publisher-more) :is(a,button,strong,span) {color:var(--site-body);border-color:var(--site-line)}
+html[data-ui][data-color-mode=dark] .organic-site :is(.document-library nav a,.document-outline a):is(:hover,[aria-current]) {background:var(--site-raised);color:var(--site-text)}
+html[data-ui][data-color-mode=dark] .organic-site :is(.document-slash-menu,.document-share [role=status],.document-editor .editor-toolbar) {background:var(--site-surface);color:var(--site-text);border-color:var(--site-line)}
+html[data-ui][data-color-mode=dark] .organic-site .document-slash-menu button {background:var(--site-surface);color:var(--site-text)}
+html[data-ui][data-color-mode=dark] .organic-site .document-slash-menu button:is(:hover,[data-selected=true]) {background:var(--site-raised)}
+
+/* Editor chrome follows the reader preference; the editable page stays true to
+   its chosen appearance, with its own white artboard where appropriate. */
+html[data-ui][data-color-mode] .blog-canvas-editor {font-family:var(--site-font);--studio-line:var(--site-line);--studio-soft:var(--site-raised);--studio-selected:var(--site-accent-soft);--studio-ink:var(--site-text)}
+html[data-ui][data-color-mode] .blog-canvas-editor :is(.be-heading,.bd-sidebar,.bd-properties,.bd-stage-top,.bd-toolbar,.bd-tool-dock,.bd-text-toolbar,.bt-library,.bc-publish-panel) :is(button,input,select,textarea,label,h2,h3) {font-family:var(--site-font)}
+html[data-ui][data-color-mode=dark] .blog-canvas-editor {background:var(--site-canvas);color:var(--site-text);--bd-line:var(--site-line);--bd-paper:var(--site-surface);--bd-muted:var(--site-muted);--bd-ink:var(--site-text)}
+html[data-ui][data-color-mode=dark] .blog-canvas-editor :is(.be-heading,.be-feedback,.bd-sidebar,.bd-properties,.bd-stage-top,.bd-toolbar,.bd-stage-bar,.bd-tool-dock,.bd-floating-tools,.bd-text-toolbar,.bt-library,.bd-sticker-library,.bc-inspector,.bc-publish-panel,.bc-public-preview,.bd-reset-confirm,.bd-canvas-loading) {background:var(--site-surface);color:var(--site-text);border-color:var(--site-line)}
+html[data-ui][data-color-mode=dark] .blog-canvas-editor :is(.bd-stage,.bd-designer) {background:var(--site-canvas)}
+html[data-ui][data-color-mode=dark] .blog-canvas-editor :is(.bd-properties,.bd-sidebar,.bd-stage-top,.bd-toolbar,.bd-stage-bar,.bd-tool-dock,.bd-floating-tools,.bd-text-toolbar,.bt-library,.bc-inspector,.bc-publish-panel,.bt-personalization) :is(button,input,select,textarea,summary,label,strong,h2,h3,p,small):not(:where(.bd-block *,.bt-font-specimen *)) {color:var(--site-text);border-color:var(--site-line)}
+html[data-ui][data-color-mode=dark] .blog-canvas-editor :is(.bd-properties,.bd-stage-top,.bd-toolbar,.bd-stage-bar,.bd-tool-dock,.bd-text-toolbar,.bt-library,.bc-inspector,.bc-publish-panel,.bt-personalization) :is(button,select,input,textarea):not(:where(.bd-block *,.bt-font-specimen *,.bt-motion-option input)) {background:var(--site-surface)}
+html[data-ui][data-color-mode=dark] .blog-canvas-editor :is(.bd-properties,.bd-sidebar,.bd-stage-top,.bd-toolbar,.bd-stage-bar,.bd-tool-dock,.bd-floating-tools,.bd-text-toolbar,.bt-library,.bt-personalization) button:is(:hover,[aria-pressed=true],[aria-current=true]),html[data-ui][data-color-mode=dark] .bd-layer-row[data-active=true] {background:var(--site-accent-soft);color:var(--site-accent)}
+html[data-ui][data-color-mode=dark] .blog-canvas-editor .bd-text-toolbar {box-shadow:var(--site-menu-shadow)}
+html[data-ui][data-color-mode=dark] .blog-canvas-editor :is(.bt-font-specimen,.bt-motion-demo) {background:#fff;color:#202124;color-scheme:light}
+
+/* Route-specific legacy selectors and the animated navigation marker otherwise
+   win the cascade over the shared tokens. Keep these explicit and bounded. */
+html[data-ui][data-color-mode=dark] .organic-site .community-navigation-shell .feed-active-indicator {background:var(--site-raised)!important}
+html[data-ui][data-color-mode=dark] .organic-site .community-navigation-shell>.feed-navigation>.feed-identity {background:var(--site-surface)!important;color:var(--site-text)}
+html[data-ui][data-color-mode=dark] .organic-site .community-navigation-shell .feed-main>.feed-tabs :is(a,button) {color:var(--site-muted)!important;background:transparent}
+html[data-ui][data-color-mode=dark] .organic-site .community-navigation-shell .feed-main>.feed-tabs :is(a,button):is([aria-current=page],[aria-pressed=true]) {color:var(--site-text)!important}
+html[data-ui][data-color-mode=dark] .organic-site .community-navigation-shell .feed-main>.feed-tabs :is(a,button)::after {background:var(--site-accent)!important}
+html[data-ui][data-color-mode=dark] .organic-site .community-empty-detail {color:var(--site-body)!important}
+html[data-ui][data-color-mode=dark] .organic-site .community-navigation-shell .feed-discover :is(h2,nav a) {color:var(--site-body)!important}
+html[data-ui][data-color-mode=dark] .organic-site .community-navigation-shell .feed-discovery-search button {background:var(--site-raised)!important;color:var(--site-text)!important}
+html[data-ui][data-color-mode=dark] .organic-site .catalog-filter-options a {background:var(--site-surface);border-color:var(--site-control-line);color:var(--site-text)}
+html[data-ui][data-color-mode=dark] .organic-site .catalog-filter-options a:is(:hover,[aria-current]) {background:var(--site-accent-soft);border-color:var(--site-accent);color:var(--site-accent)}
+
+/* Editing uses the author's ink, not the surrounding application's muted text.
+   Local --blog-text-color and inline rich-text spans still take precedence. */
+html[data-ui][data-color-mode] .blog-canvas-editor .bd-node .anx-portfolio {
+ --ink:var(--anx-ink);--muted:var(--anx-muted);
+ --organic-ink:var(--anx-ink);--organic-text:var(--anx-ink);--organic-muted:var(--anx-muted);
+}
+html[data-ui][data-color-mode=dark] .blog-canvas-editor .bd-properties>header {background:var(--site-surface)!important;color:var(--site-text);border-color:var(--site-line)}
+html[data-ui][data-color-mode=dark] .blog-canvas-editor .bd-sidebar-footer>button {background:var(--site-surface)!important;color:var(--site-text);border-color:var(--site-control-line)}
+html[data-ui][data-color-mode=dark] .blog-canvas-editor .bd-sidebar-footer>button:hover {background:var(--site-raised)!important}
+/* Verification badges adapt only on platform surfaces and portfolios that have
+   opted into the site palette. White/custom author canvases retain their blue. */
+html[data-ui][data-color-mode=dark] .organic-site .site-owner-badge:not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *,.signature-blog *)),
+html[data-ui][data-color-mode=dark] :is(.anx-portfolio[data-site-colors=true],.bd-block[data-site-colors=true]) .site-owner-badge {
+ --site-owner-blue:var(--site-accent);--site-owner-check:var(--site-surface);
+}
+/* The preview's surrounding controls share the editor appearance. Its iframe
+   remains an isolated document and keeps the author's own page palette. */
+html[data-ui][data-color-mode] .blog-canvas-editor :is(.blog-effect-preview,.bp-stage) {background:var(--site-canvas);color:var(--site-text)}
+html[data-ui][data-color-mode] .blog-canvas-editor .bp-toolbar {background:var(--site-surface);color:var(--site-text);border-color:var(--site-line);font-family:var(--site-font)}
+html[data-ui][data-color-mode] .blog-canvas-editor .bp-toolbar :is(button,strong,span,output) {font-family:var(--site-font)}
+html[data-ui][data-color-mode] .blog-canvas-editor .bp-toolbar :is(span,.bp-size) {color:var(--site-muted)}
+html[data-ui][data-color-mode] .blog-canvas-editor .bp-devices {background:var(--site-surface);border-color:var(--site-control-line)}
+html[data-ui][data-color-mode] .blog-canvas-editor .bp-toolbar button {background:var(--site-surface);border-color:var(--site-control-line);color:var(--site-body)}
+html[data-ui][data-color-mode] .blog-canvas-editor .bp-toolbar button:hover {background:var(--site-raised);color:var(--site-text)}
+html[data-ui][data-color-mode] .blog-canvas-editor .bp-toolbar button[aria-pressed=true] {background:var(--site-accent-soft);color:var(--site-accent)}
+html[data-ui][data-color-mode] .blog-canvas-editor .bp-toolbar button span {color:inherit}
+html[data-ui][data-color-mode] .blog-canvas-editor .bp-loading {color:var(--site-muted)}
+@media print {html[data-ui][data-color-mode] {color-scheme:light;--site-canvas:#fff;--site-surface:#fff;--site-text:#171717;--site-body:#333;--site-muted:#555;--site-line:#ddd}.site-tools{display:none}}

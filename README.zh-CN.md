@@ -153,13 +153,15 @@ git clone https://github.com/IntMainJhy/SpaceYew.git
 cd SpaceYew
 npm ci
 cp .env.local.example .env.local
-npm run setup
+node --env-file=.env.local scripts/setup.mjs
 npm run dev
 ```
 
 默认本地入口为 `http://127.0.0.1:3008/`。此仓库本身就是网站根目录，无需再进入 site-v1 子目录。如果已有环境文件，不要覆盖它。
 
 `APP_DATA_DIR` 默认位于应用目录之外的 `../.site-v1-data`，可设置为其他私有绝对路径。首次初始化创建随机管理员凭据文件 `initial-admin.txt`，仅存放在实际数据目录；已有数据不会因重复 setup 自动重置。不要上传该文件、数据库或真实配置。
+
+继续使用已有站点时，在本机 `.env.local` 中固定 `APP_DATA_DIR=/absolute/path/to/existing-data`，并让 `PUBLIC_URL` 与浏览器使用的主机名、端口一致。修改后重启服务。若启动后突然出现默认资料、演示账号或头像缺失，先核对实际数据目录；指向另一目录会打开另一份数据库，并不代表原资料已被删除，不要用空库覆盖原库。直接执行 Node 脚本时需使用 `node --env-file=.env.local scripts/setup.mjs` 或显式传入环境变量；普通 Node 不会自动读取 `.env.local`。
 
 本地环境模板只包含 loopback URL 与 Cookie 配置。需要邮件功能时，参照 [.env.example](.env.example) 配置 SMTP；本机 capture 模式只用于联调。真实 SMTP 投递、备份恢复及正式部署需在目标环境单独验证。
 

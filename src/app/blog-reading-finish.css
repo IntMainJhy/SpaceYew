@@ -1,0 +1,62 @@
+/* Default portfolio paper follows the reader. Authored palettes and local text
+   formatting keep their own surface; no saved profile or geometry is changed. */
+.anx-portfolio[data-default-font=true],
+html[data-ui] .organic-site .anx-portfolio[data-default-font=true] :is(h1,h2,h3,h4){
+ font-family:Newsreader,"ZCOOL XiaoWei","Songti SC",Georgia,serif;
+ font-optical-sizing:auto;
+ letter-spacing:normal;
+}
+.anx-portfolio[data-default-font=true] :is(h1,h2,h3){text-wrap:pretty}
+.anx-portfolio[data-default-font=true] .anx-name h1{letter-spacing:-.02em}
+
+.bd-block[data-site-colors=true]{color:var(--site-text,#252a2d)}
+:is(.anx-portfolio[data-site-colors=true],.bd-block[data-site-colors=true] .anx-portfolio){
+ --anx-paper:var(--site-surface,#fff);
+ --anx-ink:var(--site-text,#252a2d);
+ --anx-muted:var(--site-muted,#656d72);
+ --anx-line:var(--site-line,#dedfdb);
+ --anx-hatch:var(--site-line,#dedfdb);
+ --anx-side:var(--site-raised,#f0efeb);
+ --organic-ink:var(--anx-ink);
+ --organic-text:var(--anx-ink);
+ --organic-muted:var(--anx-muted);
+ color:var(--anx-ink);
+ background:var(--anx-paper);
+}
+html[data-ui] :is(.anx-portfolio[data-site-colors=true],.bd-block[data-site-colors=true] .anx-portfolio) :is(h1,h2,h3,h4){color:var(--anx-ink)}
+:is(.anx-portfolio[data-site-colors=true],.bd-block[data-site-colors=true] .anx-portfolio) :is(.anx-intro p,.anx-resume-description,.anx-experiences p){color:var(--site-body,#454c50)}
+:is(.anx-portfolio[data-site-colors=true],.bd-block[data-site-colors=true] .anx-portfolio) ::selection{background:var(--site-accent,#30688f);color:var(--site-surface,#fff)}
+:is(.anx-portfolio[data-site-colors=true],.bd-block[data-site-colors=true] .anx-portfolio) .anx-separator{background:var(--site-canvas,#f8f7f4)}
+:is(.anx-portfolio[data-site-colors=true],.bd-block[data-site-colors=true] .anx-portfolio) :is(.anx-portrait>span,.anx-panel:target>header,.anx-contact>a:hover,.anx-inline-media,.anx-image-stage){background:var(--site-raised,#f0efeb)}
+:is(.anx-portfolio[data-site-colors=true],.bd-block[data-site-colors=true] .anx-portfolio) :is(.anx-entry:hover,.anx-panel .anx-certificates button,.anx-panel .anx-resume-gallery button){background:var(--site-canvas,#f8f7f4)}
+:is(.anx-portfolio[data-site-colors=true],.bd-block[data-site-colors=true] .anx-portfolio) :is(.anx-image-dialog,.anx-image-heading,.anx-image-heading button){background:var(--anx-paper);color:var(--anx-ink);border-color:var(--anx-line)}
+:is(.anx-portfolio[data-site-colors=true],.bd-block[data-site-colors=true] .anx-portfolio) .anx-image-status{color:var(--anx-muted)}
+:is(.anx-portfolio[data-site-colors=true],.bd-block[data-site-colors=true] .anx-portfolio) .anx-image-heading button:hover{background:var(--site-raised,#f0efeb)}
+:is(.anx-portfolio[data-site-colors=true],.bd-block[data-site-colors=true] .anx-portfolio) .anx-image-heading button:focus-visible{outline-color:var(--site-accent,#30688f)}
+html[data-color-mode=dark] .blog-public-shell:has(.anx-portfolio[data-site-colors=true]){background:var(--site-canvas,#171b1e)}
+
+/* The short index makes every section reachable without a horizontal scrollbar. */
+.anx-portfolio .anx-topbar nav:has(.anx-nav-menu){overflow:visible;flex-wrap:wrap;justify-content:flex-end;gap:8px 24px}
+.anx-portfolio .anx-topbar nav .anx-nav-shortcuts{min-width:0;flex-wrap:wrap;gap:4px 20px}
+.anx-portfolio .anx-topbar .anx-nav-menu summary{min-height:44px;gap:8px;font-weight:400;white-space:nowrap}
+.anx-portfolio .anx-topbar .anx-nav-menu>div{width:240px;max-width:calc(100vw - 40px);max-height:min(440px,65dvh);padding:10px;border-radius:12px;border:0;box-shadow:0 12px 36px rgb(0 0 0 / .16);z-index:15}
+.anx-portfolio .anx-topbar .anx-nav-menu>div>a{display:flex;padding:10px 12px;white-space:normal;min-height:44px;line-height:1.5;border-radius:7px;text-decoration:none}
+.anx-portfolio .anx-topbar .anx-nav-menu>div>a:is(:hover,:focus-visible){background:color-mix(in srgb,var(--anx-ink) 7%,var(--anx-paper));text-decoration:none;outline-offset:-2px}
+.anx-portfolio[data-default-font=true] .anx-profile-header .anx-signature{min-height:176px;padding-block:20px}
+.anx-portfolio[data-default-font=true] .anx-profile-header .anx-mark{max-height:180px}
+@media(max-width:700px){
+ .anx-portfolio .anx-topbar:has(.anx-nav-menu){flex-wrap:wrap;gap:0 18px}
+ .anx-portfolio .anx-topbar nav:has(.anx-nav-menu){width:100%;justify-content:space-between;gap:4px 12px}
+ .anx-portfolio .anx-topbar nav .anx-nav-shortcuts{gap:4px 14px}
+ .anx-portfolio .anx-topbar .anx-nav-menu{margin-left:auto}
+}
+@media(max-width:540px){
+ .anx-portfolio .anx-nav-shortcuts>a:nth-child(n+3){display:none}
+ .anx-portfolio[data-default-font=true] .anx-profile-header .anx-signature{min-height:140px;padding:18px 16px 22px}
+ .anx-portfolio[data-default-font=true] .anx-profile-header .anx-mark{max-height:150px}
+}
+@container(max-width:540px){
+ .bd-block .anx-portfolio .anx-nav-shortcuts>a:nth-child(n+3){display:none}
+ .bd-block .anx-portfolio[data-default-font=true] .anx-profile-header .anx-signature{min-height:140px;padding:18px 16px 22px}
+ .bd-block .anx-portfolio[data-default-font=true] .anx-profile-header .anx-mark{max-height:150px}
+}

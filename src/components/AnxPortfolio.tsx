@@ -4,6 +4,7 @@
 // profile-header, panel, handwritten-note and anx-mark-solid. MIT, © 2026 Chánh Đại / Anx.
 // Full notice: docs/licenses/anx-portfolio-MIT.txt. Branding and personal data are replaced.
 import {BlogMotionSkills} from './BlogMotionSkills';
+import {customBlogFont} from '@/lib/blog-typography.mjs';
 import {gsap} from 'gsap';
 import Link from 'next/link';
 import {DesignText,DesignLabel,useBlogEditing} from './BlogDesignFields';
@@ -35,7 +36,12 @@ function NoteArrow(){return <svg viewBox="0 0 40 40" fill="none" stroke="current
 export function AnxPortfolio({data,p,content,preview=false,embedded=false,part}:{data:SpaceData;p:SpaceData;content:SpaceData[];preview?:boolean;embedded?:boolean;part?:string}){
  const editing=useBlogEditing(),show=(key:string)=>!part||part===key;
  const {t,locale}=useLocale(),[failedAvatar,setFailedAvatar]=useState(''),settings=data.layout.blog||{},base='/blog/'+data.handle,Chapters=preview||embedded?'div':'main';
- const hero=useRef<HTMLElement>(null);
+ const hero=useRef<HTMLElement>(null),sectionMenu=useRef<HTMLDetailsElement>(null);
+ useEffect(()=>{
+  const closeOutside=(event:PointerEvent)=>{if(sectionMenu.current?.open&&!sectionMenu.current.contains(event.target as Node))sectionMenu.current.open=false};
+  document.addEventListener('pointerdown',closeOutside);
+  return()=>document.removeEventListener('pointerdown',closeOutside);
+ },[]);
  useEffect(()=>{if(editing||settings.design?.motion?.entrance===false||!hero.current)return;const media=gsap.matchMedia();media.add('(prefers-reduced-motion: no-preference)',()=>{gsap.fromTo(hero.current!.querySelector('.anx-portrait'),{clipPath:'inset(0 0 14% 0)'},{clipPath:'inset(0 0 0% 0)',duration:.6,ease:'power3.out',clearProps:'clipPath'});gsap.fromTo(hero.current!.querySelector('.anx-name'),{x:10,opacity:.75},{x:0,opacity:1,duration:.45,ease:'power3.out',clearProps:'transform,opacity'});},hero.current);return()=>media.revert()},[editing,settings.design?.motion?.entrance]);
  const resume=p.resume,experiences=(resume&&!settings.showLegacyContent?[]:p.experiences||[]).filter((item:SpaceData)=>item.visible!==false),sections=(resume&&!settings.showLegacyContent?[]:settings.sections||['projects','articles','resources']).filter((key:string)=>content.some(item=>item.type===key));
  const labels:Record<string,string>={projects:'作品与项目',articles:'文字与思考',resources:'分享的资源'};
@@ -51,9 +57,9 @@ export function AnxPortfolio({data,p,content,preview=false,embedded=false,part}:
   ...(visible('certificates')&&resume?.certificates?.some((item:SpaceData)=>item.imageId||editing)?[{id:'certificates',label:locale==='en'?'Certificates':locale==='ja'?'証明書':'证书影像'}]:[]),
   ...(visible('gallery')&&resume?.gallery?.some((item:SpaceData)=>item.imageId||editing)?[{id:'gallery',label:locale==='en'?'Gallery':locale==='ja'?'ギャラリー':'分享现场'}]:[])
  ];
- return <div className="anx-portfolio" data-home-theme="anx" data-theme-motion={!editing&&settings.design?.motion?.interactions!==false} data-design-part={part}>
+ return <div className="anx-portfolio" data-home-theme="anx" data-site-colors={!settings.design} data-default-font={(!settings.design?.appearance||settings.design.appearance==='original')&&!customBlogFont(settings.design)} data-theme-motion={!editing&&settings.design?.motion?.interactions!==false} data-design-part={part}>
   {show('header')&&<>
-  <div className="anx-topbar" id="anx-top"><a className="anx-handle" href={navigation.length?'#anx-'+navigation[0].id:'#anx-top'}>@{data.handle}</a>{navigation.length>0&&<nav aria-label={t('博客栏目')}>{settings.design?.appearance&&settings.design.appearance!=='original'?<><div className="anx-nav-shortcuts">{navigation.slice(0,3).map((item:SpaceData)=><a key={item.id} href={'#anx-'+item.id}>{item.label}</a>)}</div><details className="anx-nav-menu"><summary>{locale==='en'?'All sections':locale==='ja'?'すべての項目':'全部栏目'} <span aria-hidden="true">＋</span></summary><div>{navigation.map((item:SpaceData)=><a key={item.id} href={'#anx-'+item.id} onClick={e=>e.currentTarget.closest('details')?.removeAttribute('open')}>{item.label}</a>)}</div></details></>:navigation.map((item:SpaceData)=><a key={item.id} href={'#anx-'+item.id}>{item.label}</a>)}</nav>}</div>
+  <div className="anx-topbar" id="anx-top"><a className="anx-handle" href={navigation.length?'#anx-'+navigation[0].id:'#anx-top'}>@{data.handle}</a>{navigation.length>0&&<nav aria-label={t('博客栏目')}>{navigation.length>4||(settings.design?.appearance&&settings.design.appearance!=='original')?<><div className="anx-nav-shortcuts">{navigation.slice(0,3).map((item:SpaceData)=><a key={item.id} href={'#anx-'+item.id}>{item.label}</a>)}</div><details className="anx-nav-menu" ref={sectionMenu} onKeyDown={event=>{if(event.key==='Escape'){event.currentTarget.open=false;event.currentTarget.querySelector('summary')?.focus()}}}><summary>{locale==='en'?'All sections':locale==='ja'?'すべての項目':'全部栏目'} <span aria-hidden="true">＋</span></summary><div>{navigation.map((item:SpaceData)=><a key={item.id} href={'#anx-'+item.id} onClick={e=>e.currentTarget.closest('details')?.removeAttribute('open')}>{item.label}</a>)}</div></details></>:navigation.map((item:SpaceData)=><a key={item.id} href={'#anx-'+item.id}>{item.label}</a>)}</nav>}</div>
   <header ref={hero} className="anx-profile-header">
    <figure className="anx-signature"><PortfolioMark handle={/[a-z]/i.test(p.alias||'')?p.alias:data.handle}/><figcaption>Fig. 1.</figcaption></figure>
    <div className="anx-portrait" onClick={editing?()=>editing.image(['avatarId']):undefined}><span aria-hidden={!editing} role={editing?'button':undefined} tabIndex={editing?0:undefined} aria-label={editing?t('更换头像'):undefined} onKeyDown={editing?e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();editing.image(['avatarId'])}}:undefined}>{[...(p.name||'?')][0]}{p.avatarId&&failedAvatar!==p.avatarId&&<img src={'/media/'+p.avatarId} alt="" onError={()=>setFailedAvatar(p.avatarId)}/>}</span></div>

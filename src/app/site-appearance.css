@@ -41,6 +41,12 @@ html[data-ui][data-color-mode] .site-tools {gap:7px}
 html[data-ui][data-color-mode] .organic-site .organic-header .site-tools .language-control select {font-family:var(--site-font);color:var(--site-body);font-size:14px;max-width:88px;padding-inline:7px}
 /* Navigation supports the page; utility controls stay quieter than primary actions. */
 html[data-ui][data-color-mode] .organic-header-inner {position:relative;min-height:76px}
+html[data-ui][data-color-mode] .organic-site .organic-brand {gap:12px;font-size:24px;line-height:1.15;letter-spacing:-.025em}
+html[data-ui][data-color-mode] .organic-site .site-brand-copy>span {font-size:11px;line-height:1.35;letter-spacing:0;margin-top:4px}
+/* One optical weight for the shared icon family, including selected navigation. */
+html[data-ui][data-color-mode] body svg.icon[data-icon]:not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *)) {stroke-width:1.75}
+html[data-ui][data-color-mode] .organic-site :is(.space-btn,.btn,.organic-button)>.icon:not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *)) {width:18px;height:18px;flex:none}
+html[data-ui][data-color-mode] .organic-site .feed-nav-links svg.icon[data-icon] {width:20px;height:20px}
 html[data-ui][data-color-mode] .organic-header-tools,html[data-ui][data-color-mode] .organic-mobile-menu {position:static}
 html[data-ui][data-color-mode] .organic-site .organic-desktop-nav {gap:8px}
 html[data-ui][data-color-mode] .organic-site .organic-desktop-nav>a {position:relative;padding:10px 8px;border-bottom:0;text-decoration:none}
@@ -88,15 +94,19 @@ html[data-ui][data-color-mode] .organic-site :is(.organic-mobile-menu nav a,.fee
 }
 @media(max-width:767px){
  html[data-ui][data-color-mode] .organic-header-inner {min-height:64px}
+ html[data-ui][data-color-mode] .organic-site .organic-brand {gap:10px;font-size:21px}
  html[data-ui][data-color-mode] .site-tools {gap:3px}
  .appearance-trigger {width:42px;padding:10px}
  .appearance-trigger>span {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
  .appearance-menu {right:-80px}
  html[data-ui][data-color-mode] .organic-site .organic-header .site-tools .language-control select {max-width:74px;font-size:14px}
 }
+@media(max-width:359px){
+ html[data-ui][data-color-mode] .organic-site .organic-brand {gap:8px;font-size:18px}
+}
 
 /* Reusable public controls: one vocabulary across reading and operating pages. */
-html[data-ui][data-color-mode] .organic-site :is(.space-btn,.btn,.organic-button,.community-follow-button):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *)) {border-radius:10px;min-height:42px;padding:10px 16px;background:var(--site-surface);border-color:var(--site-control-line);color:var(--site-text);font-weight:500;line-height:1.4}
+html[data-ui][data-color-mode] .organic-site :is(.space-btn,.btn,.organic-button,.community-follow-button):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *)) {border-radius:10px;min-height:44px;padding:10px 16px;background:var(--site-surface);border-color:var(--site-control-line);color:var(--site-text);font-weight:500;line-height:1.4}
 html[data-ui][data-color-mode] .organic-site :is(.space-btn,.btn,.organic-button,.community-follow-button):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *)):hover {background:var(--site-raised);color:var(--site-text)}
 html[data-ui][data-color-mode] .organic-site :is(.space-btn.primary,.btn.primary,.organic-button.is-primary,.community-follow-button:not(.is-following)):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *)) {background:var(--site-action);color:var(--site-on-action);border-color:transparent}
 html[data-ui][data-color-mode] .organic-site :is(.space-btn.primary,.btn.primary,.organic-button.is-primary,.community-follow-button:not(.is-following)):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *)):hover {background:var(--site-action-hover);color:var(--site-on-action)}

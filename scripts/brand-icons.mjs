@@ -4,7 +4,7 @@ import sharp from 'sharp';
 import {createHash} from 'node:crypto';
 import {crc32} from 'node:zlib';
 function withOrigin(png){
- const text=Buffer.from('impeccable:prompt\0SpaceYew SY monogram: white uppercase Inter ExtraBold letter outlines on a black rounded square. Letter outlines derived from the locally hosted Inter font, SIL OFL (public/fonts/Inter-OFL.txt). Vector: src/app/icon.svg. Deterministic sharp export via scripts/brand-icons.mjs; no image-generation model used.');
+ const text=Buffer.from('impeccable:prompt\0SpaceYew SY monogram: original, optically balanced white S and Y vector strokes on a black rounded square. Custom tall letterforms, round terminals and open counters designed on a 64px grid for 16px and 32px legibility. No font-derived outlines. Vector: src/app/icon.svg. Deterministic sharp export via scripts/brand-icons.mjs; no image-generation model used.');
  const chunk=Buffer.alloc(text.length+12);chunk.writeUInt32BE(text.length);chunk.write('tEXt',4);text.copy(chunk,8);chunk.writeUInt32BE(crc32(chunk.subarray(4,-4)),chunk.length-4);
  return Buffer.concat([png.subarray(0,-12),chunk,png.subarray(-12)]);
 }

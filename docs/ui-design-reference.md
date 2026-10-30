@@ -50,3 +50,21 @@
 公共页面的 `.community-surface.organic-admin` 仅继承操作界面的文字与控件变量，外层背景保持透明，避免登录、注册、社区、举报、条款及成员工作区出现遮住流动背景的整块白板或黑板。登录表单、社区主栏与桌面导航列同样透明；手机固定底部导航保留不透明底色。独立管理后台、输入框、弹层及作者自定义画布保持原有表面。
 
 浏览器核对上述公共页、未登录工作区入口，以及首页、文档、Skill、资源目录；深色重点核对登录、注册、社区、举报与条款，390px核对注册表单及固定导航，无横向溢出。未登录或注册账号，未修改用户数据。相关9项测试、类型检查和生产构建通过。
+
+## SY 标识与共享控件修订（2026-10-30）
+
+用户明确本轮重点是左上角 SY 网站标识。保留黑白、SY、既有 Baskerville/宋体与 Inter 编辑界面，替换原先 Inter 粗体轮廓为原创 64px 网格字形：更高的 S/Y、开放的字腔、统一圆端与光学校正间距。先核对16/32px，再核对大尺寸。网页品牌桌面36px、手机32px，深色仅对网页内标识黑白反转；favicon及PNG通过同一SVG生成并更新内容hash。画布页仍只有返回入口与“博客画布”标题。
+
+功能图标统一为官方 Lucide v1.65.0 的静态子集，保留47个原调用名称并补充sun/moon；完整ISC与Feather MIT归属见 `docs/licenses/LUCIDE.txt`。操作区统一1.75描边、按钮18px/导航20px与44px点击高度；作者自定义页面保留原有样式。外观复用同一套日/月/显示器，设置使用齿轮。未增加运行时依赖，未改变数据或业务操作。
+
+本轮采用已安装的 Anthropic `frontend-design` 与 Vercel `web-design-guidelines`，保留现有 UI/UX Pro Max 和 Impeccable。技能安装在用户级技能目录，不纳入网站仓库。GitHub星标反映整个仓库关注量，Skills.sh安装数作为采用程度参考，并非活跃用户数或质量排名。
+
+| 来源 | 本次检索的仓库星标 | Skills.sh单技能安装数 | 处理 |
+| --- | --- | --- | --- |
+| [Anthropic Frontend Design](https://www.skills.sh/anthropics/skills/frontend-design) | [anthropics/skills](https://github.com/anthropics/skills) 约184.9k，属整个技能合集 | 约1.1M | 新安装并读取 |
+| [UI/UX Pro Max](https://www.skills.sh/nextlevelbuilder/ui-ux-pro-max-skill/ui-ux-pro-max) | [UI专项仓库](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) 约142.8k | 约424.2k | 本机已有，保留 |
+| [Vercel Web Design Guidelines](https://www.skills.sh/vercel-labs/agent-skills/web-design-guidelines) | [Vercel技能合集](https://github.com/vercel-labs/agent-skills) 约33.2k | 约803.3k | 新安装并读取最新规范 |
+
+以上为2026-10-30检索快照，数字会变化，不声称覆盖GitHub全部设计技能。UI/UX Pro Max本轮两次定向图标查询均无匹配，图标细节实际采用Lucide官方几何与Vercel规范，没有将空结果作为推荐依据。
+
+验证：14项相关测试、最终类型检查及生产构建通过；逐一确认SVG缓存hash、512px PNG、180px Apple图标和16/32/48px ICO一致。浏览器核对1280px桌面深浅色、320px页首、外观切换与社区选中导航；320px字标收紧后控件位于可见宽度内。公共背景仍透明，真实草稿与账号数据未修改。Vercel规范独立复核未发现本次差异的阻断问题；截图保存在忽略的本地review目录，不作为生产资源。

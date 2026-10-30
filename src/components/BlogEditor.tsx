@@ -11,7 +11,6 @@ import {ResumeImport} from './ResumeImport';
 import {FileChoice} from './Upload';
 import {Icon} from './Icons';
 import {AppearanceSwitch} from './AppearanceSwitch';
-import {BrandMark} from './BrandMark';
 import {BlogCanvas} from './BlogCanvas';
 import {BlogPreview} from './BlogPreview';
 import {canvasResume,previewCanvasProfile,previewCanvasLayout} from '@/lib/blog-canvas.mjs';
@@ -61,7 +60,7 @@ export function BlogEditor({owner=false}:{owner?:boolean}){
  const backLink=<Link className="bc-editor-back" href={owner?'/admin':'/blogs'} aria-label={backLabel} title={backLabel}><Icon name="arrow"/><span>{say('返回','Back')}</span></Link>;
  if(!row)return <div className="blog-editor be-loading">{backLink}<h1>{say('编辑我的博客','Edit my blog')}</h1>{error?<><p role="alert">{error}</p>{signedOut?<Link className="space-btn primary" href={(owner?'/admin/login':'/login')+'?next='+encodeURIComponent(owner?'/admin/blog':'/workspace/blog')}>{say('登录后编辑','Sign in to edit')}</Link>:<button className="space-btn" onClick={()=>location.reload()}>{say('重新加载','Reload')}</button>}</>:<p role="status">{say('正在读取你的草稿…','Loading your draft…')}</p>}</div>;
  const pending=row.reviews.find((r:Data)=>r.kind==='board'&&r.status==='pending'),publicUrl='/blog/'+row.handle;
- return <div ref={editorRoot} className="blog-editor blog-canvas-editor"><header className="be-heading"><div className="bc-editor-heading">{backLink}<Link href={owner?'/admin':'/blogs'} aria-label={say('SpaceYew · 返回博客主页','SpaceYew · Back to blog homes')}><BrandMark/></Link><div><h1>{say('博客画布','Blog canvas')}</h1><p className="bc-editor-status"><span>@{row.handle}</span><span className="bc-save-state" data-dirty={dirty}><Icon name={dirty?'file':'check'}/>{dirty?say('草稿未保存','Unsaved draft'):say('已保存','Saved')}</span></p></div></div><div className="be-primary-actions">
+ return <div ref={editorRoot} className="blog-editor blog-canvas-editor"><header className="be-heading"><div className="bc-editor-heading">{backLink}<div><h1>{say('博客画布','Blog canvas')}</h1><p className="bc-editor-status"><span>@{row.handle}</span><span className="bc-save-state" data-dirty={dirty}><Icon name={dirty?'file':'check'}/>{dirty?say('草稿未保存','Unsaved draft'):say('已保存','Saved')}</span></p></div></div><div className="be-primary-actions">
   <div className="bc-action-group bc-action-preferences" role="group" aria-label={say('外观与文字版本','Appearance and content language')}>
    <AppearanceSwitch/>
    <label className="bc-language"><span className="community-sr">{say('编辑文字版本','Content language')}</span><select aria-label={say('编辑文字版本','Content language')} value={language} disabled={busy||uploading} onChange={e=>setLanguage(e.target.value)}><option value="">{say('原文','Original')}</option><option value="zh">中文</option><option value="en">English</option><option value="ja">日本語</option></select></label>

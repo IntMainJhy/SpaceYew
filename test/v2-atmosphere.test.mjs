@@ -7,7 +7,7 @@ import {Box3,Mesh,MeshPhysicalMaterial,Vector3} from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/V2Atmosphere.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText;
-function mount({reduced=false,width=1400,height=900,loading=false,failed=false}={}){
+function mount({reduced=false,width=1400,height=900,loading=false,failed=false,kind='glass',component=false}={}){
  class Target extends EventTarget{
   listeners=new Set();dataset={};style={};
   addEventListener(name,fn,options){super.addEventListener(name,fn,options);this.listeners.add(name)}
@@ -16,26 +16,32 @@ function mount({reduced=false,width=1400,height=900,loading=false,failed=false}=
  }
  const preference=Object.assign(new Target(),{matches:reduced}),root=new Target(),host=new Target(),document=Object.assign(new Target(),{hidden:false,documentElement:root}),window=Object.assign(new Target(),{devicePixelRatio:3,matchMedia:()=>preference});
  const surface=new Target(),canvas=Object.assign(new Target(),{parentElement:surface,closest:selector=>selector==='.v2-home'?host:null});
- const draws=[],sizes=[];let releases=0,resolve,reject,signal;
+ const draws=[],sizes=[],loads=[],effects=[];let releases=0,resolve,reject,signal;
  const adapter={resize:(...args)=>sizes.push(args),render:(...args)=>draws.push(args),dispose:()=>releases++};
+ const load=(kind,abortSignal)=>{
+  signal=abortSignal;
+  const record={kind,signal,releases:0,adapter:{...adapter,dispose:()=>{record.releases++;releases++}}};loads.push(record);
+  if(failed)return Promise.reject(Error('Model or WebGL unavailable'));
+  return loading?new Promise((a,b)=>{record.resolve=()=>a(record.adapter);resolve=record.resolve;reject=b}):Promise.resolve(record.adapter);
+ };
  let resize,intersection,theme,now=0,id=0;const frames=new Map();
  class Resize{constructor(fn){this.fn=fn;resize=this}observe(){}disconnect(){this.disconnected=true}}
  class Intersection{constructor(fn){this.fn=fn;intersection=this}observe(){}disconnect(){this.disconnected=true}set(value){this.fn([{isIntersecting:value}])}}
  class Mutation{constructor(fn){this.fn=fn;theme=this}observe(){}disconnect(){this.disconnected=true}}
  const exports={};
  vm.runInNewContext(source,{exports,window,document,AbortController,Math,ResizeObserver:Resize,IntersectionObserver:Intersection,MutationObserver:Mutation,requestAnimationFrame:fn=>{frames.set(++id,fn);return id},cancelAnimationFrame:key=>frames.delete(key),require:name=>{
-  if(name==='react')return{useEffect(){},useRef(){}};
+  if(name==='react')return{useEffect(fn){effects.push(fn)},useRef(){return{current:canvas}}};
   if(name==='react/jsx-runtime')return{jsx(){}};
+  if(name==='@/lib/home-moon')return{createHomeMoon:(_,abortSignal)=>load('moon',abortSignal)};
+  if(name==='@/lib/home-glass')return{createHomeGlass:(_,abortSignal)=>load('glass',abortSignal)};
   throw Error('Unexpected dependency '+name);
  }});
- const cleanup=exports.mountV2Atmosphere(canvas,(_,abortSignal)=>{
-  signal=abortSignal;
-  if(failed)return Promise.reject(Error('Model or WebGL unavailable'));
-  return loading?new Promise((a,b)=>{resolve=a;reject=b}):Promise.resolve(adapter);
- });
+ let cleanup;
+ if(component){exports.V2Atmosphere({initialScene:kind});cleanup=effects[0]();}
+ else cleanup=exports.mountV2Atmosphere(canvas,(_,abortSignal)=>load(kind,abortSignal),kind);
  const step=(ms=35)=>{now+=ms;const pending=[...frames.values()];frames.clear();pending.forEach(fn=>fn(now))};
  const move=(x=width,y=height,pointerType='mouse')=>host.dispatchEvent(Object.assign(new Event('pointermove'),{clientX:x,clientY:y,pointerType}));
- return{canvas,host,window,document,root,preference,get resize(){return resize},intersection,theme,frames,draws,sizes,cleanup,step,move,signal,adapter,get releases(){return releases},resolve:()=>resolve(adapter),reject:()=>reject(Error('Load failed'))};
+ return{canvas,host,window,document,root,preference,get resize(){return resize},get intersection(){return intersection},get theme(){return theme},frames,draws,sizes,cleanup,step,move,get signal(){return signal},adapter,loads,get releases(){return releases},resolve:()=>resolve(),reject:()=>reject(Error('Load failed'))};
 }
 const flush=async()=>{await Promise.resolve();await Promise.resolve()};
 
@@ -85,7 +91,30 @@ test('load failures, context loss and unmount during a late load preserve the CS
  const pending=mount({loading:true});pending.cleanup();assert.equal(pending.signal.aborted,true);pending.resolve();await flush();assert.equal(pending.releases,1);assert.equal(pending.draws.length,0);
  const lost=mount();lost.intersection.set(true);await flush();lost.move();
  lost.canvas.dispatchEvent(new Event('webglcontextlost',{cancelable:true}));assert.equal(lost.frames.size,0);assert.equal(lost.canvas.style.opacity,'0');assert.equal(lost.canvas.dataset.atmosphere,'fallback');
+ assert.equal(lost.releases,1,'context loss promptly releases GPU resources');assert.equal(lost.signal.aborted,true);assert.equal(lost.host.listeners.size,0);
  lost.cleanup();assert.equal(lost.releases,1);
+});
+
+test('scene changes abort old loads before mounting, ignore invalid events, and release late scenes',async()=>{
+ const s=mount({kind:'moon',component:true,loading:true});await flush();
+ const change=detail=>s.window.dispatchEvent(Object.assign(new Event('spaceyew-home-scene'),{detail}));
+ assert.equal(s.host.dataset.scene,'moon');assert.equal(s.loads.length,1);
+ const moon=s.loads[0];change('invalid');change({scene:'glass'});assert.equal(s.loads.length,1);assert.equal(moon.signal.aborted,false);
+ change('glass');assert.equal(moon.signal.aborted,true,'old async work is aborted synchronously');assert.equal(s.host.dataset.scene,'glass');await flush();
+ const glass=s.loads[1];moon.resolve();await flush();assert.equal(moon.releases,1);assert.equal(s.draws.length,0,'late old model never renders');
+ s.intersection.set(true);glass.resolve();await flush();assert.equal(s.draws.length,1);
+ change('glass');await flush();assert.equal(s.loads.length,2,'selecting the current scene preserves the renderer');
+ change('moon');assert.equal(glass.releases,1);assert.equal(glass.signal.aborted,true);await flush();
+ const next=s.loads[2];s.cleanup();assert.equal(next.signal.aborted,true);next.resolve();await flush();assert.equal(next.releases,1);
+ assert.equal(s.window.listeners.size+s.host.listeners.size+s.canvas.listeners.size+s.document.listeners.size+s.preference.listeners.size,0);
+});
+
+test('moon retains presence below the hero while glass keeps the archived reading opacity',async()=>{
+ for(const [kind,dark,opacity] of [['moon',false,.5],['moon',true,.45],['glass',false,.55],['glass',true,.2]]){
+  const s=mount({kind});s.root.dataset.colorMode=dark?'dark':'light';s.intersection.set(true);await flush();
+  s.host.top=-1800;s.window.dispatchEvent(new Event('scroll'));s.step();
+  assert.ok(Math.abs(Number(s.canvas.style.opacity)-opacity)<.00001);s.cleanup();
+ }
 });
 
 test('the shipped original GLB loads as two bounded glass meshes with real transmission and volume',async()=>{

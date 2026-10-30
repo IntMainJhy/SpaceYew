@@ -3,10 +3,12 @@
 import {useEffect,useRef} from 'react';
 import type {HomeGlassScene} from '@/lib/home-glass';
 
-const loadScene=(canvas:HTMLCanvasElement,signal:AbortSignal)=>import('@/lib/home-glass').then(module=>module.createHomeGlass(canvas,signal));
+export type HomeSceneKind='moon'|'glass';
+const loadMoon=(canvas:HTMLCanvasElement,signal:AbortSignal)=>import('@/lib/home-moon').then(module=>module.createHomeMoon(canvas,signal));
+const loadGlass=(canvas:HTMLCanvasElement,signal:AbortSignal)=>import('@/lib/home-glass').then(module=>module.createHomeGlass(canvas,signal));
 
 /** Load the homepage-only renderer without blocking the semantic content. */
-export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene){
+export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadMoon,kind:HomeSceneKind='moon'){
  const surface=canvas.parentElement||canvas,host=canvas.closest('.v2-home')||surface,preference=window.matchMedia('(prefers-reduced-motion: reduce)'),controller=new AbortController();
  let scene:HomeGlassScene|null=null,frame=0,lastDraw=0,visible=false,printing=false,lost=false,disposed=false;
  let targetX=0,targetY=0,pointerX=0,pointerY=0,progress=0,dirty=false;
@@ -15,9 +17,10 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
  const draw=()=>{
   if(!scene||disposed||lost||document.hidden||printing||!visible)return;
   try{
-   const dark=document.documentElement.dataset.colorMode==='dark',reading=Math.max(0,Math.min(1,(progress-.18)/.52));
+   const dark=document.documentElement.dataset.colorMode==='dark',reading=Math.max(0,Math.min(1,(progress-(kind==='moon'?.55:.18))/(kind==='moon'?.7:.52)));
    scene.render(pointerX,pointerY,dark,progress,preference.matches);
-   canvas.style.opacity=String(1-(dark?.8:.45)*reading*reading*(3-2*reading));
+   const fade=kind==='moon'?(dark?.55:.5):(dark?.8:.45);
+   canvas.style.opacity=String(1-fade*reading*reading*(3-2*reading));
   }
   catch{fail();}
  };
@@ -39,8 +42,10 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
  const scroll=()=>{readProgress();dirty=true;sync();};
  const measure=()=>{
   if(!scene||disposed||lost)return;
-  const rect=canvas.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,rect.width<768?1.25:1.5);
-  scene.resize(Math.max(1,rect.width),Math.max(1,rect.height),dpr);readProgress();draw();
+  try{
+   const rect=canvas.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,rect.width<768?1.25:1.5);
+   scene.resize(Math.max(1,rect.width),Math.max(1,rect.height),dpr);readProgress();draw();
+  }catch{fail();}
  };
  const move=(event:PointerEvent)=>{
   if(event.pointerType==='touch'||preference.matches)return;
@@ -53,11 +58,12 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
  const beforePrint=()=>{printing=true;sync();};
  const afterPrint=()=>{printing=false;resume();};
  const reduced=()=>{if(preference.matches){pointerX=pointerY=targetX=targetY=0;draw();}sync();};
- const contextLost=(event:Event)=>{event.preventDefault();lost=true;canvas.style.opacity='0';canvas.dataset.atmosphere='fallback';stop();};
+ const contextLost=(event:Event)=>{event.preventDefault();lost=true;fail();};
  const resize=typeof ResizeObserver==='undefined'?null:new ResizeObserver(measure);
  const intersection=typeof IntersectionObserver==='undefined'?null:new IntersectionObserver(entries=>{visible=entries.some(entry=>entry.isIntersecting);resume();},{threshold:.01});
  const theme=typeof MutationObserver==='undefined'?null:new MutationObserver(draw);
  const cleanup=()=>{
+  if(disposed)return;
   disposed=true;controller.abort();stop();resize?.disconnect();intersection?.disconnect();theme?.disconnect();
   if(!resize)window.removeEventListener('resize',measure);
   host.removeEventListener('pointermove',move as EventListener);host.removeEventListener('pointerleave',leave);
@@ -68,7 +74,7 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
   scene?.dispose();scene=null;
  };
  const fail=()=>{cleanup();canvas.style.opacity='0';canvas.dataset.atmosphere='fallback';};
- resize?.observe(surface);intersection?.observe(canvas);theme?.observe(document.documentElement,{attributes:true,attributeFilter:['data-color-mode']});
+ resize?.observe(surface);const copy=host.querySelector?.('.v2-hero-copy');if(copy)resize?.observe(copy);intersection?.observe(canvas);theme?.observe(document.documentElement,{attributes:true,attributeFilter:['data-color-mode']});
  if(!resize)window.addEventListener('resize',measure);
  if(!intersection)visible=true;
  host.addEventListener('pointermove',move as EventListener,{passive:true});host.addEventListener('pointerleave',leave);
@@ -83,8 +89,22 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
  return cleanup;
 }
 
-export function V2Atmosphere(){
+export function V2Atmosphere({initialScene='moon'}:{initialScene?:HomeSceneKind}={}){
  const canvas=useRef<HTMLCanvasElement>(null);
- useEffect(()=>canvas.current?mountV2Atmosphere(canvas.current):undefined,[]);
+ useEffect(()=>{
+  const element=canvas.current;if(!element)return;
+  let kind=initialScene,cleanup=()=>{};
+  const mount=(next:HomeSceneKind)=>{
+   cleanup();kind=next;
+   const host=element.closest<HTMLElement>('.v2-home');if(host)host.dataset.scene=kind;
+   cleanup=mountV2Atmosphere(element,kind==='glass'?loadGlass:loadMoon,kind);
+  };
+  const change=(event:Event)=>{
+   const next=(event as CustomEvent<unknown>).detail;
+   if((next==='moon'||next==='glass')&&next!==kind)mount(next);
+  };
+  mount(initialScene);window.addEventListener('spaceyew-home-scene',change);
+  return()=>{window.removeEventListener('spaceyew-home-scene',change);cleanup();};
+ },[initialScene]);
  return <canvas ref={canvas} className="v2-atmosphere" aria-hidden="true" style={{display:'block',width:'100%',height:'100%'}}/>;
 }

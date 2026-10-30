@@ -15,7 +15,7 @@ export function middleware(request:NextRequest){const pathname=request.nextUrl.p
  // Uploaded documents enforce their own opaque-origin sandbox even when opened directly.
  if(pathname.startsWith('/site-files/'))return NextResponse.next();
  const nonce=btoa(String.fromCharCode(...crypto.getRandomValues(new Uint8Array(18))));
- const csp=["default-src 'self'",`script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${process.env.NODE_ENV==='development'?" 'unsafe-eval'":''}`,"style-src 'self' 'unsafe-inline'","img-src 'self' data: blob:","font-src 'self' data:","connect-src 'self'"+(process.env.NODE_ENV==='development'?' ws:':''),"media-src 'self' blob:","object-src 'none'","base-uri 'none'","form-action 'self'","frame-ancestors 'none'",...(process.env.PUBLIC_URL?.startsWith('https://')?['upgrade-insecure-requests']:[])].join('; ');
+ const csp=["default-src 'self'",`script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${process.env.NODE_ENV==='development'?" 'unsafe-eval'":''}`,"style-src 'self' 'unsafe-inline'","img-src 'self' data: blob:","font-src 'self' data:","connect-src 'self' blob:"+(process.env.NODE_ENV==='development'?' ws:':''),"media-src 'self' blob:","object-src 'none'","base-uri 'none'","form-action 'self'","frame-ancestors 'none'",...(process.env.PUBLIC_URL?.startsWith('https://')?['upgrade-insecure-requests']:[])].join('; ');
  const headers=new Headers(request.headers);headers.set('x-nonce',nonce);headers.set('Content-Security-Policy',csp);const response=NextResponse.next({request:{headers}});response.headers.set('Content-Security-Policy',csp);
  if(/^\/(?:admin|workspace|api|login|join|report)(?:\/|$)/.test(pathname))response.headers.set('X-Robots-Tag','noindex, nofollow');
  return response;

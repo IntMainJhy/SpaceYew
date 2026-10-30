@@ -52,9 +52,10 @@ import './site-appearance.css';
 import './blog-reading-finish.css';
 import './blog-entry.css';
 import './v2.css';
+import './lunar.css';
 export const viewport:Viewport={width:'device-width',initialScale:1,viewportFit:'cover'};
 export const metadata:Metadata={applicationName:'SpaceYew',title:'SpaceYew',description:'Projects, experience, and shared resources.'};
-const designContract='<!-- SpaceYew UI v2 experiment: user-pinned blue atmospheric creator showcase, original open-frame brand, modern sans typography and persistent light/dark appearance. Public portfolio content, editing controls and author-selected formatting retain their own boundaries. -->';
+const designContract='<!-- SpaceYew UI v2 experiment: user-pinned blue atmospheric creator showcase, original open-frame brand, modern sans typography and persistent light/dark appearance. The accepted NASA LRO Moon is the default homepage scene; the archived glass scene remains selectable with a URL-backed comparison control. Public portfolio content, editing controls and author-selected formatting retain their own boundaries. -->';
 export default async function RootLayout({children}:{children:React.ReactNode}){
   const locale=normalizeLocale((await cookies()).get('site-locale')?.value);
   const nonce=(await headers()).get('x-nonce')||undefined;

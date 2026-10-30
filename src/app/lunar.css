@@ -1,0 +1,28 @@
+/* Approved lunar replacement. The archived glass composition remains selectable. */
+.v2-home[data-scene=moon]{background:linear-gradient(180deg,#070d19 0,#111e32 500px,var(--site-canvas) 1160px)}
+body:has(.v2-home[data-scene=moon]) .v2-landing .organic-header{background:#070d19;--chrome-surface:#070d19}
+body:has(.v2-home[data-scene=moon]) :is(.promotion-bar,.promotion-controls){background:#080f1d}
+.v2-home[data-scene=moon] .v2-home-atmosphere:before{content:"";position:absolute;left:78%;top:36%;width:min(55vw,74vh);aspect-ratio:1;transform:translate(-50%,-50%);background:url('/images/lunar/moon-fallback.png') center/104.5% auto no-repeat}
+.v2-home[data-scene=moon] .v2-home-atmosphere:has(canvas[data-atmosphere=paused]):before,.v2-home[data-scene=moon] .v2-home-atmosphere:has(canvas[data-atmosphere=running]):before{display:none}
+.v2-home[data-scene=moon] .v2-hero-copy{max-width:560px;margin-bottom:74px}
+.v2-home[data-scene=moon] .v2-hero-showcase{max-width:760px}
+.v2-scene-switcher{display:flex;align-items:center;gap:3px;width:max-content;margin:28px 0 0;padding:3px;border:1px solid #a2bbdc52;border-radius:999px;background:#0a152d66;backdrop-filter:blur(8px)}
+.v2-scene-switcher button{border:0;border-radius:999px;min-height:38px;padding:8px 17px;font:500 12px/1.4 var(--site-font);color:#c4d4ec;background:transparent;transition:background-color .18s,color .18s}
+.v2-scene-switcher button[aria-pressed=true]{background:#e0eafa;color:#172a49}
+.v2-scene-switcher button:not([aria-pressed=true]):hover{background:#c1d7f51a;color:#fff}
+.v2-scene-switcher button:focus-visible{outline:2px solid #fff;outline-offset:3px}
+@media(max-width:1000px){.v2-scene-switcher{margin-inline:auto}}
+@media(max-width:767px){
+ .v2-home[data-scene=moon] .v2-hero-scene{padding-top:58px}
+ .v2-home[data-scene=moon] .v2-hero-copy{margin-bottom:calc(min(82vw,36vh) + 56px)}
+ .v2-home[data-scene=moon] .v2-home-atmosphere:before{display:none}
+ .v2-home[data-scene=moon] .v2-hero-actions{gap:12px}
+ .v2-home[data-scene=moon] .v2-hero-copy:after{content:"";position:absolute;left:50%;top:calc(100% + 28px);width:min(82vw,36vh);aspect-ratio:1;transform:translateX(-50%);background:url('/images/lunar/moon-fallback.png') center/104.5% auto no-repeat;pointer-events:none}
+ .v2-home[data-scene=moon]:has(canvas[data-atmosphere=paused]) .v2-hero-copy:after,.v2-home[data-scene=moon]:has(canvas[data-atmosphere=running]) .v2-hero-copy:after{display:none}
+ .v2-scene-switcher{margin-top:22px}
+}
+@media(prefers-reduced-motion:reduce){.v2-scene-switcher button{transition:none}}
+@media print{.v2-scene-switcher{display:none}}
+
+.v2-home[data-scene=glass] .v2-scene-switcher{position:absolute;left:0;bottom:-48px;margin:0}
+@media(max-width:1000px){.v2-home[data-scene=glass] .v2-scene-switcher{left:50%;transform:translateX(-50%)}}

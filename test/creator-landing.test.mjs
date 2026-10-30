@@ -18,7 +18,7 @@ async function render(space,locale='zh'){
   '@/lib/spaces.mjs':{defaultBlogSpace:()=>space,publicSpaces:()=>[]},
   '@/lib/content-locales.mjs':locales,'@/lib/db.mjs':{getConfig:()=>({desktopDownloads:{}})},
   '@/lib/home-download.mjs':{homeDownload:()=>({href:'/downloads'})},
-  './FeedAvatar':{FeedAvatar:()=>null},'./Icons':{Icon:()=>null},'./V2Atmosphere':{V2Atmosphere:()=>null},
+  './HomeSceneSwitcher':{HomeSceneSwitcher:()=>null},'./FeedAvatar':{FeedAvatar:()=>null},'./Icons':{Icon:()=>null},'./V2Atmosphere':{V2Atmosphere:()=>null},
   './CreatorStage':{CreatorStage:({creator})=>React.createElement('pre',{'data-stage':true},JSON.stringify(creator))}
  };
  vm.runInNewContext(source,{exports,Set,encodeURIComponent,require:name=>{if(!Object.hasOwn(modules,name))throw new Error(name);return modules[name]}});

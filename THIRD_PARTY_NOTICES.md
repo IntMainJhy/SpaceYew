@@ -20,6 +20,10 @@ The complete [MIT notice](docs/licenses/anx-portfolio-MIT.txt) and [upstream bra
 
 The blog editor uses `@xyflow/react` (MIT) for viewport gestures, node selection and dragging. Copyright and full MIT notice are preserved in [docs/licenses/React-Flow-MIT.txt](docs/licenses/React-Flow-MIT.txt). The public portfolio layout remains independent of canvas coordinates.
 
+### Three.js
+
+The homepage glass renderer uses Three.js, GLTFLoader and the procedural RoomEnvironment (MIT). The [complete license](docs/licenses/Three.js-MIT.txt) is retained. The glass GLB is an original extrusion of SpaceYew's existing folded-plane symbol; no Ego Lite model or environment image is included.
+
 ### npm dependencies
 
 `package.json` and `package-lock.json` record website dependencies and versions. Dependencies are installed through npm; `node_modules` is not distributed in this repository. Their licenses, copyright notices and usage conditions are governed by each package and upstream project, including GSAP's upstream terms. This project's license neither grants nor restricts independent rights in those dependencies.
@@ -49,6 +53,10 @@ macOS and Windows client source code, installers and proprietary assets are not 
 ### React Flow
 
 博客编辑器使用 MIT 许可的 `@xyflow/react` 实现画布平移、缩放、卡片选择与拖动。完整版权及许可保留于 [docs/licenses/React-Flow-MIT.txt](docs/licenses/React-Flow-MIT.txt)。公开博客的阅读排版独立于编辑画布坐标。
+
+### Three.js
+
+首页玻璃背景使用 MIT 许可的 Three.js、GLTFLoader 与程序化 RoomEnvironment，保留[完整许可](docs/licenses/Three.js-MIT.txt)。玻璃 GLB 基于 SpaceYew 现有折叠形标志原创建模，未引入 Ego Lite 的模型或环境图片。
 
 ### npm 依赖
 

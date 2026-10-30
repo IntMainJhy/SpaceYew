@@ -51,7 +51,7 @@ body:has(.v2-site) .promotion-bar .promotion-item{padding-block:0}
 .v2-home{min-width:0;overflow:clip}
 .v2-hero-scene{position:relative;isolation:isolate;padding:106px 24px 64px;background:linear-gradient(180deg,#142a5d 0%,#1b55bd 25%,#5a9ce5 50%,#eef3f9 100%);min-height:930px}
 html[data-color-mode=dark] .v2-hero-scene{background:linear-gradient(180deg,#142a5d,#1b55bd 28%,#1c426d 63%,#101a31)}
-.v2-atmosphere{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+.v2-atmosphere{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;mask-image:linear-gradient(#000 78%,transparent);-webkit-mask-image:linear-gradient(#000 78%,transparent)}
 .v2-hero-copy{position:relative;text-align:center;max-width:660px;margin:0 auto 64px;color:#e4efff}
 html[data-ui][data-color-mode] .v2-site .v2-hero-copy h1{font-family:var(--site-font);font-size:clamp(36px,4.3vw,56px);font-weight:600;line-height:1.17;letter-spacing:-.04em;margin:0 0 18px;color:#e5efff;text-wrap:balance}
 .v2-hero-copy h1 span{display:block}

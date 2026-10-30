@@ -1,10 +1,10 @@
 # SpaceYew brand assets
 
-The SpaceYew symbol is the original letter-free “Joined leaves / 合叶” mark: two asymmetric solid leaves in deep sea blue `#3976A8` and coral orange `#D87560`, separated by a curved transparent channel. It has no background tile. The source of truth is `src/app/icon.svg`; the SpaceYew wordmark keeps the website’s editorial serif type. Portfolio illustrations, résumé images, certificates and test screenshots are content, not reusable brand assets.
+The SpaceYew symbol is a monochrome **SY** monogram: white uppercase letter outlines on a black rounded square. The outlines use the locally hosted Inter ExtraBold face; its SIL OFL notice is in `public/fonts/Inter-OFL.txt`. The source of truth is `src/app/icon.svg`; the SpaceYew wordmark keeps the website’s editorial serif type. Portfolio illustrations, résumé images, certificates and test screenshots are content, not reusable brand assets.
 
 Run `npm run brand:icons` after changing the SVG. `scripts/brand-icons.mjs` uses Sharp to deterministically generate `src/app/favicon.ico` (16, 32 and 48 px), `src/app/apple-icon.png` (180 px) and `public/brand/spaceyew-icon.png` (512 px). PNG exports include an origin note; no image generation model is involved.
 
-SVG, favicon and the 512px PNG retain transparency. The Apple icon is flattened onto warm white `#FAFAF9`. The mark is static and uses broad filled shapes so the silhouette and curved gap survive small sizes. No mascot or generated character artwork is part of this mark.
+SVG, favicon and the 512px PNG retain transparent outer corners. The Apple icon is flattened onto white `#ffffff`. The mark is static and uses bold letter outlines for clarity at small sizes. No mascot or generated character artwork is part of this mark.
 
 The command also regenerates `src/lib/brand-icon.ts` with `/icon.svg?v=<first 12 characters of the SVG SHA-256>`. `BrandMark` uses this versioned URL so a changed mark receives a new cache key. Regenerate and commit the SVG, exports and URL module together.
 

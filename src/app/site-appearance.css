@@ -2,21 +2,21 @@
    retain their own palette and explicit text formatting. Existing fonts are inherited. */
 html[data-ui] {
  --site-canvas:#fff;--site-surface:#fff;--site-raised:#f5f5f5;
- --site-text:#252a2d;--site-body:#454c50;--site-muted:#656d72;
- --site-line:#e5e5e5;--site-control-line:#bfc6c8;--site-accent:#30688f;
- --site-accent-soft:#e8f0f5;--site-action:#273f50;--site-on-action:#fff;
- --site-focus:#3976a8;--site-selection:#d5e7f3;--site-danger:#a33d39;
- --site-error-surface:#fff0ee;--site-menu-shadow:0 14px 40px #182b3d1f;
+ --site-text:#171717;--site-body:#454545;--site-muted:#656565;
+ --site-line:#e5e5e5;--site-control-line:#cfcfcf;--site-accent:#171717;
+ --site-accent-soft:#f5f5f5;--site-action:#171717;--site-action-hover:#333;--site-on-action:#fff;
+ --site-focus:#171717;--site-selection:#dedede;--site-danger:#a33d39;
+ --site-error-surface:#fff0ee;--site-menu-shadow:0 14px 40px #1717171f;
  --chrome-surface:var(--site-surface);--chrome-ink:var(--site-text);--chrome-muted:var(--site-muted);--chrome-accent:var(--site-accent);
  background:var(--site-canvas);color:var(--site-text);color-scheme:light;
  scrollbar-color:var(--site-control-line) var(--site-canvas);
 }
 html[data-ui][data-color-mode=dark] {
- --site-canvas:#171b1e;--site-surface:#1e2428;--site-raised:#293137;
- --site-text:#eeeae2;--site-body:#d2d0c9;--site-muted:#a5afb5;
- --site-line:#3a444b;--site-control-line:#596972;--site-accent:#9fc8e5;
- --site-accent-soft:#293f4f;--site-action:#c0d9e8;--site-on-action:#172a36;
- --site-focus:#9fc8e5;--site-selection:#345771;--site-danger:#f4a49c;
+ --site-canvas:#171717;--site-surface:#202020;--site-raised:#2b2b2b;
+ --site-text:#eee;--site-body:#d2d2d2;--site-muted:#aaa;
+ --site-line:#444;--site-control-line:#686868;--site-accent:#eee;
+ --site-accent-soft:#303030;--site-action:#eee;--site-action-hover:#d4d4d4;--site-on-action:#171717;
+ --site-focus:#eee;--site-selection:#484848;--site-danger:#f4a49c;
  --site-error-surface:#412a2a;--site-menu-shadow:0 16px 44px #0005;
  color-scheme:dark;
 }
@@ -82,7 +82,7 @@ html[data-ui][data-color-mode] .organic-site :is(.organic-mobile-menu nav a,.fee
 html[data-ui][data-color-mode] .organic-site :is(.space-btn,.btn,.organic-button,.community-follow-button):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *)) {border-radius:10px;min-height:42px;padding:10px 16px;background:var(--site-surface);border-color:var(--site-control-line);color:var(--site-text);font-weight:500;line-height:1.4}
 html[data-ui][data-color-mode] .organic-site :is(.space-btn,.btn,.organic-button,.community-follow-button):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *)):hover {background:var(--site-raised);color:var(--site-text)}
 html[data-ui][data-color-mode] .organic-site :is(.space-btn.primary,.btn.primary,.organic-button.is-primary,.community-follow-button:not(.is-following)):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *)) {background:var(--site-action);color:var(--site-on-action);border-color:transparent}
-html[data-ui][data-color-mode] .organic-site :is(.space-btn.primary,.btn.primary,.organic-button.is-primary,.community-follow-button:not(.is-following)):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *)):hover {background:var(--site-accent);color:var(--site-on-action)}
+html[data-ui][data-color-mode] .organic-site :is(.space-btn.primary,.btn.primary,.organic-button.is-primary,.community-follow-button:not(.is-following)):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *)):hover {background:var(--site-action-hover);color:var(--site-on-action)}
 html[data-ui][data-color-mode] .organic-site :is(input:not([type=color]):not([type=checkbox]):not([type=radio]):not([type=file]),textarea,select):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *,.bt-font-specimen *)) {background:var(--site-surface);border-color:var(--site-control-line);color:var(--site-text);caret-color:var(--site-focus);border-radius:9px}
 html[data-ui][data-color-mode] .organic-site :is(input,textarea)::placeholder {color:var(--site-muted);opacity:1}
 html[data-ui][data-color-mode] .organic-site :is(input[type=checkbox],input[type=radio]) {accent-color:var(--site-accent)}

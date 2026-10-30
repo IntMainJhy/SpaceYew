@@ -9,7 +9,6 @@ import {FeedAvatar} from './FeedAvatar';
 import {CommunityFeaturePreview} from './ProductFeaturePreviews';
 import {ProductHomeMotion} from './ProductHomeMotion';
 import {BlogTheme} from './BlogTheme';
-import {SkillInstall} from './SkillInstall';
 import {getConfig} from '@/lib/db.mjs';
 import {homeDownload} from '@/lib/home-download.mjs';
 
@@ -40,7 +39,6 @@ export async function PlatformHome({req}:{req:Request}){
       <div className="product-hero-copy">
         <h1 id="product-title"><span>{t('让你的创造，')}</span><span>{t('有自己的空间。')}</span></h1>
         <p>{t('分享发现，展示作品，记录成长。')}</p>
-        <SkillInstall baseUrl={new URL(process.env.PUBLIC_URL||req.url).origin}/>
         <div className="space-actions product-entry-actions"><Link className="space-btn primary" href={download.href} rel="noopener noreferrer" title={download.platform&&!download.available?t('{0} 桌面版即将推出',[download.name]):undefined}>{download.platform?t('{0} 下载',[download.name]):t('下载桌面端')}</Link><Link className="space-link" href="/login?next=%2Fcommunity">{t('进入网站')}</Link></div>
       </div>
     </section>

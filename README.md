@@ -31,7 +31,7 @@ Local previews of the English interface with English sample posts and fictional 
 
 ### Homepage
 
-An introduction to SpaceYew, the Skill installation entry and site navigation.
+An introduction to SpaceYew, desktop downloads and site navigation.
 
 ![SpaceYew homepage in English with editorial typography, pastel backgrounds and feature links](docs/screenshots/home-en.jpg)
 

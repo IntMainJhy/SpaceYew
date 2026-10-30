@@ -149,11 +149,11 @@ html[data-ui] .skill-workflow h3 {font-size:20px;line-height:1.6;margin:0;}
 .learning-related-links a {display:inline-flex;align-items:center;min-height:44px;}
 .resource-shortcuts {display:flex;gap:24px;flex-wrap:wrap;margin-top:12px;}
 .resource-shortcuts a {display:inline-flex;align-items:center;gap:10px;min-height:44px;font-size:14px;text-decoration:underline;text-underline-offset:4px;}
-.home-learning {margin:88px 0;}
-.home-learning-links {display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:24px;}
-.home-learning-links>a {padding:24px 0;border-top:1px solid var(--organic-line);}
+.home-learning {margin:48px 0;}
+.home-learning-links {display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:20px;}
+.home-learning-links>a {padding:20px 0;border-top:1px solid var(--organic-line);}
 html[data-ui] .home-learning-links h3 {font-size:26px;line-height:1.5;margin:0;}
-.home-learning-links p {font-size:15px;line-height:1.8;color:var(--organic-muted);margin:8px 0 20px;}
+.home-learning-links p {font-size:15px;line-height:1.8;color:var(--organic-muted);margin:8px 0 12px;}
 .home-learning-links span {font-size:14px;}
 .home-learning-links>a:hover span {text-decoration:underline;text-underline-offset:4px;}
 @media(max-width:900px){
@@ -200,7 +200,7 @@ html[data-ui] .home-learning-links h3 {font-size:26px;line-height:1.5;margin:0;}
  .skills-page {padding-top:24px;}
  .skill-feature {grid-template-columns:minmax(0,1fr);gap:36px;padding:28px 0;}
  .skill-workflow ol {grid-template-columns:minmax(0,1fr);gap:28px;}
- .home-learning {margin:56px 0;}
+ .home-learning {margin:36px 0;}
  .home-learning-links {gap:24px;}
 }
 @media(max-width:420px){.home-learning-links {grid-template-columns:1fr;gap:8px;}.learning-next {flex-wrap:wrap;}}

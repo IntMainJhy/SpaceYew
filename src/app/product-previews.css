@@ -7,8 +7,9 @@
 .pfp-feed-heading .icon {width:17px;height:17px}
 .pfp-feed-heading>a {display:grid;place-items:center;min-width:44px;min-height:44px;border-radius:10px}
 .pfp-feed-heading>a:hover {background:var(--site-surface)}
-.pfp-community .pfp-empty {min-height:260px;padding-top:24px;padding-bottom:48px}
-.pfp-community .pfp-empty>.icon {box-sizing:content-box;padding:16px;border-radius:16px;background:var(--site-surface);color:var(--site-text)}
+.pfp-community .pfp-empty {min-height:160px;padding:8px 24px 28px;align-items:flex-start;text-align:left}
+.pfp-community .pfp-empty>.icon {display:none}
+.pfp-community .pfp-empty p {max-width:42ch}
 .product-feature-preview :is(a,button) {color:inherit;}
 .product-feature-preview a {text-decoration:none;text-underline-offset:4px;}
 .product-feature-preview a:hover {color:var(--sp-accent);}

@@ -30,13 +30,13 @@ export function HomeFlowBackground({interactive=true}:{interactive?:boolean}={})
     <stop offset="1" stopColor="#fff" stopOpacity="0"/>
    </linearGradient>
    <radialGradient id={id+'-clear'} cx=".5" cy=".2" r=".56">
-    <stop stopColor="#fff"/>
-    <stop offset=".4" stopColor="#fff" stopOpacity=".98"/>
+    <stop stopColor="var(--site-canvas, #fff)"/>
+    <stop offset=".4" stopColor="var(--site-canvas, #fff)" stopOpacity=".98"/>
     <stop offset="1" stopColor="#fff" stopOpacity="0"/>
    </radialGradient>
    <linearGradient id={id+'-fade'} x1="0" y1="0" x2="0" y2="1">
     <stop offset=".58" stopColor="#fff" stopOpacity="0"/>
-    <stop offset="1" stopColor="#fff"/>
+    <stop offset="1" stopColor="var(--site-canvas, #fff)"/>
    </linearGradient>
   </defs>
   <g data-flow-ribbons="" opacity=".9">

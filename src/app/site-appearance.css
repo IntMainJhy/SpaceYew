@@ -1,9 +1,9 @@
 /* Shared chrome owns reading appearance. Authored portfolios and canvas nodes
    retain their own palette and explicit text formatting. Existing fonts are inherited. */
 html[data-ui] {
- --site-canvas:#f8f7f4;--site-surface:#fff;--site-raised:#f0efeb;
+ --site-canvas:#fff;--site-surface:#fff;--site-raised:#f5f5f5;
  --site-text:#252a2d;--site-body:#454c50;--site-muted:#656d72;
- --site-line:#dedfdb;--site-control-line:#bfc6c8;--site-accent:#30688f;
+ --site-line:#e5e5e5;--site-control-line:#bfc6c8;--site-accent:#30688f;
  --site-accent-soft:#e8f0f5;--site-action:#273f50;--site-on-action:#fff;
  --site-focus:#3976a8;--site-selection:#d5e7f3;--site-danger:#a33d39;
  --site-error-surface:#fff0ee;--site-menu-shadow:0 14px 40px #182b3d1f;

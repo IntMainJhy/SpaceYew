@@ -2,11 +2,12 @@
 import {useLocale} from './LocaleProvider';
 import {useRef,useState} from 'react';
 import {Icon} from './Icons';
+import {catalogCoverUrl} from '@/lib/catalog-presentation.mjs';
 import {inputClass,secondary,Notice} from './CommunityUI';
 
 export function PostCover({id,alt='',className='',generated}:{id?:string;alt?:string;className?:string;generated?:{kind:string;title:string;category:string}}){const {t:tr,locale}=useLocale();
  const[failed,setFailed]=useState('');
- const source=id?'/media/'+id:generated?'/api/covers?'+new URLSearchParams(generated):'';
+ const source=id?'/media/'+id:generated?catalogCoverUrl(generated.kind,generated.title,generated.category):'';
  if(!source)return null;
  if(failed===source)return <p className="community-cover-unavailable">{tr("封面暂不可用")}</p>;
  return <img className={'community-post-cover '+className} src={source} alt={alt||tr("投稿封面")} width={1200} height={675} loading="lazy" decoding="async" onError={()=>setFailed(source)}/>;

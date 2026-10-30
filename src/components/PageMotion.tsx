@@ -31,9 +31,18 @@ export function PageMotion({children,className=''}:{children:React.ReactNode;cla
    const next=new URL(link.href,location.href);
    if(next.origin===location.origin&&/^\/(community|workspace)(\/|$)/.test(next.pathname))capture(next.pathname+next.search,event.detail===0,link.dataset.navKey);
   };
+  const dismiss=(event:PointerEvent|KeyboardEvent)=>{
+   const menu=document.querySelector<HTMLDetailsElement>('.organic-mobile-menu[open]');
+   if(!menu)return;
+   if('key' in event){
+    if(event.key!=='Escape')return;
+    event.preventDefault();menu.open=false;menu.querySelector('summary')?.focus();
+   }else if(event.target instanceof Node&&!menu.contains(event.target))menu.open=false;
+  };
   const back=()=>capture(location.pathname+location.search);
   document.addEventListener('click',click,true);window.addEventListener('popstate',back);
-  return()=>{document.removeEventListener('click',click,true);window.removeEventListener('popstate',back);};
+  document.addEventListener('pointerdown',dismiss);document.addEventListener('keydown',dismiss);
+  return()=>{document.removeEventListener('click',click,true);window.removeEventListener('popstate',back);document.removeEventListener('pointerdown',dismiss);document.removeEventListener('keydown',dismiss);};
  },[]);
  useLayoutEffect(()=>{
   const element=root.current,previous=pending?.to===route?pending:null;pending=null;

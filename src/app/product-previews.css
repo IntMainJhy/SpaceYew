@@ -1,6 +1,14 @@
 /* Readable excerpts of the product, using the active platform palette. */
 .product-feature-preview {min-width:0;width:100%;overflow:hidden;color:var(--sp-ink);background:var(--sp-paper);border-radius:var(--sp-panel-radius,16px);font-size:14px;line-height:1.65;}
 .product-feature-preview :is(h3,h4,h5,p) {overflow-wrap:anywhere;}
+.product-home .pfp-community {background:var(--site-raised)}
+.pfp-feed-heading {display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 24px;color:var(--site-body)}
+.pfp-feed-heading>span {display:flex;align-items:center;gap:10px;font-size:14px}
+.pfp-feed-heading .icon {width:17px;height:17px}
+.pfp-feed-heading>a {display:grid;place-items:center;min-width:44px;min-height:44px;border-radius:10px}
+.pfp-feed-heading>a:hover {background:var(--site-surface)}
+.pfp-community .pfp-empty {min-height:260px;padding-top:24px;padding-bottom:48px}
+.pfp-community .pfp-empty>.icon {box-sizing:content-box;padding:16px;border-radius:16px;background:var(--site-surface);color:var(--site-text)}
 .product-feature-preview :is(a,button) {color:inherit;}
 .product-feature-preview a {text-decoration:none;text-underline-offset:4px;}
 .product-feature-preview a:hover {color:var(--sp-accent);}

@@ -10,6 +10,9 @@ const categoryLabels={
 export function catalogCategoryLabel(category=''){
  return Object.hasOwn(categoryLabels,category)?categoryLabels[category]:category;
 }
+export function catalogCoverUrl(kind='docs',title='SpaceYew',category=''){
+ return '/api/covers?'+new URLSearchParams({kind,title,category,v:'2'});
+}
 export function catalogEditorUrl(kind,id=''){
  const section=['docs','skills','resources'].includes(kind)?kind:'docs';
  return '/'+section+'?compose=1'+(id?'&edit='+encodeURIComponent(id):'');

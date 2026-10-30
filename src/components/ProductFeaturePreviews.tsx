@@ -25,7 +25,9 @@ function PreviewEmpty({icon,title,description}:{icon:string;title:string;descrip
 }
 
 export function CommunityFeaturePreview({posts}:{posts:PreviewPost[]}){
+  const {t}=useLocale();
   return <PreviewFrame kind="community" label="社区界面预览">
+    <header className="pfp-feed-heading"><span><Icon name="comment"/>{t('社区动态')}</span><Link href="/community" aria-label={t('去社区看看')}><Icon name="arrow"/></Link></header>
     <div className="pfp-feed">
       {posts.length?posts.slice(0,2).map((post,index)=><article className={'pfp-post'+(index?' pfp-post-compact':'')} key={post.id}>
         <div className="pfp-person"><FeedAvatar name={post.authorName} avatarId={post.authorAvatarId}/><strong>{post.authorName}</strong></div>

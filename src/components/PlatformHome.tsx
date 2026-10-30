@@ -11,6 +11,7 @@ import {ProductHomeMotion} from './ProductHomeMotion';
 import {BlogTheme} from './BlogTheme';
 import {getConfig} from '@/lib/db.mjs';
 import {homeDownload} from '@/lib/home-download.mjs';
+import {Icon} from './Icons';
 
 function ShowcaseGrid({spaces,locale,t,heading='h3'}:{spaces:any[];locale:string;t:(text:string)=>string;heading?:'h2'|'h3'}){
   const Heading=heading;
@@ -21,7 +22,7 @@ function ShowcaseGrid({spaces,locale,t,heading='h3'}:{spaces:any[];locale:string
       <div className="platform-showcase-info">
         <div className="platform-showcase-person"><FeedAvatar name={profile.name} avatarId={profile.avatarId}/><div><Heading>{profile.name}<SiteOwnerBadge siteOwner={space.siteOwner} compact/></Heading><small>@{space.handle}</small></div></div>
         {profile.intro&&<p>{profile.intro}</p>}
-        <span className="platform-showcase-action">{t('查看博客主页')}</span>
+        <span className="platform-showcase-action">{t('查看博客主页')}<Icon name="arrow"/></span>
       </div>
     </Link>;
   })}</div>:<p className="space-muted platform-empty">{t('暂时没有公开主页。')}</p>;
@@ -39,7 +40,7 @@ export async function PlatformHome({req}:{req:Request}){
       <div className="product-hero-copy">
         <h1 id="product-title"><span>{t('让你的创造，')}</span><span>{t('有自己的空间。')}</span></h1>
         <p>{t('分享发现，展示作品，记录成长。')}</p>
-        <div className="space-actions product-entry-actions"><Link className="space-btn primary" href={download.href} rel="noopener noreferrer" title={download.platform&&!download.available?t('{0} 桌面版即将推出',[download.name]):undefined}>{download.platform?t('{0} 下载',[download.name]):t('下载桌面端')}</Link><Link className="space-link" href="/login?next=%2Fcommunity">{t('进入网站')}</Link></div>
+        <div className="space-actions product-entry-actions"><Link className="space-btn primary" href={download.href} rel="noopener noreferrer" title={download.platform&&!download.available?t('{0} 桌面版即将推出',[download.name]):undefined}><Icon name="download"/>{download.platform?t('{0} 下载',[download.name]):t('下载桌面端')}</Link><Link className="space-link" href="/login?next=%2Fcommunity">{t('进入网站')}<Icon name="arrow"/></Link></div>
       </div>
     </section>
 
@@ -48,7 +49,7 @@ export async function PlatformHome({req}:{req:Request}){
         <div className="product-story-copy">
           <h2 id="community-introduction-title">{t('在社区，')}<span>{t('遇见新的灵感。')}</span></h2>
           <p>{t('分享发现与创作心得，和同样热爱创造的人交流。')}</p>
-          <Link className="space-link" href="/community">{t('去社区看看')}</Link>
+          <Link className="space-link" href="/community">{t('去社区看看')}<Icon name="arrow"/></Link>
         </div>
         <CommunityFeaturePreview posts={previewPosts as any}/>
       </section>
@@ -57,7 +58,7 @@ export async function PlatformHome({req}:{req:Request}){
         <div className="product-story-copy">
           <h2 id="showcase-introduction-title">{t('博客主页，')}<span>{t('由你来定义。')}</span></h2>
           <p>{t('把个人介绍、经历、技能和作品，整理成一份有质感的博客主页。')}</p>
-          <Link className="space-link" href={studioHref}>{t('查看博客主页')}</Link>
+          <Link className="space-link" href={studioHref}>{t('查看博客主页')}<Icon name="arrow"/></Link>
         </div>
         <div className="home-personal-preview">{featured?<BlogTheme preview data={featured}/>:<div className="space-empty"><h3>{t('完整介绍你自己')}</h3><p>{t('个人介绍、经历、技能与作品。')}</p></div>}</div>
       </section>

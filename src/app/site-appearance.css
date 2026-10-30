@@ -39,6 +39,21 @@ html[data-ui][data-color-mode] .organic-header {position:relative;z-index:60}
 html[data-ui][data-color-mode] :is(.organic-header-inner,.organic-header-tools,.site-tools) {overflow:visible}
 html[data-ui][data-color-mode] .site-tools {gap:7px}
 html[data-ui][data-color-mode] .organic-site .organic-header .site-tools .language-control select {font-family:var(--site-font);color:var(--site-body);font-size:14px;max-width:88px;padding-inline:7px}
+/* Navigation supports the page; utility controls stay quieter than primary actions. */
+html[data-ui][data-color-mode] .organic-header-inner {position:relative;min-height:76px}
+html[data-ui][data-color-mode] .organic-header-tools,html[data-ui][data-color-mode] .organic-mobile-menu {position:static}
+html[data-ui][data-color-mode] .organic-site .organic-desktop-nav {gap:8px}
+html[data-ui][data-color-mode] .organic-site .organic-desktop-nav>a {position:relative;padding:10px 8px;border-bottom:0;text-decoration:none}
+html[data-ui][data-color-mode] .organic-site .organic-desktop-nav>a::after {content:'';position:absolute;inset:auto 8px 5px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left}
+html[data-ui][data-color-mode] .organic-site .organic-desktop-nav>a:is(.is-active,:hover,:focus-visible)::after {transform:scaleX(1)}
+html[data-ui][data-color-mode] .organic-site .organic-mobile-menu summary {min-width:44px;min-height:44px;justify-content:center;border-radius:10px;padding:10px;gap:10px}
+html[data-ui][data-color-mode] .organic-site .organic-mobile-menu summary:hover {background:var(--site-raised)}
+html[data-ui][data-color-mode] .organic-site .organic-mobile-menu summary i {border-radius:0;background:currentColor;transform-origin:center}
+html[data-ui][data-color-mode] .organic-site .organic-mobile-menu[open] summary i:first-child {transform:translateY(3.5px) rotate(45deg)}
+html[data-ui][data-color-mode] .organic-site .organic-mobile-menu[open] summary i:last-child {transform:translateY(-3.5px) rotate(-45deg)}
+html[data-ui][data-color-mode] .organic-site .organic-mobile-menu nav {top:calc(100% + 12px);right:16px;width:min(288px,calc(100vw - 32px));padding:8px;border:0;border-radius:16px;box-shadow:var(--site-menu-shadow)}
+html[data-ui][data-color-mode] .organic-site .organic-mobile-menu nav a {min-height:46px;padding:11px 14px;border-radius:9px;color:var(--site-body)}
+html[data-ui][data-color-mode] .organic-site .organic-mobile-menu nav a:is(:hover,[aria-current]) {color:var(--site-text);background:var(--site-raised)}
 html[data-ui][data-color-mode] :is(.organic-brand span,.site-brand-copy>span,.organic-footer-filing,.organic-footer-compact,.blog-platform-footer) {color:var(--site-muted)}
 html[data-ui][data-color-mode] .organic-site .organic-desktop-nav>a {color:var(--site-body);font-size:14px}
 html[data-ui][data-color-mode] .organic-site .organic-desktop-nav>a[aria-current=page] {color:var(--site-text);border-color:var(--site-accent)}
@@ -46,7 +61,7 @@ html[data-ui][data-color-mode] .organic-site :is(.organic-mobile-menu summary,.o
 html[data-ui][data-color-mode] .organic-site :is(.organic-mobile-menu nav a,.feed-nav-links a) {color:var(--site-text)}
 
 .appearance-switch {position:relative;color:var(--site-text);font-family:inherit}
-.appearance-trigger {list-style:none;display:flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:8px 11px;border:1px solid var(--site-line);border-radius:10px;background:var(--site-surface);color:var(--site-body);font-size:14px;line-height:1.4;cursor:pointer;user-select:none}
+.appearance-trigger {list-style:none;display:flex;align-items:center;justify-content:center;gap:7px;min-height:44px;padding:8px 11px;border:1px solid transparent;border-radius:10px;background:var(--site-surface);color:var(--site-body);font-size:14px;line-height:1.4;cursor:pointer;user-select:none}
 .appearance-trigger::-webkit-details-marker {display:none}
 .appearance-trigger>.icon {width:18px;height:18px}
 .appearance-trigger:hover,.appearance-switch[open]>.appearance-trigger {color:var(--site-text);background:var(--site-raised)}
@@ -66,11 +81,13 @@ html[data-ui][data-color-mode] .organic-site :is(.organic-mobile-menu nav a,.fee
 .appearance-trigger:focus-visible,.appearance-options>button:focus-visible {outline:2px solid var(--site-focus);outline-offset:3px}
 .appearance-notice {padding:8px 10px;font-size:12px;color:var(--site-muted)}
 @media(prefers-reduced-motion:no-preference){
+ html[data-ui][data-color-mode] .organic-site .organic-desktop-nav>a::after,html[data-ui][data-color-mode] .organic-site .organic-mobile-menu summary i {transition:transform 220ms var(--motion-ease)}
  .appearance-trigger,.appearance-options>button {transition:background-color 160ms ease,color 160ms ease}
  .appearance-switch[open]>.appearance-menu {animation:appearance-open 160ms cubic-bezier(.16,1,.3,1)}
  @keyframes appearance-open {from{opacity:.4;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
 }
 @media(max-width:767px){
+ html[data-ui][data-color-mode] .organic-header-inner {min-height:64px}
  html[data-ui][data-color-mode] .site-tools {gap:3px}
  .appearance-trigger {width:42px;padding:10px}
  .appearance-trigger>span {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
@@ -83,6 +100,7 @@ html[data-ui][data-color-mode] .organic-site :is(.space-btn,.btn,.organic-button
 html[data-ui][data-color-mode] .organic-site :is(.space-btn,.btn,.organic-button,.community-follow-button):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *)):hover {background:var(--site-raised);color:var(--site-text)}
 html[data-ui][data-color-mode] .organic-site :is(.space-btn.primary,.btn.primary,.organic-button.is-primary,.community-follow-button:not(.is-following)):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *)) {background:var(--site-action);color:var(--site-on-action);border-color:transparent}
 html[data-ui][data-color-mode] .organic-site :is(.space-btn.primary,.btn.primary,.organic-button.is-primary,.community-follow-button:not(.is-following)):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *)):hover {background:var(--site-action-hover);color:var(--site-on-action)}
+html[data-ui][data-color-mode] .organic-site :is(.space-btn,.btn,.organic-button,.community-follow-button):disabled {opacity:.5;cursor:not-allowed;transform:none}
 html[data-ui][data-color-mode] .organic-site :is(input:not([type=color]):not([type=checkbox]):not([type=radio]):not([type=file]),textarea,select):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *,.bt-font-specimen *)) {background:var(--site-surface);border-color:var(--site-control-line);color:var(--site-text);caret-color:var(--site-focus);border-radius:9px}
 html[data-ui][data-color-mode] .organic-site :is(input,textarea)::placeholder {color:var(--site-muted);opacity:1}
 html[data-ui][data-color-mode] .organic-site :is(input[type=checkbox],input[type=radio]) {accent-color:var(--site-accent)}
@@ -138,8 +156,8 @@ html[data-ui][data-color-mode=dark] .organic-site .community-navigation-shell .f
 html[data-ui][data-color-mode=dark] .organic-site .community-empty-detail {color:var(--site-body)!important}
 html[data-ui][data-color-mode=dark] .organic-site .community-navigation-shell .feed-discover :is(h2,nav a) {color:var(--site-body)!important}
 html[data-ui][data-color-mode=dark] .organic-site .community-navigation-shell .feed-discovery-search button {background:var(--site-raised)!important;color:var(--site-text)!important}
-html[data-ui][data-color-mode=dark] .organic-site .catalog-filter-options a {background:var(--site-surface);border-color:var(--site-control-line);color:var(--site-text)}
-html[data-ui][data-color-mode=dark] .organic-site .catalog-filter-options a:is(:hover,[aria-current]) {background:var(--site-accent-soft);border-color:var(--site-accent);color:var(--site-accent)}
+html[data-ui][data-color-mode] .organic-site .skill-search {background:var(--site-surface);border-color:var(--site-control-line)}
+html[data-ui][data-color-mode] .organic-site .skill-search>input#skill-query {background:transparent;border:0;border-radius:0;box-shadow:none;color:var(--site-text)}
 
 /* Editing uses the author's ink, not the surrounding application's muted text.
    Local --blog-text-color and inline rich-text spans still take precedence. */

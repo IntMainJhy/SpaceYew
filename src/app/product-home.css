@@ -4,7 +4,7 @@
 .home-flow-particles {font:500 12px ui-monospace,SFMono-Regular,Consolas,monospace;}
 @media(max-width:760px){.home-flow-background{top:90px;height:780px;}}
 @media print{.home-flow-background{display:none;}}
-.product-hero {padding:76px 0 64px;text-align:center;}
+.product-hero {padding:clamp(56px,6vw,88px) 0 72px;text-align:center;}
 .product-hero-copy {max-width:880px;margin-inline:auto;}
 html[data-ui] .organic-site .product-hero-copy h1 {font-size:clamp(44px,5vw,76px);line-height:1.16;letter-spacing:-.035em;margin:0 0 24px;text-wrap:balance;}
 .product-hero-copy h1 span,.product-story-copy h2 span,.product-invitation h2 span {display:block;}
@@ -98,6 +98,19 @@ html[data-ui] .platform-page.product-home {--sp-accent:#171717;--sp-ink:#1b1b1b;
 html:is([data-ui=x-social],[data-ui=natural-organic]) .platform-page.product-home {--sp-panel-radius:16px;--sp-field-radius:10px;}
 html[data-ui=x-social] .organic-site .product-home :is(.product-hero-copy h1,.product-story-copy h2,.product-invitation h2) {font-weight:650;}
 .product-home .space-link {font-size:14px;font-weight:500;}
+.product-home .space-link,.platform-showcase-action {display:inline-flex;align-items:center;gap:10px}
+.product-home .space-link>.icon,.platform-showcase-action>.icon {width:17px;height:17px;flex:none}
+html[data-ui][data-color-mode] .organic-site .product-home .product-entry-actions>.space-btn {min-height:50px;padding:14px 24px;gap:10px;font-size:16px}
+.product-entry-actions>.space-btn>.icon {width:18px;height:18px}
+.product-home .product-entry-actions>.space-link {font-size:15px;min-height:50px}
+.product-home .home-personal-preview {border:0;mask-image:linear-gradient(#000 80%,transparent)}
+.product-home .homepage-hosting-preview {background:var(--site-raised);color:var(--site-text);border-radius:16px}
+.product-home .platform-showcase {background:var(--site-raised)}
+.product-home .platform-showcase:hover {background:var(--site-accent-soft)}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){
+ .product-home .space-link>.icon,.platform-showcase-action>.icon {transition:transform 220ms var(--motion-ease)}
+ .product-home .space-link:hover>.icon,.platform-showcase:hover .platform-showcase-action>.icon {transform:translateX(4px)}
+}
 .product-hero-copy>.space-actions>.space-link,.product-invitation>.space-actions>.space-link {color:var(--sp-muted);}
 .product-hero-copy>.space-actions>.space-link:hover,.product-invitation>.space-actions>.space-link:hover {color:var(--sp-ink);}
 .product-home .product-section-heading {margin-bottom:24px;align-items:baseline;}

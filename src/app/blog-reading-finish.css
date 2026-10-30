@@ -51,3 +51,57 @@ html[data-color-mode=dark] .blog-public-shell:has(.anx-portfolio[data-site-color
  .bd-block .anx-portfolio[data-default-font=true] .anx-profile-header .anx-signature{min-height:140px;padding:18px 16px 22px}
  .bd-block .anx-portfolio[data-default-font=true] .anx-profile-header .anx-mark{max-height:150px}
 }
+
+/* The original portfolio keeps its ruled-paper composition and existing type.
+   Only surfaces that follow the reader's palette receive these refinements. */
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) {
+ --reading-tint:color-mix(in srgb,var(--site-accent) 5%,var(--site-surface));
+ --reading-edge:color-mix(in srgb,var(--site-accent) 28%,var(--site-line));
+ --reading-shadow:0 6px 18px rgb(18 35 48 / .08);
+}
+html[data-color-mode=dark] :is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) {--reading-shadow:0 8px 22px rgb(0 0 0 / .2)}
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-topbar {background:var(--site-surface)}
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-topbar a[aria-current=location] {color:var(--site-accent);text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1px}
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-nav-menu summary {padding-inline:10px;border-radius:8px}
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-nav-menu:is(:hover,[open]) summary {background:var(--site-raised)}
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-nav-menu>div {background:var(--site-surface);color:var(--site-text);border:1px solid var(--site-line)}
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-nav-menu>div>a[aria-current=location] {background:var(--site-accent-soft);color:var(--site-accent)}
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-contact {gap:10px;padding-block:20px}
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-contact>a {background:var(--site-surface);border-color:var(--site-control-line);color:var(--site-body);text-decoration:none}
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-contact>a:is(:hover,:focus-visible) {background:var(--site-accent-soft);border-color:var(--site-accent);color:var(--site-accent)}
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-panel>header {position:relative;background:var(--reading-tint)}
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-panel>header::after {content:"";position:absolute;bottom:-1px;left:20px;width:44px;height:1px;background:var(--site-accent);transform:scaleX(0);transform-origin:left;opacity:0}
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-panel[data-reading=true]>header::after {transform:scaleX(1);opacity:1}
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-resume-facts {background:var(--reading-tint)}
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-resume-facts>div {padding-block:24px}
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-resume-facts dt {color:var(--site-body)}
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-resume-items article {background:var(--site-surface)}
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-resume-items article:focus-within {background:var(--reading-tint)}
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-resume-items h3>a {text-decoration:underline;text-decoration-color:var(--site-control-line);text-underline-offset:5px}
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-resume-items h3>a:is(:hover,:focus-visible) {color:var(--site-accent);text-decoration-color:currentColor}
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-panel :is(.anx-certificates,.anx-resume-gallery) figure {padding:10px;background:var(--site-raised);border:1px solid var(--site-line);border-radius:12px}
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-panel :is(.anx-certificates,.anx-resume-gallery) button {background:var(--site-surface);border:0;border-radius:6px}
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-panel :is(.anx-certificates,.anx-resume-gallery) figcaption {color:var(--site-body);padding-inline:2px}
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-panel :is(.anx-certificates,.anx-resume-gallery) figure:is(:hover,:focus-within) {border-color:var(--reading-edge);box-shadow:var(--reading-shadow)}
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-inline-media {border-color:var(--site-control-line);border-radius:10px;background:var(--site-raised)}
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) :is(.anx-certificates button,.anx-resume-gallery button,.anx-inline-media)>.icon {background:var(--site-surface);color:var(--site-body);border-color:var(--site-line);border-radius:6px}
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-image-dialog {border:1px solid var(--site-line);border-radius:14px;box-shadow:0 20px 70px rgb(0 0 0 / .28)}
+:is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-image-dialog::backdrop {background:rgb(10 17 23 / .72)}
+@media(hover:hover){
+ :is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-resume-items article:hover {background:var(--reading-tint)}
+}
+@media(prefers-reduced-motion:no-preference){
+ :is(.anx-portfolio[data-site-colors=true][data-theme-motion=true],.bd-page-shell[data-site-colors=true] .anx-portfolio[data-theme-motion=true]) :is(.anx-topbar,.anx-panel>header,.anx-resume-facts,.anx-contact,.anx-resume-items article) {transition:background-color 180ms ease,border-color 180ms ease}
+ :is(.anx-portfolio[data-site-colors=true][data-theme-motion=true],.bd-page-shell[data-site-colors=true] .anx-portfolio[data-theme-motion=true]) .anx-panel>header::after {transition:transform 280ms cubic-bezier(.16,1,.3,1),opacity 180ms ease}
+ :is(.anx-portfolio[data-site-colors=true][data-theme-motion=true],.bd-page-shell[data-site-colors=true] .anx-portfolio[data-theme-motion=true]) .anx-nav-menu[open]>div {animation:reading-index-open 180ms cubic-bezier(.16,1,.3,1)}
+ :is(.anx-portfolio[data-site-colors=true][data-theme-motion=true],.bd-page-shell[data-site-colors=true] .anx-portfolio[data-theme-motion=true]) .anx-panel :is(.anx-certificates,.anx-resume-gallery) figure {transition:border-color 180ms ease,box-shadow 180ms ease}
+ :is(.anx-portfolio[data-site-colors=true][data-theme-motion=true],.bd-page-shell[data-site-colors=true] .anx-portfolio[data-theme-motion=true]) :is(.anx-resume-gallery button,.anx-inline-media):is(:hover,:focus-visible) img {transform:scale(1.025)}
+ :is(.anx-portfolio[data-site-colors=true][data-theme-motion=true],.bd-page-shell[data-site-colors=true] .anx-portfolio[data-theme-motion=true]) :is(.anx-certificates button,.anx-resume-gallery button,.anx-inline-media)>.icon {transition:transform 180ms cubic-bezier(.16,1,.3,1),background-color 180ms ease}
+ :is(.anx-portfolio[data-site-colors=true][data-theme-motion=true],.bd-page-shell[data-site-colors=true] .anx-portfolio[data-theme-motion=true]) :is(.anx-certificates button,.anx-resume-gallery button,.anx-inline-media):is(:hover,:focus-visible)>.icon {transform:translate(-2px,-2px);background:var(--site-accent-soft)}
+ @keyframes reading-index-open {from{clip-path:inset(0 0 12% 0);opacity:.65}to{clip-path:inset(0);opacity:1}}
+}
+@media(max-width:540px){
+ :is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-contact {padding-block:16px}
+ :is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-panel>header::after {left:16px}
+ :is(.anx-portfolio[data-site-colors=true],.bd-page-shell[data-site-colors=true]) .anx-panel :is(.anx-certificates,.anx-resume-gallery) figure {padding:8px;border-radius:10px}
+}

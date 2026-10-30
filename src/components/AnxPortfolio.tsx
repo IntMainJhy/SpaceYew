@@ -42,6 +42,20 @@ export function AnxPortfolio({data,p,content,preview=false,embedded=false,part}:
   document.addEventListener('pointerdown',closeOutside);
   return()=>document.removeEventListener('pointerdown',closeOutside);
  },[]);
+ useEffect(()=>{
+  if(editing||settings.design?.appearance&&settings.design.appearance!=='original')return;
+  const index=hero.current?.previousElementSibling,root=hero.current?.closest('.bd-page-shell')||hero.current?.closest('.anx-portfolio');
+  const Observer=root?.ownerDocument.defaultView?.IntersectionObserver;if(!root||!index||!Observer)return;
+  const sections=Array.from(root.querySelectorAll<HTMLElement>('.anx-panel[id]')),links=Array.from(index.querySelectorAll<HTMLAnchorElement>('nav a[href^="#anx-"]')),visible=new Set<Element>();
+  const observer=new Observer(entries=>{
+   for(const entry of entries)entry.isIntersecting?visible.add(entry.target):visible.delete(entry.target);
+   const active=sections.find(section=>visible.has(section));if(!active)return;
+   for(const section of sections)if(section===active)section.dataset.reading='true';else delete section.dataset.reading;
+   for(const link of links)if(link.hash==='#'+active.id)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current');
+  },{rootMargin:'-96px 0px -24px 0px'});
+  sections.forEach(section=>observer.observe(section));
+  return()=>{observer.disconnect();sections.forEach(section=>delete section.dataset.reading);links.forEach(link=>link.removeAttribute('aria-current'))};
+ },[editing,settings.design]);
  useEffect(()=>{if(editing||settings.design?.motion?.entrance===false||!hero.current)return;const media=gsap.matchMedia();media.add('(prefers-reduced-motion: no-preference)',()=>{gsap.fromTo(hero.current!.querySelector('.anx-portrait'),{clipPath:'inset(0 0 14% 0)'},{clipPath:'inset(0 0 0% 0)',duration:.6,ease:'power3.out',clearProps:'clipPath'});gsap.fromTo(hero.current!.querySelector('.anx-name'),{x:10,opacity:.75},{x:0,opacity:1,duration:.45,ease:'power3.out',clearProps:'transform,opacity'});},hero.current);return()=>media.revert()},[editing,settings.design?.motion?.entrance]);
  const resume=p.resume,experiences=(resume&&!settings.showLegacyContent?[]:p.experiences||[]).filter((item:SpaceData)=>item.visible!==false),sections=(resume&&!settings.showLegacyContent?[]:settings.sections||['projects','articles','resources']).filter((key:string)=>content.some(item=>item.type===key));
  const labels:Record<string,string>={projects:'作品与项目',articles:'文字与思考',resources:'分享的资源'};

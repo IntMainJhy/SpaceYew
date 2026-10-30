@@ -1,8 +1,8 @@
-import {Box3,CanvasTexture,DirectionalLight,Euler,Group,MathUtils,Mesh,MeshPhysicalMaterial,PerspectiveCamera,PMREMGenerator,Quaternion,Scene,SRGBColorSpace,Vector3,WebGLRenderer} from 'three';
+import {Box3,CanvasTexture,Color,DirectionalLight,Euler,Group,MathUtils,Mesh,MeshPhysicalMaterial,PerspectiveCamera,PMREMGenerator,Quaternion,Scene,SRGBColorSpace,Vector3,WebGLRenderer} from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
 
-export type HomeGlassScene={resize:(width:number,height:number,dpr:number)=>void;render:(x:number,y:number,dark:boolean)=>void;dispose:()=>void};
+export type HomeGlassScene={resize:(width:number,height:number,dpr:number)=>void;render:(x:number,y:number,dark:boolean,scroll:number,reduced:boolean)=>void;dispose:()=>void};
 const MODEL_URL='/models/spaceyew-glass.glb';
 
 function disposeModel(model:Group){
@@ -51,27 +51,31 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
   const context=backdrop.getContext('2d');if(!context)throw Error('Background unavailable');
   background=new CanvasTexture(backdrop);background.colorSpace=SRGBColorSpace;
   scene.background=background;
-  let previousTheme:boolean|undefined;
+  let previousTheme:boolean|undefined,previousReading=-1,width=1,height=1;
+  const paper=new Color(),topColor=new Color(),middleColor=new Color();
   return{
-   resize(width,height,dpr){
-    renderer.setPixelRatio(dpr);renderer.setSize(width,height,false);
+   resize(nextWidth,nextHeight,dpr){
+    width=nextWidth;height=nextHeight;renderer.setPixelRatio(dpr);renderer.setSize(width,height,false);
     camera.aspect=width/height;camera.updateProjectionMatrix();
-    const viewHeight=2*Math.tan(MathUtils.degToRad(camera.fov/2))*camera.position.z;
-    const displayWidth=Math.min(width*(width<768?1.35:.92),1480),displayHeight=displayWidth*size.y/size.x;
-    mark.scale.setScalar(viewHeight*(displayHeight/height)/size.y);
-    const copy=canvas.parentElement?.querySelector('.v2-hero-copy');
-    const top=copy?copy.getBoundingClientRect().bottom-canvas.getBoundingClientRect().top+48:height*.4;
-    mark.position.y=viewHeight*(.5-(top+displayHeight/2)/height);
    },
-   render(x,y,dark){
-    if(dark!==previousTheme){
+   render(x,y,dark,scroll,reduced){
+    const reading=MathUtils.smoothstep(scroll,.18,.7);
+    if(dark!==previousTheme||reading!==previousReading){
+     paper.set(dark?'#101a31':'#eef3f9');
+     topColor.set('#142a5d').lerp(paper,reading);middleColor.set(dark?'#1c426d':'#3288ed').lerp(paper,reading);
      const gradient=context.createLinearGradient(0,0,0,512);
-     gradient.addColorStop(0,'#142a5d');gradient.addColorStop(.28,'#1558cb');
-     gradient.addColorStop(.56,dark?'#1c426d':'#3288ed');gradient.addColorStop(1,dark?'#101a31':'#eef3f9');
+     gradient.addColorStop(0,topColor.getStyle());gradient.addColorStop(.48,middleColor.getStyle());gradient.addColorStop(1,paper.getStyle());
      context.fillStyle=gradient;context.fillRect(0,0,8,512);background!.needsUpdate=true;
      scene.environmentIntensity=dark?.7:1;
-     previousTheme=dark;
+     previousTheme=dark;previousReading=reading;
     }
+    const mobile=width<768,spatial=reduced?0:reading,drift=reduced?0:Math.sin(scroll*.4);
+    const viewHeight=2*Math.tan(MathUtils.degToRad(camera.fov/2))*camera.position.z;
+    const displayWidth=Math.min(width*(mobile?1.3:.55),820)*(1-spatial*.14);
+    mark.scale.setScalar(viewHeight*(displayWidth/width)*camera.aspect/size.x);
+    const centerX=mobile?.92:width<1100?.9:.75;
+    mark.position.set(viewHeight*camera.aspect*(centerX+spatial*.08-.5),viewHeight*(.5-(mobile?.69:.64)+spatial*.04),0);
+    mark.rotation.set(.06+drift*.04,-.18+spatial*.3,-.04+drift*.06);
     pointerRotation.set(-y*.014,-x*.022,0,'YXZ');pointerQuaternion.setFromEuler(pointerRotation);
     camera.quaternion.copy(baseCamera).multiply(pointerQuaternion);
     renderer.render(scene,camera);

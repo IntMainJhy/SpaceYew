@@ -12,10 +12,10 @@ function mount({reduced=false,width=1400,height=900,loading=false,failed=false}=
   listeners=new Set();dataset={};style={};
   addEventListener(name,fn,options){super.addEventListener(name,fn,options);this.listeners.add(name)}
   removeEventListener(name,fn){super.removeEventListener(name,fn);this.listeners.delete(name)}
-  getBoundingClientRect(){return{left:0,top:0,width,height}}
+  getBoundingClientRect(){return{left:0,top:this.top||0,width,height}}
  }
  const preference=Object.assign(new Target(),{matches:reduced}),root=new Target(),host=new Target(),document=Object.assign(new Target(),{hidden:false,documentElement:root}),window=Object.assign(new Target(),{devicePixelRatio:3,matchMedia:()=>preference});
- const canvas=Object.assign(new Target(),{parentElement:host});
+ const surface=new Target(),canvas=Object.assign(new Target(),{parentElement:surface,closest:selector=>selector==='.v2-home'?host:null});
  const draws=[],sizes=[];let releases=0,resolve,reject,signal;
  const adapter={resize:(...args)=>sizes.push(args),render:(...args)=>draws.push(args),dispose:()=>releases++};
  let resize,intersection,theme,now=0,id=0;const frames=new Map();
@@ -65,7 +65,19 @@ test('touch and reduced motion keep the glass static, including preference chang
  s.preference.matches=false;s.preference.dispatchEvent(new Event('change'));s.move(390,844,'touch');assert.equal(s.frames.size,0);
  s.move();s.step();assert.ok(s.draws.at(-1)[0]>0);
  s.preference.matches=true;s.preference.dispatchEvent(new Event('change'));
- assert.deepEqual(s.draws.at(-1),[0,0,false]);assert.equal(s.frames.size,0);s.cleanup();
+ assert.deepEqual(s.draws.at(-1),[0,0,false,0,true]);assert.equal(s.frames.size,0);s.cleanup();
+});
+
+test('scrolling below the hero redraws the same viewport canvas and coalesces scroll events, including reduced motion',async()=>{
+ const s=mount({reduced:true});s.intersection.set(true);await flush();
+ s.host.top=-1800;for(let i=0;i<12;i++)s.window.dispatchEvent(new Event('scroll'));
+ assert.equal(s.frames.size,1,'scroll events share one pending frame');
+ const before=s.draws.length;s.step();assert.equal(s.draws.length,before+1);
+ assert.deepEqual(s.draws.at(-1),[0,0,false,2,true],'reading colors update without enabling spatial motion');
+ assert.equal(s.frames.size,0);assert.deepEqual(s.sizes.at(-1),[1400,900,1.5],'GPU target stays viewport-sized');
+ s.window.dispatchEvent(new Event('scroll'));s.step(16);assert.equal(s.draws.length,before+1,'independent scroll events still respect the 30fps ceiling');s.step(19);assert.equal(s.draws.length,before+2);
+ s.intersection.set(false);s.host.top=-2700;s.window.dispatchEvent(new Event('scroll'));s.step();assert.equal(s.draws.length,before+2);
+ s.intersection.set(true);assert.equal(s.draws.at(-1)[3],3);s.cleanup();assert.equal(s.window.listeners.size,0);
 });
 
 test('load failures, context loss and unmount during a late load preserve the CSS fallback and release resources',async()=>{

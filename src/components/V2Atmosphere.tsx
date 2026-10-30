@@ -7,38 +7,44 @@ const loadScene=(canvas:HTMLCanvasElement,signal:AbortSignal)=>import('@/lib/hom
 
 /** Load the homepage-only renderer without blocking the semantic content. */
 export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene){
- const host=canvas.parentElement||canvas,preference=window.matchMedia('(prefers-reduced-motion: reduce)'),controller=new AbortController();
+ const surface=canvas.parentElement||canvas,host=canvas.closest('.v2-home')||surface,preference=window.matchMedia('(prefers-reduced-motion: reduce)'),controller=new AbortController();
  let scene:HomeGlassScene|null=null,frame=0,lastDraw=0,visible=false,printing=false,lost=false,disposed=false;
- let targetX=0,targetY=0,pointerX=0,pointerY=0;
+ let targetX=0,targetY=0,pointerX=0,pointerY=0,progress=0,dirty=false;
  canvas.dataset.atmosphere='loading';canvas.style.opacity='0';
- const stop=()=>{if(frame)cancelAnimationFrame(frame);frame=0;lastDraw=0;if(scene)canvas.dataset.atmosphere=lost?'fallback':'paused';};
+ const stop=()=>{if(frame)cancelAnimationFrame(frame);frame=0;if(scene)canvas.dataset.atmosphere=lost?'fallback':'paused';};
  const draw=()=>{
   if(!scene||disposed||lost||document.hidden||printing||!visible)return;
-  try{scene.render(pointerX,pointerY,document.documentElement.dataset.colorMode==='dark');canvas.style.opacity='1';}
+  try{
+   const dark=document.documentElement.dataset.colorMode==='dark',reading=Math.max(0,Math.min(1,(progress-.18)/.52));
+   scene.render(pointerX,pointerY,dark,progress,preference.matches);
+   canvas.style.opacity=String(1-(dark?.8:.45)*reading*reading*(3-2*reading));
+  }
   catch{fail();}
  };
- const canMove=()=>!disposed&&!lost&&!!scene&&visible&&!document.hidden&&!printing&&!preference.matches;
- const moving=()=>Math.abs(targetX-pointerX)+Math.abs(targetY-pointerY)>.0001;
+ const canRender=()=>!disposed&&!lost&&!!scene&&visible&&!document.hidden&&!printing;
+ const moving=()=>!preference.matches&&Math.abs(targetX-pointerX)+Math.abs(targetY-pointerY)>.0001;
  const tick=(now:number)=>{
-  frame=0;if(!canMove())return;
+  frame=0;if(!canRender())return;
   if(!lastDraw||now-lastDraw>=1000/30){
    const amount=1-Math.exp(-7*Math.min(lastDraw?(now-lastDraw)/1000:1/30,.05));
-   lastDraw=now;pointerX+=(targetX-pointerX)*amount;pointerY+=(targetY-pointerY)*amount;draw();
+   lastDraw=now;pointerX+=(targetX-pointerX)*amount;pointerY+=(targetY-pointerY)*amount;dirty=false;draw();
   }
-  if(canMove()&&moving())frame=requestAnimationFrame(tick);else stop();
+  if(canRender()&&(dirty||moving()))frame=requestAnimationFrame(tick);else stop();
  };
  const sync=()=>{
-  if(canMove()&&moving()){if(!frame){canvas.dataset.atmosphere='running';frame=requestAnimationFrame(tick);}}
+  if(canRender()&&(dirty||moving())){if(!frame){canvas.dataset.atmosphere='running';frame=requestAnimationFrame(tick);}}
   else stop();
  };
+ const readProgress=()=>{progress=Math.max(0,-host.getBoundingClientRect().top/Math.max(canvas.getBoundingClientRect().height,1));};
+ const scroll=()=>{readProgress();dirty=true;sync();};
  const measure=()=>{
   if(!scene||disposed||lost)return;
   const rect=canvas.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,rect.width<768?1.25:1.5);
-  scene.resize(Math.max(1,rect.width),Math.max(1,rect.height),dpr);draw();
+  scene.resize(Math.max(1,rect.width),Math.max(1,rect.height),dpr);readProgress();draw();
  };
  const move=(event:PointerEvent)=>{
   if(event.pointerType==='touch'||preference.matches)return;
-  const rect=host.getBoundingClientRect();
+  const rect=canvas.getBoundingClientRect();
   targetX=Math.max(-1,Math.min(1,((event.clientX-rect.left)/Math.max(rect.width,1)-.5)*2));
   targetY=Math.max(-1,Math.min(1,((event.clientY-rect.top)/Math.max(rect.height,1)-.5)*2));sync();
  };
@@ -58,16 +64,18 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
   canvas.removeEventListener('webglcontextlost',contextLost);
   document.removeEventListener('visibilitychange',resume);preference.removeEventListener('change',reduced);
   window.removeEventListener('beforeprint',beforePrint);window.removeEventListener('afterprint',afterPrint);
+  window.removeEventListener('scroll',scroll);
   scene?.dispose();scene=null;
  };
  const fail=()=>{cleanup();canvas.style.opacity='0';canvas.dataset.atmosphere='fallback';};
- resize?.observe(host);intersection?.observe(canvas);theme?.observe(document.documentElement,{attributes:true,attributeFilter:['data-color-mode']});
+ resize?.observe(surface);intersection?.observe(canvas);theme?.observe(document.documentElement,{attributes:true,attributeFilter:['data-color-mode']});
  if(!resize)window.addEventListener('resize',measure);
  if(!intersection)visible=true;
  host.addEventListener('pointermove',move as EventListener,{passive:true});host.addEventListener('pointerleave',leave);
  canvas.addEventListener('webglcontextlost',contextLost);
  document.addEventListener('visibilitychange',resume);preference.addEventListener('change',reduced);
  window.addEventListener('beforeprint',beforePrint);window.addEventListener('afterprint',afterPrint);
+ window.addEventListener('scroll',scroll,{passive:true});
  void createScene(canvas,controller.signal).then(loaded=>{
   if(disposed){loaded.dispose();return;}
   scene=loaded;canvas.dataset.atmosphere=lost?'fallback':'paused';measure();sync();

@@ -1,14 +1,5 @@
 /* Default portfolio paper follows the reader. Authored palettes and local text
    formatting keep their own surface; no saved profile or geometry is changed. */
-.anx-portfolio[data-default-font=true],
-html[data-ui] .organic-site .anx-portfolio[data-default-font=true] :is(h1,h2,h3,h4){
- font-family:Newsreader,"ZCOOL XiaoWei","Songti SC",Georgia,serif;
- font-optical-sizing:auto;
- letter-spacing:normal;
-}
-.anx-portfolio[data-default-font=true] :is(h1,h2,h3){text-wrap:pretty}
-.anx-portfolio[data-default-font=true] .anx-name h1{letter-spacing:-.02em}
-
 .bd-block[data-site-colors=true]{color:var(--site-text,#252a2d)}
 :is(.anx-portfolio[data-site-colors=true],.bd-block[data-site-colors=true] .anx-portfolio){
  --anx-paper:var(--site-surface,#fff);

@@ -1,7 +1,6 @@
 /* Shared chrome owns reading appearance. Authored portfolios and canvas nodes
-   retain their own palette and explicit text formatting. Font assets are local. */
+   retain their own palette and explicit text formatting. Existing fonts are inherited. */
 html[data-ui] {
- --site-font:Newsreader,"ZCOOL XiaoWei","Songti SC",STSong,Georgia,serif;
  --site-canvas:#f8f7f4;--site-surface:#fff;--site-raised:#f0efeb;
  --site-text:#252a2d;--site-body:#454c50;--site-muted:#656d72;
  --site-line:#dedfdb;--site-control-line:#bfc6c8;--site-accent:#30688f;
@@ -34,9 +33,7 @@ html[data-ui][data-color-mode] .organic-site :is(.platform-page,.space-public,.s
 }
 /* The repeated exception is deliberate: custom fonts and colors inside member
    content always take priority over the platform's visual preferences. */
-html[data-ui][data-color-mode] :is(.organic-site,.blog-public-shell) :is(h1,h2,h3,h4,p,li,label,button,input,select,textarea,summary,small,strong,a,th,td):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *,.homepage-document *,.bt-font-specimen *,.tiptap *,.organic-prose *,.community-prose *,.dw-document-editor *)) {font-family:var(--site-font)}
-html[data-ui][data-color-mode] .organic-site :is(h1,h2,h3,h4):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *,.bt-font-specimen *,.tiptap *,.organic-prose *,.community-prose *)) {color:var(--site-text);letter-spacing:-.02em;line-height:1.35;font-weight:500!important}
-html[data-ui][data-color-mode] .organic-site :is(.organic-brand,.organic-brand span,.brand small,.site-tools select,.blog-canvas-editor) {font-family:var(--site-font)}
+html[data-ui][data-color-mode] .organic-site :is(h1,h2,h3,h4):not(:where(.space-root *,.bd-block *,.anx-portfolio *,.personal-homepage *,.bt-font-specimen *,.tiptap *,.organic-prose *,.community-prose *)) {color:var(--site-text)}
 html[data-ui][data-color-mode] :is(.organic-header,.organic-footer,.blog-platform-bar,.blog-platform-footer) {background:var(--site-surface);color:var(--site-text);border-color:var(--site-line)}
 html[data-ui][data-color-mode] .organic-header {position:relative;z-index:60}
 html[data-ui][data-color-mode] :is(.organic-header-inner,.organic-header-tools,.site-tools) {overflow:visible}
@@ -48,7 +45,7 @@ html[data-ui][data-color-mode] .organic-site .organic-desktop-nav>a[aria-current
 html[data-ui][data-color-mode] .organic-site :is(.organic-mobile-menu summary,.organic-mobile-menu nav) {color:var(--site-text);background:var(--site-surface);border-color:var(--site-line)}
 html[data-ui][data-color-mode] .organic-site :is(.organic-mobile-menu nav a,.feed-nav-links a) {color:var(--site-text)}
 
-.appearance-switch {position:relative;color:var(--site-text);font-family:var(--site-font)}
+.appearance-switch {position:relative;color:var(--site-text);font-family:inherit}
 .appearance-trigger {list-style:none;display:flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:8px 11px;border:1px solid var(--site-line);border-radius:10px;background:var(--site-surface);color:var(--site-body);font-size:14px;line-height:1.4;cursor:pointer;user-select:none}
 .appearance-trigger::-webkit-details-marker {display:none}
 .appearance-trigger>.icon {width:18px;height:18px}
@@ -121,8 +118,7 @@ html[data-ui][data-color-mode=dark] .organic-site .document-slash-menu button:is
 
 /* Editor chrome follows the reader preference; the editable page stays true to
    its chosen appearance, with its own white artboard where appropriate. */
-html[data-ui][data-color-mode] .blog-canvas-editor {font-family:var(--site-font);--studio-line:var(--site-line);--studio-soft:var(--site-raised);--studio-selected:var(--site-accent-soft);--studio-ink:var(--site-text)}
-html[data-ui][data-color-mode] .blog-canvas-editor :is(.be-heading,.bd-sidebar,.bd-properties,.bd-stage-top,.bd-toolbar,.bd-tool-dock,.bd-text-toolbar,.bt-library,.bc-publish-panel) :is(button,input,select,textarea,label,h2,h3) {font-family:var(--site-font)}
+html[data-ui][data-color-mode] .blog-canvas-editor {--studio-line:var(--site-line);--studio-soft:var(--site-raised);--studio-selected:var(--site-accent-soft);--studio-ink:var(--site-text)}
 html[data-ui][data-color-mode=dark] .blog-canvas-editor {background:var(--site-canvas);color:var(--site-text);--bd-line:var(--site-line);--bd-paper:var(--site-surface);--bd-muted:var(--site-muted);--bd-ink:var(--site-text)}
 html[data-ui][data-color-mode=dark] .blog-canvas-editor :is(.be-heading,.be-feedback,.bd-sidebar,.bd-properties,.bd-stage-top,.bd-toolbar,.bd-stage-bar,.bd-tool-dock,.bd-floating-tools,.bd-text-toolbar,.bt-library,.bd-sticker-library,.bc-inspector,.bc-publish-panel,.bc-public-preview,.bd-reset-confirm,.bd-canvas-loading) {background:var(--site-surface);color:var(--site-text);border-color:var(--site-line)}
 html[data-ui][data-color-mode=dark] .blog-canvas-editor :is(.bd-stage,.bd-designer) {background:var(--site-canvas)}
@@ -163,8 +159,7 @@ html[data-ui][data-color-mode=dark] :is(.anx-portfolio[data-site-colors=true],.b
 /* The preview's surrounding controls share the editor appearance. Its iframe
    remains an isolated document and keeps the author's own page palette. */
 html[data-ui][data-color-mode] .blog-canvas-editor :is(.blog-effect-preview,.bp-stage) {background:var(--site-canvas);color:var(--site-text)}
-html[data-ui][data-color-mode] .blog-canvas-editor .bp-toolbar {background:var(--site-surface);color:var(--site-text);border-color:var(--site-line);font-family:var(--site-font)}
-html[data-ui][data-color-mode] .blog-canvas-editor .bp-toolbar :is(button,strong,span,output) {font-family:var(--site-font)}
+html[data-ui][data-color-mode] .blog-canvas-editor .bp-toolbar {background:var(--site-surface);color:var(--site-text);border-color:var(--site-line)}
 html[data-ui][data-color-mode] .blog-canvas-editor .bp-toolbar :is(span,.bp-size) {color:var(--site-muted)}
 html[data-ui][data-color-mode] .blog-canvas-editor .bp-devices {background:var(--site-surface);border-color:var(--site-control-line)}
 html[data-ui][data-color-mode] .blog-canvas-editor .bp-toolbar button {background:var(--site-surface);border-color:var(--site-control-line);color:var(--site-body)}

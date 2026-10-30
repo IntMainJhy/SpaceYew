@@ -53,7 +53,7 @@ import './blog-reading-finish.css';
 import './blog-entry.css';
 export const viewport:Viewport={width:'device-width',initialScale:1,viewportFit:'cover'};
 export const metadata:Metadata={applicationName:'SpaceYew',title:'SpaceYew',description:'Projects, experience, and shared resources.'};
-const designContract='<!-- SpaceYew: one shared editorial interface with warm paper and ink surfaces, local Newsreader and ZCOOL XiaoWei typography, and persistent light/dark/system appearance. Public, workspace and management controls share this system; code retains monospace and author-owned pages keep their independent styles. -->';
+const designContract='<!-- SpaceYew: one shared editorial interface with warm paper and ink surfaces, the established Baskerville/Songti typography and Inter editor controls, and persistent light/dark/system appearance. Public, workspace and management controls share this system; code retains monospace and author-owned pages keep their independent styles. -->';
 export default async function RootLayout({children}:{children:React.ReactNode}){
   const locale=normalizeLocale((await cookies()).get('site-locale')?.value);
   const nonce=(await headers()).get('x-nonce')||undefined;

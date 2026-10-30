@@ -7,5 +7,3 @@ export function followsSiteAppearance(design){
  if(['textColor','headingColor','linkColor'].some(key=>design.typography?.[key]))return false;
  return !(design.nodes||[]).some(node=>node.style?.background||node.style?.color||Object.values(node.richText||{}).some(runs=>runs.some(run=>run.color)));
 }
-
-export const readingFont='Newsreader,"ZCOOL XiaoWei","Songti SC",Georgia,serif';

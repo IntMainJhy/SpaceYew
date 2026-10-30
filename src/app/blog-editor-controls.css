@@ -1,5 +1,9 @@
 /* Consistent operating controls; authored page styles stay inside the canvas. */
 .blog-canvas-editor{--studio-line:#dfe3e8;--studio-soft:#f3f5f8;--studio-selected:#e8edf4;--studio-ink:#263449}
+html[data-ui][data-color-mode] .blog-editor .bc-editor-back{display:inline-flex;align-items:center;justify-content:center;gap:6px;width:auto;min-height:44px;padding:10px 12px;flex:none;border:0;border-radius:9px;background:transparent;color:var(--site-body);font-size:13px;line-height:1.4;text-decoration:none;white-space:nowrap}
+html[data-ui][data-color-mode] .blog-editor .bc-editor-back:hover{background:var(--site-raised);color:var(--site-text)}
+html[data-ui][data-color-mode] .blog-editor .bc-editor-back:focus-visible{outline:2px solid var(--site-focus);outline-offset:3px}
+.bc-editor-back>.icon{width:17px;height:17px;flex:none;transform:rotate(180deg)}
 .blog-canvas-editor .be-primary-actions .space-btn{min-height:40px;border-radius:9px;padding:9px 13px;font-size:13px;box-shadow:none}
 .blog-canvas-editor .be-primary-actions .space-btn:not(.primary){background:#fff;border-color:var(--studio-line);color:#374151}
 .blog-canvas-editor .bc-language select{min-height:40px;border-radius:9px;border-color:var(--studio-line)}

@@ -98,7 +98,7 @@ export function mountSpaceAtmosphere(canvas:HTMLCanvasElement,createScene:(canva
  const fail=()=>{cleanup();failed=true;ready=false;compact=true;focus=false;state();canvas.style.opacity='0';canvas.dataset.atmosphere='fallback';};
  const contextLost=(event:Event)=>{event.preventDefault();fail();};
  canvas.dataset.atmosphere='loading';canvas.style.opacity='0';state();restoreCopy();
- resize.observe(surface);resize.observe(journey);intersection.observe(journey);theme.observe(document.documentElement,{attributes:true,attributeFilter:['data-color-mode']});
+ resize.observe(surface);resize.observe(journey);intersection.observe(canvas);theme.observe(document.documentElement,{attributes:true,attributeFilter:['data-color-mode']});
  host.addEventListener('pointermove',move,{passive:true});host.addEventListener('pointerleave',leave);viewport.addEventListener('pointerdown',pointerDown);viewport.addEventListener('pointerup',pointerUp);viewport.addEventListener('pointercancel',cancel);viewport.addEventListener('lostpointercapture',cancel);
  window.addEventListener('scroll',scroll,{passive:true});window.addEventListener('keydown',key);window.addEventListener('spaceyew-space-command',command);window.addEventListener('beforeprint',beforePrint);window.addEventListener('afterprint',afterPrint);
  document.addEventListener('visibilitychange',resume);preference.addEventListener('change',reduced);canvas.addEventListener('webglcontextlost',contextLost);

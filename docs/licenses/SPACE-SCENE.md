@@ -21,7 +21,10 @@ Positions use the same world coordinates as the website's Moon, rocks and
 camera. Native Blender coordinates `(x, -z, y)` convert to glTF Y-up `(x, y, z)`.
 The website uses the native vertex positions and colors while its point shader
 provides the small, soft stellar appearance; it does not reconstruct the
-primary galaxy layout in JavaScript.
+primary galaxy layout in JavaScript. The galactic disk rotates about its native
+tilted axis at 0.026 radians per active second; the outer stellar field stays
+fixed. The source Blender scene contains the same point selection and native
+Geometry Nodes rotation animation.
 
 ## Asteroids
 
@@ -31,6 +34,10 @@ crater relief. Albedo, tangent normal and roughness maps are baked from the
 native Blender materials and embedded in the GLB. No third-party asteroid
 photographs, models or textures are included. The web scene and native project
 place 42 copies with shared mesh data around the same camera flight corridor.
+Each rock tumbles about its fixed center at 0.075 radians per active second
+along its seeded Euler direction; source geometry, placements and the safe
+flight corridor are retained. The local Blender project contains matching
+editable animation.
 
 ## Native source project
 

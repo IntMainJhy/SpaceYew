@@ -4,6 +4,11 @@ import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import type {HomeGlassScene} from './home-glass';
 
 const MOON_POSITION=new Vector3(8,-1,-22),MOON_RADIUS=5.6;
+/** Active time drives the authored motion; the lifecycle supplies a clock that stops outside the visible scene. */
+export function sampleSpaceMotion(value:number,reduced=false){
+ const time=reduced||!Number.isFinite(value)?0:Math.max(0,value);
+ return{time,galaxyAngle:time*.026,rockAngle:time*.075};
+}
 /** World-space camera beats. Scroll belongs to the page; this function accepts its normalized journey progress. */
 export const SPACE_FLIGHT_STOPS=[
  {progress:0,position:[0,4,100],target:[0,1,-36],fov:40},
@@ -129,15 +134,24 @@ export async function createHomeSpace(canvas:HTMLCanvasElement,signal:AbortSigna
   }
   const starCount=starSizes.length;canvas.dataset.spaceGalaxy=nativeStars?'blender':'fallback';
   starGeometry.setAttribute('position',new Float32BufferAttribute(starPositions,3));starGeometry.setAttribute('aColor',new Float32BufferAttribute(starColors,3));starGeometry.setAttribute('aSize',new Float32BufferAttribute(starSizes,1));starGeometry.setAttribute('aAlpha',new Float32BufferAttribute(starAlphas,1));starGeometry.setAttribute('aPhase',new Float32BufferAttribute(starPhases,1));
+  const galaxyIndices:number[]=[],fieldIndices:number[]=[],inverseTilt=new Quaternion().setFromEuler(galaxyTilt).invert(),galaxyAxis=new Vector3(0,0,1).applyEuler(galaxyTilt);
+  for(let i=0;i<starCount;i++){
+   point.fromArray(starPositions,i*3).sub(galaxyCenter).applyQuaternion(inverseTilt);
+   (Math.hypot(point.x,point.y)<455&&Math.abs(point.z)<112?galaxyIndices:fieldIndices).push(i);
+  }
+  // Keep the native galaxy as one rotating body while the surrounding sky remains a fixed depth reference.
+  const fieldGeometry=starGeometry.clone();fieldGeometry.setIndex(fieldIndices);extraGeometries.push(fieldGeometry);
+  starGeometry.translate(-galaxyCenter.x,-galaxyCenter.y,-galaxyCenter.z);starGeometry.setIndex(galaxyIndices);
   const starMaterial=new ShaderMaterial({transparent:true,depthWrite:false,blending:AdditiveBlending,uniforms:{uScale:{value:1000},uDpr:{value:1},uTime:{value:0},uOpacity:{value:1}},vertexShader:`
    attribute vec3 aColor;attribute float aSize;attribute float aAlpha;attribute float aPhase;
    uniform float uScale;uniform float uDpr;uniform float uTime;varying vec3 vColor;varying float vAlpha;
-   void main(){vec4 mv=modelViewMatrix*vec4(position,1.);gl_Position=projectionMatrix*mv;float cloud=step(6.,aSize);float pointScale=mix(.82,1.08,cloud);gl_PointSize=clamp(aSize*uScale*uDpr*pointScale/max(1.,-mv.z),.65,38.*uDpr);vColor=aColor;vAlpha=aAlpha*mix(.60,1.,cloud)*(.93+.07*sin(uTime*.55+aPhase));}
+   void main(){vec4 mv=modelViewMatrix*vec4(position,1.);gl_Position=projectionMatrix*mv;float cloud=step(6.,aSize);float pointScale=mix(.82,1.08,cloud);gl_PointSize=clamp(aSize*uScale*uDpr*pointScale/max(1.,-mv.z),.65,38.*uDpr);vColor=aColor;vAlpha=aAlpha*mix(.60,1.,cloud)*(.83+.17*sin(uTime*1.4+aPhase));}
   `,fragmentShader:`
    uniform float uOpacity;varying vec3 vColor;varying float vAlpha;
    void main(){vec2 p=gl_PointCoord-.5;float r=length(p)*2.;if(r>1.)discard;float soft=exp(-r*r*5.5);float core=exp(-r*r*32.)*.55;gl_FragColor=vec4(vColor,(soft+core)*vAlpha*uOpacity);}
   `});extraMaterials.push(starMaterial);
-  const stars=new Points(starGeometry,starMaterial);stars.frustumCulled=false;scene.add(stars);
+  const stars=new Points(starGeometry,starMaterial);stars.name='space-galaxy';stars.position.copy(galaxyCenter);stars.frustumCulled=false;scene.add(stars);
+  const fieldStars=new Points(fieldGeometry,starMaterial);fieldStars.name='space-distant-stars';fieldStars.frustumCulled=false;scene.add(fieldStars);
 
   rockModel.updateMatrixWorld(true);
   const rockSources:Mesh[]=[];rockModel.traverse(node=>{if(node instanceof Mesh)rockSources.push(node);});
@@ -195,7 +209,7 @@ export async function createHomeSpace(canvas:HTMLCanvasElement,signal:AbortSigna
   const headMaterial=new ShaderMaterial({transparent:true,depthWrite:false,blending:AdditiveBlending,uniforms:{uSize:{value:4},uFade:{value:0}},vertexShader:`uniform float uSize;void main(){gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);gl_PointSize=uSize;}`,fragmentShader:`uniform float uFade;void main(){float d=length(gl_PointCoord-.5)*2.;if(d>1.)discard;gl_FragColor=vec4(.86,.94,1.,exp(-d*d*5.)*uFade);}`});extraMaterials.push(headMaterial);
   const cometHead=new Points(headGeometry,headMaterial);cometHead.frustumCulled=false;cometHead.visible=false;scene.add(cometHead);
 
-  let height=1,dpr=1,mobile=false,visibleRocks=42,previousTime=0,lastProgress=0,focusAmount=0,focused=false,focusStartProgress=0,selected:Rock|undefined,diagnosticPhase='',diagnosticDistance=-1,disposed=false,lastReduced=false,cometClock=0,cometStartTime=-Infinity,nextCometTime=Infinity,cometNumber=0,dragYaw=0,dragPitch=0,dragYawTarget=0,dragPitchTarget=0;
+  let height=1,dpr=1,mobile=false,visibleRocks=42,previousTime=0,lastProgress=0,focusAmount=0,focused=false,focusStartProgress=0,selected:Rock|undefined,diagnosticPhase='',diagnosticDistance=-1,diagnosticMotionTick=-1,disposed=false,lastReduced=false,cometClock=0,cometStartTime=-Infinity,nextCometTime=Infinity,cometNumber=0,dragYaw=0,dragPitch=0,dragYawTarget=0,dragPitchTarget=0;
   const raycaster=new Raycaster(),ndc=new Vector2(),basePosition=new Vector3(),baseTarget=new Vector3(),focusPositionDelta=new Vector3(),focusTargetDelta=new Vector3(),lookTarget=new Vector3(),forward=new Vector3(),right=new Vector3(),up=new Vector3(),cometStart=new Vector3(),cometVelocity=new Vector3(),cometPoint=new Vector3(),tailPoint=new Vector3(),tailDirection=new Vector3(),projected=new Vector3(),pointerQuaternion=new Quaternion(),pointerEuler=new Euler(0,0,0,'YXZ');
   const restoreColor=()=>{if(selected){rockMeshes[selected.mesh].setColorAt(selected.instance,white);rockMeshes[selected.mesh].instanceColor!.needsUpdate=true;selected=undefined;}};
   const resetFocus=()=>{focused=false;restoreColor();dragYawTarget=0;dragPitchTarget=0;canvas.dataset.spaceFocus='false';canvas.dataset.spaceDrag='false';};
@@ -214,10 +228,10 @@ export async function createHomeSpace(canvas:HTMLCanvasElement,signal:AbortSigna
    focusPositionDelta.copy(direction).multiplyScalar(advance);focusTargetDelta.copy(rock.position).sub(baseTarget);
    rockMeshes[rock.mesh].setColorAt(rock.instance,selectedColor);rockMeshes[rock.mesh].instanceColor!.needsUpdate=true;canvas.dataset.spaceFocus='true';return true;
   };
-  const setInstances=(time:number)=>{
+  const setInstances=(angle:number)=>{
    const used=[0,0,0];
    for(let i=0;i<visibleRocks;i++){
-    const rock=rocks[i];dummy.position.copy(rock.position);dummy.rotation.set(rock.rotation.x+rock.spin.x*time,rock.rotation.y+rock.spin.y*time,rock.rotation.z+rock.spin.z*time);dummy.scale.setScalar(rock.size);dummy.updateMatrix();rockMeshes[rock.mesh].setMatrixAt(rock.instance,dummy.matrix);used[rock.mesh]++;
+    const rock=rocks[i],rate=angle/Math.max(.000001,rock.spin.length());dummy.position.copy(rock.position);dummy.rotation.set(rock.rotation.x+rock.spin.x*rate,rock.rotation.y+rock.spin.y*rate,rock.rotation.z+rock.spin.z*rate);dummy.scale.setScalar(rock.size);dummy.updateMatrix();rockMeshes[rock.mesh].setMatrixAt(rock.instance,dummy.matrix);used[rock.mesh]++;
    }
    rockMeshes.forEach((mesh,i)=>{mesh.count=used[i];mesh.instanceMatrix.needsUpdate=true;});
   };
@@ -231,12 +245,13 @@ export async function createHomeSpace(canvas:HTMLCanvasElement,signal:AbortSigna
     height=h;mobile=w<768;dpr=Math.min(pixelRatio,mobile?1.5:1.65);visibleRocks=mobile?20:42;
     if(mobile){dragYaw=0;dragPitch=0;dragYawTarget=0;dragPitchTarget=0;}
     renderer!.setPixelRatio(dpr);renderer!.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();
-    const renderedStars=mobile?Math.min(8000,starCount):starCount;starGeometry.setDrawRange(0,renderedStars);starMaterial.uniforms.uDpr.value=dpr;
+    const renderedStars=mobile?Math.min(8000,starCount):starCount,renderedField=Math.min(fieldIndices.length,Math.round(renderedStars*fieldIndices.length/starCount));
+    starGeometry.setDrawRange(0,Math.min(galaxyIndices.length,renderedStars-renderedField));fieldGeometry.setDrawRange(0,renderedField);starMaterial.uniforms.uDpr.value=dpr;
     canvas.dataset.spaceStars=String(renderedStars);canvas.dataset.spaceRockCount=String(visibleRocks);
    },
    render(x,y,_dark,scroll,reduced,elapsed=0){
     if(closed||disposed)return;
-    lastReduced=reduced;const time=reduced?0:Math.max(0,elapsed),rawDelta=time-previousTime,delta=rawDelta>0&&rawDelta<=.1?rawDelta:0;previousTime=time;
+    lastReduced=reduced;const motion=sampleSpaceMotion(elapsed,reduced),time=motion.time,rawDelta=time-previousTime,delta=rawDelta>0&&rawDelta<=.1?rawDelta:0;previousTime=time;
     const flight=sampleSpaceFlight(reduced?.9:scroll,camera.aspect);lastProgress=flight.progress;basePosition.fromArray(flight.position);baseTarget.fromArray(flight.target);
     if(focused&&(reduced||Math.abs(lastProgress-focusStartProgress)>.003))resetFocus();
     focusAmount+=(Number(focused)-focusAmount)*(delta?1-Math.exp(-delta*(focused?4.5:8.5)):0);
@@ -254,15 +269,15 @@ export async function createHomeSpace(canvas:HTMLCanvasElement,signal:AbortSigna
     if(camera.fov!==flight.fov){camera.fov=flight.fov;camera.updateProjectionMatrix();}
     camera.updateMatrixWorld();
     starMaterial.uniforms.uScale.value=height/(2*Math.tan(MathUtils.degToRad(camera.fov/2)));starMaterial.uniforms.uTime.value=time;starMaterial.uniforms.uOpacity.value=1;
-    setInstances(time);
+    stars.quaternion.setFromAxisAngle(galaxyAxis,motion.galaxyAngle);setInstances(motion.rockAngle);
     if(!reduced&&!focused)cometClock+=delta;
     const launchComet=()=>{
      camera.getWorldDirection(forward);right.set(1,0,0).applyQuaternion(camera.quaternion);up.set(0,1,0).applyQuaternion(camera.quaternion);
      const halfHeight=115*Math.tan(MathUtils.degToRad(camera.fov/2)),halfWidth=halfHeight*camera.aspect;
      cometStart.copy(camera.position).addScaledVector(forward,115).addScaledVector(right,halfWidth*.84).addScaledVector(up,halfHeight*(.68-(cometNumber%3)*.04));
-     cometVelocity.copy(right).multiplyScalar(-halfWidth*.62/1.05).addScaledVector(up,-halfHeight*.40/1.05);cometStartTime=cometClock;nextCometTime=cometClock+29+(cometNumber%3)*4;cometNumber++;
+     cometVelocity.copy(right).multiplyScalar(-halfWidth*.62/1.05).addScaledVector(up,-halfHeight*.40/1.05);cometStartTime=cometClock;nextCometTime=cometClock+18+(cometNumber%3)*5;cometNumber++;
     };
-    if(!reduced&&!focused&&lastProgress>.36&&((cometNumber===0)||cometClock>=nextCometTime))launchComet();
+    if(!reduced&&!focused&&((cometNumber===0&&(cometClock>=4||lastProgress>.36))||cometClock>=nextCometTime))launchComet();
     const phase=cometClock-cometStartTime,showComet=!reduced&&!focused&&phase>=0&&phase<1.05;
     if(showComet){
      camera.getWorldDirection(forward);right.set(1,0,0).applyQuaternion(camera.quaternion);up.set(0,1,0).applyQuaternion(camera.quaternion);
@@ -279,6 +294,7 @@ export async function createHomeSpace(canvas:HTMLCanvasElement,signal:AbortSigna
     cometHead.visible=showComet;cometTail.visible=showComet;canvas.dataset.spaceComets=showComet?'1':'0';
     const journeyPhase=lastProgress<.27?'far':lastProgress<.82?'belt':'near';if(journeyPhase!==diagnosticPhase){diagnosticPhase=journeyPhase;canvas.dataset.journeyPhase=journeyPhase;}
     const distance=Math.round(camera.position.distanceTo(MOON_POSITION)*10)/10;if(distance!==diagnosticDistance){diagnosticDistance=distance;canvas.dataset.spaceDistance=String(distance);canvas.dataset.spaceCameraZ=camera.position.z.toFixed(2);}
+    const motionTick=Math.floor(time*10);if(motionTick!==diagnosticMotionTick){diagnosticMotionTick=motionTick;canvas.dataset.spaceTime=time.toFixed(1);canvas.dataset.spaceGalaxyAngle=motion.galaxyAngle.toFixed(3);canvas.dataset.spaceRockAngle=motion.rockAngle.toFixed(3);canvas.dataset.spaceCometClock=cometClock.toFixed(1);}
     renderer!.render(scene,camera);
    },
    activate(x,y){

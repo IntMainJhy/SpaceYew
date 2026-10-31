@@ -29,7 +29,7 @@ function mount({reduced=false,width=1400,height=900,loading=false,failed=false}=
  const adapter={animated:true,resize:(...args)=>sizes.push(args),render:(...args)=>draws.push(args),dispose:()=>releases++,drag:(...args)=>drags.push(args),resetFocus:()=>{resets++;canvas.dataset.spaceFocus='false';},activate:(...args)=>{activations.push(args);canvas.dataset.spaceFocus=String(hit);return hit;},focusNearest:()=>{nearest++;canvas.dataset.spaceFocus=String(hit);return hit;}};
  let resize,intersection,theme,now=0,id=0;const frames=new Map();
  class Resize{constructor(fn){this.fn=fn;resize=this;}observe(){}disconnect(){this.disconnected=true;}}
- class Intersection{constructor(fn){this.fn=fn;intersection=this;}observe(){}disconnect(){this.disconnected=true;}set(value){this.fn([{isIntersecting:value}]);}}
+ class Intersection{constructor(fn){this.fn=fn;intersection=this;}observe(target){this.observed=target;}disconnect(){this.disconnected=true;}set(value){this.fn([{isIntersecting:value}]);}}
  class Mutation{constructor(fn){this.fn=fn;theme=this;}observe(){}disconnect(){this.disconnected=true;}}
  const exports={};vm.runInNewContext(source,{exports,window,document,AbortController,CustomEvent,Math,ResizeObserver:Resize,IntersectionObserver:Intersection,MutationObserver:Mutation,requestAnimationFrame:fn=>{frames.set(++id,fn);return id;},cancelAnimationFrame:key=>frames.delete(key)});
  const cleanup=exports.mountSpaceAtmosphere(canvas,(_,abortSignal)=>{signal=abortSignal;if(failed)return Promise.reject(Error('WebGL unavailable'));return loading?new Promise(done=>{resolve=()=>done(adapter);}):Promise.resolve(adapter);});
@@ -45,8 +45,9 @@ const flush=async()=>{await Promise.resolve();await Promise.resolve();};
 const elapsed=s=>s.draws.at(-1)[5];
 
 test('space keeps an active 30fps clock, pauses every inactive state and never advances time on a resize or theme redraw',async()=>{
- const s=mount();s.intersection.set(true);await flush();assert.deepEqual(s.sizes.at(-1),[1400,900,1.5]);assert.equal(elapsed(s),0);assert.equal(s.frames.size,1);
+ const s=mount();s.intersection.set(true);await flush();assert.equal(s.intersection.observed,s.canvas,'visible ambient canvas stays active beyond the flight section');assert.deepEqual(s.sizes.at(-1),[1400,900,1.5]);assert.equal(elapsed(s),0);assert.equal(s.frames.size,1);
  s.step(16);const first=s.draws.length;s.step(16);assert.equal(s.draws.length,first,'the continuous loop respects the 30fps draw ceiling');s.step(19);assert.ok(elapsed(s)>0);assert.equal(s.frames.size,1,'idle space still animates');
+ s.scrollTo(s.journey.height+100);const readingTime=elapsed(s);s.step();assert.ok(elapsed(s)>readingTime,'background motion continues behind reading sections');assert.equal(s.draws.at(-1)[3],1);
  const time=elapsed(s);s.theme.fn();assert.equal(elapsed(s),time);s.resize.fn();assert.equal(elapsed(s),time,'layout and color changes are read-only for animation time');
  for(const [pause,resume] of[
   [()=>{s.document.hidden=true;s.document.dispatchEvent(new Event('visibilitychange'));},()=>{s.document.hidden=false;s.document.dispatchEvent(new Event('visibilitychange'));}],

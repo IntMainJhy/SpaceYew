@@ -7,17 +7,19 @@ import {Box3,Mesh,MeshPhysicalMaterial,Vector3} from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/V2Atmosphere.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText;
-function mount({reduced=false,width=1400,height=900,loading=false,failed=false,animated=false}={}){
+function mount({reduced=false,width=1400,height=900,loading=false,failed=false,animated=false,mode='home',reveal=false,overlay=false,header=false}={}){
  class Target extends EventTarget{
-  listeners=new Set();dataset={};style={};
+  listeners=new Set();dataset={};style={setProperty(name,value){this[name]=value},removeProperty(name){delete this[name]}};
   addEventListener(name,fn,options){super.addEventListener(name,fn,options);this.listeners.add(name)}
   removeEventListener(name,fn){super.removeEventListener(name,fn);this.listeners.delete(name)}
   getBoundingClientRect(){return{left:0,top:this.top||0,width,height}}
  }
  const preference=Object.assign(new Target(),{matches:reduced}),root=new Target(),host=new Target(),document=Object.assign(new Target(),{hidden:false,documentElement:root}),window=Object.assign(new Target(),{devicePixelRatio:3,matchMedia:()=>preference});
- const surface=new Target(),canvas=Object.assign(new Target(),{parentElement:surface,closest:selector=>selector==='.v2-home'?host:null});
- const draws=[],sizes=[];let releases=0,resolve,reject,signal;
- const adapter={animated,resize:(...args)=>sizes.push(args),render:(...args)=>draws.push(args),dispose:()=>releases++};
+ const surface=new Target(),canvas=Object.assign(new Target(),{parentElement:surface,closest:selector=>['.v2-home','.v2-site'].includes(selector)?host:null});
+ const panel=Object.assign(new Target(),{dataset:{glassReveal:'stage'},getBoundingClientRect:()=>({left:100,top:500,right:1100,bottom:860,width:1000,height:360})});host.querySelectorAll=()=>reveal?[panel]:[];
+ const headerBounds={brandRight:160,toolsLeft:270,height:64},bar={getBoundingClientRect:()=>({top:0,height:headerBounds.height}),querySelector:selector=>selector==='.organic-brand'?{getBoundingClientRect:()=>({right:headerBounds.brandRight})}:selector==='.organic-header-tools'?{getBoundingClientRect:()=>({left:headerBounds.toolsLeft})}:null};host.querySelector=selector=>header&&selector==='.organic-header'?bar:null;
+ const draws=[],sizes=[],reveals=[],overlayModes=[],docks=[];let releases=0,resolve,reject,signal;
+ const adapter={animated,resize:(...args)=>sizes.push(args),setReveals:value=>reveals.push(value),setCollectionOverlay:value=>overlayModes.push(value),setHeaderDock:value=>docks.push(value?{...value}:null),render:(...args)=>{draws.push(args);if(overlay)canvas.dataset.glassOverlay=args[3]>=1.3&&!args[4]?'1.000':'0.000';},dispose:()=>releases++};
  let resize,intersection,theme,now=0,id=0;const frames=new Map();
  class Resize{constructor(fn){this.fn=fn;resize=this}observe(){}disconnect(){this.disconnected=true}}
  class Intersection{constructor(fn){this.fn=fn;intersection=this}observe(){}disconnect(){this.disconnected=true}set(value){this.fn([{isIntersecting:value}])}}
@@ -32,10 +34,10 @@ function mount({reduced=false,width=1400,height=900,loading=false,failed=false,a
   signal=abortSignal;
   if(failed)return Promise.reject(Error('Model or WebGL unavailable'));
   return loading?new Promise((a,b)=>{resolve=a;reject=b}):Promise.resolve(adapter);
- });
+ },{mode});
  const step=(ms=35)=>{now+=ms;const pending=[...frames.values()];frames.clear();pending.forEach(fn=>fn(now))};
  const move=(x=width,y=height,pointerType='mouse')=>host.dispatchEvent(Object.assign(new Event('pointermove'),{clientX:x,clientY:y,pointerType}));
- return{canvas,host,window,document,root,preference,get resize(){return resize},intersection,theme,frames,draws,sizes,cleanup,step,move,signal,adapter,get releases(){return releases},resolve:()=>resolve(adapter),reject:()=>reject(Error('Load failed'))};
+ return{canvas,surface,host,panel,window,document,root,preference,get resize(){return resize},intersection,theme,frames,draws,sizes,reveals,overlayModes,docks,headerBounds,cleanup,step,move,signal,adapter,get releases(){return releases},resolve:()=>resolve(adapter),reject:()=>reject(Error('Load failed'))};
 }
 const flush=async()=>{await Promise.resolve();await Promise.resolve()};
 
@@ -119,4 +121,29 @@ test('the optical studio keeps light motion active while visible and retains an 
   [()=>s.window.dispatchEvent(new Event('beforeprint')),()=>s.window.dispatchEvent(new Event('afterprint'))]
  ]){const before=s.draws.at(-1)[5];pause();assert.equal(s.frames.size,0);s.step(60000);resume();assert.equal(s.draws.at(-1)[5],before,'inactive time is not replayed');s.step();assert.ok(s.draws.at(-1)[5]-before<=.05);}
  s.preference.matches=true;s.preference.dispatchEvent(new Event('change'));assert.equal(s.frames.size,0);const frozen=s.draws.at(-1)[5];s.step(10000);s.theme.fn();s.resize.fn();assert.equal(s.draws.at(-1)[5],frozen);s.cleanup();assert.equal(s.releases,1);
+});
+
+test('interior routes begin in the collected-glass phase and use page scroll rather than a fixed host rectangle',async()=>{
+ const s=mount({mode:'interior',overlay:true});s.intersection.set(true);await flush();assert.equal(s.draws.at(-1)[3],1.05);assert.equal(s.overlayModes.at(-1),false);s.host.top=0;s.window.scrollY=1800;s.window.dispatchEvent(new Event('scroll'));s.step();assert.equal(s.draws.at(-1)[3],3.05);assert.equal(s.surface.dataset.glassOverlay,undefined,'interior renderers do not enter the homepage foreground layer');s.cleanup();
+});
+
+test('the existing canvas is promoted only for completed collection and every override clears on reduced motion or failure',async()=>{
+ const s=mount({animated:true,overlay:true});s.intersection.set(true);await flush();assert.equal(s.overlayModes.at(-1),true);assert.equal(s.surface.dataset.glassOverlay,undefined);s.host.top=-1800;s.window.dispatchEvent(new Event('scroll'));s.step();assert.equal(s.surface.dataset.glassOverlay,'true');assert.equal(s.surface.style['--glass-overlay'],'1.000');
+ s.preference.matches=true;s.preference.dispatchEvent(new Event('change'));assert.equal(s.surface.dataset.glassOverlay,undefined);assert.equal(s.surface.style['--glass-overlay'],undefined,'the reduced-motion background cannot cover content');s.preference.matches=false;s.preference.dispatchEvent(new Event('change'));s.step();assert.equal(s.surface.dataset.glassOverlay,'true');s.canvas.dispatchEvent(new Event('webglcontextlost',{cancelable:true}));assert.equal(s.surface.dataset.glassOverlay,undefined);assert.equal(s.surface.style['--glass-overlay'],undefined);assert.equal(s.canvas.dataset.glassOverlay,undefined);s.cleanup();
+});
+
+test('the native header dock follows the actual brand-to-tools gap when the layout resizes',async()=>{
+ const s=mount({width:390,height:844,header:true});s.intersection.set(true);await flush();assert.deepEqual(s.docks.at(-1),{x:215,y:32,width:90});s.headerBounds.toolsLeft=225;s.resize.fn();assert.deepEqual(s.docks.at(-1),{x:192.5,y:32,width:45},'the native mark uses the remaining clear gap, with ten pixels of breathing room on each side');s.cleanup();
+});
+
+test('a reduced-motion change event overrides a stale media-query getter and clears every foreground flag',async()=>{
+ const s=mount({animated:true,overlay:true,reveal:true});s.intersection.set(true);await flush();s.host.top=-1800;s.window.dispatchEvent(new Event('scroll'));s.step();assert.equal(s.surface.dataset.glassOverlay,'true');
+ s.preference.dispatchEvent(Object.assign(new Event('change'),{matches:true}));assert.equal(s.preference.matches,false,'the regression keeps the old getter stale');assert.equal(s.draws.at(-1)[4],true);assert.equal(s.frames.size,0);assert.equal(s.surface.dataset.glassOverlay,undefined);assert.equal(s.surface.style['--glass-overlay'],undefined);assert.equal(s.panel.dataset.glassMotion,undefined);s.move();s.step();assert.equal(s.frames.size,0,'pointer input cannot restart the reduced-motion loop');
+ s.preference.dispatchEvent(Object.assign(new Event('change'),{matches:false}));assert.equal(s.panel.dataset.glassMotion,'active');assert.equal(s.frames.size,1);s.cleanup();
+});
+
+test('section reveals coalesce into rendered frames and release every semantic style on failure or reduced motion',async()=>{
+ const s=mount({reveal:true});s.intersection.set(true);await flush();assert.equal(s.panel.dataset.glassMotion,'active');assert.ok(Number(s.panel.style['--glass-reveal'])>0&&Number(s.panel.style['--glass-reveal'])<1);assert.equal(s.reveals.at(-1).length,1);const measured=s.reveals.length;
+ for(let i=0;i<12;i++)s.window.dispatchEvent(new Event('scroll'));assert.equal(s.reveals.length,measured,'events do not repeatedly deform or remeasure the glass');s.step();assert.equal(s.reveals.length,measured+1);
+ s.preference.matches=true;s.preference.dispatchEvent(new Event('change'));assert.equal(s.panel.dataset.glassMotion,undefined);assert.equal(s.panel.style['--glass-reveal'],undefined);assert.equal(s.reveals.at(-1).length,0);s.preference.matches=false;s.preference.dispatchEvent(new Event('change'));assert.equal(s.panel.dataset.glassMotion,'active');s.canvas.dispatchEvent(new Event('webglcontextlost',{cancelable:true}));assert.equal(s.panel.dataset.glassMotion,undefined);assert.equal(s.panel.style['--glass-lift'],undefined);assert.equal(s.panel.style['--glass-tilt'],undefined);assert.equal(s.reveals.at(-1).length,0);s.cleanup();
 });

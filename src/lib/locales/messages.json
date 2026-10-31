@@ -3736,7 +3736,7 @@
     "リソース管理"
   ],
   "资源类型": [
-    "Resource type",
+    "Resource types",
     "リソースの種類"
   ],
   "资源说明": [
@@ -12526,5 +12526,225 @@
   "公开链接始终指向已发布的主页。": [
     "This link opens the published homepage.",
     "このリンクは公開済みのページを開きます。"
+  ],
+  "博客空间": [
+    "Blog spaces",
+    "ブログスペース"
+  ],
+  "博客空间内容": [
+    "Profile content",
+    "プロフィールの内容"
+  ],
+  "查看博客空间": [
+    "View blog space",
+    "ブログスペースを見る"
+  ],
+  "转发到博客空间": [
+    "Repost to profile",
+    "プロフィールにリポスト"
+  ],
+  "邮箱仅用于登录、验证和账号恢复，不会显示在社区博客空间。": [
+    "Your email is used for sign-in, verification and account recovery. It is not shown on your community profile.",
+    "メールはログイン、認証、アカウント復旧に使用し、コミュニティのプロフィールには表示しません。"
+  ],
+  "博客空间与内容审核": [
+    "blog home & content reviews",
+    "ホームページとコンテンツの審査"
+  ],
+  "博客空间二维码": [
+    "blog home QR code",
+    "ホームページのQRコード"
+  ],
+  "博客空间审核": [
+    "Blog home review",
+    "ブログホーム審査"
+  ],
+  "博客空间导航": [
+    "blog home navigation",
+    "ホームページのナビゲーション"
+  ],
+  "博客空间已下架。": [
+    "The blog space is now offline.",
+    "ブログスペースを非公開にしました。"
+  ],
+  "博客空间界面预览": [
+    "blog home preview",
+    "ホームページ画面のプレビュー"
+  ],
+  "博客空间的内容结构": [
+    "The building blocks of your blog home",
+    "ホームページを構成するコンテンツ"
+  ],
+  "博客空间，": [
+    "Your blog space,",
+    "ブログスペースを、"
+  ],
+  "作品、经历、资源和简历共用一份内容库。更新一次，博客空间持续生长。": [
+    "One library connects your work, experience, resources and résumé. Update once and let your blog home grow.",
+    "作品・経歴・リソース・履歴書をひとつに。更新するたび、ホームページも育ちます。"
+  ],
+  "公开博客空间封面": [
+    "Public blog home cover",
+    "公開ホームページのカバー"
+  ],
+  "分享博客空间": [
+    "Share blog home",
+    "ブログホームを共有"
+  ],
+  "发现博客空间": [
+    "Explore blog spaces",
+    "ブログスペースを探す"
+  ],
+  "在社区分享发现，把作品、经历与资源，整理成你的博客空间。": [
+    "Share discoveries with the community. Bring your work, experience and resources together in your own blog home.",
+    "コミュニティで発見を共有し、作品・経歴・リソースを自分のホームページにまとめよう。"
+  ],
+  "填写资料，即可拥有完整的博客空间。": [
+    "Add your details to create a complete blog space.",
+    "プロフィールを入力すると、ブログスペースが完成します。"
+  ],
+  "想展示作品，从博客空间开始；想交流发现，去社区看看。也可以先在内容库保存一份草稿。": [
+    "Build a blog home to show your work, visit the community to exchange ideas, or save a draft in your library.",
+    "作品を紹介するならブログホームを作り、発見を共有するならコミュニティへ。まずライブラリに下書きを保存することもできます。"
+  ],
+  "我的博客空间": [
+    "My blog home",
+    "マイホームページ"
+  ],
+  "把个人介绍、经历、技能和作品，整理成一份有质感的博客空间。": [
+    "Bring your story, experience, skills and work together in a thoughtfully designed blog home.",
+    "紹介、経歴、スキル、作品を美しいブログホームにまとめましょう。"
+  ],
+  "搭建博客空间": [
+    "Build your blog home",
+    "ブログホームを作る"
+  ],
+  "欢迎来到我的博客空间。": [
+    "Welcome to my blog home.",
+    "私のホームページへようこそ。"
+  ],
+  "正在打开博客空间…": [
+    "Opening the blog space…",
+    "ブログスペースを開いています…"
+  ],
+  "现有站长资料已接入博客空间，继续在原内容后台维护即可同步更新。": [
+    "Your existing owner profile is connected to your blog home. Keep editing it in the original dashblog home to update both.",
+    "既存の管理者プロフィールはホームページに接続されています。従来の管理画面で編集すると両方に反映されます。"
+  ],
+  "用模块快速搭建，或在自由画布中编排。把作品、手记与资源放在一起，做一个有你风格的博客空间。": [
+    "Start with ready-made blocks or arrange things freely on a canvas. Bring your work, notes and resources together in a blog home that reflects your style.",
+    "ブロックで手軽に組み立てても、自由なキャンバスに配置しても。作品、ノート、リソースをまとめて、あなたらしいホームページを作れます。"
+  ],
+  "登录后整理作品、经历与资源，搭建可分享的博客空间。": [
+    "Sign in to organize your work, experience and resources in a shareable blog home.",
+    "ログインして作品・経歴・リソースを整理し、共有できるホームページを作りましょう。"
+  ],
+  "看看博客空间": [
+    "Explore a blog home",
+    "ホームページを見る"
+  ],
+  "社区、博客空间与持续更新的简历。": [
+    "Community, blog spaces and a résumé that grows with you.",
+    "コミュニティ、ブログホーム、更新を重ねる履歴書。"
+  ],
+  "社区、博客空间与静态网站托管。": [
+    "Community, blog spaces and static website hosting.",
+    "コミュニティ、ブログホーム、静的サイトのホスティング。"
+  ],
+  "社区与博客空间": [
+    "Community & blog spaces",
+    "コミュニティとブログホーム"
+  ],
+  "自由组合经历、作品与资源，搭建自己的博客空间。": [
+    "Build a blog home from your experience, work and resources.",
+    "経歴・作品・リソースを自由に組み合わせて、自分のホームページを。"
+  ],
+  "制作开发者博客空间": [
+    "Build a developer’s blog home",
+    "開発者のブログホームを制作"
+  ],
+  "可运行的博客空间、响应式样式，以及素材缺失和交互检查说明。": [
+    "A working blog home, responsive styles, and notes on missing assets and interaction checks.",
+    "動作するホームページ、レスポンシブのスタイル、不足素材と操作検証の記録。"
+  ],
+  "请使用 frontend-design Skill，为 [个人介绍与项目资料] 制作博客空间，使用 [前端技术栈]。 读者主要是潜在合作伙伴。页面需要清楚展示介绍、精选作品和联系入口，遵循 [品牌约束]，先说明一个明确的视觉方向，再实现桌面和手机布局。 使用我提供的真实内容；缺失素材请标注。检查键盘操作、文字对比度和窄屏显示。": [
+    "Use the frontend-design skill to build a blog home from [introduction and project materials] with [frontend stack].\nThe audience is potential collaborators. Clearly present an introduction, selected work and contact links. Follow [brand constraints], explain one clear visual direction, then implement desktop and mobile layouts.\nUse the real content provided and identify missing assets. Check keyboard access, text contrast and narrow screens.",
+    "frontend-design Skill を使い、[自己紹介と作品資料] をもとに [フロントエンド環境] でブログホームを作ってください。\n想定読者は協業相手です。紹介、代表作品、連絡先を明確にし、[ブランド制約] を守って一つのビジュアル方針を説明してから、PC とモバイルに実装してください。\n提供した実際の内容を使い、不足素材を明記してください。キーボード操作、文字のコントラスト、狭い画面を確認してください。"
+  ],
+  "博客空间管理": [
+    "Manage blog home",
+    "ブログホーム管理"
+  ],
+  "认识社区、博客空间和共享内容栏目。": [
+    "Explore the community, blog spaces and shared catalogs.",
+    "コミュニティ、ブログホーム、共有カタログをご紹介。"
+  ],
+  "想介绍自己，从博客空间开始；想分享教程或工具，在对应栏目发布，审核通过后也会出现在社区。": [
+    "Introduce yourself with a blog home. Share tutorials or tools in their catalog; approved contributions also appear in the community.",
+    "ブログホームで自己紹介。チュートリアルやツールは承認後にコミュニティにも掲載します。"
+  ],
+  "验证邮箱后，即可登录并创建自己的博客空间。": [
+    "Verify your email to sign in and create your own blog space.",
+    "メール認証後、ログインして自分のブログホームを作成できます。"
+  ],
+  "编辑博客空间": [
+    "Edit blog home",
+    "ブログホームを編集"
+  ],
+  "创建我的空间": [
+    "Create my space",
+    "自分のスペースを作る"
+  ],
+  "穿过创作者的玻璃空间，发现他们的作品与故事。": [
+    "Travel through creators’ glass spaces and discover their work and stories.",
+    "クリエイターのガラス空間を巡り、作品と物語を見つけましょう。"
+  ],
+  "进入博客空间": [
+    "Enter blog space",
+    "ブログスペースに入る"
+  ],
+  "跳过动画，浏览空间": [
+    "Skip animation and browse spaces",
+    "アニメーションをスキップして閲覧"
+  ],
+  "发现不同的创作者，走进他们的空间。": [
+    "Discover creators and step into their spaces.",
+    "クリエイターを見つけ、その空間に入ってみましょう。"
+  ],
+  "浏览全部空间": [
+    "Browse all spaces",
+    "すべてのスペースを見る"
+  ],
+  "走进一个新的空间。": [
+    "Step into a new space.",
+    "新しいスペースに入ろう。"
+  ],
+  "作品、经历与想法，在这里相遇。": [
+    "Work, experience and ideas meet here.",
+    "作品、経験、アイデアがここで出会います。"
+  ],
+  "设置我的空间": [
+    "Set up my space",
+    "スペースを設定"
+  ],
+  "暂时没有公开博客空间。": [
+    "No public blog spaces yet.",
+    "公開ブログスペースはまだありません。"
+  ],
+  "网站与工具": [
+    "Websites & tools",
+    "サイトとツール"
+  ],
+  "教程、Skill、网站与工具，在一个地方发现。": [
+    "Tutorials, skills, websites and tools, together.",
+    "チュートリアル、Skill、サイト、ツールを一か所で。"
+  ],
+  "搜索全部资源": [
+    "Search all resources",
+    "すべてのリソースを検索"
+  ],
+  "浏览全部": [
+    "Browse all",
+    "すべて見る"
   ]
 }

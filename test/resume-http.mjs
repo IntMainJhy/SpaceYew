@@ -17,6 +17,7 @@ try{
  assert.equal((await fetch(base+'/download/'+uploaded.file.id)).status,404,'Original résumé remains private');
  const after=await(await call('/api/admin/bootstrap')).json();assert.deepEqual(before.profile,after.profile,'Import never auto-publishes');
  const save=await call('/api/admin/config',{key:'profile',value:{...before.profile,...draft.profile,alias:'Example developer',resume:{...draft.profile.resume,metrics:[{label:'Released apps',value:'12',note:'Synthetic fixture'}]}}});assert.equal(save.status,200,await save.clone().text());
- for(const locale of ['en','zh']){const html=await(await fetch(base+'/blogs',{headers:{Cookie:'site-locale='+locale}})).text();assert.match(html,/Alex Example/);assert.match(html,/Example University/);assert.match(html,/anx-resume-items/);assert.doesNotMatch(html,/homepage-studio/)}
+ const publicOwner=await(await call('/api/admin/blog/mine')).json();assert.ok(publicOwner.handle,'The saved owner résumé has a canonical public handle');
+ for(const locale of ['en','zh']){const html=await(await fetch(base+'/blog/'+encodeURIComponent(publicOwner.handle),{headers:{Cookie:'site-locale='+locale}})).text();assert.match(html,/Alex Example/);assert.match(html,/Example University/);assert.match(html,/anx-resume-items/);assert.doesNotMatch(html,/homepage-studio/)}
  assert.ok([401,403].includes((await call('/api/admin/resume/parse',{text:draft.text},false)).status));console.log('Résumé HTTP: PDF upload → private extraction → explicit save → public Anx page passed.');
 }finally{if(server)await stopServer(server);await rm(directory,{recursive:true,force:true})}

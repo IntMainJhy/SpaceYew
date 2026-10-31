@@ -17,6 +17,7 @@ import {Icon} from './Icons';
 import {Tracker, TrackedLink} from './Tracker';
 import {AuthNav} from './AuthNav';
 import {SiteTools} from './SiteTools';
+import {PlatformGlass} from './PlatformGlass';
 import {ResumePrint} from './ResumePrint';
 
 type Doc = Record<string, any>;
@@ -197,11 +198,12 @@ export async function PublicSite({path = [], query = {}}: {path?: string[], quer
 }
 export async function PublicFrame({path=[],children}:{path?:string[],children:React.ReactNode}){const {t:tr,locale}=await serverI18n();
   const section=path[0]||'',current='/'+path.join('/');
-  const nav=[['/','首页'],['/community','社区'],['/blogs','博客主页'],['/docs','文档'],['/skills','Skill'],['/resources','其他资源']];
+  const nav=[['/','首页'],['/community','社区'],['/blogs','博客空间'],['/resources','资源']];
   const homepageRoute=section==='blogs'||section==='blog'||section==='workspace'&&['blog','profile','library','files','insights','connect'].includes(path[1]);
-  const active = (href: string) => href==='/blogs'?homepageRoute:href === '/' ? !section : current===href||current.startsWith(href+'/')||href==='/docs'&&section==='articles';
+  const active = (href: string) => href==='/blogs'?homepageRoute:href==='/resources'?['resources','docs','skills','articles'].includes(section):href==='/'?!section:current===href||current.startsWith(href+'/');
   const authPage=section==='login'||section==='join';
   return <div className={'organic-site v2-site'+(!path.length?' v2-landing':'')+(authPage?' public-auth-site':path.length?' public-content-site':'')}>
+    <PlatformGlass scene={!path.length?'home':section==='blogs'&&path.length===1?'blogs':'interior'}/>
     <a className="organic-skip" href="#main">{tr("跳到主要内容")}</a><Tracker/>
     <header className="organic-header"><div className="organic-container organic-header-inner"><Link href="/" className="organic-brand"><BrandMark/><div className="site-brand-copy">SpaceYew<span>{tr('社区与博客主页')}</span></div></Link>
       <div className="organic-header-tools">
@@ -210,6 +212,6 @@ export async function PublicFrame({path=[],children}:{path?:string[],children:Re
       <SiteTools/></div>
     </div></header>
     <main id="main" className="organic-container organic-main"><PageMotion>{children}</PageMotion></main>
-    <footer className="organic-footer organic-footer-compact"><div className="organic-container"><Link href="/" className="organic-footer-signature">SpaceYew</Link><nav aria-label={tr("页脚导航")}><Link href="/downloads">{tr("客户端下载")}</Link><Link href="/blogs">{tr("发现博客主页")}</Link><Link href="/legal/community">{tr("社区规则")}</Link><Link href="/legal/terms">{tr("用户协议")}</Link><Link href="/legal/privacy">{tr("隐私政策")}</Link><Link href="/report">{tr("举报投诉")}</Link>{appSurface()!=='platform'&&<Link href="/admin">{tr("内容管理")}</Link>}</nav></div><div className="organic-container organic-footer-filing"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">蜀ICP备2026018870号-2</a></div></footer>
+    <footer className="organic-footer organic-footer-compact"><div className="organic-container"><Link href="/" className="organic-footer-signature">SpaceYew</Link><nav aria-label={tr("页脚导航")}><Link href="/downloads">{tr("客户端下载")}</Link><Link href="/blogs">{tr("发现博客空间")}</Link><Link href="/legal/community">{tr("社区规则")}</Link><Link href="/legal/terms">{tr("用户协议")}</Link><Link href="/legal/privacy">{tr("隐私政策")}</Link><Link href="/report">{tr("举报投诉")}</Link>{appSurface()!=='platform'&&<Link href="/admin">{tr("内容管理")}</Link>}</nav></div><div className="organic-container organic-footer-filing"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">蜀ICP备2026018870号-2</a></div></footer>
   </div>;
 }

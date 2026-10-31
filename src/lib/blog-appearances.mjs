@@ -1,6 +1,7 @@
 // Visual themes are independent of page geometry and résumé section presentation.
 export const blogAppearances=[
  {id:'original',zh:'原版主题',en:'Original',description:'保留原有配色与字体',english:'Keep the original colors and type',paper:'#ffffff',ink:'#202124',muted:'#656971',line:'#e1e2e5',accent:'#202124',surface:'#f6f7f8',font:'Baskerville,"Songti SC",serif'},
+ {id:'glass-space',zh:'玻璃空间',en:'Glass space',description:'冰蓝玻璃 · 清晰文字 · 连续空间',english:'Ice-blue glass, clear type and a continuous space',paper:'#e8f2fa',ink:'#173957',muted:'#426380',line:'#9cbcd7',accent:'#205e9e',surface:'#cce2f3',font:'"SpaceYew Sans","PingFang SC","Microsoft YaHei",sans-serif'},
  {id:'sketch',zh:'铅笔手绘',en:'Pencil sketch',description:'暖纸纹理 · 铅笔虚线 · 衬线手写感',english:'Warm paper, pencil strokes and handwritten serifs',paper:'#f5f0e8',ink:'#2c2c2c',muted:'#5a5147',line:'#8a8073',accent:'#2c2c2c',surface:'#e8e2d8',font:'"Kaiti SC",STKaiti,KaiTi,Georgia,serif'},
  {id:'mint-docs',zh:'清新文档',en:'Mint docs',description:'Mintlify 灵感 · 通透白底 · 薄荷绿',english:'Mintlify inspired clarity, white space and green',paper:'#ffffff',ink:'#0d0d0d',muted:'#505b56',line:'#dce7e1',accent:'#18e299',surface:'#f1faf6',font:'"Inter","Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif'},
  {id:'mint-serif',zh:'薄荷书页',en:'Mint editorial',description:'参考图风格 · 大衬线标题 · 柔和薄荷',english:'Reference-inspired serif headlines and soft mint',paper:'#f9f7f4',ink:'#171b19',muted:'#5c625e',line:'#ddd5c9',accent:'#bedfd5',surface:'#bedfd5',font:'"Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif'},

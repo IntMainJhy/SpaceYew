@@ -42,7 +42,7 @@ for(const locale of ['zh','en','ja'])for(const tool of skillAiTools){
 }
 let catalogPages=0;
 for(const locale of ['zh','en','ja'])for(const kind of ['docs','resources']){
- const response=await fetch(base+'/'+kind+'?q=SpaceYew',{headers:{cookie:'site-locale='+locale}}),html=await response.text();
+ const response=await fetch(base+'/'+kind+'?'+(kind==='resources'?'type=resources&':'')+'q=SpaceYew',{headers:{cookie:'site-locale='+locale}}),html=await response.text();
  assert.equal(response.status,200);
  assert.ok(!/<select[^>]*name="category"/.test(html),'categories are not collapsed');
  const nav=html.split('<nav class="catalog-filter-options" aria-label="'+translate(locale,'分类')+'">')[1]?.split('</nav>')[0];
@@ -56,6 +56,15 @@ for(const locale of ['zh','en','ja'])for(const kind of ['docs','resources']){
  }
  catalogPages++;
 }
+const overview=await(await fetch(base+'/resources',{headers:{cookie:'site-locale=zh'}})).text();
+assert.ok(overview.includes('data-resource-kind="all"'),'resource hub opens with all resource types');
+const connectSearch=await(await fetch(base+'/resources?q=Connect',{headers:{cookie:'site-locale=zh'}})).text();
+assert.ok(connectSearch.includes('href="/docs/connect"'),'all-resource search includes Connect guide');
+assert.ok(overview.includes('href="/skills/'+curatedSkills[0].id+'"'),'overview includes curated skills');
+assert.ok(overview.includes(curatedSkills[0].repo),'third-party skills retain their source attribution');
+const allSearch=await(await fetch(base+'/resources?q=UI',{headers:{cookie:'site-locale=zh'}})).text();
+assert.ok(allSearch.includes('href="/resources?type=skills&amp;q=UI"'),'browse all preserves the search term');
+assert.ok(allSearch.includes('href="/skills/ui-ux-pro-max"'),'all-resource search finds curated skills');
 const empty=await(await fetch(base+'/skills?type=knowledge&tool=cursor',{headers:{cookie:'site-locale=en'}})).text();
 assert.ok(empty.includes(translate('en','精选目录中没有匹配的 Skill')));
 assert.ok(empty.includes('href="/skills"'));

@@ -10,7 +10,6 @@ import {BlogShare} from './BlogShare';
 import {ResumeImport} from './ResumeImport';
 import {FileChoice} from './Upload';
 import {Icon} from './Icons';
-import {AppearanceSwitch} from './AppearanceSwitch';
 import {BlogCanvas} from './BlogCanvas';
 import {BlogPreview} from './BlogPreview';
 import {canvasResume,previewCanvasProfile,previewCanvasLayout} from '@/lib/blog-canvas.mjs';
@@ -50,19 +49,19 @@ export function BlogEditor({owner=false}:{owner?:boolean}){
   },editorRoot);
   return()=>context.revert();
  },[tab,publishMounted,!!row]);
- function load(value:Data){setRow(value);setProfile(value.profile);const next={...value.layout,blog:{mode:'theme',theme:'anx',title:'',description:'',bundleId:'',sections:['projects','articles','resources'],...value.layout.blog,...(!value.profile.resume&&(value.profile.experiences?.length||value.content?.length||value.legacyContent?.length)?{showLegacyContent:true}:{})}};next.blog.design=next.blog.design?withBlogDecorations(next.blog.design):defaultBlogDesign(value.profile,next,[...(value.content||[]),...(value.legacyContent||[])]);setLayout(next);setDiscoverable(value.discoverable);setHandle(value.handle);baseline.current=canvasDraftSignature(value.profile,next,value.discoverable)}
+ function load(value:Data){setRow(value);setProfile(value.profile);const next={...value.layout,blog:{mode:'theme',theme:'anx',title:'',description:'',bundleId:'',sections:['projects','articles','resources'],...value.layout.blog,...(!value.profile.resume&&(value.profile.experiences?.length||value.content?.length||value.legacyContent?.length)?{showLegacyContent:true}:{})}};next.blog.design=next.blog.design?withBlogDecorations(next.blog.design):{...defaultBlogDesign(value.profile,next,[...(value.content||[]),...(value.legacyContent||[])]),...(!value.public&&value.visibility!=='public'?{appearance:'glass-space'}:{})};setLayout(next);setDiscoverable(value.discoverable);setHandle(value.handle);baseline.current=canvasDraftSignature(value.profile,next,value.discoverable)}
  useEffect(()=>{mounted.current=true;api(base+'/mine').then(value=>{if(mounted.current)load(value)}).catch(e=>{if(mounted.current){setSignedOut([401,403].includes(e.status));setError(e.message)}});return()=>{mounted.current=false}},[base]);
  const patch=(value:Data)=>setProfile(p=>({...p,...value})),resume=canvasResume(profile),setResume=(value:Data|null)=>patch({resume:value}),uploading=Object.values(uploads).some(Boolean),flag=(key:string)=>(value:boolean)=>setUploads(x=>({...x,[key]:value}));
  async function run(action:()=>Promise<void>){if(busy||uploading)return;setBusy(true);setError('');setStatus('');const id=++requestId.current;try{await action()}catch(e:any){if(mounted.current&&id===requestId.current)setError(e.message)}finally{if(mounted.current)setBusy(false)}}
  async function save(){const value=await post(base+'/save',{profile,layout,discoverable,revision:row!.revision,profileVersion:row!.profileVersion,...(owner?{publish:true}:{})});load(value);setStatus(say(owner?'公开主页已更新。':'草稿已保存，公开版本保持不变。',owner?'Public homepage updated.':'Draft saved. The published version is unchanged.'));return value}
  useEffect(()=>{const key=(e:KeyboardEvent)=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='s'&&row){e.preventDefault();if(dirty&&!busy&&!uploading)void run(async()=>{await save()})}};window.addEventListener('keydown',key);return()=>window.removeEventListener('keydown',key)});
- const backLabel=say(owner?'返回管理后台':'返回博客主页',owner?'Back to admin':'Back to blog homes');
+ const backLabel=say(owner?'返回管理后台':'返回博客空间',owner?'Back to admin':'Back to blog spaces');
  const backLink=<Link className="bc-editor-back" href={owner?'/admin':'/blogs'} aria-label={backLabel} title={backLabel}><Icon name="arrow"/><span>{say('返回','Back')}</span></Link>;
  if(!row)return <div className="blog-editor be-loading">{backLink}<h1>{say('编辑我的博客','Edit my blog')}</h1>{error?<><p role="alert">{error}</p>{signedOut?<Link className="space-btn primary" href={(owner?'/admin/login':'/login')+'?next='+encodeURIComponent(owner?'/admin/blog':'/workspace/blog')}>{say('登录后编辑','Sign in to edit')}</Link>:<button className="space-btn" onClick={()=>location.reload()}>{say('重新加载','Reload')}</button>}</>:<p role="status">{say('正在读取你的草稿…','Loading your draft…')}</p>}</div>;
  const pending=row.reviews.find((r:Data)=>r.kind==='board'&&r.status==='pending'),publicUrl='/blog/'+row.handle;
- return <div ref={editorRoot} className="blog-editor blog-canvas-editor"><header className="be-heading"><div className="bc-editor-heading">{backLink}<div><h1>{say('博客画布','Blog canvas')}</h1><p className="bc-editor-status"><span>@{row.handle}</span><span className="bc-save-state" data-dirty={dirty}><Icon name={dirty?'file':'check'}/>{dirty?say('草稿未保存','Unsaved draft'):say('已保存','Saved')}</span></p></div></div><div className="be-primary-actions">
-  <div className="bc-action-group bc-action-preferences" role="group" aria-label={say('外观与文字版本','Appearance and content language')}>
-   <AppearanceSwitch/>
+ return <div ref={editorRoot} className="blog-editor blog-canvas-editor"><header className="be-heading"><div className="bc-editor-heading">{backLink}<div><h1>{say('空间画布','Space canvas')}</h1><p className="bc-editor-status"><span>@{row.handle}</span><span className="bc-save-state" data-dirty={dirty}><Icon name={dirty?'file':'check'}/>{dirty?say('草稿未保存','Unsaved draft'):say('已保存','Saved')}</span></p></div></div><div className="be-primary-actions">
+  <div className="bc-action-group bc-action-preferences" role="group" aria-label={say('文字版本','Content language')}>
+
    <label className="bc-language"><span className="community-sr">{say('编辑文字版本','Content language')}</span><select aria-label={say('编辑文字版本','Content language')} value={language} disabled={busy||uploading} onChange={e=>setLanguage(e.target.value)}><option value="">{say('原文','Original')}</option><option value="zh">中文</option><option value="en">English</option><option value="ja">日本語</option></select></label>
   </div>
   <div className="bc-action-group bc-action-views" role="group" aria-label={say('查看与分享','View and share')}>

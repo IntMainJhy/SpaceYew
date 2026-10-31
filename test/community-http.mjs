@@ -42,7 +42,7 @@ try{
    assert.ok(page.includes('blog-editor be-loading'),route);
    assert.ok(!page.includes('class="feed-navigation"'),route);
    assert.ok(page.includes('<h1>'+heading+'</h1>'),route);
-   assert.ok(activeHomepage(page).includes('aria-current="page"'),route);
+   assert.ok(activeHomepage(page).includes('aria-current="location"'),route);
   }
  }
  const ownerHtml=await(await fetch(base+'/admin',{headers:{Cookie:owner}})).text();assert.match(ownerHtml,/<h1 id="admin-overview-title">Management center<\/h1>/);assert.ok(ownerHtml.includes('class="admin-summary-grid"'));assert.ok(!ownerHtml.includes('class="skeleton"'));

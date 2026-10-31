@@ -12,23 +12,24 @@ export function BlogSpacesJourney({spaces,labels}:{spaces:BlogSpacePreview[];lab
  useEffect(()=>{
   const element=host.current,surface=canvas.current,opening=element?.parentElement;if(!element||!surface||!opening||!spaces.length)return;
   const preference=matchMedia('(prefers-reduced-motion: reduce)'),controller=new AbortController(),controls=element.querySelector<HTMLElement>('.blog-spaces-journey-controls');
-  let engine:BlogSpacesScene|null=null,loading=false,frame=0,lastDraw=0,nextDraw=0,visible=false,disposed=false,printing=false,lost=false,dirty=true,progress=0,x=0,y=0,targetX=0,targetY=0,downX=0,downY=0,selected=-1,navigationInset=parseFloat(getComputedStyle(element).getPropertyValue('--blog-space-header-inset'))||0;
+  let engine:BlogSpacesScene|null=null,loading=false,frame=0,lastDraw=0,visible=false,disposed=false,printing=false,lost=false,dirty=true,progress=0,x=0,y=0,targetX=0,targetY=0,downX=0,downY=0,selected=-1,navigationInset=parseFloat(getComputedStyle(element).getPropertyValue('--blog-space-header-inset'))||0;
   const staticView=()=>preference.matches||printing;
   const controlVisibility=()=>{const shown=visible&&progress<.94&&!disposed;element.dataset.controls=shown?'visible':'hidden';if(controls){controls.inert=!shown;controls.setAttribute('aria-hidden',String(!shown));}};
-  const stop=()=>{if(frame)cancelAnimationFrame(frame);frame=0;lastDraw=nextDraw=0;};
+  const stop=()=>{if(frame)cancelAnimationFrame(frame);frame=0;lastDraw=0;};
   const canDraw=()=>!!engine&&!disposed&&!lost&&!document.hidden&&visible&&!staticView();
   const select=(index:number)=>{if(index===selected)return;selected=index;const space=spaces[index];if(open.current&&space){open.current.href=space.href;open.current.textContent=labels.open+' · '+space.name;}};
   const draw=()=>{if(!canDraw())return;try{select(engine!.render(progress,x,y,false));}catch{fail();}};
   const moving=()=>Math.abs(targetX-x)+Math.abs(targetY-y)>.0005;
   const tick=(now:number)=>{
    frame=0;if(!canDraw())return;
-   if(!lastDraw||now+.5>=nextDraw){const dt=Math.min(lastDraw?(now-lastDraw)/1000:1/30,.08),amount=1-Math.exp(-8*dt);x+=(targetX-x)*amount;y+=(targetY-y)*amount;dirty=false;draw();lastDraw=now;const interval=1000/30;nextDraw=nextDraw?nextDraw+interval*(Math.floor(Math.max(0,now-nextDraw)/interval)+1):now+interval;}
+   const dt=Math.min(lastDraw?(now-lastDraw)/1000:1/60,.08),amount=1-Math.exp(-8*dt);x+=(targetX-x)*amount;y+=(targetY-y)*amount;dirty=false;draw();lastDraw=now;
    if(canDraw()&&(dirty||moving()))frame=requestAnimationFrame(tick);
   };
   const sync=()=>{if(canDraw()&&(dirty||moving())){if(!frame)frame=requestAnimationFrame(tick);}else stop();};
   // The scene extends behind navigation; retain the original below-header scroll timing.
   const read=()=>{const rect=opening.getBoundingClientRect(),travel=Math.max(1,rect.height-element.clientHeight+navigationInset);progress=Math.max(0,Math.min(1,-rect.top/travel));opening.style.setProperty('--blog-journey-progress',String(progress));controlVisibility();dirty=true;sync();};
-  const resize=()=>{navigationInset=parseFloat(getComputedStyle(element).getPropertyValue('--blog-space-header-inset'))||0;if(!engine||disposed||staticView())return;try{const rect=element.getBoundingClientRect(),width=Math.max(1,rect.width),height=Math.max(1,rect.height),dpr=Math.min(devicePixelRatio||1,2,Math.sqrt((width<768?2000000:5000000)/(width*height)));engine.resize(width,height,dpr);read();draw();}catch{fail();}};
+  // Keep high-DPI fill cost within a 120Hz budget; the readable texture and MSAA stay intact.
+  const resize=()=>{navigationInset=parseFloat(getComputedStyle(element).getPropertyValue('--blog-space-header-inset'))||0;if(!engine||disposed||staticView())return;try{const rect=element.getBoundingClientRect(),width=Math.max(1,rect.width),height=Math.max(1,rect.height),dpr=Math.min(devicePixelRatio||1,2,Math.sqrt((width<768?1500000:3000000)/(width*height)));engine.resize(width,height,dpr);read();draw();}catch{fail();}};
   const move=(event:PointerEvent)=>{if(event.pointerType==='touch'||staticView())return;const rect=element.getBoundingClientRect();targetX=Math.max(-1,Math.min(1,(event.clientX-rect.left)/rect.width*2-1));targetY=Math.max(-1,Math.min(1,(event.clientY-rect.top)/rect.height*2-1));sync();};
   const leave=()=>{targetX=targetY=0;sync();};
   const down=(event:PointerEvent)=>{downX=event.clientX;downY=event.clientY;};

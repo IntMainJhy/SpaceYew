@@ -1,9 +1,9 @@
-import {BackSide,BoxGeometry,CanvasTexture,Color,Group,MathUtils,Mesh,MeshBasicMaterial,MeshPhysicalMaterial,PerspectiveCamera,PlaneGeometry,PMREMGenerator,Raycaster,REVISION,Scene,ShaderChunk,ShaderMaterial,SRGBColorSpace,Vector2,WebGLRenderer} from 'three';
+import {BackSide,BoxGeometry,CanvasTexture,CatmullRomCurve3,Color,FrontSide,Group,MathUtils,Mesh,MeshBasicMaterial,MeshPhysicalMaterial,PerspectiveCamera,PlaneGeometry,PMREMGenerator,Raycaster,REVISION,Scene,ShaderChunk,ShaderMaterial,Shape,ShapeGeometry,SRGBColorSpace,TubeGeometry,Vector2,Vector3,WebGLRenderer} from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import type {BlogSpacePreview} from '@/components/BlogSpacesJourney';
 
 const chunk=ShaderChunk.transmission_pars_fragment,sample='return textureBicubic( transmissionSamplerMap, fragCoord.xy, lod );';
-const linearChunk=REVISION==='187'&&chunk.split(sample).length===2?chunk.replace(sample,'return textureLod( transmissionSamplerMap, fragCoord.xy, lod );'):null;
+const linearChunk=REVISION==='187'&&chunk.split(sample).length===2?chunk.replace(sample,'return textureLod( transmissionSamplerMap, fragCoord.xy, 0.0 );'):null;
 
 export function blogJourneyCameraZ(progress:number,count:number,reduced=false){
  return reduced||count===0?9:9-MathUtils.smoothstep(MathUtils.clamp(progress,0,1),0,.88)*(Math.max(0,count-1)*6.6+14);
@@ -40,7 +40,7 @@ export async function createBlogSpacesScene(canvas:HTMLCanvasElement,spaces:Blog
  gltf.scene.traverse(node=>{if(node instanceof Mesh){geometry.add(node.geometry);for(const material of Array.isArray(node.material)?node.material:[node.material])materials.add(material);}});
  if(signal.aborted){dispose();throw new DOMException('Aborted','AbortError');}
  try{
-  renderer=new WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'high-performance'});renderer.outputColorSpace=SRGBColorSpace;renderer.transmissionResolutionScale=.65;
+  renderer=new WebGLRenderer({canvas,alpha:false,antialias:true,powerPreference:'high-performance'});renderer.outputColorSpace=SRGBColorSpace;renderer.transmissionResolutionScale=.65;
   const studio=new Scene();studio.background=new Color('#315785');const boxGeometry=new BoxGeometry(),studioMaterials:MeshBasicMaterial[]=[];
   for(const [position,scale,color,power] of [
    [[0,0,0],[34,26,32],'#6b9ac5',.55],[[ -6,4,6],[2.7,10,.12],'#f1faff',5.4],[[6,1,4],[.65,9,.12],'#e2f4ff',5],[[0,7,2],[8,.7,.12],'#fff0dd',4.6],[[-2,0,-7],[4,10,.12],'#163958',.5],[[7,-1,-3],[2.2,12,.12],'#315472',.5],
@@ -50,12 +50,18 @@ export async function createBlogSpacesScene(canvas:HTMLCanvasElement,spaces:Blog
   const pmrem=new PMREMGenerator(renderer);try{environment=pmrem.fromScene(studio,0);scene.environment=environment.texture;}finally{boxGeometry.dispose();studioMaterials.forEach(material=>material.dispose());pmrem.dispose();}
   scene.environmentRotation.y=-.45;
   gltf.scene.traverse(node=>{if(!(node instanceof Mesh))return;for(const material of Array.isArray(node.material)?node.material:[node.material])if(material instanceof MeshPhysicalMaterial){
-   material.color.set('#ffffff');material.transmission=1;material.ior=1.52;material.thickness=.24;material.roughness=.01;material.dispersion=1.4;material.clearcoat=0;material.envMapIntensity=.95;material.attenuationColor.set('#d4e9ff');material.attenuationDistance=12;material.toneMapped=false;
-   if(linearChunk){material.onBeforeCompile=shader=>{const include='#include <transmission_pars_fragment>';if(shader.fragmentShader.split(include).length===2)shader.fragmentShader=shader.fragmentShader.replace(include,linearChunk);};material.customProgramCacheKey=()=> 'spaceyew-blog-linear-volume-r187';}
+   material.color.set('#ffffff');material.side=FrontSide;material.transmission=1;material.ior=1.52;material.thickness=.24;material.roughness=.01;material.dispersion=1.4;material.clearcoat=0;material.envMapIntensity=.95;material.attenuationColor.set('#d4e9ff');material.attenuationDistance=12;material.toneMapped=false;
+   if(linearChunk){material.onBeforeCompile=shader=>{const include='#include <transmission_pars_fragment>';if(shader.fragmentShader.split(include).length===2)shader.fragmentShader=shader.fragmentShader.replace(include,linearChunk);};material.customProgramCacheKey=()=> 'spaceyew-blog-base-volume-r187';}
   }});
   const wallGeometry=new PlaneGeometry(600,360);geometry.add(wallGeometry);
   const wallMaterial=new ShaderMaterial({depthWrite:false,toneMapped:false,uniforms:{uProgress:{value:0},uTop:{value:new Color('#1b376b')},uBlue:{value:new Color('#2c79c8')},uIce:{value:new Color('#eaf3fa')}},vertexShader:'varying vec2 vScreen;void main(){vec4 p=projectionMatrix*modelViewMatrix*vec4(position,1.);vScreen=p.xy/p.w*.5+.5;gl_Position=p;}',fragmentShader:`varying vec2 vScreen;uniform float uProgress;uniform vec3 uTop;uniform vec3 uBlue;uniform vec3 uIce;void main(){float y=1.-vScreen.y;vec3 color=mix(uTop,uBlue,smoothstep(0.,.66,y));color=mix(color,uIce,smoothstep(.55,1.6,y+uProgress*.8));color=mix(color,uIce,smoothstep(.72,1.,uProgress));gl_FragColor=vec4(color,1.);#include <colorspace_fragment>}`.replace(';#include',';\n#include')});materials.add(wallMaterial);const wall=new Mesh(wallGeometry,wallMaterial);wall.position.z=-90;wall.renderOrder=-10;scene.add(wall);
-  const contentGeometry=new PlaneGeometry(4.48,2.85);geometry.add(contentGeometry);
+  // This polished rim samples only mip 0; avoid rebuilding unused transmission mips every frame.
+  if(linearChunk)wall.onBeforeRender=activeRenderer=>{const target=activeRenderer.getRenderTarget();if(target)(target.texture as typeof target.texture&{mipmapsAutoUpdate:boolean}).mipmapsAutoUpdate=false;};
+  // Real rounded geometry gives MSAA a stable boundary; alpha-discard corners shimmer in motion.
+  const halfWidth=2.24,halfHeight=1.425,radius=.15,outline=new Shape();
+  outline.moveTo(-halfWidth+radius,-halfHeight);outline.lineTo(halfWidth-radius,-halfHeight);outline.absarc(halfWidth-radius,-halfHeight+radius,radius,-Math.PI/2,0);outline.lineTo(halfWidth,halfHeight-radius);outline.absarc(halfWidth-radius,halfHeight-radius,radius,0,Math.PI/2);outline.lineTo(-halfWidth+radius,halfHeight);outline.absarc(-halfWidth+radius,halfHeight-radius,radius,Math.PI/2,Math.PI);outline.lineTo(-halfWidth,-halfHeight+radius);outline.absarc(-halfWidth+radius,-halfHeight+radius,radius,Math.PI,Math.PI*1.5);outline.closePath();
+  const contentGeometry=new ShapeGeometry(outline,12),positions=contentGeometry.getAttribute('position'),uvs=contentGeometry.getAttribute('uv');
+  for(let i=0;i<positions.count;i++)uvs.setXY(i,positions.getX(i)/(halfWidth*2)+.5,positions.getY(i)/(halfHeight*2)+.5);geometry.add(contentGeometry);
   const panels:{group:Group;index:number;glass:Mesh[];space:BlogSpacePreview}[]=[];
   for(const [index,space] of spaces.entries()){
    const group=new Group(),glass:Mesh[]=[];const native=gltf.scene.clone(true);native.traverse(node=>{if(node instanceof Mesh)glass.push(node);});group.add(native);
@@ -63,7 +69,7 @@ export async function createBlogSpacesScene(canvas:HTMLCanvasElement,spaces:Blog
    const texture=new CanvasTexture(preview);texture.colorSpace=SRGBColorSpace;texture.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());textures.push(texture);
    const images:{avatar?:ImageBitmap;cover?:ImageBitmap}={};
    const paint=()=>{
-    if(disposed)return;context.clearRect(0,0,1600,1040);const background=context.createLinearGradient(0,0,1600,1040);background.addColorStop(0,'#edf7ff');background.addColorStop(1,'#c8e1f5');context.fillStyle=background;context.beginPath();context.roundRect(0,0,1600,1040,55);context.fill();
+    if(disposed)return;const background=context.createLinearGradient(0,0,1600,1040);background.addColorStop(0,'#edf7ff');background.addColorStop(1,'#c8e1f5');context.fillStyle=background;context.fillRect(0,0,1600,1040);
     context.strokeStyle='#b0cde4';context.lineWidth=2;context.beginPath();context.moveTo(0,130);context.lineTo(1600,130);context.stroke();
     for(const [i,color] of ['#d7a19a','#d6be86','#95c3bb'].entries()){context.fillStyle=color;context.beginPath();context.arc(70+i*37,65,12,0,Math.PI*2);context.fill();}
     context.fillStyle='#365e84';context.font='500 28px "SpaceYew Sans","PingFang SC",sans-serif';context.fillText('/blog/'+space.handle,220,76);
@@ -76,8 +82,12 @@ export async function createBlogSpacesScene(canvas:HTMLCanvasElement,spaces:Blog
    };
    paint();document.fonts?.ready.then(paint).catch(()=>{});
    for(const [key,id] of [['avatar',space.avatarId],['cover',space.coverId]] as const){if(!id)continue;void fetch('/media/'+encodeURIComponent(id),{signal}).then(res=>{if(!res.ok)throw Error('Preview image unavailable');return res.blob();}).then(blob=>createImageBitmap(blob)).then(bitmap=>{if(disposed){bitmap.close();return;}bitmaps.add(bitmap);images[key]=bitmap;paint();}).catch(()=>{});}
-   const material=new MeshBasicMaterial({map:texture,toneMapped:false,alphaTest:.05});materials.add(material);const content=new Mesh(contentGeometry,material);content.position.z=.145;group.add(content);scene.add(group);panels.push({group,index,glass,space});
+   const material=new MeshBasicMaterial({map:texture,toneMapped:false});materials.add(material);const content=new Mesh(contentGeometry,material);content.position.z=.145;group.add(content);scene.add(group);panels.push({group,index,glass,space});
   }
+  // Restore the original studio curve, keeping it behind even an eight-page flight.
+  const lightDepth=Math.min(-30,-Math.max(0,spaces.length-1)*6.6-12),lightScale=(9-lightDepth)/39;
+  const curve=new CatmullRomCurve3([[-60,-11.23],[-20,-2],[-7,1],[0,3],[8,1],[20,3],[60,9.67]].map(([x,y])=>new Vector3(x*lightScale,y*lightScale,lightDepth))),lightGeometry=new TubeGeometry(curve,512,.025*lightScale,8,false);geometry.add(lightGeometry);
+  const lightMaterial=new MeshBasicMaterial({color:new Color('#d4ecff').multiplyScalar(.8),toneMapped:false});materials.add(lightMaterial);scene.add(new Mesh(lightGeometry,lightMaterial));
   let width=1,height=1,mobile=false;
   const raycaster=new Raycaster(),mouse=new Vector2();
   signal.addEventListener('abort',dispose,{once:true});if(signal.aborted){dispose();throw new DOMException('Aborted','AbortError');}

@@ -27,7 +27,8 @@ panel.name = "SpaceYew_Blog_Glass_Page"
 panel.dimensions = (4.8, 0.24, 3.15)
 bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
 bevel = panel.modifiers.new("Native polished glass edge", "BEVEL")
-bevel.width, bevel.segments = 0.15, 6
+# Keep a real 0.04 side band: the bevel must not overlap at half the 0.24 depth.
+bevel.width, bevel.segments = 0.10, 8
 bpy.ops.object.modifier_apply(modifier=bevel.name)
 for face in panel.data.polygons:
     face.use_smooth = True

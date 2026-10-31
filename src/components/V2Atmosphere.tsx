@@ -1,14 +1,17 @@
 'use client';
 
 import {useEffect,useRef} from 'react';
+import {mountSpaceAtmosphere} from '@/lib/space-atmosphere';
 import type {HomeGlassScene} from '@/lib/home-glass';
 
-export type HomeSceneKind='moon'|'glass';
+export type HomeSceneKind='space'|'moon'|'glass';
+const loadSpace=(canvas:HTMLCanvasElement,signal:AbortSignal)=>import('@/lib/home-space').then(module=>module.createHomeSpace(canvas,signal));
 const loadMoon=(canvas:HTMLCanvasElement,signal:AbortSignal)=>import('@/lib/home-moon').then(module=>module.createHomeMoon(canvas,signal));
 const loadGlass=(canvas:HTMLCanvasElement,signal:AbortSignal)=>import('@/lib/home-glass').then(module=>module.createHomeGlass(canvas,signal));
 
 /** Load the homepage-only renderer without blocking the semantic content. */
 export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadMoon,kind:HomeSceneKind='moon'){
+ if(kind==='space')return mountSpaceAtmosphere(canvas,createScene);
  const surface=canvas.parentElement||canvas,host=canvas.closest('.v2-home')||surface,preference=window.matchMedia('(prefers-reduced-motion: reduce)'),controller=new AbortController();
  let scene:HomeGlassScene|null=null,frame=0,lastDraw=0,visible=false,printing=false,lost=false,disposed=false;
  let targetX=0,targetY=0,pointerX=0,pointerY=0,progress=0,dirty=false;
@@ -89,7 +92,7 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadMoon,
  return cleanup;
 }
 
-export function V2Atmosphere({initialScene='moon'}:{initialScene?:HomeSceneKind}={}){
+export function V2Atmosphere({initialScene='space'}:{initialScene?:HomeSceneKind}={}){
  const canvas=useRef<HTMLCanvasElement>(null);
  useEffect(()=>{
   const element=canvas.current;if(!element)return;
@@ -97,11 +100,11 @@ export function V2Atmosphere({initialScene='moon'}:{initialScene?:HomeSceneKind}
   const mount=(next:HomeSceneKind)=>{
    cleanup();kind=next;
    const host=element.closest<HTMLElement>('.v2-home');if(host)host.dataset.scene=kind;
-   cleanup=mountV2Atmosphere(element,kind==='glass'?loadGlass:loadMoon,kind);
+   cleanup=mountV2Atmosphere(element,kind==='space'?loadSpace:kind==='glass'?loadGlass:loadMoon,kind);
   };
   const change=(event:Event)=>{
    const next=(event as CustomEvent<unknown>).detail;
-   if((next==='moon'||next==='glass')&&next!==kind)mount(next);
+   if((next==='space'||next==='moon'||next==='glass')&&next!==kind)mount(next);
   };
   mount(initialScene);window.addEventListener('spaceyew-home-scene',change);
   return()=>{window.removeEventListener('spaceyew-home-scene',change);cleanup();};

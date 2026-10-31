@@ -4,14 +4,14 @@ import {useEffect,useState} from 'react';
 import {useLocale} from './LocaleProvider';
 import type {HomeSceneKind} from './V2Atmosphere';
 
-export function HomeSceneSwitcher({initialScene='moon'}:{initialScene?:HomeSceneKind}={}){
+export function HomeSceneSwitcher({initialScene='space'}:{initialScene?:HomeSceneKind}={}){
  const {locale}=useLocale(),[scene,setScene]=useState(initialScene);
- const labels=locale==='zh'?{moon:'月球',glass:'玻璃',group:'首页背景'}:locale==='ja'?{moon:'月',glass:'ガラス',group:'ホームの背景'}:{moon:'Moon',glass:'Glass',group:'Homepage background'};
+ const labels=locale==='zh'?{space:'星海',moon:'月球',glass:'玻璃',group:'首页背景'}:locale==='ja'?{space:'宇宙',moon:'月',glass:'ガラス',group:'ホームの背景'}:{space:'Space',moon:'Moon',glass:'Glass',group:'Homepage background'};
  useEffect(()=>{
   setScene(initialScene);
-  const change=(event:Event)=>{const next=(event as CustomEvent<unknown>).detail;if(next==='moon'||next==='glass')setScene(next);};
+  const change=(event:Event)=>{const next=(event as CustomEvent<unknown>).detail;if(next==='space'||next==='moon'||next==='glass')setScene(next);};
   const popstate=()=>{
-   const next=new URL(window.location.href).searchParams.get('scene')==='glass'?'glass':'moon';
+   const value=new URL(window.location.href).searchParams.get('scene'),next=value==='glass'?'glass':value==='moon'?'moon':'space';
    window.dispatchEvent(new CustomEvent<HomeSceneKind>('spaceyew-home-scene',{detail:next}));
   };
   window.addEventListener('spaceyew-home-scene',change);window.addEventListener('popstate',popstate);
@@ -22,5 +22,5 @@ export function HomeSceneSwitcher({initialScene='moon'}:{initialScene?:HomeScene
   window.history.replaceState(window.history.state,'',url.pathname+url.search+url.hash);
   setScene(next);window.dispatchEvent(new CustomEvent<HomeSceneKind>('spaceyew-home-scene',{detail:next}));
  };
- return <div className="v2-scene-switcher" role="group" aria-label={labels.group}>{(['moon','glass'] as const).map(kind=><button key={kind} type="button" aria-pressed={scene===kind} onClick={()=>select(kind)}>{labels[kind]}</button>)}</div>;
+ return <div className="v2-scene-switcher" role="group" aria-label={labels.group}>{(['space','moon','glass'] as const).map(kind=><button key={kind} type="button" aria-pressed={scene===kind} onClick={()=>select(kind)}>{labels[kind]}</button>)}</div>;
 }

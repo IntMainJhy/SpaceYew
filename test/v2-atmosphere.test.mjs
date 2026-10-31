@@ -16,7 +16,7 @@ function mount({reduced=false,width=1400,height=900,loading=false,failed=false,k
  }
  const preference=Object.assign(new Target(),{matches:reduced}),root=new Target(),host=new Target(),document=Object.assign(new Target(),{hidden:false,documentElement:root}),window=Object.assign(new Target(),{devicePixelRatio:3,matchMedia:()=>preference});
  const surface=new Target(),canvas=Object.assign(new Target(),{parentElement:surface,closest:selector=>selector==='.v2-home'?host:null});
- const draws=[],sizes=[],loads=[],effects=[];let releases=0,resolve,reject,signal;
+ const draws=[],sizes=[],loads=[],effects=[],delegations=[];let releases=0,resolve,reject,signal;
  const adapter={resize:(...args)=>sizes.push(args),render:(...args)=>draws.push(args),dispose:()=>releases++};
  const load=(kind,abortSignal)=>{
   signal=abortSignal;
@@ -34,6 +34,8 @@ function mount({reduced=false,width=1400,height=900,loading=false,failed=false,k
   if(name==='react/jsx-runtime')return{jsx(){}};
   if(name==='@/lib/home-moon')return{createHomeMoon:(_,abortSignal)=>load('moon',abortSignal)};
   if(name==='@/lib/home-glass')return{createHomeGlass:(_,abortSignal)=>load('glass',abortSignal)};
+  if(name==='@/lib/home-space')return{createHomeSpace:(_,abortSignal)=>load('space',abortSignal)};
+  if(name==='@/lib/space-atmosphere')return{mountSpaceAtmosphere:(element,createScene)=>{const delegation={element,createScene,released:false};delegations.push(delegation);return()=>{delegation.released=true;}}};
   throw Error('Unexpected dependency '+name);
  }});
  let cleanup;
@@ -41,9 +43,15 @@ function mount({reduced=false,width=1400,height=900,loading=false,failed=false,k
  else cleanup=exports.mountV2Atmosphere(canvas,(_,abortSignal)=>load(kind,abortSignal),kind);
  const step=(ms=35)=>{now+=ms;const pending=[...frames.values()];frames.clear();pending.forEach(fn=>fn(now))};
  const move=(x=width,y=height,pointerType='mouse')=>host.dispatchEvent(Object.assign(new Event('pointermove'),{clientX:x,clientY:y,pointerType}));
- return{canvas,host,window,document,root,preference,get resize(){return resize},get intersection(){return intersection},get theme(){return theme},frames,draws,sizes,cleanup,step,move,get signal(){return signal},adapter,loads,get releases(){return releases},resolve:()=>resolve(),reject:()=>reject(Error('Load failed'))};
+ return{canvas,host,window,document,root,preference,get resize(){return resize},get intersection(){return intersection},get theme(){return theme},frames,draws,sizes,cleanup,step,move,get signal(){return signal},adapter,loads,delegations,get releases(){return releases},resolve:()=>resolve(),reject:()=>reject(Error('Load failed'))};
 }
 const flush=async()=>{await Promise.resolve();await Promise.resolve()};
+
+test('space delegates to its continuous journey lifecycle while the archived scenes retain their own scheduler',async()=>{
+ const s=mount({kind:'space'});assert.equal(s.delegations.length,1);assert.equal(s.delegations[0].element,s.canvas);assert.equal(s.loads.length,0);
+ await s.delegations[0].createScene(s.canvas,new AbortController().signal);assert.equal(s.loads[0].kind,'space');
+ s.cleanup();assert.equal(s.delegations[0].released,true);
+});
 
 test('glass follows the pointer with damping, caps redraws and resolution, and stops when idle or outside the viewport',async()=>{
  const s=mount();s.intersection.set(true);await flush();

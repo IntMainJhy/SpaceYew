@@ -2,7 +2,16 @@ import {Box3,CanvasTexture,Color,DirectionalLight,Euler,Group,MathUtils,Mesh,Mes
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
 
-export type HomeGlassScene={resize:(width:number,height:number,dpr:number)=>void;render:(x:number,y:number,dark:boolean,scroll:number,reduced:boolean)=>void;dispose:()=>void};
+export type HomeGlassScene={
+ resize:(width:number,height:number,dpr:number)=>void;
+ render:(x:number,y:number,dark:boolean,scroll:number,reduced:boolean,elapsedSeconds?:number)=>void;
+ dispose:()=>void;
+ animated?:boolean;
+ activate?:(x:number,y:number)=>boolean;
+ focusNearest?:()=>boolean;
+ resetFocus?:()=>void;
+ drag?:(dxNormalized:number,dyNormalized:number)=>void;
+};
 const MODEL_URL='/models/spaceyew-glass.glb';
 
 function disposeModel(model:Group){

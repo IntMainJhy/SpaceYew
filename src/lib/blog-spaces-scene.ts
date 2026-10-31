@@ -30,7 +30,7 @@ function cover(context:CanvasRenderingContext2D,image:ImageBitmap,x:number,y:num
  context.drawImage(image,(image.width-sw)/2,(image.height-sh)/2,sw,sh,x,y,width,height);
 }
 
-/** One native mesh per real public space. The preview is behind the glass, inside its transmission pass. */
+/** One native mesh per real public space. Sharp content sits on its front face; the glass perimeter remains optical. */
 export async function createBlogSpacesScene(canvas:HTMLCanvasElement,spaces:BlogSpacePreview[],signal:AbortSignal,invalidate:()=>void):Promise<BlogSpacesScene>{
  const response=await fetch('/models/spaceyew-blog-panel.glb',{signal});if(!response.ok)throw Error('Glass panel unavailable');
  const gltf=await new GLTFLoader().parseAsync(await response.arrayBuffer(),'');
@@ -76,7 +76,7 @@ export async function createBlogSpacesScene(canvas:HTMLCanvasElement,spaces:Blog
    };
    paint();document.fonts?.ready.then(paint).catch(()=>{});
    for(const [key,id] of [['avatar',space.avatarId],['cover',space.coverId]] as const){if(!id)continue;void fetch('/media/'+encodeURIComponent(id),{signal}).then(res=>{if(!res.ok)throw Error('Preview image unavailable');return res.blob();}).then(blob=>createImageBitmap(blob)).then(bitmap=>{if(disposed){bitmap.close();return;}bitmaps.add(bitmap);images[key]=bitmap;paint();}).catch(()=>{});}
-   const material=new MeshBasicMaterial({map:texture,toneMapped:false,alphaTest:.05});materials.add(material);const content=new Mesh(contentGeometry,material);content.position.z=-.145;group.add(content);scene.add(group);panels.push({group,index,glass,space});
+   const material=new MeshBasicMaterial({map:texture,toneMapped:false,alphaTest:.05});materials.add(material);const content=new Mesh(contentGeometry,material);content.position.z=.145;group.add(content);scene.add(group);panels.push({group,index,glass,space});
   }
   let width=1,height=1,mobile=false;
   const raycaster=new Raycaster(),mouse=new Vector2();

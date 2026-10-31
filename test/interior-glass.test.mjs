@@ -34,7 +34,7 @@ test('interior routes select three native sculptures independently of the homepa
  for(const path of ['/resources','/resources?type=skills','/skills/design','/docs/getting-started'])assert.equal(interiorSceneForPath(path),'resources');
  for(const path of ['/login','/join','/reset-password'])assert.equal(interiorSceneForPath(path),'login');
  assert.equal(new Set(Object.values(interiorModels)).size,3);
- assert.ok(!Object.values(interiorModels).includes('/models/spaceyew-glass.glb'));
+ assert.ok(!Object.values(interiorModels).includes('/models/spaceyew-page.glb'));
 });
 
 test('all original Blender exports are bounded real glass volumes and stay under 110KB',async()=>{

@@ -49,9 +49,10 @@ import './glass-studio.css';
 import './blog-spaces.css';
 import './glass-platform.css';
 import './account-menu.css';
+import './three-home.css';
 export const viewport:Viewport={width:'device-width',initialScale:1,viewportFit:'cover'};
 export const metadata:Metadata={applicationName:'SpaceYew',title:'SpaceYew',description:'Projects, experience, and shared resources.'};
-const designContract='<!-- THESIS: one clear optical space from discovery to creation. OWN-WORLD: original Blender folded glass, blue-to-grey light, local sans, sharp content. STORY: home folds remain in the opening scene; real blog pages pass the camera and settle into a directory; resources and community share this space. FIRST VIEWPORT: centered work and actions, transparent gradient-blur fixed navigation, subtle pointer orbit. FORM: user-selected glass world extended through native-scroll Three.js choreography; one platform appearance, authored blog styling retained. FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance. -->';
+const designContract='<!-- THESIS: one clear optical space from discovery to creation. OWN-WORLD: one original Blender curved glass page over a studio light field, warm paper reading surface, local sans, sharp content. STORY: the page enters the opening scene, an authored creator window rises over the horizon, then real stories settle onto paper. FIRST VIEWPORT: centered work and actions, transparent gradient-blur fixed navigation, subtle pointer orbit. FORM: the glass page and its receiver share one native-scroll Three.js timeline; the navigation switches from studio ink to paper ink. FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance. -->';
 export default async function RootLayout({children}:{children:React.ReactNode}){
   const locale=normalizeLocale((await cookies()).get('site-locale')?.value);
   return <html lang={htmlLocale(locale)} data-ui="x-social" data-color-mode="light" data-color-preference="light"><body><template id="public-design-contract" dangerouslySetInnerHTML={{__html:designContract}}/><LocaleProvider initialLocale={locale}>{children}</LocaleProvider></body></html>

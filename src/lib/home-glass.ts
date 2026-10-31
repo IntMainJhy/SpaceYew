@@ -1,214 +1,183 @@
-import {ACESFilmicToneMapping,Box3,Color,DataTexture,DirectionalLight,Euler,Group,LinearFilter,MathUtils,Mesh,MeshBasicMaterial,MeshPhysicalMaterial,PerspectiveCamera,PlaneGeometry,PMREMGenerator,Quaternion,REVISION,RGBAFormat,Scene,ShaderChunk,ShaderMaterial,Vector2,Vector3,WebGLRenderer} from 'three';
+import {ACESFilmicToneMapping,Box3,Color,DataTexture,DirectionalLight,Group,LinearFilter,MathUtils,Mesh,MeshBasicMaterial,MeshPhysicalMaterial,PerspectiveCamera,PlaneGeometry,PMREMGenerator,Scene,ShaderMaterial,Vector3,WebGLRenderer} from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 
 export type GlassReveal={left:number;top:number;width:number;height:number;progress:number;variant?:string};
 export type HomeGlassScene={animated?:boolean;interactive?:boolean;resize:(width:number,height:number,dpr:number)=>void;setReveals?:(panels:GlassReveal[])=>void;render:(x:number,y:number,dark:boolean,scroll:number,reduced:boolean,activeSeconds?:number)=>void;dispose:()=>void};
-const MODEL_URL='/models/spaceyew-glass.glb';
-const transmissionChunk=ShaderChunk.transmission_pars_fragment,bicubicSample='return textureBicubic( transmissionSamplerMap, fragCoord.xy, lod );';
-// These polished folds need little blur. Linear mip filtering cuts r187's RGB sampling from 24 to 3 fetches,
-// trading bicubic reconstruction for GPU headroom while preserving its volume rays, IOR and dispersion.
-const specularSum='vec3 totalSpecular = reflectedLight.directSpecular + reflectedLight.indirectSpecular;';
-// Retain a white highlight core without lifting every clear face into a grey veil.
-// Only reflection energy receives this shoulder; the transmitted wall keeps its display mapping.
-const reflectionShoulder=specularSum+'\n totalSpecular /= vec3(1.0) + totalSpecular * 0.32;';
-const spectralSample='vec4 transmissionSample = getTransmissionSample( refractionCoords, roughness, iors[ i ] );';
-// Bounded studio-refraction approximation: the screen receiver cannot contain off-camera lights.
-// Across the bevel, each native RGB volume ray also sees the original HDR studio.
-// This supplies narrow spectral edges, not a full-screen RGB offset or a path-traced caustic.
-const studioRefraction=spectralSample+`
- #if defined( USE_ENVMAP ) && defined( ENVMAP_TYPE_PMREM )
-  vec3 studioDirection = envMapRotation * normalize( transmissionRay );
-  vec3 studioRadiance = textureLod( envMap, studioDirection, roughnessToMip( roughness ) ).rgb * envMapIntensity;
-  float obliqueness = 1.0 - clamp( abs( dot( n, v ) ), 0.0, 1.0 );
-  // Mid-angle bevels can transmit colour; at extreme grazing Fresnel reflects almost everything.
-  float bevelWindow = smoothstep( 0.06, 0.42, obliqueness ) * ( 1.0 - smoothstep( 0.78, 1.0, obliqueness ) );
-  transmissionSample[ i ] = mix( transmissionSample[ i ], studioRadiance[ i ], bevelWindow * 0.26 );
- #endif
-`;
-const linearTransmission=REVISION==='187'&&transmissionChunk.split(bicubicSample).length===2&&transmissionChunk.split(spectralSample).length===2?transmissionChunk.replace(bicubicSample,'return textureLod( transmissionSamplerMap, fragCoord.xy, lod );').replace(spectralSample,studioRefraction):null;
+
+const MODEL_URL='/models/spaceyew-page.glb';
+const FOV=38;
 
 function disposeModel(model:Group){
  const materials=new Set<MeshPhysicalMaterial>();
- model.traverse(node=>{if(node instanceof Mesh){node.geometry.dispose();for(const material of Array.isArray(node.material)?node.material:[node.material])materials.add(material);}});
+ model.traverse(node=>{if(node instanceof Mesh){node.geometry.dispose();for(const material of Array.isArray(node.material)?node.material:[node.material])materials.add(material as MeshPhysicalMaterial);}});
  materials.forEach(material=>material.dispose());
 }
 
-/** Native folded glass in an original optical studio. The wall is the actual transmission receiver. */
+function feather(size=64){
+ const pixels=new Uint8Array(size*size*4);
+ for(let row=0;row<size;row++)for(let column=0;column<size;column++){
+  const x=(column+.5)/size*2-1,y=(row+.5)/size*2-1;
+  const value=Math.round(255*Math.pow(Math.max(0,1-Math.pow(x,4)-Math.pow(y,4)),1.7)),index=(row*size+column)*4;
+  pixels.set([value,value,value,255],index);
+ }
+ const texture=new DataTexture(pixels,size,size);
+ texture.minFilter=texture.magFilter=LinearFilter;texture.needsUpdate=true;
+ return texture;
+}
+
+/** One curved glass page in an original photographic studio, on a continuous light field. */
 export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSignal):Promise<HomeGlassScene>{
  const response=await fetch(MODEL_URL,{signal});
- if(!response.ok)throw Error('Glass model unavailable');
+ if(!response.ok)throw Error('Glass page unavailable');
  const gltf=await new GLTFLoader().parseAsync(await response.arrayBuffer(),''),model=gltf.scene;
  if(signal.aborted){disposeModel(model);throw new DOMException('Aborted','AbortError');}
  let renderer:WebGLRenderer;
  try{renderer=new WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'high-performance'});}
  catch(error){disposeModel(model);throw error;}
  let environment:ReturnType<PMREMGenerator['fromScene']>|undefined,disposed=false;
- const extraGeometry:PlaneGeometry[]=[],extraMaterials:(ShaderMaterial|MeshBasicMaterial|MeshPhysicalMaterial)[]=[];
- const dispose=()=>{if(disposed)return;disposed=true;signal.removeEventListener('abort',dispose);disposeModel(model);environment?.dispose();extraGeometry.forEach(item=>item.dispose());extraMaterials.forEach(item=>item.dispose());renderer.dispose();};
+ const wallGeometry=new PlaneGeometry(90,54),extraMaterials:(ShaderMaterial|MeshBasicMaterial|MeshPhysicalMaterial)[]=[];
+ const dispose=()=>{if(disposed)return;disposed=true;signal.removeEventListener('abort',dispose);disposeModel(model);environment?.dispose();wallGeometry.dispose();extraMaterials.forEach(material=>material.dispose());renderer.dispose();};
  try{
-  renderer.outputColorSpace='srgb';renderer.toneMapping=ACESFilmicToneMapping;renderer.toneMappingExposure=1.08;
-  renderer.transmissionResolutionScale=.7;
-  const scene=new Scene(),camera=new PerspectiveCamera(40,1,.1,100),mark=new Group();camera.position.z=8.2;
-  const baseCamera=camera.quaternion.clone(),pointerRotation=new Euler(0,0,0,'YXZ'),pointerQuaternion=new Quaternion();
-  // Original photographic lighting rig. These broad cards exist only in the
-  // environment capture: their reflections follow the actual glass normals.
-  // No lamp geometry is drawn in the page or painted onto the receiver.
-  const studio=new Scene();studio.name='spaceyew-photographic-environment';studio.background=new Color('#101a29');
-  const studioGeometry=new PlaneGeometry(),studioMaterials:MeshBasicMaterial[]=[];
-  // Original feathered diffuser, captured once. Smooth HDR gradients reflect as
-  // shaped white cores rather than rectangular stickers on the bevels.
-  const lightSize=64,lightPixels=new Uint8Array(lightSize*lightSize*4);
-  for(let row=0;row<lightSize;row++)for(let col=0;col<lightSize;col++){
-   const x=(col+.5)/lightSize*2-1,y=(row+.5)/lightSize*2-1;
-   const light=Math.round(255*Math.pow(Math.max(0,1-Math.pow(x,4)-Math.pow(y,4)),1.6)),index=(row*lightSize+col)*4;
-   lightPixels.set([light,light,light,255],index);
-  }
-  const lightTexture=new DataTexture(lightPixels,lightSize,lightSize,RGBAFormat);lightTexture.minFilter=lightTexture.magFilter=LinearFilter;lightTexture.needsUpdate=true;
+  renderer.outputColorSpace='srgb';renderer.toneMapping=ACESFilmicToneMapping;renderer.toneMappingExposure=1.12;
+  renderer.transmissionResolutionScale=.62;
+  const scene=new Scene(),camera=new PerspectiveCamera(FOV,1,.1,120),group=new Group();
+  camera.position.set(0,.55,9.2);
+  // Original studio: broad softboxes, negative fill and a cool rim. The cards
+  // exist only in the PMREM capture, never as page geometry.
+  const studio=new Scene();studio.name='spaceyew-page-studio';studio.background=new Color('#060c18');
+  const studioGeometry=new PlaneGeometry(),studioMaterials:MeshBasicMaterial[]=[],lightTexture=feather();
   const panel=(name:string,position:number[],scale:number[],color:string,power:number)=>{
-   const material=new MeshBasicMaterial({color:new Color(color).multiplyScalar(power),map:power>1?lightTexture:null,toneMapped:false});studioMaterials.push(material);
+   const material=new MeshBasicMaterial({color:new Color(color).multiplyScalar(power),map:power>1?lightTexture:null,toneMapped:false});
+   studioMaterials.push(material);
    const card=new Mesh(studioGeometry,material);card.name=name;card.position.fromArray(position);card.scale.fromArray(scale);card.lookAt(0,0,0);studio.add(card);
   };
-  panel('large-left-softbox',[-4,4.6,5.8],[4.8,3.2,1],'#f8fbff',9.2);
-  panel('ceiling-diffusion',[0,6,-1],[9,5,1],'#fff4e8',7.5);
-  panel('right-bounce',[6,1,1],[3.8,7,1],'#d5edff',3.6);
-  panel('low-silver-bounce',[0,-5,2],[8,4,1],'#b8d7f0',.25);
-  panel('left-negative-fill',[-5,-.5,-3],[4.5,10,1],'#0b1524',.45);
-  panel('right-negative-fill',[5,2,-4],[5,11,1],'#101b2a',.45);
-  panel('front-negative-fill',[0,0,6.8],[3.8,4.5,1],'#0c1624',.4);
-  panel('rear-window',[-3,2,-6],[4,5.5,1],'#f3f9ff',5.5);
+  panel('warm-key',[-5.2,4.8,6.4],[6.4,4.2,1],'#fff0d8',7);
+  panel('cool-rim',[6.2,1.4,3.4],[2.2,8.4,1],'#bfd9ff',5);
+  panel('top-diffusion',[0,7.2,-.6],[10.5,5.2,1],'#eaf2ff',5);
+  panel('rear-window',[-3.2,2.2,-6.4],[5,6.4,1],'#f3f9ff',3);
+  panel('left-negative',[-5.4,-.4,-3],[4.6,11,1],'#0a1524',.4);
+  panel('right-negative',[5.4,2.2,-4],[5,12,1],'#101b2a',.42);
+  panel('front-negative',[0,0,7],[4,4.8,1],'#0c1624',.36);
   const pmrem=new PMREMGenerator(renderer);
-  try{environment=pmrem.fromScene(studio,.012);scene.environment=environment.texture;}
+  try{environment=pmrem.fromScene(studio,.018);scene.environment=environment.texture;}
   finally{studioGeometry.dispose();studioMaterials.forEach(material=>material.dispose());lightTexture.dispose();pmrem.dispose();}
-  const key=new DirectionalLight('#fff5e9',3);key.position.set(-4,6,7);scene.add(key);
-  const rim=new DirectionalLight('#c3e3ff',1.15);rim.position.set(5,1,4);scene.add(rim);
-  const fill=new DirectionalLight('#a3cef5',.12);fill.position.set(0,-5,3);scene.add(fill);
-  model.position.sub(new Box3().setFromObject(model,true).getCenter(new Vector3()));mark.add(model);scene.add(mark);
-  const nativeSize=new Box3().setFromObject(model,true).getSize(new Vector3()),folds:{mesh:Mesh;x:number;side:number}[]=[],nativeMaterials=new Set<MeshPhysicalMaterial>();
+  const key=new DirectionalLight('#fff4e8',2.6);key.position.set(-4.5,6,7);scene.add(key);
+  const rim=new DirectionalLight('#c3e3ff',1.1);rim.position.set(5.5,1.5,4.5);scene.add(rim);
+  const fill=new DirectionalLight('#a3cef5',.14);fill.position.set(0,-5,4);scene.add(fill);
+
+  // Centre the authored page, then fit it to the viewport on every resize.
+  const bounds=new Box3().setFromObject(model,true),size=bounds.getSize(new Vector3()),centre=bounds.getCenter(new Vector3());
+  model.position.sub(centre);
+  const material=new MeshPhysicalMaterial();
+  material.color.set('#ffffff');material.toneMapped=false;material.transmission=1;material.opacity=1;
+  material.metalness=0;material.ior=1.46;material.thickness=.42;material.roughness=.035;material.dispersion=2.8;
+  material.attenuationColor.set('#e8f3ff');material.attenuationDistance=22;material.clearcoat=0;
+  material.iridescence=.08;material.iridescenceIOR=1.9;Object.assign(material,{iridescenceThicknessMinimum:170,iridescenceThicknessMaximum:300});
   model.traverse(node=>{
    if(!(node instanceof Mesh))return;
-   const center=new Box3().setFromObject(node,true).getCenter(new Vector3());folds.push({mesh:node,x:node.position.x,side:center.x<0?-1:1});
-   for(const material of Array.isArray(node.material)?node.material:[node.material]){
-    if(!(material instanceof MeshPhysicalMaterial))continue;
-    nativeMaterials.add(material);
-    // Match the display-referred wall: an extra ACES pass through the glass would turn pale ice grey.
-    // Keep the surface neutral; the physical volume supplies the restrained ice tint.
-    material.color.set('#ffffff');material.toneMapped=false;material.transmission=1;material.opacity=1;material.metalness=0;
-    material.ior=1.45;material.thickness=.46;material.roughness=.012;material.dispersion=4.8;
-    material.attenuationColor.set('#eff8ff');material.attenuationDistance=18;material.clearcoat=0;material.clearcoatRoughness=.045;
-    // A restrained optical coating adds angle-dependent colour to reflected edges;
-    // native dispersion above separately splits the three transmitted volume rays.
-    material.iridescence=.56;material.iridescenceIOR=2.05;Object.assign(material,{iridescenceThicknessMinimum:180,iridescenceThicknessMaximum:300});
-    // Guard the pinned chunk exactly; unsupported Three versions keep their standard physical shader.
-    if(linearTransmission){material.onBeforeCompile=shader=>{const include='#include <transmission_pars_fragment>';if(shader.fragmentShader.split(include).length===2&&shader.fragmentShader.split(specularSum).length===2)shader.fragmentShader=shader.fragmentShader.replace(include,linearTransmission).replace(specularSum,reflectionShoulder);};material.customProgramCacheKey=()=> 'spaceyew-prismatic-studio-r187';}
-   }
+   const current=Array.isArray(node.material)?node.material[0]:node.material;
+   if(current!==material)current?.dispose?.();
+   node.material=material;
   });
-  // Two small segmented glass sheets share this renderer and its transmission pass.
-  // Their real vertices curl open behind semantic HTML; no text is flattened into a texture.
-  const curtainSource=(folds[0].mesh.material instanceof MeshPhysicalMaterial?folds[0].mesh.material:null);
-  const curtains=Array.from({length:2},(_,index)=>{
-   const geometry=new PlaneGeometry(1,1,24,16);extraGeometry.push(geometry);
-   const material=curtainSource?.clone()||new MeshPhysicalMaterial({transmission:1,ior:1.52,toneMapped:false});
-   if(curtainSource){material.onBeforeCompile=curtainSource.onBeforeCompile;material.customProgramCacheKey=curtainSource.customProgramCacheKey;}
-   material.transparent=true;material.depthWrite=false;material.thickness=.09;material.dispersion=.65;material.roughness=.018;
-   extraMaterials.push(material);const mesh=new Mesh(geometry,material);mesh.name='spaceyew-unfurl-'+index;mesh.visible=false;mesh.frustumCulled=false;scene.add(mesh);
-   return{mesh,base:new Float32Array(geometry.attributes.position.array),panel:null as GlassReveal|null,shapeProgress:NaN,shapeVariant:''};
-  });
-  // A continuous receiver supplies genuine colour to volume refraction. Its
-  // broad room illumination and soft contact shadow are art-directed, not a
-  // simulated caustic pass. Specular highlights come only from the HDR rig.
-  const wallGeometry=new PlaneGeometry(80,52);extraGeometry.push(wallGeometry);
-  const wallMaterial=new ShaderMaterial({depthWrite:false,uniforms:{uTime:{value:0},uLightSweep:{value:0},uBrightness:{value:1},uScroll:{value:0},uCenter:{value:new Vector2(.5,.38)},uContact:{value:new Vector2(.31,.20)},uBlueTop:{value:new Color('#9bbde1')},uBlueMiddle:{value:new Color('#c0dcf1')},uBlueBottom:{value:new Color('#e5ebf0')},uIce:{value:new Color('#f0f0f0')}},vertexShader:`
+  extraMaterials.push(material);
+  group.add(model);scene.add(group);
+
+  // The receiver paints the studio light field, the horizon, the floor and the
+  // contact shadow. It shares the CSS fallback palette and document progress.
+  const wallMaterial=new ShaderMaterial({depthWrite:false,transparent:false,uniforms:{
+   uScroll:{value:0},uTime:{value:0},uBrightness:{value:1},
+   uInk:{value:new Color('#04060c')},uNavy:{value:new Color('#071426')},uDeep:{value:new Color('#0e2a55')},
+   uSky:{value:new Color('#4a7fb8')},uBand:{value:new Color('#bfd7ec')},uGlow:{value:new Color('#f2f5f7')},
+   uFloor:{value:new Color('#0a1424')},uFloorDeep:{value:new Color('#03060b')},uPaper:{value:new Color('#f3f1ec')}
+  },vertexShader:`
    varying vec2 vScreen;
    void main(){vec4 p=projectionMatrix*modelViewMatrix*vec4(position,1.);vScreen=p.xy/p.w*.5+.5;gl_Position=p;}
   `,fragmentShader:`
-   varying vec2 vScreen;uniform float uTime;uniform float uLightSweep;uniform float uBrightness;uniform float uScroll;uniform vec2 uCenter;uniform vec2 uContact;uniform vec3 uBlueTop;uniform vec3 uBlueMiddle;uniform vec3 uBlueBottom;uniform vec3 uIce;
-   float softPool(vec2 point,vec2 center,vec2 extent){vec2 offset=(point-center)/extent;return exp(-dot(offset,offset)*2.);}
+   varying vec2 vScreen;uniform float uScroll;uniform float uTime;uniform float uBrightness;
+   uniform vec3 uInk;uniform vec3 uNavy;uniform vec3 uDeep;uniform vec3 uSky;uniform vec3 uBand;uniform vec3 uGlow;uniform vec3 uFloor;uniform vec3 uFloorDeep;uniform vec3 uPaper;
+   float pool(vec2 point,vec2 centre,vec2 extent){vec2 offset=(point-centre)/extent;return exp(-dot(offset,offset)*2.);}
    void main(){
-    vec2 uv=vScreen;float documentY=max(0.,(1.-uv.y)+uScroll),daylight=smoothstep(.88,1.55,documentY);
-    vec3 color=mix(uBlueTop,uBlueMiddle,smoothstep(.12,.88,documentY));color=mix(color,uBlueBottom,daylight);color=mix(color,uIce,smoothstep(1.55,2.4,documentY));
-    float quiet=softPool(uv,vec2(.5,.60),vec2(.52,.9));color*=1.-quiet*.06*(1.-daylight);
-    float drift=sin(uTime*.22)*.025;
-    float window=softPool(uv,vec2(.12+drift,.77),vec2(.42,.55));
-    float bounce=softPool(uv,vec2(.91-drift,.28),vec2(.52,.58));
-    float ambientRise=smoothstep(.18,.75,documentY);
-    color+=vec3(.035,.06,.085)*window*(1.-daylight*.85)*ambientRise;
-    color+=vec3(.025,.045,.065)*bounce*(1.-daylight*.85)*ambientRise;
-    // A broad oblique window wash creates real contrast for the three refraction rays.
-    float windowEdge=uv.y+uv.x*.32-.25-uLightSweep*.22;
-    float windowWash=(1.-smoothstep(-.08,.16,windowEdge))*softPool(uv,vec2(.48,.12),vec2(.95,.48));
-    color=mix(color,vec3(.84,.93,1.),windowWash*.52*(1.-daylight));
-    float groundY=uCenter.y-uContact.y;
-    float contact=softPool(uv,vec2(.5-uContact.x,groundY),vec2(.23,.10))+softPool(uv,vec2(.5+uContact.x,groundY),vec2(.23,.10));
-    color*=1.-contact*.11*(1.-smoothstep(.15,.95,uScroll))*(1.-daylight);
-    color*=uBrightness;gl_FragColor=vec4(color,1.);
+    vec2 uv=vScreen;
+    float d=(1.-uv.y)+uScroll*.92;
+    vec3 color=uInk;
+    color=mix(color,uNavy,smoothstep(.08,.36,d));
+    color=mix(color,uDeep,smoothstep(.36,.53,d));
+    color=mix(color,uSky,smoothstep(.64,.69,d));
+    color=mix(color,uBand,smoothstep(.69,.705,d));
+    color=mix(color,uGlow,smoothstep(.705,.718,d));
+    color=mix(color,uBand,smoothstep(.718,.732,d));
+    color=mix(color,uFloor,smoothstep(.732,.80,d));
+    color=mix(color,uFloorDeep,smoothstep(.80,.90,d));
+    color=mix(color,uPaper,smoothstep(.98,1.18,d));
+    // broad glow behind the page, then the horizon reflection on the floor
+    float halo=pool(uv,vec2(.5,.56),vec2(.52,.34));
+    color+=vec3(.03,.055,.09)*halo*(1.-smoothstep(.55,.92,d));
+    float sheen=pool(uv,vec2(.5,.615),vec2(.62,.055));
+    color+=vec3(.055,.085,.12)*sheen*(1.-smoothstep(.62,.95,d));
+    float drift=sin(uTime*.18)*.012;
+    float contact=pool(uv,vec2(.5+drift,.79),vec2(.26,.055));
+    color*=1.-contact*.16*(1.-smoothstep(.2,1.,uScroll));
+    color*=uBrightness;
+    gl_FragColor=vec4(color,1.);
     #include <colorspace_fragment>
    }
-  `});wallMaterial.toneMapped=false;extraMaterials.push(wallMaterial);
-  const wall=new Mesh(wallGeometry,wallMaterial);wall.position.z=-7;wall.renderOrder=-10;scene.add(wall);
-  let width=1,height=1,lastMotionTick=-1;canvas.dataset.glassFilter=linearTransmission?'linear-mip-r187':'three-default';
-  const visibleGlass=()=>mark.visible||curtains.some(curtain=>curtain.mesh.visible);
+  `});
+  wallMaterial.toneMapped=false;extraMaterials.push(wallMaterial);
+  const wall=new Mesh(wallGeometry,wallMaterial);wall.position.z=-8;wall.renderOrder=-10;scene.add(wall);
+
+  let width=1,height=1,mobile=false,visibleWidth=1,displayScale=1,baseX=0,baseY=0,lastTick=-1;
+  const measure=()=>{
+   const visibleHeight=2*Math.tan(MathUtils.degToRad(FOV/2))*camera.position.z;visibleWidth=visibleHeight*camera.aspect;
+   const target=visibleHeight*(mobile?1.16:1.28);
+   displayScale=target/size.y;
+   group.scale.setScalar(displayScale);
+   baseY=-(size.y*displayScale)*.5+(mobile?visibleHeight*.05:visibleHeight*-.06);
+   baseX=mobile?visibleWidth*.42:.34;
+   group.position.x=baseX;
+  };
+  const place=(progress:number,motion=true)=>{
+   const p=motion?MathUtils.smoothstep(progress,0,1.15):0,recede=motion?MathUtils.smoothstep(progress,.15,1.25):0;
+   group.position.y=baseY+p*1.15;
+   group.position.z=recede*1.35;
+   group.rotation.y=.55+recede*.14;
+   group.rotation.x=.015-recede*.05;
+   const opacity=1-MathUtils.smoothstep(progress,.55,1.05);
+   const transparent=opacity<.999;
+   if(material.transparent!==transparent){material.transparent=transparent;material.depthWrite=!transparent;material.needsUpdate=true;}
+   material.opacity=opacity;
+   group.visible=opacity>.001;
+   wallMaterial.uniforms.uScroll.value=progress;
+   return p;
+  };
+  canvas.dataset.glassFilter='physical-page';
   signal.addEventListener('abort',dispose,{once:true});if(signal.aborted){dispose();throw new DOMException('Aborted','AbortError');}
   return{
-   get animated(){return !disposed&&visibleGlass();},
-   get interactive(){return !disposed&&visibleGlass();},
-   setReveals(panels){
-    for(let index=0;index<curtains.length;index++){
-     const curtain=curtains[index],panel=panels[index];curtain.panel=panel||null;curtain.mesh.visible=!!panel;
-     if(!panel)continue;
-     if(curtain.shapeProgress===panel.progress&&curtain.shapeVariant===(panel.variant||''))continue;
-     curtain.shapeProgress=panel.progress;curtain.shapeVariant=panel.variant||'';
-     const open=Math.pow(MathUtils.smootherstep(panel.progress,0,1),1.7),bend=Math.max(.001,(1-open)*2.3),positions=curtain.mesh.geometry.attributes.position;
-     const direction=panel.variant==='profiles'?-1:1;
-     for(let vertex=0;vertex<positions.count;vertex++){
-      const x=curtain.base[vertex*3],t=.5-curtain.base[vertex*3+1],angle=t*bend;
-      const ripple=Math.sin((x+.5)*Math.PI*2+open*2)*Math.sin(t*Math.PI)*(1-open)*.035;
-      positions.setXYZ(vertex,x+ripple*direction,.5-Math.sin(angle)/bend,(1-Math.cos(angle))/bend*.72+ripple);
-     }
-     positions.needsUpdate=true;curtain.mesh.geometry.computeVertexNormals();
-     curtain.mesh.material.opacity=Math.sin(Math.PI*panel.progress)*.6;
-    }
-   },
+   get animated(){return !disposed&&group.visible;},
+   get interactive(){return !disposed&&group.visible;},
+   setReveals(){/* the creator window is semantic HTML; no glass sheet is generated */},
    resize(nextWidth,nextHeight,dpr){
-    if(disposed)return;const viewportChanged=width!==nextWidth||height!==nextHeight;width=nextWidth;height=nextHeight;const mobile=width<768;
-    renderer.transmissionResolutionScale=mobile?.55:.7;renderer.setPixelRatio(Math.min(dpr,2));renderer.setSize(width,height,false);
-    if(viewportChanged){camera.aspect=width/height;camera.updateProjectionMatrix();}
+    if(disposed)return;width=nextWidth;height=nextHeight;mobile=width<768;
+    renderer.transmissionResolutionScale=mobile?.5:.62;
+    renderer.setPixelRatio(Math.min(dpr,2));renderer.setSize(width,height,false);
+    camera.aspect=width/height;camera.updateProjectionMatrix();measure();
    },
    render(x,y,dark,scroll,reduced,activeSeconds=0){
     if(disposed)return;
-    const time=reduced||!Number.isFinite(activeSeconds)?0:Math.max(0,activeSeconds),mobile=width<768,reading=MathUtils.smoothstep(scroll,.2,1.3),spatial=reduced?0:MathUtils.smootherstep(scroll,.2,1.3),breath=Math.sin(time*.38);
-    camera.position.z=8.2+spatial*.9;
-    // The hero leaves as a scene rather than becoming another navigation mark.
-    // Its reading pose remains below the header and disappears before it can overlap controls.
-    const centerY=MathUtils.lerp(mobile?Math.max(.70,.215+320/height):.68,.42,spatial),split=MathUtils.lerp(mobile?.58:.8,.20,spatial);
-    const opticalSweep=reduced?0:MathUtils.smootherstep(scroll,0,1.05),turn=reduced?0:Math.sin(spatial*Math.PI);
-    for(const fold of folds){fold.mesh.position.x=fold.x+fold.side*split;fold.mesh.rotation.y=fold.side*turn*.38;}
-    const combinedWidth=nativeSize.x+2*split,displayWidth=Math.min(width*(mobile?1.10:1.12),1500),displayHeight=Math.min(displayWidth*nativeSize.y/combinedWidth,height*(mobile?.43:1.14));
-    const initialViewHeight=2*Math.tan(MathUtils.degToRad(camera.fov/2))*8.2,viewHeight=initialViewHeight*(camera.position.z/8.2);
-    const visibleHeight=MathUtils.lerp(displayHeight,displayHeight*.55,spatial),opacity=reduced?(scroll>=1.3?0:1):1-MathUtils.smoothstep(spatial,.42,.82);
-    mark.visible=opacity>.001;mark.scale.setScalar(initialViewHeight*(visibleHeight/height)/nativeSize.y);
-    const parallax=reduced?0:1-spatial;
-    mark.position.set(viewHeight*camera.aspect*x*.011*parallax*(1-spatial*.8),viewHeight*(.5-centerY)+Math.sin(time*.32)*.035*parallax*(1-spatial*.8),0);
-    mark.rotation.set(.04+spatial*.10+turn*.10+(reduced?0:-y*.055+breath*.016),-.10+spatial*.16+turn*.22+(reduced?0:x*.09+breath*.035),-.025+spatial*.025+(reduced?0:Math.sin(time*.28)*.012));
-    pointerRotation.set(-y*.026*parallax,-x*.038*parallax,0,'YXZ');pointerQuaternion.setFromEuler(pointerRotation);camera.quaternion.copy(baseCamera).multiply(pointerQuaternion);
-    const lightPhase=-.68+opticalSweep*1.75+(reduced?0:breath*.16+x*.10);
-    scene.environmentRotation.set(.05+opticalSweep*.15,lightPhase,-opticalSweep*.12);
-    // r187 uses the scene intensity when the material inherits scene.environment.
-    scene.environmentIntensity=(dark?.98:1.03)+Math.sin(opticalSweep*Math.PI)*.34;
-    key.position.set(-4+opticalSweep*6,6-opticalSweep*2,7);key.intensity=3.3+Math.sin(opticalSweep*Math.PI)*1.2;
-    rim.intensity=1.3+opticalSweep*.6;rim.position.set(5-opticalSweep*3,1+opticalSweep*3,4);
-    wallMaterial.uniforms.uTime.value=time;wallMaterial.uniforms.uLightSweep.value=opticalSweep;wallMaterial.uniforms.uBrightness.value=dark?.96:1;wallMaterial.uniforms.uScroll.value=scroll;
-    wallMaterial.uniforms.uCenter.value.set(.5,1-centerY);const projectedWidth=visibleHeight*combinedWidth/nativeSize.y*(8.2/camera.position.z);wallMaterial.uniforms.uContact.value.set((split+.718)/combinedWidth*(projectedWidth/width),visibleHeight/height*.43);
-    const sheetDepth=.85,sheetViewHeight=2*Math.tan(MathUtils.degToRad(camera.fov/2))*(camera.position.z-sheetDepth);
-    for(const curtain of curtains){const panel=curtain.panel;curtain.mesh.visible=!reduced&&!!panel;if(!panel)continue;const sheetHeight=panel.height/height*sheetViewHeight*1.18;curtain.mesh.position.set(((panel.left+panel.width*.5)/width-.5)*sheetViewHeight*camera.aspect,(.5-(panel.top+panel.height*.5)/height)*sheetViewHeight,sheetDepth);curtain.mesh.scale.set(panel.width/width*sheetViewHeight*camera.aspect*1.18,sheetHeight,sheetHeight);}
-    // Deliberately amplified for visible spectral separation at phone sizes.
-    const dispersion=4.8+Math.sin(opticalSweep*Math.PI)*1.5;
-    for(const material of nativeMaterials){material.ior=1.45+opticalSweep*.07;material.thickness=.46+opticalSweep*.10;material.dispersion=dispersion;material.iridescence=.56+Math.sin(opticalSweep*Math.PI)*.14;}
-    const tick=Math.floor(time*10);if(tick!==lastMotionTick){lastMotionTick=tick;canvas.dataset.glassTime=time.toFixed(1);}
-    canvas.dataset.glassLightPhase=lightPhase.toFixed(3);canvas.dataset.glassReading=reading.toFixed(3);canvas.dataset.glassDispersion=dispersion.toFixed(2);
-    canvas.dataset.glassHeroVisible=mark.visible?'true':'false';
-    // Keep optical quality while real glass is visible; a static wall has no transmission work.
-    renderer.transmissionResolutionScale=visibleGlass()?(mobile?.55:.7):.12;
-    for(const material of nativeMaterials){const transparent=opacity<.999;if(material.transparent!==transparent){material.transparent=transparent;material.depthWrite=!transparent;material.needsUpdate=true;}material.opacity=opacity;}
+    const time=reduced||!Number.isFinite(activeSeconds)?0:Math.max(0,activeSeconds);
+    const p=place(scroll,!reduced);
+    const turn=reduced?0:Math.sin(p*Math.PI);
+    group.rotation.y+=reduced?0:x*.035;
+    group.rotation.x+=reduced?0:-y*.02;
+    if(!reduced){group.position.x=baseX+x*.05;group.rotation.z=Math.sin(time*.22)*.006;}else{group.position.x=baseX;group.rotation.z=0;}
+    // one light story: the page, its receiver and the studio sweep together
+    scene.environmentRotation.set(.04+p*.12,-.42+p*.55+(reduced?0:Math.sin(time*.16)*.1),-p*.08);
+    scene.environmentIntensity=(dark?.74:.78)+(reduced?0:Math.sin(time*.2)*.03);
+    key.intensity=1.8+turn*.8;rim.intensity=1.3+turn*.35;
+    wallMaterial.uniforms.uTime.value=time;wallMaterial.uniforms.uBrightness.value=dark?.97:1;
+    const tick=Math.floor(time*10);if(tick!==lastTick){lastTick=tick;canvas.dataset.glassTime=time.toFixed(1);}
+    canvas.dataset.glassHeroVisible=group.visible?'true':'false';
+    canvas.dataset.glassReading=MathUtils.smoothstep(scroll,.2,1.1).toFixed(3);
+    renderer.transmissionResolutionScale=group.visible?(mobile?.5:.62):.1;
     renderer.render(scene,camera);
    },
    dispose

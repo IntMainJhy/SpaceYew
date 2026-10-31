@@ -127,13 +127,13 @@ test('load failures, context loss and unmount during a late load preserve the CS
  lost.cleanup();assert.equal(lost.releases,1);
 });
 
-test('the shipped original GLB loads as two bounded glass meshes with real transmission and volume',async()=>{
- const bytes=fs.readFileSync(new URL('../public/models/spaceyew-glass.glb',import.meta.url));
- assert.ok(bytes.length<64*1024,'small self-contained model');
+test('the shipped page GLB loads as one bounded glass mesh with real transmission and volume',async()=>{
+ const bytes=fs.readFileSync(new URL('../public/models/spaceyew-page.glb',import.meta.url));
+ assert.ok(bytes.length<500*1024,'the curved page stays a compact self-contained model');
  const gltf=await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');
- const meshes=[];gltf.scene.traverse(node=>{if(node instanceof Mesh)meshes.push(node)});assert.equal(meshes.length,2);
- const size=new Box3().setFromObject(gltf.scene).getSize(new Vector3());assert.ok(size.x>2&&size.y>3&&size.z>.4);
- for(const mesh of meshes){assert.ok(mesh.material instanceof MeshPhysicalMaterial);assert.equal(mesh.material.transmission,1);assert.ok(mesh.material.thickness>.4);mesh.geometry.dispose();mesh.material.dispose()}
+ const meshes=[];gltf.scene.traverse(node=>{if(node instanceof Mesh)meshes.push(node)});assert.equal(meshes.length,1,'the home scene ships one authored page');
+ const size=new Box3().setFromObject(gltf.scene).getSize(new Vector3());assert.ok(size.x>6&&size.y>8&&size.z>1,'the page keeps its authored width, height and curvature');
+ for(const mesh of meshes){assert.ok(mesh.material instanceof MeshPhysicalMaterial);assert.equal(mesh.material.transmission,1);assert.ok(mesh.material.ior>=1.4&&mesh.material.ior<=1.6);mesh.geometry.dispose();mesh.material.dispose()}
 });
 
 

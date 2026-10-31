@@ -35,7 +35,7 @@ export async function LegalConsultation(){
     <LegalContact wechat={lawyer.wechat}/>
    </section>
   </div>
-  <aside className="legal-platform" aria-labelledby="legal-platform-title"><div><h2 id="legal-platform-title">{t('真律咨询平台')}</h2><p>{t('也可访问真律咨询平台，查看其服务条款与渠道码入口。')}</p></div><a className="space-btn" href={lawyer.platformUrl} target="_blank" rel="noopener noreferrer">{t('访问真律咨询平台')}<Icon name="arrow"/><span className="community-sr">{t('在新窗口打开')}</span></a></aside>
+  <aside className="legal-platform" aria-labelledby="legal-platform-title"><div><h2 id="legal-platform-title">{t('真律咨询 App')}</h2><p>{t('前往华为应用市场，查看应用详情与安装方式。')}</p></div><a className="space-btn" href={lawyer.platformUrl} target="_blank" rel="noopener noreferrer">{t('前往华为应用市场')}<Icon name="arrow"/><span className="community-sr">{t('在新窗口打开')}</span></a></aside>
   <p className="legal-source">{t('本页根据提供的律师介绍资料整理。')}</p>
  </div>;
 }

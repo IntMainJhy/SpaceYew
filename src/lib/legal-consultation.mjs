@@ -9,7 +9,7 @@ export const legalConsultation={
  wechat:'shzhangyuelvshi',
  hourlyRate:100,
  portrait:'/images/legal/zhang-yue.webp',
- platformUrl:'http://47.116.201.205/gongsi/zhenlv/web/',
+ platformUrl:'https://appgallery.huawei.com/app/detail?id=zy.zhenlvfalvzixun.law&channelId=SHARE&source=appshare',
  areas:['民间借贷','交通事故','离婚纠纷','抚养费','租房纠纷','房屋买卖','遗产继承','遗嘱见证','律师函','人身伤害'],
 };
 

@@ -19,7 +19,12 @@ try{
   assert.ok(page.html.includes('id="consultation-contact"'));
   assert.ok(page.html.includes(legalConsultation.license)&&page.html.includes(legalConsultation.wechat));
   assert.ok(page.html.includes(legalConsultation.portrait));
-  assert.ok(page.html.includes('href="'+legalConsultation.platformUrl+'"'),'supplied external platform URL');
+  const appLink=page.html.match(/<a\b[^>]*href="(https:\/\/appgallery\.huawei\.com\/app\/detail[^\"]*)"[^>]*>/)?.[0];
+  assert.ok(appLink,'Huawei AppGallery link');
+  assert.equal(appLink.match(/href="([^\"]+)"/)[1].replaceAll('&amp;','&'),'https://appgallery.huawei.com/app/detail?id=zy.zhenlvfalvzixun.law&channelId=SHARE&source=appshare','exact user-supplied app link');
+  assert.ok(appLink.includes('target="_blank"')&&appLink.includes('rel="noopener noreferrer"'),'safe external navigation');
+  assert.ok(page.html.includes(translate(locale,'前往华为应用市场')));
+  assert.ok(!page.html.includes('47.116.201.205')&&!page.html.includes('渠道码'),'retired platform entry is absent');
   assert.ok(page.html.includes(translate(locale,'复制律师微信号')));
   for(const area of legalConsultation.areas)assert.ok(page.html.includes(translate(locale,area)),locale+': '+area);
   assert.ok(!page.html.includes('成功代理数百起')&&!page.html.includes('劳动仲裁'),'unsupported examples are not published as claims');
@@ -34,5 +39,5 @@ try{
  assert.ok((await read('/sitemap.xml')).html.includes(server.base+LEGAL_CONSULTATION_PATH));
  assert.equal((await read(LEGAL_CONSULTATION_PATH+'/extra')).status,404);
  assert.equal((await read('/resources/no-such-legal-service')).status,404);
- console.log('PASS: legal consultation page in three languages, resource discovery/search/category, exact routing, portrait, source platform and sitemap.');
+ console.log('PASS: legal consultation page in three languages, resource discovery/search/category, exact routing, portrait, AppGallery destination and sitemap.');
 }finally{if(server)await stopServer(server);await rm(directory,{recursive:true,force:true});}

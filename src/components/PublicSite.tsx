@@ -1,4 +1,3 @@
-import {appSurface} from '@/lib/app-access.mjs';
 import {localeDate} from '@/lib/i18n.mjs';
 import {serverI18n} from '@/lib/server-i18n';
 /* Natural Organic — user-pinned public redesign, seed c1ce478a, code-led.
@@ -211,6 +210,6 @@ export async function PublicFrame({path=[],children}:{path?:string[],children:Re
       <SiteTools/></div>
     </div></header>
     <main id="main" className="organic-container organic-main"><PageMotion>{children}</PageMotion></main>
-    <footer className="organic-footer organic-footer-compact"><div className="organic-container"><Link href="/" className="organic-footer-signature">SpaceYew</Link><nav aria-label={tr("页脚导航")}><Link href="/downloads">{tr("客户端下载")}</Link><Link href="/blogs">{tr("发现博客空间")}</Link><Link href="/legal/community">{tr("社区规则")}</Link><Link href="/legal/terms">{tr("用户协议")}</Link><Link href="/legal/privacy">{tr("隐私政策")}</Link><Link href="/report">{tr("举报投诉")}</Link>{appSurface()!=='platform'&&<Link href="/admin">{tr("内容管理")}</Link>}</nav></div><div className="organic-container organic-footer-filing"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">蜀ICP备2026018870号-2</a></div></footer>
+    <footer className="organic-footer organic-footer-compact"><div className="organic-container"><Link href="/" className="organic-footer-signature">SpaceYew</Link><nav aria-label={tr("页脚导航")}><Link href="/downloads">{tr("客户端下载")}</Link><Link href="/blogs">{tr("发现博客空间")}</Link><Link href="/legal/community">{tr("社区规则")}</Link><Link href="/legal/terms">{tr("用户协议")}</Link><Link href="/legal/privacy">{tr("隐私政策")}</Link><Link href="/report">{tr("举报投诉")}</Link><Link href="/workspace/account">{tr("我的账号")}</Link></nav></div><div className="organic-container organic-footer-filing"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">蜀ICP备2026018870号-2</a></div></footer>
   </div>;
 }

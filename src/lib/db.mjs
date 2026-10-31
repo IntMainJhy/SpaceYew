@@ -88,6 +88,14 @@ export function db(){
 export function getConfig(key){return JSON.parse(db().prepare('SELECT value FROM config WHERE key=?').get(key).value)}
 // Public identity only: this configuration never participates in authorization.
 export function siteOwnerAccountId(){let selected;try{selected=JSON.parse(db().prepare("SELECT value FROM config WHERE key='siteOwnerAccount'").get()?.value||'null')}catch{return ''}return typeof selected?.id==='string'&&db().prepare("SELECT 1 FROM community_users WHERE id=? AND status='active'").get(selected.id)?selected.id:''}
+// Administrative identity is independent of the public author badge. Invalid configured
+// identities fail closed instead of re-enabling a retired administrator account.
+export function ownerAccountConfigured(){return !!db().prepare("SELECT 1 FROM config WHERE key='ownerAccount'").get()}
+export function ownerAccountId(){
+ let selected;try{selected=JSON.parse(db().prepare("SELECT value FROM config WHERE key='ownerAccount'").get()?.value||'null')}catch{return ''}
+ if(typeof selected?.id!=='string'||selected.id==='owner'||typeof selected.email!=='string')return '';
+ return db().prepare("SELECT id FROM community_users WHERE id=? AND role='owner' AND status='active' AND email=? AND email_verified_at IS NOT NULL").get(selected.id,selected.email.trim().toLowerCase())?.id||'';
+}
 export function isSiteOwnerAccount(id){return typeof id==='string'&&!!id&&siteOwnerAccountId()===id}
 export function setConfig(key,value){db().prepare('UPDATE config SET value=? WHERE key=?').run(JSON.stringify(value),key)}
 const transactionDepth=new WeakMap();

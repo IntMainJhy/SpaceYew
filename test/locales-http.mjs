@@ -16,7 +16,9 @@ for(const locale of ['en','zh','ja']){
  const hub=await resource.text();assert.ok(hub.includes(`lang="${htmlLocale(locale)}"`));assert.ok(hub.includes('<h1>'+translate(locale,'资源')+'</h1>'));
  for(const label of ['全部','文档','网站与工具','搜索全部资源'])assert.ok(hub.includes(htmlText(translate(locale,label))),`resource hub ${locale}: ${label}`);
  const filtered=await(await fetch(base+'/resources?type=resources&category='+encodeURIComponent('技术笔记'),{headers:{Cookie:`site-locale=${locale}`}})).text();assert.match(filtered,/name="category" value="技术笔记"/,'resource filter retains the raw category value');
- const admin=await(await fetch(base+'/admin',{headers:{Cookie:`site-locale=${locale}`}})).text();
- assert.ok(admin.includes(translate(locale,'登录管理后台')),'admin sign-in language');
+ const adminResponse=await fetch(base+'/admin',{headers:{Cookie:`site-locale=${locale}`}});assert.equal(adminResponse.status,200);
+ const admin=await adminResponse.text(),destination=new URL(adminResponse.url),unified=destination.pathname==='/login';
+ if(unified)assert.equal(destination.searchParams.get('next'),'/admin','unified sign-in retains the requested management destination');
+ assert.ok(admin.includes(translate(locale,unified?'登录 SpaceYew':'登录管理后台')),'admin sign-in language');
 }
 console.log('PASS: three languages across public collection headings, resource hub labels/filters and admin sign-in, server html.lang and original category values.');

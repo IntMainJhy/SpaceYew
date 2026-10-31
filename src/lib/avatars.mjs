@@ -12,7 +12,7 @@ const permitted=new Set(['image/jpeg','image/png','image/webp']);
 function avatarUser(req,upload=false){
  requireValue(serviceRequest(req),'头像服务暂未开放',503);
  const user=currentUser(req);requireValue(user,'请先登录',401);
- requireValue(user.role!=='owner','站长头像请在个人资料中更换',403);
+ requireValue(user.id!=='owner','站长头像请在个人资料中更换',403);
  requireValue(user.status==='active'&&(!upload||publishingQualified(user,req)),'账号暂不能更换头像，请先确认发布资格或联系站长',403);
  return user;
 }

@@ -1,0 +1,21 @@
+/* Original native Blender sculptures at the edge of each interior reading surface. */
+.site-glass-atmosphere.interior-atmosphere{overflow:hidden;background:linear-gradient(160deg,#c0d9ee,#edf4fa 72%,#d1e4f2)}
+.interior-atmosphere--resources{background:linear-gradient(150deg,#cedfea,#edf4fa 68%,#cadff0)}
+.interior-atmosphere--login{background:linear-gradient(140deg,#bcd7ec,#e9f2fa 65%,#d9e6f3)}
+.interior-atmosphere-canvas{display:block;width:100%;height:100%;opacity:0;transition:opacity .3s ease-out}
+.interior-atmosphere-fallback{position:absolute;width:min(42vw,660px);height:min(65vh,650px);right:-8%;top:20%;opacity:.5;transition:opacity .3s ease-out}
+.interior-atmosphere-fallback i{display:block;position:absolute;box-sizing:border-box;border:18px solid #d7eaf766;box-shadow:inset 0 1px 0 #fff9,0 1px 0 #8bb3d64d;background:linear-gradient(120deg,#e9f7ff1a,#c0dcef33)}
+.interior-atmosphere--community .interior-atmosphere-fallback i{width:70%;height:70%;border-width:clamp(16px,3vw,42px);border-radius:50%;transform:rotate(-28deg) scaleY(.86)}
+.interior-atmosphere--community .interior-atmosphere-fallback i:nth-child(2){left:30%;top:20%;transform:rotate(35deg) scaleY(.86)}
+.interior-atmosphere--community .interior-atmosphere-fallback i:nth-child(3){display:none}
+.interior-atmosphere--resources .interior-atmosphere-fallback{left:-7%;right:auto;top:29%;transform:rotate(-13deg)}
+.interior-atmosphere--resources .interior-atmosphere-fallback i{width:66%;height:78%;border-width:1px;border-radius:22px;transform:skewY(-5deg)}
+.interior-atmosphere--resources .interior-atmosphere-fallback i:nth-child(2){left:18%;top:8%}
+.interior-atmosphere--resources .interior-atmosphere-fallback i:nth-child(3){left:36%;top:16%}
+.interior-atmosphere--login .interior-atmosphere-fallback{left:7%;right:auto;top:20%;width:min(35vw,540px)}
+.interior-atmosphere--login .interior-atmosphere-fallback i:first-child{inset:0 10%;border-width:clamp(20px,3vw,42px);border-bottom:0;border-radius:48% 48% 0 0;transform:rotate(-5deg)}
+.interior-atmosphere--login .interior-atmosphere-fallback i:not(:first-child){display:none}
+.interior-atmosphere:has(canvas[data-atmosphere=paused]) .interior-atmosphere-fallback,.interior-atmosphere:has(canvas[data-atmosphere=running]) .interior-atmosphere-fallback{opacity:0}
+@media(max-width:767px){.interior-atmosphere-fallback{top:8%;right:-48%;width:90vw;height:42vh;opacity:.35}.interior-atmosphere--resources .interior-atmosphere-fallback,.interior-atmosphere--login .interior-atmosphere-fallback{left:auto;right:-48%;top:8%;width:90vw}}
+@media(prefers-reduced-motion:reduce){.interior-atmosphere-canvas,.interior-atmosphere-fallback{transition:none}}
+@media print{.interior-atmosphere{display:none!important}}

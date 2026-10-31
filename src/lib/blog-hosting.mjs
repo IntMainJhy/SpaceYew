@@ -1,9 +1,10 @@
 import {randomBytes,randomUUID} from 'node:crypto';
 import path from 'node:path';
 import {readFile,writeFile,mkdir,rm} from 'node:fs/promises';
-import {db,DATA,FILES,hash,now,transaction,limited} from './db.mjs';
+import {db,DATA,FILES,hash,now,transaction,limited,ownerAccountConfigured,ownerAccountId} from './db.mjs';
 import {spaceActor,ensureSpace,publicSpace,spaceStorageBytes} from './spaces.mjs';
 import {COOKIE,cookie} from './auth.mjs';
+import {appSurface} from './app-access.mjs';
 import {requireValue} from './content.mjs';
 import {lock} from './uploads.mjs';
 import {blogPath,unpackBlog,staticMime} from './blog-archive.mjs';
@@ -42,7 +43,7 @@ export async function blogBundles(req,p,input){
   }catch(error){await rm(folder,{recursive:true,force:true});throw error}
  });
 }
-function previewUser(row){if(row.actor==='owner')return{id:'owner',role:'owner',status:'active'};return db().prepare('SELECT id,role,status FROM community_users WHERE id=?').get(row.actor)}
+function previewUser(row){if(row.actor==='owner')return ownerAccountConfigured()?null:{id:'owner',role:'owner',status:'active'};const user=db().prepare('SELECT id,role,status FROM community_users WHERE id=?').get(row.actor);return user&&ownerAccountConfigured()?{...user,role:user.id===ownerAccountId()?'owner':'member'}:user;}
 function bridge(prefix){return `<script>(function(){var prefix=${JSON.stringify(prefix)};function report(){parent.postMessage({type:'spaceyew:page',path:location.pathname.slice(prefix.length)+location.search+location.hash},'*')}addEventListener('load',report);addEventListener('hashchange',report);addEventListener('message',function(event){if(event.source===parent&&event.data&&event.data.type==='spaceyew:request-page')report()});addEventListener('click',function(event){var anchor=event.target&&event.target.closest&&event.target.closest('a[href]');if(!anchor)return;var url;try{url=new URL(anchor.getAttribute('href'),location.href)}catch{return}if(['http:','https:','mailto:'].indexOf(url.protocol)<0)return;if(url.origin===location.origin&&url.pathname.indexOf(prefix)===0)return;event.preventDefault();parent.postMessage({type:'spaceyew:external-link',url:url.href},'*')});})();</script>`}
 export async function blogFileResponse(req,bundleId,access,segments){
  requireValue(uuid(bundleId),'页面不存在',404);const d=db(),bundle=d.prepare('SELECT * FROM blog_bundles WHERE id=?').get(bundleId);requireValue(bundle,'页面不存在',404);
@@ -51,8 +52,8 @@ export async function blogFileResponse(req,bundleId,access,segments){
   published=publicSpace(req,space.handle);requireValue(published.layout.blog?.mode==='static'&&published.layout.blog.bundleId===bundle.id,'页面不存在或暂未公开',404);
  }else{
   const preview=d.prepare('SELECT * FROM blog_previews WHERE token=? AND bundle=? AND expires>?').get(hash(access||''),bundle.id,Date.now());
-  const session=preview&&d.prepare('SELECT user_id FROM sessions WHERE token=? AND expires>?').get(preview.session,Date.now());
-  requireValue(preview&&session&&(session.user_id||'owner')===preview.actor&&previewAllowed(previewUser(preview),bundle),'预览已失效，请重新打开',404);
+  const session=preview&&d.prepare("SELECT s.user_id,COALESCE(r.realm,'combined') realm,r.authentication FROM sessions s LEFT JOIN session_realms r ON r.token=s.token WHERE s.token=? AND s.expires>?").get(preview.session,Date.now());
+  requireValue(preview&&session&&session.realm===appSurface()&&(session.authentication==='password'||session.realm==='combined'&&[null,'legacy'].includes(session.authentication))&&(session.user_id||'owner')===preview.actor&&previewAllowed(previewUser(preview),bundle),'预览已失效，请重新打开',404);
  }
  let name=segments.join('/')||bundle.entry;if(name.endsWith('/'))name+='index.html';name=blogPath(name);
  requireValue(JSON.parse(bundle.manifest).includes(name),'页面不存在',404);

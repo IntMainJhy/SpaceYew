@@ -73,7 +73,7 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
    if(width!==sizedWidth||height!==sizedHeight||dpr!==sizedDpr){scene.resize(width,height,dpr);sizedWidth=width;sizedHeight=height;sizedDpr=dpr;}
    if(mode==='home'){
     const header=canvas.closest('.v2-site')?.querySelector?.<HTMLElement>('.organic-header'),brand=header?.querySelector<HTMLElement>('.organic-brand'),tools=header?.querySelector<HTMLElement>('.organic-header-tools');
-    if(header&&brand&&tools){const a=brand.getBoundingClientRect(),b=tools.getBoundingClientRect(),bar=header.getBoundingClientRect();scene.setHeaderDock?.({x:(a.right+b.left)*.5-rect.left,y:bar.top+bar.height*.5-rect.top,width:Math.max(0,b.left-a.right-20)});}
+    if(header&&brand&&tools){const a=brand.getBoundingClientRect(),b=tools.getBoundingClientRect(),bar=header.getBoundingClientRect(),center=rect.left+width*.5;scene.setHeaderDock?.({x:width*.5,y:bar.top+bar.height*.5-rect.top,width:Math.max(0,2*Math.min(center-a.right,b.left-center)-20)});}
     else scene.setHeaderDock?.(null);
    }
    readProgress();draw();
@@ -107,6 +107,7 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
  };
  const fail=()=>{cleanup();canvas.style.opacity='0';canvas.dataset.atmosphere='fallback';};
  resize?.observe(surface);intersection?.observe(canvas);theme?.observe(document.documentElement,{attributes:true,attributeFilter:['data-color-mode']});
+ if(mode==='home'&&resize){const header=canvas.closest('.v2-site')?.querySelector?.<HTMLElement>('.organic-header');if(header){resize.observe(header);for(const item of header.querySelectorAll<HTMLElement>('.organic-brand,.organic-header-tools'))resize.observe(item);}}
  if(!resize)window.addEventListener('resize',measure);
  if(!intersection)visible=true;
  host.addEventListener('pointermove',move as EventListener,{passive:true});host.addEventListener('pointerleave',leave);

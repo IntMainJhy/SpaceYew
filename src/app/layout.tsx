@@ -48,6 +48,7 @@ import './v2.css';
 import './glass-studio.css';
 import './blog-spaces.css';
 import './glass-platform.css';
+import './account-menu.css';
 export const viewport:Viewport={width:'device-width',initialScale:1,viewportFit:'cover'};
 export const metadata:Metadata={applicationName:'SpaceYew',title:'SpaceYew',description:'Projects, experience, and shared resources.'};
 const designContract='<!-- THESIS: one clear optical space from discovery to creation. OWN-WORLD: original Blender folded glass, blue-to-ice light, local sans, sharp content. STORY: home folds dock in the clear fixed-navigation gap; real blog pages pass the camera and settle into a directory; resources and community share this space. FIRST VIEWPORT: centered work and actions, transparent gradient-blur fixed navigation, subtle pointer orbit. FORM: user-selected glass world extended through native-scroll Three.js choreography; one platform appearance, authored blog styling retained. FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance. -->';

@@ -18,7 +18,7 @@ export function MemberAvatarSettings({user,onSaved}:{user:Doc;onSaved:(user:Doc)
  }catch(e:any){setError(e.message)}finally{setBusy(false)}}
  return <section className="member-avatar-settings"><h2>{tr("个人头像")}</h2><div className="member-avatar-layout">
   <div className="member-avatar-preview">{preview?<span className="feed-avatar"><img src={preview} alt={tr("待保存的新头像")}/></span>:<FeedAvatar name={user.displayName||user.nickname} avatarId={user.avatarId}/>}</div>
-  <div className="member-avatar-controls">{user.role==='owner'?<><p>{tr("站长头像与主站个人资料共用。")}</p><Link className={secondary} href="/admin/profile">{tr("前往个人资料更换头像")}</Link></>:<>
+  <div className="member-avatar-controls">{user.id==='owner'?<><p>{tr("站长头像与主站个人资料共用。")}</p><Link className={secondary} href="/admin/profile">{tr("前往个人资料更换头像")}</Link></>:<>
    <p>{tr("JPG、PNG、WebP，最大2 MB，居中裁切。")}</p><p className="community-fine">{tr("请确保图片使用权并遵守社区规则，保存后公开显示。")}</p>
    {!qualified&&<p className="community-fine">{tr("完成发布资格核验且账号正常后，可上传头像。")}</p>}
    <div className="field"><label htmlFor="member-avatar-file">{tr("选择头像图片")}</label><input ref={picker} type="file" id="member-avatar-file" accept="image/jpeg,image/png,image/webp" disabled={busy||!qualified} onChange={event=>{

@@ -24,7 +24,7 @@ import {pageResources} from '@/lib/page-resources.mjs';
 import {PublicSite,PublicFrame} from '@/components/PublicSite';
 import {AdminApp} from '@/components/AdminApp';
 import {CommunityApp} from '@/components/CommunityApp';
-import {getConfig,publicBySlug} from '@/lib/db.mjs';
+import {getConfig,publicBySlug,ownerAccountConfigured} from '@/lib/db.mjs';
 export const dynamic='force-dynamic';export const runtime='nodejs';
 type Props={params:Promise<{path?:string[]}>,searchParams:Promise<Record<string,string|string[]|undefined>>};
 function decodedPath(path:string[]){return path.map(segment=>{try{return decodeURIComponent(segment)}catch{return segment}})}
@@ -33,6 +33,7 @@ export default async function Page({params,searchParams}:Props){
  const path=decodedPath((await params).path||[]),query=await searchParams,requestHeaders=await headers();
  const host=requestHeaders.get('host')||new URL(process.env.PUBLIC_URL||'http://localhost:3008').host;
  const req=new Request('http://'+host+'/'+path.map(encodeURIComponent).join('/'),{headers:requestHeaders});
+ if(path[0]==='admin'&&ownerAccountConfigured()){const user=currentUser(req);if(!user)redirect('/login?next='+encodeURIComponent('/'+path.join('/')));if(user.role!=='owner')redirect('/workspace/account');if(path[1]==='login')redirect('/admin');}
  if(path[0]==='publish'){
   if(path.length>2)notFound();
   let kind=String(query.kind||'docs');

@@ -12746,5 +12746,21 @@
   "浏览全部": [
     "Browse all",
     "すべて見る"
+  ],
+  "我的账号": [
+    "My account",
+    "マイアカウント"
+  ],
+  "我的博客": [
+    "My blog",
+    "マイブログ"
+  ],
+  "此邮箱用于站长登录": [
+    "This email is used to sign in as the site owner.",
+    "このメールはサイト管理者のログインに使用します。"
+  ],
+  "站长登录邮箱不能在此修改": [
+    "The owner sign-in email cannot be changed here.",
+    "管理者のログイン用メールはここでは変更できません。"
   ]
 }

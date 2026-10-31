@@ -47,8 +47,8 @@ export async function handle(req){try{const url=new URL(req.url),p=url.pathname.
 
  if(p[0]==='admin'&&p[1]==='logs'&&p.length===2&&method==='GET')return json(managementLog(req,url.searchParams));
  if(p[0]==='admin'&&p[1]==='overview'&&p.length===2&&method==='GET')return json(adminOverview(req));
- if(p[0]==='auth'&&p[1]==='password'&&method==='POST'){changePassword(await body(req));return json({ok:true},200,{'Set-Cookie':sessionCookie('',true)})}
- if(p[0]==='admin'&&p[1]==='bootstrap'&&method==='GET'){return json({profile:getConfig('profile'),site:getConfig('site'),taxonomy:getConfig('taxonomy'),counts:db().prepare('SELECT type,status,COUNT(*) count FROM content WHERE deleted IS NULL GROUP BY type,status').all(),maxFileBytes:MAX,chunkBytes:CHUNK,username:db().prepare('SELECT username FROM admins WHERE id=1').get().username})}
+ if(p[0]==='auth'&&p[1]==='password'&&method==='POST'){changePassword(await body(req),req);return json({ok:true},200,{'Set-Cookie':sessionCookie('',true)})}
+ if(p[0]==='admin'&&p[1]==='bootstrap'&&method==='GET'){return json({profile:getConfig('profile'),site:getConfig('site'),taxonomy:getConfig('taxonomy'),counts:db().prepare('SELECT type,status,COUNT(*) count FROM content WHERE deleted IS NULL GROUP BY type,status').all(),maxFileBytes:MAX,chunkBytes:CHUNK,username:actor.email||actor.username})}
  if(p[0]==='admin'&&p[1]==='preview'&&method==='POST'){const input=await body(req,9000000);return json(contentData(input.data,input.type))}
  if(p[0]==='admin'&&p[1]==='content'){
   if(method==='GET'){if(p[2]){const row=db().prepare('SELECT * FROM content WHERE id=?').get(p[2]);requireValue(row,'内容不存在',404);return json(adminRow(row))}return json(listContent({type:url.searchParams.get('type'),q:url.searchParams.get('q')||'',status:url.searchParams.get('status')||'all',page:url.searchParams.get('page')||1,trash:url.searchParams.get('trash')==='1'}))}

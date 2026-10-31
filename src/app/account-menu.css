@@ -1,0 +1,13 @@
+.site-account-menu{position:relative;color:var(--glass-header-ink,var(--site-text));font-size:14px}
+.site-account-menu>summary{display:flex;align-items:center;gap:8px;min-height:44px;padding:8px 9px;cursor:pointer;list-style:none;white-space:nowrap;font-weight:500}
+.site-account-menu>summary::-webkit-details-marker{display:none}
+.site-account-menu>summary .feed-avatar{width:24px;height:24px;flex:0 0 24px}
+.site-account-menu>summary:focus-visible{outline:2px solid var(--site-focus);outline-offset:3px}
+.site-account-panel{position:absolute;right:0;top:calc(100% + 10px);z-index:100;min-width:212px;padding:10px;background:var(--site-surface,#edf6fc);color:var(--site-text,#173957);border:0;box-shadow:0 12px 30px #17395720;backdrop-filter:blur(24px)}
+.site-account-panel>p{margin:0 8px 6px;padding:8px 0;border-bottom:1px solid var(--site-line);font-weight:600}
+.site-account-panel small{display:block;color:var(--site-muted);font-size:12px;font-weight:400;margin-top:3px}
+.site-account-panel>a,.site-account-panel>button{display:flex;align-items:center;gap:10px;min-height:44px;padding:10px 8px;width:100%;background:transparent;border:0;color:var(--site-text);font:inherit;text-align:left;cursor:pointer;text-decoration:none}
+.site-account-panel :is(a,button):hover{background:var(--site-accent-soft)}
+.site-account-panel :is(a,button):focus-visible{outline:2px solid var(--site-focus);outline-offset:-2px}
+.site-account-panel .icon{width:18px;height:18px}
+.site-account-menu.is-mobile .site-account-panel{position:static;min-width:0;box-shadow:none;border:0;border-top:1px solid var(--site-line);padding:4px 0;background:transparent}

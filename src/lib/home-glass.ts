@@ -117,7 +117,7 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
   // broad room illumination and soft contact shadow are art-directed, not a
   // simulated caustic pass. Specular highlights come only from the HDR rig.
   const wallGeometry=new PlaneGeometry(80,52);extraGeometry.push(wallGeometry);
-  const wallMaterial=new ShaderMaterial({depthWrite:false,uniforms:{uTime:{value:0},uLightSweep:{value:0},uBrightness:{value:1},uScroll:{value:0},uCenter:{value:new Vector2(.5,.38)},uContact:{value:new Vector2(.31,.20)},uBlueTop:{value:new Color('#070f29')},uBlueMiddle:{value:new Color('#1858c9')},uBlueBottom:{value:new Color('#d9d9dc')},uIce:{value:new Color('#e5e5e5')}},vertexShader:`
+  const wallMaterial=new ShaderMaterial({depthWrite:false,uniforms:{uTime:{value:0},uLightSweep:{value:0},uBrightness:{value:1},uScroll:{value:0},uCenter:{value:new Vector2(.5,.38)},uContact:{value:new Vector2(.31,.20)},uBlueTop:{value:new Color('#9bbde1')},uBlueMiddle:{value:new Color('#c0dcf1')},uBlueBottom:{value:new Color('#e5ebf0')},uIce:{value:new Color('#f0f0f0')}},vertexShader:`
    varying vec2 vScreen;
    void main(){vec4 p=projectionMatrix*modelViewMatrix*vec4(position,1.);vScreen=p.xy/p.w*.5+.5;gl_Position=p;}
   `,fragmentShader:`

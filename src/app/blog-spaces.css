@@ -1,14 +1,14 @@
-.blog-spaces-page{--blog-space-ink:#173d63;--blog-space-body:#365d80;--blog-space-header-inset:72px;position:relative;isolation:isolate;margin-inline:auto;background:linear-gradient(180deg,#1b376b 0,#347ac2 80svh,#dedee1 220svh,#e5e5e5 100%);color:var(--blog-space-ink);overflow:clip}
+.blog-spaces-page{--blog-space-ink:#173d63;--blog-space-body:#365d80;--blog-space-header-inset:72px;position:relative;isolation:isolate;margin-inline:auto;background:var(--site-blue-gradient);color:var(--blog-space-ink);overflow:clip}
 .blog-spaces-opening{position:relative;height:90svh;min-height:680px;--blog-journey-progress:0}
 .blog-spaces-opening[data-journey=ready]{height:235svh;min-height:0}
 .blog-spaces-journey{position:sticky;top:0;width:100%;height:100svh;min-height:calc(520px + var(--blog-space-header-inset));overflow:hidden;isolation:isolate}
 .blog-spaces-journey>canvas{position:absolute;inset:0;display:block;width:100%;height:100%;opacity:0;touch-action:pan-y}
 .blog-spaces-heading{position:absolute;z-index:2;inset:clamp(80px,15svh,170px) 24px auto;max-width:760px;margin-inline:auto;text-align:center;pointer-events:none;opacity:clamp(0,calc(1 - var(--blog-journey-progress)*5),1);transform:translateY(calc(var(--blog-journey-progress)*-48px))}
-html[data-ui][data-color-mode] .organic-site .blog-spaces-heading h1{font:550 clamp(44px,5vw,72px)/1.12 var(--site-font);letter-spacing:-.035em;color:#f5f5f5;margin:0 0 24px}
-html[data-ui][data-color-mode] .organic-site .blog-spaces-heading>p{font-size:17px;line-height:1.7;color:#f0f0f2;margin:0 0 32px}
+html[data-ui][data-color-mode] .organic-site .blog-spaces-heading h1{font:550 clamp(44px,5vw,72px)/1.12 var(--site-font);letter-spacing:-.035em;color:#173957;margin:0 0 24px}
+html[data-ui][data-color-mode] .organic-site .blog-spaces-heading>p{font-size:17px;line-height:1.7;color:#294b69;margin:0 0 32px}
 .blog-spaces-actions{display:flex;justify-content:center;align-items:center;gap:26px;flex-wrap:wrap;pointer-events:auto}
 html[data-ui][data-color-mode] .organic-site .blog-spaces-actions>.space-btn{border:0;background:#eaf5ff;color:#173f70;min-height:48px;gap:12px;padding:12px 23px;border-radius:999px}
-.blog-spaces-actions .blog-spaces-text-link{color:#f2f2f3}
+.blog-spaces-actions .blog-spaces-text-link{color:#173957}
 .blog-spaces-text-link{display:inline-flex;gap:12px;align-items:center;min-height:44px;color:#1a5593;text-decoration:none;font-size:14px;line-height:1.5}
 .blog-spaces-text-link>.icon{width:18px;height:18px;flex:none}
 .blog-spaces-text-link:hover{text-decoration:underline;text-underline-offset:5px}

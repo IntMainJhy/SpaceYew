@@ -41,7 +41,7 @@ const flush=async()=>{await Promise.resolve();await Promise.resolve()};
 
 test('glass follows the pointer with damping, caps redraws and resolution, and stops when idle or outside the viewport',async()=>{
  const s=mount();s.intersection.set(true);await flush();
- assert.deepEqual(s.sizes.at(-1),[1400,900,1.5]);assert.equal(s.draws.length,1);assert.equal(s.frames.size,0,'no continuous idle GPU loop');
+ assert.ok(1400*900*s.sizes.at(-1)[2]**2<=8000001);assert.equal(s.draws.length,1);assert.equal(s.frames.size,0,'no continuous idle GPU loop');
  s.move();s.step(16);assert.ok(s.draws.at(-1)[0]>0&&s.draws.at(-1)[0]<1,'smooth rather than instant camera motion');
  const first=s.draws.length;s.step(16);assert.equal(s.draws.length,first,'draws capped near 30 fps');
  for(let i=0;i<100;i++)s.step();assert.equal(s.frames.size,0,'settled camera sleeps');
@@ -61,7 +61,7 @@ test('glass follows the pointer with damping, caps redraws and resolution, and s
 
 test('touch and reduced motion keep the glass static, including preference changes during movement',async()=>{
  const s=mount({reduced:true,width:390,height:844});s.intersection.set(true);await flush();
- assert.deepEqual(s.sizes.at(-1),[390,844,1.25]);assert.equal(s.draws.length,1);s.move();assert.equal(s.frames.size,0);
+ assert.deepEqual(s.sizes.at(-1),[390,844,2]);assert.equal(s.draws.length,1);s.move();assert.equal(s.frames.size,0);
  s.preference.matches=false;s.preference.dispatchEvent(new Event('change'));s.move(390,844,'touch');assert.equal(s.frames.size,0);
  s.move();s.step();assert.ok(s.draws.at(-1)[0]>0);
  s.preference.matches=true;s.preference.dispatchEvent(new Event('change'));
@@ -74,10 +74,21 @@ test('scrolling below the hero redraws the same viewport canvas and coalesces sc
  assert.equal(s.frames.size,1,'scroll events share one pending frame');
  const before=s.draws.length;s.step();assert.equal(s.draws.length,before+1);
  assert.deepEqual(s.draws.at(-1),[0,0,false,2,true],'reading colors update without enabling spatial motion');
- assert.equal(s.frames.size,0);assert.deepEqual(s.sizes.at(-1),[1400,900,1.5],'GPU target stays viewport-sized');
+ assert.equal(s.frames.size,0);assert.deepEqual(s.sizes.at(-1).slice(0,2),[1400,900],'GPU target stays viewport-sized');
  s.window.dispatchEvent(new Event('scroll'));s.step(16);assert.equal(s.draws.length,before+1,'independent scroll events still respect the 30fps ceiling');s.step(19);assert.equal(s.draws.length,before+2);
  s.intersection.set(false);s.host.top=-2700;s.window.dispatchEvent(new Event('scroll'));s.step();assert.equal(s.draws.length,before+2);
  s.intersection.set(true);assert.equal(s.draws.at(-1)[3],3);s.cleanup();assert.equal(s.window.listeners.size,0);
+});
+
+test('interaction cadence retains 30fps on a 60Hz display, bounds pixels, and lowers resolution under sustained load',async()=>{
+ const s=mount({animated:true,width:2560,height:1440});s.intersection.set(true);await flush();
+ assert.ok(2560*1440*s.sizes.at(-1)[2]**2<=8000001,'large displays retain a high-resolution total pixel budget');
+ const start=s.draws.length;for(let i=0;i<600;i++){s.window.dispatchEvent(new Event('scroll'));s.step(1000/60);}
+ assert.ok(s.draws.length-start>=299&&s.draws.length-start<=301,'30fps does not fall to 20fps through floating-point drift');
+ const before=s.draws.at(-1)[5],dpr=s.sizes.at(-1)[2];for(let i=0;i<30;i++){s.window.dispatchEvent(new Event('scroll'));s.step(100);}
+ assert.ok(s.draws.at(-1)[5]-before>2.8,'visible animation time does not slow to half speed when frames are late');
+ assert.ok(s.sizes.at(-1)[2]<dpr&&s.sizes.at(-1)[2]>=dpr*.85,'sustained late frames use a bounded reduction that preserves fine edges');
+ const sizes=s.sizes.length;s.resize.fn();assert.equal(s.sizes.length,sizes,'unchanged bounds do not rebuild render targets');s.cleanup();
 });
 
 test('load failures, context loss and unmount during a late load preserve the CSS fallback and release resources',async()=>{
@@ -98,7 +109,7 @@ test('the shipped original GLB loads as two bounded glass meshes with real trans
 });
 
 
-test('the optical studio keeps light motion active while visible and never fades the blue background into paper',async()=>{
+test('the optical studio keeps light motion active while visible and retains an opaque rendered backdrop throughout reading',async()=>{
  const s=mount({animated:true});s.intersection.set(true);await flush();assert.equal(s.draws.at(-1)[5],0);assert.equal(s.frames.size,1);
  s.step();s.step();const time=s.draws.at(-1)[5];assert.ok(time>0);assert.equal(s.frames.size,1,'visible strip-light reflections have a continuing clock');
  s.host.top=-2700;s.window.dispatchEvent(new Event('scroll'));s.step();assert.equal(s.canvas.style.opacity,'1','reading sections retain the optical scene');assert.equal(s.draws.at(-1)[3],3);

@@ -8,10 +8,11 @@ const loadScene=(canvas:HTMLCanvasElement,signal:AbortSignal)=>import('@/lib/hom
 /** Load the homepage-only renderer without blocking the semantic content. */
 export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene){
  const surface=canvas.parentElement||canvas,host=canvas.closest('.v2-home')||surface,preference=window.matchMedia('(prefers-reduced-motion: reduce)'),controller=new AbortController();
- let scene:HomeGlassScene|null=null,frame=0,lastDraw=0,activeTime=0,visible=false,printing=false,lost=false,disposed=false;
+ let scene:HomeGlassScene|null=null,frame=0,lastDraw=0,nextDraw=0,activeTime=0,visible=false,printing=false,lost=false,disposed=false;
+ let quality=1,slowFrames=0,drawCount=0,sizedWidth=0,sizedHeight=0,sizedDpr=0;
  let targetX=0,targetY=0,pointerX=0,pointerY=0,progress=0,dirty=false;
  canvas.dataset.atmosphere='loading';canvas.style.opacity='0';
- const stop=()=>{if(frame)cancelAnimationFrame(frame);frame=0;if(scene?.animated)lastDraw=0;if(scene)canvas.dataset.atmosphere=lost?'fallback':'paused';};
+ const stop=()=>{if(frame)cancelAnimationFrame(frame);frame=0;if(scene?.animated){lastDraw=0;nextDraw=0;}if(scene)canvas.dataset.atmosphere=lost?'fallback':'paused';};
  const draw=()=>{
   if(!scene||disposed||lost||document.hidden||printing||!visible)return;
   try{
@@ -27,9 +28,15 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
  const moving=()=>!preference.matches&&Math.abs(targetX-pointerX)+Math.abs(targetY-pointerY)>.0001;
  const tick=(now:number)=>{
   frame=0;if(!canRender())return;
-  if(!lastDraw||now-lastDraw>=1000/30){
-   const dt=Math.min(lastDraw?(now-lastDraw)/1000:1/30,.05),amount=1-Math.exp(-7*dt);
-   if(continuous())activeTime+=dt;
+  const interval=1000/(continuous()&&!dirty&&!moving()?15:30);
+  if(!lastDraw||now+.5>=nextDraw){
+   const elapsed=lastDraw?(now-lastDraw)/1000:1/30,amount=1-Math.exp(-7*Math.min(elapsed,.05));
+   if(continuous())activeTime+=Math.min(elapsed,.25);
+   if(scene?.animated&&++drawCount>12){
+    slowFrames=elapsed>Math.max(.08,interval/1000*1.8)?slowFrames+1:0;
+    if(slowFrames>=6&&quality>.85){quality=.85;slowFrames=0;measure();}
+   }
+   nextDraw=nextDraw?nextDraw+interval*(Math.floor(Math.max(0,now-nextDraw)/interval)+1):now+interval;
    lastDraw=now;pointerX+=(targetX-pointerX)*amount;pointerY+=(targetY-pointerY)*amount;dirty=false;draw();
   }
   if(canRender()&&(dirty||moving()||continuous()))frame=requestAnimationFrame(tick);else stop();
@@ -43,8 +50,10 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
  const measure=()=>{
   if(!scene||disposed||lost)return;
   try{
-   const rect=canvas.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,rect.width<768?1.25:1.5);
-   scene.resize(Math.max(1,rect.width),Math.max(1,rect.height),dpr);readProgress();draw();
+   const rect=canvas.getBoundingClientRect(),width=Math.max(1,rect.width),height=Math.max(1,rect.height),mobile=width<768;
+   const dpr=Math.min(window.devicePixelRatio||1,2,Math.sqrt((mobile?3000000:8000000)/(width*height)))*quality;
+   if(width!==sizedWidth||height!==sizedHeight||dpr!==sizedDpr){scene.resize(width,height,dpr);sizedWidth=width;sizedHeight=height;sizedDpr=dpr;}
+   readProgress();draw();
   }catch{fail();}
  };
  const move=(event:PointerEvent)=>{
@@ -74,7 +83,7 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
   scene?.dispose();scene=null;
  };
  const fail=()=>{cleanup();canvas.style.opacity='0';canvas.dataset.atmosphere='fallback';};
- resize?.observe(surface);const copy=host.querySelector?.('.v2-hero-copy');if(copy)resize?.observe(copy);intersection?.observe(canvas);theme?.observe(document.documentElement,{attributes:true,attributeFilter:['data-color-mode']});
+ resize?.observe(surface);intersection?.observe(canvas);theme?.observe(document.documentElement,{attributes:true,attributeFilter:['data-color-mode']});
  if(!resize)window.addEventListener('resize',measure);
  if(!intersection)visible=true;
  host.addEventListener('pointermove',move as EventListener,{passive:true});host.addEventListener('pointerleave',leave);

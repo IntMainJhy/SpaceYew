@@ -48,5 +48,5 @@ test('unmount reverts an unfinished close and internal links retain client navig
   const links=f.nodes(tree).filter(node=>node.type===f.Link);assert.equal(links.length,2);assert.ok(links.every(node=>node.props.prefetch===false));assert.equal(links[1].props.tabIndex,-1);
   assert.ok(f.nodes(tree).some(node=>node.type==='a'&&node.props.rel==='sponsored noopener noreferrer'));
   f.button(tree).props.onClick();cleanup();assert.ok(f.contexts[0].reverted);
-  assert.ok(f.site('/community'));assert.equal(f.site('/admin'),null);assert.equal(f.site('/admin/settings'),null);
+  assert.ok(f.site('/community'));assert.equal(f.site('/'),null);assert.equal(f.site('/admin'),null);assert.equal(f.site('/admin/settings'),null);
 });

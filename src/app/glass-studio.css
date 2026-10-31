@@ -1,46 +1,47 @@
-/* SpaceYew's native folded glass frames one centered reading axis.
-   The optical studio remains blue from the first frame through the footer. */
+/* The native glass frames a continuous blue-to-ice studio, with no section cut. */
 html[data-ui][data-color-mode]:has(.v2-home){
- --site-canvas:#102c65;--site-surface:#153c7d;--site-raised:#1c4d94;--site-text:#edf5ff;--site-body:#c8def8;--site-muted:#b7d1f3;--site-line:#4e7cb9;--site-control-line:#7b9bc9;--site-accent:#deecff;--site-accent-soft:#2d5795;--site-action:#e9f2ff;--site-action-hover:#fff;--site-on-action:#15376c;--site-focus:#dceaff;--site-selection:#3879bd;
+ --site-canvas:#eef4fa;--site-surface:#f3f8fc;--site-raised:#dae9f6;--site-text:#143959;--site-body:#365473;--site-muted:#4c6480;--site-line:#b6cede;--site-control-line:#83a6c7;--site-accent:#1c58a1;--site-accent-soft:#d6e7f8;--site-action:#1d5ea7;--site-action-hover:#154e8d;--site-on-action:#fff;--site-focus:#174b87;--site-selection:#174b87;
 }
-html[data-ui][data-color-mode=dark]:has(.v2-home){--site-canvas:#0a1f49;--site-surface:#10316a;--site-raised:#183f79;--site-body:#c0d7f4;--site-muted:#b0caed}
-body:has(.v2-home) :is(.promotion-bar,.promotion-controls){background:#0b2150}
-html[data-ui][data-color-mode] body:has(.v2-home) .v2-landing .organic-header{background:#102b61;--chrome-surface:#102b61}
-.v2-home{background:linear-gradient(180deg,#102b61 0,#1654ab 1000px,#103572 2500px,#102c65 100%)}
-.v2-home-atmosphere{background:linear-gradient(180deg,#14284d,#2d62a8 52%,#204274)}
+html[data-ui][data-color-mode=dark]:has(.v2-home){--site-canvas:#e8f0f8;--site-surface:#edf5fb;--site-raised:#d4e4f3}
+html[data-ui][data-color-mode] .v2-landing{position:relative}
+html[data-ui][data-color-mode] .v2-landing .organic-header{position:absolute;inset:0 0 auto;background:transparent!important;--chrome-surface:transparent;border:0;box-shadow:none;backdrop-filter:none}
+.v2-home{background:linear-gradient(180deg,#1b376b 0,#2a72c5 65svh,#c4dff4 140svh,#eef4fa 240svh,#eef4fa 100%)}
+.v2-home-atmosphere{background:transparent}
 .v2-home .v2-hero-scene{padding:0;min-height:0}
-.v2-hero-intro{display:flex;align-items:center;justify-content:center;min-height:calc(100svh - 120px);padding:64px 24px 104px}
+.v2-hero-intro{display:flex;align-items:center;justify-content:center;min-height:100svh;padding:96px 24px 104px}
 .v2-home .v2-hero-copy{max-width:800px;width:100%;margin:0 auto;text-align:center;z-index:1}
-html[data-ui][data-color-mode] .v2-site .v2-home .v2-hero-copy h1{font-size:clamp(42px,4.7vw,64px);font-weight:550;line-height:1.16;letter-spacing:-.035em;margin-bottom:24px;color:#f0f7ff;text-shadow:0 3px 24px #0a25514d}
-html[data-ui][data-color-mode] .v2-site .v2-home .v2-hero-copy>p{font-size:17px;color:#d3e6ff;margin:0 0 30px}
+html[data-ui][data-color-mode] .v2-site .v2-home .v2-hero-copy h1{font-size:clamp(42px,4.7vw,64px);font-weight:550;line-height:1.16;letter-spacing:-.035em;margin-bottom:24px;color:#eef5ff;text-shadow:none}
+html[data-ui][data-color-mode] .v2-site .v2-home .v2-hero-copy>p{font-size:17px;color:#fff;margin:0 0 30px}
+html[data-ui][data-color-mode] .v2-site .v2-home .v2-hero-secondary{color:#edf5ff}
 .v2-home .v2-hero-actions{justify-content:center;gap:24px}
 .v2-home .v2-hero-showcase{max-width:1080px;margin:0 auto;padding:0 24px 92px}
-.v2-home .v2-stage{background:#123777ed;--v2-stage-muted:#c1d8f7;color:#edf5ff;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 28px 70px #051a4238}
-.v2-home .v2-stage-chrome{background:#638bc126;border-color:#a8c5f12e}
-.v2-home .v2-stage-profile{border-color:#7da3d344}
-html[data-ui][data-color-mode] .v2-site .v2-home :is(.v2-stage-profile h2,.v2-stage-project h3,.v2-stage-note h3,.v2-stage-about h3){color:#eaf3ff}
-.v2-home :is(.v2-stage-profile>a,.v2-stage-about>a,.v2-stage-note>a){color:#d6e9ff}
-.v2-home .v2-stage-skills>span{background:#517ebc45;color:#d5e6fd}
-.v2-home .v2-stage-tabs>button[aria-selected=true]{color:#eff6ff;border-bottom-color:#c6e1ff}
-.v2-home .v2-stage :is(a,button,[role=tabpanel]):focus-visible{outline-color:#e6f2ff}
+.v2-home .v2-stage{background:#bdddf5eb;--site-text:#10365f;--site-accent:#123f79;--site-focus:#113f79;--v2-stage-muted:#234d75;color:var(--site-text);box-shadow:0 28px 70px #153f792b;backdrop-filter:none;-webkit-backdrop-filter:none}
+.v2-home .v2-stage-chrome{background:#e7f3fc40;border-color:#729cc13d}
+.v2-home .v2-stage-profile{border-color:#729cc14d}
+html[data-ui][data-color-mode] .v2-site .v2-home :is(.v2-stage-profile h2,.v2-stage-project h3,.v2-stage-note h3,.v2-stage-about h3){color:var(--site-text)}
+.v2-home :is(.v2-stage-profile>a,.v2-stage-about>a,.v2-stage-note>a){color:var(--site-accent)}
+.v2-home .v2-stage-skills>span{background:#6f9eca30;color:#244d76}
+.v2-home .v2-stage-tabs>button[aria-selected=true]{color:#123f79;border-bottom-color:#245d9a}
+.v2-home .v2-stage :is(a,button,[role=tabpanel]):focus-visible{outline-color:var(--site-focus)}
 .v2-home .v2-section{max-width:1160px;padding-block:88px}
 .v2-home .v2-section-heading{max-width:760px;text-align:center;margin:0 auto 42px}
-html[data-ui][data-color-mode] .v2-site .v2-home .v2-section-heading h2{font-size:clamp(32px,4vw,50px);font-weight:500;letter-spacing:-.035em;color:#edf5ff}
-html[data-ui][data-color-mode] .v2-site .v2-home .v2-section-heading p{color:#c8def8}
+html[data-ui][data-color-mode] .v2-site .v2-home .v2-section-heading h2{font-size:clamp(32px,4vw,50px);font-weight:500;letter-spacing:-.035em;color:var(--site-text)}
+html[data-ui][data-color-mode] .v2-site .v2-home .v2-section-heading p{color:var(--site-body)}
 .v2-home .v2-work-section{padding-top:26px}
 .v2-home .v2-heading-row{display:block;text-align:center}
 .v2-home .v2-heading-row .v2-text-link{margin:18px auto 0}
-.v2-home .v2-creator{background:#16417fe8;box-shadow:0 14px 32px #0823571a}
-html[data-color-mode=dark] .v2-home .v2-creator{background:#10316ae8}
-.v2-home .v2-work-art{background:#19477e;box-shadow:0 15px 36px #061c4926}
+.v2-home .v2-creator{--site-text:#173e68;--site-body:#234f7a;--site-muted:#2e5883;--site-accent:#18447a;background:#b8d9f4ed;color:var(--site-text);box-shadow:0 14px 32px #275e971a}
+html[data-color-mode=dark] .v2-home .v2-creator{background:#b0d3f1ed;color:var(--site-text)}
+.v2-home .v2-work-art{background:#a9cfef;box-shadow:0 15px 36px #225b9726}
 .v2-home .v2-tools{gap:40px}
 .v2-home .v2-tools>a{text-align:center}
 .v2-home .v2-tools p{margin-inline:auto!important;max-width:32ch!important}
 .v2-home .v2-tools>a>span{justify-content:center}
 .v2-home .v2-tools>a>.icon{margin-inline:auto}
 .v2-home .v2-invitation{padding-block:110px 100px}
-.v2-home .v2-hero-empty{background:#153c7d;color:#edf5ff}
+.v2-home .v2-hero-empty{background:var(--site-surface);color:var(--site-text)}
 body:has(.v2-home) .organic-footer{position:relative;background:var(--site-canvas)!important;color:var(--site-body)}
+body:has(.v2-home) .organic-footer nav{color:var(--site-body)}
 body:has(.v2-home) ::selection{background:#3879bd;color:#fff}
 @supports(animation-timeline:view()){
  @media(prefers-reduced-motion:no-preference){
@@ -52,12 +53,12 @@ body:has(.v2-home) ::selection{background:#3879bd;color:#fff}
 @keyframes glass-art-open{from{transform:scale(.94);clip-path:inset(3% round 14px)}to{transform:scale(1);clip-path:inset(0 round 14px)}}
 @media(max-width:1000px){.v2-home .v2-hero-copy{margin:0 auto}.v2-home .v2-hero-showcase{padding-inline:28px}}
 @media(max-width:767px){
- .v2-hero-intro{align-items:flex-start;min-height:calc(100svh - 112px);padding:58px 22px 32px}
+ .v2-hero-intro{align-items:flex-start;min-height:100svh;padding:136px 22px 32px}
  html[data-ui][data-color-mode] .v2-site .v2-home .v2-hero-copy h1{font-size:clamp(34px,8.8vw,40px);line-height:1.2;margin-bottom:20px}
  html[data-ui][data-color-mode] .v2-site .v2-home .v2-hero-copy>p{font-size:14px;margin-bottom:26px}
  .v2-home .v2-hero-actions{gap:18px}
  .v2-home .v2-hero-showcase{padding:0 18px 46px}
- .v2-home .v2-stage-profile{border-bottom-color:#7da3d344}
+ .v2-home .v2-stage-profile{border-bottom-color:#729cc14d}
  .v2-home .v2-section{padding:54px 22px}
  .v2-home .v2-work-section{padding-top:20px}
  .v2-home .v2-section-heading{margin-bottom:30px}

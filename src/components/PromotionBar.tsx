@@ -9,7 +9,7 @@ type Item = {title: string; url: string; kind: string};
 type Config = {enabled: boolean; items: Item[]};
 export function SitePromotion({config}: {config: Config}) {
   const path = usePathname();
-  return path === '/admin' || path.startsWith('/admin/') ? null : <PromotionBar config={config}/>;
+  return path === '/' || path === '/admin' || path.startsWith('/admin/') ? null : <PromotionBar config={config}/>;
 }
 export function PromotionBar({config}: {config: Config}) {const {t:tr}=useLocale();
   const [dismissed, setDismissed] = useState(false);

@@ -55,7 +55,7 @@ import './v2.css';
 import './glass-studio.css';
 export const viewport:Viewport={width:'device-width',initialScale:1,viewportFit:'cover'};
 export const metadata:Metadata={applicationName:'SpaceYew',title:'SpaceYew',description:'Projects, experience, and shared resources.'};
-const designContract='<!-- SpaceYew UI v2 experiment: continuous blue optical studio around centered creator content, original native glass mark, authored strip-light reflections and scroll-linked staging, modern sans typography and persistent light/dark appearance. Public portfolio content, editing controls and author-selected formatting retain their own boundaries. -->';
+const designContract='<!-- SpaceYew UI v2 experiment: continuous blue-to-ice optical studio around centered creator content, transparent navigation, original native glass mark, sharp strip-light reflections and scroll-linked staging, modern sans typography and persistent appearance controls. Public portfolio content, editing controls and author-selected formatting retain their own boundaries. -->';
 export default async function RootLayout({children}:{children:React.ReactNode}){
   const locale=normalizeLocale((await cookies()).get('site-locale')?.value);
   const nonce=(await headers()).get('x-nonce')||undefined;

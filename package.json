@@ -29,6 +29,7 @@
     "test:registration:http": "node test/email-registration-http.mjs"
   },
   "dependencies": {
+    "@react-three/fiber": "9.8.2",
     "@tiptap/core": "3.32.0",
     "@tiptap/extension-image": "3.32.0",
     "@tiptap/extension-placeholder": "3.32.0",

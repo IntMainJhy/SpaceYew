@@ -6,7 +6,7 @@ import {api} from '@/lib/client';
 import {FeedAvatar} from './FeedAvatar';
 import {type Doc,Notice,primary,secondary} from './CommunityUI';
 
-export function MemberAvatarSettings({user,onSaved}:{user:Doc;onSaved:(user:Doc)=>void}){const {t:tr,locale}=useLocale();
+export function MemberAvatarSettings({user,onSaved}:{user:Doc;onSaved:(user:Doc)=>void}){const {t:tr}=useLocale();
  const[file,setFile]=useState<File|null>(null),[preview,setPreview]=useState(''),[busy,setBusy]=useState(false),[error,setError]=useState(''),[message,setMessage]=useState('');
  const picker=useRef<HTMLInputElement>(null);
  function clearSelection(){setFile(null);if(picker.current)picker.current.value=''}

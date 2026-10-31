@@ -7,7 +7,7 @@ import {post} from '@/lib/client';
 import {Icon} from './Icons';
 import {type Doc} from './CommunityUI';
 
-export function ShareLink({id,title='社区分享'}:{id:string;title?:string}){const {t:tr,locale}=useLocale();
+export function ShareLink({id,title='社区分享'}:{id:string;title?:string}){const {t:tr}=useLocale();
  const menu=useRef<HTMLDetailsElement>(null);
  const[notice,setNotice]=useState(''),[native,setNative]=useState(false),[manual,setManual]=useState('');
  useEffect(()=>{
@@ -21,7 +21,7 @@ export function ShareLink({id,title='社区分享'}:{id:string;title?:string}){c
  async function copy(){try{await navigator.clipboard.writeText(url());setNotice('链接已复制');setManual('');if(menu.current)menu.current.open=false;}catch{setManual(url());setNotice('复制失败，请手动复制下方链接');}}
  return <span className="feed-share"><details ref={menu} className="feed-share-menu"><summary aria-label={tr("分享与更多操作")}><Icon name="share"/><span>{tr("分享")}</span></summary><div className="feed-share-popover" role="group" aria-label={tr("分享方式")}><button type="button" onClick={()=>void copy()}><Icon name="link"/>{tr("复制链接")}</button>{native&&<button type="button" onClick={async()=>{try{await navigator.share({title,url:url()});setNotice("已打开系统分享");if(menu.current)menu.current.open=false;}catch(e:any){if(e.name!=='AbortError')setNotice("系统分享暂不可用，请复制链接");}}}><Icon name="share"/>{tr("系统分享")}</button>}<Link className="feed-mobile-report" href={'/report?post='+id}>{tr("举报此内容")}</Link>{manual&&<input value={manual} readOnly aria-label={tr("可手动复制的分享链接")} onFocus={e=>e.target.select()}/>}</div></details><span className="feed-copy-notice" role="status">{tr(notice)}</span></span>;
 }
-export function PostActions({item,user,onBookmarkRemoved}:{item:Doc;user:Doc|null;onBookmarkRemoved?:()=>void}){const {t:tr,locale}=useLocale();
+export function PostActions({item,user,onBookmarkRemoved}:{item:Doc;user:Doc|null;onBookmarkRemoved?:()=>void}){const {t:tr}=useLocale();
  const router=useRouter();const[state,setState]=useState<Doc>(item),[busy,setBusy]=useState(''),[error,setError]=useState('');
  useEffect(()=>setState(item),[item.id,item.likeCount,item.liked,item.bookmarked,item.reposted,item.repostCount,item.commentCount]);
  async function react(kind:string){
@@ -37,7 +37,7 @@ export function PostActions({item,user,onBookmarkRemoved}:{item:Doc;user:Doc|nul
   <ShareLink id={item.id} title={item.title}/><Link href={'/report?post='+item.id} className="feed-report-link">{tr("举报")}</Link>
  </div>{busy&&<span className="community-sr" role="status">{tr("正在保存互动…")}</span>}{error&&<p role="alert" className="feed-action-error">{tr(error)}{!user&&<Link href="/login">{tr("前往登录")}</Link>}</p>}</div>;
 }
-export function FollowButton({person,user,onSaved}:{person:Doc;user:Doc|null;onSaved?:(person:Doc)=>void}){const {t:tr,locale}=useLocale();
+export function FollowButton({person,user,onSaved}:{person:Doc;user:Doc|null;onSaved?:(person:Doc)=>void}){const {t:tr}=useLocale();
  const router=useRouter();const[following,setFollowing]=useState(!!person.following),[busy,setBusy]=useState(false),[error,setError]=useState('');
  useEffect(()=>setFollowing(!!person.following),[person.id,person.following]);
  if(user?.id===person.id)return null;

@@ -3,7 +3,7 @@ import {DocumentReader} from './DocumentReader';
 import {documentOutline} from '@/lib/document-outline.mjs';
 import {headers} from 'next/headers';
 import {publicCatalog} from '@/lib/catalog.mjs';
-import {CatalogCards,CatalogFilter,MemberCatalog,defaultCover} from './SharedCatalog';
+import {CatalogCards,CatalogFilter,MemberCatalog} from './SharedCatalog';
 import {notFound} from 'next/navigation';
 import {publicContent} from '@/lib/db.mjs';
 import {localizeContent} from '@/lib/content-locales.mjs';

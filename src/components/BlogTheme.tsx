@@ -9,7 +9,6 @@ import {BlogDesignedPage} from './BlogDesignedPage';
 import {AnxPortfolio} from './AnxPortfolio';
 import type {SpaceData} from './SpaceBoard';
 
-export const homepageThemes=[['anx','Anx Portfolio','来自 anx-portfolio 的内置适配版，立体像素签名与细线个人档案。'],['folio','像素手记','像素签名、细线框架与开放的个人档案。'],['panorama','远景日记','宽幅风景、深色阅读面板与独立个人名片。'],['journal','叙事杂志','宽幅标题、留白与细致的经历编排。'],['minimal','简洁档案','侧栏名片与清晰的个人信息。'],['terminal','开发者','深色界面与等宽字体，专注技术与作品。']];
 export function BlogTheme({data,preview=false,embedded=false}:{data:SpaceData;preview?:boolean;embedded?:boolean}){
  const Chapters=preview?'div':'main';
  const {t,locale}=useLocale(),p=localizeProfile(data.profile,locale),settings=data.layout.blog||{},theme=data.owner==='owner'?'anx':settings.theme||'journal',content=(data.content||[]).map((x:SpaceData)=>localizeContent(x,locale)),base='/blog/'+data.handle;

@@ -1,9 +1,9 @@
 /* Operate extension: inherit white/ink controls, quiet rows and existing responsive navigation. */
-.management-filters{display:flex;align-items:end;flex-wrap:wrap;gap:12px;margin:24px 0}
+.management-filters{display:flex;align-items:flex-end;flex-wrap:wrap;gap:12px;margin:24px 0}
 .management-filters label{display:grid;gap:6px;min-width:0;font-size:13px;color:var(--x-muted,#536471)}
 .management-filters :is(input,select){max-width:100%;min-width:130px;padding:10px 12px;background:#fff;color:var(--x-ink,#0f1419);border:1px solid var(--x-border,#cfd9de);border-radius:10px;font:inherit}
 .management-filters input[type=search]{width:220px}
-.management-filters>button{align-self:end}
+.management-filters>button{align-self:flex-end}
 .management-pagination{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:16px;margin-top:24px;font-variant-numeric:tabular-nums}
 .management-empty{padding:32px 0;color:var(--x-muted,#536471)}
 .file-storage{max-width:640px;margin:12px 0 28px;font-variant-numeric:tabular-nums}

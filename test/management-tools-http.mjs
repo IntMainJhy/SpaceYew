@@ -19,7 +19,8 @@ try{
  const chunk=await fetch(base+'/api/spaces/uploads/'+task.data.id+'?index=0',{method:'PUT',headers:{Origin:base,Cookie:a,'X-Chunk-Sha256':hash(bytes)},body:bytes});assert.equal(chunk.status,200);
  const complete=await call('/api/spaces/uploads/'+task.data.id+'/complete',{},a);assert.equal(complete.status,200);const file=complete.data.file;
  assert.equal((await call('/api/spaces/files',undefined,b)).data.total,0);assert.equal((await call('/api/spaces/files/'+file.id,undefined,b,'DELETE')).status,404);
- const fileHtml=await(await fetch(base+'/workspace/files',{headers:{Cookie:a+'; site-locale=en'}})).text();assert.ok(fileHtml.includes('My files'));assert.ok(fileHtml.includes('synthetic-personal-file.txt'));assert.ok(!fileHtml.includes('Application error'));
+ const personalFiles=await call('/api/spaces/files?q=synthetic-personal&kind=file&status=unused',undefined,a);assert.equal(personalFiles.status,200);assert.equal(personalFiles.data.total,1);assert.equal(personalFiles.data.items[0].id,file.id);assert.equal((await call('/api/spaces/files?kind=image',undefined,a)).data.total,0);
+ const fileRedirect=await fetch(base+'/workspace/files',{redirect:'manual',headers:{Cookie:a+'; site-locale=en'}});assert.equal(fileRedirect.status,307);assert.equal(new URL(fileRedirect.headers.get('location'),base).pathname,'/workspace/blog');const editorHtml=await(await fetch(base+'/workspace/blog',{headers:{Cookie:a+'; site-locale=en'}})).text();assert.ok(editorHtml.includes('blog-editor'));assert.ok(!editorHtml.includes('Application error'));
  assert.equal((await call('/api/admin/logs',undefined,a)).status,401);
  const logs=(await call('/api/admin/logs?scope=space')).data;assert.ok(logs.items.some(row=>row.action==='space_file_upload'&&row.target===file.id));
  assert.equal((await call('/api/spaces/files/'+file.id,undefined,a,'DELETE')).status,200);assert.equal((await call('/api/spaces/files',undefined,a)).data.used,0);

@@ -21,11 +21,6 @@ export function previewCanvasProfile(profile,language){
  return result;
 }
 
-// Pack real measured card heights. Explicitly saved positions are respected on first open.
-export function arrangeCanvasCards(nodes,saved={}){
- let rowY=0;return nodes.map((node,index)=>{const position=saved[node.id]||{x:(index%2)*648,y:rowY};if(index%2===1||index===nodes.length-1){const previous=nodes[index-1],left=previous?(saved[previous.id]?.y??rowY)+(previous.measured?.height||280):rowY;rowY=Math.max(left,position.y+(node.measured?.height||280))+40}return {...node,position}});
-}
-
 export function previewCanvasLayout(layout,language){if(!layout.blog?.design)return layout;return {...layout,blog:{...layout.blog,design:{...layout.blog.design,nodes:layout.blog.design.nodes.map(n=>({...n,...Object.fromEntries(['label','text','alt'].map(key=>[key,n.translations?.[language]?.[key]?.trim()?n.translations[language][key]:n[key]])),translations:{}}))}}}}
 
 // Preserve unfinished words and spaces during typing; the server normalizes on save.

@@ -16,26 +16,16 @@ try {
  assert.equal((await fetch(server.base+'/api/admin/config',{method:'POST',headers:{Origin:server.base,'Content-Type':'application/json'},body:JSON.stringify({key:'site',value:{...boot.site,promotionBar}})})).status,401);
  assert.equal((await save(promotionBar)).status,200);
  const html=await (await fetch(server.base+'/',{headers:{Cookie:'site-locale=zh'}})).text();
- assert.ok(html.includes('隔离验收广告 · 后台可更新'));
- assert.ok(html.includes('class="promotion-label"'));
- assert.ok(html.includes('<span>广告</span>'));
- assert.ok(html.includes('class="icon"'));
- assert.ok(html.includes('社区推荐'));
- assert.ok(html.includes('aria-roledescription="跑马灯"'));
- assert.ok(html.includes('class="promotion-group promotion-clone" aria-hidden="true"'));
- assert.ok(html.includes('tabindex="-1"'));
- assert.ok(html.includes('rel="sponsored noopener noreferrer"'));
- assert.ok(!html.includes('上一条推广'));
- assert.ok(!html.includes('class="appearance-bar"'));
+ const persistedPromotions=async()=>(await(await fetch(server.base+'/api/admin/bootstrap',{headers})).json()).site.promotionBar;
+ assert.deepEqual(await persistedPromotions(),promotionBar,'legacy promotion config remains authenticated and round-trips without loss');
+ assert.ok(!html.includes('class="promotion-bar"'),'the current platform home does not render the retired promotion component');
  assert.equal((await save({...promotionBar,items:[{title:'危险链接',url:'javascript:alert(1)',kind:'ad'}]})).status,400);
  assert.equal((await save({enabled:false,items:[]})).status,200);
  assert.ok(!(await (await fetch(server.base+'/',{headers:{Cookie:'site-locale=zh'}})).text()).includes('class="promotion-bar"'));
  assert.equal((await save({enabled:true,items:[{title:'单条广告也持续循环',url:'',kind:'ad'}]})).status,200);
  const single=await(await fetch(server.base+'/',{headers:{Cookie:'site-locale=zh'}})).text();
- assert.ok(single.includes('单条广告也持续循环'));
- assert.ok(single.includes('class="promotion-inner"'));
- assert.ok(single.includes('关闭推广条'));
- assert.ok(!single.includes('暂停推广'));assert.ok(!single.includes('播放推广'));assert.ok(!single.includes('继续推广'));
+ assert.deepEqual(await persistedPromotions(),{enabled:true,items:[{title:'单条广告也持续循环',url:'',kind:'ad'}]});
+ assert.ok(!single.includes('class="promotion-bar"'));
  // Desktop releases share the authenticated settings save, but need no installer to exist in the fixture.
  const home=async locale=>(await fetch(server.base+'/',{headers:{Cookie:'site-locale='+locale}})).text();
  const downloads=async locale=>{const response=await fetch(server.base+'/downloads',{headers:{Cookie:'site-locale='+locale}});assert.equal(response.status,200);return response.text()};
@@ -64,5 +54,5 @@ try {
  assert.equal((await releaseSave({})).status,200);
  const cleared=await downloads('en');assert.ok(!cleared.includes(releases.macos.url));assert.ok(cleared.includes('Coming soon'));
  assert.ok((await downloads('ja')).includes('近日公開'));
- console.log('PASS: introduction page without download modules, dedicated downloads page, owner-only promotions/releases, SSR pending/available/cleared downloads, legacy preservation, locales and unsafe URL rejection; isolated data.');
+ console.log('PASS: introduction page without download modules, dedicated downloads page, owner-only legacy promotion config persistence/releases, SSR pending/available/cleared downloads, legacy preservation, locales and unsafe URL rejection; isolated data.');
 } finally {if(server)await stopServer(server);await rm(data,{recursive:true,force:true});}

@@ -5,14 +5,14 @@ import {Icon} from './Icons';
 import {catalogCoverUrl} from '@/lib/catalog-presentation.mjs';
 import {inputClass,secondary,Notice} from './CommunityUI';
 
-export function PostCover({id,alt='',className='',generated}:{id?:string;alt?:string;className?:string;generated?:{kind:string;title:string;category:string}}){const {t:tr,locale}=useLocale();
+export function PostCover({id,alt='',className='',generated}:{id?:string;alt?:string;className?:string;generated?:{kind:string;title:string;category:string}}){const {t:tr}=useLocale();
  const[failed,setFailed]=useState('');
  const source=id?'/media/'+id:generated?catalogCoverUrl(generated.kind,generated.title,generated.category):'';
  if(!source)return null;
  if(failed===source)return <p className="community-cover-unavailable">{tr("封面暂不可用")}</p>;
  return <img className={'community-post-cover '+className} src={source} alt={alt||tr("投稿封面")} width={1200} height={675} loading="lazy" decoding="async" onError={()=>setFailed(source)}/>;
 }
-export function CoverField({id,alt,onChange,disabled,onBusy}:{id:string;alt:string;onChange:(id:string,alt:string)=>void;disabled:boolean;onBusy:(busy:boolean)=>void}){const {t:tr,locale}=useLocale();
+export function CoverField({id,alt,onChange,disabled,onBusy}:{id:string;alt:string;onChange:(id:string,alt:string)=>void;disabled:boolean;onBusy:(busy:boolean)=>void}){const {t:tr}=useLocale();
  const input=useRef<HTMLInputElement>(null),[busy,setBusy]=useState(false),[error,setError]=useState('');
  async function upload(file?:File){if(!file)return;setError('');if(file.size>5*1024*1024){setError('图片不能超过5MB。');return;}if(!['image/jpeg','image/png','image/webp'].includes(file.type)){setError('请选择 JPG、PNG 或 WebP 图片。');return;}setBusy(true);onBusy(true);try{
   const response=await fetch('/api/community/covers',{method:'PUT',headers:{'Content-Type':file.type},body:file}),data=await response.json();if(!response.ok)throw new Error(data.error||'上传失败');onChange(data.id,alt);

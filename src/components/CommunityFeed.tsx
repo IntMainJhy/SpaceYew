@@ -14,7 +14,7 @@ import {api} from '@/lib/client';
 import {communityProfileDestination} from '@/lib/navigation.mjs';
 import {usePageSeed} from './PageResources';
 
-function AccountIdentity({user}:{user:Doc|null}){const {t:tr,locale}=useLocale();
+function AccountIdentity({user}:{user:Doc|null}){const {t:tr}=useLocale();
  const menu=useRef<HTMLDetailsElement>(null);
  const name=user?.displayName||user?.nickname||tr('登录 / 注册');
  const handle=user?.handle||user?.username;
@@ -37,7 +37,7 @@ function AccountIdentity({user}:{user:Doc|null}){const {t:tr,locale}=useLocale()
  </div>;
 }
 
-function MobileAccountMenu({user,active}:{user:Doc|null;active:string}){const {t:tr,locale}=useLocale();
+function MobileAccountMenu({user,active}:{user:Doc|null;active:string}){const {t:tr}=useLocale();
  const menu=useRef<HTMLDetailsElement>(null),name=user?.displayName||user?.nickname||tr('登录社区');
  const login=(next:string)=>user?next:'/login?next='+encodeURIComponent(next);
  const close=()=>{if(menu.current)menu.current.open=false;};
@@ -51,7 +51,7 @@ function MobileAccountMenu({user,active}:{user:Doc|null;active:string}){const {t
  return <details className="feed-mobile-account" ref={menu}><summary aria-label={tr("我的账号与更多功能")} aria-current={['account','posts','profile','following'].includes(active)?'page':undefined}><FeedAvatar name={name} avatarId={user?.avatarId} guest={!user}/><span>{tr("我的")}</span></summary><div className="feed-mobile-panel" role="group" aria-label={tr("我的社区菜单")}><header><FeedAvatar name={name} avatarId={user?.avatarId} guest={!user}/><div><strong>{name}<SiteOwnerBadge siteOwner={user?.siteOwner} compact/></strong><small>{user?tr("管理分享与个人账号"):tr("登录后分享、收藏与关注")}</small></div><button type="button" onClick={()=>{close();menu.current?.querySelector('summary')?.focus();}} aria-label={tr("关闭我的菜单")}>{tr("关闭")}</button></header><div className="feed-mobile-menu-links"><Link href={user?communityProfileDestination(user):login('/workspace/account')} onClick={close}><Icon name="user"/>{tr(user&&communityProfileDestination(user).startsWith('/community/')?"社区名片":"个人账号")}</Link><Link href={login('/workspace')} onClick={close}><Icon name="file"/>{tr("我的投稿")}</Link><Link href={login('/community?feed=following')} onClick={close}><Icon name="heart"/>{tr("关注动态")}</Link><Link href={login('/workspace/account')} onClick={close}><Icon name="settings"/>{tr("个人账号")}</Link>{user&&['owner','reviewer'].includes(user.role)&&<Link href="/admin/community" onClick={close}><Icon name="shield"/>{tr("社区审核")}</Link>}</div><footer>{user?<Logout/>:<Link href="/login?next=/community" onClick={close}>{tr("登录 / 注册")}</Link>}</footer></div></details>;
 }
 
-export function CommunityNavigation({user,active='feed',compose=true}:{user:Doc|null,active?:string,compose?:boolean}){const {t:tr,locale}=useLocale();
+export function CommunityNavigation({user,active='feed',compose=true}:{user:Doc|null,active?:string,compose?:boolean}){const {t:tr}=useLocale();
  const seed=usePageSeed('/api/community/notification-count'),[unread,setUnread]=useState(seed?.data?.unread||0);
  useEffect(()=>{if(!user){setUnread(0);return;}let live=true;const refresh=()=>{if(!document.hidden)api('/api/community/notification-count').then(result=>{if(live)setUnread(result.unread);}).catch(()=>{});};refresh();const timer=window.setInterval(refresh,60000);window.addEventListener('community-social-change',refresh);return()=>{live=false;window.clearInterval(timer);window.removeEventListener('community-social-change',refresh);};},[user?.id]);
  const login=(next:string)=>user?next:'/login?next='+encodeURIComponent(next);

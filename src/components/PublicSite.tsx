@@ -30,17 +30,16 @@ const button = 'organic-button px-6 py-3 rounded-full font-medium transition-col
 const card = 'organic-card bg-[#faf6f1] rounded-[2rem] border border-stone-200';
 const input = 'organic-input px-5 py-3 bg-white border border-stone-200 rounded-full text-stone-800 placeholder:text-stone-400 focus:border-stone-400 focus:ring-2 focus:ring-stone-200 transition-all duration-300';
 
-async function Tags({tags = [],literal=false}: {tags?: string[],literal?:boolean}) {const {t:tr,locale}=await serverI18n();
+async function Tags({tags = [],literal=false}: {tags?: string[],literal?:boolean}) {const {t:tr}=await serverI18n();
   if (!tags.length) return null;
   return <ul className="organic-tags" aria-label={tr("标签")}>{tags.map(t => <li key={t}>{literal?t:tr(t)}</li>)}</ul>;
 }
-async function TextLink({href, children, className = ''}: {href: string, children: React.ReactNode, className?: string}) {const {t:tr,locale}=await serverI18n();
-  return <Link className={'organic-text-link ' + className} href={href}>{children}</Link>;
+async function TextLink({href, children, className = ''}: {href: string, children: React.ReactNode, className?: string}) {  return <Link className={'organic-text-link ' + className} href={href}>{children}</Link>;
 }
-async function SectionTitle({title, description, href, action}: {title: string, description?: string, href?: string, action?: string}) {const {t:tr,locale}=await serverI18n();
+async function SectionTitle({title, description, href, action}: {title: string, description?: string, href?: string, action?: string}) {const {t:tr}=await serverI18n();
   return <div className="organic-section-heading"><div><h2>{tr(title)}</h2>{description && <p>{tr(description)}</p>}</div>{href && <TextLink href={href}>{action || tr("继续看看")}</TextLink>}</div>;
 }
-async function ProjectCard({item, index = 0, collection=false}: {item: Doc, index?: number, collection?:boolean}) {const {t:tr,locale}=await serverI18n();const Title=collection?'h2':'h3';
+async function ProjectCard({item, index = 0, collection=false}: {item: Doc, index?: number, collection?:boolean}) {const {t:tr}=await serverI18n();const Title=collection?'h2':'h3';
   return <article className={card + ' organic-project-piece tone-' + index % 3}>
     <Link className="organic-project-link" href={hrefFor('projects', item.slug)}>
       <div className={'organic-project-cover ' + (!item.coverId ? 'organic-type-cover' : '')}>
@@ -65,17 +64,17 @@ async function ArticleRow({item, collection=false}: {item: Doc, collection?:bool
     <Link href={hrefFor('articles', item.slug)}><div className="catalog-article-copy"><Title>{item.title}</Title><p>{item.summary}</p>{!collection&&<span className="organic-text-link">{tr("展开这篇手记 ")}</span>}</div>{collection&&item.coverId&&<img className="catalog-article-cover" src={'/media/'+item.coverId} alt="" loading="lazy"/>}</Link><Tags tags={item.tags}/>
   </article>;
 }
-async function Timeline({profile, limit = 200}: {profile: Doc, limit?: number}) {const {t:tr,locale}=await serverI18n();
+async function Timeline({profile, limit = 200}: {profile: Doc, limit?: number}) {const {t:tr}=await serverI18n();
   const entries = profile.experiences.filter((x: Doc) => x.visible).sort((a: Doc, b: Doc) => a.order - b.order).slice(0, limit);
   return <div className="organic-timeline">{entries.map((x: Doc) => <article className="organic-timeline-entry" key={x.id}>
     <div className="organic-timeline-date"><span>{x.start?.replaceAll('-', '.')}</span><span>{x.end ? '— ' + x.end.replaceAll('-', '.') : tr("至今")}</span></div>
     <div>{x.type && <span className="organic-note">{x.type}</span>}<h3>{x.title}</h3><p className="organic-body-copy">{x.description}</p></div>
   </article>)}</div>;
 }
-async function Empty({title = '这一页，等下一次更新', text = '内容正在慢慢整理。也可以先从我的经历开始了解。', href = '/about', action = '去认识我'}: {title?: string, text?: string, href?: string, action?: string}) {const {t:tr,locale}=await serverI18n();
+async function Empty({title = '这一页，等下一次更新', text = '内容正在慢慢整理。也可以先从我的经历开始了解。', href = '/about', action = '去认识我'}: {title?: string, text?: string, href?: string, action?: string}) {const {t:tr}=await serverI18n();
   return <div className="organic-empty"><span className="organic-empty-leaf" aria-hidden="true"/><h2>{tr(title)}</h2><p>{tr(text)}</p><TextLink href={href}>{tr(action)}</TextLink></div>;
 }
-async function ProfileLinks({profile}: {profile: Doc}) {const {t:tr,locale}=await serverI18n();
+async function ProfileLinks({profile}: {profile: Doc}) {const {t:tr}=await serverI18n();
   return <div className="organic-profile-links">
     {profile.email && <a href={'mailto:' + profile.email}>{profile.email}</a>}
     {profile.github && <a href={profile.github} target="_blank" rel="noopener noreferrer">{tr("GitHub / 代码主页")}<Icon name="link"/></a>}
@@ -111,7 +110,7 @@ async function Home({profile, projects, articles, resources}: {profile: Doc, pro
     <section className="organic-about-band"><div><h2>{tr("从作品之外，")}<br/>{tr("再多认识我一点。")}</h2><p>{tr("个人介绍、成长经历与技能，也都收在这份持续更新的记录里。")}</p></div><div className="organic-about-band-links"><TextLink href="/about">{tr("关于我与我的经历")}</TextLink><TextLink href="/career">{tr("查看求职展示")}</TextLink></div></section>
   </div>;
 }
-async function About({profile}: {profile: Doc}) {const {t:tr,locale}=await serverI18n();
+async function About({profile}: {profile: Doc}) {const {t:tr}=await serverI18n();
   const entries = profile.experiences.some((x: Doc) => x.visible);
   return <><header className="organic-page-heading"><h1>{tr("关于我，")}<em>{tr("和一路走来的经历。")}</em></h1></header>
     <div className="organic-about-layout"><aside className="organic-person">
@@ -161,7 +160,7 @@ async function Detail({type, slug}: {type: string, slug: string}) {const {t:tr,l
     </div>
   </div>;
 }
-async function Collection({type, projects, articles, resources, taxonomy, query}: {type: string, projects: Doc[], articles: Doc[], resources: Doc[], taxonomy: Doc, query: Query}) {const {t:tr,locale}=await serverI18n();
+async function Collection({type, projects, articles, resources, taxonomy, query}: {type: string, projects: Doc[], articles: Doc[], resources: Doc[], taxonomy: Doc, query: Query}) {const {t:tr}=await serverI18n();
   const q = String(query.q || '').trim(), category = String(query.category || ''), tag = String(query.tag || ''), resourceType = String(query.type || '');
   const all = type === 'projects' ? projects : type === 'articles' ? articles : resources;
   const filtered = all.filter(item => (!q || (item.title + ' ' + item.summary).toLowerCase().includes(q.toLowerCase())) && (!category || item.category === category) && (!tag || item.tags.includes(tag)) && (!resourceType || item.kind === resourceType));
@@ -183,9 +182,9 @@ async function Collection({type, projects, articles, resources, taxonomy, query}
     {pages > 1 && <nav className="organic-pagination" aria-label={tr("分页")}>{page > 1 && <Link className={button + ' is-secondary'} href={pageUrl(page - 1)}>{tr("上一页")}</Link>}<span>{page} / {pages}</span>{page < pages && <Link className={button + ' is-secondary'} href={pageUrl(page + 1)}>{tr("下一页")}</Link>}</nav>}
   </div>;
 }
-export async function PublicSite({path = [], query = {}}: {path?: string[], query?: Query}) {const {t:tr,locale}=await serverI18n();
+export async function PublicSite({path = [], query = {}}: {path?: string[], query?: Query}) {const {locale}=await serverI18n();
   const profile = localizeProfile(getConfig('profile'),locale), site = getConfig('site'), taxonomy = getConfig('taxonomy');
-  const current = '/' + path.join('/'), section = path[0] || '';
+  const section = path[0] || '';
   const projects = (publicContent('projects') as Doc[]).map(item=>localizeContent(item,locale)).sort((a, b) => a.order - b.order), articles = (publicContent('articles') as Doc[]).map(item=>localizeContent(item,locale)), resources = (publicContent('resources') as Doc[]).map(item=>localizeContent(item,locale));
   let body;
   if (!section) body = <Home profile={profile} projects={projects} articles={articles} resources={resources}/>;
@@ -196,7 +195,7 @@ export async function PublicSite({path = [], query = {}}: {path?: string[], quer
   else notFound();
   return <PublicFrame path={path}>{body}</PublicFrame>;
 }
-export async function PublicFrame({path=[],children}:{path?:string[],children:React.ReactNode}){const {t:tr,locale}=await serverI18n();
+export async function PublicFrame({path=[],children}:{path?:string[],children:React.ReactNode}){const {t:tr}=await serverI18n();
   const section=path[0]||'',current='/'+path.join('/');
   const nav=[['/','首页'],['/community','社区'],['/blogs','博客空间'],['/resources','资源']];
   const homepageRoute=section==='blogs'||section==='blog'||section==='workspace'&&['blog','profile','library','files','insights','connect'].includes(path[1]);

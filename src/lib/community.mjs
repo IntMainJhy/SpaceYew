@@ -14,7 +14,6 @@ import {currentUser,localRequest,serviceRequest,publishingQualified,login,sessio
 import {requireValue,cleanText,HttpError} from './content.mjs';
 import {POLICIES,POLICY_VERSION,policyBundle} from './community-policies.mjs';
 
-export const policyHash=hash(JSON.stringify(POLICIES));
 const parse=v=>v?JSON.parse(v):null;
 const stamp=()=>now();
 const actorId=u=>u.id;

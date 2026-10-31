@@ -4,7 +4,7 @@ import {BlogEditor} from '@/components/BlogEditor';
 import {catalogEditorUrl} from '@/lib/catalog-presentation.mjs';
 import {catalogApi,publicCatalogItem} from '@/lib/catalog.mjs';
 import {CatalogPublisher} from '@/components/CatalogPublisher';
-import {SharedDetail,ResourcesPage} from '@/components/SharedCatalog';
+import {SharedDetail} from '@/components/SharedCatalog';
 import {SkillDetail} from '@/components/SkillDetail';
 import {getSkillDetail} from '@/lib/skill-details.mjs';
 import {registrationEnabled} from '@/lib/app-access.mjs';

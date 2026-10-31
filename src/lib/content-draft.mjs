@@ -7,11 +7,3 @@ export function validContentDraft(value){
  }
  return true;
 }
-// Local recovery never selects another record or replaces the current server revision.
-export function restoreContentDraft(raw,current){
- try{
-  const value=JSON.parse(raw);
-  if(!validContentDraft(value)||!['projects','articles','resources'].includes(value.type)||String(value.id||'')!==String(current.id||''))return null;
-  return {...current,...value,id:current.id,revision:current.revision,published:current.published,visibility:current.visibility,pending:current.pending,...(current.id?{type:current.type,slug:current.slug}:{})};
- }catch{return null;}
-}

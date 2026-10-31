@@ -16,15 +16,15 @@ try{
  for(const [locale,label] of [['zh','文档'],['en','Docs'],['ja','ドキュメント']]){
   const docs=await read('/docs',locale);assert.equal(docs.status,200);assert.ok(docs.html.includes('>'+label+'</h1>'));
   const nav=docs.html.match(/<nav[^>]+aria-label="(?:主导航|Main navigation|メインナビゲーション)"[^>]*>([\s\S]*?)<\/nav>/)?.[1];assert.ok(nav);
-  const links=[...nav.matchAll(/href="([^"]+)"/g)].map(x=>x[1]);assert.deepEqual(links.slice(0,5),['/','/community','/docs','/skills','/resources']);assert.ok(!links.includes('/downloads')&&!links.includes('/my-space')&&!links.includes('/showcases'));
-  assert.ok(docs.html.includes('Published tutorial fixture'));assert.ok(!docs.html.includes('PRIVATE_TUTORIAL_DRAFT'));assert.ok(docs.html.includes('/articles/published-guide'));
+  const links=[...nav.matchAll(/href="([^"]+)"/g)].map(x=>x[1]);assert.deepEqual(links,['/','/community','/blogs','/resources','/login']);const resourceTabs=docs.html.match(/<nav class="resource-hub-tabs"[^>]*>([\s\S]*?)<\/nav>/)?.[1];assert.ok(resourceTabs);assert.deepEqual([...resourceTabs.matchAll(/href="([^"]+)"/g)].map(x=>x[1]),['/resources','/resources?type=docs','/resources?type=skills','/resources?type=resources']);assert.ok(!links.includes('/downloads')&&!links.includes('/my-space')&&!links.includes('/showcases'));
+  assert.ok(docs.html.includes('Published tutorial fixture'));assert.ok(!docs.html.includes('PRIVATE_TUTORIAL_DRAFT'));assert.ok(docs.html.includes('/docs/articles/published-guide'));
   for(const route of ['/docs/getting-started','/docs/showcase','/docs/community','/docs/desktop','/docs/connect','/skills','/resources','/downloads','/showcases'])assert.equal((await read(route,locale)).status,200,locale+route);
  }
  const integration=await read('/docs/connect','en');assert.ok(integration.html.includes('POST /api/connect'));
  const skill=await read('/skills','en');assert.ok(skill.html.includes(server.base+'/skills/spaceyew-post.tar.gz'));assert.ok(skill.html.includes('/workspace/connect'));
  assert.equal((await fetch(server.base+'/skills/spaceyew-post.tar.gz')).status,200);
  for(const route of ['/docs/not-a-guide','/docs/showcase/extra','/skills/not-a-skill','/articles/private-guide'])assert.equal((await read(route)).status,404,route);
- const article=await read('/articles/published-guide');assert.equal(article.status,200);assert.ok([...article.html.matchAll(/<a[^>]+>/g)].some(([tag])=>tag.includes('href="/docs"')&&tag.includes('aria-current="location"')));
+ const article=await read('/docs/articles/published-guide');assert.equal(article.status,200);assert.ok(article.html.includes('Published tutorial body.'));assert.ok(article.html.includes('href="/docs"'),'document reader links back to its library');
  const sitemap=await read('/sitemap.xml');for(const route of ['/docs/getting-started','/docs/connect','/skills'])assert.ok(sitemap.html.includes(server.base+route));
  console.log('PASS: three-language primary navigation, guides, published tutorials, private-draft isolation, Skill install/download, preserved secondary routes, unknown-route 404 and sitemap.');
 }finally{if(server)await stopServer(server);D.db().close();delete globalThis.__personalSiteDb;await rm(directory,{recursive:true,force:true});}

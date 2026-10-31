@@ -7,7 +7,7 @@ import {Box3,Mesh,MeshPhysicalMaterial,Vector3} from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/V2Atmosphere.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText;
-function mount({reduced=false,width=1400,height=900,loading=false,failed=false}={}){
+function mount({reduced=false,width=1400,height=900,loading=false,failed=false,animated=false}={}){
  class Target extends EventTarget{
   listeners=new Set();dataset={};style={};
   addEventListener(name,fn,options){super.addEventListener(name,fn,options);this.listeners.add(name)}
@@ -17,7 +17,7 @@ function mount({reduced=false,width=1400,height=900,loading=false,failed=false}=
  const preference=Object.assign(new Target(),{matches:reduced}),root=new Target(),host=new Target(),document=Object.assign(new Target(),{hidden:false,documentElement:root}),window=Object.assign(new Target(),{devicePixelRatio:3,matchMedia:()=>preference});
  const surface=new Target(),canvas=Object.assign(new Target(),{parentElement:surface,closest:selector=>selector==='.v2-home'?host:null});
  const draws=[],sizes=[];let releases=0,resolve,reject,signal;
- const adapter={resize:(...args)=>sizes.push(args),render:(...args)=>draws.push(args),dispose:()=>releases++};
+ const adapter={animated,resize:(...args)=>sizes.push(args),render:(...args)=>draws.push(args),dispose:()=>releases++};
  let resize,intersection,theme,now=0,id=0;const frames=new Map();
  class Resize{constructor(fn){this.fn=fn;resize=this}observe(){}disconnect(){this.disconnected=true}}
  class Intersection{constructor(fn){this.fn=fn;intersection=this}observe(){}disconnect(){this.disconnected=true}set(value){this.fn([{isIntersecting:value}])}}
@@ -95,4 +95,17 @@ test('the shipped original GLB loads as two bounded glass meshes with real trans
  const meshes=[];gltf.scene.traverse(node=>{if(node instanceof Mesh)meshes.push(node)});assert.equal(meshes.length,2);
  const size=new Box3().setFromObject(gltf.scene).getSize(new Vector3());assert.ok(size.x>2&&size.y>3&&size.z>.4);
  for(const mesh of meshes){assert.ok(mesh.material instanceof MeshPhysicalMaterial);assert.equal(mesh.material.transmission,1);assert.ok(mesh.material.thickness>.4);mesh.geometry.dispose();mesh.material.dispose()}
+});
+
+
+test('the optical studio keeps light motion active while visible and never fades the blue background into paper',async()=>{
+ const s=mount({animated:true});s.intersection.set(true);await flush();assert.equal(s.draws.at(-1)[5],0);assert.equal(s.frames.size,1);
+ s.step();s.step();const time=s.draws.at(-1)[5];assert.ok(time>0);assert.equal(s.frames.size,1,'visible strip-light reflections have a continuing clock');
+ s.host.top=-2700;s.window.dispatchEvent(new Event('scroll'));s.step();assert.equal(s.canvas.style.opacity,'1','reading sections retain the optical scene');assert.equal(s.draws.at(-1)[3],3);
+ for(const [pause,resume] of[
+  [()=>{s.document.hidden=true;s.document.dispatchEvent(new Event('visibilitychange'));},()=>{s.document.hidden=false;s.document.dispatchEvent(new Event('visibilitychange'));}],
+  [()=>s.intersection.set(false),()=>s.intersection.set(true)],
+  [()=>s.window.dispatchEvent(new Event('beforeprint')),()=>s.window.dispatchEvent(new Event('afterprint'))]
+ ]){const before=s.draws.at(-1)[5];pause();assert.equal(s.frames.size,0);s.step(60000);resume();assert.equal(s.draws.at(-1)[5],before,'inactive time is not replayed');s.step();assert.ok(s.draws.at(-1)[5]-before<=.05);}
+ s.preference.matches=true;s.preference.dispatchEvent(new Event('change'));assert.equal(s.frames.size,0);const frozen=s.draws.at(-1)[5];s.step(10000);s.theme.fn();s.resize.fn();assert.equal(s.draws.at(-1)[5],frozen);s.cleanup();assert.equal(s.releases,1);
 });

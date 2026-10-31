@@ -8,31 +8,34 @@ const loadScene=(canvas:HTMLCanvasElement,signal:AbortSignal)=>import('@/lib/hom
 /** Load the homepage-only renderer without blocking the semantic content. */
 export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene){
  const surface=canvas.parentElement||canvas,host=canvas.closest('.v2-home')||surface,preference=window.matchMedia('(prefers-reduced-motion: reduce)'),controller=new AbortController();
- let scene:HomeGlassScene|null=null,frame=0,lastDraw=0,visible=false,printing=false,lost=false,disposed=false;
+ let scene:HomeGlassScene|null=null,frame=0,lastDraw=0,activeTime=0,visible=false,printing=false,lost=false,disposed=false;
  let targetX=0,targetY=0,pointerX=0,pointerY=0,progress=0,dirty=false;
  canvas.dataset.atmosphere='loading';canvas.style.opacity='0';
- const stop=()=>{if(frame)cancelAnimationFrame(frame);frame=0;if(scene)canvas.dataset.atmosphere=lost?'fallback':'paused';};
+ const stop=()=>{if(frame)cancelAnimationFrame(frame);frame=0;if(scene?.animated)lastDraw=0;if(scene)canvas.dataset.atmosphere=lost?'fallback':'paused';};
  const draw=()=>{
   if(!scene||disposed||lost||document.hidden||printing||!visible)return;
   try{
-   const dark=document.documentElement.dataset.colorMode==='dark',reading=Math.max(0,Math.min(1,(progress-.18)/.52));
-   scene.render(pointerX,pointerY,dark,progress,preference.matches);
-   canvas.style.opacity=String(1-(dark?.8:.45)*reading*reading*(3-2*reading));
+   const dark=document.documentElement.dataset.colorMode==='dark';
+   if(scene.animated)scene.render(pointerX,pointerY,dark,progress,preference.matches,activeTime);
+   else scene.render(pointerX,pointerY,dark,progress,preference.matches);
+   canvas.style.opacity='1';
   }
   catch{fail();}
  };
  const canRender=()=>!disposed&&!lost&&!!scene&&visible&&!document.hidden&&!printing;
+ const continuous=()=>!!scene?.animated&&!preference.matches;
  const moving=()=>!preference.matches&&Math.abs(targetX-pointerX)+Math.abs(targetY-pointerY)>.0001;
  const tick=(now:number)=>{
   frame=0;if(!canRender())return;
   if(!lastDraw||now-lastDraw>=1000/30){
-   const amount=1-Math.exp(-7*Math.min(lastDraw?(now-lastDraw)/1000:1/30,.05));
+   const dt=Math.min(lastDraw?(now-lastDraw)/1000:1/30,.05),amount=1-Math.exp(-7*dt);
+   if(continuous())activeTime+=dt;
    lastDraw=now;pointerX+=(targetX-pointerX)*amount;pointerY+=(targetY-pointerY)*amount;dirty=false;draw();
   }
-  if(canRender()&&(dirty||moving()))frame=requestAnimationFrame(tick);else stop();
+  if(canRender()&&(dirty||moving()||continuous()))frame=requestAnimationFrame(tick);else stop();
  };
  const sync=()=>{
-  if(canRender()&&(dirty||moving())){if(!frame){canvas.dataset.atmosphere='running';frame=requestAnimationFrame(tick);}}
+  if(canRender()&&(dirty||moving()||continuous())){if(!frame){canvas.dataset.atmosphere='running';frame=requestAnimationFrame(tick);}}
   else stop();
  };
  const readProgress=()=>{progress=Math.max(0,-host.getBoundingClientRect().top/Math.max(canvas.getBoundingClientRect().height,1));};

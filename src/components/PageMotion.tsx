@@ -2,11 +2,13 @@
 import {useEffect,useLayoutEffect,useRef} from 'react';
 import {usePathname,useSearchParams} from 'next/navigation';
 import {gsap} from 'gsap';
+import '@/app/surface-clarity.css';
+import '@/app/interaction-motion.css';
 
 type Box={left:number;top:number;width:number;height:number};
-type Snapshot={to:string;regions:Record<string,Box>;active?:Box;scroll:number;key?:string;keyboard:boolean};
+type Snapshot={from:string;to:string;regions:Record<string,Box>;active?:Box;scroll:number;key?:string;keyboard:boolean};
 const regions={nav:'.feed-nav-links',identity:'.feed-identity',compose:'.feed-navigation>.feed-write',discover:'.community-navigation-shell>.feed-discover',content:'.community-route-content,.space-workspace-main'};
-// Navigation can replace the community and studio component trees; keep one pending handoff.
+// PublicFrame can remount between routes; one pending handoff also bridges its header links.
 let pending:Snapshot|null=null;
 const box=(element:Element):Box=>{const {left,top,width,height}=element.getBoundingClientRect();return{left,top,width,height};};
 
@@ -19,17 +21,18 @@ export function PageMotion({children,className=''}:{children:React.ReactNode;cla
  useEffect(()=>{
   const capture=(to:string,keyboard=false,key?:string)=>{
    const element=root.current,nav=element?.querySelector<HTMLElement>('.feed-nav-links');
-   if(!element||!nav||to===element.dataset.motionRoute)return;
-   const active=nav.querySelector('[data-nav-key][aria-current="page"]');
-   const indicator=nav.querySelector('.feed-active-indicator');
-   pending={to,keyboard,key,scroll:nav.scrollTop,regions:Object.fromEntries(Object.entries(regions).flatMap(([name,selector])=>{const node=element.querySelector(selector);return node?[[name,box(node)]]:[]})),active:indicator&&nav.dataset.motionReady?box(indicator):active?box(active):undefined};
+   if(!element||to===element.dataset.motionRoute)return;
+   const active=nav?.querySelector('[data-nav-key][aria-current="page"]');
+   const indicator=nav?.querySelector('.feed-active-indicator');
+   pending={from:element.dataset.motionRoute||'',to,keyboard,key,scroll:nav?.scrollTop||0,regions:Object.fromEntries(Object.entries(regions).flatMap(([name,selector])=>{const node=element.querySelector(selector);return node?[[name,box(node)]]:[]})),active:indicator&&nav?.dataset.motionReady?box(indicator):active?box(active):undefined};
   };
   const click=(event:MouseEvent)=>{
-   if(event.button||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+   if(event.defaultPrevented||event.button||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
    const link=event.target instanceof Element?event.target.closest<HTMLAnchorElement>('a'):null;
-   if(!link||!root.current?.contains(link)||link.target||link.hasAttribute('download'))return;
+   const element=root.current,shell=element?.closest('.organic-site,.blog-public-shell')||element;
+   if(!link||!shell?.contains(link)||link.target||link.hasAttribute('download'))return;
    const next=new URL(link.href,location.href);
-   if(next.origin===location.origin&&/^\/(community|workspace)(\/|$)/.test(next.pathname))capture(next.pathname+next.search,event.detail===0,link.dataset.navKey);
+   if(next.origin===location.origin)capture(next.pathname+next.search,event.detail===0,link.dataset.navKey);
   };
   const dismiss=(event:PointerEvent|KeyboardEvent)=>{
    const menu=document.querySelector<HTMLDetailsElement>('.organic-mobile-menu[open]');
@@ -46,11 +49,21 @@ export function PageMotion({children,className=''}:{children:React.ReactNode;cla
  },[]);
  useLayoutEffect(()=>{
   const element=root.current,previous=pending?.to===route?pending:null;pending=null;
-  const changed=lastRoute.current!==route;lastRoute.current=route;
+  const last=lastRoute.current,changed=last!==route||!!previous;lastRoute.current=route;
   if(!element)return;
   if(!element.querySelector('.community-navigation-shell')){
    if(!changed)return;
-   const media=gsap.matchMedia();media.add('(prefers-reduced-motion: no-preference)',()=>{gsap.fromTo(element,{opacity:.86},{opacity:1,duration:.2,ease:'power2.out',clearProps:'opacity'})},element);return()=>media.revert();
+   const queryOnly=(previous?.from||last).split('?')[0]===path;
+   const media=gsap.matchMedia();
+   media.add('(prefers-reduced-motion: no-preference)',()=>{
+    // Keep full-screen WebGL scenes in their coordinate system; animate their text receivers.
+    const content=element.querySelector<HTMLElement>('.resource-hub > [data-glass-reveal],.catalog-page,.skills-page,.product-download-page,.document-reader,.shared-reading-layout,.community-auth-form,.community-report,.community-policy-document,.community-receipt');
+    const heading=element.querySelector<HTMLElement>('.v2-hero-copy,.blog-spaces-heading,.catalog-page-heading,.organic-page-heading,.product-section-heading,.learning-heading');
+    if(content)gsap.fromTo(content,{opacity:.88,y:queryOnly?0:10},{opacity:1,y:0,duration:queryOnly ? .24 : .36,ease:'power3.out',clearProps:'transform,opacity',overwrite:'auto'});
+    if(heading&&!queryOnly&&!content?.contains(heading))gsap.fromTo(heading,{opacity:.86,y:12},{opacity:1,y:0,duration:.4,ease:'power3.out',clearProps:'transform,opacity',overwrite:'auto'});
+    if(!content&&!heading)gsap.fromTo(element,{opacity:.9},{opacity:1,duration:.22,ease:'power2.out',clearProps:'opacity',overwrite:'auto'});
+   },element);
+   return()=>media.revert();
   }
   const nav=element.querySelector<HTMLElement>('.feed-nav-links');
   if(previous&&nav)nav.scrollTop=previous.scroll;

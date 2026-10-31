@@ -87,3 +87,29 @@ test('active time moves lighting and native poses, while reduced motion is still
  s.adapter.render(0,0,false,0,true,40);const quietPose=s.mark.quaternion.clone(),quietLight=s.scene.environmentRotation.y,quietCamera=s.camera.position.clone(),quietFold=s.folds[0].position.clone();s.adapter.render(1,1,false,5,true,80);assert.ok(quietPose.angleTo(s.mark.quaternion)<1e-8);assert.equal(s.scene.environmentRotation.y,quietLight);assert.ok(quietCamera.distanceTo(s.camera.position)<1e-10,'reduced motion does not push the camera while scrolling');assert.ok(quietFold.distanceTo(s.folds[0].position)<1e-10,'reduced motion keeps the folded frame spatially still');assert.equal(s.canvas.dataset.glassTime,'0.0');assert.deepEqual(s.folds.map(fold=>fold.geometry.attributes.position.version),positions,'animation does not regenerate or replace native geometry');
  s.controller.abort();assert.equal(s.releases,1);s.adapter.dispose();assert.equal(s.releases,1);s.adapter.render(0,0,false,0,false,5);assert.equal(s.releases,1);
 });
+
+test('backlit volume bends independent sources while receiver lighting follows pointer and withdraws before reading',async()=>{
+ const s=await studio(),guides=s.scene.getObjectByName('spaceyew-transmission-guides'),uniforms=s.wall.material.uniforms;
+ assert.equal(s.canvas.dataset.glassOptics,'volume-transmission+projected-caustics');
+ assert.ok(guides.children.every(guide=>guide.geometry.parameters.radius>=.003),'the actual transmission sources have enough angular size to resolve at the capped transmission resolution');
+ const fixedSources=guides.matrixWorld.clone();s.adapter.render(.8,-.6,false,0,false,0);
+ assert.ok(guides.matrixWorld.equals(fixedSources),'pointer movement steers the physical glass independently of the world-space backlights');
+ assert.deepEqual(uniforms.uPointer.value.toArray(),[.8,-.6]);assert.equal(uniforms.uOpticalEnergy.value,1);
+ // Check the same Snell ray used by MeshPhysicalMaterial against the actual Blender normals.
+ // A clear surface must displace the source image, not merely overlay a tinted alpha mesh.
+ let largestShift=0;
+ for(const fold of s.folds){const normalMatrix=new three.Matrix3().getNormalMatrix(fold.matrixWorld),positions=fold.geometry.attributes.position,normals=fold.geometry.attributes.normal,scale=new three.Vector3().setFromMatrixScale(fold.matrixWorld);
+  for(let i=0;i<positions.count;i++){
+   const point=new three.Vector3().fromBufferAttribute(positions,i).applyMatrix4(fold.matrixWorld),normal=new three.Vector3().fromBufferAttribute(normals,i).applyMatrix3(normalMatrix).normalize(),view=s.camera.position.clone().sub(point).normalize();
+   if(normal.dot(view)<.08)continue;
+   const incident=view.clone().negate(),eta=1/fold.material.ior,dot=normal.dot(incident),root=1-eta*eta*(1-dot*dot);if(root<0)continue;
+   const ray=incident.multiplyScalar(eta).addScaledVector(normal,-eta*dot-Math.sqrt(root)).normalize().multiplyScalar(fold.material.thickness).multiply(scale);
+   const start=point.clone().project(s.camera),exit=point.add(ray).project(s.camera);largestShift=Math.max(largestShift,Math.hypot((exit.x-start.x)*720,(exit.y-start.y)*450));
+  }
+ }
+ assert.ok(largestShift>20,'native bevel normals and volume thickness visibly bend a resolved source image; shift='+largestShift);
+ s.adapter.render(.8,-.6,false,.7,false,2);assert.ok(uniforms.uOpticalEnergy.value>0&&uniforms.uOpticalEnergy.value<1,'receiver light energy follows the same collection as the actual source');
+ s.adapter.render(.8,-.6,false,1.05,false,2);assert.equal(uniforms.uOpticalEnergy.value,0,'large light shafts and caustics stop before reading sections');
+ s.adapter.render(.8,-.6,false,0,true,40);assert.deepEqual(uniforms.uPointer.value.toArray(),[0,0]);assert.equal(uniforms.uTime.value,0,'reduced motion keeps the optical composition but stops light steering');
+ let geometryReleases=0,materialReleases=0;s.wall.geometry.addEventListener('dispose',()=>geometryReleases++);s.wall.material.addEventListener('dispose',()=>materialReleases++);s.adapter.dispose();s.adapter.dispose();assert.equal(geometryReleases,1);assert.equal(materialReleases,1);
+});

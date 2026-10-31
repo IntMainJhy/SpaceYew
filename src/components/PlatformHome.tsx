@@ -10,6 +10,7 @@ import {V2Atmosphere} from './V2Atmosphere';
 import {CreatorStage,type CreatorStageData,type CreatorProject} from './CreatorStage';
 import {HomeMotion} from './HomeMotion';
 import {HomeWindGallery,type HomeWindItem} from './HomeWindGallery';
+import {HomeDiscovery} from './HomeDiscovery';
 import '@/app/home-showcase.css';
 export async function PlatformHome({req}:{req:Request}){
  const {t,locale}=await serverI18n(),spaces=publicSpaces(req);
@@ -27,6 +28,7 @@ export async function PlatformHome({req}:{req:Request}){
  }
  const projects=creator?.projects.slice(0,3)||[];
  const windCopy=locale==='zh'?{heading:'让发现，随风而来。',hint:'轻触或悬停布片，遇见下一份灵感。'}:locale==='ja'?{heading:'風に乗って、新しい発見を。',hint:'布に触れるか、カーソルを重ねて次のひらめきへ。'}:{heading:'A little wind. A new discovery.',hint:'Hover or touch a fabric to find your next inspiration.'};
+ const discovery=locale==='zh'?{heading:'灵感，在这里交汇。',hint:'移动鼠标或拖动玻璃，让想法有新的连接。',pause:'暂停动效',play:'播放动效',action:'继续探索',descriptions:['从一件真实的作品，了解创作背后的过程。','走进个人空间，发现各自的经历与故事。','找到下一次创作中，用得上的 Skill 与资源。']}:locale==='ja'?{heading:'ひらめきが、ここでつながる。',hint:'マウスを動かすかガラスをドラッグして、新しいつながりを。',pause:'アニメーションを停止',play:'アニメーションを再生',action:'もっと見る',descriptions:['作品を通して、その制作過程に出会う。','個人の空間で、それぞれの経験や物語を知る。','次の制作に役立つ Skill やリソースを探す。']}:{heading:'Where ideas find each other.',hint:'Move your pointer or drag the glass to discover a new connection.',pause:'Pause animation',play:'Play animation',action:'Explore further',descriptions:['Meet the process behind a real piece of work.','Discover the experiences and stories inside personal spaces.','Find a Skill or resource for your next creation.']};
  const windItems:HomeWindItem[]=[
   {title:creator?.name||t('博客空间'),category:t('博客空间'),description:creator?'@'+creator.handle:t('个人介绍、经历、技能与作品。'),href:creator?.url||'/blogs'},
   {title:'GSAP',category:'Skill',description:t('探索 Skill'),href:'/skills/gsap'},
@@ -47,6 +49,7 @@ export async function PlatformHome({req}:{req:Request}){
    </Link>)}</div>
    {!projects.length&&<div className="v2-simple-empty"><p>{t('暂时没有公开主页。')}</p><Link href="/blogs">{t('发现博客空间')}<Icon name="arrow"/></Link></div>}
   </section>
+  <HomeDiscovery heading={discovery.heading} hint={discovery.hint} pauseLabel={discovery.pause} playLabel={discovery.play} items={[{label:t('作品'),description:discovery.descriptions[0],href:creator?.url||'/blogs',action:discovery.action},{label:t('博客空间'),description:discovery.descriptions[1],href:'/blogs',action:discovery.action},{label:t('资源'),description:discovery.descriptions[2],href:'/resources',action:discovery.action}]}/>
   <section className="v2-section v2-creators-section" data-home-scene="creators" id="creators" aria-labelledby="v2-creators-title">
    <div className="v2-section-heading v2-editorial-heading"><h2 id="v2-creators-title">{t('博客空间，')}<span>{t('由你来定义。')}</span></h2><div><p>{t('个人介绍、经历、技能与作品。')}</p><Link className="v2-text-link" href="/blogs">{t('发现更多主页')}<Icon name="arrow"/></Link></div></div>
    <div className="v2-creators">{spaces.slice(0,6).map((space:any)=>{const p=localizeProfile(space.profile,locale);return <Link className="v2-creator" href={'/blog/'+encodeURIComponent(space.handle)} key={space.handle}><FeedAvatar name={p.name} avatarId={p.avatarId}/><div className="v2-creator-identity"><h3>{p.name}</h3><span>@{space.handle}</span></div><p>{p.intro}</p><Icon name="arrow"/></Link>})}</div>

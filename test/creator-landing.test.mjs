@@ -20,6 +20,7 @@ async function render(space,locale='zh'){
   '@/lib/home-download.mjs':{homeDownload:()=>({href:'/downloads'})},
   './FeedAvatar':{FeedAvatar:()=>null},'./Icons':{Icon:()=>null},'./V2Atmosphere':{V2Atmosphere:()=>null},
   './HomeMotion':{HomeMotion:()=>null},
+  './HomeDiscovery':{HomeDiscovery:()=>null},
   './HomeWindGallery':{HomeWindGallery:({items,heading})=>React.createElement('section',{'data-wind-gallery':true},React.createElement('h2',null,heading),items.map(item=>React.createElement('a',{key:item.href,href:item.href},item.title)))},
   '@/app/home-showcase.css':{},
   './CreatorStage':{CreatorStage:({creator})=>React.createElement('pre',{'data-stage':true},JSON.stringify(creator))}

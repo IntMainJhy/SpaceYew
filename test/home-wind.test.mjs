@@ -1,6 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
+import vm from 'node:vm';
+import ts from 'typescript';
+
+const runtime={};
+vm.runInNewContext(ts.transpileModule(readFileSync(new URL('../src/components/HomeWindGallery.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText,{exports:runtime,require:()=>({})});
 
 test('the shipped wind model provides four upright, UV-mapped cloth grids with a pinned top and a winding cable',()=>{
  const bytes=readFileSync(new URL('../public/models/spaceyew-home-wind.glb',import.meta.url));
@@ -46,9 +51,28 @@ test('the shipped wind model provides four upright, UV-mapped cloth grids with a
   assert.equal(top.length,node.extras.weave_columns+1);
   assert.ok(top.every(({position})=>Math.abs(position[1]-1.28)<1e-5&&Math.abs(position[2])<1e-6),'the renderer’s y=1.28 wind anchor is the flat top edge');
   assert.ok(positions.some((position,vertex)=>uv[vertex][1]>.99&&position[1]<-1.2),'the UV print extends down the free hanging edge');
+  const hem=gltf.nodes.find(item=>item.name==='WindHem_'+index);assert.ok(hem&&node.children.includes(gltf.nodes.indexOf(hem)),'the sewn hem follows its cloth parent');
+  assert.ok(attribute(gltf.meshes[hem.mesh].primitives[0],'POSITION').length>=250,'the raised hem is actual deformable geometry');
  }
  const cable=gltf.nodes.find(node=>node.name==='WindCable');assert.ok(cable,'the desktop cable ships with the Blender model');
  const positions=attribute(gltf.meshes[cable.mesh].primitives[0],'POSITION'),range=axis=>Math.max(...positions.map(point=>point[axis]))-Math.min(...positions.map(point=>point[axis]));
- assert.ok(positions.every(position=>position.every(Number.isFinite)&&position.every(value=>Math.abs(value)<8)),'cable coordinates are finite and bounded');
- assert.ok(range(0)>12&&range(1)>.8&&range(2)>.02,'the cable spans the installation and follows a non-flat winding path');
+ assert.ok(positions.every(position=>position.every(Number.isFinite)&&position.every(value=>Math.abs(value)<12)),'cable coordinates are finite and bounded');
+ assert.ok(positions.length>=3000&&range(0)>20&&range(1)>.5&&range(2)>.005,'the fine cable spans past both wrap edges with a smooth detailed contour');
+ assert.ok(positions.every(([x,y])=>Math.abs(y-runtime.windCableY(x))<.012),'moving fabric pins follow the same curve as the authored Blender cable');
+});
+
+test('desktop and mobile wind tracks loop outside the visible panel bounds without changing content order',()=>{
+ for(const[spacing,span]of[[3.8,12.6],[2.8,5.4]]){
+  const length=spacing*4;
+  assert.ok(length/2>span/2+1.06,'the wrap point is beyond the camera plus half a fabric');
+  for(const offset of[0,.25,3.8,20,1000,-2]){
+   const xs=Array.from({length:4},(_,index)=>runtime.windTrackX(index,offset,spacing));
+   assert.equal(new Set(xs.map(value=>value.toFixed(5))).size,4,'four semantic content panels remain distinct');
+   for(let index=0;index<4;index++){
+    assert.ok(Math.abs(xs[index]-runtime.windTrackX(index,offset+length,spacing))<1e-10,'one complete cycle is seamless');
+    const next=xs[(index+1)%4],distance=((next-xs[index])%length+length)%length;
+    assert.ok(Math.abs(distance-spacing)<1e-10,'adjacent content keeps the same spacing around the loop');
+   }
+  }
+ }
 });

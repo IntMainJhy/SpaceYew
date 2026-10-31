@@ -63,8 +63,8 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
     // Match the display-referred wall: an extra ACES pass through the glass would turn pale ice grey.
     // Keep the surface neutral; the physical volume supplies the restrained ice tint.
     material.color.set('#ffffff');material.toneMapped=false;material.transmission=1;material.opacity=1;material.metalness=0;
-    material.ior=1.52;material.thickness=.85;material.roughness=.01;material.envMapIntensity=.95;material.dispersion=1.4;
-    material.attenuationColor.set('#d4e9ff');material.attenuationDistance=12;material.clearcoat=0;material.clearcoatRoughness=.045;
+    material.ior=1.52;material.thickness=1.05;material.roughness=.007;material.envMapIntensity=.72;material.dispersion=1.4;
+    material.attenuationColor.set('#e3f2ff');material.attenuationDistance=18;material.clearcoat=0;material.clearcoatRoughness=.045;
     // Guard the pinned chunk exactly; unsupported Three versions keep their standard physical shader.
     if(linearTransmission){material.onBeforeCompile=shader=>{const include='#include <transmission_pars_fragment>';if(shader.fragmentShader.split(include).length===2)shader.fragmentShader=shader.fragmentShader.replace(include,linearTransmission);};material.customProgramCacheKey=()=> 'spaceyew-linear-volume-r187';}
    }
@@ -91,41 +91,61 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
    [[-.30,.53],[-.02,.48],[.12,.50],[.18,.55],[.10,.61],[-.30,.63]],
    [[1.30,.51],[1.02,.46],[.87,.49],[.82,.54],[.90,.60],[1.30,.62]],
   ];
-  const guideGeometry=(points:number[][])=>new TubeGeometry(new CatmullRomCurve3(points.map(point=>new Vector3((point[0]-.5)*camera.aspect,.5-point[1],0))),56,.00145,8,false);
+  const guideGeometry=(points:number[][])=>new TubeGeometry(new CatmullRomCurve3(points.map(point=>new Vector3((point[0]-.5)*camera.aspect,.5-point[1],0))),56,.0034,8,false);
   const guide=(name:string,points:number[][],color:string,energy:number)=>{
    const geometry=guideGeometry(points);extraGeometry.push(geometry);
    const material=new MeshBasicMaterial({color:new Color(color).multiplyScalar(energy),toneMapped:false});extraMaterials.push(material);
    const mesh=new Mesh(geometry,material);mesh.name=name;lightGuides.add(mesh);return mesh;
   };
-  const leftGuide=guide('warm-transmission-guide',desktopGuides[0],'#ffe4c7',.58);
-  const rightGuide=guide('ice-transmission-guide',desktopGuides[1],'#bdddff',.62);
+  const leftGuide=guide('warm-transmission-guide',desktopGuides[0],'#ffe4c7',.76);
+  const rightGuide=guide('ice-transmission-guide',desktopGuides[1],'#d7edff',.78);
   const replaceGuide=(mesh:Mesh<TubeGeometry,MeshBasicMaterial>,points:number[][])=>{
    const index=extraGeometry.indexOf(mesh.geometry);mesh.geometry.dispose();mesh.geometry=guideGeometry(points);extraGeometry[index]=mesh.geometry;
   };
   // A structured blue wall is rendered behind the glass, so refraction and RGB dispersion have real contrast to sample.
   // The broad shadow/caustic lobes are art-directed receiver approximations, not ray-traced transport.
   const wallGeometry=new PlaneGeometry(80,52);extraGeometry.push(wallGeometry);
-  const wallMaterial=new ShaderMaterial({depthWrite:false,uniforms:{uTime:{value:0},uBrightness:{value:1},uScroll:{value:0},uBackdropAlpha:{value:1},uCenter:{value:new Vector2(.5,.38)},uSpread:{value:.35},uReading:{value:0},uBlueTop:{value:new Color('#1b376b')},uBlueMiddle:{value:new Color('#2a72c5')},uBlueBottom:{value:new Color('#c4dff4')},uIce:{value:new Color('#eef4fa')}},vertexShader:`
+  const wallMaterial=new ShaderMaterial({depthWrite:false,uniforms:{uTime:{value:0},uPointer:{value:new Vector2()},uOpticalEnergy:{value:1},uBrightness:{value:1},uScroll:{value:0},uBackdropAlpha:{value:1},uCenter:{value:new Vector2(.5,.38)},uSpread:{value:.35},uReading:{value:0},uBlueTop:{value:new Color('#1b376b')},uBlueMiddle:{value:new Color('#2a72c5')},uBlueBottom:{value:new Color('#c4dff4')},uIce:{value:new Color('#eef4fa')}},vertexShader:`
    varying vec2 vScreen;
    void main(){vec4 p=projectionMatrix*modelViewMatrix*vec4(position,1.);vScreen=p.xy/p.w*.5+.5;gl_Position=p;}
   `,fragmentShader:`
-   varying vec2 vScreen;uniform float uTime;uniform float uBrightness;uniform float uScroll;uniform float uBackdropAlpha;uniform vec2 uCenter;uniform float uSpread;uniform float uReading;uniform vec3 uBlueTop;uniform vec3 uBlueMiddle;uniform vec3 uBlueBottom;uniform vec3 uIce;
+   varying vec2 vScreen;uniform float uTime;uniform vec2 uPointer;uniform float uOpticalEnergy;uniform float uBrightness;uniform float uScroll;uniform float uBackdropAlpha;uniform vec2 uCenter;uniform float uSpread;uniform float uReading;uniform vec3 uBlueTop;uniform vec3 uBlueMiddle;uniform vec3 uBlueBottom;uniform vec3 uIce;
    float stripe(float value,float center,float width){return exp(-pow((value-center)/width,2.));}
    void main(){
     vec2 uv=vScreen;float documentY=max(0.,(1.-uv.y)+uScroll),daylight=smoothstep(.65,1.4,documentY);
     vec3 color=mix(uBlueTop,uBlueMiddle,smoothstep(0.,.65,documentY));color=mix(color,uBlueBottom,daylight);color=mix(color,uIce,smoothstep(1.4,2.4,documentY));
     float quiet=exp(-pow((uv.x-.5)*3.2,2.))*stripe(uv.y,.56,.48);color*=1.-quiet*.08*(1.-daylight);
     float phase=sin(uTime*.38),left=uCenter.x-uSpread,right=uCenter.x+uSpread;
-    float tilt=(uv.y-uCenter.y)*.12;
-    float lightA=stripe(uv.x+tilt,left-.045+phase*.022,.010);
-    float lightB=stripe(uv.x-tilt,right+.035-phase*.02,.016);
-    float feather=stripe(uv.y,uCenter.y,.65);
-    color+=vec3(.11,.15,.19)*(lightA+lightB*.72)*feather*(1.-daylight*.85);
-    float shade=(stripe(uv.x+tilt,left+.025,.075)+stripe(uv.x-tilt,right-.025,.075))*stripe(uv.y,uCenter.y-.07,.48);
-    color*=1.-shade*.16*(1.-daylight*.75);
-    vec2 ground=vec2((uv.x-uCenter.x)*1.3,(uv.y-(uCenter.y-.28))*4.2);float radius=length(ground);
-    float caustic=stripe(radius,.4+sin(uv.x*8.+uTime*.22)*.028,.025)*(1.-smoothstep(.16,.45,uv.y));
-    color+=vec3(.045,.10,.15)*caustic*(.6+uReading*.2)*(1.-daylight*.85);
+    float relativeY=uv.y-uCenter.y,tilt=relativeY*.12;
+    // The luminous slits and their dark flags are projected onto this opaque wall.
+    // They stay independent of the mesh: the volume rays really bend their image.
+    float sweep=phase*.022+uPointer.x*.018;
+    float leftAxis=uv.x-(left+.018-relativeY*.20+sweep);
+    float rightAxis=uv.x-(right-.018+relativeY*.15-sweep*.8);
+    float sourceGate=stripe(uv.y,uCenter.y+.12,.46);
+    float warmCore=stripe(leftAxis,0.,.008),iceCore=stripe(rightAxis,0.,.011);
+    float warmBloom=stripe(leftAxis,0.,.045),iceBloom=stripe(rightAxis,0.,.06);
+    float sourceShadow=(stripe(leftAxis,.034,.031)+stripe(rightAxis,-.044,.035))*sourceGate;
+    color*=1.-sourceShadow*.38*uOpticalEnergy;
+    color+=vec3(.86,.65,.39)*(warmCore*.8+warmBloom*.18)*sourceGate*uOpticalEnergy;
+    color+=vec3(.38,.65,.94)*(iceCore*.9+iceBloom*.2)*sourceGate*uOpticalEnergy;
+    // One secondary slit breaks across the bevel as a clear, narrow spectral seam.
+    float seam=stripe(leftAxis,-.018,.0025)+stripe(rightAxis,.022,.003);
+    color+=vec3(.20,.30,.40)*seam*sourceGate*uOpticalEnergy;
+    // ponytail: art-directed receiver caustics, not ray-traced light transport.
+    // Paired folded arcs and a soft focus pool relate the outgoing light to each fold.
+    float groundY=max(.07,uCenter.y-.29)+uPointer.y*.012;
+    vec2 ground=vec2((uv.x-uCenter.x)*1.45,(uv.y-groundY)*4.2);
+    float radius=length(ground),waviness=sin(uv.x*11.+uTime*.25)*.025;
+    float causticGate=1.-smoothstep(groundY+.03,groundY+.22,uv.y);
+    float caustic=stripe(radius,.43+waviness,.012);
+    float spectralWarm=stripe(radius,.453+waviness,.008);
+    float spectralIce=stripe(radius,.419+waviness,.007);
+    vec2 leftFocus=vec2((uv.x-left-.04)*3.7,(uv.y-groundY)*4.0);
+    vec2 rightFocus=vec2((uv.x-right+.04)*3.7,(uv.y-groundY)*4.0);
+    float focusPool=exp(-dot(leftFocus,leftFocus)*2.)+exp(-dot(rightFocus,rightFocus)*2.);
+    color+=vec3(.14,.22,.32)*focusPool*.48*uOpticalEnergy;
+    color+=(vec3(.34,.48,.62)*caustic+vec3(.30,.14,.055)*spectralWarm+vec3(.055,.16,.32)*spectralIce)*causticGate*uOpticalEnergy;
     color*=uBrightness;gl_FragColor=vec4(color,1.);
     #include <colorspace_fragment>
     gl_FragColor.rgb*=uBackdropAlpha;gl_FragColor.a=uBackdropAlpha;
@@ -181,16 +201,16 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
     const fixtureCollection=MathUtils.smootherstep(scroll,.2,1.3),fixtureOpacity=1-MathUtils.smoothstep(fixtureCollection,0,.9)*.95;
     lightGuides.visible=fixtureOpacity>.075;
     for(const guide of[leftGuide,rightGuide]){const transparent=fixtureOpacity<.999;if(guide.material.transparent!==transparent){guide.material.transparent=transparent;guide.material.needsUpdate=true;}guide.material.opacity=fixtureOpacity;}
-    const sourcePhase=reduced?0:time*.23;lightGuides.position.set(Math.sin(sourcePhase)*.012*lightGuides.scale.x,Math.sin(sourcePhase*1.17)*.016*lightGuides.scale.y,-1.5);lightGuides.rotation.z=reduced?0:Math.sin(sourcePhase*.8)*.025;
+    const sourcePhase=reduced?0:time*.23;lightGuides.position.set(Math.sin(sourcePhase)*.045*lightGuides.scale.x,Math.sin(sourcePhase*1.17)*.028*lightGuides.scale.y,-1.5);lightGuides.rotation.z=reduced?0:Math.sin(sourcePhase*.8)*.025;
     pointerRotation.set(-y*.026*parallax,-x*.038*parallax,0,'YXZ');pointerQuaternion.setFromEuler(pointerRotation);camera.quaternion.copy(baseCamera).multiply(pointerQuaternion);
     const lightPhase=-.58+(reduced?0:breath*.28+x*.12);scene.environmentRotation.set(.018,lightPhase,0);scene.environmentIntensity=dark?.95:1;
     key.position.set(-4+Math.sin(lightPhase)*1.3,6,7);rim.intensity=(dark?1.44:1.5)+(reduced?0:Math.sin(time*.38+.8)*.12);
-    wallMaterial.uniforms.uTime.value=time;wallMaterial.uniforms.uBrightness.value=dark?.96:1;wallMaterial.uniforms.uReading.value=reading;wallMaterial.uniforms.uScroll.value=scroll;
+    wallMaterial.uniforms.uTime.value=time;wallMaterial.uniforms.uPointer.value.set(reduced?0:x,reduced?0:y);wallMaterial.uniforms.uOpticalEnergy.value=1-MathUtils.smoothstep(fixtureCollection,0,.8);wallMaterial.uniforms.uBrightness.value=dark?.96:1;wallMaterial.uniforms.uReading.value=reading;wallMaterial.uniforms.uScroll.value=scroll;
     wallMaterial.uniforms.uCenter.value.set(.5,1-centerY);const projectedWidth=MathUtils.lerp(displayHeight,collectedHeight,spatial)*combinedWidth/nativeSize.y*(8.2/camera.position.z);wallMaterial.uniforms.uSpread.value=(split+.718)/combinedWidth*(projectedWidth/width);
     const sheetDepth=.85,sheetViewHeight=2*Math.tan(MathUtils.degToRad(camera.fov/2))*(camera.position.z-sheetDepth);
     for(const curtain of curtains){const panel=curtain.panel;curtain.mesh.visible=!reduced&&!!panel;if(!panel)continue;const sheetHeight=panel.height/height*sheetViewHeight*1.18;curtain.mesh.position.set(((panel.left+panel.width*.5)/width-.5)*sheetViewHeight*camera.aspect,(.5-(panel.top+panel.height*.5)/height)*sheetViewHeight,sheetDepth);curtain.mesh.scale.set(panel.width/width*sheetViewHeight*camera.aspect*1.18,sheetHeight,sheetHeight);}
     const tick=Math.floor(time*10);if(tick!==lastMotionTick){lastMotionTick=tick;canvas.dataset.glassTime=time.toFixed(1);canvas.dataset.glassLightPhase=lightPhase.toFixed(3);canvas.dataset.glassReading=reading.toFixed(3);canvas.dataset.glassDispersion='1.4';}
-    canvas.dataset.glassCollected=spatial.toFixed(3);
+    canvas.dataset.glassCollected=spatial.toFixed(3);canvas.dataset.glassOptics='volume-transmission+projected-caustics';
     overlayAmount=collectionOverlay&&!reduced?MathUtils.smoothstep(spatial,.86,1):0;canvas.dataset.glassOverlay=overlayAmount.toFixed(3);
     // Optical transmission still samples the studio, while alpha gently blends the dock with
     // the live header behind it. This small foreground mark never becomes a pale content cutout.

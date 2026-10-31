@@ -12762,5 +12762,169 @@
   "站长登录邮箱不能在此修改": [
     "The owner sign-in email cannot be changed here.",
     "管理者のログイン用メールはここでは変更できません。"
+  ],
+  "返回资源": [
+    "Back to resources",
+    "リソースに戻る"
+  ],
+  "张越律师个人照片": [
+    "Portrait of lawyer Zhang Yue",
+    "張越弁護士の写真"
+  ],
+  "法律咨询": [
+    "Legal consultation",
+    "法律相談"
+  ],
+  "律师": [
+    "Lawyer",
+    "弁護士"
+  ],
+  "张越律师自2021年起执业，主要提供民事纠纷相关法律服务。业务涉及借贷、交通事故、婚姻家事、住房及继承等事项。可通过微信沟通具体问题与咨询安排。": [
+    "Zhang Yue has practised law since 2021, focusing on civil disputes involving lending, traffic accidents, family matters, housing and inheritance. Contact him on WeChat to discuss your situation and arrange a consultation.",
+    "張越弁護士は2021年から執業し、民事紛争に関する法律サービスを中心に提供しています。貸借、交通事故、婚姻・家族、住宅、相続などを取り扱います。具体的なご相談や日程については、WeChatでお問い合わせください。"
+  ],
+  "执业证号": [
+    "Lawyer’s practising licence number",
+    "執業証番号"
+  ],
+  "执业时间": [
+    "Practising since",
+    "執業期間"
+  ],
+  "2021年至今": [
+    "2021–present",
+    "2021年から現在まで"
+  ],
+  "咨询与联系": [
+    "Consultation and contact",
+    "相談・お問い合わせ"
+  ],
+  "业务范围": [
+    "Practice areas",
+    "取扱分野"
+  ],
+  "围绕生活中的民事法律问题，了解相关咨询事项。": [
+    "Explore consultation topics for civil legal matters in everyday life.",
+    "暮らしの中の民事問題について、相談できる内容をご紹介します。"
+  ],
+  "咨询前，可以先准备": [
+    "What to prepare before a consultation",
+    "相談前に準備できること"
+  ],
+  "简要的事情经过、关键时间点、已有合同或相关材料，以及你希望解决的问题，便于沟通具体咨询安排。": [
+    "Prepare a brief account of events, key dates, any contracts or relevant documents, and the issues you want to resolve. These details help arrange the consultation.",
+    "経緯の概要、重要な日付、契約書や関連資料、解決したいことをまとめておくと、具体的な相談内容を伝えやすくなります。"
+  ],
+  "咨询费用": [
+    "Consultation fee",
+    "相談料金"
+  ],
+  "元 / 小时": [
+    "CNY / hour",
+    "元 / 時間"
+  ],
+  "具体收费及服务安排，请联系律师确认。": [
+    "Confirm the fee and service arrangements directly with the lawyer.",
+    "具体的な料金やサービスの内容は、弁護士に直接ご確認ください。"
+  ],
+  "真律咨询平台": [
+    "Zhenlv Legal Consulting Platform",
+    "真律法律相談プラットフォーム"
+  ],
+  "也可访问真律咨询平台，查看其服务条款与渠道码入口。": [
+    "You can also visit the Zhenlv platform to view its terms of service and channel-code entry.",
+    "真律のサイトでは、利用規約とチャネルコードの入力画面をご覧いただけます。"
+  ],
+  "访问真律咨询平台": [
+    "Visit the Zhenlv platform",
+    "真律のサイトを開く"
+  ],
+  "在新窗口打开": [
+    "Opens in a new window",
+    "新しいウィンドウで開きます"
+  ],
+  "本页根据提供的律师介绍资料整理。": [
+    "This page is based on the supplied lawyer profile.",
+    "本ページは、提供された弁護士紹介資料をもとに作成しています。"
+  ],
+  "微信号": [
+    "WeChat ID",
+    "WeChat ID"
+  ],
+  "复制律师微信号": [
+    "Copy the lawyer’s WeChat ID",
+    "弁護士のWeChat IDをコピー"
+  ],
+  "复制微信号": [
+    "Copy WeChat ID",
+    "WeChat IDをコピー"
+  ],
+  "复制成功，添加时请备注法律咨询": [
+    "Copied. Include “法律咨询” (legal consultation) when adding this contact.",
+    "コピーしました。追加申請時は「法律咨询」とご記入ください。"
+  ],
+  "复制未成功，请长按或选中上方微信号手动复制。": [
+    "Copy failed. Long-press or select the WeChat ID above to copy it manually.",
+    "コピーできませんでした。上のWeChat IDを長押しするか選択して、手動でコピーしてください。"
+  ],
+  "添加微信时请备注“法律咨询”。": [
+    "Include “法律咨询” (legal consultation) when adding this contact on WeChat.",
+    "WeChatの追加申請時は「法律咨询」とご記入ください。"
+  ],
+  "法律咨询 · 张越律师": [
+    "Legal consultation · Zhang Yue",
+    "法律相談 · 張越弁護士"
+  ],
+  "了解律师背景、民事纠纷业务范围与咨询方式。": [
+    "View the lawyer’s background, civil practice areas and contact details.",
+    "弁護士の経歴、民事分野の取扱内容、相談方法をご覧ください。"
+  ],
+  "张越": [
+    "Zhang Yue",
+    "張越"
+  ],
+  "上海君典律师事务所": [
+    "Shanghai Jundian Law Firm",
+    "上海君典法律事務所"
+  ],
+  "民间借贷": [
+    "Private lending",
+    "民間の金銭貸借"
+  ],
+  "交通事故": [
+    "Traffic accidents",
+    "交通事故"
+  ],
+  "离婚纠纷": [
+    "Divorce disputes",
+    "離婚紛争"
+  ],
+  "抚养费": [
+    "Child support",
+    "養育費"
+  ],
+  "租房纠纷": [
+    "Rental disputes",
+    "賃貸借紛争"
+  ],
+  "房屋买卖": [
+    "Home sales and purchases",
+    "住宅の売買"
+  ],
+  "遗产继承": [
+    "Inheritance",
+    "遺産相続"
+  ],
+  "遗嘱见证": [
+    "Witnessing of wills",
+    "遺言の立会い"
+  ],
+  "律师函": [
+    "Lawyer’s letters",
+    "弁護士名義の通知書"
+  ],
+  "人身伤害": [
+    "Personal injury",
+    "人身被害"
   ]
 }

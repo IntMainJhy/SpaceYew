@@ -6,7 +6,7 @@ import {serverI18n} from '@/lib/server-i18n';
 import {publicSpace,publicSpaceDocument} from '@/lib/spaces.mjs';
 import {publicBlogBundle,staticPage} from '@/lib/blog-hosting.mjs';
 import {localizeContent,localizeProfile} from '@/lib/content-locales.mjs';
-import {BlogTheme} from './BlogTheme';
+import {PublicBlogTheme as BlogTheme} from './RouteClients';
 import {BlogShare} from './BlogShare';
 import {StaticSite} from './StaticSite';
 import {SpaceVisit} from './SpaceBoard';

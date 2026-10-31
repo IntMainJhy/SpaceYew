@@ -35,8 +35,8 @@ export async function createBlogSpacesScene(canvas:HTMLCanvasElement,spaces:Blog
  const response=await fetch('/models/spaceyew-blog-panel.glb',{signal});if(!response.ok)throw Error('Glass panel unavailable');
  const gltf=await new GLTFLoader().parseAsync(await response.arrayBuffer(),'');
  let disposed=false,renderer:WebGLRenderer|undefined,environment:ReturnType<PMREMGenerator['fromScene']>|undefined;
- const scene=new Scene(),camera=new PerspectiveCamera(42,1,.1,180),geometry=new Set<any>(),materials=new Set<any>(),textures:CanvasTexture[]=[],bitmaps=new Set<ImageBitmap>();
- const dispose=()=>{if(disposed)return;disposed=true;signal.removeEventListener('abort',dispose);geometry.forEach(item=>item.dispose());materials.forEach(item=>item.dispose());textures.forEach(item=>item.dispose());bitmaps.forEach(item=>item.close());environment?.dispose();renderer?.dispose();};
+ const scene=new Scene(),camera=new PerspectiveCamera(42,1,.1,180),geometry=new Set<any>(),materials=new Set<any>(),textures:CanvasTexture[]=[],bitmaps=new Set<ImageBitmap>(),pendingPaints=new Set<number>();
+ const dispose=()=>{if(disposed)return;disposed=true;signal.removeEventListener('abort',dispose);for(const frame of pendingPaints)cancelAnimationFrame(frame);pendingPaints.clear();geometry.forEach(item=>item.dispose());materials.forEach(item=>item.dispose());textures.forEach(item=>item.dispose());bitmaps.forEach(item=>item.close());environment?.dispose();renderer?.dispose();};
  gltf.scene.traverse(node=>{if(node instanceof Mesh){geometry.add(node.geometry);for(const material of Array.isArray(node.material)?node.material:[node.material])materials.add(material);}});
  if(signal.aborted){dispose();throw new DOMException('Aborted','AbortError');}
  try{
@@ -80,26 +80,28 @@ export async function createBlogSpacesScene(canvas:HTMLCanvasElement,spaces:Blog
     if(images.cover){context.save();context.beginPath();context.roundRect(820,210,705,space.projectTitle?610:705,34);context.clip();cover(context,images.cover,820,210,705,space.projectTitle?610:705);context.restore();if(space.projectTitle){context.fillStyle='#1d4a73';context.font='600 36px "SpaceYew Sans","PingFang SC","Microsoft YaHei",sans-serif';lines(context,space.projectTitle,820,880,705,48,2);}}
     texture.needsUpdate=true;invalidate();
    };
-   paint();document.fonts?.ready.then(paint).catch(()=>{});
-   for(const [key,id] of [['avatar',space.avatarId],['cover',space.coverId]] as const){if(!id)continue;void fetch('/media/'+encodeURIComponent(id),{signal}).then(res=>{if(!res.ok)throw Error('Preview image unavailable');return res.blob();}).then(blob=>createImageBitmap(blob)).then(bitmap=>{if(disposed){bitmap.close();return;}bitmaps.add(bitmap);images[key]=bitmap;paint();}).catch(()=>{});}
+   let paintFrame=0;
+   const schedulePaint=()=>{if(disposed||paintFrame)return;paintFrame=requestAnimationFrame(()=>{pendingPaints.delete(paintFrame);paintFrame=0;paint();});pendingPaints.add(paintFrame);};
+   paint();if(document.fonts&&document.fonts.status!=='loaded')document.fonts.ready.then(schedulePaint).catch(()=>{});
+   for(const [key,id] of [['avatar',space.avatarId],['cover',space.coverId]] as const){if(!id)continue;void fetch('/media/'+encodeURIComponent(id),{signal}).then(res=>{if(!res.ok)throw Error('Preview image unavailable');return res.blob();}).then(blob=>createImageBitmap(blob)).then(bitmap=>{if(disposed){bitmap.close();return;}bitmaps.add(bitmap);images[key]=bitmap;schedulePaint();}).catch(()=>{});}
    const material=new MeshBasicMaterial({map:texture,toneMapped:false});materials.add(material);const content=new Mesh(contentGeometry,material);content.position.z=.145;group.add(content);scene.add(group);panels.push({group,index,glass,space});
   }
   // Restore the original studio curve, keeping it behind even an eight-page flight.
   const lightDepth=Math.min(-30,-Math.max(0,spaces.length-1)*6.6-12),lightScale=(9-lightDepth)/39;
   const curve=new CatmullRomCurve3([[-60,-11.23],[-20,-2],[-7,1],[0,3],[8,1],[20,3],[60,9.67]].map(([x,y])=>new Vector3(x*lightScale,y*lightScale,lightDepth))),lightGeometry=new TubeGeometry(curve,512,.025*lightScale,8,false);geometry.add(lightGeometry);
   const lightMaterial=new MeshBasicMaterial({color:new Color('#d4ecff').multiplyScalar(.8),toneMapped:false});materials.add(lightMaterial);scene.add(new Mesh(lightGeometry,lightMaterial));
-  let width=1,height=1,mobile=false;
+  let width=1,height=1,mobile=false,pixelRatio=0;
   const raycaster=new Raycaster(),mouse=new Vector2();
   signal.addEventListener('abort',dispose,{once:true});if(signal.aborted){dispose();throw new DOMException('Aborted','AbortError');}
   return{
-   resize(nextWidth,nextHeight,dpr){if(disposed)return;width=nextWidth;height=nextHeight;mobile=width<768;renderer!.setPixelRatio(Math.min(dpr,2));renderer!.setSize(width,height,false);renderer!.transmissionResolutionScale=mobile?.55:.7;camera.aspect=width/height;camera.updateProjectionMatrix();},
+   resize(nextWidth,nextHeight,dpr){if(disposed)return;const nextRatio=Math.min(dpr,2);if(width===nextWidth&&height===nextHeight&&pixelRatio===nextRatio)return;width=nextWidth;height=nextHeight;pixelRatio=nextRatio;mobile=width<768;renderer!.setPixelRatio(pixelRatio);renderer!.setSize(width,height,false);renderer!.transmissionResolutionScale=mobile?.55:.7;camera.aspect=width/height;camera.updateProjectionMatrix();},
    render(progress,x,y,reduced){
     if(disposed)return 0;const p=reduced?0:MathUtils.clamp(progress,0,1);camera.position.set(reduced?0:x*.2+Math.sin(p*Math.PI*2)*.35,reduced?0:-y*.12,blogJourneyCameraZ(p,spaces.length,reduced));camera.rotation.set(reduced?0:-y*.018,reduced?0:-x*.025,0,'YXZ');wallMaterial.uniforms.uProgress.value=p;
     let selected=0,closest=Infinity;for(const panel of panels){const pose=blogJourneyPanelPose(camera.position.z,panel.index,camera.aspect,mobile);
      panel.group.position.set(pose.x,pose.y,pose.z);panel.group.scale.setScalar(pose.scale);panel.group.rotation.set(0,pose.rotationY+(reduced?0:x*.025),pose.rotationZ);panel.group.visible=pose.visible&&p<.99;
      const score=Math.abs(camera.position.z-panel.group.position.z-7);if(panel.group.visible&&score<closest){closest=score;selected=panel.index;}
     }
-    renderer!.render(scene,camera);canvas.dataset.blogGlass='native-blender';canvas.dataset.blogProgress=p.toFixed(3);return selected;
+    renderer!.render(scene,camera);if(canvas.dataset.blogGlass!=='native-blender')canvas.dataset.blogGlass='native-blender';const displayed=p.toFixed(3);if(canvas.dataset.blogProgress!==displayed)canvas.dataset.blogProgress=displayed;return selected;
    },
    pick(x,y){if(disposed)return null;mouse.set(x,y);raycaster.setFromCamera(mouse,camera);for(const hit of raycaster.intersectObjects(panels.filter(panel=>panel.group.visible).flatMap(panel=>panel.glass),false)){const panel=panels.find(panel=>panel.glass.includes(hit.object as Mesh));if(panel)return panel.space.href;}return null;},
    dispose,

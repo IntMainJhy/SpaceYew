@@ -51,21 +51,21 @@ export async function mountHomeKinetic(canvas:HTMLCanvasElement,host:HTMLElement
    }
   `});backdropMaterial.toneMapped=false;materials.add(backdropMaterial);
   const backdrop=new Mesh(backdropGeometry,backdropMaterial);backdrop.position.z=-3;scene.add(backdrop);
-  let width=1,height=1,time=0,last=0,visible=false,paused=false,lost=false,printing=false,mode=0,pose=0,scroll=0,targetX=0,targetY=0,x=0,y=0,dragging=false,dragX=0,dragOffset=0;
+  let width=1,height=1,time=0,last:number|null=null,visible=false,paused=false,lost=false,printing=false,mode=0,pose=0,scroll=0,targetX=0,targetY=0,x=0,y=0,dragging=false,dragX=0,dragOffset=0;
   const preference=matchMedia('(prefers-reduced-motion: reduce)');let reduced=preference.matches;
   const canDraw=()=>!disposed&&!lost&&!printing&&visible&&!document.hidden;
-  const stop=()=>{cancelAnimationFrame(frame);frame=0;last=0;};
-  const draw=()=>{
+  const stop=()=>{cancelAnimationFrame(frame);frame=0;last=null;};
+  const draw=(delta=0)=>{
    if(disposed||lost)return;
-   pose=MathUtils.damp(pose,mode,6,1/30);x=MathUtils.damp(x,reduced?0:targetX,5,1/30);y=MathUtils.damp(y,reduced?0:targetY,5,1/30);
+   pose=MathUtils.damp(pose,mode,6,delta);x=MathUtils.damp(x,reduced?0:targetX,5,delta);y=MathUtils.damp(y,reduced?0:targetY,5,delta);
    sculpture.rotation.set(.18+(reduced?0:y*.18),-.30+pose*.63+(reduced?0:time*.1+x*.22+dragOffset),-.12+(reduced?0:Math.sin(time*.32)*.06+scroll*.20));
    sculpture.position.y=reduced?0:Math.sin(time*.8)*.07;
    arcs.forEach((arc,index)=>{arc.rotation.set(index*.66+pose*(index-1)*.15,index*.42,pose*(index%2?-.32:.32));arc.position.z=(index-1)*.15;});
    nodes.forEach((node,index)=>{const active=index===mode;node.scale.setScalar(active?1.3:1);const material=node.material as MeshPhysicalMaterial;material.emissive.set(active?'#3879c5':'#000000');material.emissiveIntensity=active?.18:0;});
    backdropMaterial.uniforms.uTime.value=reduced?0:time;backdropMaterial.uniforms.uPhase.value=pose;
-   scene.environmentRotation.y=reduced?0:time*.035+x*.08;scene.updateMatrixWorld();renderer!.render(scene,camera);
+   scene.environmentRotation.y=reduced?0:time*.035+x*.08;renderer!.render(scene,camera);
   };
-  const tick=(now:number)=>{frame=0;if(!canDraw())return;const delta=last?(now-last)/1000:1/30;if(delta<1/30-.002){frame=requestAnimationFrame(tick);return;}last=now;if(!reduced&&!paused)time+=Math.min(delta,.08);draw();if(!reduced&&!paused||Math.abs(pose-mode)>.002||Math.abs(x-(reduced?0:targetX))>.002||Math.abs(y-(reduced?0:targetY))>.002)frame=requestAnimationFrame(tick);};
+  const tick=(now:number)=>{frame=0;if(!canDraw())return;const delta=Math.min(last===null?1/120:Math.max(0,(now-last)/1000),.08);last=now;if(!reduced&&!paused)time+=delta;draw(delta);if(!reduced&&!paused||Math.abs(pose-mode)>.002||Math.abs(x-(reduced?0:targetX))>.002||Math.abs(y-(reduced?0:targetY))>.002)frame=requestAnimationFrame(tick);};
   const wake=()=>{if(canDraw()){if(!frame)frame=requestAnimationFrame(tick);}else stop();};
   const measure=()=>{if(disposed||lost)return;const box=host.getBoundingClientRect();width=Math.max(box.width,1);height=Math.max(box.height,1);renderer!.setPixelRatio(Math.min(devicePixelRatio||1,1.6,Math.sqrt(1100000/(width*height))));renderer!.setSize(width,height,false);camera.aspect=width/height;camera.position.z=width<500?10.2:8.6;camera.updateProjectionMatrix();draw();wake();};
   const move=(event:PointerEvent)=>{if(reduced)return;const box=host.getBoundingClientRect();if(event.pointerType!=='touch'){targetX=(event.clientX-box.left)/box.width*2-1;targetY=(event.clientY-box.top)/box.height*2-1;}if(dragging){dragOffset+=(event.clientX-dragX)*.006;dragX=event.clientX;}wake();};

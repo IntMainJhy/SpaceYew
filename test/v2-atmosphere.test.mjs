@@ -7,9 +7,10 @@ import {Box3,Mesh,MeshPhysicalMaterial,Vector3} from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/V2Atmosphere.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText;
-function mount({reduced=false,width=1400,height=900,loading=false,failed=false,animated=false,mode='home',reveal=false,overlay=false,header=false}={}){
+function mount({reduced=false,width=1400,height=900,loading=false,failed=false,animated=false,mode='home',reveal=false,overlay=false,header=false,cpuRenderMs=0}={}){
+ let cpuClock=0;
  class Target extends EventTarget{
-  listeners=new Set();dataset={};style={setProperty(name,value){this[name]=value},removeProperty(name){delete this[name]}};
+  listeners=new Set();dataset={};style={getPropertyValue(name){return this[name]||''},setProperty(name,value){this[name]=value},removeProperty(name){delete this[name]}};
   addEventListener(name,fn,options){super.addEventListener(name,fn,options);this.listeners.add(name)}
   removeEventListener(name,fn){super.removeEventListener(name,fn);this.listeners.delete(name)}
   getBoundingClientRect(){return{left:0,top:this.top||0,width,height}}
@@ -19,13 +20,13 @@ function mount({reduced=false,width=1400,height=900,loading=false,failed=false,a
  const panel=Object.assign(new Target(),{dataset:{glassReveal:'stage'},getBoundingClientRect:()=>({left:100,top:500,right:1100,bottom:860,width:1000,height:360})});host.querySelectorAll=()=>reveal?[panel]:[];
  const headerBounds={brandRight:160,toolsLeft:270,height:64},bar={getBoundingClientRect:()=>({top:0,height:headerBounds.height}),querySelectorAll:()=>[],querySelector:selector=>selector==='.organic-brand'?{getBoundingClientRect:()=>({right:headerBounds.brandRight})}:selector==='.organic-header-tools'?{getBoundingClientRect:()=>({left:headerBounds.toolsLeft})}:null};host.querySelector=selector=>header&&selector==='.organic-header'?bar:null;
  const draws=[],sizes=[],reveals=[],overlayModes=[],docks=[];let releases=0,resolve,reject,signal;
- const adapter={animated,resize:(...args)=>sizes.push(args),setReveals:value=>reveals.push(value),setCollectionOverlay:value=>overlayModes.push(value),setHeaderDock:value=>docks.push(value?{...value}:null),render:(...args)=>{draws.push(args);if(overlay)canvas.dataset.glassOverlay=args[3]>=1.3&&!args[4]?'1.000':'0.000';},dispose:()=>releases++};
+ const adapter={animated,resize:(...args)=>sizes.push(args),setReveals:value=>reveals.push(value),setCollectionOverlay:value=>overlayModes.push(value),setHeaderDock:value=>docks.push(value?{...value}:null),render:(...args)=>{draws.push(args);cpuClock+=cpuRenderMs;if(overlay)canvas.dataset.glassOverlay=args[3]>=1.3&&!args[4]?'1.000':'0.000';},dispose:()=>releases++};
  let resize,intersection,theme,now=0,id=0;const frames=new Map();
  class Resize{constructor(fn){this.fn=fn;resize=this}observe(){}disconnect(){this.disconnected=true}}
  class Intersection{constructor(fn){this.fn=fn;intersection=this}observe(){}disconnect(){this.disconnected=true}set(value){this.fn([{isIntersecting:value}])}}
  class Mutation{constructor(fn){this.fn=fn;theme=this}observe(){}disconnect(){this.disconnected=true}}
  const exports={};
- vm.runInNewContext(source,{exports,window,document,AbortController,Math,ResizeObserver:Resize,IntersectionObserver:Intersection,MutationObserver:Mutation,requestAnimationFrame:fn=>{frames.set(++id,fn);return id},cancelAnimationFrame:key=>frames.delete(key),require:name=>{
+ vm.runInNewContext(source,{exports,window,document,AbortController,Math,performance:{now:()=>cpuClock},ResizeObserver:Resize,IntersectionObserver:Intersection,MutationObserver:Mutation,requestAnimationFrame:fn=>{frames.set(++id,fn);return id},cancelAnimationFrame:key=>frames.delete(key),require:name=>{
   if(name==='react')return{useEffect(){},useRef(){}};
   if(name==='react/jsx-runtime')return{jsx(){}};
   throw Error('Unexpected dependency '+name);
@@ -41,11 +42,11 @@ function mount({reduced=false,width=1400,height=900,loading=false,failed=false,a
 }
 const flush=async()=>{await Promise.resolve();await Promise.resolve()};
 
-test('glass follows the pointer with damping, caps redraws and resolution, and stops when idle or outside the viewport',async()=>{
+test('glass follows every display frame with damping, bounds resolution, and stops when idle or outside the viewport',async()=>{
  const s=mount();s.intersection.set(true);await flush();
  assert.ok(1400*900*s.sizes.at(-1)[2]**2<=8000001);assert.equal(s.draws.length,1);assert.equal(s.frames.size,0,'no continuous idle GPU loop');
  s.move();s.step(16);assert.ok(s.draws.at(-1)[0]>0&&s.draws.at(-1)[0]<1,'smooth rather than instant camera motion');
- const first=s.draws.length;s.step(16);assert.equal(s.draws.length,first,'draws capped near 30 fps');
+ const first=s.draws.length;s.step(1000/144);assert.equal(s.draws.length,first+1,'144Hz pointer movement is not skipped by a 30fps ceiling');
  for(let i=0;i<100;i++)s.step();assert.equal(s.frames.size,0,'settled camera sleeps');
  s.host.dispatchEvent(new Event('pointerleave'));assert.equal(s.frames.size,1);
  s.intersection.set(false);assert.equal(s.frames.size,0);
@@ -77,20 +78,45 @@ test('scrolling below the hero redraws the same viewport canvas and coalesces sc
  const before=s.draws.length;s.step();assert.equal(s.draws.length,before+1);
  assert.deepEqual(s.draws.at(-1),[0,0,false,2,true],'reading colors update without enabling spatial motion');
  assert.equal(s.frames.size,0);assert.deepEqual(s.sizes.at(-1).slice(0,2),[1400,900],'GPU target stays viewport-sized');
- s.window.dispatchEvent(new Event('scroll'));s.step(16);assert.equal(s.draws.length,before+1,'independent scroll events still respect the 30fps ceiling');s.step(19);assert.equal(s.draws.length,before+2);
+ s.window.dispatchEvent(new Event('scroll'));s.step(1000/144);assert.equal(s.draws.length,before+2,'a fresh scroll update paints on the next high-refresh callback');s.step(19);assert.equal(s.draws.length,before+2,'static reduced-motion content sleeps again after the update');
  s.intersection.set(false);s.host.top=-2700;s.window.dispatchEvent(new Event('scroll'));s.step();assert.equal(s.draws.length,before+2);
  s.intersection.set(true);assert.equal(s.draws.at(-1)[3],3);s.cleanup();assert.equal(s.window.listeners.size,0);
 });
 
-test('interaction cadence retains 30fps on a 60Hz display, bounds pixels, and lowers resolution under sustained load',async()=>{
+test('visible optical motion follows 60/120/144Hz callbacks without changing animation speed',async()=>{
+ for(const hz of[60,120,144]){
+  const s=mount({animated:true});s.intersection.set(true);await flush();const start=s.draws.length;
+  for(let i=0;i<hz*2;i++)s.step(1000/hz);
+  assert.equal(s.draws.length-start,hz*2,'every visible callback renders at '+hz+'Hz');
+  assert.ok(Math.abs(s.draws.at(-1)[5]-2)<.02,'active seconds remain wall-clock based at '+hz+'Hz');
+  s.cleanup();assert.equal(s.frames.size,0);
+ }
+});
+
+test('sustained missed frames or expensive submissions adapt pixels rather than skipping high-refresh callbacks',async()=>{
  const s=mount({animated:true,width:2560,height:1440});s.intersection.set(true);await flush();
  assert.ok(2560*1440*s.sizes.at(-1)[2]**2<=8000001,'large displays retain a high-resolution total pixel budget');
  const start=s.draws.length;for(let i=0;i<600;i++){s.window.dispatchEvent(new Event('scroll'));s.step(1000/60);}
- assert.ok(s.draws.length-start>=299&&s.draws.length-start<=301,'30fps does not fall to 20fps through floating-point drift');
+ assert.equal(s.draws.length-start,600,'display callbacks are never discarded by a software frame ceiling');
  const before=s.draws.at(-1)[5],dpr=s.sizes.at(-1)[2];for(let i=0;i<30;i++){s.window.dispatchEvent(new Event('scroll'));s.step(100);}
  assert.ok(s.draws.at(-1)[5]-before>2.8,'visible animation time does not slow to half speed when frames are late');
- assert.ok(s.sizes.at(-1)[2]<dpr&&s.sizes.at(-1)[2]>=dpr*.85,'sustained late frames use a bounded reduction that preserves fine edges');
+ assert.ok(s.sizes.at(-1)[2]<dpr&&s.sizes.at(-1)[2]>=dpr*.72,'sustained late frames use a bounded reduction that preserves fine edges');
  const sizes=s.sizes.length;s.resize.fn();assert.equal(s.sizes.length,sizes,'unchanged bounds do not rebuild render targets');s.cleanup();
+ const costly=mount({animated:true,cpuRenderMs:10});costly.intersection.set(true);await flush();const initial=costly.sizes.at(-1)[2],beforeFrames=costly.draws.length;
+ for(let i=0;i<60;i++)costly.step(1000/144);
+ assert.equal(costly.draws.length-beforeFrames,60);assert.ok(costly.sizes.at(-1)[2]<initial,'render work exceeding the observed display budget lowers pixel cost');costly.cleanup();
+});
+
+test('observed 120/144Hz displays adapt pixels when sustained callbacks miss every other refresh',async()=>{
+ for(const hz of[120,144]){
+  const s=mount({animated:true});s.intersection.set(true);await flush();const initialDpr=s.sizes.at(-1)[2];
+  for(let index=0;index<60;index++)s.step(1000/hz);
+  assert.equal(s.sizes.at(-1)[2],initialDpr,'healthy high-refresh callbacks preserve optical resolution');
+  const before=s.draws.length;
+  for(let index=0;index<48;index++)s.step(2000/hz);
+  assert.equal(s.draws.length-before,48,'every late callback still renders instead of imposing another frame cap');
+  assert.ok(s.sizes.at(-1)[2]<initialDpr,'sustained missed high-refresh intervals reduce GPU pixels even below 25ms');s.cleanup();
+ }
 });
 
 test('load failures, context loss and unmount during a late load preserve the CSS fallback and release resources',async()=>{

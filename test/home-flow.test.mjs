@@ -7,10 +7,10 @@ import ts from 'typescript';
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/lib/home-flow.ts',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
 function mount(reduced=false,fine=true,interactive=true){
  class Target extends EventTarget{
-  listeners=new Set();attrs={};
+  listeners=new Set();attrs={};writes={};
   addEventListener(type,listener,options){super.addEventListener(type,listener,options);this.listeners.add(type);}
   removeEventListener(type,listener){super.removeEventListener(type,listener);this.listeners.delete(type);}
-  setAttribute(name,value){this.attrs[name]=value;}
+  setAttribute(name,value){this.attrs[name]=value;this.writes[name]=(this.writes[name]||0)+1;}
  }
  const preference=Object.assign(new Target(),{matches:reduced}),pointer=Object.assign(new Target(),{matches:fine});
  const document=Object.assign(new Target(),{hidden:false}),window=Object.assign(new Target(),{matchMedia:q=>q.includes('reduced')?preference:pointer});
@@ -72,4 +72,14 @@ test('quiet authentication background keeps flowing without emitting pointer cha
  for(let i=0;i<10;i++){s.move(100+i*40,300);s.step();}
  assert.notEqual(s.ribbons[0].attrs.d,initial);assert.equal(s.trail.attrs.opacity,'0');
  assert.equal(s.pool.filter(p=>p.textContent).length,0);s.cleanup();assert.equal(s.frames.size,0);
+});
+
+test('admin background motion follows 120/144Hz callbacks without a decorative 30fps ceiling',()=>{
+ for(const hz of[120,144]){
+  const s=mount(false,true,false);s.observer.intersect(true);
+  for(let index=0;index<hz;index++)s.step(1000/hz);
+  assert.equal(s.ribbons[0].writes.d,hz,'one curve update per visible callback at '+hz+'Hz');
+  const actual=s.ribbons[0].attrs.d.match(/-?\d+(?:\.\d+)?/g).map(Number),expected=s.homeFlowPaths((hz-1)/hz)[0].match(/-?\d+(?:\.\d+)?/g).map(Number);
+  assert.equal(actual.length,expected.length);assert.ok(actual.every((value,index)=>Math.abs(value-expected[index])<1e-9),'wall-clock curve phase stays independent of refresh rate');s.cleanup();assert.equal(s.frames.size,0);
+ }
 });

@@ -14,6 +14,39 @@ export function windTrackX(index:number,offset:number,spacing:number){
 }
 export function windCableY(x:number){return 1.4+.30*Math.sin(x*.52-.2)+.10*Math.sin(x*1.04+1.2);}
 
+/** The original cloth motion, evaluated on the GPU with its analytic normal Jacobian. */
+export function windVertexShader(source:string){
+ const anchors=['#include <common>','#include <beginnormal_vertex>','#include <begin_vertex>'];
+ if(!anchors.every(anchor=>source.split(anchor).length===2))return source;
+ return source.replace(anchors[0],anchors[0]+`
+  uniform float uWindTime,uWindIndex,uWindStrength,uWindReduced;
+  uniform vec2 uWindHit;
+  struct WindWarp { vec2 offset; float dxdy; vec2 dz; };
+  WindWarp windWarp(vec3 point){
+   float loose=max(0.,(1.28-point.y)/2.56),dy=point.y<1.28?-1./2.56:0.;
+   float a=uWindTime*1.25+point.x*2.1+loose*3.+uWindIndex*1.8;
+   float b=uWindTime*2.+point.x*5.+loose*2.;
+   float c=uWindTime*.85+uWindIndex+loose*2.;
+   float wind=sin(a)*.075+sin(b)*.022;
+   vec2 hit=point.xy-uWindHit;
+   float pressure=exp(-dot(hit,hit)*3.)*uWindStrength*.19;
+   float moving=1.-uWindReduced;
+   WindWarp warp;
+   warp.offset=vec2(sin(c)*.035*loose*loose,wind*loose*loose+pressure*loose)*moving;
+   warp.dxdy=.035*(cos(c)*2.*loose*loose+sin(c)*2.*loose)*dy*moving;
+   warp.dz.x=((cos(a)*.1575+cos(b)*.11)*loose*loose-6.*hit.x*pressure*loose)*moving;
+   warp.dz.y=(((cos(a)*.225+cos(b)*.044)*loose*loose+wind*2.*loose)*dy+pressure*(dy-6.*hit.y*loose))*moving;
+   return warp;
+  }
+ `).replace(anchors[1],anchors[1]+`
+  WindWarp normalWarp=windWarp(position);
+  objectNormal=vec3(objectNormal.x-normalWarp.dz.x*objectNormal.z,
+   objectNormal.y-normalWarp.dxdy*objectNormal.x+(normalWarp.dxdy*normalWarp.dz.x-normalWarp.dz.y)*objectNormal.z,objectNormal.z);
+ `).replace(anchors[2],anchors[2]+`
+  transformed+=vec3(normalWarp.offset.x,0.,normalWarp.offset.y);
+ `);
+}
+
 export function HomeWindGallery({items,heading,hint}:{items:HomeWindItem[];heading:string;hint:string}){
  const stage=useRef<HTMLDivElement>(null),canvas=useRef<HTMLCanvasElement>(null),links=useRef<(HTMLAnchorElement|null)[]>([]),control=useRef(()=>{}),pausedRef=useRef(false),headingId=useId();
  const[paused,setPaused]=useState(false),{locale}=useLocale(),entries=items.slice(0,4);
@@ -33,11 +66,12 @@ export function HomeWindGallery({items,heading,hint}:{items:HomeWindItem[];headi
     scene.add(new THREE.HemisphereLight(0xffffff,0xd5dfe7,.65));
     const key=new THREE.DirectionalLight(0xfffcf7,1.6);key.position.set(-4,3,6);scene.add(key);
     const fill=new THREE.DirectionalLight(0xedf5ff,.3);fill.position.set(4,-1,5);scene.add(fill);
-    type Surface={mesh:Three.Mesh<Three.BufferGeometry,Three.MeshPhysicalMaterial>;base:Float32Array};
-    const cloths:{mesh:Three.Mesh;group:Three.Group;surfaces:Surface[];strength:number;hit:Three.Vector3}[]=[];
-    let model:Three.Group|null=null,frame=0,last=0,time=0,offset=0,flow=1,hover=-1,focused=-1,width=1,height=1,small=false,reduced=preference.matches,lost=false,printing=false,touchRelease:ReturnType<typeof setTimeout>|undefined;
+    type Surface={mesh:Three.Mesh<Three.BufferGeometry,Three.MeshPhysicalMaterial>};
+    type WindUniforms={uWindTime:{value:number};uWindIndex:{value:number};uWindStrength:{value:number};uWindReduced:{value:number};uWindHit:{value:Three.Vector2}};
+    const cloths:{mesh:Three.Mesh;group:Three.Group;surfaces:Surface[];uniforms:WindUniforms;strength:number;hit:Three.Vector3}[]=[];
+    let model:Three.Group|null=null,frame=0,last:number|null=null,time=0,offset=0,flow=1,hover=-1,focused=-1,width=1,height=1,small=false,reduced=preference.matches,lost=false,printing=false,touchRelease:ReturnType<typeof setTimeout>|undefined;
     const pointer=new THREE.Vector2(),raycaster=new THREE.Raycaster(),point=new THREE.Vector3();
-    const stop=()=>{if(frame)cancelAnimationFrame(frame);frame=0;last=0;};
+    const stop=()=>{if(frame)cancelAnimationFrame(frame);frame=0;last=null;};
     const ready=()=>!disposed&&!failed&&!lost&&!printing&&visible&&!document.hidden;
     const active=()=>!reduced&&!pausedRef.current&&focused<0;
     const spacing=()=>small?2.8:3.8;
@@ -54,7 +88,7 @@ export function HomeWindGallery({items,heading,hint}:{items:HomeWindItem[];headi
       link.style.transform=`translate3d(${(point.x*.5+.5)*width}px,${(-point.y*.5+.5)*height}px,0) translate(-50%,-50%) rotate(${-group.rotation.z}rad)`;
      });
     };
-    const draw=(delta=1/30)=>{
+    const draw=(delta=0)=>{
      if(!model)return;
      cloths.forEach((cloth,index)=>{
       const selected=hover===index||focused===index;
@@ -66,22 +100,14 @@ export function HomeWindGallery({items,heading,hint}:{items:HomeWindItem[];headi
        const x=windTrackX(index,offset,spacing()),slope=.156*Math.cos(x*.52-.2)+.104*Math.cos(x*1.04+1.2);
        cloth.group.position.set(x,windCableY(x),0);cloth.group.rotation.z=Math.atan(slope)*.75+Math.sin(time*.65+index*1.7)*.008;
       }
-      for(const part of cloth.surfaces){
-       const positions=part.mesh.geometry.getAttribute('position') as Three.BufferAttribute;
-       for(let vertex=0;vertex<positions.count;vertex++){
-        const at=vertex*3,x=part.base[at],y=part.base[at+1],z=part.base[at+2],loose=Math.max(0,(1.28-y)/2.56);
-        const wind=reduced?0:(Math.sin(time*1.25+x*2.1+loose*3+index*1.8)*.075+Math.sin(time*2+x*5+loose*2)*.022)*loose*loose;
-        const pressure=reduced?0:Math.exp(-((x-cloth.hit.x)**2+(y-cloth.hit.y)**2)*3)*cloth.strength*.19*loose;
-        positions.setXYZ(vertex,x+(reduced?0:Math.sin(time*.85+index+loose*2)*.035*loose*loose),y,z+wind+pressure);
-       }
-       positions.needsUpdate=true;part.mesh.geometry.computeVertexNormals();part.mesh.material.emissiveIntensity=.15+cloth.strength*.025;
-      }
+      cloth.uniforms.uWindTime.value=time;cloth.uniforms.uWindStrength.value=cloth.strength;cloth.uniforms.uWindReduced.value=reduced?1:0;cloth.uniforms.uWindHit.value.set(cloth.hit.x,cloth.hit.y);
+      for(const part of cloth.surfaces)part.mesh.material.emissiveIntensity=.15+cloth.strength*.025;
      });
-     scene.updateMatrixWorld();positionLinks();renderer.render(scene,camera);
+     renderer.render(scene,camera);positionLinks();
     };
     const tick=(now:number)=>{
      frame=0;if(!ready())return;
-     const elapsed=last?(now-last)/1000:1/30;if(elapsed<1/30-.002){frame=requestAnimationFrame(tick);return;}
+     const elapsed=last===null?1/120:Math.max(0,(now-last)/1000);
      const delta=Math.min(elapsed,.07);last=now;
      if(active()){time+=delta;flow=THREE.MathUtils.damp(flow,hover>=0?.08:1,5,delta);offset+=delta*(small?.17:.30)*flow;}
      draw(delta);
@@ -130,24 +156,31 @@ export function HomeWindGallery({items,heading,hint}:{items:HomeWindItem[];headi
     model=gltf.scene;scene.add(model);
     const weave=new THREE.CanvasTexture(silkWeave());weave.wrapS=weave.wrapT=THREE.RepeatWrapping;weave.repeat.set(5,6);weave.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());
     for(let index=entries.length;index<4;index++){const unused=model.getObjectByName('WindFabric_'+index);if(unused){disposeObject(unused);unused.removeFromParent();}}
+    const expandedGeometry=new Set<Three.BufferGeometry>();
     entries.forEach((entry,index)=>{
      const mesh=model!.getObjectByName('WindFabric_'+index) as Three.Mesh|undefined;if(!mesh)throw Error('Missing silk fabric');
      const texture=new THREE.CanvasTexture(fabricPrint(entry,index));texture.colorSpace=THREE.SRGBColorSpace;texture.flipY=false;texture.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());
-     const surfaces:Surface[]=[];
+     const surfaces:Surface[]=[],uniforms:WindUniforms={uWindTime:{value:0},uWindIndex:{value:index},uWindStrength:{value:0},uWindReduced:{value:reduced?1:0},uWindHit:{value:new THREE.Vector2()}};
      mesh.traverse(child=>{
       if(!(child instanceof THREE.Mesh))return;
       for(const old of Array.isArray(child.material)?child.material:[child.material])old.dispose();
       child.material=new THREE.MeshPhysicalMaterial({map:texture,color:0xffffff,bumpMap:weave,bumpScale:.009,roughness:.56,metalness:0,sheen:.3,sheenRoughness:.48,sheenColor:new THREE.Color(0xffffff),specularIntensity:.18,clearcoat:0,side:THREE.DoubleSide,toneMapped:false,emissive:0xffffff,emissiveMap:texture,emissiveIntensity:.15});
-      surfaces.push({mesh:child as Surface['mesh'],base:new Float32Array(child.geometry.getAttribute('position').array)});
+      child.material.onBeforeCompile=(shader:Three.WebGLProgramParametersWithUniforms)=>{Object.assign(shader.uniforms,uniforms);shader.vertexShader=windVertexShader(shader.vertexShader);};
+      child.material.customProgramCacheKey=()=> 'spaceyew-analytic-silk-r187';
+      if(!expandedGeometry.has(child.geometry)){child.geometry.computeBoundingBox();child.geometry.boundingBox?.expandByScalar(.4);child.geometry.computeBoundingSphere();if(child.geometry.boundingSphere)child.geometry.boundingSphere.radius+=.4;expandedGeometry.add(child.geometry);}
+      surfaces.push({mesh:child as Surface['mesh']});
      });
-     mesh.position.y=-1.28;const group=new THREE.Group();group.add(mesh);scene.add(group);cloths.push({mesh,group,surfaces,strength:0,hit:new THREE.Vector3()});
+     // Stable native planes remain the hit proxies. The shader's <=3.5cm lateral warp
+     // is smaller than the semantic link's hit area; raycasts avoid GPU readback.
+     mesh.position.y=-1.28;const group=new THREE.Group();group.add(mesh);scene.add(group);cloths.push({mesh,group,surfaces,uniforms,strength:0,hit:new THREE.Vector3()});
     });
     const cable=model.getObjectByName('WindCable') as Three.Mesh|undefined;if(cable){for(const old of Array.isArray(cable.material)?cable.material:[cable.material])old.dispose();cable.material=new THREE.MeshBasicMaterial({color:0x7194b9,transparent:true,opacity:.82});}
     measure();host.dataset.wind='ready';wake();
    }catch{failed=true;release();if(!disposed)host.dataset.wind='fallback';}
   };
-  const observer=new IntersectionObserver(records=>{visible=records.some(record=>record.isIntersecting);if(visible)void initialize();wake();},{rootMargin:'180px',threshold:0});observer.observe(host);
-  return()=>{disposed=true;observer.disconnect();release();};
+  const observer=new IntersectionObserver(records=>{if(records.some(record=>record.isIntersecting))void initialize();},{rootMargin:'180px',threshold:0});
+  const visibility=new IntersectionObserver(records=>{visible=records.some(record=>record.isIntersecting);wake();},{threshold:0});observer.observe(host);visibility.observe(host);
+  return()=>{disposed=true;observer.disconnect();visibility.disconnect();release();};
  },[items]);
  return <section className="home-wind-section" aria-labelledby={headingId} data-home-reveal="wind">
   <div className="home-wind-heading"><h2 id={headingId}>{heading}</h2><div className="home-wind-caption"><p>{hint}</p><button className="home-wind-toggle" type="button" aria-pressed={paused} onClick={()=>{pausedRef.current=!paused;setPaused(!paused);control.current();}}><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">{paused?<path d="m7 4 8 6-8 6V4Z"/>:<path d="M7 4v12M13 4v12"/>}</svg>{paused?labels.play:labels.pause}</button></div></div>

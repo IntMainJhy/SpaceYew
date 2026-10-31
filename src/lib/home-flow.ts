@@ -46,7 +46,6 @@ export function mountHomeFlow(svg:SVGSVGElement,interactive=true){
  const tick=(now:number)=>{
   if(!running)return;
   frame=requestAnimationFrame(tick);
-  if(last&&now-last<32)return; // Keep the decorative layer near a 30fps work budget.
   const delta=last?Math.min(now-last,64):0;last=now;elapsed+=delta;
   const ease=1-Math.exp(-delta/110),pull=target&&now-target.at<300?target:null;
   drift.x+=((pull?(pull.x-800)*.022:0)-drift.x)*ease;

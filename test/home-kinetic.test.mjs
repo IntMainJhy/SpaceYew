@@ -62,6 +62,19 @@ test('kinetic activity pauses offscreen and hidden, selection stays finite, and 
  assert.equal(s.model.getObjectByName('DiscoveryNode_2').scale.x,1.3);s.adapter.select(-9);assert.equal(s.model.getObjectByName('DiscoveryNode_0').scale.x,1.3);for(const [attribute,version]of nativeAttributes)assert.equal(attribute.version,version,'controls update transforms without regenerating native positions, normals or UVs');s.adapter.dispose();
 });
 
+test('kinetic renders every 60/120/144Hz callback with refresh-independent motion and damping',async()=>{
+ const rotations=[];
+ for(const hz of[60,120,144]){
+  const s=await runtime();assert.ifError(s.error);s.visible(true);s.adapter.select(1);
+  s.host.dispatchEvent(Object.assign(new Event('pointermove'),{pointerType:'mouse',clientX:600,clientY:300}));
+  const before=s.draws;for(let index=0;index<=hz;index++)s.step(index*1000/hz);
+  assert.equal(s.draws-before,hz+1,'a high-refresh callback is not discarded at '+hz+'Hz');
+  rotations.push(s.scene.children.find(node=>node.isGroup).quaternion.clone());
+  s.adapter.pause(true);for(let index=0;index<hz*2;index++)s.step(1100+index*1000/hz);assert.equal(s.frames.size,0,'paused damping settles instead of retaining a busy loop');s.adapter.dispose();
+ }
+ for(const rotation of rotations.slice(1))assert.ok(rotation.angleTo(rotations[0])<1e-7,'wall-clock motion and exponential damping agree across display refresh rates');
+});
+
 test('abort releases shared materials, observers and listeners exactly once; stale controls never draw again',async()=>{
  const s=await runtime({reduced:true});s.visible(true);s.step(0);s.abort();assert.equal(s.releases,1);assert.equal(s.environmentReleases,1);assert.equal(s.frames.size,0);
  for(const target of[s.host,s.canvas,s.window,s.document,s.preference])assert.equal(target.listenerCount,0,'every mounted listener is removed');for(const observer of[...s.resize,...s.intersection])assert.equal(observer.disconnects,1);

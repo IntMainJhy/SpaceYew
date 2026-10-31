@@ -85,3 +85,19 @@ test('the scroll camera passes every real panel in order and reduced motion neve
  }
  const reading=exports.blogJourneyPanelPose(6,0,1.7,false),passing=exports.blogJourneyPanelPose(1.8,0,1.7,false);assert.ok(Math.abs(passing.x)>Math.abs(reading.x)+2,'only the close pass peels the page sideways');
 });
+
+test('preview assets share a repaint frame and queued texture work is cancelled on disposal',async()=>{
+ const bytes=fs.readFileSync(new URL('../public/models/spaceyew-blog-panel.glb',import.meta.url));let invalidations=0,next=0,closed=0;const frames=new Map(),decodes=[];
+ class Renderer{capabilities={getMaxAnisotropy:()=>4};dispose(){}}
+ class PMREM{fromScene(){return{texture:new three.Texture(),dispose(){}};}dispose(){}}
+ const context={fillRect(){},createLinearGradient:()=>({addColorStop(){}}),beginPath(){},roundRect(){},fill(){},moveTo(){},lineTo(){},stroke(){},arc(){},fillText(){},measureText:value=>({width:value.length*30}),save(){},restore(){},clip(){},drawImage(){}};
+ const output=ts.transpileModule(fs.readFileSync(new URL('../src/lib/blog-spaces-scene.ts',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText,exports={};
+ vm.runInNewContext(output,{exports,Math,DOMException,document:{createElement:()=>({getContext:()=>context}),fonts:{status:'loaded',get ready(){throw Error('Already loaded fonts require no repaint');}}},requestAnimationFrame:fn=>{frames.set(++next,fn);return next;},cancelAnimationFrame:id=>frames.delete(id),createImageBitmap:()=>new Promise(resolve=>decodes.push(()=>resolve({width:1000,height:700,close(){closed++;}}))),fetch:async url=>url.includes('.glb')?{ok:true,arrayBuffer:async()=>bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength)}:{ok:true,blob:async()=>({})},require:name=>{
+  if(name==='three')return{...three,WebGLRenderer:Renderer,PMREMGenerator:PMREM};if(name==='three/addons/loaders/GLTFLoader.js')return{GLTFLoader};throw Error('Unexpected '+name);
+ }});
+ const spaces=['first','second'].map(handle=>({handle,name:handle,intro:'简介',avatarId:'avatar',coverId:'cover',href:'/blog/'+handle})),adapter=await exports.createBlogSpacesScene({dataset:{}},spaces,new AbortController().signal,()=>invalidations++),flush=async()=>{for(let i=0;i<8;i++)await Promise.resolve();};
+ await flush();assert.equal(invalidations,2);assert.equal(frames.size,0,'loaded fonts do not duplicate the initial texture upload');assert.equal(decodes.length,4);
+ decodes[0]();decodes[1]();await flush();assert.equal(frames.size,1,'the avatar and cover of one page share a single repaint');assert.equal(invalidations,2);
+ for(const [id,callback]of [...frames]){frames.delete(id);callback();}assert.equal(invalidations,3);
+ decodes[2]();decodes[3]();await flush();assert.equal(frames.size,1);adapter.dispose();adapter.dispose();assert.equal(frames.size,0);assert.equal(closed,4,'all decoded images close exactly once, including queued previews');assert.equal(invalidations,3,'disposed previews cannot enqueue more scene rendering');
+});

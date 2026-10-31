@@ -111,7 +111,7 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
    if(curtainSource){material.onBeforeCompile=curtainSource.onBeforeCompile;material.customProgramCacheKey=curtainSource.customProgramCacheKey;}
    material.transparent=true;material.depthWrite=false;material.thickness=.09;material.dispersion=.65;material.roughness=.018;
    extraMaterials.push(material);const mesh=new Mesh(geometry,material);mesh.name='spaceyew-unfurl-'+index;mesh.visible=false;mesh.frustumCulled=false;scene.add(mesh);
-   return{mesh,base:new Float32Array(geometry.attributes.position.array),panel:null as GlassReveal|null};
+   return{mesh,base:new Float32Array(geometry.attributes.position.array),panel:null as GlassReveal|null,shapeProgress:NaN,shapeVariant:''};
   });
   // A continuous receiver supplies genuine colour to volume refraction. Its
   // broad room illumination and soft contact shadow are art-directed, not a
@@ -124,6 +124,7 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
    varying vec2 vScreen;uniform float uTime;uniform float uLightSweep;uniform float uBrightness;uniform float uScroll;uniform float uBackdropAlpha;uniform vec2 uCenter;uniform vec2 uContact;uniform vec3 uBlueTop;uniform vec3 uBlueMiddle;uniform vec3 uBlueBottom;uniform vec3 uIce;
    float softPool(vec2 point,vec2 center,vec2 extent){vec2 offset=(point-center)/extent;return exp(-dot(offset,offset)*2.);}
    void main(){
+    if(uBackdropAlpha<.001)discard;
     vec2 uv=vScreen;float documentY=max(0.,(1.-uv.y)+uScroll),daylight=smoothstep(.88,1.55,documentY);
     vec3 color=mix(uBlueTop,uBlueMiddle,smoothstep(.12,.88,documentY));color=mix(color,uBlueBottom,daylight);color=mix(color,uIce,smoothstep(1.55,2.4,documentY));
     float quiet=softPool(uv,vec2(.5,.60),vec2(.52,.9));color*=1.-quiet*.06*(1.-daylight);
@@ -159,6 +160,8 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
     for(let index=0;index<curtains.length;index++){
      const curtain=curtains[index],panel=panels[index];curtain.panel=panel||null;curtain.mesh.visible=!!panel;
      if(!panel)continue;
+     if(curtain.shapeProgress===panel.progress&&curtain.shapeVariant===(panel.variant||''))continue;
+     curtain.shapeProgress=panel.progress;curtain.shapeVariant=panel.variant||'';
      const open=Math.pow(MathUtils.smootherstep(panel.progress,0,1),1.7),bend=Math.max(.001,(1-open)*2.3),positions=curtain.mesh.geometry.attributes.position;
      const direction=panel.variant==='profiles'?-1:1;
      for(let vertex=0;vertex<positions.count;vertex++){
@@ -210,6 +213,9 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
     canvas.dataset.glassLightPhase=lightPhase.toFixed(3);canvas.dataset.glassReading=reading.toFixed(3);canvas.dataset.glassDispersion=dispersion.toFixed(2);
     canvas.dataset.glassCollected=spatial.toFixed(3);
     overlayAmount=collectionOverlay&&!reduced?MathUtils.smoothstep(spatial,.86,1):0;canvas.dataset.glassOverlay=overlayAmount.toFixed(3);
+    // The fully collected 50px mark only needs a small, smooth transmission receiver.
+    // Keep the hero and any unfurling sheet at their ordinary optical resolution.
+    renderer.transmissionResolutionScale=overlayAmount>.99&&!curtains.some(curtain=>curtain.mesh.visible)?.12:(mobile?.55:.7);
     // Optical transmission still samples the studio, while alpha gently blends the dock with
     // the live header behind it. This small foreground mark never becomes a pale content cutout.
     for(const material of nativeMaterials){const opacity=1-overlayAmount*.45,transparent=opacity<.999;if(material.transparent!==transparent){material.transparent=transparent;material.depthWrite=!transparent;material.needsUpdate=true;}material.opacity=opacity;}

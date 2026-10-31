@@ -12,14 +12,19 @@ type SculptureProps={posterSrc:string;label:string;pauseLabel:string;playLabel:s
 /** Fiber and the optical renderer are fetched only when this card approaches the viewport. */
 const ResourceCanvas=lazy(async()=>{
  const [{Canvas,useFrame,useThree},THREE,{GLTFLoader},{RoomEnvironment}]=await Promise.all([import('@react-three/fiber'),import('three'),import('three/addons/loaders/GLTFLoader.js'),import('three/addons/environments/RoomEnvironment.js')]);
+ const sample='return textureBicubic( transmissionSamplerMap, fragCoord.xy, lod );',chunk=THREE.ShaderChunk.transmission_pars_fragment;
+ // Polished glass can use hardware mip filtering: three RGB fetches instead of
+ // r187's 24 bicubic fetches. Keep native refraction and fail open on version drift.
+ const linearTransmission=THREE.REVISION==='187'&&chunk.split(sample).length===2?chunk.replace(sample,'return textureLod( transmissionSamplerMap, fragCoord.xy, lod );'):null;
+ const glyphPlaces=[[-1.86,1.15,.7],[1.87,.52,.85],[1.17,-1.57,.8]];
  const disposeObject=(object:Three.Object3D)=>{
   const geometries=new Set<Three.BufferGeometry>(),materials=new Set<Three.Material>(),textures=new Set<Three.Texture>();
   object.traverse(node=>{if(!(node instanceof THREE.Mesh)&&!(node instanceof THREE.Points))return;geometries.add(node.geometry);for(const material of Array.isArray(node.material)?node.material:[node.material]){materials.add(material);for(const value of Object.values(material))if(value instanceof THREE.Texture)textures.add(value);}});
   textures.forEach(texture=>texture.dispose());materials.forEach(material=>material.dispose());geometries.forEach(geometry=>geometry.dispose());return textures;
  };
  function SculptureScene({running,interactive,reduced,posterSrc,interaction,onReady,onError}:SceneProps){
-  const {gl,scene,invalidate}=useThree(),[world,setWorld]=useState<Three.Group|null>(null);
-  const runtime=useRef<{content:Three.Group;glyphs:Three.Group[];wall:Three.ShaderMaterial;particles:Three.Points<Three.BufferGeometry,Three.ShaderMaterial>;particleBase:Float32Array;time:number;rotationX:number;rotationY:number;ready:boolean}|null>(null);
+  const {gl,scene,camera,invalidate}=useThree(),[world,setWorld]=useState<Three.Group|null>(null);
+  const runtime=useRef<{content:Three.Group;glyphs:Three.Group[];wall:Three.ShaderMaterial;time:number;rotationX:number;rotationY:number;ready:boolean}|null>(null);
   const callbacks=useRef({onReady,onError});callbacks.current={onReady,onError};
   useEffect(()=>{
    let alive=true,owned:Three.Group|null=null,parsed:Three.Group|null=null,poster:Three.Texture|null=null,environment:Three.WebGLRenderTarget|null=null;
@@ -43,7 +48,10 @@ const ResourceCanvas=lazy(async()=>{
      model.traverse(node=>{
       if(!(node instanceof THREE.Mesh))return;
       if(node.name==='Resource_crystal_page_3')foremost=node;
-      for(const material of Array.isArray(node.material)?node.material:[node.material])if(material instanceof THREE.MeshPhysicalMaterial){material.color.set('#ffffff');material.toneMapped=false;material.transmission=1;material.ior=1.46;material.thickness=.24;material.roughness=.025;material.envMapIntensity=.72;material.dispersion=.35;material.attenuationColor.set('#c8e4f7');material.attenuationDistance=9;}
+      for(const material of Array.isArray(node.material)?node.material:[node.material])if(material instanceof THREE.MeshPhysicalMaterial){
+       material.color.set('#ffffff');material.toneMapped=false;material.transmission=1;material.ior=1.46;material.thickness=.24;material.roughness=.025;material.envMapIntensity=.72;material.dispersion=.35;material.attenuationColor.set('#c8e4f7');material.attenuationDistance=9;
+       if(linearTransmission){material.onBeforeCompile=shader=>{const include='#include <transmission_pars_fragment>';if(shader.fragmentShader.split(include).length===2)shader.fragmentShader=shader.fragmentShader.replace(include,linearTransmission);};material.customProgramCacheKey=()=> 'spaceyew-resource-linear-volume-r187';}
+      }
      });
      if(poster&&foremost){
       poster.colorSpace=THREE.SRGBColorSpace;poster.anisotropy=Math.min(4,gl.capabilities.getMaxAnisotropy());
@@ -59,7 +67,7 @@ const ResourceCanvas=lazy(async()=>{
      const bracket=shape([[-.02,.25],[-.22,0],[-.02,-.25],[.06,-.18],[-.08,0],[.06,.18]]);
      const left=new THREE.Mesh(bracket,cobalt),right=new THREE.Mesh(bracket,porcelain);left.position.x=-.10;right.rotation.z=Math.PI;right.position.x=.15;glyphs[1].add(left,right);
      glyphs[2].add(new THREE.Mesh(shape([[-.21,.32],[.21,.32],[.21,-.32],[0,-.17],[-.21,-.32]]),cobalt));
-     const wallMaterial=new THREE.ShaderMaterial({depthWrite:false,toneMapped:false,uniforms:{uTime:{value:0}},vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:`
+     const clock={value:0},wallMaterial=new THREE.ShaderMaterial({depthWrite:false,toneMapped:false,uniforms:{uTime:clock},vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:`
       varying vec2 vUv;uniform float uTime;
       void main(){
        vec2 p=vUv*2.-1.;vec2 flow=vec2(sin(p.y*3.+uTime*.16),cos(p.x*2.5-uTime*.12))*.22;
@@ -73,10 +81,10 @@ const ResourceCanvas=lazy(async()=>{
      `});
      const wall=new THREE.Mesh(new THREE.PlaneGeometry(24,18),wallMaterial);wall.position.z=-4;wall.renderOrder=-10;root.add(wall);
      // A sparse, non-emissive current adds depth around the pages, behind every solid glyph.
-     const particleBase=new Float32Array(30*3);
-     for(let index=0;index<30;index++){particleBase[index*3]=((index*.61803398875)%1-.5)*6.4;particleBase[index*3+1]=((index*.38196601125+.17)%1-.5)*4.5;particleBase[index*3+2]=-1.55+(index%5)*.08;}
-     const particleGeometry=new THREE.BufferGeometry();particleGeometry.setAttribute('position',new THREE.BufferAttribute(particleBase.slice(),3));
-     const particleMaterial=new THREE.ShaderMaterial({transparent:true,depthWrite:false,blending:THREE.NormalBlending,toneMapped:false,uniforms:{uSize:{value:2.1*gl.getPixelRatio()},uColor:{value:new THREE.Color('#5b8db7')}},vertexShader:'uniform float uSize;void main(){vec4 p=modelViewMatrix*vec4(position,1.);gl_Position=projectionMatrix*p;gl_PointSize=uSize*(8./max(1.,-p.z));}',fragmentShader:`
+     const particleBase=new Float32Array(30*3),particlePhase=new Float32Array(30);
+     for(let index=0;index<30;index++){particleBase[index*3]=((index*.61803398875)%1-.5)*6.4;particleBase[index*3+1]=((index*.38196601125+.17)%1-.5)*4.5;particleBase[index*3+2]=-1.55+(index%5)*.08;particlePhase[index]=index*.65;}
+     const particleGeometry=new THREE.BufferGeometry();particleGeometry.setAttribute('position',new THREE.BufferAttribute(particleBase,3));particleGeometry.setAttribute('aPhase',new THREE.BufferAttribute(particlePhase,1));
+     const particleMaterial=new THREE.ShaderMaterial({transparent:true,depthWrite:false,blending:THREE.NormalBlending,toneMapped:false,uniforms:{uTime:clock,uSize:{value:2.1*gl.getPixelRatio()},uColor:{value:new THREE.Color('#5b8db7')}},vertexShader:'uniform float uSize,uTime;attribute float aPhase;void main(){float phase=uTime*.12+aPhase;vec3 drift=vec3(sin(phase)*.12,cos(phase)*.18,sin(phase)*.04);vec4 p=modelViewMatrix*vec4(position+drift,1.);gl_Position=projectionMatrix*p;gl_PointSize=uSize*(8./max(1.,-p.z));}',fragmentShader:`
       uniform vec3 uColor;
       void main(){float coverage=1.-smoothstep(.08,.5,length(gl_PointCoord-.5));gl_FragColor=vec4(uColor,coverage*.26);
        #include <colorspace_fragment>
@@ -85,12 +93,15 @@ const ResourceCanvas=lazy(async()=>{
      const particles=new THREE.Points(particleGeometry,particleMaterial);particles.frustumCulled=false;root.add(particles);
      const key=new THREE.DirectionalLight('#f5faff',2.2);key.position.set(-4,5,7);root.add(key);
      const rim=new THREE.DirectionalLight('#bddbfa',.8);rim.position.set(4,-1,3);root.add(rim);
-     runtime.current={content,glyphs,wall:wallMaterial,particles,particleBase,time:0,rotationX:.02,rotationY:-.13,ready:false};setWorld(root);invalidate();
+     // Prepare programs while the nearby poster is still visible. Drivers with
+     // parallel shader compilation need not block the first animated frame.
+     await gl.compileAsync(root,camera,scene);if(!alive)return;
+     runtime.current={content,glyphs,wall:wallMaterial,time:0,rotationX:.02,rotationY:-.13,ready:false};setWorld(root);invalidate();
     }catch{if(alive)callbacks.current.onError();}
    };
    void load();
-   return()=>{alive=false;abort.abort();runtime.current=null;interaction.current.invalidate=()=>{};gl.domElement.removeEventListener('webglcontextlost',lost);const disposedTextures=owned?disposeObject(owned):new Set<Three.Texture>();owned=null;if(parsed){disposeObject(parsed);parsed=null;}if(poster&&!disposedTextures.has(poster))poster.dispose();poster=null;if(environment){if(scene.environment===environment.texture)scene.environment=previousEnvironment;environment.dispose();}};
-  },[gl,scene,invalidate,posterSrc,interaction]);
+   return()=>{if(!alive)return;alive=false;abort.abort();runtime.current=null;interaction.current.invalidate=()=>{};gl.domElement.removeEventListener('webglcontextlost',lost);const disposedTextures=owned?disposeObject(owned):new Set<Three.Texture>();owned=null;if(parsed){disposeObject(parsed);parsed=null;}if(poster&&!disposedTextures.has(poster))poster.dispose();poster=null;if(environment){if(scene.environment===environment.texture)scene.environment=previousEnvironment;environment.dispose();}};
+  },[gl,scene,camera,invalidate,posterSrc,interaction]);
   useFrame((_,delta)=>{
    const state=runtime.current;if(!state)return;
    if(running&&!reduced)state.time+=Math.min(delta,.05);
@@ -98,16 +109,14 @@ const ResourceCanvas=lazy(async()=>{
    const targetX=.02+(reduced?0:input.y*.09),targetY=-.13+(reduced?0:input.x*.13+input.drag);
    state.rotationX=reduced?targetX:THREE.MathUtils.damp(state.rotationX,targetX,7,Math.min(delta,.05));state.rotationY=reduced?targetY:THREE.MathUtils.damp(state.rotationY,targetY,7,Math.min(delta,.05));
    state.content.rotation.set(state.rotationX,state.rotationY,-.08+(reduced?0:Math.sin(time*.35)*.018));state.content.position.y=reduced?0:Math.sin(time*.5)*.035;
-   const places=[[-1.86,1.15,.7],[1.87,.52,.85],[1.17,-1.57,.8]];
-   state.glyphs.forEach((glyph,index)=>{glyph.position.set(places[index][0],places[index][1]+(reduced?0:Math.sin(time*.7+index*2)*.075),places[index][2]);glyph.rotation.set(.08,.10+(reduced?0:Math.sin(time*.45+index)*.12),(index-1)*.15);});
-   if(!state.ready||running||reduced){const positions=state.particles.geometry.getAttribute('position') as Three.BufferAttribute;for(let index=0;index<positions.count;index++){const offset=index*3,phase=time*.12+index*.65;positions.setXYZ(index,state.particleBase[offset]+Math.sin(phase)*.12,state.particleBase[offset+1]+Math.cos(phase)*.18,state.particleBase[offset+2]+Math.sin(phase)*.04);}positions.needsUpdate=true;}
+   state.glyphs.forEach((glyph,index)=>{glyph.position.set(glyphPlaces[index][0],glyphPlaces[index][1]+(reduced?0:Math.sin(time*.7+index*2)*.075),glyphPlaces[index][2]);glyph.rotation.set(.08,.10+(reduced?0:Math.sin(time*.45+index)*.12),(index-1)*.15);});
    state.wall.uniforms.uTime.value=time;scene.environmentRotation.y=reduced?0:Math.sin(time*.17)*.075;
    if(!state.ready){state.ready=true;queueMicrotask(()=>{if(runtime.current===state)callbacks.current.onReady();});}
    if(!running&&interactive&&(Math.abs(state.rotationX-targetX)+Math.abs(state.rotationY-targetY)>.001))invalidate();
   });
   return world?<primitive object={world} dispose={null}/>:null;
  }
- return{default:function ResourceScene(props:SceneProps){return <Canvas className="home-resource-canvas" aria-hidden="true" dpr={[1,1.5]} camera={{position:[0,.02,7.4],fov:38,near:.1,far:35}} gl={{alpha:true,antialias:true,powerPreference:'low-power'}} frameloop={props.running?'always':'demand'} resize={{scroll:false,debounce:{scroll:0,resize:120}}} onCreated={({gl})=>{gl.outputColorSpace=THREE.SRGBColorSpace;gl.toneMapping=THREE.ACESFilmicToneMapping;gl.toneMappingExposure=1;}}><SculptureScene {...props}/></Canvas>;}};
+ return{default:function ResourceScene(props:SceneProps){return <Canvas className="home-resource-canvas" aria-hidden="true" dpr={[1,1.5]} camera={{position:[0,.02,7.4],fov:38,near:.1,far:35}} gl={{alpha:true,antialias:true,powerPreference:'high-performance'}} frameloop={props.running?'always':'demand'} resize={{scroll:false,debounce:{scroll:0,resize:120}}} onCreated={({gl})=>{gl.outputColorSpace=THREE.SRGBColorSpace;gl.toneMapping=THREE.ACESFilmicToneMapping;gl.toneMappingExposure=1;}}><SculptureScene {...props}/></Canvas>;}};
 });
 
 class SculptureBoundary extends Component<{children:ReactNode;onError:()=>void},{failed:boolean}>{

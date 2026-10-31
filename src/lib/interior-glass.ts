@@ -1,4 +1,4 @@
-import {ACESFilmicToneMapping,Box3,Color,DirectionalLight,Group,MathUtils,Mesh,MeshPhysicalMaterial,PerspectiveCamera,PlaneGeometry,PMREMGenerator,Scene,ShaderMaterial,Vector2,Vector3,WebGLRenderer} from 'three';
+import {ACESFilmicToneMapping,Box3,Color,DirectionalLight,Group,MathUtils,Mesh,MeshPhysicalMaterial,PerspectiveCamera,PlaneGeometry,PMREMGenerator,REVISION,Scene,ShaderChunk,ShaderMaterial,Vector2,Vector3,WebGLRenderer} from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
 import {interiorModels} from './interior-scene.mjs';
@@ -6,6 +6,10 @@ import type {HomeGlassScene} from './home-glass';
 
 export type InteriorScene=keyof typeof interiorModels;
 const palettes={community:['#bdd8ee','#eaf3fa','#c7dfef'],resources:['#c9dfec','#edf4fa','#c2d8ee'],login:['#b9d5ec','#edf4fa','#d2e2f2']};
+const transmissionChunk=ShaderChunk.transmission_pars_fragment,bicubicSample='return textureBicubic( transmissionSamplerMap, fragCoord.xy, lod );';
+// Keep the native RGB volume rays and roughness LOD, using one hardware-filtered
+// sample per channel rather than r187's eight-fetch bicubic reconstruction.
+const linearTransmission=REVISION==='187'&&transmissionChunk.split(bicubicSample).length===2?transmissionChunk.replace(bicubicSample,'return textureLod( transmissionSamplerMap, fragCoord.xy, lod );'):null;
 
 /** Three native Blender sculptures share optical materials, never the homepage mark. */
 export async function createInteriorGlass(canvas:HTMLCanvasElement,signal:AbortSignal,kind:InteriorScene):Promise<HomeGlassScene>{
@@ -41,6 +45,7 @@ export async function createInteriorGlass(canvas:HTMLCanvasElement,signal:AbortS
     material.color.set('#ffffff');material.transmission=1;material.thickness=.36;
     material.ior=1.46;material.roughness=.045;material.metalness=0;material.envMapIntensity=.9;
     material.attenuationColor.set('#bfddf5');material.attenuationDistance=7;material.dispersion=.2;material.toneMapped=false;
+    if(linearTransmission){material.onBeforeCompile=shader=>{const include='#include <transmission_pars_fragment>';if(shader.fragmentShader.split(include).length===2)shader.fragmentShader=shader.fragmentShader.replace(include,linearTransmission);};material.customProgramCacheKey=()=> 'spaceyew-interior-volume-r187';}
    }
   });
   sculpture.add(model);scene.add(sculpture);
@@ -59,15 +64,17 @@ export async function createInteriorGlass(canvas:HTMLCanvasElement,signal:AbortS
   `});wallMaterial.toneMapped=false;
   const wall=new Mesh(wallGeometry,wallMaterial);wall.position.z=-6;wall.renderOrder=-10;scene.add(wall);
   wall.onBeforeRender=passRenderer=>{const target=passRenderer.getRenderTarget(),resolution=wallMaterial!.uniforms.uResolution.value;if(target)resolution.set(target.width,target.height);else passRenderer.getDrawingBufferSize(resolution);};
-  let width=1,height=1;
+  let width=1,height=1,pixelRatio=0;
   signal.addEventListener('abort',dispose,{once:true});
   return{
    // The shared lifecycle renders only while the pointer/scroll changes and sleeps when settled.
    animated:false,
    resize(nextWidth,nextHeight,dpr){
-    if(disposed||!renderer)return;width=nextWidth;height=nextHeight;
-    const pixelBudget=width<768?850000:2400000;
-    renderer.setPixelRatio(Math.min(dpr,1.5,Math.sqrt(pixelBudget/(width*height))));
+    if(disposed||!renderer)return;
+    const pixelBudget=nextWidth<768?850000:2400000,nextRatio=Math.min(dpr,1.5,Math.sqrt(pixelBudget/(nextWidth*nextHeight)));
+    if(width===nextWidth&&height===nextHeight&&pixelRatio===nextRatio)return;
+    width=nextWidth;height=nextHeight;pixelRatio=nextRatio;
+    renderer.setPixelRatio(pixelRatio);
     renderer.setSize(width,height,false);renderer.getDrawingBufferSize(wallMaterial!.uniforms.uResolution.value);
     camera.aspect=width/height;camera.updateProjectionMatrix();
    },
@@ -82,7 +89,7 @@ export async function createInteriorGlass(canvas:HTMLCanvasElement,signal:AbortS
     sculpture.position.set(viewWidth*(centerX-.5)+(reduced?0:x*.035),viewHeight*(.5-centerY)+progress*.07+(reduced?0:y*.025),0);
     sculpture.rotation.set(kind==='login'?.04:-.08,kind==='resources'?.17:kind==='login'?-.28:.16,kind==='login'?-.06:kind==='resources'?-.08:.10);
     if(!reduced){sculpture.rotation.y+=x*.035;sculpture.rotation.x+=y*.025;}
-    scene.updateMatrixWorld(true);renderer.render(scene,camera);
+    renderer.render(scene,camera);
    },
    dispose,
   };

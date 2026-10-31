@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import ts from 'typescript';
+import {ShaderLib,ShaderChunk} from 'three';
 
 const runtime={};
 vm.runInNewContext(ts.transpileModule(readFileSync(new URL('../src/components/HomeWindGallery.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText,{exports:runtime,require:()=>({})});
@@ -75,4 +76,15 @@ test('desktop and mobile wind tracks loop outside the visible panel bounds witho
    }
   }
  }
+});
+
+test('silk deformation and its normal Jacobian augment the native physical shader without mutating shared Three chunks',()=>{
+ const original=ShaderLib.physical.vertexShader,normalChunk=ShaderChunk.beginnormal_vertex,patched=runtime.windVertexShader(original);
+ assert.notEqual(patched,original);assert.ok(patched.includes('uniform float uWindTime,uWindIndex,uWindStrength,uWindReduced;'));
+ assert.ok(patched.includes('WindWarp normalWarp=windWarp(position);'));
+ assert.ok(patched.includes('normalWarp.dxdy*normalWarp.dz.x-normalWarp.dz.y'),'inverse-transpose Jacobian preserves the normals of the warped fabric and sewn hem');
+ assert.ok(patched.includes('transformed+=vec3(normalWarp.offset.x,0.,normalWarp.offset.y);'),'position and normals share a single deformation evaluation');
+ assert.ok(patched.includes('float moving=1.-uWindReduced;'),'reduced motion restores the original positions and normals');
+ assert.equal(ShaderLib.physical.vertexShader,original);assert.equal(ShaderChunk.beginnormal_vertex,normalChunk);
+ assert.equal(runtime.windVertexShader('different shader template'),'different shader template','unsupported shaders keep their standard fallback');
 });

@@ -13,14 +13,16 @@ const specularSum='vec3 totalSpecular = reflectedLight.directSpecular + reflecte
 const reflectionShoulder=specularSum+'\n totalSpecular /= vec3(1.0) + totalSpecular * 0.32;';
 const spectralSample='vec4 transmissionSample = getTransmissionSample( refractionCoords, roughness, iors[ i ] );';
 // Bounded studio-refraction approximation: the screen receiver cannot contain off-camera lights.
-// At grazing angles only, each native RGB volume ray also sees the original HDR studio.
+// Across the bevel, each native RGB volume ray also sees the original HDR studio.
 // This supplies narrow spectral edges, not a full-screen RGB offset or a path-traced caustic.
 const studioRefraction=spectralSample+`
  #if defined( USE_ENVMAP ) && defined( ENVMAP_TYPE_PMREM )
   vec3 studioDirection = envMapRotation * normalize( transmissionRay );
   vec3 studioRadiance = textureLod( envMap, studioDirection, roughnessToMip( roughness ) ).rgb * envMapIntensity;
-  float grazing = pow( 1.0 - clamp( abs( dot( n, v ) ), 0.0, 1.0 ), 2.0 );
-  transmissionSample[ i ] = mix( transmissionSample[ i ], studioRadiance[ i ], grazing * 0.14 );
+  float obliqueness = 1.0 - clamp( abs( dot( n, v ) ), 0.0, 1.0 );
+  // Mid-angle bevels can transmit colour; at extreme grazing Fresnel reflects almost everything.
+  float bevelWindow = smoothstep( 0.06, 0.42, obliqueness ) * ( 1.0 - smoothstep( 0.78, 1.0, obliqueness ) );
+  transmissionSample[ i ] = mix( transmissionSample[ i ], studioRadiance[ i ], bevelWindow * 0.20 );
  #endif
 `;
 const linearTransmission=REVISION==='187'&&transmissionChunk.split(bicubicSample).length===2&&transmissionChunk.split(spectralSample).length===2?transmissionChunk.replace(bicubicSample,'return textureLod( transmissionSamplerMap, fragCoord.xy, lod );').replace(spectralSample,studioRefraction):null;
@@ -66,9 +68,9 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
    const material=new MeshBasicMaterial({color:new Color(color).multiplyScalar(power),map:power>1?lightTexture:null,toneMapped:false});studioMaterials.push(material);
    const card=new Mesh(studioGeometry,material);card.name=name;card.position.fromArray(position);card.scale.fromArray(scale);card.lookAt(0,0,0);studio.add(card);
   };
-  panel('large-left-softbox',[-4,4.6,5.8],[4.8,3.2,1],'#f8fbff',7);
-  panel('ceiling-diffusion',[0,6,-1],[9,5,1],'#fff4e8',6.5);
-  panel('right-bounce',[6,1,1],[3.8,7,1],'#e1f1ff',2.4);
+  panel('large-left-softbox',[-4,4.6,5.8],[4.8,3.2,1],'#f8fbff',8.5);
+  panel('ceiling-diffusion',[0,6,-1],[9,5,1],'#fff4e8',7.5);
+  panel('right-bounce',[6,1,1],[3.8,7,1],'#e1f1ff',3.2);
   panel('low-silver-bounce',[0,-5,2],[8,4,1],'#b8d7f0',.25);
   panel('left-negative-fill',[-5,-.5,-3],[4.5,10,1],'#0b1524',.45);
   panel('right-negative-fill',[5,2,-4],[5,11,1],'#101b2a',.45);
@@ -77,8 +79,8 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
   const pmrem=new PMREMGenerator(renderer);
   try{environment=pmrem.fromScene(studio,.012);scene.environment=environment.texture;}
   finally{studioGeometry.dispose();studioMaterials.forEach(material=>material.dispose());lightTexture.dispose();pmrem.dispose();}
-  const key=new DirectionalLight('#fff5e9',2.3);key.position.set(-4,6,7);scene.add(key);
-  const rim=new DirectionalLight('#c3e3ff',.8);rim.position.set(5,1,4);scene.add(rim);
+  const key=new DirectionalLight('#fff5e9',3);key.position.set(-4,6,7);scene.add(key);
+  const rim=new DirectionalLight('#c3e3ff',1.15);rim.position.set(5,1,4);scene.add(rim);
   const fill=new DirectionalLight('#a3cef5',.12);fill.position.set(0,-5,3);scene.add(fill);
   model.position.sub(new Box3().setFromObject(model,true).getCenter(new Vector3()));mark.add(model);scene.add(mark);
   const nativeSize=new Box3().setFromObject(model,true).getSize(new Vector3()),folds:{mesh:Mesh;x:number;side:number}[]=[],nativeMaterials=new Set<MeshPhysicalMaterial>();
@@ -91,13 +93,13 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
     // Match the display-referred wall: an extra ACES pass through the glass would turn pale ice grey.
     // Keep the surface neutral; the physical volume supplies the restrained ice tint.
     material.color.set('#ffffff');material.toneMapped=false;material.transmission=1;material.opacity=1;material.metalness=0;
-    material.ior=1.45;material.thickness=.46;material.roughness=.012;material.dispersion=1.5;
+    material.ior=1.45;material.thickness=.46;material.roughness=.012;material.dispersion=4.2;
     material.attenuationColor.set('#eff8ff');material.attenuationDistance=18;material.clearcoat=0;material.clearcoatRoughness=.045;
     // A restrained optical coating adds angle-dependent colour to reflected edges;
     // native dispersion above separately splits the three transmitted volume rays.
-    material.iridescence=.22;material.iridescenceIOR=1.8;Object.assign(material,{iridescenceThicknessMinimum:180,iridescenceThicknessMaximum:300});
+    material.iridescence=.48;material.iridescenceIOR=2.05;Object.assign(material,{iridescenceThicknessMinimum:180,iridescenceThicknessMaximum:300});
     // Guard the pinned chunk exactly; unsupported Three versions keep their standard physical shader.
-    if(linearTransmission){material.onBeforeCompile=shader=>{const include='#include <transmission_pars_fragment>';if(shader.fragmentShader.split(include).length===2&&shader.fragmentShader.split(specularSum).length===2)shader.fragmentShader=shader.fragmentShader.replace(include,linearTransmission).replace(specularSum,reflectionShoulder);};material.customProgramCacheKey=()=> 'spaceyew-spectral-studio-r187';}
+    if(linearTransmission){material.onBeforeCompile=shader=>{const include='#include <transmission_pars_fragment>';if(shader.fragmentShader.split(include).length===2&&shader.fragmentShader.split(specularSum).length===2)shader.fragmentShader=shader.fragmentShader.replace(include,linearTransmission).replace(specularSum,reflectionShoulder);};material.customProgramCacheKey=()=> 'spaceyew-prismatic-studio-r187';}
    }
   });
   // Two small segmented glass sheets share this renderer and its transmission pass.
@@ -115,21 +117,22 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
   // broad room illumination and soft contact shadow are art-directed, not a
   // simulated caustic pass. Specular highlights come only from the HDR rig.
   const wallGeometry=new PlaneGeometry(80,52);extraGeometry.push(wallGeometry);
-  const wallMaterial=new ShaderMaterial({depthWrite:false,uniforms:{uTime:{value:0},uLightSweep:{value:0},uBrightness:{value:1},uScroll:{value:0},uBackdropAlpha:{value:1},uCenter:{value:new Vector2(.5,.38)},uContact:{value:new Vector2(.31,.20)},uBlueTop:{value:new Color('#1b376b')},uBlueMiddle:{value:new Color('#2a72c5')},uBlueBottom:{value:new Color('#c4dff4')},uIce:{value:new Color('#eef4fa')}},vertexShader:`
+  const wallMaterial=new ShaderMaterial({depthWrite:false,uniforms:{uTime:{value:0},uLightSweep:{value:0},uBrightness:{value:1},uScroll:{value:0},uBackdropAlpha:{value:1},uCenter:{value:new Vector2(.5,.38)},uContact:{value:new Vector2(.31,.20)},uBlueTop:{value:new Color('#070f29')},uBlueMiddle:{value:new Color('#1858c9')},uBlueBottom:{value:new Color('#c4dff4')},uIce:{value:new Color('#eef4fa')}},vertexShader:`
    varying vec2 vScreen;
    void main(){vec4 p=projectionMatrix*modelViewMatrix*vec4(position,1.);vScreen=p.xy/p.w*.5+.5;gl_Position=p;}
   `,fragmentShader:`
    varying vec2 vScreen;uniform float uTime;uniform float uLightSweep;uniform float uBrightness;uniform float uScroll;uniform float uBackdropAlpha;uniform vec2 uCenter;uniform vec2 uContact;uniform vec3 uBlueTop;uniform vec3 uBlueMiddle;uniform vec3 uBlueBottom;uniform vec3 uIce;
    float softPool(vec2 point,vec2 center,vec2 extent){vec2 offset=(point-center)/extent;return exp(-dot(offset,offset)*2.);}
    void main(){
-    vec2 uv=vScreen;float documentY=max(0.,(1.-uv.y)+uScroll),daylight=smoothstep(.65,1.4,documentY);
-    vec3 color=mix(uBlueTop,uBlueMiddle,smoothstep(0.,.65,documentY));color=mix(color,uBlueBottom,daylight);color=mix(color,uIce,smoothstep(1.4,2.4,documentY));
+    vec2 uv=vScreen;float documentY=max(0.,(1.-uv.y)+uScroll),daylight=smoothstep(.88,1.55,documentY);
+    vec3 color=mix(uBlueTop,uBlueMiddle,smoothstep(.12,.88,documentY));color=mix(color,uBlueBottom,daylight);color=mix(color,uIce,smoothstep(1.55,2.4,documentY));
     float quiet=softPool(uv,vec2(.5,.60),vec2(.52,.9));color*=1.-quiet*.06*(1.-daylight);
     float drift=sin(uTime*.22)*.025;
     float window=softPool(uv,vec2(.12+drift,.77),vec2(.42,.55));
     float bounce=softPool(uv,vec2(.91-drift,.28),vec2(.52,.58));
-    color+=vec3(.035,.06,.085)*window*(1.-daylight*.85);
-    color+=vec3(.025,.045,.065)*bounce*(1.-daylight*.85);
+    float ambientRise=smoothstep(.18,.75,documentY);
+    color+=vec3(.035,.06,.085)*window*(1.-daylight*.85)*ambientRise;
+    color+=vec3(.025,.045,.065)*bounce*(1.-daylight*.85)*ambientRise;
     // A broad oblique window wash creates real contrast for the three refraction rays.
     float windowEdge=uv.y+uv.x*.32-.25-uLightSweep*.22;
     float windowWash=(1.-smoothstep(-.08,.16,windowEdge))*softPool(uv,vec2(.48,.12),vec2(.95,.48));
@@ -193,15 +196,16 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
     const lightPhase=-.68+opticalSweep*1.75+(reduced?0:breath*.16+x*.10);
     scene.environmentRotation.set(.05+opticalSweep*.15,lightPhase,-opticalSweep*.12);
     // r187 uses the scene intensity when the material inherits scene.environment.
-    scene.environmentIntensity=(dark?.73:.78)+Math.sin(opticalSweep*Math.PI)*.24;
-    key.position.set(-4+opticalSweep*6,6-opticalSweep*2,7);key.intensity=2.3+Math.sin(opticalSweep*Math.PI)*.8;
-    rim.intensity=.8+opticalSweep*.45;rim.position.set(5-opticalSweep*3,1+opticalSweep*3,4);
+    scene.environmentIntensity=(dark?.92:.97)+Math.sin(opticalSweep*Math.PI)*.30;
+    key.position.set(-4+opticalSweep*6,6-opticalSweep*2,7);key.intensity=3+Math.sin(opticalSweep*Math.PI)*1.1;
+    rim.intensity=1.15+opticalSweep*.55;rim.position.set(5-opticalSweep*3,1+opticalSweep*3,4);
     wallMaterial.uniforms.uTime.value=time;wallMaterial.uniforms.uLightSweep.value=opticalSweep;wallMaterial.uniforms.uBrightness.value=dark?.96:1;wallMaterial.uniforms.uScroll.value=scroll;
     wallMaterial.uniforms.uCenter.value.set(.5,1-centerY);const projectedWidth=MathUtils.lerp(displayHeight,collectedHeight,spatial)*combinedWidth/nativeSize.y*(8.2/camera.position.z);wallMaterial.uniforms.uContact.value.set((split+.718)/combinedWidth*(projectedWidth/width),MathUtils.lerp(displayHeight,collectedHeight,spatial)/height*.43);
     const sheetDepth=.85,sheetViewHeight=2*Math.tan(MathUtils.degToRad(camera.fov/2))*(camera.position.z-sheetDepth);
     for(const curtain of curtains){const panel=curtain.panel;curtain.mesh.visible=!reduced&&!!panel;if(!panel)continue;const sheetHeight=panel.height/height*sheetViewHeight*1.18;curtain.mesh.position.set(((panel.left+panel.width*.5)/width-.5)*sheetViewHeight*camera.aspect,(.5-(panel.top+panel.height*.5)/height)*sheetViewHeight,sheetDepth);curtain.mesh.scale.set(panel.width/width*sheetViewHeight*camera.aspect*1.18,sheetHeight,sheetHeight);}
-    const dispersion=1.5+Math.sin(opticalSweep*Math.PI)*.42;
-    for(const material of nativeMaterials){material.ior=1.45+opticalSweep*.07;material.thickness=.46+opticalSweep*.10;material.dispersion=dispersion;material.iridescence=.22+Math.sin(opticalSweep*Math.PI)*.10;}
+    // Deliberately amplified for visible spectral separation at phone sizes.
+    const dispersion=4.2+Math.sin(opticalSweep*Math.PI)*1.2;
+    for(const material of nativeMaterials){material.ior=1.45+opticalSweep*.07;material.thickness=.46+opticalSweep*.10;material.dispersion=dispersion;material.iridescence=.48+Math.sin(opticalSweep*Math.PI)*.12;}
     const tick=Math.floor(time*10);if(tick!==lastMotionTick){lastMotionTick=tick;canvas.dataset.glassTime=time.toFixed(1);}
     canvas.dataset.glassLightPhase=lightPhase.toFixed(3);canvas.dataset.glassReading=reading.toFixed(3);canvas.dataset.glassDispersion=dispersion.toFixed(2);
     canvas.dataset.glassCollected=spatial.toFixed(3);

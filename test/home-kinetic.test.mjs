@@ -5,7 +5,6 @@ import vm from 'node:vm';
 import ts from 'typescript';
 import * as three from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
-import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
 
 const bytes=fs.readFileSync(new URL('../public/models/spaceyew-home-kinetic.glb',import.meta.url));
 const buffer=()=>bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength);
@@ -23,17 +22,18 @@ class TrackedTarget extends EventTarget{
 async function runtime({reduced=false,failRender=false,abortAfterParse=false}={}){
  const host=new TrackedTarget(),canvas=new TrackedTarget(),window=new TrackedTarget(),document=new TrackedTarget(),preference=new TrackedTarget(),signal=new TrackedTarget();signal.aborted=false;preference.matches=reduced;
  const abort=()=>{signal.aborted=true;signal.dispatchEvent(new Event('abort'));};
- const frames=new Map(),resize=[],intersection=[],resourceCounts=new Map();let nextFrame=1,scene,camera,model,draws=0,releases=0,environmentReleases=0,dpr=0;
+ const frames=new Map(),resize=[],intersection=[],resourceCounts=new Map(),studioResourceCounts=new Map();let nextFrame=1,scene,camera,model,studio,environmentTexture,environmentBuilds=0,draws=0,releases=0,environmentReleases=0,dpr=0;const studioFields=[];
  const track=object=>{if(!object||resourceCounts.has(object))return;resourceCounts.set(object,0);object.addEventListener('dispose',()=>resourceCounts.set(object,resourceCounts.get(object)+1));};
+ const trackStudio=object=>{if(studioResourceCounts.has(object))return;studioResourceCounts.set(object,0);object.addEventListener('dispose',()=>studioResourceCounts.set(object,studioResourceCounts.get(object)+1));};
  const trackModel=object=>object.traverse(node=>{if(node.isMesh){track(node.geometry);for(const material of Array.isArray(node.material)?node.material:[node.material])track(material);}});
  class Loader extends GLTFLoader{async parseAsync(...args){const gltf=await super.parseAsync(...args);model=gltf.scene;trackModel(model);if(abortAfterParse)abort();return gltf;}}
  class Renderer{setPixelRatio(value){dpr=value;}setSize(){}dispose(){releases++;}render(s,c){scene=s;camera=c;trackModel(scene);draws++;if(failRender)throw Error('GPU render unavailable');scene.updateMatrixWorld(true);camera.updateMatrixWorld();}}
- class PMREM{fromScene(){return{texture:new three.Texture(),dispose(){environmentReleases++;}};}dispose(){}}
+ class PMREM{fromScene(value){studio=value;environmentBuilds++;value.updateMatrixWorld(true);value.traverse(node=>{if(!node.isMesh)return;const material=Array.isArray(node.material)?node.material[0]:node.material;trackStudio(node.geometry);for(const item of Array.isArray(node.material)?node.material:[node.material])trackStudio(item);node.geometry.computeBoundingBox();studioFields.push({object:node,size:node.geometry.boundingBox.getSize(new three.Vector3()).multiply(node.scale).toArray().map(Math.abs),color:material.color?.clone(),material});});environmentTexture=new three.Texture();return{texture:environmentTexture,dispose(){environmentReleases++;}};}dispose(){}}
  class Resize{constructor(callback){this.callback=callback;this.disconnects=0;resize.push(this);}observe(){}disconnect(){this.disconnects++;}}
  class Intersection{constructor(callback){this.callback=callback;this.disconnects=0;intersection.push(this);}observe(){}disconnect(){this.disconnects++;}}
- const exports={};vm.runInNewContext(source,{exports,DOMException,Math,Number,fetch:async()=>({ok:true,arrayBuffer:async()=>buffer()}),requestAnimationFrame:callback=>{const id=nextFrame++;frames.set(id,callback);return id;},cancelAnimationFrame:id=>frames.delete(id),ResizeObserver:Resize,IntersectionObserver:Intersection,matchMedia:()=>preference,devicePixelRatio:3,innerHeight:900,document,window,require:name=>{if(name==='three')return{...three,WebGLRenderer:Renderer,PMREMGenerator:PMREM};if(name==='three/addons/loaders/GLTFLoader.js')return{GLTFLoader:Loader};if(name==='three/addons/environments/RoomEnvironment.js')return{RoomEnvironment};throw Error('Unexpected dependency '+name);}});
+ const exports={};vm.runInNewContext(source,{exports,DOMException,Math,Number,fetch:async()=>({ok:true,arrayBuffer:async()=>buffer()}),requestAnimationFrame:callback=>{const id=nextFrame++;frames.set(id,callback);return id;},cancelAnimationFrame:id=>frames.delete(id),ResizeObserver:Resize,IntersectionObserver:Intersection,matchMedia:()=>preference,devicePixelRatio:3,innerHeight:900,document,window,require:name=>{if(name==='three')return{...three,WebGLRenderer:Renderer,PMREMGenerator:PMREM};if(name==='three/addons/loaders/GLTFLoader.js')return{GLTFLoader:Loader};throw Error('Unexpected dependency '+name);}});
  let adapter,error;try{adapter=await exports.mountHomeKinetic(canvas,host,signal);}catch(caught){error=caught;}
- return{adapter,error,host,canvas,window,document,preference,resize,intersection,frames,resourceCounts,abort,get model(){return model;},get scene(){return scene;},get camera(){return camera;},get draws(){return draws;},get releases(){return releases;},get environmentReleases(){return environmentReleases;},get dpr(){return dpr;},visible(value){intersection[0].callback([{isIntersecting:value}]);},step(now){const queued=[...frames.values()];frames.clear();for(const callback of queued)callback(now);}};
+ return{adapter,error,host,canvas,window,document,preference,resize,intersection,frames,resourceCounts,studioResourceCounts,abort,get model(){return model;},get studio(){return studio;},studioFields,get environmentTexture(){return environmentTexture;},get environmentBuilds(){return environmentBuilds;},get scene(){return scene;},get camera(){return camera;},get draws(){return draws;},get releases(){return releases;},get environmentReleases(){return environmentReleases;},get dpr(){return dpr;},visible(value){intersection[0].callback([{isIntersecting:value}]);},step(now){const queued=[...frames.values()];frames.clear();for(const callback of queued)callback(now);}};
 }
 
 test('the deferred Blender mobile contains three genuinely volumetric ribbons and three independent discovery nodes',async()=>{
@@ -52,13 +52,13 @@ test('the deferred Blender mobile contains three genuinely volumetric ribbons an
 });
 
 test('kinetic activity pauses offscreen and hidden, selection stays finite, and reduced motion preserves usable controls',async()=>{
- const s=await runtime();assert.ifError(s.error);const nativeAttributes=[];s.model.traverse(node=>{if(node.isMesh)for(const attribute of Object.values(node.geometry.attributes))nativeAttributes.push([attribute,attribute.version]);});assert.equal(s.host.dataset.kinetic,'ready');assert.equal(s.frames.size,0,'initial preparation does not schedule an offscreen loop');assert.ok(s.dpr<=1.6);
- s.visible(true);s.step(0);s.step(40);const backdrop=s.scene.children.find(node=>node.isMesh&&node.material.isShaderMaterial&&!node.material.transparent),time=backdrop.material.uniforms.uTime.value;assert.ok(time>0);assert.ok(s.frames.size>0);
- s.adapter.pause(true);s.step(80);assert.equal(backdrop.material.uniforms.uTime.value,time,'pause freezes ambient optical time');assert.equal(s.frames.size,0);
- s.adapter.pause(false);s.step(120);assert.ok(backdrop.material.uniforms.uTime.value>time);
+ const s=await runtime();assert.ifError(s.error);const quietEnvironment=s.scene.environmentRotation.toArray(),nativeAttributes=[];s.model.traverse(node=>{if(node.isMesh)for(const attribute of Object.values(node.geometry.attributes))nativeAttributes.push([attribute,attribute.version]);});assert.equal(s.host.dataset.kinetic,'ready');assert.equal(s.frames.size,0,'initial preparation does not schedule an offscreen loop');assert.ok(s.dpr<=1.6);
+ s.visible(true);s.step(0);s.step(40);const reflectionPose=s.scene.environmentRotation.toArray();assert.notDeepEqual(reflectionPose,quietEnvironment,'ambient movement changes only the reflection environment and native sculpture');assert.ok(s.frames.size>0);
+ s.adapter.pause(true);s.step(80);assert.deepEqual(s.scene.environmentRotation.toArray(),reflectionPose,'pause freezes ambient reflection movement');assert.equal(s.frames.size,0);
+ s.adapter.pause(false);s.step(120);assert.notDeepEqual(s.scene.environmentRotation.toArray(),reflectionPose);
  s.visible(false);assert.equal(s.frames.size,0,'leaving the viewport cancels the next frame');s.visible(true);s.document.hidden=true;s.document.dispatchEvent(new Event('visibilitychange'));assert.equal(s.frames.size,0);s.document.hidden=false;s.document.dispatchEvent(new Event('visibilitychange'));
- s.preference.matches=true;s.preference.dispatchEvent(new Event('change'));s.step(160);assert.equal(backdrop.material.uniforms.uTime.value,0);assert.equal(s.frames.size,0,'reduced motion leaves no ambient render loop');
- s.adapter.select(1.6);assert.equal(backdrop.material.uniforms.uPhase.value,2,'selection clamps to an available complete scene');const sculpture=s.scene.children.find(node=>node.isGroup);const pose=sculpture.quaternion.clone();s.adapter.select(NaN);s.adapter.select(Infinity);assert.deepEqual(sculpture.quaternion.toArray(),pose.toArray(),'invalid control values never corrupt the camera or model');
+ s.preference.matches=true;s.preference.dispatchEvent(new Event('change'));s.step(160);assert.deepEqual(s.scene.environmentRotation.toArray(),quietEnvironment);assert.equal(s.frames.size,0,'reduced motion leaves no ambient render loop');
+ const sculpture=s.scene.children.find(node=>node.isGroup),initialPose=sculpture.quaternion.clone();s.adapter.select(1.6);assert.notDeepEqual(sculpture.quaternion.toArray(),initialPose.toArray(),'selection changes the native sculpture pose');const pose=sculpture.quaternion.clone();s.adapter.select(NaN);s.adapter.select(Infinity);assert.deepEqual(sculpture.quaternion.toArray(),pose.toArray(),'invalid control values never corrupt the camera or model');
  assert.equal(s.model.getObjectByName('DiscoveryNode_2').scale.x,1.3);s.adapter.select(-9);assert.equal(s.model.getObjectByName('DiscoveryNode_0').scale.x,1.3);for(const [attribute,version]of nativeAttributes)assert.equal(attribute.version,version,'controls update transforms without regenerating native positions, normals or UVs');s.adapter.dispose();
 });
 
@@ -81,4 +81,18 @@ test('a lost GPU context exposes the static fallback and cannot be restarted by 
 
 test('the pause button keeps its native click while dragging captures only the sculpture surface',async()=>{
  const s=await runtime();const down=()=>{const event=new Event('pointerdown');Object.assign(event,{pointerType:'mouse',pointerId:1,clientX:100});s.host.dispatchEvent(event);};s.host.interactive=true;down();assert.equal(s.host.captures,undefined,'an interactive descendant must retain its native pointer sequence');assert.equal(s.host.dataset.dragging,undefined);s.host.interactive=false;down();assert.equal(s.host.captures,1);assert.equal(s.host.dataset.dragging,'true');s.host.dispatchEvent(new Event('pointerup'));assert.equal(s.host.dataset.dragging,undefined);s.adapter.dispose();
+});
+
+
+test('illumination fixtures stay in the detached reflection studio and the visible scene contains only glass with a plain receiver',async()=>{
+ const s=await runtime();assert.ifError(s.error);assert.equal(s.environmentBuilds,1,'the reflection field is prepared once, independently of animation');assert.ok(s.studio?.isScene&&s.studio!==s.scene);assert.equal(s.studio.parent,null);assert.equal(s.scene.environment,s.environmentTexture);
+ for(const count of s.studioResourceCounts.values())assert.equal(count,1,'temporary studio geometry and materials release immediately after the PMREM bake');
+ assert.ok(s.studioFields.length>=3,'broad softboxes and flags give the glass directional reflected contrast');
+ for(const field of s.studioFields){const dimensions=field.size.toSorted((a,b)=>b-a);assert.ok(dimensions[1]>=1.5,'a reflection fixture has two broad dimensions rather than a narrow luminous shaft');assert.ok(field.material.isMeshBasicMaterial);assert.equal(field.material.side,three.BackSide);}
+ assert.ok(s.studioFields.some(field=>field.color&&Math.max(field.color.r,field.color.g,field.color.b)>1),'HDR energy exists in the reflection field without displaying a source');
+ const native=new Set(),rendered=[];s.model.traverse(node=>{if(node.isMesh)native.add(node);});s.scene.traverse(node=>{if(node.isMesh)rendered.push(node);});assert.equal(native.size,6);assert.equal(rendered.length,native.size+1,'no visible light shafts, halos, caustic hoops or extra luminous geometry is rendered');
+ const [receiver]=rendered.filter(mesh=>!native.has(mesh));assert.ok(receiver?.geometry.type==='PlaneGeometry'&&receiver.material.isShaderMaterial);assert.equal(receiver.material.transparent,false);assert.equal(receiver.material.blending,three.NormalBlending);assert.equal(receiver.material.depthWrite,true);assert.ok(receiver.position.z<0);assert.ok(receiver.geometry.parameters.width>=10&&receiver.geometry.parameters.height>=10,'the only non-model mesh is a broad backdrop');
+ for(const field of s.studioFields)assert.ok(!rendered.includes(field.object),'environment fixture geometry never enters the visible or transmission scene');
+ for(const mesh of rendered){assert.notEqual(mesh.material.blending,three.AdditiveBlending);if(mesh.material.isMeshPhysicalMaterial)assert.equal(mesh.material.transmission,1,'the real glass material remains transmissive');}
+ s.visible(true);s.step(0);s.step(1000);s.adapter.select(2);assert.equal(s.environmentBuilds,1,'control and time changes rotate the cached field without rebuilding or exposing fixtures');s.adapter.dispose();
 });

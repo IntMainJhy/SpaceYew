@@ -1,7 +1,6 @@
-import {ACESFilmicToneMapping,AdditiveBlending,Box3,Color,DirectionalLight,Group,MathUtils,Mesh,MeshBasicMaterial,MeshPhysicalMaterial,PerspectiveCamera,PlaneGeometry,PMREMGenerator,Scene,ShaderMaterial,Vector3,WebGLRenderer} from 'three';
+import {ACESFilmicToneMapping,BackSide,Box3,BoxGeometry,Color,DirectionalLight,Group,MathUtils,Mesh,MeshBasicMaterial,MeshPhysicalMaterial,PerspectiveCamera,PlaneGeometry,PMREMGenerator,Scene,ShaderMaterial,Vector3,WebGLRenderer} from 'three';
 import type {BufferGeometry,Material} from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
-import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
 
 /** One bounded optical installation; native scroll and all navigation remain HTML. */
 export async function mountHomeKinetic(canvas:HTMLCanvasElement,host:HTMLElement,signal:AbortSignal){
@@ -16,8 +15,21 @@ export async function mountHomeKinetic(canvas:HTMLCanvasElement,host:HTMLElement
   renderer=new WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'low-power'});
   renderer.outputColorSpace='srgb';renderer.toneMapping=ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;renderer.transmissionResolutionScale=.5;
   const scene=new Scene(),camera=new PerspectiveCamera(37,1,.1,40),sculpture=new Group();camera.position.set(0,.05,8.6);
-  const studio=new RoomEnvironment(),pmrem=new PMREMGenerator(renderer);
-  try{environment=pmrem.fromScene(studio,.02);scene.environment=environment.texture;}finally{studio.dispose();pmrem.dispose();}
+  // Photography lights exist only in this detached environment: the camera never sees a fixture.
+  const studio=new Scene(),studioGeometry=new BoxGeometry(),studioMaterials:MeshBasicMaterial[]=[];
+  studio.background=new Color('#627d9a');
+  const softbox=(position:number[],scale:number[],color:string,energy:number)=>{
+   const material=new MeshBasicMaterial({color:new Color(color).multiplyScalar(energy),side:BackSide});studioMaterials.push(material);
+   const panel=new Mesh(studioGeometry,material);panel.position.fromArray(position);panel.scale.fromArray(scale);panel.lookAt(0,0,0);studio.add(panel);
+  };
+  softbox([0,0,0],[28,24,28],'#7c9bb7',.5);
+  softbox([-5,4,5],[5.5,7.5,.12],'#f5faff',3.8);
+  softbox([5,1,3],[4,6,.12],'#c4e4ff',2.4);
+  softbox([0,6,-1],[7,3,.12],'#fff1dc',2.8);
+  softbox([-2,-3,-5],[5,4,.12],'#244465',.5);
+  softbox([6,-2,-3],[2.8,8,.12],'#365371',.45);
+  const pmrem=new PMREMGenerator(renderer);
+  try{environment=pmrem.fromScene(studio,.03);scene.environment=environment.texture;}finally{studioGeometry.dispose();studioMaterials.forEach(material=>material.dispose());pmrem.dispose();}
   scene.environmentIntensity=.75;
   const key=new DirectionalLight('#f4faff',3);key.position.set(-3,5,4);scene.add(key);
   const rim=new DirectionalLight('#8dbdff',2);rim.position.set(4,1,-2);scene.add(rim);
@@ -30,22 +42,15 @@ export async function mountHomeKinetic(canvas:HTMLCanvasElement,host:HTMLElement
     material.color.set('#ffffff');material.toneMapped=false;material.transmission=1;material.thickness=.42;material.roughness=.025;material.ior=1.48;material.dispersion=.75;material.envMapIntensity=.55;material.attenuationColor.set('#c3dcf6');material.attenuationDistance=6;
    }
   });
-  // Opaque illuminated geometry behind the ribbons is genuinely refracted by Three's volume pass.
+  // A smooth opaque receiver gives the volume rays a background without drawing light into the air.
   const backdropGeometry=new PlaneGeometry(20,18);geometries.add(backdropGeometry);
   const backdropMaterial=new ShaderMaterial({uniforms:{uTime:{value:0},uPhase:{value:0}},vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:`
    varying vec2 vUv;uniform float uTime,uPhase;
-   void main(){vec2 p=vUv-.5;float band=exp(-pow((p.x+p.y*.5-sin(uTime*.25)*.05)/.045,2.));float second=exp(-pow((p.x-p.y*.7-.13)/.016,2.));vec3 ice=vec3(.62,.78,.90);ice+=vec3(.22,.17,.06)*band+vec3(.13,.16,.19)*second;ice=mix(ice,vec3(.81,.77,.94),uPhase*.09);gl_FragColor=vec4(ice,1.);
+   void main(){vec3 ice=mix(vec3(.77,.87,.95),vec3(.90,.95,.99),smoothstep(0.,1.,vUv.y));ice=mix(ice,vec3(.85,.86,.96),uPhase*.025);gl_FragColor=vec4(ice,1.);
    #include <colorspace_fragment>
    }
   `});backdropMaterial.toneMapped=false;materials.add(backdropMaterial);
   const backdrop=new Mesh(backdropGeometry,backdropMaterial);backdrop.position.z=-3;scene.add(backdrop);
-  // These two luminous strokes are an art-directed light receiver, without another render target.
-  const glowGeometry=new PlaneGeometry(9,7);geometries.add(glowGeometry);
-  const glowMaterial=new ShaderMaterial({transparent:true,depthWrite:false,blending:AdditiveBlending,uniforms:{uTime:{value:0}},vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:'varying vec2 vUv;uniform float uTime;void main(){vec2 p=(vUv-.5)*vec2(1.,1.7);float r=length(p);float ring=exp(-pow((r-.31-sin(atan(p.y,p.x)*3.+uTime*.35)*.024)/.007,2.));float fade=exp(-dot(p,p)*7.);gl_FragColor=vec4(vec3(.17,.28,.43)*ring*fade,.48);}'});materials.add(glowMaterial);
-  const glow=new Mesh(glowGeometry,glowMaterial);glow.position.set(0,-.8,-2.8);scene.add(glow);
-  const emitGeometry=new PlaneGeometry(.075,5);geometries.add(emitGeometry);
-  const emitMaterial=new MeshBasicMaterial({color:new Color('#fff5d6').multiplyScalar(1.3),toneMapped:false});materials.add(emitMaterial);
-  const emitter=new Mesh(emitGeometry,emitMaterial);emitter.position.set(-1.3,0,-1.2);emitter.rotation.z=-.42;scene.add(emitter);
   let width=1,height=1,time=0,last=0,visible=false,paused=false,lost=false,printing=false,mode=0,pose=0,scroll=0,targetX=0,targetY=0,x=0,y=0,dragging=false,dragX=0,dragOffset=0;
   const preference=matchMedia('(prefers-reduced-motion: reduce)');let reduced=preference.matches;
   const canDraw=()=>!disposed&&!lost&&!printing&&visible&&!document.hidden;
@@ -57,8 +62,8 @@ export async function mountHomeKinetic(canvas:HTMLCanvasElement,host:HTMLElement
    sculpture.position.y=reduced?0:Math.sin(time*.8)*.07;
    arcs.forEach((arc,index)=>{arc.rotation.set(index*.66+pose*(index-1)*.15,index*.42,pose*(index%2?-.32:.32));arc.position.z=(index-1)*.15;});
    nodes.forEach((node,index)=>{const active=index===mode;node.scale.setScalar(active?1.3:1);const material=node.material as MeshPhysicalMaterial;material.emissive.set(active?'#3879c5':'#000000');material.emissiveIntensity=active?.18:0;});
-   backdropMaterial.uniforms.uTime.value=reduced?0:time;backdropMaterial.uniforms.uPhase.value=pose;glowMaterial.uniforms.uTime.value=reduced?0:time;
-   emitter.position.x=-1.3+(reduced?0:Math.sin(time*.4)*.65);scene.environmentRotation.y=reduced?0:time*.035;scene.updateMatrixWorld();renderer!.render(scene,camera);
+   backdropMaterial.uniforms.uTime.value=reduced?0:time;backdropMaterial.uniforms.uPhase.value=pose;
+   scene.environmentRotation.y=reduced?0:time*.035+x*.08;scene.updateMatrixWorld();renderer!.render(scene,camera);
   };
   const tick=(now:number)=>{frame=0;if(!canDraw())return;const delta=last?(now-last)/1000:1/30;if(delta<1/30-.002){frame=requestAnimationFrame(tick);return;}last=now;if(!reduced&&!paused)time+=Math.min(delta,.08);draw();if(!reduced&&!paused||Math.abs(pose-mode)>.002||Math.abs(x-(reduced?0:targetX))>.002||Math.abs(y-(reduced?0:targetY))>.002)frame=requestAnimationFrame(tick);};
   const wake=()=>{if(canDraw()){if(!frame)frame=requestAnimationFrame(tick);}else stop();};

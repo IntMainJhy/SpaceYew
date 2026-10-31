@@ -19,6 +19,9 @@ async function render(space,locale='zh'){
   '@/lib/content-locales.mjs':locales,'@/lib/db.mjs':{getConfig:()=>({desktopDownloads:{}})},
   '@/lib/home-download.mjs':{homeDownload:()=>({href:'/downloads'})},
   './FeedAvatar':{FeedAvatar:()=>null},'./Icons':{Icon:()=>null},'./V2Atmosphere':{V2Atmosphere:()=>null},
+  './HomeMotion':{HomeMotion:()=>null},
+  './HomeWindGallery':{HomeWindGallery:({items,heading})=>React.createElement('section',{'data-wind-gallery':true},React.createElement('h2',null,heading),items.map(item=>React.createElement('a',{key:item.href,href:item.href},item.title)))},
+  '@/app/home-showcase.css':{},
   './CreatorStage':{CreatorStage:({creator})=>React.createElement('pre',{'data-stage':true},JSON.stringify(creator))}
  };
  vm.runInNewContext(source,{exports,Set,encodeURIComponent,require:name=>{if(!Object.hasOwn(modules,name))throw new Error(name);return modules[name]}});
@@ -31,6 +34,8 @@ test('creator landing projects use the reviewed résumé cover and localized pub
  assert.ok(html.includes('Translated work'));
  assert.ok(html.includes('/blog/published-author#anx-projects'));
  assert.ok(!html.includes('private-marker'));
+ assert.ok(html.includes('data-glass-reveal="stage"'));
+ assert.ok(html.includes('data-stage="true"'));
 });
 test('hidden résumé projects stay out of the landing and published documents provide the fallback',async()=>{
  const hidden={...space,layout:{blog:{design:{nodes:[{part:'section:projects',hidden:true}]}}},content:[{type:'projects',slug:'public-project',title:'Published document',summary:'Public summary',coverId:'document-cover'},{type:'articles',slug:'article',title:'Not a portfolio project',summary:'Article'}]};
@@ -40,4 +45,18 @@ test('hidden résumé projects stay out of the landing and published documents p
  assert.ok(html.includes('Published document'));
  assert.ok(html.includes('/media/document-cover'));
  assert.ok(!html.includes('Not a portfolio project'));
+});
+test('wind discoveries link to the public creator and reachable skill and resource destinations',async()=>{
+ const html=await render(space),gallery=html.match(/<section data-wind-gallery="true">([\s\S]*?)<\/section>/)?.[1];
+ assert.ok(gallery,'wind discoveries are rendered after the homepage content');
+ const links=Array.from(gallery.matchAll(/<a href="([^"]+)"/g),match=>match[1]);
+ assert.deepEqual(links,['/blog/published-author','/skills/gsap','/resources?type=docs','/resources?type=resources']);
+ assert.ok(!gallery.includes('private-marker'));
+});
+test('homepage and wind discoveries remain usable before any public creator is available',async()=>{
+ const html=await render(null,'en'),gallery=html.match(/<section data-wind-gallery="true">([\s\S]*?)<\/section>/)?.[1];
+ assert.ok(html.includes('href="/workspace/blog"'));
+ assert.ok(!html.includes('data-stage="true"'));
+ assert.ok(gallery?.includes('href="/blogs"'));
+ assert.ok(!html.includes('undefined'));
 });

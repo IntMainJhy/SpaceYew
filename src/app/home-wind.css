@@ -1,0 +1,25 @@
+.home-wind-section{container-type:inline-size;position:relative;isolation:isolate;margin:60px auto 0;padding:68px 0 28px;color:#183b60;max-width:1440px;}
+.home-wind-heading{display:flex;align-items:baseline;justify-content:space-between;gap:28px;max-width:1200px;margin:auto;padding:0 44px;}
+html[data-ui][data-color-mode] .v2-site .v2-home .home-wind-heading h2{font-size:clamp(32px,3.7vw,48px);font-weight:600;line-height:1.25;letter-spacing:-.035em;margin:0;text-wrap:balance;}
+.home-wind-heading p{font-size:14px;line-height:1.8;color:#3f6081;max-width:24em;margin:0;}
+.home-wind-stage{position:relative;height:clamp(410px,44vw,600px);min-width:0;margin-top:24px;overflow:hidden;}
+.home-wind-canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;}
+.home-wind-stage[data-wind=ready] .home-wind-canvas{opacity:1;}
+.home-wind-links{position:absolute;inset:0;}
+.home-wind-link{position:absolute;display:flex;flex-direction:column;width:20%;min-height:280px;top:17%;padding:32px 24px;gap:16px;background:#f4f0e5;color:#173552;text-decoration:none;transform:translate(-50%,-50%) rotate(var(--wind-turn,0deg));transform-origin:center;box-sizing:border-box;box-shadow:0 20px 34px -28px #254c7a;}
+.home-wind-link:before{content:"";position:absolute;inset:7px;border:1px dashed #294d7933;pointer-events:none;}
+.home-wind-link-0{left:18%;top:44%;--wind-turn:-3deg;}.home-wind-link-1{left:39%;top:56%;background:#c8dcf5;--wind-turn:2deg;}.home-wind-link-2{left:61%;top:45%;background:#e1dcef;--wind-turn:-2deg;}.home-wind-link-3{left:82%;top:57%;background:#e1e9dd;--wind-turn:3deg;}
+.home-wind-category{font-size:11px;line-height:1.6;color:#294d79;}
+.home-wind-link strong{font-size:clamp(18px,2.1vw,28px);line-height:1.4;font-weight:600;overflow-wrap:anywhere;}
+.home-wind-description{font-size:13px;line-height:1.7;color:#36516f;}
+.home-wind-link>svg{width:24px;height:24px;margin-top:auto;}
+.home-wind-link:focus-visible{outline:2px solid #285eb9;outline-offset:7px;}
+.home-wind-stage[data-wind=ready] .home-wind-link{min-height:0;padding:0;background:transparent;box-shadow:none;}
+.home-wind-stage[data-wind=ready] .home-wind-link:before{display:none;}
+.home-wind-stage[data-wind=ready] .home-wind-link>*{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}
+.home-wind-stage:not([data-wind=ready]):before{content:"";position:absolute;inset:12% -5% auto;height:100px;border-top:1px solid #355b9b;border-radius:50%;transform:rotate(3deg);}
+@media(max-width:760px){.home-wind-section{padding-top:44px;margin-top:24px;}.home-wind-heading{display:block;padding:0 24px;}html[data-ui][data-color-mode] .v2-site .v2-home .home-wind-heading h2{font-size:32px;}.home-wind-heading p{margin-top:16px;font-size:13px;max-width:28em;}.home-wind-stage{height:calc(100vw * 1.65);max-height:1000px;min-height:600px;margin-top:18px;}.home-wind-link{width:39%;min-height:240px;padding:24px 18px;gap:12px;}.home-wind-link strong{font-size:23px;}.home-wind-link-0{left:26%;top:24%;}.home-wind-link-1{left:74%;top:29%;}.home-wind-link-2{left:26%;top:66%;}.home-wind-link-3{left:74%;top:71%;}.home-wind-stage:not([data-wind=ready]):before{inset:12% -12% auto;height:56%;border:1px solid #355b9b;transform:rotate(7deg);}}
+@media(prefers-reduced-motion:reduce){.home-wind-canvas{transition:none;}}
+@media print{.home-wind-canvas{display:none;}.home-wind-stage{height:360px!important;}.home-wind-stage .home-wind-link{left:auto!important;top:auto!important;position:relative;transform:none;width:23%!important;height:auto!important;background:#f4f0e5!important;padding:20px!important;}.home-wind-links{display:flex;gap:2%;align-items:flex-start;}.home-wind-stage .home-wind-link>*{position:static!important;width:auto!important;height:auto!important;clip-path:none!important;white-space:normal!important;}}
+
+@container(max-width:760px){.home-wind-stage{height:calc(100cqw * 1.65);max-height:1000px;min-height:600px;}.home-wind-link{width:39%;min-height:240px;padding:24px 18px;}.home-wind-link-0{left:26%;top:24%;}.home-wind-link-1{left:74%;top:29%;}.home-wind-link-2{left:26%;top:66%;}.home-wind-link-3{left:74%;top:71%;}}

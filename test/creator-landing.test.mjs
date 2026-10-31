@@ -22,7 +22,7 @@ async function render(space,locale='zh',media=true){
   './HomeMotion':{HomeMotion:()=>null},
   './HomeResourceSculpture':{HomeResourceSculpture:({posterSrc,label})=>media?React.createElement('img',{src:posterSrc,alt:label,'data-resource-fallback':true}):null},
   './HomeStoryVideo':{HomeStoryVideo:({src,poster,label})=>media?React.createElement('img',{src:poster,alt:label,'data-video-src':src}):null},
-  './HomeCardGallery':{HomeCardGallery:({items,heading})=>React.createElement('section',{'data-card-gallery':true},React.createElement('h2',null,heading),items.map(item=>React.createElement('a',{key:item.href,href:item.href},item.title)))},
+  './HomeBlogCanvasDemo':{HomeBlogCanvasDemo:({locale})=>React.createElement('div',{'data-editor-demo':true,'data-locale':locale})},
   '@/app/home-showcase.css':{},
   './CreatorStage':{CreatorStage:({creator})=>React.createElement('pre',{'data-stage':true},JSON.stringify(creator))}
  };
@@ -32,7 +32,7 @@ async function render(space,locale='zh',media=true){
 const space={handle:'published-author',profile:{name:'Published author',intro:'Public introduction',email:'private-marker',skills:['ArkTS'],resume:{sections:[{id:'projects',title:'代表项目',items:[{title:'Real work',description:'A published project',coverId:'published-cover',translations:{en:{title:'Translated work'}}}]}]}},layout:{blog:{design:{nodes:[{part:'section:projects'}]}}},content:[]};
 test('creator landing projects use the reviewed résumé cover and localized public presentation',async()=>{
  const html=await render(space,'en');
- assert.ok(html.includes('/media/published-cover'));
+ assert.ok(html.includes('published-cover'));
  assert.ok(html.includes('Translated work'));
  assert.ok(html.includes('/blog/published-author#anx-projects'));
  assert.ok(!html.includes('private-marker'));
@@ -43,43 +43,48 @@ test('hidden résumé projects stay out of the landing and published documents p
  const hidden={...space,layout:{blog:{design:{nodes:[{part:'section:projects',hidden:true}]}}},content:[{type:'projects',slug:'public-project',title:'Published document',summary:'Public summary',coverId:'document-cover'},{type:'articles',slug:'article',title:'Not a portfolio project',summary:'Article'}]};
  const html=await render(hidden);
  assert.ok(!html.includes('Real work'));
- assert.ok(!html.includes('/media/published-cover'));
+ assert.ok(!html.includes('published-cover'));
  assert.ok(html.includes('Published document'));
- assert.ok(html.includes('/media/document-cover'));
+ assert.ok(html.includes('document-cover'));
  assert.ok(!html.includes('Not a portfolio project'));
 });
 test('large feature rows alternate real media while keeping public navigation independent of renderers',async()=>{
  const html=await render(space,'en');
- assert.deepEqual(Array.from(html.matchAll(/data-home-story="([^"]+)" data-home-side="([^"]+)"/g),match=>[match[1],match[2]]),[['work','left'],['blog','right'],['skills','left'],['resources','right']]);
- for(const src of ['/media/published-cover','/media/home/blog-space.webp','/media/home/skills-poster.webp','/media/home/resources.webp'])assert.ok(html.includes('src="'+src+'"'),src+' supplies real imagery');
+ assert.deepEqual(Array.from(html.matchAll(/data-home-story="([^"]+)" data-home-side="([^"]+)"/g),match=>[match[1],match[2]]),[['blog','left'],['editor','right'],['skills','left'],['resources','right']]);
+ for(const src of ['/media/home/blog-space.webp','/media/home/skills-poster.webp','/media/home/resources.webp'])assert.ok(html.includes('src="'+src+'"'),src+' supplies real imagery');
  assert.ok(html.includes('data-video-src="/media/home/skills-loop.mp4"'));
  const noMedia=await render(space,'en',false);
- for(const href of ['/blogs','/community','/resources','/resources?type=skills','/skills/gsap'])assert.ok(noMedia.includes('href="'+href+'"'),href+' remains a normal public link without video or GPU content');
- for(const title of ['Your story. Your own page.','Start your next creation here.','Keep a good discovery close.'])assert.ok(noMedia.includes(title),'feature copy stays readable without client renderers');
+ assert.ok(html.includes('data-editor-demo="true" data-locale="en"'));
+ for(const href of ['/workspace/blog','/blogs','/community','/resources','/resources?type=skills','/skills/gsap'])assert.ok(noMedia.includes('href="'+href+'"'),href+' remains a normal public link without video or GPU content');
+ for(const title of ['Your story. Your own page.','Your page. Arranged your way.','Start your next creation here.','Keep a good discovery close.'])assert.ok(noMedia.includes(title),'feature copy stays readable without client renderers');
 });
-test('only an illustrated published project fills the work row and the long creator introduction stays inside the first window',async()=>{
+test('the interactive editor replaces the duplicate project row while real projects and introduction stay in the first window',async()=>{
  const intro='A long public creator introduction that belongs on the full profile rather than being repeated through every feature.';
  const mixed={...space,profile:{...space.profile,intro,resume:{sections:[{id:'projects',title:'代表项目',items:[{title:'Text-only project',description:'Visible on the original portfolio'},space.profile.resume.sections[0].items[0],{title:'Another illustrated work',description:'Second cover',coverId:'secondary-cover'}]}]}}};
  const html=await render(mixed),stage=html.match(/<pre data-stage="true">([\s\S]*?)<\/pre>/)?.[1],stories=html.replace(/<pre data-stage="true">[\s\S]*?<\/pre>/,'');
  assert.ok(stage?.includes(intro));assert.ok(stage?.includes('Text-only project'));assert.ok(stage?.includes('Another illustrated work'));
  assert.ok(!stories.includes(intro),'the authored introduction is preserved without repeating a dense biography below the window');
- assert.equal(Array.from(stories.matchAll(/data-home-story="work"/g)).length,1);
- assert.ok(stories.includes('/media/published-cover'));
+ assert.equal(Array.from(stories.matchAll(/data-home-story="editor"/g)).length,1);
+ assert.ok(!stories.includes('data-home-story="work"'));
+ assert.ok(!stories.includes('published-cover'));
  assert.ok(!stories.includes('/media/secondary-cover'));
  assert.ok(!stories.includes('Text-only project'));
  assert.ok(!stories.includes('Another illustrated work'));
 });
-test('card discoveries link to the public creator and reachable skill and resource destinations',async()=>{
- const html=await render(space),gallery=html.match(/<section data-card-gallery="true">([\s\S]*?)<\/section>/)?.[1];
- assert.ok(gallery,'card discoveries are rendered after the homepage content');
- const links=Array.from(gallery.matchAll(/<a href="([^"]+)"/g),match=>match[1]);
- assert.deepEqual(links,['/blog/published-author','/skills/gsap','/resources?type=docs','/resources?type=resources']);
- assert.ok(!gallery.includes('private-marker'));
+test('homepage ends with the creation invitation instead of a four-card gallery',async()=>{
+ const html=await render(space);
+ assert.ok(html.includes('data-home-scene="invitation"'));
+ assert.ok(!html.includes('data-card-gallery'));
+ assert.ok(!html.includes('home-card'));
+ const afterInvitation=html.slice(html.indexOf('data-home-scene="invitation"'));
+ assert.equal(Array.from(afterInvitation.matchAll(/<section/g)).length,0,'no discovery section follows the final invitation');
 });
-test('homepage and card discoveries remain usable before any public creator is available',async()=>{
- const html=await render(null,'en'),gallery=html.match(/<section data-card-gallery="true">([\s\S]*?)<\/section>/)?.[1];
+test('the editor story and real navigation remain available without a published creator',async()=>{
+ const html=await render(null,'en');
  assert.ok(html.includes('href="/workspace/blog"'));
  assert.ok(!html.includes('data-stage="true"'));
- assert.ok(gallery?.includes('href="/blogs"'));
+ assert.ok(html.includes('data-home-story="editor"'));
+ assert.ok(html.includes('data-editor-demo="true" data-locale="en"'));
+ assert.ok(html.includes('href="/blogs"'));
  assert.ok(!html.includes('undefined'));
 });

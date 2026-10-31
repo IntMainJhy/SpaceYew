@@ -2,7 +2,7 @@
 .site-glass-atmosphere.interior-atmosphere{overflow:hidden;background:var(--site-blue-gradient)}
 .interior-atmosphere-canvas{display:block;width:100%;height:100%;opacity:0;transition:opacity .3s ease-out}
 .interior-atmosphere-fallback{position:absolute;width:min(42vw,660px);height:min(65vh,650px);right:-8%;top:20%;opacity:.5;transition:opacity .3s ease-out}
-.interior-atmosphere-fallback i{display:block;position:absolute;box-sizing:border-box;border:18px solid #d7eaf766;box-shadow:inset 0 1px 0 #fff9,0 1px 0 #8bb3d64d;background:linear-gradient(120deg,#e9f7ff1a,#c0dcef33)}
+.interior-atmosphere-fallback i{display:block;position:absolute;box-sizing:border-box;border:18px solid #e0e1e366;box-shadow:inset 0 1px 0 #fff9,0 1px 0 #a2a5aa4d;background:linear-gradient(120deg,#f1f1f21a,#c9cbd033)}
 .interior-atmosphere--community .interior-atmosphere-fallback i{width:70%;height:70%;border-width:clamp(16px,3vw,42px);border-radius:50%;transform:rotate(-28deg) scaleY(.86)}
 .interior-atmosphere--community .interior-atmosphere-fallback i:nth-child(2){left:30%;top:20%;transform:rotate(35deg) scaleY(.86)}
 .interior-atmosphere--community .interior-atmosphere-fallback i:nth-child(3){display:none}

@@ -76,11 +76,11 @@ test('interior glass keeps native RGB volume rays with bounded hardware filterin
 
 // The interior lifecycle offsets progress to avoid home folding; color starts at
 // document zero even in reduced motion and still follows native page scrolling.
-test('interior studio normalizes lifecycle progress while keeping the same four blue stops',async()=>{
+test('interior studio normalizes lifecycle progress while keeping the shared blue-to-grey stops',async()=>{
  for(const kind of Object.keys(interiorModels)){
   const s=await studio(kind),uniforms=s.wall.material.uniforms;
   assert.equal(uniforms.uProgress.value,0);
-  assert.deepEqual(['uTop','uBlue','uBottom','uIce'].map(key=>uniforms[key].value.getHexString()),['070f29','1858c9','c4dff4','eef4fa']);
+  assert.deepEqual(['uTop','uBlue','uBottom','uIce'].map(key=>uniforms[key].value.getHexString()),['070f29','1858c9','d9d9dc','e5e5e5']);
   s.adapter.render(0,0,false,2.55,false);assert.ok(Math.abs(uniforms.uProgress.value-1.5)<1e-9);
   s.adapter.render(0,0,false,3.45,true);assert.ok(Math.abs(uniforms.uProgress.value-2.4)<1e-9,'reduced motion retains the document background without moving the sculpture');
   s.adapter.render(0,0,false,.5,false);assert.equal(uniforms.uProgress.value,0);

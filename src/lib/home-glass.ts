@@ -2,7 +2,7 @@ import {ACESFilmicToneMapping,Box3,Color,DataTexture,DirectionalLight,Euler,Grou
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 
 export type GlassReveal={left:number;top:number;width:number;height:number;progress:number;variant?:string};
-export type HomeGlassScene={animated?:boolean;resize:(width:number,height:number,dpr:number)=>void;setReveals?:(panels:GlassReveal[])=>void;setCollectionOverlay?:(enabled:boolean)=>void;setHeaderDock?:(dock:{x:number;y:number;width:number}|null)=>void;render:(x:number,y:number,dark:boolean,scroll:number,reduced:boolean,activeSeconds?:number)=>void;dispose:()=>void};
+export type HomeGlassScene={animated?:boolean;interactive?:boolean;resize:(width:number,height:number,dpr:number)=>void;setReveals?:(panels:GlassReveal[])=>void;render:(x:number,y:number,dark:boolean,scroll:number,reduced:boolean,activeSeconds?:number)=>void;dispose:()=>void};
 const MODEL_URL='/models/spaceyew-glass.glb';
 const transmissionChunk=ShaderChunk.transmission_pars_fragment,bicubicSample='return textureBicubic( transmissionSamplerMap, fragCoord.xy, lod );';
 // These polished folds need little blur. Linear mip filtering cuts r187's RGB sampling from 24 to 3 fetches,
@@ -117,14 +117,13 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
   // broad room illumination and soft contact shadow are art-directed, not a
   // simulated caustic pass. Specular highlights come only from the HDR rig.
   const wallGeometry=new PlaneGeometry(80,52);extraGeometry.push(wallGeometry);
-  const wallMaterial=new ShaderMaterial({depthWrite:false,uniforms:{uTime:{value:0},uLightSweep:{value:0},uBrightness:{value:1},uScroll:{value:0},uBackdropAlpha:{value:1},uCenter:{value:new Vector2(.5,.38)},uContact:{value:new Vector2(.31,.20)},uBlueTop:{value:new Color('#070f29')},uBlueMiddle:{value:new Color('#1858c9')},uBlueBottom:{value:new Color('#c4dff4')},uIce:{value:new Color('#eef4fa')}},vertexShader:`
+  const wallMaterial=new ShaderMaterial({depthWrite:false,uniforms:{uTime:{value:0},uLightSweep:{value:0},uBrightness:{value:1},uScroll:{value:0},uCenter:{value:new Vector2(.5,.38)},uContact:{value:new Vector2(.31,.20)},uBlueTop:{value:new Color('#070f29')},uBlueMiddle:{value:new Color('#1858c9')},uBlueBottom:{value:new Color('#d9d9dc')},uIce:{value:new Color('#e5e5e5')}},vertexShader:`
    varying vec2 vScreen;
    void main(){vec4 p=projectionMatrix*modelViewMatrix*vec4(position,1.);vScreen=p.xy/p.w*.5+.5;gl_Position=p;}
   `,fragmentShader:`
-   varying vec2 vScreen;uniform float uTime;uniform float uLightSweep;uniform float uBrightness;uniform float uScroll;uniform float uBackdropAlpha;uniform vec2 uCenter;uniform vec2 uContact;uniform vec3 uBlueTop;uniform vec3 uBlueMiddle;uniform vec3 uBlueBottom;uniform vec3 uIce;
+   varying vec2 vScreen;uniform float uTime;uniform float uLightSweep;uniform float uBrightness;uniform float uScroll;uniform vec2 uCenter;uniform vec2 uContact;uniform vec3 uBlueTop;uniform vec3 uBlueMiddle;uniform vec3 uBlueBottom;uniform vec3 uIce;
    float softPool(vec2 point,vec2 center,vec2 extent){vec2 offset=(point-center)/extent;return exp(-dot(offset,offset)*2.);}
    void main(){
-    if(uBackdropAlpha<.001)discard;
     vec2 uv=vScreen;float documentY=max(0.,(1.-uv.y)+uScroll),daylight=smoothstep(.88,1.55,documentY);
     vec3 color=mix(uBlueTop,uBlueMiddle,smoothstep(.12,.88,documentY));color=mix(color,uBlueBottom,daylight);color=mix(color,uIce,smoothstep(1.55,2.4,documentY));
     float quiet=softPool(uv,vec2(.5,.60),vec2(.52,.9));color*=1.-quiet*.06*(1.-daylight);
@@ -143,19 +142,15 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
     color*=1.-contact*.11*(1.-smoothstep(.15,.95,uScroll))*(1.-daylight);
     color*=uBrightness;gl_FragColor=vec4(color,1.);
     #include <colorspace_fragment>
-    gl_FragColor.rgb*=uBackdropAlpha;gl_FragColor.a=uBackdropAlpha;
    }
   `});wallMaterial.toneMapped=false;extraMaterials.push(wallMaterial);
   const wall=new Mesh(wallGeometry,wallMaterial);wall.position.z=-7;wall.renderOrder=-10;scene.add(wall);
-  let width=1,height=1,lastMotionTick=-1,collectionOverlay=true,overlayAmount=0,headerDock:{x:number;y:number;width:number}|null=null;canvas.dataset.glassFilter=linearTransmission?'linear-mip-r187':'three-default';
-  // The collected mark can sit above HTML using this same canvas. Its glass still samples the
-  // opaque studio in the transmission target; only the final backdrop becomes transparent.
-  wall.onBeforeRender=passRenderer=>{wallMaterial.uniforms.uBackdropAlpha.value=passRenderer.getRenderTarget()?1:1-overlayAmount;};
+  let width=1,height=1,lastMotionTick=-1;canvas.dataset.glassFilter=linearTransmission?'linear-mip-r187':'three-default';
+  const visibleGlass=()=>mark.visible||curtains.some(curtain=>curtain.mesh.visible);
   signal.addEventListener('abort',dispose,{once:true});if(signal.aborted){dispose();throw new DOMException('Aborted','AbortError');}
   return{
-   animated:true,
-   setCollectionOverlay(enabled){collectionOverlay=enabled;},
-   setHeaderDock(dock){headerDock=dock;},
+   get animated(){return !disposed&&visibleGlass();},
+   get interactive(){return !disposed&&visibleGlass();},
    setReveals(panels){
     for(let index=0;index<curtains.length;index++){
      const curtain=curtains[index],panel=panels[index];curtain.panel=panel||null;curtain.mesh.visible=!!panel;
@@ -182,18 +177,17 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
     if(disposed)return;
     const time=reduced||!Number.isFinite(activeSeconds)?0:Math.max(0,activeSeconds),mobile=width<768,reading=MathUtils.smoothstep(scroll,.2,1.3),spatial=reduced?0:MathUtils.smootherstep(scroll,.2,1.3),breath=Math.sin(time*.38);
     camera.position.z=8.2+spatial*.9;
-    // Once foregrounded, the same native folds dock entirely inside the clear navigation gap.
-    // Interior routes retain their quieter background pose rather than entering the header layer.
-    const collectedHeight=collectionOverlay?Math.min(50,headerDock?headerDock.width*nativeSize.y/(nativeSize.x+.08):Infinity):Math.min(mobile?140:180,height*(mobile?.17:.20)),collectedCenter=collectionOverlay?(headerDock?.y??(mobile?32:36)):(mobile?74:82)+collectedHeight*.5;
-    const centerY=MathUtils.lerp(mobile?Math.max(.70,.215+320/height):.68,collectedCenter/height,spatial),split=MathUtils.lerp(mobile?.58:.8,.04,spatial);
+    // The hero leaves as a scene rather than becoming another navigation mark.
+    // Its reading pose remains below the header and disappears before it can overlap controls.
+    const centerY=MathUtils.lerp(mobile?Math.max(.70,.215+320/height):.68,.42,spatial),split=MathUtils.lerp(mobile?.58:.8,.20,spatial);
     const opticalSweep=reduced?0:MathUtils.smootherstep(scroll,0,1.05),turn=reduced?0:Math.sin(spatial*Math.PI);
     for(const fold of folds){fold.mesh.position.x=fold.x+fold.side*split;fold.mesh.rotation.y=fold.side*turn*.38;}
     const combinedWidth=nativeSize.x+2*split,displayWidth=Math.min(width*(mobile?1.10:1.12),1500),displayHeight=Math.min(displayWidth*nativeSize.y/combinedWidth,height*(mobile?.43:1.14));
     const initialViewHeight=2*Math.tan(MathUtils.degToRad(camera.fov/2))*8.2,viewHeight=initialViewHeight*(camera.position.z/8.2);
-    mark.scale.setScalar(initialViewHeight*(MathUtils.lerp(displayHeight,collectedHeight,spatial)/height)/nativeSize.y);
-    const parallax=reduced?0:1-(collectionOverlay?spatial:0);
-    const dockX=collectionOverlay&&headerDock?headerDock.x/width-.5:0;
-    mark.position.set(viewHeight*camera.aspect*(dockX*spatial+x*.011*parallax*(1-spatial*.8)),viewHeight*(.5-centerY)+Math.sin(time*.32)*.035*parallax*(1-spatial*.8),0);
+    const visibleHeight=MathUtils.lerp(displayHeight,displayHeight*.55,spatial),opacity=reduced?(scroll>=1.3?0:1):1-MathUtils.smoothstep(spatial,.42,.82);
+    mark.visible=opacity>.001;mark.scale.setScalar(initialViewHeight*(visibleHeight/height)/nativeSize.y);
+    const parallax=reduced?0:1-spatial;
+    mark.position.set(viewHeight*camera.aspect*x*.011*parallax*(1-spatial*.8),viewHeight*(.5-centerY)+Math.sin(time*.32)*.035*parallax*(1-spatial*.8),0);
     mark.rotation.set(.04+spatial*.10+turn*.10+(reduced?0:-y*.055+breath*.016),-.10+spatial*.16+turn*.22+(reduced?0:x*.09+breath*.035),-.025+spatial*.025+(reduced?0:Math.sin(time*.28)*.012));
     pointerRotation.set(-y*.026*parallax,-x*.038*parallax,0,'YXZ');pointerQuaternion.setFromEuler(pointerRotation);camera.quaternion.copy(baseCamera).multiply(pointerQuaternion);
     const lightPhase=-.68+opticalSweep*1.75+(reduced?0:breath*.16+x*.10);
@@ -203,7 +197,7 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
     key.position.set(-4+opticalSweep*6,6-opticalSweep*2,7);key.intensity=3.3+Math.sin(opticalSweep*Math.PI)*1.2;
     rim.intensity=1.3+opticalSweep*.6;rim.position.set(5-opticalSweep*3,1+opticalSweep*3,4);
     wallMaterial.uniforms.uTime.value=time;wallMaterial.uniforms.uLightSweep.value=opticalSweep;wallMaterial.uniforms.uBrightness.value=dark?.96:1;wallMaterial.uniforms.uScroll.value=scroll;
-    wallMaterial.uniforms.uCenter.value.set(.5,1-centerY);const projectedWidth=MathUtils.lerp(displayHeight,collectedHeight,spatial)*combinedWidth/nativeSize.y*(8.2/camera.position.z);wallMaterial.uniforms.uContact.value.set((split+.718)/combinedWidth*(projectedWidth/width),MathUtils.lerp(displayHeight,collectedHeight,spatial)/height*.43);
+    wallMaterial.uniforms.uCenter.value.set(.5,1-centerY);const projectedWidth=visibleHeight*combinedWidth/nativeSize.y*(8.2/camera.position.z);wallMaterial.uniforms.uContact.value.set((split+.718)/combinedWidth*(projectedWidth/width),visibleHeight/height*.43);
     const sheetDepth=.85,sheetViewHeight=2*Math.tan(MathUtils.degToRad(camera.fov/2))*(camera.position.z-sheetDepth);
     for(const curtain of curtains){const panel=curtain.panel;curtain.mesh.visible=!reduced&&!!panel;if(!panel)continue;const sheetHeight=panel.height/height*sheetViewHeight*1.18;curtain.mesh.position.set(((panel.left+panel.width*.5)/width-.5)*sheetViewHeight*camera.aspect,(.5-(panel.top+panel.height*.5)/height)*sheetViewHeight,sheetDepth);curtain.mesh.scale.set(panel.width/width*sheetViewHeight*camera.aspect*1.18,sheetHeight,sheetHeight);}
     // Deliberately amplified for visible spectral separation at phone sizes.
@@ -211,14 +205,10 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
     for(const material of nativeMaterials){material.ior=1.45+opticalSweep*.07;material.thickness=.46+opticalSweep*.10;material.dispersion=dispersion;material.iridescence=.56+Math.sin(opticalSweep*Math.PI)*.14;}
     const tick=Math.floor(time*10);if(tick!==lastMotionTick){lastMotionTick=tick;canvas.dataset.glassTime=time.toFixed(1);}
     canvas.dataset.glassLightPhase=lightPhase.toFixed(3);canvas.dataset.glassReading=reading.toFixed(3);canvas.dataset.glassDispersion=dispersion.toFixed(2);
-    canvas.dataset.glassCollected=spatial.toFixed(3);
-    overlayAmount=collectionOverlay&&!reduced?MathUtils.smoothstep(spatial,.86,1):0;canvas.dataset.glassOverlay=overlayAmount.toFixed(3);
-    // The fully collected 50px mark only needs a small, smooth transmission receiver.
-    // Keep the hero and any unfurling sheet at their ordinary optical resolution.
-    renderer.transmissionResolutionScale=overlayAmount>.99&&!curtains.some(curtain=>curtain.mesh.visible)?.12:(mobile?.55:.7);
-    // Optical transmission still samples the studio, while alpha gently blends the dock with
-    // the live header behind it. This small foreground mark never becomes a pale content cutout.
-    for(const material of nativeMaterials){const opacity=1-overlayAmount*.45,transparent=opacity<.999;if(material.transparent!==transparent){material.transparent=transparent;material.depthWrite=!transparent;material.needsUpdate=true;}material.opacity=opacity;}
+    canvas.dataset.glassHeroVisible=mark.visible?'true':'false';
+    // Keep optical quality while real glass is visible; a static wall has no transmission work.
+    renderer.transmissionResolutionScale=visibleGlass()?(mobile?.55:.7):.12;
+    for(const material of nativeMaterials){const transparent=opacity<.999;if(material.transparent!==transparent){material.transparent=transparent;material.depthWrite=!transparent;material.needsUpdate=true;}material.opacity=opacity;}
     renderer.render(scene,camera);
    },
    dispose

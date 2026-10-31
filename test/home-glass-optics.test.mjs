@@ -34,21 +34,26 @@ test('native glass retains volume and spectral refraction with controlled studio
  assert.ok(s.wall.material.isShaderMaterial);assert.equal(s.wall.material.toneMapped,false);assert.ok(s.wall.position.z<0,'the rendered receiver lies behind the glass in the transmission view');s.adapter.resize(1440,900,3);assert.equal(s.dpr,2);assert.equal(s.transmissionSize,.7);s.adapter.dispose();
 });
 
-test('the opening folds recede, close and dock inside the navigation gap as reading begins',async()=>{
- const s=await studio(),projected=()=>{const box=new three.Box3().setFromObject(s.mark,true),points=[];for(const x of[box.min.x,box.max.x])for(const y of[box.min.y,box.max.y])for(const z of[box.min.z,box.max.z])points.push(new three.Vector3(x,y,z).project(s.camera));return{top:(1-Math.max(...points.map(p=>p.y)))*450,bottom:(1-Math.min(...points.map(p=>p.y)))*450};};
- const opening=projected(),separation=s.folds.map(fold=>fold.position.x),cameraZ=s.camera.position.z;s.adapter.render(0,0,false,1.3,false,0);const collected=projected();
- assert.ok(collected.bottom-collected.top<(opening.bottom-opening.top)*.3,'the native mark becomes substantially smaller instead of remaining a full-page frame');assert.ok(collected.top>=8&&collected.bottom<66,'the collected glass stays inside the fixed header instead of covering content');assert.ok(s.camera.position.z>cameraZ,'camera recedes during collection');assert.ok(Math.abs(s.folds[1].position.x-s.folds[0].position.x)<Math.abs(separation[1]-separation[0]),'the two folded pieces close together');assert.equal(s.canvas.dataset.glassCollected,'1.000');assert.equal(s.scene.getObjectByName('spaceyew-transmission-guides'),undefined,'photographic lights are not visible scene objects');s.adapter.dispose();
+test('the hero folds recede, close and fade out instead of becoming a navigation mark',async()=>{
+ const s=await studio(),openingScale=s.mark.scale.x,separation=s.folds.map(fold=>fold.position.x),cameraZ=s.camera.position.z;
+ s.adapter.render(0,0,false,.85,false,0);const middleOpacity=s.folds[0].material.opacity;
+ assert.ok(middleOpacity>0&&middleOpacity<1,'leaving the hero gradually fades the original glass');assert.equal(s.mark.visible,true);
+ s.adapter.render(0,0,false,1.3,false,0);
+ assert.equal(s.mark.visible,false,'no folded logo remains behind or above the navigation');assert.equal(s.adapter.animated,false);assert.equal(s.adapter.interactive,false);
+ assert.ok(s.mark.scale.x<openingScale&&s.camera.position.z>cameraZ,'the large scene gently recedes before leaving');assert.ok(Math.abs(s.folds[1].position.x-s.folds[0].position.x)<Math.abs(separation[1]-separation[0]),'the two folds still close during their exit');
+ assert.equal(s.canvas.dataset.glassHeroVisible,'false');assert.equal(s.canvas.dataset.glassOverlay,undefined);s.adapter.dispose();
 });
 
-test('the native dock fits measured desktop and phone header gaps without pointer drift or opaque faces',async()=>{
- const s=await studio(),projected=(width,height)=>{const points=[];for(const fold of s.folds){const positions=fold.geometry.attributes.position;for(let i=0;i<positions.count;i++)points.push(new three.Vector3().fromBufferAttribute(positions,i).applyMatrix4(fold.matrixWorld).project(s.camera));}return{top:(1-Math.max(...points.map(p=>p.y)))*height*.5,bottom:(1-Math.min(...points.map(p=>p.y)))*height*.5,left:(1+Math.min(...points.map(p=>p.x)))*width*.5,right:(1+Math.max(...points.map(p=>p.x)))*width*.5};};
- for(const [width,height,x,y,gap]of[[1440,900,600,36,100],[390,844,215,32,70],[320,568,174,32,32]]){
-  s.adapter.resize(width,height,2);s.adapter.setHeaderDock({x,y,width:gap});
-  for(const pointer of[-1,1]){s.adapter.render(pointer,-pointer,false,1.3,false,10);const bounds=projected(width,height);assert.ok(bounds.top>=5&&bounds.bottom<=y*2-5,'the complete native silhouette fits inside the header height');assert.ok(bounds.left>=x-gap*.5&&bounds.right<=x+gap*.5,'a measured narrow gap contains the model instead of navigation text');assert.ok(bounds.bottom-bounds.top<=54,'the dock cannot grow back into page artwork: '+JSON.stringify({width,height,bounds}));assert.ok(s.camera.quaternion.angleTo(new three.Quaternion())<1e-8,'collected camera parallax stops at the dock');}
+test('the retired header mark stays absent across viewport sizes and returns only with the hero',async()=>{
+ const s=await studio();
+ assert.equal(s.adapter.setHeaderDock,undefined);assert.equal(s.adapter.setCollectionOverlay,undefined);
+ for(const [width,height]of[[1440,900],[390,844],[320,568]]){
+  s.adapter.resize(width,height,2);
+  for(const pointer of[-1,1]){s.adapter.render(pointer,-pointer,false,1.3,false,10);assert.equal(s.mark.visible,false);assert.equal(s.adapter.animated,false);assert.ok(s.camera.quaternion.angleTo(new three.Quaternion())<1e-8,'hidden hero parallax is settled');}
+  s.adapter.render(0,0,false,0,false,10);assert.equal(s.mark.visible,true);assert.equal(s.adapter.animated,true);
+  for(const fold of s.folds){assert.equal(fold.material.opacity,1);assert.equal(fold.material.transparent,false);assert.equal(fold.material.depthWrite,true);assert.equal(fold.material.transmission,1);assertSpectralVolume(fold.material);}
  }
- for(const fold of s.folds){assert.equal(fold.material.opacity,.55);assert.equal(fold.material.transparent,true);assert.equal(fold.material.depthWrite,false);assert.equal(fold.material.transmission,1);assertSpectralVolume(fold.material);}
- s.adapter.render(0,0,false,0,false,0);assert.ok(s.folds.every(fold=>fold.material.opacity===1&&!fold.material.transparent&&fold.material.depthWrite),'returning to the hero restores the original closed opaque draw');
- s.adapter.render(0,0,false,1.3,false,0);s.adapter.setCollectionOverlay(false);s.adapter.render(0,0,false,1.3,false,0);assert.ok(s.folds.every(fold=>fold.material.opacity===1&&!fold.material.transparent),'interior glass keeps its ordinary material');s.adapter.dispose();
+ s.adapter.render(0,0,false,1.3,true,10);assert.equal(s.mark.visible,false,'reduced motion hides the scene after the hero without animating a header transition');s.adapter.render(0,0,false,0,true,10);assert.equal(s.mark.visible,true);s.adapter.dispose();
 });
 
 test('a bounded real glass sheet unfurls around entering content without regenerating native geometry',async()=>{
@@ -67,22 +72,25 @@ test('photographic cards affect reflections without entering the content or head
  assert.ok(!s.wall.material.fragmentShader.includes('caustic'),'receiver does not pretend that procedural rings are focused glass transport');s.adapter.dispose();
 });
 
-test('collected glass uses one foreground canvas while transmission retains its opaque optical receiver',async()=>{
- const s=await studio(),main={getRenderTarget:()=>null},transmission={getRenderTarget:()=>({texture:{}})};s.adapter.render(0,0,false,1.3,false,0);assert.equal(s.canvas.dataset.glassOverlay,'1.000');
- s.wall.onBeforeRender(main);assert.equal(s.wall.material.uniforms.uBackdropAlpha.value,0,'the final canvas exposes HTML and the continuous CSS ground');s.wall.onBeforeRender(transmission);assert.equal(s.wall.material.uniforms.uBackdropAlpha.value,1,'physical glass still samples the local studio in its existing transmission pass');
- assert.ok(s.transmissionSize<=.15,'the tiny collected mark does not keep a full-size transmission pass alive');assert.ok(s.wall.material.fragmentShader.includes('if(uBackdropAlpha<.001)discard;'),'the transparent main pass skips full-viewport studio shading');
- s.adapter.setReveals([{left:200,top:300,width:1000,height:360,progress:.4,variant:'stage'}]);s.adapter.render(0,0,false,1.3,false,0);assert.equal(s.transmissionSize,.7,'a visible sheet keeps the optical target at its full hero quality');s.adapter.setReveals([]);s.adapter.render(0,0,false,1.3,false,0);assert.ok(s.transmissionSize<=.15);
- s.adapter.setCollectionOverlay(false);s.adapter.render(0,0,false,1.3,false,0);s.wall.onBeforeRender(main);assert.equal(s.wall.material.uniforms.uBackdropAlpha.value,1,'interior mode keeps its ordinary background rendering');assert.equal(s.canvas.dataset.glassOverlay,'0.000');
- s.adapter.setCollectionOverlay(true);s.adapter.render(0,0,false,1.3,true,0);s.wall.onBeforeRender(main);assert.equal(s.wall.material.uniforms.uBackdropAlpha.value,1,'reduced motion never promotes a full-size static glass layer');s.adapter.render(0,0,false,0,false,0);s.wall.onBeforeRender(main);assert.equal(s.wall.material.uniforms.uBackdropAlpha.value,1,'returning to the hero restores the complete background');assert.equal(s.transmissionSize,.7,'returning to the hero restores its full optical resolution');s.adapter.dispose();
+test('the reading receiver remains opaque while invisible glass sleeps and reveal sheets can wake it',async()=>{
+ const s=await studio();s.adapter.render(0,0,false,1.3,false,2);
+ assert.equal(s.mark.visible,false);assert.equal(s.adapter.animated,false);assert.ok(s.transmissionSize<=.15,'a plain wall keeps no full optical target alive');
+ assert.equal(s.wall.onBeforeRender,three.Mesh.prototype.onBeforeRender,'there is no final-pass transparency override or foreground promotion');
+ assert.equal(s.wall.material.uniforms.uBackdropAlpha,undefined);assert.ok(!s.wall.material.fragmentShader.includes('uBackdropAlpha'));assert.equal(s.wall.material.transparent,false);
+ s.adapter.render(0,0,false,4,false,2);assert.equal(s.wall.material.uniforms.uScroll.value,4,'scroll still updates the shared grey document receiver on demand');
+ s.adapter.setReveals([{left:200,top:300,width:1000,height:360,progress:.4,variant:'stage'}]);s.adapter.render(0,0,false,1.3,false,2);
+ assert.equal(s.mark.visible,false,'a reveal never resurrects the removed header mark');assert.equal(s.adapter.animated,true);assert.equal(s.adapter.interactive,true);assert.equal(s.transmissionSize,.7,'real reveal glass retains its optical quality');
+ s.adapter.setReveals([]);s.adapter.render(0,0,false,1.3,false,2);assert.equal(s.adapter.animated,false);assert.equal(s.adapter.interactive,false);
+ s.adapter.render(0,0,false,0,false,2);assert.equal(s.mark.visible,true);assert.equal(s.transmissionSize,.7);s.adapter.dispose();
 });
 
 test('scrolling advances the continuous blue-to-ice document gradient and preserves the centered glass',async()=>{
  const s=await studio();const opening=s.folds.map(fold=>new three.Box3().setFromObject(fold,true).getCenter(new three.Vector3()).project(s.camera).x);
  assert.ok(opening[0]<-.45&&opening[1]>.45,'glass framing leaves a central content corridor');
  const environmentCards=[...s.environment.children],fixedGeometry=environmentCards.map(card=>card.geometry);
- const paletteKeys=['uBlueTop','uBlueMiddle','uBlueBottom','uIce'],palette=paletteKeys.map(key=>s.wall.material.uniforms[key].value.clone());assert.deepEqual(palette.map(color=>color.getHexString()),['070f29','1858c9','c4dff4','eef4fa'],'the receiver shares the deep blue, bright blue and pale ice document stops');assert.ok(palette[3].r>.8&&palette[3].g>.8&&palette[3].b>.8,'lower reading sections end in clean pale ice rather than continuous blue');
+ const paletteKeys=['uBlueTop','uBlueMiddle','uBlueBottom','uIce'],palette=paletteKeys.map(key=>s.wall.material.uniforms[key].value.clone());assert.deepEqual(palette.map(color=>color.getHexString()),['070f29','1858c9','d9d9dc','e5e5e5'],'the receiver shares the deep blue, bright blue and pale ice document stops');assert.ok(palette[3].r>.74&&palette[3].r===palette[3].g&&palette[3].g===palette[3].b,'lower reading sections end in neutral silver grey rather than a blue-tinted reading surface');
  const luminance=color=>color.r*.2126+color.g*.7152+color.b*.0722;assert.ok(luminance(palette[0])<.01&&luminance(palette[0])<luminance(palette[1])*.12,'the opening navy stays distinctly deeper than the blue below it');
- const css=fs.readFileSync(new URL('../src/app/glass-studio.css',import.meta.url),'utf8')+fs.readFileSync(new URL('../src/app/glass-platform.css',import.meta.url),'utf8');for(const [color,stop]of[['070f29',12],['1858c9',88],['c4dff4',155],['eef4fa',240]])assert.ok(css.includes('#'+color+' '+stop+'svh'),'the CSS fallback shares the receiver gradient stop '+color);
+ const css=fs.readFileSync(new URL('../src/app/glass-studio.css',import.meta.url),'utf8')+fs.readFileSync(new URL('../src/app/glass-platform.css',import.meta.url),'utf8');for(const [color,stop]of[['070f29',12],['1858c9',88],['d9d9dc',155],['e5e5e5',240]])assert.ok(css.includes('#'+color+' '+stop+'svh'),'the CSS fallback shares the receiver gradient stop '+color);
  assert.ok(s.wall.material.fragmentShader.includes('smoothstep(.18,.75,documentY)'),'ambient fill rises below the dark opening rather than washing out its navy');
  for(const dark of[false,true])for(const progress of[0,.65,1.4,2.4,6]){s.adapter.render(0,0,dark,progress,false,0);assert.equal(s.wall.material.uniforms.uScroll.value,progress,'viewport scroll advances the actual receiver in document coordinates');for(let i=0;i<palette.length;i++)assert.ok(s.wall.material.uniforms[paletteKeys[i]].value.equals(palette[i]),'gradient endpoints remain stable instead of fading the canvas');assert.ok(s.wall.material.uniforms.uBrightness.value>.9&&s.scene.environmentIntensity>.6,'saved dark mode keeps a legible receiver and a lit reflection field');}assert.equal(s.wall.material.transparent,false,'the continuous receiver stays opaque throughout the gradient');
  assert.ok(environmentCards.every(card=>!s.scene.children.includes(card)),'scroll poses cannot expose reflection cards as page geometry');

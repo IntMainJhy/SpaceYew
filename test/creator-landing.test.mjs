@@ -22,7 +22,7 @@ async function render(space,locale='zh',media=true){
   './HomeMotion':{HomeMotion:()=>null},
   './HomeResourceSculpture':{HomeResourceSculpture:({posterSrc,label})=>media?React.createElement('img',{src:posterSrc,alt:label,'data-resource-fallback':true}):null},
   './HomeStoryVideo':{HomeStoryVideo:({src,poster,label})=>media?React.createElement('img',{src:poster,alt:label,'data-video-src':src}):null},
-  './HomeWindGallery':{HomeWindGallery:({items,heading})=>React.createElement('section',{'data-wind-gallery':true},React.createElement('h2',null,heading),items.map(item=>React.createElement('a',{key:item.href,href:item.href},item.title)))},
+  './HomeCardGallery':{HomeCardGallery:({items,heading})=>React.createElement('section',{'data-card-gallery':true},React.createElement('h2',null,heading),items.map(item=>React.createElement('a',{key:item.href,href:item.href},item.title)))},
   '@/app/home-showcase.css':{},
   './CreatorStage':{CreatorStage:({creator})=>React.createElement('pre',{'data-stage':true},JSON.stringify(creator))}
  };
@@ -69,15 +69,15 @@ test('only an illustrated published project fills the work row and the long crea
  assert.ok(!stories.includes('Text-only project'));
  assert.ok(!stories.includes('Another illustrated work'));
 });
-test('wind discoveries link to the public creator and reachable skill and resource destinations',async()=>{
- const html=await render(space),gallery=html.match(/<section data-wind-gallery="true">([\s\S]*?)<\/section>/)?.[1];
- assert.ok(gallery,'wind discoveries are rendered after the homepage content');
+test('card discoveries link to the public creator and reachable skill and resource destinations',async()=>{
+ const html=await render(space),gallery=html.match(/<section data-card-gallery="true">([\s\S]*?)<\/section>/)?.[1];
+ assert.ok(gallery,'card discoveries are rendered after the homepage content');
  const links=Array.from(gallery.matchAll(/<a href="([^"]+)"/g),match=>match[1]);
  assert.deepEqual(links,['/blog/published-author','/skills/gsap','/resources?type=docs','/resources?type=resources']);
  assert.ok(!gallery.includes('private-marker'));
 });
-test('homepage and wind discoveries remain usable before any public creator is available',async()=>{
- const html=await render(null,'en'),gallery=html.match(/<section data-wind-gallery="true">([\s\S]*?)<\/section>/)?.[1];
+test('homepage and card discoveries remain usable before any public creator is available',async()=>{
+ const html=await render(null,'en'),gallery=html.match(/<section data-card-gallery="true">([\s\S]*?)<\/section>/)?.[1];
  assert.ok(html.includes('href="/workspace/blog"'));
  assert.ok(!html.includes('data-stage="true"'));
  assert.ok(gallery?.includes('href="/blogs"'));

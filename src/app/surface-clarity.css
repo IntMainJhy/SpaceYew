@@ -1,7 +1,5 @@
-/* Page scaffolding shares the native glass environment. Controls, content cards
-   and floating navigation keep the surfaces that make them legible. */
+/* Reading surfaces stay legible against the shared deep-blue glass environment. */
 html[data-ui][data-color-mode] .v2-site :is(
- .community-auth,
  .community-auth .community-auth-form,
  .document-reader,
  .shared-reading-layout>article,
@@ -12,27 +10,28 @@ html[data-ui][data-color-mode] .v2-site :is(
  .community-receipt,
  .skill-feature
 ){
- background:transparent;
- border-radius:0;
- box-shadow:none;
+ background:var(--site-surface);
+ border-radius:16px;
+ box-shadow:inset 0 1px 0 #f6fbffb3,0 18px 38px -22px #061b4952;
  backdrop-filter:none;
  -webkit-backdrop-filter:none;
 }
 
 html[data-ui][data-color-mode] .v2-site .community-auth .community-auth-form{
+ padding:28px;
  border:0;
 }
 
-/* A search field needs a surface; its whole filter section does not. */
+/* Search labels and category controls share a quiet reading surface. */
 html[data-ui][data-color-mode] .v2-site :is(
  .resource-overview-search,
  .catalog-search,
  .catalog-filter-group,
  .skill-catalog-toolbar
 ){
- background:transparent;
- box-shadow:none;
- border-radius:0;
+ background:var(--site-surface);
+ box-shadow:inset 0 1px 0 #f6fbffb3;
+ border-radius:16px;
  backdrop-filter:none;
  -webkit-backdrop-filter:none;
 }
@@ -83,3 +82,9 @@ html[data-ui][data-color-mode] .v2-site .document-reader :is(.document-library n
 html[data-ui][data-color-mode] .v2-site .document-reader :focus-visible{
  outline-color:var(--site-focus);
 }
+
+html[data-ui][data-color-mode] .v2-site .community-navigation-shell>.feed-navigation{background:#edf6fcf0;border:0;box-shadow:inset 0 1px 0 #f6fbffb3,0 18px 38px -22px #061b4952;border-radius:16px}
+html[data-ui][data-color-mode] .v2-site .community-empty{background:#edf6fcf0;color:#173957;padding:32px 24px;border-radius:16px}
+html[data-ui][data-color-mode] .v2-site .feed-discover{background:#edf6fcf0;padding:16px;border-radius:16px;box-sizing:border-box}
+@media(max-width:767px){html[data-ui][data-color-mode] .v2-site .community-auth .community-auth-form{padding:26px 22px}}
+@media print{html[data-ui][data-color-mode] .v2-site :is(.document-reader,.community-auth-form,.community-empty,.feed-discover){background:#fff;box-shadow:none}}

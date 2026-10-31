@@ -25,7 +25,8 @@ async function studio(kind='community',overrides={}){
  }});
  const controller=new AbortController(),adapter=await exports.createInteriorGlass({},controller.signal,kind);adapter.resize(1440,900,2);adapter.render(0,0,false,1.05,false);
  const glass=[];scene.traverse(node=>{if(node.isMesh&&node.material instanceof three.MeshPhysicalMaterial)glass.push(node);});
- return{adapter,controller,glass,sizes,ratios,get releases(){return releases;},get environmentReleases(){return environmentReleases;}};
+ const wall=scene.children.find(node=>node.isMesh&&node.material instanceof three.ShaderMaterial);
+ return{adapter,controller,glass,wall,sizes,ratios,get releases(){return releases;},get environmentReleases(){return environmentReleases;}};
 }
 
 test('interior routes select three native sculptures independently of the homepage mark',()=>{
@@ -70,5 +71,19 @@ test('interior glass keeps native RGB volume rays with bounded hardware filterin
  }
  for(const overrides of[{REVISION:'188'},{ShaderChunk:{...three.ShaderChunk,transmission_pars_fragment:'unrecognized shader'}}]){
   const s=await studio('community',overrides),shader={fragmentShader:standard};s.glass[0].material.onBeforeCompile(shader,{});assert.equal(shader.fragmentShader,standard,'unrecognized Three versions/templates keep the standard shader');s.adapter.dispose();
+ }
+});
+
+// The interior lifecycle offsets progress to avoid home folding; color starts at
+// document zero even in reduced motion and still follows native page scrolling.
+test('interior studio normalizes lifecycle progress while keeping the same four blue stops',async()=>{
+ for(const kind of Object.keys(interiorModels)){
+  const s=await studio(kind),uniforms=s.wall.material.uniforms;
+  assert.equal(uniforms.uProgress.value,0);
+  assert.deepEqual(['uTop','uBlue','uBottom','uIce'].map(key=>uniforms[key].value.getHexString()),['070f29','1858c9','c4dff4','eef4fa']);
+  s.adapter.render(0,0,false,2.55,false);assert.ok(Math.abs(uniforms.uProgress.value-1.5)<1e-9);
+  s.adapter.render(0,0,false,3.45,true);assert.ok(Math.abs(uniforms.uProgress.value-2.4)<1e-9,'reduced motion retains the document background without moving the sculpture');
+  s.adapter.render(0,0,false,.5,false);assert.equal(uniforms.uProgress.value,0);
+  s.adapter.dispose();
  }
 });

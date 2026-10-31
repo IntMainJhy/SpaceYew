@@ -19,7 +19,7 @@ function fixture({reduced=false,desktop=true,top=1200,storyTop=top}={}){
  });
  const scenes=[sections[0],stories[0],stories[1],sections[1],stories[2],sections[2],stories[3],sections[3]],root={querySelectorAll:()=>scenes};
  const media={reverted:false,add(queries,fn,scope){this.scope=scope;mediaCleanup=fn({conditions:{desktop,mobile:!desktop,reduce:reduced},add:fn=>fn()});},revert(){this.reverted=true;mediaCleanup?.();}};
- const gsap={matchMedia:()=>media,timeline(options){operations.push('write');const timeline={fromTo(target,from,to,at){tweens.push({target,from,to,at});return timeline;}};timelines.push(options);return timeline;}};
+ const gsap={matchMedia:()=>media,timeline(options){operations.push('write');const timeline={options,restarts:0,pauses:0,progresses:[],fromTo(target,from,to,at){tweens.push({target,from,to,at});return timeline;},restart(){this.restarts++;return this;},progress(value){this.progresses.push(value);return this;},pause(){this.pauses++;return this;}};timelines.push(timeline);return timeline;}};
  const window={innerHeight:900,addEventListener:(key,fn)=>listeners.set(key,fn),removeEventListener:key=>listeners.delete(key)};
  class IntersectionObserver{
   constructor(callback,options){this.callback=callback;this.options=options;this.targets=new Set();observers.push(this);}
@@ -39,36 +39,46 @@ function fixture({reduced=false,desktop=true,top=1200,storyTop=top}={}){
  return{output,cleanup,flush,enter,root,stories,scenes,media,tweens,timelines,listeners,frames,observers,operations,window};
 }
 
-test('one-shot story entrances create no scroll ticker, refresh or offscreen tweens',()=>{
+test('stories retain one reusable timeline and replay on every viewport visit',()=>{
  const f=fixture();assert.equal(f.output.type,'span');assert.equal(f.output.props.hidden,true);assert.equal(f.media.scope,f.root);
- assert.equal(f.timelines.length,0);assert.equal(f.frames.size,0);assert.equal(f.operations.join(','),Array(8).fill('read').join(','),'all restored-position reads are batched before writes');
- assert.equal(f.observers.length,1);assert.equal(f.observers[0].options.rootMargin,'0px 0px -126px 0px');assert.equal(f.observers[0].targets.size,8);
- f.enter(undefined,false);assert.equal(f.timelines.length,0);
- f.enter();assert.equal(f.timelines.length,8);assert.ok(f.timelines.every(t=>!t.scrollTrigger));
+ assert.equal(f.timelines.length,0);assert.equal(f.frames.size,0);assert.equal(f.operations.join(','),Array(8).fill('read').join(','),'restored-position reads are batched before writes');
+ assert.equal(f.observers.length,1);assert.equal(f.observers[0].options.threshold,0);assert.equal(f.observers[0].targets.size,8);
+ f.enter(undefined,false);assert.equal(f.timelines.length,0,'offscreen rows have neither animation work nor hidden initial styles');
+ f.enter();assert.equal(f.timelines.length,8);assert.ok(f.timelines.every(t=>t.options.paused&&!t.options.scrollTrigger&&t.restarts===1));
  assert.ok(f.tweens.find(t=>t.target.name==='first work art').from.x<0);assert.ok(f.tweens.find(t=>t.target.name==='second work art').from.x>0);
  assert.ok(f.tweens.find(t=>t.target.name==='creator art').from.x>0);assert.ok(f.tweens.find(t=>t.target.name==='resources art').from.x<0);
- assert.ok(f.tweens.every(t=>(t.from.opacity??1)>=.8&&t.from.autoAlpha===undefined&&t.from.clipPath===undefined));
- assert.equal(f.observers[0].disconnected,true);assert.equal(f.listeners.size,0,'completed entrances no longer need viewport work');f.cleanup();
+ assert.ok(f.tweens.every(t=>(t.from.opacity??1)>=.8&&t.from.autoAlpha===undefined&&t.from.clipPath===undefined&&t.to.immediateRender===false));
+ f.enter();assert.ok(f.timelines.every(t=>t.restarts===1),'duplicate visible entries do not interrupt an active entrance');
+ f.enter(undefined,false);assert.ok(f.timelines.every(t=>t.pauses===1&&t.progresses.at(-1)===1),'offscreen rows finish without a reset or an ongoing ticker');
+ f.enter();assert.equal(f.timelines.length,8,'re-entry reuses existing timelines');assert.ok(f.timelines.every(t=>t.restarts===2));
+ f.enter(undefined,false);f.enter();assert.ok(f.timelines.every(t=>t.restarts===3),'up and down crossings keep replaying');
+ assert.equal(f.observers[0].targets.size,8,'completed rows remain observable');f.cleanup();
 });
 
-test('reduced motion and already visible restored scenes do not receive entrance animations',()=>{
- for(const options of [{reduced:true},{top:-600},{top:200}]){
-  const f=fixture(options);assert.equal(f.tweens.length,0);assert.equal(f.timelines.length,0);assert.equal(f.observers.length,0);assert.equal(f.listeners.size,0);f.cleanup();
+test('reduced motion is static; initially visible or restored scenes only animate after leaving',()=>{
+ const reduced=fixture({reduced:true});assert.equal(reduced.tweens.length,0);assert.equal(reduced.observers.length,0);assert.equal(reduced.listeners.size,0);reduced.cleanup();
+ for(const top of [-600,200]){
+  const f=fixture({top});assert.equal(f.timelines.length,0);assert.equal(f.observers.length,1);f.enter();assert.equal(f.timelines.length,0,'first-paint content is not reset');
+  f.enter(undefined,false);f.enter();assert.equal(f.timelines.length,8,'restored rows are eligible for later entrances');f.cleanup();
  }
  const desktop=fixture(),mobile=fixture({desktop:false});desktop.enter();mobile.enter();
  assert.ok(desktop.tweens.some(t=>Math.abs(t.from.rotationY)>0));
  assert.ok(mobile.tweens.every(t=>(t.from.x??0)===0&&(t.from.rotationY??0)===0));desktop.cleanup();mobile.cleanup();
 });
 
-test('later story rows enter independently and cannot retrigger when scrolling back',()=>{
- const f=fixture({top:200,storyTop:1200});assert.equal(f.observers[0].targets.size,4);f.enter([f.stories[2]]);assert.equal(f.timelines.length,1);
- assert.equal(f.observers[0].targets.has(f.stories[2]),false);f.enter([f.stories[2]]);assert.equal(f.timelines.length,1);f.enter();assert.equal(f.timelines.length,4);f.cleanup();
+test('rows enter independently and preserve their settled state across observer recreation',()=>{
+ const f=fixture({top:200,storyTop:1200});assert.equal(f.observers[0].targets.size,8);f.enter([f.stories[2]]);assert.equal(f.timelines.length,1);
+ assert.equal(f.observers[0].targets.has(f.stories[2]),true);f.enter([f.stories[2]]);assert.equal(f.timelines[0].restarts,1);
+ f.window.innerHeight=800;f.listeners.get('resize')();f.listeners.get('resize')();assert.equal(f.frames.size,1);f.flush();
+ assert.equal(f.observers[0].disconnected,true);assert.equal(f.observers.at(-1).targets.size,8);
+ f.enter([f.stories[2]]);assert.equal(f.timelines[0].restarts,1,'rebuilding an observer does not replay a visible row');
+ f.observers[0].callback([{target:f.stories[2],isIntersecting:false}]);f.enter([f.stories[2]]);assert.equal(f.timelines[0].restarts,1,'late callbacks from a disconnected observer are ignored');
+ f.enter([f.stories[2]],false);f.enter([f.stories[2]]);assert.equal(f.timelines[0].restarts,2);
+ assert.equal(f.operations.filter(op=>op==='read').length,8,'resizing does not globally remeasure or refresh stories');f.cleanup();
 });
 
-test('viewport changes batch one margin update and cleanup cancels late observer callbacks',()=>{
- const f=fixture();f.enter([f.stories[0]]);f.window.innerHeight=800;f.listeners.get('resize')();f.listeners.get('resize')();assert.equal(f.frames.size,1);f.flush();
- assert.equal(f.observers[0].disconnected,true);assert.equal(f.observers.at(-1).options.rootMargin,'0px 0px -112px 0px');assert.equal(f.observers.at(-1).targets.size,7);
- assert.equal(f.operations.filter(op=>op==='read').length,8,'resizing does not globally remeasure or refresh stories');
- f.listeners.get('resize')();f.cleanup();assert.equal(f.frames.size,0);assert.equal(f.listeners.size,0);assert.equal(f.media.reverted,true);assert.ok(f.observers.every(observer=>observer.disconnected));
+test('cleanup cancels queued resize work, observers and late callbacks',()=>{
+ const f=fixture();f.enter([f.stories[0]]);f.listeners.get('resize')();f.cleanup();
+ assert.equal(f.frames.size,0);assert.equal(f.listeners.size,0);assert.equal(f.media.reverted,true);assert.ok(f.observers.every(observer=>observer.disconnected));
  const count=f.timelines.length;f.enter(f.scenes);assert.equal(f.timelines.length,count,'a late observer callback cannot animate after unmount');
 });

@@ -5,7 +5,7 @@ import {interiorModels} from './interior-scene.mjs';
 import type {HomeGlassScene} from './home-glass';
 
 export type InteriorScene=keyof typeof interiorModels;
-const palettes={community:['#bdd8ee','#eaf3fa','#c7dfef'],resources:['#c9dfec','#edf4fa','#c2d8ee'],login:['#b9d5ec','#edf4fa','#d2e2f2']};
+const palette=['#070f29','#1858c9','#c4dff4','#eef4fa'];
 const transmissionChunk=ShaderChunk.transmission_pars_fragment,bicubicSample='return textureBicubic( transmissionSamplerMap, fragCoord.xy, lod );';
 // Keep the native RGB volume rays and roughness LOD, using one hardware-filtered
 // sample per channel rather than r187's eight-fetch bicubic reconstruction.
@@ -44,20 +44,24 @@ export async function createInteriorGlass(canvas:HTMLCanvasElement,signal:AbortS
     if(!(material instanceof MeshPhysicalMaterial))continue;
     material.color.set('#ffffff');material.transmission=1;material.thickness=.36;
     material.ior=1.46;material.roughness=.045;material.metalness=0;material.envMapIntensity=.9;
-    material.attenuationColor.set('#bfddf5');material.attenuationDistance=7;material.dispersion=.2;material.toneMapped=false;
+    material.attenuationColor.set('#bfddf5');material.attenuationDistance=7;material.dispersion=.72;material.toneMapped=false;
     if(linearTransmission){material.onBeforeCompile=shader=>{const include='#include <transmission_pars_fragment>';if(shader.fragmentShader.split(include).length===2)shader.fragmentShader=shader.fragmentShader.replace(include,linearTransmission);};material.customProgramCacheKey=()=> 'spaceyew-interior-volume-r187';}
    }
   });
   sculpture.add(model);scene.add(sculpture);
-  const colors=palettes[kind].map(color=>new Color(color));
+  const colors=palette.map(color=>new Color(color));
   wallGeometry=new PlaneGeometry(40,30);
-  wallMaterial=new ShaderMaterial({depthWrite:false,uniforms:{uResolution:{value:new Vector2(1,1)},uTop:{value:colors[0]},uBottom:{value:colors[1]},uSide:{value:colors[2]}},vertexShader:'void main(){gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:`
-   uniform vec2 uResolution;uniform vec3 uTop,uBottom,uSide;
+  wallMaterial=new ShaderMaterial({depthWrite:false,uniforms:{uResolution:{value:new Vector2(1,1)},uProgress:{value:0},uTop:{value:colors[0]},uBlue:{value:colors[1]},uBottom:{value:colors[2]},uIce:{value:colors[3]}},vertexShader:'void main(){gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:`
+   uniform vec2 uResolution;uniform float uProgress;uniform vec3 uTop,uBlue,uBottom,uIce;
    void main(){
     vec2 uv=gl_FragCoord.xy/uResolution;
-    vec3 color=mix(uBottom,uTop,smoothstep(.12,1.,uv.y));
-    float wash=exp(-length((uv-vec2(.87,.65))*vec2(1.4,1.0))*2.2);
-    color=mix(color,uSide,wash*.36);
+    float documentY=1.-uv.y+uProgress;
+    vec3 color=mix(uTop,uBlue,smoothstep(.12,.88,documentY));
+    color=mix(color,uBottom,smoothstep(.88,1.55,documentY));
+    color=mix(color,uIce,smoothstep(1.55,2.4,documentY));
+    vec2 pool=(vec2(uv.x,documentY)-vec2(.56,.86))*vec2(1.5,1.1);
+    float wash=exp(-dot(pool,pool)*3.)*.075;
+    color=mix(color,uBottom,wash);
     gl_FragColor=vec4(color,1.);
     #include <colorspace_fragment>
    }
@@ -85,6 +89,7 @@ export async function createInteriorGlass(canvas:HTMLCanvasElement,signal:AbortS
     const centerX=mobile?(kind==='resources'?.97:1.01):(kind==='community'?.88:kind==='resources'?.105:.235);
     const centerY=mobile?.265:kind==='resources'?.57:.50;
     sculpture.scale.setScalar(viewHeight*(displayHeight/height)/nativeSize.y);
+    wallMaterial!.uniforms.uProgress.value=Math.max(scroll-1.05,0);
     const progress=reduced?0:Math.min(Math.max(scroll-1.05,0),1);
     sculpture.position.set(viewWidth*(centerX-.5)+(reduced?0:x*.035),viewHeight*(.5-centerY)+progress*.07+(reduced?0:y*.025),0);
     sculpture.rotation.set(kind==='login'?.04:-.08,kind==='resources'?.17:kind==='login'?-.28:.16,kind==='login'?-.06:kind==='resources'?-.08:.10);

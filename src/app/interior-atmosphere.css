@@ -1,7 +1,5 @@
 /* Original native Blender sculptures at the edge of each interior reading surface. */
-.site-glass-atmosphere.interior-atmosphere{overflow:hidden;background:linear-gradient(160deg,#c0d9ee,#edf4fa 72%,#d1e4f2)}
-.interior-atmosphere--resources{background:linear-gradient(150deg,#cedfea,#edf4fa 68%,#cadff0)}
-.interior-atmosphere--login{background:linear-gradient(140deg,#bcd7ec,#e9f2fa 65%,#d9e6f3)}
+.site-glass-atmosphere.interior-atmosphere{overflow:hidden;background:var(--site-blue-gradient)}
 .interior-atmosphere-canvas{display:block;width:100%;height:100%;opacity:0;transition:opacity .3s ease-out}
 .interior-atmosphere-fallback{position:absolute;width:min(42vw,660px);height:min(65vh,650px);right:-8%;top:20%;opacity:.5;transition:opacity .3s ease-out}
 .interior-atmosphere-fallback i{display:block;position:absolute;box-sizing:border-box;border:18px solid #d7eaf766;box-shadow:inset 0 1px 0 #fff9,0 1px 0 #8bb3d64d;background:linear-gradient(120deg,#e9f7ff1a,#c0dcef33)}

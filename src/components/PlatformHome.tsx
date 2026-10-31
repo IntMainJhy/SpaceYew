@@ -9,7 +9,7 @@ import {Icon} from './Icons';
 import {V2Atmosphere} from './V2Atmosphere';
 import {CreatorStage,type CreatorStageData,type CreatorProject} from './CreatorStage';
 import {HomeMotion} from './HomeMotion';
-import {HomeWindGallery,type HomeWindItem} from './HomeWindGallery';
+import {HomeCardGallery,type HomeCardItem} from './HomeCardGallery';
 import {HomeResourceSculpture} from './HomeResourceSculpture';
 import {HomeStoryVideo} from './HomeStoryVideo';
 import '@/app/home-showcase.css';
@@ -28,9 +28,9 @@ export async function PlatformHome({req}:{req:Request}){
   creator={name:profile.name,handle:featured.handle,intro:profile.intro||'',avatarId:profile.avatarId||'',skills:profile.skills||[],url,projects:resumeProjects.length?resumeProjects:documents};
  }
  const projects=creator?.projects.filter(project=>project.imageId).slice(0,1)||[];
- const windCopy=locale==='zh'?{heading:'让发现，随风而来。',hint:'轻触或悬停布片，遇见下一份灵感。'}:locale==='ja'?{heading:'風に乗って、新しい発見を。',hint:'布に触れるか、カーソルを重ねて次のひらめきへ。'}:{heading:'A little wind. A new discovery.',hint:'Hover or touch a fabric to find your next inspiration.'};
+ const cardCopy=locale==='zh'?{heading:'转一个角度，发现更多。',hint:'四张玻璃卡片，通向下一份灵感。'}:locale==='ja'?{heading:'角度を変えて、新しい発見を。',hint:'4枚のガラスカードから、次のひらめきへ。'}:{heading:'A new angle. A new discovery.',hint:'Four glass cards. Your next inspiration.'};
  const copy=locale==='zh'?{blogTitle:'你的故事，一个主页。',blogText:'介绍自己，也让作品与经历被看见。',skillTitle:'下一次创作，从这里开始。',skillText:'找到合适的 Skill，让想法更快落地。',resourceTitle:'好工具，随手找。',resourceText:'文档、网站与工具，随手探索。',workAction:'查看作品',pause:'暂停演示',play:'继续演示',blogAlt:'SpaceYew 真实博客主页',skillAlt:'SpaceYew Skill 目录的实际操作演示',resourceAlt:'可拖动旋转的玻璃资源卡片',community:'去社区分享',workText:'从真实的作品，了解它背后的创作。'}:locale==='ja'?{blogTitle:'あなたの物語を、ひとつのページに。',blogText:'自己紹介も、作品も、これまでの経験も。',skillTitle:'次の制作は、ここから。',skillText:'アイデアを形にする Skill を見つける。',resourceTitle:'見つけたものを、手元に。',resourceText:'ドキュメント、サイト、ツールを探索。',workAction:'作品を見る',pause:'デモを停止',play:'デモを再生',blogAlt:'SpaceYew の実際のブログページ',skillAlt:'SpaceYew Skill ディレクトリの操作デモ',resourceAlt:'ドラッグして回転できるガラスのリソースカード',community:'コミュニティで共有',workText:'作品を通して、その制作過程を知る。'}:{blogTitle:'Your story. Your own page.',blogText:'Bring your work and experience into view.',skillTitle:'Start your next creation here.',skillText:'Find the right Skill to take an idea further.',resourceTitle:'Keep a good discovery close.',resourceText:'Explore documents, websites, and useful tools.',workAction:'View project',pause:'Pause demo',play:'Resume demo',blogAlt:'An actual SpaceYew blog page',skillAlt:'A recording of the actual SpaceYew Skill directory',resourceAlt:'Draggable glass resource cards',community:'Share with the community',workText:'Meet the process behind a real piece of work.'};
- const windItems:HomeWindItem[]=[
+ const cardItems:HomeCardItem[]=[
   {title:creator?.name||t('博客空间'),category:t('博客空间'),description:creator?'@'+creator.handle:t('个人介绍、经历、技能与作品。'),href:creator?.url||'/blogs'},
   {title:'GSAP',category:'Skill',description:t('探索 Skill'),href:'/skills/gsap'},
   {title:t('文档'),category:t('资源'),description:t('使用指南、教程与开发手记。'),href:'/resources?type=docs'},
@@ -61,6 +61,6 @@ export async function PlatformHome({req}:{req:Request}){
    </section>
   </div>
   <section className="v2-section v2-invitation" data-home-scene="invitation" aria-labelledby="v2-invitation-title"><h2 id="v2-invitation-title">{t('下一份值得被看见的，')}<span>{t('是你的创造。')}</span></h2><div><Link className="v2-primary" href="/workspace/blog">{t('创建我的空间')}<Icon name="arrow"/></Link><Link className="v2-text-link" href={download.href}>{download.platform?t('{0} 下载',[download.name]):t('下载桌面端')}<Icon name="download"/></Link></div></section>
-  <HomeWindGallery items={windItems} heading={windCopy.heading} hint={windCopy.hint}/>
+  <HomeCardGallery items={cardItems} heading={cardCopy.heading} hint={cardCopy.hint}/>
  </div>;
 }

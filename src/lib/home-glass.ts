@@ -22,7 +22,7 @@ const studioRefraction=spectralSample+`
   float obliqueness = 1.0 - clamp( abs( dot( n, v ) ), 0.0, 1.0 );
   // Mid-angle bevels can transmit colour; at extreme grazing Fresnel reflects almost everything.
   float bevelWindow = smoothstep( 0.06, 0.42, obliqueness ) * ( 1.0 - smoothstep( 0.78, 1.0, obliqueness ) );
-  transmissionSample[ i ] = mix( transmissionSample[ i ], studioRadiance[ i ], bevelWindow * 0.20 );
+  transmissionSample[ i ] = mix( transmissionSample[ i ], studioRadiance[ i ], bevelWindow * 0.26 );
  #endif
 `;
 const linearTransmission=REVISION==='187'&&transmissionChunk.split(bicubicSample).length===2&&transmissionChunk.split(spectralSample).length===2?transmissionChunk.replace(bicubicSample,'return textureLod( transmissionSamplerMap, fragCoord.xy, lod );').replace(spectralSample,studioRefraction):null;
@@ -68,9 +68,9 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
    const material=new MeshBasicMaterial({color:new Color(color).multiplyScalar(power),map:power>1?lightTexture:null,toneMapped:false});studioMaterials.push(material);
    const card=new Mesh(studioGeometry,material);card.name=name;card.position.fromArray(position);card.scale.fromArray(scale);card.lookAt(0,0,0);studio.add(card);
   };
-  panel('large-left-softbox',[-4,4.6,5.8],[4.8,3.2,1],'#f8fbff',8.5);
+  panel('large-left-softbox',[-4,4.6,5.8],[4.8,3.2,1],'#f8fbff',9.2);
   panel('ceiling-diffusion',[0,6,-1],[9,5,1],'#fff4e8',7.5);
-  panel('right-bounce',[6,1,1],[3.8,7,1],'#e1f1ff',3.2);
+  panel('right-bounce',[6,1,1],[3.8,7,1],'#d5edff',3.6);
   panel('low-silver-bounce',[0,-5,2],[8,4,1],'#b8d7f0',.25);
   panel('left-negative-fill',[-5,-.5,-3],[4.5,10,1],'#0b1524',.45);
   panel('right-negative-fill',[5,2,-4],[5,11,1],'#101b2a',.45);
@@ -93,11 +93,11 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
     // Match the display-referred wall: an extra ACES pass through the glass would turn pale ice grey.
     // Keep the surface neutral; the physical volume supplies the restrained ice tint.
     material.color.set('#ffffff');material.toneMapped=false;material.transmission=1;material.opacity=1;material.metalness=0;
-    material.ior=1.45;material.thickness=.46;material.roughness=.012;material.dispersion=4.2;
+    material.ior=1.45;material.thickness=.46;material.roughness=.012;material.dispersion=4.8;
     material.attenuationColor.set('#eff8ff');material.attenuationDistance=18;material.clearcoat=0;material.clearcoatRoughness=.045;
     // A restrained optical coating adds angle-dependent colour to reflected edges;
     // native dispersion above separately splits the three transmitted volume rays.
-    material.iridescence=.48;material.iridescenceIOR=2.05;Object.assign(material,{iridescenceThicknessMinimum:180,iridescenceThicknessMaximum:300});
+    material.iridescence=.56;material.iridescenceIOR=2.05;Object.assign(material,{iridescenceThicknessMinimum:180,iridescenceThicknessMaximum:300});
     // Guard the pinned chunk exactly; unsupported Three versions keep their standard physical shader.
     if(linearTransmission){material.onBeforeCompile=shader=>{const include='#include <transmission_pars_fragment>';if(shader.fragmentShader.split(include).length===2&&shader.fragmentShader.split(specularSum).length===2)shader.fragmentShader=shader.fragmentShader.replace(include,linearTransmission).replace(specularSum,reflectionShoulder);};material.customProgramCacheKey=()=> 'spaceyew-prismatic-studio-r187';}
    }
@@ -199,16 +199,16 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
     const lightPhase=-.68+opticalSweep*1.75+(reduced?0:breath*.16+x*.10);
     scene.environmentRotation.set(.05+opticalSweep*.15,lightPhase,-opticalSweep*.12);
     // r187 uses the scene intensity when the material inherits scene.environment.
-    scene.environmentIntensity=(dark?.92:.97)+Math.sin(opticalSweep*Math.PI)*.30;
-    key.position.set(-4+opticalSweep*6,6-opticalSweep*2,7);key.intensity=3+Math.sin(opticalSweep*Math.PI)*1.1;
-    rim.intensity=1.15+opticalSweep*.55;rim.position.set(5-opticalSweep*3,1+opticalSweep*3,4);
+    scene.environmentIntensity=(dark?.98:1.03)+Math.sin(opticalSweep*Math.PI)*.34;
+    key.position.set(-4+opticalSweep*6,6-opticalSweep*2,7);key.intensity=3.3+Math.sin(opticalSweep*Math.PI)*1.2;
+    rim.intensity=1.3+opticalSweep*.6;rim.position.set(5-opticalSweep*3,1+opticalSweep*3,4);
     wallMaterial.uniforms.uTime.value=time;wallMaterial.uniforms.uLightSweep.value=opticalSweep;wallMaterial.uniforms.uBrightness.value=dark?.96:1;wallMaterial.uniforms.uScroll.value=scroll;
     wallMaterial.uniforms.uCenter.value.set(.5,1-centerY);const projectedWidth=MathUtils.lerp(displayHeight,collectedHeight,spatial)*combinedWidth/nativeSize.y*(8.2/camera.position.z);wallMaterial.uniforms.uContact.value.set((split+.718)/combinedWidth*(projectedWidth/width),MathUtils.lerp(displayHeight,collectedHeight,spatial)/height*.43);
     const sheetDepth=.85,sheetViewHeight=2*Math.tan(MathUtils.degToRad(camera.fov/2))*(camera.position.z-sheetDepth);
     for(const curtain of curtains){const panel=curtain.panel;curtain.mesh.visible=!reduced&&!!panel;if(!panel)continue;const sheetHeight=panel.height/height*sheetViewHeight*1.18;curtain.mesh.position.set(((panel.left+panel.width*.5)/width-.5)*sheetViewHeight*camera.aspect,(.5-(panel.top+panel.height*.5)/height)*sheetViewHeight,sheetDepth);curtain.mesh.scale.set(panel.width/width*sheetViewHeight*camera.aspect*1.18,sheetHeight,sheetHeight);}
     // Deliberately amplified for visible spectral separation at phone sizes.
-    const dispersion=4.2+Math.sin(opticalSweep*Math.PI)*1.2;
-    for(const material of nativeMaterials){material.ior=1.45+opticalSweep*.07;material.thickness=.46+opticalSweep*.10;material.dispersion=dispersion;material.iridescence=.48+Math.sin(opticalSweep*Math.PI)*.12;}
+    const dispersion=4.8+Math.sin(opticalSweep*Math.PI)*1.5;
+    for(const material of nativeMaterials){material.ior=1.45+opticalSweep*.07;material.thickness=.46+opticalSweep*.10;material.dispersion=dispersion;material.iridescence=.56+Math.sin(opticalSweep*Math.PI)*.14;}
     const tick=Math.floor(time*10);if(tick!==lastMotionTick){lastMotionTick=tick;canvas.dataset.glassTime=time.toFixed(1);}
     canvas.dataset.glassLightPhase=lightPhase.toFixed(3);canvas.dataset.glassReading=reading.toFixed(3);canvas.dataset.glassDispersion=dispersion.toFixed(2);
     canvas.dataset.glassCollected=spatial.toFixed(3);
